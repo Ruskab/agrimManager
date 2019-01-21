@@ -1,0 +1,33 @@
+package api.apiControllers;
+
+import api.businessControllers.ClientBusinessController;
+import api.dtos.ClientDto;
+import api.exceptions.ArgumentNotValidException;
+
+import java.util.List;
+
+public class ClientApiController {
+
+    public static final String CLIENTS = "/clients";
+
+    public static final String ID_ID = "/{id}";
+
+    private ClientBusinessController clientBusinessController = new ClientBusinessController();
+
+    public int create(ClientDto clientDto){
+        this.validate(clientDto, "clientDto");
+        this.validate(clientDto.getFullName(), "clientDto FullName");
+        return clientBusinessController.create(clientDto);
+    }
+
+    public List<ClientDto> readAll() {
+        return this.clientBusinessController.readAll();
+    }
+
+    private void validate(Object property, String message) {
+        if (property == null){
+            throw new ArgumentNotValidException(message + " is missing");
+        }
+    }
+
+}
