@@ -15,3 +15,5 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS hbtest;'
 script:
   - mvn verify
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
+  - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR

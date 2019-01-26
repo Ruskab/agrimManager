@@ -6,6 +6,11 @@
 * IntelliJ
 * GitHub
 
+### Estado del código
+
+[![Build Status](https://travis-ci.org/Ruskab/agrimManager.svg?branch=develop)](https://travis-ci.org/Ruskab/agrimManager)
+
+
 ## Diseño de entidades
 ![themes-entities-class-diagram](https://user-images.githubusercontent.com/16058725/48664196-4ac42880-ea9b-11e8-860c-1c8610d95c49.png)
 
