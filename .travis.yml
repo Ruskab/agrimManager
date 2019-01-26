@@ -1,0 +1,17 @@
+language: java
+jdk:
+  - oraclejdk8
+branches:
+  only:
+    - master
+    - develop
+notifications:
+  email:
+    recipients:
+      - ilya.kab@gmail.es
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS hbtest;'
+script:
+  - mvn verify
