@@ -10,6 +10,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 
 public class GenericDaoHibr<T,ID> implements GenericDao<T,ID> {
 
@@ -34,8 +35,8 @@ public class GenericDaoHibr<T,ID> implements GenericDao<T,ID> {
     }
 
     @Override
-    public T read(ID id) {
-        return entityManager.find(entityClass,id);
+    public Optional<T> read(ID id) {
+        return Optional.ofNullable(entityManager.find(entityClass,id)) ;
     }
 
     @Override

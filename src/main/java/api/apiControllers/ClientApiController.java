@@ -24,10 +24,15 @@ public class ClientApiController {
         return this.clientBusinessController.readAll();
     }
 
+    public void update(String id,ClientDto clientDto) {
+        this.validate(clientDto, "clientDto");
+        this.validate(clientDto.getFullName(), "clientDto FullName");
+        this.clientBusinessController.update(id,clientDto);
+    }
+
     private void validate(Object property, String message) {
         if (property == null){
             throw new ArgumentNotValidException(message + " is missing");
         }
     }
-
 }
