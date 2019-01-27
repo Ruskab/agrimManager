@@ -26,7 +26,7 @@ public class ClientBusinessControllerIT {
     }
 
     @Test
-    void testReadClient() {
+    public void testReadClient() {
         List<ClientDto> clients = this.clientBusinessController.readAll();
         assertThat(clients.size(),is(greaterThan(0)));
     }

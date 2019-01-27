@@ -30,7 +30,7 @@ public class Dispatcher {
                     //this.doGet(request, response);
                     break;
                 case PUT:
-                    //this.doPut(request);
+                    this.doPut(request);
                     break;
                 case PATCH:
                     //this.doPatch(request);
@@ -51,6 +51,14 @@ public class Dispatcher {
             exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private void doPut(HttpRequest request) {
+        if (request.isEqualsPath(ClientApiController.CLIENTS)){
+            this.clientApiController.update(request.getPath(1),(ClientDto) request.getBody());
+        }else{
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
 
