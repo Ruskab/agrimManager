@@ -55,10 +55,10 @@ public class Dispatcher {
     }
 
     private void doPut(HttpRequest request) {
-        if (request.isEqualsPath(ClientApiController.CLIENTS)){
+        if (request.isEqualsPath(ClientApiController.CLIENTS+ ClientApiController.ID_ID)){
             this.clientApiController.update(request.getPath(1),(ClientDto) request.getBody());
         }else{
-            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+            throw new NotFoundException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
 
