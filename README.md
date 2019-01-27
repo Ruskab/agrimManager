@@ -16,7 +16,7 @@
 ![themes-entities-class-diagram](https://user-images.githubusercontent.com/16058725/48664196-4ac42880-ea9b-11e8-860c-1c8610d95c49.png)
 
 ## Arquitectura
-![themes-architecture-diagram]()
+![themes-architecture-diagram](https://user-images.githubusercontent.com/16058725/51445549-bbd7c480-1d06-11e9-95f6-61761ac0061e.png)
 
 ## API
 ### POST /clients
