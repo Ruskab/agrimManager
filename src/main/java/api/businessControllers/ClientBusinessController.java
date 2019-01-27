@@ -26,6 +26,6 @@ public class ClientBusinessController {
 
         client.setFullName(clientDto.getFullName());
         client.setHours(clientDto.getHours());
-        DaoFactory.getFactory().getClientDao().create(client);
+        DaoFactory.getFactory().getClientDao().update(client);
     }
 }
