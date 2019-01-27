@@ -18,7 +18,7 @@ public class DispatcherIT {
     @Test
     void testCreateClient() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS)
-                .body(new ClientDto("fullNameTest",1)).post();
+                .body(new ClientDto("fullNameTest", 1)).post();
 
         int id = (int) new Client().submit(request).getBody();
 
@@ -43,7 +43,7 @@ public class DispatcherIT {
 
     @Test
     void testCreateClientWithoutClientDtoFullName() {
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(new ClientDto(null,1)).post();
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(new ClientDto(null, 1)).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -53,14 +53,14 @@ public class DispatcherIT {
     void testUpdateClientWithoutClientDtoFullName() {
         String id = "1";
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
-                .expandPath(id).body(new ClientDto(null,1)).put();
+                .expandPath(id).body(new ClientDto(null, 1)).put();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
-    void testUpdateUserWithoutUserDto() {
+    void testUpdateClientWithoutClientDto() {
         String id = "1";
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath(id).body(null).put();
@@ -69,9 +69,9 @@ public class DispatcherIT {
     }
 
     @Test
-    void testUpdateUserNotFoundException() {
+    void testUpdateClientNotFoundException() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
-                .expandPath("s5FdeGf54D").body(new ClientDto("updatedName",1)).put();
+                .expandPath("s5FdeGf54D").body(new ClientDto("updatedName", 1)).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
     }
