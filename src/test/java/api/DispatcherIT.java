@@ -29,6 +29,10 @@ public class DispatcherIT {
         createdUsers = new ArrayList<>();
         DaoFactory.setFactory(new DaoFactoryHibr());
         clientBusinessController = new ClientBusinessController();
+    }
+
+    @BeforeEach
+    void init(){
         createdUsers.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
         createdUsers.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
     }
@@ -110,6 +114,40 @@ public class DispatcherIT {
                 .expandPath("s5FdeGf54D").body(new ClientDto("updatedName", 1)).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    public void testDeleteClient(){
+        int createdUserId = createdUsers.get(0);
+
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath(Integer.toString(createdUserId)).delete();
+        new Client().submit(request);
+        createdUsers.remove(0);
+        Optional<api.entity.Client> updatedUser = DaoFactory.getFactory().getClientDao().read(createdUserId);
+
+        assertThat(updatedUser.isPresent(), is(false));
+    }
+
+    @Test
+    void testDeleteClientNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath("s5FdeGf54D").delete();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    void testDeleteClientNotFoundExceptionWithValidId() {
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath("99999").delete();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @AfterEach
+    public void clean(){
+        createdUsers.clear();
     }
 
     @AfterAll
