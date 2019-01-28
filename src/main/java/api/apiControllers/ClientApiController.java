@@ -39,6 +39,11 @@ public class ClientApiController {
         }
     }
 
+    public void delete(String id) {
+        this.validateId(id, "client id: ");
+        this.clientBusinessController.delete(id);
+    }
+
     private void validate(Object property, String message) {
         if (property == null){
             throw new ArgumentNotValidException(message + " is missing");
