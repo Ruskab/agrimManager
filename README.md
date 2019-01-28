@@ -19,23 +19,7 @@
 ![themes-architecture-diagram](https://user-images.githubusercontent.com/16058725/51445549-bbd7c480-1d06-11e9-95f6-61761ac0061e.png)
 
 ## API
-### POST /clients
-#### Parámetros del cuerpo
-- `nombreCompleto`: String (**requerido**)
-- `horasNevera`: int
-#### Respuesta
-- 200 OK 
-  - `id`: String
-- 403 BAD_REQUEST
----
-### PUT /clients/{id}
-#### Parámetros del cuerpo
-- `nombreCompleto`: String (**requerido**)
-- `horasNevera`: int
-#### Respuesta
-- 200 OK 
-- 403 BAD_REQUEST
-- 404 NOT_FOUND
+[Api services](https://github.com/Ruskab/agrimManager/wiki/Api-services#api-services)
 --- 
 
 ##### Autor: Ilya Kabushko.
