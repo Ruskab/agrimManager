@@ -36,7 +36,7 @@ public class Dispatcher {
                     //this.doPatch(request);
                     break;
                 case DELETE:
-                    //this.doDelete(request);
+                    this.doDelete(request);
                     break;
                 default: // Unexpected
                     throw new RequestInvalidException("method error: " + request.getMethod());
@@ -54,10 +54,18 @@ public class Dispatcher {
         }
     }
 
-    private void doPut(HttpRequest request) {
-        if (request.isEqualsPath(ClientApiController.CLIENTS+ ClientApiController.ID_ID)){
-            this.clientApiController.update(request.getPath(1),(ClientDto) request.getBody());
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)){
+            this.clientApiController.delete(request.getPath(1));
         }else{
+            throw new NotFoundException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doPut(HttpRequest request) {
+        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
+            this.clientApiController.update(request.getPath(1), (ClientDto) request.getBody());
+        } else {
             throw new NotFoundException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
@@ -65,7 +73,7 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ClientApiController.CLIENTS)) {
             response.setBody(this.clientApiController.create((ClientDto) request.getBody()));
-        }else{
+        } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
