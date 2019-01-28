@@ -28,4 +28,11 @@ public class ClientBusinessController {
         client.setHours(clientDto.getHours());
         DaoFactory.getFactory().getClientDao().update(client);
     }
+
+    public void delete(String id) {
+        DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
+                .orElseThrow(() -> new NotFoundException("Client id: " + id));
+
+        DaoFactory.getFactory().getClientDao().deleteById(Integer.parseInt(id));
+    }
 }
