@@ -26,6 +26,11 @@ public class ClientApiController {
         return this.clientBusinessController.readAll();
     }
 
+    public ClientDto read(String id) {
+        this.validateId(id, "client id");
+        return this.clientBusinessController.read(id);
+    }
+
     public void update(String id,ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");

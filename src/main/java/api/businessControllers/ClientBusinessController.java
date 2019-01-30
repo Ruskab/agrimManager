@@ -20,6 +20,12 @@ public class ClientBusinessController {
         return DaoFactory.getFactory().getClientDao().findAll().stream().map(ClientDto::new).collect(Collectors.toList());
     }
 
+
+    public ClientDto read(String id) {
+        return DaoFactory.getFactory().getClientDao().read(Integer.parseInt(id)).map(ClientDto::new)
+                .orElseThrow(() -> new NotFoundException("Client id: " + id));
+    }
+
     public void update(String id, ClientDto clientDto) {
         Client client = DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
                 .orElseThrow(() -> new NotFoundException("Client id: " + id));
