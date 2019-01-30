@@ -27,7 +27,7 @@ public class Dispatcher {
                     this.doPost(request, response);
                     break;
                 case GET:
-                    //this.doGet(request, response);
+                    this.doGet(request, response);
                     break;
                 case PUT:
                     this.doPut(request);
@@ -51,6 +51,12 @@ public class Dispatcher {
             exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private void doGet(HttpRequest request, HttpResponse response) {
+        if (request.isEqualsPath(ClientApiController.CLIENTS)){
+            response.setBody(this.clientApiController.readAll());
         }
     }
 
