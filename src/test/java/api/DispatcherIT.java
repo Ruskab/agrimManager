@@ -5,10 +5,7 @@ import api.businessControllers.ClientBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
-import http.Client;
-import http.HttpException;
-import http.HttpRequest;
-import http.HttpStatus;
+import http.*;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testCreateClient() {
+    public void testCreateClient() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS)
                 .body(new ClientDto("fullNameTest", 4)).post();
 
@@ -51,7 +48,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testClientInvalidRequest() {
+    public void testClientInvalidRequest() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path("/invalid").body(null).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -59,7 +56,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testCreateClientWithoutClientDto() {
+    public void testCreateClientWithoutClientDto() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(null).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -67,7 +64,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testCreateClientWithoutClientDtoFullName() {
+    public void testCreateClientWithoutClientDtoFullName() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(new ClientDto(null, 1)).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -90,7 +87,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testUpdateClientWithoutClientDtoFullName() {
+    public void testUpdateClientWithoutClientDtoFullName() {
         String id = "1";
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath(id).body(new ClientDto(null, 1)).put();
@@ -100,7 +97,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testUpdateClientWithoutClientDto() {
+    public void testUpdateClientWithoutClientDto() {
         String id = "1";
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath(id).body(null).put();
@@ -109,7 +106,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testUpdateClientNotFoundException() {
+    public void testUpdateClientNotFoundException() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath("s5FdeGf54D").body(new ClientDto("updatedName", 1)).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -130,7 +127,7 @@ public class DispatcherIT {
     }
 
     @Test
-    void testDeleteClientNotFoundExceptionWithInvalidId() {
+    public void testDeleteClientNotFoundExceptionWithInvalidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath("s5FdeGf54D").delete();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -138,21 +135,55 @@ public class DispatcherIT {
     }
 
     @Test
-    void testDeleteClientNotFoundExceptionWithValidId() {
+    public void testDeleteClientNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath("99999").delete();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
     }
 
+    @Test
+    public void testReadClientByIdShoudThrowNotFoundExceptionWithValidId(){
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath("99999").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    void testReadClientNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath("s5FdeGf54D").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    public void testReadClient(){
+        int createdUserId = createdUsers.get(0);
+
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath(Integer.toString(createdUserId)).get();
+        ClientDto clientDto = (ClientDto) new Client().submit(request).getBody();
+
+        assertThat(clientDto.getFullName(), is("fakeFullNameTest"));
+        assertThat(clientDto.getHours(), is(1));
+    }
+
+    @Test
+    public void testReadAllClient(){
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).get();
+        List<ClientDto> clientDtoList = (List<ClientDto>) new Client().submit(request).getBody();
+
+        assertThat(clientDtoList.get(0).getFullName(), is("fakeFullNameTest"));
+        assertThat(clientDtoList.get(0).getHours(), is(1));
+        assertThat(clientDtoList.get(1).getFullName(), is("fakeFullNameTest2"));
+        assertThat(clientDtoList.get(1).getHours(), is(2));
+    }
+
     @AfterEach
     public void clean(){
+        createdUsers.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
         createdUsers.clear();
     }
-
-    @AfterAll
-    static void deleteCreatedUsers(){
-        createdUsers.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
-    }
-
 }
