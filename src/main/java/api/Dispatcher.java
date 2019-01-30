@@ -57,6 +57,8 @@ public class Dispatcher {
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ClientApiController.CLIENTS)){
             response.setBody(this.clientApiController.readAll());
+        }else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)){
+            response.setBody(this.clientApiController.read(request.getPath(1)));
         }
     }
 
