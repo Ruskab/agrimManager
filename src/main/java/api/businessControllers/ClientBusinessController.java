@@ -30,9 +30,9 @@ public class ClientBusinessController {
     }
 
     public void delete(String id) {
-        DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
+        Client client = DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
                 .orElseThrow(() -> new NotFoundException("Client id: " + id));
 
-        DaoFactory.getFactory().getClientDao().deleteById(Integer.parseInt(id));
+        DaoFactory.getFactory().getClientDao().deleteById(client.getId());
     }
 }
