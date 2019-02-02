@@ -29,14 +29,14 @@ class DispatcherIT {
     private List<Integer> createdVehicles;
 
     @BeforeAll
-    static void prepare() {
+    public static void prepare() {
         DaoFactory.setFactory(new DaoFactoryHibr());
         clientBusinessController = new ClientBusinessController();
         vehicleBusinessController = new VehicleBusinessController();
     }
 
     @BeforeEach
-    void init(){
+    public void init(){
         createdUsers = new ArrayList<>();
         createdVehicles = new ArrayList<>();
         createdUsers.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
@@ -44,7 +44,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testCreateClient() {
+    public void testCreateClient() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS)
                 .body(new ClientDto("fullNameTest", 4)).post();
 
@@ -315,6 +315,24 @@ class DispatcherIT {
         assertThat(clientDtoList.get(0).getHours(), is(1));
         assertThat(clientDtoList.get(1).getFullName(), is("fakeFullNameTest2"));
         assertThat(clientDtoList.get(1).getHours(), is(2));
+    }
+
+    @Test
+    void testReadAllVehicles(){
+        VehicleDto expectedVehicleDto1 = createVehicleDto(createdUsers.get(0).toString(),"AA1234AA");
+        VehicleDto expectedVehicleDto2 = createVehicleDto(createdUsers.get(0).toString(),"BB1234BB");
+        VehicleDto expectedVehicleDto3 = createVehicleDto(createdUsers.get(0).toString(),"CC1234CC");
+
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1)) ;
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto2)) ;
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto3)) ;
+
+        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).get();
+        List<VehicleDto> vehicleDtoList = (List<VehicleDto>) new Client().submit(request).getBody();
+
+        assertThat(vehicleDtoList.get(0).getRegistrationPlate(), is(expectedVehicleDto1.getRegistrationPlate()));
+        assertThat(vehicleDtoList.get(1).getRegistrationPlate(), is(expectedVehicleDto2.getRegistrationPlate()));
+        assertThat(vehicleDtoList.get(2).getRegistrationPlate(), is(expectedVehicleDto3.getRegistrationPlate()));
     }
 
     private VehicleDto createVehicleDto(String clientId, String registrationPlate) {

@@ -62,6 +62,8 @@ public class Dispatcher {
             response.setBody(this.clientApiController.readAll());
         } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
             response.setBody(this.clientApiController.read(request.getPath(1)));
+        } else if (request.isEqualsPath(VehicleApiController.VEHICLES)){
+            response.setBody(this.vehicleApiController.readAll());
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)){
             response.setBody(this.vehicleApiController.read(request.getPath(1)));
         }else{

@@ -7,6 +7,9 @@ import api.entity.Vehicle;
 import api.entity.builder.VehicleBuilder;
 import api.exceptions.NotFoundException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class VehicleBusinessController {
     public int create(VehicleDto vehicleDto) {
         Client client = null;
@@ -35,5 +38,9 @@ public class VehicleBusinessController {
     public VehicleDto read(String id) {
         return DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(id)).map(VehicleDto::new)
                 .orElseThrow(() -> new NotFoundException("Vehicle id" + id));
+    }
+
+    public List<VehicleDto> readAll() {
+        return DaoFactory.getFactory().getVehicleDao().findAll().stream().map(VehicleDto::new).collect(Collectors.toList());
     }
 }
