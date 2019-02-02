@@ -11,7 +11,7 @@ public class VehicleBusinessController {
     public int create(VehicleDto vehicleDto) {
         Client client = null;
         if (vehicleDto.getClientId() != null) {
-            client = DaoFactory.getFactory().getClientDao().read(vehicleDto.getId())
+            client = DaoFactory.getFactory().getClientDao().read(Integer.parseInt(vehicleDto.getClientId()))
                     .orElseThrow(() -> new NotFoundException("Client not found"));
         }
         Vehicle vehicle = new VehicleBuilder().setRegistrationPlate(vehicleDto.getRegistrationPlate())

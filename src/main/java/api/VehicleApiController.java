@@ -6,7 +6,7 @@ import api.exceptions.ArgumentNotValidException;
 
 public class VehicleApiController {
 
-    public static final String VEHICLES = "/clients";
+    public static final String VEHICLES = "/vehicles";
 
     public static final String ID_ID = "/{id}";
 
