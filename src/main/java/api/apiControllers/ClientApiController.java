@@ -38,12 +38,6 @@ public class ClientApiController {
         this.clientBusinessController.update(id,clientDto);
     }
 
-    private void validateId(String id, String message) {
-        if (!StringUtils.isStrictlyNumeric(id)){
-            throw new NotFoundException(message +  " Should be numeric");
-        }
-    }
-
     public void delete(String id) {
         this.validateId(id, "client id: ");
         this.clientBusinessController.delete(id);
@@ -54,4 +48,11 @@ public class ClientApiController {
             throw new ArgumentNotValidException(message + " is missing");
         }
     }
+
+    private void validateId(String id, String message) {
+        if (!StringUtils.isStrictlyNumeric(id)){
+            throw new NotFoundException(message +  " Should be numeric");
+        }
+    }
+
 }

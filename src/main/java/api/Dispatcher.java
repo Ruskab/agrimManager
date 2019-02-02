@@ -67,6 +67,8 @@ public class Dispatcher {
     private void doDelete(HttpRequest request) {
         if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
             this.clientApiController.delete(request.getPath(1));
+        } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)) {
+            this.vehicleApiController.delete(request.getPath(1));
         } else {
             throw new NotFoundException("request error: " + request.getMethod() + ' ' + request.getPath());
         }

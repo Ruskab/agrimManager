@@ -190,9 +190,44 @@ class DispatcherIT {
                 .expandPath(Integer.toString(createdClientId)).delete();
         new Client().submit(request);
         createdUsers.remove(0);
-        Optional<api.entity.Client> updatedClient = DaoFactory.getFactory().getClientDao().read(createdClientId);
+        Optional<api.entity.Client> deletedClient = DaoFactory.getFactory().getClientDao().read(createdClientId);
 
-        assertThat(updatedClient.isPresent(), is(false));
+        assertThat(deletedClient.isPresent(), is(false));
+    }
+
+    @Test
+    void testDeleteClientWithVehiclesShouldThrowInternal_Server_Error(){
+        int createdClientId = createdUsers.get(0);
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdUsers.get(0).toString(),"AA1234AA")));
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath(Integer.toString(createdClientId)).delete();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(),is(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    @Test
+    void testDeleteVehicle(){
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdUsers.get(1).toString(),"AA1234AA")));
+        int createdVehicleId = createdVehicles.get(0);
+
+        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath(Integer.toString(createdVehicleId)).delete();
+        new Client().submit(request);
+        createdVehicles.remove(0);
+        assertThat(DaoFactory.getFactory().getVehicleDao().read(createdVehicleId).isPresent(), is(false));
+    }
+
+    @Test
+    void testDeleteVehicleWithoutClientId(){
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(null,"AA1234AA")));
+        int createdVehicleId = createdVehicles.get(0);
+
+        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath(Integer.toString(createdVehicleId)).delete();
+        new Client().submit(request);
+        createdVehicles.remove(0);
+        assertThat(DaoFactory.getFactory().getVehicleDao().read(createdVehicleId).isPresent(), is(false));
     }
 
     @Test
@@ -204,8 +239,24 @@ class DispatcherIT {
     }
 
     @Test
+    void testDeleteVehicleNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath("s5FdeGf54D").delete();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
     void testDeleteClientNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
+                .expandPath("99999").delete();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    void testDeleteVehicleNotFoundExceptionWithValidId() {
+        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
                 .expandPath("99999").delete();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
