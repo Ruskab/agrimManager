@@ -267,7 +267,15 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testReadVehicleByIdShoudThrowNotFoundExceptionWithValidId(){
+        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath("99999").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
     }
 
     @Test
@@ -275,7 +283,15 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID_ID)
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testReadVehicleNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath("s5FdeGf54D").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
     }
 
     @Test
