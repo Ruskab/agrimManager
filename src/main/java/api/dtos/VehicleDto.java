@@ -65,7 +65,7 @@ public class VehicleDto {
     }
 
     public void setBodyOnFrame(String bodyOnFrame) {
-        bodyOnFrame = bodyOnFrame;
+        this.bodyOnFrame = bodyOnFrame;
     }
 
     public LocalDate getLastRevisionDate() {
@@ -81,7 +81,7 @@ public class VehicleDto {
     }
 
     public void setItvDate(LocalDate itvDate) {
-        itvDate = itvDate;
+        this.itvDate = itvDate;
     }
 
     public LocalDate getNextItvDate() {
