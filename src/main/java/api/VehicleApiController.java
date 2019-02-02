@@ -6,6 +6,8 @@ import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import com.mysql.cj.core.util.StringUtils;
 
+import java.util.List;
+
 public class VehicleApiController {
 
     static final String VEHICLES = "/vehicles";
@@ -42,5 +44,9 @@ public class VehicleApiController {
         if ( !StringUtils.isStrictlyNumeric(id)){
             throw new NotFoundException(message +  " Should be numeric");
         }
+    }
+
+    public List<VehicleDto> readAll() {
+        return this.vehicleBusinessController.readAll();
     }
 }

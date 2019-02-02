@@ -59,12 +59,4 @@ public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {
         entityTransaction.commit();
     }
 
-    @Override
-    public List<T> findAll() {
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        Query query = entityManager.createQuery("select c from Client c");
-        entityTransaction.commit();
-        return query.getResultList();
-    }
 }

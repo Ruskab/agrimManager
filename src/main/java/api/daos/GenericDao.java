@@ -14,6 +14,4 @@ public interface GenericDao<T, ID> {
 
     void deleteById(ID id);
 
-    List<T> findAll();
-
 }
