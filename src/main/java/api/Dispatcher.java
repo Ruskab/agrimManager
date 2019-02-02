@@ -18,6 +18,7 @@ public class Dispatcher {
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
 
+    private static String REQUEST_ERROR = "request error: ";
     private ClientApiController clientApiController = new ClientApiController();
     private VehicleApiController vehicleApiController = new VehicleApiController();
 
@@ -61,6 +62,10 @@ public class Dispatcher {
             response.setBody(this.clientApiController.readAll());
         } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
             response.setBody(this.clientApiController.read(request.getPath(1)));
+        } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)){
+            response.setBody(this.vehicleApiController.read(request.getPath(1)));
+        }else{
+            throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 
@@ -70,7 +75,7 @@ public class Dispatcher {
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)) {
             this.vehicleApiController.delete(request.getPath(1));
         } else {
-            throw new NotFoundException("request error: " + request.getMethod() + ' ' + request.getPath());
+            throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 
@@ -78,7 +83,7 @@ public class Dispatcher {
         if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
             this.clientApiController.update(request.getPath(1), (ClientDto) request.getBody());
         } else {
-            throw new NotFoundException("request error: " + request.getMethod() + ' ' + request.getPath());
+            throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 
@@ -88,7 +93,7 @@ public class Dispatcher {
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES)) {
             response.setBody(this.vehicleApiController.create((VehicleDto) request.getBody()));
         } else {
-            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+            throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 }
