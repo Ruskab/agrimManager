@@ -1,5 +1,7 @@
 package api.dtos;
 
+import api.entity.Vehicle;
+
 import java.time.LocalDate;
 
 public class VehicleDto {
@@ -9,9 +11,9 @@ public class VehicleDto {
     private String brand;
     private String clientId;
     private String KMS;
-    private String BodyOnFrame; //bastidor
+    private String bodyOnFrame; //bastidor
     private LocalDate lastRevisionDate;
-    private LocalDate ItvDate;
+    private LocalDate itvDate;
     private LocalDate nextItvDate;
     private String airFilterReference;
     private String oilFilterReference;
@@ -24,14 +26,30 @@ public class VehicleDto {
         this.brand = brand;
         this.clientId = clientId;
         this.KMS = KMS;
-        BodyOnFrame = bodyOnFrame;
+        this.bodyOnFrame = bodyOnFrame;
         this.lastRevisionDate = lastRevisionDate;
-        ItvDate = itvDate;
+        this.itvDate = itvDate;
         this.nextItvDate = nextItvDate;
         this.airFilterReference = airFilterReference;
         this.oilFilterReference = oilFilterReference;
         this.fuelFilter = fuelFilter;
         this.motorOil = motorOil;
+    }
+
+    public VehicleDto(Vehicle vehicle) {
+        this.id = vehicle.getId();
+        this.registrationPlate = vehicle.getRegistrationPlate();
+        this.brand = vehicle.getBrand();
+        this.clientId = Integer.toString(vehicle.getClient().getId());
+        this.KMS = vehicle.getKMS();
+        this.bodyOnFrame = vehicle.getBodyOnFrame();
+        this.lastRevisionDate = vehicle.getLastRevisionDate();
+        this.itvDate = vehicle.getItvDate();
+        this.nextItvDate = vehicle.getNextItvDate();
+        this.airFilterReference = vehicle.getAirFilterReference();
+        this.oilFilterReference = vehicle.getAirFilterReference();
+        this.fuelFilter = vehicle.getFuelFilter();
+        this.motorOil = vehicle.getMotorOil();
     }
 
     public String getKMS() {
@@ -43,11 +61,11 @@ public class VehicleDto {
     }
 
     public String getBodyOnFrame() {
-        return BodyOnFrame;
+        return bodyOnFrame;
     }
 
     public void setBodyOnFrame(String bodyOnFrame) {
-        BodyOnFrame = bodyOnFrame;
+        bodyOnFrame = bodyOnFrame;
     }
 
     public LocalDate getLastRevisionDate() {
@@ -59,11 +77,11 @@ public class VehicleDto {
     }
 
     public LocalDate getItvDate() {
-        return ItvDate;
+        return itvDate;
     }
 
     public void setItvDate(LocalDate itvDate) {
-        ItvDate = itvDate;
+        itvDate = itvDate;
     }
 
     public LocalDate getNextItvDate() {
@@ -146,9 +164,9 @@ public class VehicleDto {
                 ", brand='" + brand + '\'' +
                 ", clientId='" + clientId + '\'' +
                 ", KMS='" + KMS + '\'' +
-                ", BodyOnFrame='" + BodyOnFrame + '\'' +
+                ", BodyOnFrame='" + bodyOnFrame + '\'' +
                 ", lastRevisionDate=" + lastRevisionDate +
-                ", ItvDate=" + ItvDate +
+                ", ItvDate=" + itvDate +
                 ", nextItvDate=" + nextItvDate +
                 ", airFilterReference='" + airFilterReference + '\'' +
                 ", oilFilterReference='" + oilFilterReference + '\'' +

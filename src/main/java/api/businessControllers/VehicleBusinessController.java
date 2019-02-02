@@ -31,4 +31,9 @@ public class VehicleBusinessController {
 
         DaoFactory.getFactory().getVehicleDao().deleteById(vehicle.getId());
     }
+
+    public VehicleDto read(String id) {
+        return DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(id)).map(VehicleDto::new)
+                .orElseThrow(() -> new NotFoundException("Vehicle id" + id));
+    }
 }

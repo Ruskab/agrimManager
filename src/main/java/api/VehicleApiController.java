@@ -8,9 +8,9 @@ import com.mysql.cj.core.util.StringUtils;
 
 public class VehicleApiController {
 
-    public static final String VEHICLES = "/vehicles";
+    static final String VEHICLES = "/vehicles";
 
-    public static final String ID_ID = "/{id}";
+    static final String ID_ID = "/{id}";
 
     VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
 
@@ -21,9 +21,14 @@ public class VehicleApiController {
         return vehicleBusinessController.create(vehicleDto);
     }
 
-    public void delete(String id) {
+    void delete(String id) {
         validateId(id,"Vehicle id");
         vehicleBusinessController.delete(id);
+    }
+
+    VehicleDto read(String id) {
+        validateId(id, "vehicle id");
+        return vehicleBusinessController.read(id);
     }
 
     private void validate(Object property, String message) {
