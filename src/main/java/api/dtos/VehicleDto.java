@@ -1,24 +1,13 @@
-package api.entity;
+package api.dtos;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "vehicle")
-public class Vehicle {
+public class VehicleDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String registrationPlate;
-
     private String brand;
-
-    @JoinColumn
-    @ManyToOne
-    private Client client;
-
+    private String clientId;
     private String KMS;
     private String BodyOnFrame; //bastidor
     private LocalDate lastRevisionDate;
@@ -29,14 +18,11 @@ public class Vehicle {
     private String fuelFilter;
     private String motorOil;
 
-    public Vehicle() {
-        //JPA
-    }
-
-    public Vehicle(String registrationPlate, String brand, Client client, String KMS, String bodyOnFrame, LocalDate lastRevisionDate, LocalDate itvDate, LocalDate nextItvDate, String airFilterReference, String oilFilterReference, String fuelFilter, String motorOil) {
+    public VehicleDto(int id, String registrationPlate, String brand, String clientId, String KMS, String bodyOnFrame, LocalDate lastRevisionDate, LocalDate itvDate, LocalDate nextItvDate, String airFilterReference, String oilFilterReference, String fuelFilter, String motorOil) {
+        this.id = id;
         this.registrationPlate = registrationPlate;
         this.brand = brand;
-        this.client = client;
+        this.clientId = clientId;
         this.KMS = KMS;
         BodyOnFrame = bodyOnFrame;
         this.lastRevisionDate = lastRevisionDate;
@@ -46,34 +32,6 @@ public class Vehicle {
         this.oilFilterReference = oilFilterReference;
         this.fuelFilter = fuelFilter;
         this.motorOil = motorOil;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getRegistrationPlate() {
-        return registrationPlate;
-    }
-
-    public void setRegistrationPlate(String registrationPlate) {
-        this.registrationPlate = registrationPlate;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public String getKMS() {
@@ -146,5 +104,56 @@ public class Vehicle {
 
     public void setMotorOil(String motorOil) {
         this.motorOil = motorOil;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRegistrationPlate() {
+        return registrationPlate;
+    }
+
+    public void setRegistrationPlate(String registrationPlate) {
+        this.registrationPlate = registrationPlate;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    @Override
+    public String toString() {
+        return "VehicleDto{" +
+                "id=" + id +
+                ", registrationPlate='" + registrationPlate + '\'' +
+                ", brand='" + brand + '\'' +
+                ", clientId='" + clientId + '\'' +
+                ", KMS='" + KMS + '\'' +
+                ", BodyOnFrame='" + BodyOnFrame + '\'' +
+                ", lastRevisionDate=" + lastRevisionDate +
+                ", ItvDate=" + ItvDate +
+                ", nextItvDate=" + nextItvDate +
+                ", airFilterReference='" + airFilterReference + '\'' +
+                ", oilFilterReference='" + oilFilterReference + '\'' +
+                ", fuelFilter='" + fuelFilter + '\'' +
+                ", motorOil='" + motorOil + '\'' +
+                '}';
     }
 }

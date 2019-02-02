@@ -4,6 +4,7 @@ import api.apiControllers.ClientApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
+import api.dtos.VehicleDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -18,6 +19,7 @@ public class Dispatcher {
     }
 
     private ClientApiController clientApiController = new ClientApiController();
+    private VehicleApiController vehicleApiController = new VehicleApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -55,17 +57,17 @@ public class Dispatcher {
     }
 
     private void doGet(HttpRequest request, HttpResponse response) {
-        if (request.isEqualsPath(ClientApiController.CLIENTS)){
+        if (request.isEqualsPath(ClientApiController.CLIENTS)) {
             response.setBody(this.clientApiController.readAll());
-        }else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)){
+        } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
             response.setBody(this.clientApiController.read(request.getPath(1)));
         }
     }
 
     private void doDelete(HttpRequest request) {
-        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)){
+        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
             this.clientApiController.delete(request.getPath(1));
-        }else{
+        } else {
             throw new NotFoundException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
@@ -81,6 +83,8 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ClientApiController.CLIENTS)) {
             response.setBody(this.clientApiController.create((ClientDto) request.getBody()));
+        } else if (request.isEqualsPath(VehicleApiController.VEHICLES)) {
+            response.setBody(this.vehicleApiController.create((VehicleDto) request.getBody()));
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
