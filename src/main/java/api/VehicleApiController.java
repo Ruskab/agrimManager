@@ -14,13 +14,13 @@ public class VehicleApiController {
 
     public Object create(VehicleDto vehicleDto) {
         this.validate(vehicleDto, "vehicleDto");
-        this.validate(vehicleDto.getRegistrationPlate(),"registration plate");
-        this.validate(vehicleDto.getClientId(),"Client id");
+        this.validate(vehicleDto.getRegistrationPlate(), "registration plate");
+        this.validate(vehicleDto.getClientId(), "Client id");
         return vehicleBusinessController.create(vehicleDto);
     }
 
     private void validate(Object property, String message) {
-        if (property == null){
+        if (property == null) {
             throw new ArgumentNotValidException(message + " is missing");
         }
     }

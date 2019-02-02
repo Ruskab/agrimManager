@@ -12,15 +12,15 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Optional;
 
-public class GenericDaoHibr<T,ID> implements GenericDao<T,ID> {
+public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {
 
-    protected Class<T> entityClass;
+    Class<T> entityClass;
 
     private final static Logger LOGGER = LogManager.getLogger(GenericDaoHibr.class);
 
-    protected EntityManager entityManager;
+    EntityManager entityManager;
 
-    public GenericDaoHibr(EntityManagerFactory entityManagerFactory) {
+    GenericDaoHibr(EntityManagerFactory entityManagerFactory) {
         this.entityManager = entityManagerFactory.createEntityManager();
         ParameterizedType genericSupperclass = (ParameterizedType) getClass().getGenericSuperclass();
         this.entityClass = (Class<T>) genericSupperclass.getActualTypeArguments()[0];
@@ -36,7 +36,7 @@ public class GenericDaoHibr<T,ID> implements GenericDao<T,ID> {
 
     @Override
     public Optional<T> read(ID id) {
-        return Optional.ofNullable(entityManager.find(entityClass,id)) ;
+        return Optional.ofNullable(entityManager.find(entityClass, id));
     }
 
     @Override
@@ -51,8 +51,8 @@ public class GenericDaoHibr<T,ID> implements GenericDao<T,ID> {
     public void deleteById(ID id) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        T entity = entityManager.find(entityClass,id);
-        if (entity == null){
+        T entity = entityManager.find(entityClass, id);
+        if (entity == null) {
             LOGGER.warn("not found");
         }
         entityManager.remove(entity);

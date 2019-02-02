@@ -13,7 +13,7 @@ public class Vehicle {
 
     private String registrationPlate;
 
-    private  String brand;
+    private String brand;
 
     @JoinColumn
     @ManyToOne
@@ -29,7 +29,7 @@ public class Vehicle {
     private String fuelFilter;
     private String motorOil;
 
-    public Vehicle(){
+    public Vehicle() {
         //JPA
     }
 
