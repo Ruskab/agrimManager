@@ -63,9 +63,6 @@
 			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
-
-
-
 		<!-- MySQL connector -->
 		<dependency>
 			<groupId>mysql</groupId>

@@ -60,8 +60,10 @@ public class Dispatcher {
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(ClientApiController.CLIENTS)) {
             response.setBody(this.clientApiController.readAll());
-        } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
+        } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID)) {
             response.setBody(this.clientApiController.read(request.getPath(1)));
+        } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES )) {
+            response.setBody(this.clientApiController.clientVehiclesList(request.getPath(1)));
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES)){
             response.setBody(this.vehicleApiController.readAll());
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)){
@@ -72,7 +74,7 @@ public class Dispatcher {
     }
 
     private void doDelete(HttpRequest request) {
-        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
+        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID)) {
             this.clientApiController.delete(request.getPath(1));
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)) {
             this.vehicleApiController.delete(request.getPath(1));
@@ -82,7 +84,7 @@ public class Dispatcher {
     }
 
     private void doPut(HttpRequest request) {
-        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_ID)) {
+        if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID)) {
             this.clientApiController.update(request.getPath(1), (ClientDto) request.getBody());
         } else {
             throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
