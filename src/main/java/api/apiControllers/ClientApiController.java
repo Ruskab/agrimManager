@@ -57,6 +57,7 @@ public class ClientApiController {
     private void validateId(String id, String message) {
         if (!StringUtils.isStrictlyNumeric(id)) {
             throw new NotFoundException(message + " Should be numeric");
+            //todo change to BadRequestException
         }
     }
 
