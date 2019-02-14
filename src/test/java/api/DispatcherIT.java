@@ -6,6 +6,7 @@ import api.businessControllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
+import api.dtos.ClientVehiclesDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Vehicle;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,7 +38,7 @@ class DispatcherIT {
     }
 
     @BeforeEach
-    public void init(){
+    public void init() {
         createdUsers = new ArrayList<>();
         createdVehicles = new ArrayList<>();
         createdUsers.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
@@ -60,7 +61,7 @@ class DispatcherIT {
     @Test
     void testCreateVehicle() {
         int existentClientId = createdUsers.get(0);
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId),"AA1234AA");
+        VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId), "AA1234AA");
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(vehicleDto).post();
         int id = (int) new Client().submit(request).getBody();
         createdVehicles.add(id);
@@ -79,7 +80,6 @@ class DispatcherIT {
         assertThat(createdVehicle.get().getOilFilterReference(), is(vehicleDto.getOilFilterReference()));
         assertThat(createdVehicle.get().getMotorOil(), is(vehicleDto.getMotorOil()));
     }
-
 
 
     @Test
@@ -125,7 +125,7 @@ class DispatcherIT {
     @Test
     void testCreateVehicleWithoutRegistrationPlate() {
         int existentClientId = createdUsers.get(0);
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId),null);
+        VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId), null);
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(vehicleDto).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -134,7 +134,7 @@ class DispatcherIT {
 
     @Test
     void testCreateVehicleWithoutClientId() {
-        VehicleDto vehicleDto = createVehicleDto(null,"AA1234AA");
+        VehicleDto vehicleDto = createVehicleDto(null, "AA1234AA");
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(vehicleDto).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -142,7 +142,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testUpdateClient(){
+    void testUpdateClient() {
         int createdUserId = createdUsers.get(0);
         String createdUserFullName = DaoFactory.getFactory().getClientDao().read(createdUserId).get().getFullName();
 
@@ -151,7 +151,7 @@ class DispatcherIT {
         new Client().submit(request);
         Optional<api.entity.Client> updatedUser = DaoFactory.getFactory().getClientDao().read(createdUserId);
 
-        assertThat(createdUserFullName, is("fakeFullNameTest"  ));
+        assertThat(createdUserFullName, is("fakeFullNameTest"));
         assertThat(updatedUser.get().getFullName(), is("updatedName"));
         assertThat(updatedUser.get().getHours(), is(3));
     }
@@ -184,7 +184,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testDeleteClient(){
+    void testDeleteClient() {
         int createdClientId = createdUsers.get(0);
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
@@ -198,19 +198,19 @@ class DispatcherIT {
 
     @Test
     @Ignore("Foreign key error")
-    void testDeleteClientWithVehiclesShouldThrowInternal_Server_Error(){
+    void testDeleteClientWithVehiclesShouldThrowInternal_Server_Error() {
         int createdClientId = createdUsers.get(0);
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdUsers.get(0).toString(),"AA1234AA")));
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdUsers.get(0).toString(), "AA1234AA")));
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath(Integer.toString(createdClientId)).delete();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(),is(HttpStatus.INTERNAL_SERVER_ERROR));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 
     @Test
-    void testDeleteVehicle(){
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdUsers.get(1).toString(),"AA1234AA")));
+    void testDeleteVehicle() {
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdUsers.get(1).toString(), "AA1234AA")));
         int createdVehicleId = createdVehicles.get(0);
 
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
@@ -221,8 +221,8 @@ class DispatcherIT {
     }
 
     @Test
-    void testDeleteVehicleWithoutClientId(){
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(null,"AA1234AA")));
+    void testDeleteVehicleWithoutClientId() {
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(null, "AA1234AA")));
         int createdVehicleId = createdVehicles.get(0);
 
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
@@ -265,19 +265,19 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientByIdShoudThrowNotFoundExceptionWithValidId(){
+    void testReadClientByIdShoudThrowNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
     }
 
     @Test
-    void testReadVehicleByIdShoudThrowNotFoundExceptionWithValidId(){
+    void testReadVehicleByIdShoudThrowNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
                 .expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
     }
 
     @Test
@@ -285,7 +285,7 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
     }
 
     @Test
@@ -293,11 +293,11 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(),is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
     }
 
     @Test
-    void testReadClient(){
+    void testReadClient() {
         int createdUserId = createdUsers.get(0);
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
@@ -309,7 +309,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadAllClient(){
+    void testReadAllClient() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).get();
         List<ClientDto> clientDtoList = (List<ClientDto>) new Client().submit(request).getBody();
 
@@ -320,14 +320,14 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadAllVehicles(){
-        VehicleDto expectedVehicleDto1 = createVehicleDto(createdUsers.get(0).toString(),"AA1234AA");
-        VehicleDto expectedVehicleDto2 = createVehicleDto(createdUsers.get(0).toString(),"BB1234BB");
-        VehicleDto expectedVehicleDto3 = createVehicleDto(createdUsers.get(0).toString(),"CC1234CC");
+    void testReadAllVehicles() {
+        VehicleDto expectedVehicleDto1 = createVehicleDto(createdUsers.get(0).toString(), "AA1234AA");
+        VehicleDto expectedVehicleDto2 = createVehicleDto(createdUsers.get(0).toString(), "BB1234BB");
+        VehicleDto expectedVehicleDto3 = createVehicleDto(createdUsers.get(0).toString(), "CC1234CC");
 
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1)) ;
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto2)) ;
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto3)) ;
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto2));
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto3));
 
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).get();
         List<VehicleDto> vehicleDtoList = (List<VehicleDto>) new Client().submit(request).getBody();
@@ -335,6 +335,30 @@ class DispatcherIT {
         assertThat(vehicleDtoList.get(0).getRegistrationPlate(), is(expectedVehicleDto1.getRegistrationPlate()));
         assertThat(vehicleDtoList.get(1).getRegistrationPlate(), is(expectedVehicleDto2.getRegistrationPlate()));
         assertThat(vehicleDtoList.get(2).getRegistrationPlate(), is(expectedVehicleDto3.getRegistrationPlate()));
+    }
+
+    @Test
+    void testReadClientVehicles() {
+        Integer expectedClientId = createdUsers.get(0);
+        Integer otherClientId = createdUsers.get(1);
+        VehicleDto expectedVehicleDto1 = createVehicleDto(expectedClientId.toString(), "AA1234AA");
+        VehicleDto expectedVehicleDto2 = createVehicleDto(expectedClientId.toString(), "BB1234BB");
+        VehicleDto expectedVehicleDto3 = createVehicleDto(expectedClientId.toString(), "CC1234CC");
+        VehicleDto expectedVehicleDto4 = createVehicleDto(otherClientId.toString(), "DD1234DD");
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto2));
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto3));
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto4));
+
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();
+        ClientVehiclesDto clientVehiclesDtos = (ClientVehiclesDto) new Client().submit(request).getBody();
+
+        assertThat(clientVehiclesDtos.getVehicles(),
+                allOf(
+                        contains(createdVehicles.get(0), createdVehicles.get(1), createdVehicles.get(2)),
+                        not(contains(createdVehicles.get(3))))
+        );
+        assertThat(clientVehiclesDtos.getClientDto().getId(), is(expectedClientId));
     }
 
     private VehicleDto createVehicleDto(String clientId, String registrationPlate) {
@@ -355,7 +379,7 @@ class DispatcherIT {
     }
 
     @AfterEach
-    void clean(){
+    void clean() {
         createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
         createdUsers.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
     }
