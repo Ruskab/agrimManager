@@ -15,9 +15,7 @@ import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -281,6 +279,13 @@ class DispatcherIT {
     }
 
     @Test
+    void testReadClientVehiclesShoudThrowNotFoundExceptionWithValidClientId() {
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath("99999").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
     void testReadClientNotFoundExceptionWithInvalidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("s5FdeGf54D").get();
@@ -294,6 +299,20 @@ class DispatcherIT {
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testReadClientVehiclesShoudThrowNotFoundExceptionWithInValidClientId() {
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath("s5FdeGf54D").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testReadClientVehiclesShoudThrowNotFoundExceptionWithoutClientId() {
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND)); //todo change to bad request
     }
 
     @Test
@@ -359,6 +378,17 @@ class DispatcherIT {
                         not(contains(createdVehicles.get(3))))
         );
         assertThat(clientVehiclesDtos.getClientDto().getId(), is(expectedClientId));
+    }
+
+    @Test
+    void testReadClientVehiclesWithoutVehiclesShouldReturnClienVehicleDtoWithoutVehicles() {
+        Integer expectedClientId = createdUsers.get(0);
+
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();
+        ClientVehiclesDto clientVehiclesDtos = (ClientVehiclesDto) new Client().submit(request).getBody();
+
+        assertThat(clientVehiclesDtos.getClientDto().getId(), is(expectedClientId));
+        assertThat(clientVehiclesDtos.getVehicles(), is(Collections.emptyList()));
     }
 
     private VehicleDto createVehicleDto(String clientId, String registrationPlate) {
