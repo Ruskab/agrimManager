@@ -1,6 +1,7 @@
 package api.daos.hibernate;
 
 import api.daos.VehicleDao;
+import api.entity.Client;
 import api.entity.Vehicle;
 
 import javax.persistence.EntityManagerFactory;
@@ -26,11 +27,9 @@ class VehicleDaoHibr extends GenericDaoHibr<Vehicle, Integer> implements Vehicle
 
     @Override
     //todo revisar el commit si tiene que ir despues de gerResultList
-    public List<Vehicle> findByClientId(int id) {
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        Query query = entityManager.createQuery("SELECT v FROM Vehicle v WHERE v.client_id = :id");
-        entityTransaction.commit();
+    public List<Vehicle> findByClient(Client client) {
+        Query query = entityManager.createQuery("select v from Vehicle v where v.client = :client");
+        query.setParameter("client", client);
         return query.getResultList();
     }
 

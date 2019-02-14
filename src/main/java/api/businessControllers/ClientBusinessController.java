@@ -47,7 +47,7 @@ public class ClientBusinessController {
 
     public Optional<ClientVehiclesDto> readClientVehicles(int clientId) {
         if (existsClient(clientId)){
-            List<Vehicle> vehicles = DaoFactory.getFactory().getVehicleDao().findByClientId(clientId);
+            List<Vehicle> vehicles = DaoFactory.getFactory().getVehicleDao().findByClient(DaoFactory.getFactory().getClientDao().read(clientId).get());
             List<Integer> vehicleIds = vehicles.stream().map(vehicle -> vehicle.getId()).collect(Collectors.toList());
             return Optional.of(new ClientVehiclesDto(read(Integer.toString(clientId)),vehicleIds));
         }
