@@ -2,10 +2,13 @@ package api.businessControllers;
 
 import api.daos.DaoFactory;
 import api.dtos.ClientDto;
+import api.dtos.ClientVehiclesDto;
 import api.entity.Client;
+import api.entity.Vehicle;
 import api.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ClientBusinessController {
@@ -40,5 +43,18 @@ public class ClientBusinessController {
                 .orElseThrow(() -> new NotFoundException("Client id: " + id));
 
         DaoFactory.getFactory().getClientDao().deleteById(client.getId());
+    }
+
+    public Optional<ClientVehiclesDto> readClientVehicles(int clientId) {
+        if (existsClient(clientId)){
+            List<Vehicle> vehicles = DaoFactory.getFactory().getVehicleDao().findByClient(DaoFactory.getFactory().getClientDao().read(clientId).get());
+            List<Integer> vehicleIds = vehicles.stream().map(vehicle -> vehicle.getId()).collect(Collectors.toList());
+            return Optional.of(new ClientVehiclesDto(read(Integer.toString(clientId)),vehicleIds));
+        }
+        return Optional.empty();
+    }
+
+    private boolean existsClient(int clientId){
+        return DaoFactory.getFactory().getClientDao().read(clientId).isPresent();
     }
 }
