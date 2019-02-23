@@ -4,7 +4,6 @@ import api.daos.DaoFactory;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.entity.Client;
-import api.entity.Vehicle;
 import api.exceptions.NotFoundException;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class ClientBusinessController {
     }
 
     public List<ClientDto> readAll() {
-        return DaoFactory.getFactory().getClientDao().findAll().stream().map(ClientDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getClientDao().findAll().map(ClientDto::new).collect(Collectors.toList());
     }
 
 
@@ -47,11 +46,15 @@ public class ClientBusinessController {
 
     public Optional<ClientVehiclesDto> readClientVehicles(int clientId) {
         if (existsClient(clientId)){
-            List<Vehicle> vehicles = DaoFactory.getFactory().getVehicleDao().findByClient(DaoFactory.getFactory().getClientDao().read(clientId).get());
-            List<Integer> vehicleIds = vehicles.stream().map(vehicle -> vehicle.getId()).collect(Collectors.toList());
+            List<Integer> vehicleIds = getVehiclesIds(clientId);
             return Optional.of(new ClientVehiclesDto(read(Integer.toString(clientId)),vehicleIds));
         }
         return Optional.empty();
+    }
+
+    private List<Integer> getVehiclesIds(int clientId) {
+        return DaoFactory.getFactory().getVehicleDao().findByClient(DaoFactory.getFactory().getClientDao().read(clientId).get())
+                .map(vehicle -> vehicle.getId()).collect(Collectors.toList());
     }
 
     private boolean existsClient(int clientId){

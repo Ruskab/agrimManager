@@ -2,9 +2,9 @@ package api.daos;
 
 import api.entity.Client;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public interface ClientDao extends GenericDao<Client, Integer> {
 
-    List<Client> findAll();
+    Stream<Client> findAll();
 }
