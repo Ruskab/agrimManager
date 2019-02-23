@@ -41,6 +41,7 @@ class DispatcherIT {
         DaoFactory.setFactory(new DaoFactoryHibr());
         clientBusinessController = new ClientBusinessController();
         vehicleBusinessController = new VehicleBusinessController();
+        interventionBusinesssController = new InterventionBusinesssController();
     }
 
     @BeforeEach
@@ -283,6 +284,31 @@ class DispatcherIT {
     }
 
     @Test
+    void testDeleteCAFFEIntervention() {
+        createdInterventions.add(interventionBusinesssController.create(createCaffeInterventionDto(null)));
+        int createdInterventionId = createdInterventions.get(0);
+
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
+                .expandPath(Integer.toString(createdInterventionId)).delete();
+        new Client().submit(request);
+        createdInterventions.remove(0);
+        assertThat(DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).isPresent(), is(false));
+    }
+
+    @Test
+    void testDeleteREPAIRIntervention() {
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
+        createdInterventions.add(interventionBusinesssController.create(createInterventionDto(createdVehicles.get(0).toString())));
+        int createdInterventionId = createdInterventions.get(0);
+
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
+                .expandPath(Integer.toString(createdInterventionId)).delete();
+        new Client().submit(request);
+        createdInterventions.remove(0);
+        assertThat(DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).isPresent(), is(false));
+    }
+
+    @Test
     void testDeleteVehicleWithoutClientId() {
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(null, "AA1234AA")));
         int createdVehicleId = createdVehicles.get(0);
@@ -305,6 +331,14 @@ class DispatcherIT {
     @Test
     void testDeleteVehicleNotFoundExceptionWithInvalidId() {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath("s5FdeGf54D").delete();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    void testDeleteInterventionNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
                 .expandPath("s5FdeGf54D").delete();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
