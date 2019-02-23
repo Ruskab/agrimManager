@@ -1,9 +1,11 @@
 package api;
 
 import api.apiControllers.ClientApiController;
+import api.apiControllers.InterventionApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
+import api.dtos.InterventionDto;
 import api.dtos.VehicleDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
@@ -21,6 +23,7 @@ public class Dispatcher {
     private static String REQUEST_ERROR = "request error: ";
     private ClientApiController clientApiController = new ClientApiController();
     private VehicleApiController vehicleApiController = new VehicleApiController();
+    private InterventionApiController interventionApiController = new InterventionApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -62,13 +65,13 @@ public class Dispatcher {
             response.setBody(this.clientApiController.readAll());
         } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID)) {
             response.setBody(this.clientApiController.read(request.getPath(1)));
-        } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES )) {
+        } else if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES)) {
             response.setBody(this.clientApiController.clientVehiclesList(request.getPath(1)));
-        } else if (request.isEqualsPath(VehicleApiController.VEHICLES)){
+        } else if (request.isEqualsPath(VehicleApiController.VEHICLES)) {
             response.setBody(this.vehicleApiController.readAll());
-        } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)){
+        } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)) {
             response.setBody(this.vehicleApiController.read(request.getPath(1)));
-        }else{
+        } else {
             throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
@@ -96,7 +99,9 @@ public class Dispatcher {
             response.setBody(this.clientApiController.create((ClientDto) request.getBody()));
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES)) {
             response.setBody(this.vehicleApiController.create((VehicleDto) request.getBody()));
-        } else {
+        } else if (request.isEqualsPath(InterventionApiController.INTERVENTIONS)) {
+            response.setBody(this.interventionApiController.create((InterventionDto) request.getBody()));
+        } else{
             throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }

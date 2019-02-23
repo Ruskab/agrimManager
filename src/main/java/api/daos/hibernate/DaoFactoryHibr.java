@@ -2,6 +2,7 @@ package api.daos.hibernate;
 
 import api.daos.ClientDao;
 import api.daos.DaoFactory;
+import api.daos.InterventionDao;
 import api.daos.VehicleDao;
 
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +14,7 @@ public class DaoFactoryHibr extends DaoFactory {
 
     private ClientDao clientDao;
     private VehicleDao vehicleDao;
+    private InterventionDao interventionDao;
 
     public DaoFactoryHibr() {
         entityManagerFactory = Persistence.createEntityManagerFactory("agrim-pu");
@@ -30,6 +32,14 @@ public class DaoFactoryHibr extends DaoFactory {
             vehicleDao = new VehicleDaoHibr(entityManagerFactory);
         }
         return vehicleDao;
+    }
+
+    @Override
+    public InterventionDao getInterventionDao() {
+        if (interventionDao == null) {
+            interventionDao = new InterventionDaoHibr(entityManagerFactory);
+        }
+        return interventionDao;
     }
 
 
