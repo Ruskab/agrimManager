@@ -81,6 +81,8 @@ public class Dispatcher {
             this.clientApiController.delete(request.getPath(1));
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)) {
             this.vehicleApiController.delete(request.getPath(1));
+        } else if (request.isEqualsPath(InterventionApiController.INTERVENTIONS + InterventionApiController.ID)) {
+            this.interventionApiController.delete(request.getPath(1));
         } else {
             throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
