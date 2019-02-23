@@ -25,6 +25,10 @@ public class Intervention {
     @ManyToOne
     private Work work;
 
+    public Intervention(){
+        //JPA
+    }
+
     public Intervention(String title, Enum state, Period period) {
         this.title = title;
         State = state;

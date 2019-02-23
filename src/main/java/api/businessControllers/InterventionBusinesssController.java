@@ -6,6 +6,7 @@ import api.entity.Intervention;
 import api.entity.State;
 import api.entity.Vehicle;
 import api.exceptions.ArgumentNotValidException;
+import api.exceptions.NotFoundException;
 
 import java.util.Optional;
 
@@ -30,6 +31,13 @@ public class InterventionBusinesssController {
 
         DaoFactory.getFactory().getInterventionDao().create(intervention);
         return intervention.getId();
+    }
+
+    public void delete(String interventionId) {
+        DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
+                .orElseThrow( () -> new NotFoundException("Intervention id: " + interventionId));
+
+        DaoFactory.getFactory().getInterventionDao().deleteById(Integer.parseInt(interventionId));
     }
 
     private boolean isCaffeIntervention(InterventionDto interventionDto) {

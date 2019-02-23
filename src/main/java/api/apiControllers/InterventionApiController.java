@@ -20,6 +20,12 @@ public class InterventionApiController {
         return interventionBusinessController.create(interventionDto);
     }
 
+    public void delete(String interventionId) {
+        this.validate(interventionId, "intervention id");
+        this.validateId(interventionId, "intenvention id");
+        this.interventionBusinessController.delete(interventionId);
+    }
+
     private void validate(Object property, String message) {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is missing");
