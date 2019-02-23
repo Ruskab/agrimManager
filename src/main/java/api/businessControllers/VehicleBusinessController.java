@@ -41,6 +41,6 @@ public class VehicleBusinessController {
     }
 
     public List<VehicleDto> readAll() {
-        return DaoFactory.getFactory().getVehicleDao().findAll().stream().map(VehicleDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getVehicleDao().findAll().map(VehicleDto::new).collect(Collectors.toList());
     }
 }

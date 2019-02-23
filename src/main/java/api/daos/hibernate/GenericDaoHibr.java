@@ -7,9 +7,7 @@ import org.apache.logging.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
 import java.util.Optional;
 
 public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {

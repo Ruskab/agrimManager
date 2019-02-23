@@ -3,13 +3,11 @@ package api.apiControllers;
 import api.businessControllers.ClientBusinessController;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
-import api.dtos.VehicleDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import com.mysql.cj.core.util.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ClientApiController {
 
