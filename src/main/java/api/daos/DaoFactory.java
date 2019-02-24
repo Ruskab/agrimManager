@@ -18,4 +18,6 @@ public abstract class DaoFactory {
     public abstract VehicleDao getVehicleDao();
 
     public abstract InterventionDao getInterventionDao();
+
+    public abstract MechanicDao getMechanicDao();
 }

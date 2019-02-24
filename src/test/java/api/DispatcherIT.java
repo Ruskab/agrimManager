@@ -7,12 +7,10 @@ import api.businessControllers.InterventionBusinesssController;
 import api.businessControllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.ClientDto;
-import api.dtos.ClientVehiclesDto;
-import api.dtos.InterventionDto;
-import api.dtos.VehicleDto;
+import api.dtos.*;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Intervention;
+import api.entity.Mechanic;
 import api.entity.State;
 import api.entity.Vehicle;
 import http.*;
@@ -32,9 +30,11 @@ class DispatcherIT {
     private static ClientBusinessController clientBusinessController;
     private static VehicleBusinessController vehicleBusinessController;
     private static InterventionBusinesssController interventionBusinesssController;
+    private static MechanicApiController mechanicApiController;
     private List<Integer> createdClients;
     private List<Integer> createdVehicles;
     private List<Integer> createdInterventions;
+    private List<Integer> createdMechanics;
 
     @BeforeAll
     public static void prepare() {
@@ -42,6 +42,7 @@ class DispatcherIT {
         clientBusinessController = new ClientBusinessController();
         vehicleBusinessController = new VehicleBusinessController();
         interventionBusinesssController = new InterventionBusinesssController();
+        mechanicApiController = new MechanicApiController();
     }
 
     @BeforeEach
@@ -49,6 +50,7 @@ class DispatcherIT {
         createdClients = new ArrayList<>();
         createdVehicles = new ArrayList<>();
         createdInterventions = new ArrayList<>();
+        createdMechanics = new ArrayList<>();
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
     }
@@ -122,6 +124,19 @@ class DispatcherIT {
     }
 
     @Test
+    public void testCreateMechanic() {
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS)
+                .body(new MechanicDto("mechanic1", "secretPass")).post();
+
+        int id = (int) new Client().submit(request).getBody();
+        createdMechanics.add(id);
+
+        Optional<Mechanic> createdMechanic = DaoFactory.getFactory().getMechanicDao().read(id);
+        assertThat(createdMechanic.get().getName(), is("mechanic1"));
+        assertThat(createdMechanic.get().getPassword(), is("secretPass"));
+    }
+
+    @Test
     void testCreateInterventionWithNoExistentVehicle() {
         InterventionDto interventionDto = createInterventionDto(Integer.toString(99999));
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
@@ -146,6 +161,14 @@ class DispatcherIT {
     }
 
     @Test
+    void testCreateMechanicInvalidRequest() {
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).path("/invalid").body(null).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
     void testCreateClientWithoutClientDto() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(null).post();
 
@@ -153,9 +176,19 @@ class DispatcherIT {
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
     }
 
+
+
     @Test
     void testCreateVehicleWithoutClientDto() {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(null).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
+    void testCreateMechanicWithoutMechanicDto() {
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(null).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -200,6 +233,38 @@ class DispatcherIT {
     void testCreateInterventionCaffeWithVehicleIdShouldThrowBadRequest() {
         InterventionDto interventionDto = createCaffeInterventionDto("23");
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
+    void testCreateMechanicWithNullNameShouldThrowBAD_REQUEST() {
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto(null, "1234")).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
+    void testCreateMechanicWithEmptyNameShouldThrowBAD_REQUEST() {
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto("", "1234")).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
+    void testCreateMechanicWithEmptyPasswordShouldThrowBAD_REQUEST() {
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto("mechanic1", "")).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
+    void testCreateMechanicWithNullShouldThrowBAD_REQUEST() {
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto("mechanic1", null)).post();
+
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
     }
@@ -581,5 +646,6 @@ class DispatcherIT {
         createdInterventions.forEach(id -> DaoFactory.getFactory().getInterventionDao().deleteById(id));
         createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
         createdClients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
+        createdMechanics.forEach(id -> DaoFactory.getFactory().getMechanicDao().deleteById(id));
     }
 }
