@@ -361,7 +361,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientByIdShoudThrowNotFoundExceptionWithValidId() {
+    void testReadClientByIdShouldThrowNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -371,6 +371,14 @@ class DispatcherIT {
     @Test
     void testReadVehicleByIdShoudThrowNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath("99999").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testReadInterventionByIdShoudThrowNotFoundExceptionWithValidId() {
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
                 .expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
@@ -400,6 +408,14 @@ class DispatcherIT {
     }
 
     @Test
+    void testReadInterventionNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
+                .expandPath("s5FdeGf54D").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
     void testReadClientVehiclesShoudThrowNotFoundExceptionWithInValidClientId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -423,6 +439,26 @@ class DispatcherIT {
 
         assertThat(clientDto.getFullName(), is("fakeFullNameTest"));
         assertThat(clientDto.getHours(), is(1));
+    }
+
+    @Test
+    void testReadIntervention() {
+        VehicleDto expectedVehicleDto1 = createVehicleDto(createdClients.get(0).toString(), "AA1234AA");
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        InterventionDto expectedInterventionDto1 = createInterventionDto(createdVehicles.get(0).toString());
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto1));
+        int createdInterventionId = createdInterventions.get(0);
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
+                .expandPath(Integer.toString(createdInterventionId)).get();
+
+        InterventionDto interventionDto = (InterventionDto) new Client().submit(request).getBody();
+
+        assertThat(interventionDto.getId(), is(createdInterventionId));
+        assertThat(interventionDto.getVehicleId(), is(createdVehicles.get(0).toString()));
+        assertThat(interventionDto.getState(), is(State.REPAIR));
+        assertThat(interventionDto.getPeriod(), is(expectedInterventionDto1.getPeriod()));
+        assertThat(interventionDto.getTitle(), is(expectedInterventionDto1.getTitle()));
+        assertThat(interventionDto.getWorkId(), is(expectedInterventionDto1.getWorkId()));
     }
 
     @Test
@@ -498,7 +534,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientVehiclesWithoutVehiclesShouldReturnClienVehicleDtoWithoutVehicles() {
+    void testReadClientVehiclesWithoutVehiclesShouldReturnClientVehicleDtoWithoutVehicles() {
         Integer expectedClientId = createdClients.get(0);
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();

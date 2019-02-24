@@ -44,4 +44,8 @@ public class InterventionApiController {
             //todo change to BadRequestException
         }
     }
+
+    public InterventionDto read(String interventionId) {
+        return this.interventionBusinessController.read(interventionId);
+    }
 }

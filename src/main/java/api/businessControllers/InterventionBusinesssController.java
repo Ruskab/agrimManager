@@ -7,6 +7,7 @@ import api.entity.State;
 import api.entity.Vehicle;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
+import com.mysql.cj.core.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public class InterventionBusinesssController {
 
     public void delete(String interventionId) {
         DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
-                .orElseThrow( () -> new NotFoundException("Intervention id: " + interventionId));
+                .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
 
         DaoFactory.getFactory().getInterventionDao().deleteById(Integer.parseInt(interventionId));
     }
@@ -58,5 +59,25 @@ public class InterventionBusinesssController {
 
     public List<InterventionDto> readAll() {
         return DaoFactory.getFactory().getInterventionDao().findAll().map(InterventionDto::new).collect(Collectors.toList());
+    }
+
+    public InterventionDto read(String interventionId) {
+        validateId(interventionId, "vehicle id");
+        return DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
+                .map(InterventionDto::new)
+                .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
+    }
+
+    private void validateId(String id, String message) {
+        validate(id, message);
+        if ( !StringUtils.isStrictlyNumeric(id)){
+            throw new NotFoundException(message +  " Should be numeric");
+        }
+    }
+
+    private void validate(Object property, String message) {
+        if (property == null) {
+            throw new ArgumentNotValidException(message + " is missing");
+        }
     }
 }
