@@ -8,7 +8,9 @@ import api.entity.Vehicle;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class InterventionBusinesssController {
 
@@ -23,7 +25,7 @@ public class InterventionBusinesssController {
             vehicleOpt.orElseThrow(() -> new ArgumentNotValidException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
         }
 
-        if (intervention.getWork() != null) {
+        if (intervention.getWork().isPresent()) {
             //Optional<Work> workOpt = DaoFactory.getFactory().getWorkDao().read(interventionDto.getId());
             //workOpt.ifPresent(work -> work.setWork(work));
             DaoFactory.getFactory().getInterventionDao().create(intervention);
@@ -52,5 +54,9 @@ public class InterventionBusinesssController {
         if (interventionDto.getState().equals(State.REPAIR) && interventionDto.getVehicleId() == null) {
             throw new ArgumentNotValidException("Invalid intervention, REPAIR should have vehicle id");
         }
+    }
+
+    public List<InterventionDto> readAll() {
+        return DaoFactory.getFactory().getInterventionDao().findAll().map(InterventionDto::new).collect(Collectors.toList());
     }
 }

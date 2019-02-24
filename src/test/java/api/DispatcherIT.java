@@ -16,12 +16,12 @@ import api.entity.Intervention;
 import api.entity.State;
 import api.entity.Vehicle;
 import http.*;
-import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -100,11 +100,11 @@ class DispatcherIT {
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getWork(), is(nullValue()));
+        assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
         assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(),LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.REPAIR));
-        assertThat(createdIntervention.get().getVehicle().getId(), is(existentVehicleId));
+        assertThat(createdIntervention.get().getVehicle().get().getId(), is(existentVehicleId));
     }
 
     @Test
@@ -115,7 +115,7 @@ class DispatcherIT {
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getWork(), is(nullValue()));
+        assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Caffe"));
         assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(),LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.CAFFE));
@@ -452,6 +452,25 @@ class DispatcherIT {
         assertThat(vehicleDtoList.get(0).getRegistrationPlate(), is(expectedVehicleDto1.getRegistrationPlate()));
         assertThat(vehicleDtoList.get(1).getRegistrationPlate(), is(expectedVehicleDto2.getRegistrationPlate()));
         assertThat(vehicleDtoList.get(2).getRegistrationPlate(), is(expectedVehicleDto3.getRegistrationPlate()));
+    }
+
+    @Test
+    void testReadAllInterventions() {
+        VehicleDto expectedVehicleDto1 = createVehicleDto(createdClients.get(0).toString(), "AA1234AA");
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        InterventionDto expectedInterventionDto1 = createInterventionDto(createdVehicles.get(0).toString());
+        InterventionDto expectedInterventionDto2 = createReparationInterventionDto(createdVehicles.get(0).toString());
+        InterventionDto expectedInterventionDto3 = createCaffeInterventionDto(null);
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto1));
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto2));
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto3));
+
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).get();
+        List<Integer> interventionIds = ((List<InterventionDto>) new Client().submit(request).getBody()).stream()
+                .map(interventionDto -> interventionDto.getId()).collect(Collectors.toList());
+
+        assertThat(interventionIds, is(createdInterventions));
     }
 
     @Test
