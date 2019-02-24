@@ -17,7 +17,7 @@ public class MechanicBusinessController {
     }
 
     private void validate(Object property, String message) {
-        if (property == null || property.toString() == "") {
+        if (property == null || property.toString().equals("")) {
             throw new ArgumentNotValidException(message + " is missing");
         }
     }
