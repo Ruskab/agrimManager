@@ -7,6 +7,8 @@ import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import com.mysql.cj.core.util.StringUtils;
 
+import java.util.List;
+
 public class InterventionApiController {
     public static final String INTERVENTIONS = "/interventions";
 
@@ -26,6 +28,10 @@ public class InterventionApiController {
         this.interventionBusinessController.delete(interventionId);
     }
 
+    public List<InterventionDto> readAll() {
+        return this.interventionBusinessController.readAll();
+    }
+
     private void validate(Object property, String message) {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is missing");
@@ -37,5 +43,9 @@ public class InterventionApiController {
             throw new NotFoundException(message + " Should be numeric");
             //todo change to BadRequestException
         }
+    }
+
+    public InterventionDto read(String interventionId) {
+        return this.interventionBusinessController.read(interventionId);
     }
 }

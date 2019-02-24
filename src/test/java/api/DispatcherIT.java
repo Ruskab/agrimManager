@@ -16,12 +16,12 @@ import api.entity.Intervention;
 import api.entity.State;
 import api.entity.Vehicle;
 import http.*;
-import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -100,11 +100,11 @@ class DispatcherIT {
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getWork(), is(nullValue()));
+        assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
         assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(),LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.REPAIR));
-        assertThat(createdIntervention.get().getVehicle().getId(), is(existentVehicleId));
+        assertThat(createdIntervention.get().getVehicle().get().getId(), is(existentVehicleId));
     }
 
     @Test
@@ -115,7 +115,7 @@ class DispatcherIT {
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getWork(), is(nullValue()));
+        assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Caffe"));
         assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(),LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.CAFFE));
@@ -361,7 +361,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientByIdShoudThrowNotFoundExceptionWithValidId() {
+    void testReadClientByIdShouldThrowNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -371,6 +371,14 @@ class DispatcherIT {
     @Test
     void testReadVehicleByIdShoudThrowNotFoundExceptionWithValidId() {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath("99999").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testReadInterventionByIdShoudThrowNotFoundExceptionWithValidId() {
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
                 .expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
@@ -394,6 +402,14 @@ class DispatcherIT {
     @Test
     void testReadVehicleNotFoundExceptionWithInvalidId() {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
+                .expandPath("s5FdeGf54D").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testReadInterventionNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
@@ -426,6 +442,26 @@ class DispatcherIT {
     }
 
     @Test
+    void testReadIntervention() {
+        VehicleDto expectedVehicleDto1 = createVehicleDto(createdClients.get(0).toString(), "AA1234AA");
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        InterventionDto expectedInterventionDto1 = createInterventionDto(createdVehicles.get(0).toString());
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto1));
+        int createdInterventionId = createdInterventions.get(0);
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
+                .expandPath(Integer.toString(createdInterventionId)).get();
+
+        InterventionDto interventionDto = (InterventionDto) new Client().submit(request).getBody();
+
+        assertThat(interventionDto.getId(), is(createdInterventionId));
+        assertThat(interventionDto.getVehicleId(), is(createdVehicles.get(0).toString()));
+        assertThat(interventionDto.getState(), is(State.REPAIR));
+        assertThat(interventionDto.getPeriod(), is(expectedInterventionDto1.getPeriod()));
+        assertThat(interventionDto.getTitle(), is(expectedInterventionDto1.getTitle()));
+        assertThat(interventionDto.getWorkId(), is(expectedInterventionDto1.getWorkId()));
+    }
+
+    @Test
     void testReadAllClient() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).get();
         List<ClientDto> clientDtoList = (List<ClientDto>) new Client().submit(request).getBody();
@@ -455,6 +491,25 @@ class DispatcherIT {
     }
 
     @Test
+    void testReadAllInterventions() {
+        VehicleDto expectedVehicleDto1 = createVehicleDto(createdClients.get(0).toString(), "AA1234AA");
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        InterventionDto expectedInterventionDto1 = createInterventionDto(createdVehicles.get(0).toString());
+        InterventionDto expectedInterventionDto2 = createReparationInterventionDto(createdVehicles.get(0).toString());
+        InterventionDto expectedInterventionDto3 = createCaffeInterventionDto(null);
+        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto1));
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto2));
+        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto3));
+
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).get();
+        List<Integer> interventionIds = ((List<InterventionDto>) new Client().submit(request).getBody()).stream()
+                .map(interventionDto -> interventionDto.getId()).collect(Collectors.toList());
+
+        assertThat(interventionIds, is(createdInterventions));
+    }
+
+    @Test
     void testReadClientVehicles() {
         Integer expectedClientId = createdClients.get(0);
         Integer otherClientId = createdClients.get(1);
@@ -479,7 +534,7 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientVehiclesWithoutVehiclesShouldReturnClienVehicleDtoWithoutVehicles() {
+    void testReadClientVehiclesWithoutVehiclesShouldReturnClientVehicleDtoWithoutVehicles() {
         Integer expectedClientId = createdClients.get(0);
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();

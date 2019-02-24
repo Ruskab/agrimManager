@@ -2,6 +2,7 @@ package api.entity;
 
 import javax.persistence.*;
 import java.time.Period;
+import java.util.Optional;
 
 @Entity
 @Table(name = "intervention")
@@ -25,7 +26,7 @@ public class Intervention {
     @ManyToOne
     private Work work;
 
-    public Intervention(){
+    public Intervention() {
         //JPA
     }
 
@@ -68,16 +69,16 @@ public class Intervention {
         this.period = period;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public Optional<Vehicle> getVehicle() {
+        return Optional.ofNullable(vehicle);
     }
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
 
-    public Work getWork() {
-        return work;
+    public Optional<Work> getWork() {
+        return Optional.ofNullable(work);
     }
 
     public void setWork(Work work) {
