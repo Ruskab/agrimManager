@@ -6,6 +6,7 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
 import api.dtos.InterventionDto;
+import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
@@ -24,6 +25,7 @@ public class Dispatcher {
     private ClientApiController clientApiController = new ClientApiController();
     private VehicleApiController vehicleApiController = new VehicleApiController();
     private InterventionApiController interventionApiController = new InterventionApiController();
+    private MechanicApiController mechanicApiContoller = new MechanicApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -107,6 +109,8 @@ public class Dispatcher {
             response.setBody(this.vehicleApiController.create((VehicleDto) request.getBody()));
         } else if (request.isEqualsPath(InterventionApiController.INTERVENTIONS)) {
             response.setBody(this.interventionApiController.create((InterventionDto) request.getBody()));
+        } else if (request.isEqualsPath(this.mechanicApiContoller.MECHANICS)) {
+            response.setBody(this.mechanicApiContoller.create((MechanicDto) request.getBody()));
         } else{
             throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
