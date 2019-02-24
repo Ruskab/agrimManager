@@ -7,6 +7,8 @@ import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import com.mysql.cj.core.util.StringUtils;
 
+import java.util.List;
+
 public class InterventionApiController {
     public static final String INTERVENTIONS = "/interventions";
 
@@ -24,6 +26,10 @@ public class InterventionApiController {
         this.validate(interventionId, "intervention id");
         this.validateId(interventionId, "intenvention id");
         this.interventionBusinessController.delete(interventionId);
+    }
+
+    public List<InterventionDto> readAll() {
+        return this.interventionBusinessController.readAll();
     }
 
     private void validate(Object property, String message) {
