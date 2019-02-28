@@ -1,6 +1,6 @@
-package api.apiControllers;
+package api.api_controllers;
 
-import api.businessControllers.ClientBusinessController;
+import api.business_controllers.ClientBusinessController;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.exceptions.ArgumentNotValidException;

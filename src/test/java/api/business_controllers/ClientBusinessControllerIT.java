@@ -1,4 +1,4 @@
-package api.businessControllers;
+package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;

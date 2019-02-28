@@ -1,7 +1,7 @@
 package api;
 
-import api.apiControllers.ClientApiController;
-import api.apiControllers.InterventionApiController;
+import api.api_controllers.ClientApiController;
+import api.api_controllers.InterventionApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;

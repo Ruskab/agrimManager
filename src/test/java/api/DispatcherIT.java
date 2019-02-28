@@ -1,10 +1,10 @@
 package api;
 
-import api.apiControllers.ClientApiController;
-import api.apiControllers.InterventionApiController;
-import api.businessControllers.ClientBusinessController;
-import api.businessControllers.InterventionBusinesssController;
-import api.businessControllers.VehicleBusinessController;
+import api.api_controllers.ClientApiController;
+import api.api_controllers.InterventionApiController;
+import api.business_controllers.ClientBusinessController;
+import api.business_controllers.InterventionBusinesssController;
+import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;

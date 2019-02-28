@@ -1,6 +1,6 @@
 package api;
 
-import api.businessControllers.VehicleBusinessController;
+import api.business_controllers.VehicleBusinessController;
 import api.dtos.VehicleDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
