@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class ClientBusinessController {
 
-    private final String CLIENT_ID = "Client id: ";
+    private static final String CLIENT_ID = "Client id: ";
 
     public int create(ClientDto clientDto) {
         Client client = new Client(clientDto.getFullName(), clientDto.getHours());

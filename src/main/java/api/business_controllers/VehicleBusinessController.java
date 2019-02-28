@@ -18,7 +18,7 @@ public class VehicleBusinessController {
                     .orElseThrow(() -> new NotFoundException("Client not found"));
         }
         Vehicle vehicle = new VehicleBuilder().setRegistrationPlate(vehicleDto.getRegistrationPlate())
-                .setBrand(vehicleDto.getBrand()).setClient(client).setKMS(vehicleDto.getKMS())
+                .setBrand(vehicleDto.getBrand()).setClient(client).setKMS(vehicleDto.getKms())
                 .setBodyOnFrame(vehicleDto.getBodyOnFrame()).setLastRevisionDate(vehicleDto.getLastRevisionDate())
                 .setItvDate(vehicleDto.getItvDate()).setNextItvDate(vehicleDto.getNextItvDate())
                 .setAirFilterReference(vehicleDto.getAirFilterReference()).setOilFilterReference(vehicleDto.getOilFilterReference())

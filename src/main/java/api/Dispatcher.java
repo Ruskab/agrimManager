@@ -16,7 +16,6 @@ import http.HttpResponse;
 import http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Dispatcher {
 
@@ -24,8 +23,8 @@ public class Dispatcher {
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
 
-    private final static Logger LOGGER = LogManager.getLogger(Dispatcher.class);
-    private final static String REQUEST_ERROR = "request error: ";
+    private static final Logger LOGGER = LogManager.getLogger(Dispatcher.class);
+    private static final String REQUEST_ERROR = "request error: ";
     private ClientApiController clientApiController = new ClientApiController();
     private VehicleApiController vehicleApiController = new VehicleApiController();
     private InterventionApiController interventionApiController = new InterventionApiController();
@@ -45,7 +44,7 @@ public class Dispatcher {
                     this.doPut(request);
                     break;
                 case PATCH:
-                    throw new NotImplementedException();
+                    break;
                 case DELETE:
                     this.doDelete(request);
                     break;
@@ -60,8 +59,6 @@ public class Dispatcher {
             response.setStatus(HttpStatus.NOT_FOUND);
         } catch (Exception exception) {  // Unexpected
             LOGGER.error("context" ,exception);
-
-            exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }

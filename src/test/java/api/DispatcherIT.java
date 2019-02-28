@@ -83,7 +83,7 @@ class DispatcherIT {
         assertThat(createdVehicle.get().getBodyOnFrame(), is(vehicleDto.getBodyOnFrame()));
         assertThat(createdVehicle.get().getItvDate(), is(vehicleDto.getItvDate()));
         assertThat(createdVehicle.get().getNextItvDate(), is(vehicleDto.getNextItvDate()));
-        assertThat(createdVehicle.get().getKMS(), is(vehicleDto.getKMS()));
+        assertThat(createdVehicle.get().getKms(), is(vehicleDto.getKms()));
         assertThat(createdVehicle.get().getLastRevisionDate(), is(vehicleDto.getLastRevisionDate()));
         assertThat(createdVehicle.get().getAirFilterReference(), is(vehicleDto.getAirFilterReference()));
         assertThat(createdVehicle.get().getFuelFilter(), is(vehicleDto.getFuelFilter()));

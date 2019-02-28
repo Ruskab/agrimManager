@@ -1,5 +1,6 @@
 package api.dtos;
 
+import api.entity.Intervention;
 import api.entity.Mechanic;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class MechanicDto {
         this.password = mechanic.getPassword();
         this.interventionIds = mechanic.getInterventionList()
                 .stream()
-                .map(intervention -> intervention.getId())
+                .map(Intervention::getId)
                 .collect(Collectors.toList());
     }
 
