@@ -104,7 +104,7 @@ class DispatcherIT {
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
         assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
-        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(),LocalDate.now().plusDays(1))));
+        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.REPAIR));
         assertThat(createdIntervention.get().getVehicle().get().getId(), is(existentVehicleId));
     }
@@ -119,8 +119,28 @@ class DispatcherIT {
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
         assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Caffe"));
-        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(),LocalDate.now().plusDays(1))));
+        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.CAFFE));
+    }
+
+    @Test
+    void testAddInterventionREPAIRtoMechanic() {
+        int existentClientId = clientBusinessController.create(new ClientDto("fakeFullNameTest", 1));
+        createdClients.add(existentClientId);
+        int existentVehicleId = vehicleBusinessController.create(createVehicleDto(Integer.toString(existentClientId), "AA1234AA"));
+        createdVehicles.add(existentVehicleId);
+        InterventionDto interventionDto = createInterventionDto(Integer.toString(existentVehicleId));
+        int existentMechanic = mechanicApiController.create(new MechanicDto("mechanic1", "secretPass"));
+        createdMechanics.add(existentMechanic);
+
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS + MechanicApiController.ID_INTERVENTIONS).expandPath(Integer.toString(existentMechanic)).body(interventionDto).post();
+        new Client().submit(request).getBody();
+
+        Optional<Mechanic> mechanic = DaoFactory.getFactory().getMechanicDao().read(existentMechanic);
+
+        assertThat(mechanic.get().getInterventionList().get(0).getPeriod(), is(interventionDto.getPeriod()));
+        assertThat(Integer.toString(mechanic.get().getInterventionList().get(0).getVehicle().get().getId()), is(interventionDto.getVehicleId()));
+        assertThat(mechanic.get().getInterventionList().get(0).getState(), is(interventionDto.getState()));
     }
 
     @Test
@@ -175,7 +195,6 @@ class DispatcherIT {
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
     }
-
 
 
     @Test
@@ -325,7 +344,7 @@ class DispatcherIT {
     }
 
     @Test
-    //@Ignore("Foreign key error")
+        //@Ignore("Foreign key error")
     void testDeleteClientWithVehiclesShouldThrowInternal_Server_Error() {
         int createdClientId = createdClients.get(0);
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(0).toString(), "AA1234AA")));
@@ -627,25 +646,25 @@ class DispatcherIT {
     }
 
     private InterventionDto createInterventionDto(String vehicleId) {
-        return new InterventionDto("Reparacion", State.REPAIR,vehicleId,null,
-                Period.between(LocalDate.now(),LocalDate.now().plusDays(1)));
+        return new InterventionDto("Reparacion", State.REPAIR, vehicleId, null,
+                Period.between(LocalDate.now(), LocalDate.now().plusDays(1)));
     }
 
     private InterventionDto createReparationInterventionDto(String vehicleId) {
-        return new InterventionDto("Reparacion", State.REPAIR,vehicleId,null,
-                Period.between(LocalDate.now(),LocalDate.now().plusDays(1)));
+        return new InterventionDto("Reparacion", State.REPAIR, vehicleId, null,
+                Period.between(LocalDate.now(), LocalDate.now().plusDays(1)));
     }
 
     private InterventionDto createCaffeInterventionDto(String vehicleId) {
-        return new InterventionDto("Caffe", State.CAFFE,vehicleId,null,
-                Period.between(LocalDate.now(),LocalDate.now().plusDays(1)));
+        return new InterventionDto("Caffe", State.CAFFE, vehicleId, null,
+                Period.between(LocalDate.now(), LocalDate.now().plusDays(1)));
     }
 
     @AfterEach
     void clean() {
+        createdMechanics.forEach(id -> DaoFactory.getFactory().getMechanicDao().deleteById(id));
         createdInterventions.forEach(id -> DaoFactory.getFactory().getInterventionDao().deleteById(id));
         createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
         createdClients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
-        createdMechanics.forEach(id -> DaoFactory.getFactory().getMechanicDao().deleteById(id));
     }
 }
