@@ -41,9 +41,9 @@ public class InterventionBusinesssController {
     }
 
     public void delete(String interventionId) {
-        DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
+        Intervention intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
                 .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
-        DaoFactory.getFactory().getInterventionDao().deleteById(Integer.parseInt(interventionId));
+        DaoFactory.getFactory().getInterventionDao().deleteById(intervention.getId());
     }
 
     public static boolean isCaffeIntervention(InterventionDto interventionDto) {

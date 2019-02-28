@@ -14,6 +14,9 @@ import api.exceptions.RequestInvalidException;
 import http.HttpRequest;
 import http.HttpResponse;
 import http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Dispatcher {
 
@@ -21,14 +24,15 @@ public class Dispatcher {
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
 
-    private static String REQUEST_ERROR = "request error: ";
+    private final static Logger LOGGER = LogManager.getLogger(Dispatcher.class);
+    private final static String REQUEST_ERROR = "request error: ";
     private ClientApiController clientApiController = new ClientApiController();
     private VehicleApiController vehicleApiController = new VehicleApiController();
     private InterventionApiController interventionApiController = new InterventionApiController();
-    private MechanicApiController mechanicApiContoller = new MechanicApiController();
+    private MechanicApiController mechanicApiController = new MechanicApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
-        String ERROR_MESSAGE = "{'error':'%S'}";
+        final String ERROR_MESSAGE = "{'error':'%S'}";
         try {
             switch (request.getMethod()) {
                 case POST:
@@ -41,8 +45,7 @@ public class Dispatcher {
                     this.doPut(request);
                     break;
                 case PATCH:
-                    //this.doPatch(request);
-                    break;
+                    throw new NotImplementedException();
                 case DELETE:
                     this.doDelete(request);
                     break;
@@ -56,6 +59,8 @@ public class Dispatcher {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.NOT_FOUND);
         } catch (Exception exception) {  // Unexpected
+            LOGGER.error("context" ,exception);
+
             exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,9 +78,9 @@ public class Dispatcher {
             response.setBody(this.vehicleApiController.readAll());
         } else if (request.isEqualsPath(VehicleApiController.VEHICLES + VehicleApiController.ID_ID)) {
             response.setBody(this.vehicleApiController.read(request.getPath(1)));
-        } else if (request.isEqualsPath(this.interventionApiController.INTERVENTIONS)) {
+        } else if (request.isEqualsPath(InterventionApiController.INTERVENTIONS)) {
             response.setBody(this.interventionApiController.readAll());
-        } else if (request.isEqualsPath(this.interventionApiController.INTERVENTIONS + InterventionApiController.ID)) {
+        } else if (request.isEqualsPath(InterventionApiController.INTERVENTIONS + InterventionApiController.ID)) {
             response.setBody(this.interventionApiController.read(request.getPath(1)));
         } else {
             throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
@@ -109,10 +114,10 @@ public class Dispatcher {
             response.setBody(this.vehicleApiController.create((VehicleDto) request.getBody()));
         } else if (request.isEqualsPath(InterventionApiController.INTERVENTIONS)) {
             response.setBody(this.interventionApiController.create((InterventionDto) request.getBody()));
-        } else if (request.isEqualsPath(this.mechanicApiContoller.MECHANICS)) {
-            response.setBody(this.mechanicApiContoller.create((MechanicDto) request.getBody()));
-        } else if (request.isEqualsPath(this.mechanicApiContoller.MECHANICS + MechanicApiController.ID_INTERVENTIONS)) {
-            this.mechanicApiContoller.createIntervention(request.getPath(1), (InterventionDto) request.getBody());
+        } else if (request.isEqualsPath(MechanicApiController.MECHANICS)) {
+            response.setBody(this.mechanicApiController.create((MechanicDto) request.getBody()));
+        } else if (request.isEqualsPath(MechanicApiController.MECHANICS + MechanicApiController.ID_INTERVENTIONS)) {
+            this.mechanicApiController.createIntervention(request.getPath(1), (InterventionDto) request.getBody());
         } else {
             throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }

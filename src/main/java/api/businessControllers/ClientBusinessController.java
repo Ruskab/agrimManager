@@ -46,19 +46,19 @@ public class ClientBusinessController {
     }
 
     public Optional<ClientVehiclesDto> readClientVehicles(int clientId) {
-        if (existsClient(clientId)){
+        if (existsClient(clientId)) {
             List<Integer> vehicleIds = getVehiclesIds(clientId);
-            return Optional.of(new ClientVehiclesDto(read(Integer.toString(clientId)),vehicleIds));
+            return Optional.of(new ClientVehiclesDto(read(Integer.toString(clientId)), vehicleIds));
         }
         return Optional.empty();
     }
 
     private List<Integer> getVehiclesIds(int clientId) {
-        return DaoFactory.getFactory().getVehicleDao().findByClient(DaoFactory.getFactory().getClientDao().read(clientId).get())
-                .map(Vehicle::getId).collect(Collectors.toList());
+        Client client = DaoFactory.getFactory().getClientDao().read(clientId).orElseThrow(() -> new NotFoundException("Client Not Found"));
+        return DaoFactory.getFactory().getVehicleDao().findByClient(client).map(Vehicle::getId).collect(Collectors.toList());
     }
 
-    private boolean existsClient(int clientId){
+    private boolean existsClient(int clientId) {
         return DaoFactory.getFactory().getClientDao().read(clientId).isPresent();
     }
 }
