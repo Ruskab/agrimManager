@@ -1,6 +1,8 @@
 package api.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -26,6 +28,7 @@ public class Mechanic {
     public Mechanic(String name, String password) {
         this.name = name;
         this.password = password;
+        this.interventionList = new ArrayList<>();
     }
 
     public Mechanic(String name, String password, List<Intervention> interventions) {

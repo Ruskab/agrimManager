@@ -21,9 +21,7 @@ public class InterventionBusinesssController {
         Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getPeriod());
 
         if (!isCaffeIntervention(interventionDto)) {
-            Optional<Vehicle> vehicleOpt = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(interventionDto.getVehicleId()));
-            vehicleOpt.ifPresent(vehicle -> intervention.setVehicle(vehicle));
-            vehicleOpt.orElseThrow(() -> new ArgumentNotValidException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
+            setVehicle(interventionDto, intervention);
         }
 
         if (intervention.getWork().isPresent()) {
@@ -36,14 +34,19 @@ public class InterventionBusinesssController {
         return intervention.getId();
     }
 
+    public static void setVehicle(InterventionDto interventionDto, Intervention intervention) {
+        Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(interventionDto.getVehicleId()))
+                .orElseThrow(() -> new ArgumentNotValidException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
+        intervention.setVehicle(vehicle);
+    }
+
     public void delete(String interventionId) {
         DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
                 .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
-
         DaoFactory.getFactory().getInterventionDao().deleteById(Integer.parseInt(interventionId));
     }
 
-    private boolean isCaffeIntervention(InterventionDto interventionDto) {
+    public static boolean isCaffeIntervention(InterventionDto interventionDto) {
         return (interventionDto.getVehicleId() == null || interventionDto.getVehicleId().isEmpty())
                 && interventionDto.getState().equals(State.CAFFE);
     }

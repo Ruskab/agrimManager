@@ -111,7 +111,9 @@ public class Dispatcher {
             response.setBody(this.interventionApiController.create((InterventionDto) request.getBody()));
         } else if (request.isEqualsPath(this.mechanicApiContoller.MECHANICS)) {
             response.setBody(this.mechanicApiContoller.create((MechanicDto) request.getBody()));
-        } else{
+        } else if (request.isEqualsPath(this.mechanicApiContoller.MECHANICS + MechanicApiController.ID_INTERVENTIONS)) {
+            this.mechanicApiContoller.createIntervention(request.getPath(1), (InterventionDto) request.getBody());
+        } else {
             throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }

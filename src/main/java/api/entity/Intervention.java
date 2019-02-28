@@ -30,6 +30,13 @@ public class Intervention {
         //JPA
     }
 
+    public Intervention(String title, Enum state, Period period, Vehicle vehicle) {
+        this.title = title;
+        State = state;
+        this.period = period;
+        this.vehicle = vehicle;
+    }
+
     public Intervention(String title, Enum state, Period period) {
         this.title = title;
         State = state;
