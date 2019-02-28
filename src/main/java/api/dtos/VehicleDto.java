@@ -10,7 +10,7 @@ public class VehicleDto {
     private String registrationPlate;
     private String brand;
     private String clientId;
-    private String KMS;
+    private String kms;
     private String bodyOnFrame; //bastidor
     private LocalDate lastRevisionDate;
     private LocalDate itvDate;
@@ -20,12 +20,12 @@ public class VehicleDto {
     private String fuelFilter;
     private String motorOil;
 
-    public VehicleDto(int id, String registrationPlate, String brand, String clientId, String KMS, String bodyOnFrame, LocalDate lastRevisionDate, LocalDate itvDate, LocalDate nextItvDate, String airFilterReference, String oilFilterReference, String fuelFilter, String motorOil) {
+    public VehicleDto(int id, String registrationPlate, String brand, String clientId, String kms, String bodyOnFrame, LocalDate lastRevisionDate, LocalDate itvDate, LocalDate nextItvDate, String airFilterReference, String oilFilterReference, String fuelFilter, String motorOil) {
         this.id = id;
         this.registrationPlate = registrationPlate;
         this.brand = brand;
         this.clientId = clientId;
-        this.KMS = KMS;
+        this.kms = kms;
         this.bodyOnFrame = bodyOnFrame;
         this.lastRevisionDate = lastRevisionDate;
         this.itvDate = itvDate;
@@ -41,7 +41,7 @@ public class VehicleDto {
         this.registrationPlate = vehicle.getRegistrationPlate();
         this.brand = vehicle.getBrand();
         this.clientId = Integer.toString(vehicle.getClient().getId());
-        this.KMS = vehicle.getKMS();
+        this.kms = vehicle.getKms();
         this.bodyOnFrame = vehicle.getBodyOnFrame();
         this.lastRevisionDate = vehicle.getLastRevisionDate();
         this.itvDate = vehicle.getItvDate();
@@ -52,12 +52,12 @@ public class VehicleDto {
         this.motorOil = vehicle.getMotorOil();
     }
 
-    public String getKMS() {
-        return KMS;
+    public String getKms() {
+        return kms;
     }
 
-    public void setKMS(String KMS) {
-        this.KMS = KMS;
+    public void setKms(String kms) {
+        this.kms = kms;
     }
 
     public String getBodyOnFrame() {
@@ -163,7 +163,7 @@ public class VehicleDto {
                 ", registrationPlate='" + registrationPlate + '\'' +
                 ", brand='" + brand + '\'' +
                 ", clientId='" + clientId + '\'' +
-                ", KMS='" + KMS + '\'' +
+                ", kms='" + kms + '\'' +
                 ", BodyOnFrame='" + bodyOnFrame + '\'' +
                 ", lastRevisionDate=" + lastRevisionDate +
                 ", ItvDate=" + itvDate +

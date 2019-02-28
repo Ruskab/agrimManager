@@ -19,10 +19,10 @@ public class Vehicle {
     @ManyToOne
     private Client client;
 
-    private String KMS;
-    private String BodyOnFrame; //bastidor
+    private String kms;
+    private String bodyOnFrame; //bastidor
     private LocalDate lastRevisionDate;
-    private LocalDate ItvDate;
+    private LocalDate itvDate;
     private LocalDate nextItvDate;
     private String airFilterReference;
     private String oilFilterReference;
@@ -33,14 +33,14 @@ public class Vehicle {
         //JPA
     }
 
-    public Vehicle(String registrationPlate, String brand, Client client, String KMS, String bodyOnFrame, LocalDate lastRevisionDate, LocalDate itvDate, LocalDate nextItvDate, String airFilterReference, String oilFilterReference, String fuelFilter, String motorOil) {
+    public Vehicle(String registrationPlate, String brand, Client client, String kms, String bodyOnFrame, LocalDate lastRevisionDate, LocalDate itvDate, LocalDate nextItvDate, String airFilterReference, String oilFilterReference, String fuelFilter, String motorOil) {
         this.registrationPlate = registrationPlate;
         this.brand = brand;
         this.client = client;
-        this.KMS = KMS;
-        BodyOnFrame = bodyOnFrame;
+        this.kms = kms;
+        this.bodyOnFrame = bodyOnFrame;
         this.lastRevisionDate = lastRevisionDate;
-        ItvDate = itvDate;
+        this.itvDate = itvDate;
         this.nextItvDate = nextItvDate;
         this.airFilterReference = airFilterReference;
         this.oilFilterReference = oilFilterReference;
@@ -76,20 +76,20 @@ public class Vehicle {
         this.client = client;
     }
 
-    public String getKMS() {
-        return KMS;
+    public String getKms() {
+        return kms;
     }
 
-    public void setKMS(String KMS) {
-        this.KMS = KMS;
+    public void setKms(String kms) {
+        this.kms = kms;
     }
 
     public String getBodyOnFrame() {
-        return BodyOnFrame;
+        return bodyOnFrame;
     }
 
     public void setBodyOnFrame(String bodyOnFrame) {
-        BodyOnFrame = bodyOnFrame;
+        this.bodyOnFrame = bodyOnFrame;
     }
 
     public LocalDate getLastRevisionDate() {
@@ -101,11 +101,11 @@ public class Vehicle {
     }
 
     public LocalDate getItvDate() {
-        return ItvDate;
+        return itvDate;
     }
 
     public void setItvDate(LocalDate itvDate) {
-        ItvDate = itvDate;
+        this.itvDate = itvDate;
     }
 
     public LocalDate getNextItvDate() {
