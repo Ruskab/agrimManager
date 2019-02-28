@@ -14,7 +14,7 @@ public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {
 
     Class<T> entityClass;
 
-    private final static Logger LOGGER = LogManager.getLogger(GenericDaoHibr.class);
+    private static final Logger LOGGER = LogManager.getLogger(GenericDaoHibr.class);
 
     EntityManager entityManager;
 

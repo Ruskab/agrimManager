@@ -1,6 +1,5 @@
 package api.daos;
 
-import api.entity.Intervention;
 import api.entity.Mechanic;
 
 import java.util.stream.Stream;

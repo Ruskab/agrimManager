@@ -1,4 +1,4 @@
-package api.businessControllers;
+package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.dtos.ClientDto;
@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 public class ClientBusinessController {
 
+    private final String CLIENT_ID = "Client id: ";
+
     public int create(ClientDto clientDto) {
         Client client = new Client(clientDto.getFullName(), clientDto.getHours());
         DaoFactory.getFactory().getClientDao().create(client);
@@ -26,12 +28,12 @@ public class ClientBusinessController {
 
     public ClientDto read(String id) {
         return DaoFactory.getFactory().getClientDao().read(Integer.parseInt(id)).map(ClientDto::new)
-                .orElseThrow(() -> new NotFoundException("Client id: " + id));
+                .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
     }
 
     public void update(String id, ClientDto clientDto) {
         Client client = DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
-                .orElseThrow(() -> new NotFoundException("Client id: " + id));
+                .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
 
         client.setFullName(clientDto.getFullName());
         client.setHours(clientDto.getHours());
@@ -40,25 +42,25 @@ public class ClientBusinessController {
 
     public void delete(String id) {
         Client client = DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
-                .orElseThrow(() -> new NotFoundException("Client id: " + id));
+                .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
 
         DaoFactory.getFactory().getClientDao().deleteById(client.getId());
     }
 
     public Optional<ClientVehiclesDto> readClientVehicles(int clientId) {
-        if (existsClient(clientId)){
+        if (existsClient(clientId)) {
             List<Integer> vehicleIds = getVehiclesIds(clientId);
-            return Optional.of(new ClientVehiclesDto(read(Integer.toString(clientId)),vehicleIds));
+            return Optional.of(new ClientVehiclesDto(read(Integer.toString(clientId)), vehicleIds));
         }
         return Optional.empty();
     }
 
     private List<Integer> getVehiclesIds(int clientId) {
-        return DaoFactory.getFactory().getVehicleDao().findByClient(DaoFactory.getFactory().getClientDao().read(clientId).get())
-                .map(Vehicle::getId).collect(Collectors.toList());
+        Client client = DaoFactory.getFactory().getClientDao().read(clientId).orElseThrow(() -> new NotFoundException("Client Not Found"));
+        return DaoFactory.getFactory().getVehicleDao().findByClient(client).map(Vehicle::getId).collect(Collectors.toList());
     }
 
-    private boolean existsClient(int clientId){
+    private boolean existsClient(int clientId) {
         return DaoFactory.getFactory().getClientDao().read(clientId).isPresent();
     }
 }

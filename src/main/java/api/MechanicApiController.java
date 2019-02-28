@@ -1,6 +1,6 @@
 package api;
 
-import api.businessControllers.MechanicBusinessController;
+import api.business_controllers.MechanicBusinessController;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.exceptions.ArgumentNotValidException;

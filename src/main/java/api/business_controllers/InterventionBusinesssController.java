@@ -1,4 +1,4 @@
-package api.businessControllers;
+package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.dtos.InterventionDto;
@@ -10,7 +10,6 @@ import api.exceptions.NotFoundException;
 import com.mysql.cj.core.util.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class InterventionBusinesssController {
@@ -41,9 +40,9 @@ public class InterventionBusinesssController {
     }
 
     public void delete(String interventionId) {
-        DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
+        Intervention intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
                 .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
-        DaoFactory.getFactory().getInterventionDao().deleteById(Integer.parseInt(interventionId));
+        DaoFactory.getFactory().getInterventionDao().deleteById(intervention.getId());
     }
 
     public static boolean isCaffeIntervention(InterventionDto interventionDto) {
