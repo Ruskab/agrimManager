@@ -323,11 +323,11 @@ class DispatcherIT {
     }
 
     @Test
-    void testUpdateClientNotFoundException() {
+    void testUpdateClientBadRequestException() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("s5FdeGf54D").body(new ClientDto("updatedName", 1)).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
     @Test
@@ -405,11 +405,11 @@ class DispatcherIT {
     }
 
     @Test
-    void testDeleteClientNotFoundExceptionWithInvalidId() {
+    void testDeleteClientBadRequestExceptionWithInvalidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("s5FdeGf54D").delete();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
     @Test
@@ -421,11 +421,11 @@ class DispatcherIT {
     }
 
     @Test
-    void testDeleteInterventionNotFoundExceptionWithInvalidId() {
+    void testDeleteInterventionBadRequestExceptionWithInvalidId() {
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
                 .expandPath("s5FdeGf54D").delete();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
     @Test
@@ -476,11 +476,11 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientNotFoundExceptionWithInvalidId() {
+    void testReadClientBadRequestExceptionWithInvalidId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
@@ -500,17 +500,17 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientVehiclesShoudThrowNotFoundExceptionWithInValidClientId() {
+    void testReadClientVehiclesShoudThrowBadRequestExceptionWithInValidClientId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
-    void testReadClientVehiclesShoudThrowNotFoundExceptionWithoutClientId() {
+    void testReadClientVehiclesShoudThrowBadRequestExceptionWithoutClientId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND)); //todo change to bad request
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
