@@ -15,18 +15,7 @@ class VehicleDaoHibr extends GenericDaoHibr<Vehicle, Integer> implements Vehicle
         super(entityManagerFactory);
     }
 
-    //todo moverlo a GenericDaoHibr y que sirva para todas las entidades
-    //todo hacer que Query sea mediante Criteria
-    public Stream<Vehicle> findAll() {
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        Query query = entityManager.createQuery("select v from Vehicle v");
-        entityTransaction.commit();
-        return query.getResultStream();
-    }
-
     @Override
-    //todo revisar el commit si tiene que ir despues de gerResultList
     public Stream<Vehicle> findByClient(Client client) {
         Query query = entityManager.createQuery("select v from Vehicle v where v.client = :client");
         query.setParameter("client", client);

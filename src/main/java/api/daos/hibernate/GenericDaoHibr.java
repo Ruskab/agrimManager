@@ -4,13 +4,15 @@ import api.daos.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.lang.reflect.ParameterizedType;
 import java.util.Optional;
+import java.util.stream.Stream;
 
-public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {
+public class GenericDaoHibr<T, I> implements GenericDao<T, I> {
 
     Class<T> entityClass;
 
@@ -33,7 +35,7 @@ public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {
     }
 
     @Override
-    public Optional<T> read(ID id) {
+    public Optional<T> read(I id) {
         return Optional.ofNullable(entityManager.find(entityClass, id));
     }
 
@@ -46,7 +48,7 @@ public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {
     }
 
     @Override
-    public void deleteById(ID id) {
+    public void deleteById(I id) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         T entity = entityManager.find(entityClass, id);
@@ -55,6 +57,15 @@ public class GenericDaoHibr<T, ID> implements GenericDao<T, ID> {
         }
         entityManager.remove(entity);
         entityTransaction.commit();
+    }
+
+    public Stream<T> findAll() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery(entityClass);
+        Root<T> rootEntry = cq.from(entityClass);
+        CriteriaQuery<T> all = cq.select(rootEntry);
+        TypedQuery allQuery = entityManager.createQuery(all);
+        return allQuery.getResultStream();
     }
 
 }
