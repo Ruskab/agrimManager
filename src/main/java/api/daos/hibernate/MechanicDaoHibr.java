@@ -13,8 +13,4 @@ class MechanicDaoHibr extends GenericDaoHibr<Mechanic, Integer> implements Mecha
         super(entityManagerFactory);
     }
 
-    public Stream<Mechanic> findAll() {
-        Query query = entityManager.createQuery("select i from Mechanic i");
-        return query.getResultStream();
-    }
 }

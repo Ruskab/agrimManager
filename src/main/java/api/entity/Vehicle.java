@@ -33,19 +33,8 @@ public class Vehicle {
         //JPA
     }
 
-    public Vehicle(String registrationPlate, String brand, Client client, String kms, String bodyOnFrame, LocalDate lastRevisionDate, LocalDate itvDate, LocalDate nextItvDate, String airFilterReference, String oilFilterReference, String fuelFilter, String motorOil) {
+    public Vehicle(String registrationPlate){
         this.registrationPlate = registrationPlate;
-        this.brand = brand;
-        this.client = client;
-        this.kms = kms;
-        this.bodyOnFrame = bodyOnFrame;
-        this.lastRevisionDate = lastRevisionDate;
-        this.itvDate = itvDate;
-        this.nextItvDate = nextItvDate;
-        this.airFilterReference = airFilterReference;
-        this.oilFilterReference = oilFilterReference;
-        this.fuelFilter = fuelFilter;
-        this.motorOil = motorOil;
     }
 
     public int getId() {

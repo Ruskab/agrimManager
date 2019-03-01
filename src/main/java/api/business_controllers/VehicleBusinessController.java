@@ -17,7 +17,7 @@ public class VehicleBusinessController {
             client = DaoFactory.getFactory().getClientDao().read(Integer.parseInt(vehicleDto.getClientId()))
                     .orElseThrow(() -> new NotFoundException("Client not found"));
         }
-        Vehicle vehicle = new VehicleBuilder().setRegistrationPlate(vehicleDto.getRegistrationPlate())
+        Vehicle vehicle = new VehicleBuilder(vehicleDto.getRegistrationPlate())
                 .setBrand(vehicleDto.getBrand()).setClient(client).setKMS(vehicleDto.getKms())
                 .setBodyOnFrame(vehicleDto.getBodyOnFrame()).setLastRevisionDate(vehicleDto.getLastRevisionDate())
                 .setItvDate(vehicleDto.getItvDate()).setNextItvDate(vehicleDto.getNextItvDate())

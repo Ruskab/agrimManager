@@ -4,6 +4,7 @@ import api.business_controllers.InterventionBusinesssController;
 import api.dtos.InterventionDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
+import api.exceptions.RequestInvalidException;
 import com.mysql.cj.core.util.StringUtils;
 
 import java.util.List;
@@ -39,8 +40,7 @@ public class InterventionApiController {
 
     private void validateId(String id, String message) {
         if (!StringUtils.isStrictlyNumeric(id)) {
-            throw new NotFoundException(message + " Should be numeric");
-            //todo change to BadRequestException
+            throw new RequestInvalidException(message + " Should be numeric");
         }
     }
 
