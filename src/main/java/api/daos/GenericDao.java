@@ -2,14 +2,14 @@ package api.daos;
 
 import java.util.Optional;
 
-public interface GenericDao<T, ID> {
+public interface GenericDao<T, I> {
 
     void create(T entity);
 
-    Optional<T> read(ID id);
+    Optional<T> read(I id);
 
     void update(T entity);
 
-    void deleteById(ID id);
+    void deleteById(I id);
 
 }

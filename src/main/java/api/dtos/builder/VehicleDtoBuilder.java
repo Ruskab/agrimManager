@@ -5,86 +5,97 @@ import api.dtos.VehicleDto;
 import java.time.LocalDate;
 
 public class VehicleDtoBuilder {
-    private int id;
-    private String registrationPlate;
-    private String brand;
-    private String clientId;
-    private String kms;
-    private String bodyOnFrame;
-    private LocalDate lastRevisionDate;
-    private LocalDate itvDate;
-    private LocalDate nextItvDate;
-    private String airFilterReference;
-    private String oilFilterReference;
-    private String fuelFilter;
-    private String motorOil;
+
+    VehicleDto vehicleDto;
+
+    public VehicleDtoBuilder (){
+        this.vehicleDto = new VehicleDto();
+    }
 
     public VehicleDtoBuilder setId(int id) {
-        this.id = id;
+        this.vehicleDto.setId(id);
         return this;
     }
 
     public VehicleDtoBuilder setRegistrationPlate(String registrationPlate) {
-        this.registrationPlate = registrationPlate;
+        this.vehicleDto.setRegistrationPlate(registrationPlate);
         return this;
     }
 
     public VehicleDtoBuilder setBrand(String brand) {
-        this.brand = brand;
+        this.vehicleDto.setBrand(brand);
         return this;
     }
 
     public VehicleDtoBuilder setClientId(String clientId) {
-        this.clientId = clientId;
+        this.vehicleDto.setClientId(clientId);
         return this;
     }
 
     public VehicleDtoBuilder setKMS(String kms) {
-        this.kms = kms;
+        this.vehicleDto.setKms(kms);
         return this;
     }
 
     public VehicleDtoBuilder setBodyOnFrame(String bodyOnFrame) {
-        this.bodyOnFrame = bodyOnFrame;
+        this.vehicleDto.setBodyOnFrame(bodyOnFrame);
         return this;
     }
 
     public VehicleDtoBuilder setLastRevisionDate(LocalDate lastRevisionDate) {
-        this.lastRevisionDate = lastRevisionDate;
+        this.vehicleDto.setLastRevisionDate(lastRevisionDate);
         return this;
     }
 
     public VehicleDtoBuilder setItvDate(LocalDate itvDate) {
-        this.itvDate = itvDate;
+        this.vehicleDto.setItvDate(itvDate);
         return this;
     }
 
     public VehicleDtoBuilder setNextItvDate(LocalDate nextItvDate) {
-        this.nextItvDate = nextItvDate;
+        this.vehicleDto.setNextItvDate(nextItvDate);
         return this;
     }
 
     public VehicleDtoBuilder setAirFilterReference(String airFilterReference) {
-        this.airFilterReference = airFilterReference;
+        this.vehicleDto.setAirFilterReference(airFilterReference);
         return this;
     }
 
     public VehicleDtoBuilder setOilFilterReference(String oilFilterReference) {
-        this.oilFilterReference = oilFilterReference;
+        this.vehicleDto.setOilFilterReference(oilFilterReference);
         return this;
     }
 
     public VehicleDtoBuilder setFuelFilter(String fuelFilter) {
-        this.fuelFilter = fuelFilter;
+        this.vehicleDto.setFuelFilter(fuelFilter);
         return this;
     }
 
     public VehicleDtoBuilder setMotorOil(String motorOil) {
-        this.motorOil = motorOil;
+        this.vehicleDto.setMotorOil(motorOil);
         return this;
     }
 
-    public VehicleDto createVehicleDto() {
-        return new VehicleDto(id, registrationPlate, brand, clientId, kms, bodyOnFrame, lastRevisionDate, itvDate, nextItvDate, airFilterReference, oilFilterReference, fuelFilter, motorOil);
+    public VehicleDtoBuilder byDefault() {
+        VehicleDtoBuilder vehicleDtoBuilder = new VehicleDtoBuilder();
+        return vehicleDtoBuilder
+                .setId(2)
+                .setClientId("4")
+                .setBrand("Opel")
+                .setKMS("03-03-2017 94744")
+                .setBodyOnFrame("VF1KC0JEF31065732")
+                .setLastRevisionDate(LocalDate.now().minusMonths(2))
+                .setItvDate(LocalDate.now().minusMonths(3))
+                .setNextItvDate(LocalDate.now().plusYears(1))
+                .setAirFilterReference("1813029400")
+                .setOilFilterReference("1812344000")
+                .setFuelFilter("181315400")
+                .setMotorOil("5.5  5W30");
     }
+
+    public VehicleDto createVehicleDto() {
+        return this.vehicleDto;
+    }
+
 }

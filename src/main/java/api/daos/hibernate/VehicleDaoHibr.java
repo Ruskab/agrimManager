@@ -5,7 +5,6 @@ import api.entity.Client;
 import api.entity.Vehicle;
 
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.stream.Stream;
 

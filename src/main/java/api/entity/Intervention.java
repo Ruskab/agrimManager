@@ -14,7 +14,7 @@ public class Intervention {
 
     private String title;
 
-    private Enum State;
+    private Enum state;
 
     private Period period;
 
@@ -32,14 +32,14 @@ public class Intervention {
 
     public Intervention(String title, Enum state, Period period, Vehicle vehicle) {
         this.title = title;
-        State = state;
+        this.state = state;
         this.period = period;
         this.vehicle = vehicle;
     }
 
     public Intervention(String title, Enum state, Period period) {
         this.title = title;
-        State = state;
+        this.state = state;
         this.period = period;
     }
 
@@ -61,11 +61,11 @@ public class Intervention {
     }
 
     public Enum getState() {
-        return State;
+        return state;
     }
 
     public void setState(Enum state) {
-        State = state;
+        this.state = state;
     }
 
     public Period getPeriod() {

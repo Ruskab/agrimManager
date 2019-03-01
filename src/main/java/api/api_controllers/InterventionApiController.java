@@ -3,7 +3,6 @@ package api.api_controllers;
 import api.business_controllers.InterventionBusinesssController;
 import api.dtos.InterventionDto;
 import api.exceptions.ArgumentNotValidException;
-import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
 import com.mysql.cj.core.util.StringUtils;
 
