@@ -5,7 +5,6 @@ import api.api_controllers.InterventionApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;
-import api.entity.RepairingPack;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;

@@ -1,6 +1,6 @@
 package api;
 
-import api.businessControllers.RepairingPackBusinessController;
+import api.business_controllers.RepairingPackBusinessController;
 import api.dtos.RepairingPackDto;
 import api.exceptions.ArgumentNotValidException;
 
