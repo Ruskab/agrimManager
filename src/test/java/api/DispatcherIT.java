@@ -9,11 +9,9 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;
 import api.dtos.builder.VehicleDtoBuilder;
-import api.entity.Intervention;
-import api.entity.Mechanic;
-import api.entity.State;
-import api.entity.Vehicle;
+import api.entity.*;
 import http.*;
+import http.Client;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
@@ -31,10 +29,12 @@ class DispatcherIT {
     private static VehicleBusinessController vehicleBusinessController;
     private static InterventionBusinesssController interventionBusinesssController;
     private static MechanicApiController mechanicApiController;
+    private static RepairingPackApiController repairingPackApiController;
     private List<Integer> createdClients;
     private List<Integer> createdVehicles;
     private List<Integer> createdInterventions;
     private List<Integer> createdMechanics;
+    private List<Integer> createdReparatingPack;
 
     @BeforeAll
     public static void prepare() {
@@ -43,6 +43,7 @@ class DispatcherIT {
         vehicleBusinessController = new VehicleBusinessController();
         interventionBusinesssController = new InterventionBusinesssController();
         mechanicApiController = new MechanicApiController();
+        repairingPackApiController = new RepairingPackApiController();
     }
 
     @BeforeEach
@@ -51,6 +52,7 @@ class DispatcherIT {
         createdVehicles = new ArrayList<>();
         createdInterventions = new ArrayList<>();
         createdMechanics = new ArrayList<>();
+        createdReparatingPack = new ArrayList<>();
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
     }
@@ -102,7 +104,7 @@ class DispatcherIT {
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
+        assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
         assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.REPAIR));
@@ -117,7 +119,7 @@ class DispatcherIT {
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getWork(), is(Optional.empty()));
+        assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Caffe"));
         assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
         assertThat(createdIntervention.get().getState(), is(State.CAFFE));
@@ -157,6 +159,23 @@ class DispatcherIT {
     }
 
     @Test
+    public void testCreateReparatingPack() {
+        RepairingPackDto repairingPackDto = new RepairingPackDto();
+        repairingPackDto.setInvoicedDate(LocalDate.now());
+        repairingPackDto.setInvoicedHours(12);
+
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS)
+                .body(repairingPackDto).post();
+
+        int id = (int) new Client().submit(request).getBody();
+        createdReparatingPack.add(id);
+
+        Optional<RepairingPack> createdRepairingPack = DaoFactory.getFactory().getRepairingPackDao().read(id);
+        assertThat(createdRepairingPack.get().getInvoicedDate(), is(LocalDate.now()));
+        assertThat(createdRepairingPack.get().getInvoicedHours(), is(12));
+    }
+
+    @Test
     void testCreateInterventionWithNoExistentVehicle() {
         InterventionDto interventionDto = createInterventionDto(Integer.toString(99999));
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
@@ -189,6 +208,14 @@ class DispatcherIT {
     }
 
     @Test
+    void testCreateRepairingPackInvalidRequest() {
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).path("/invalid").body(null).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
     void testCreateClientWithoutClientDto() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(null).post();
 
@@ -208,6 +235,14 @@ class DispatcherIT {
     @Test
     void testCreateMechanicWithoutMechanicDto() {
         HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(null).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
+    void testCreateRepairingPackWithoutRepairingPackDto() {
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).body(null).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -283,6 +318,14 @@ class DispatcherIT {
     @Test
     void testCreateMechanicWithNullShouldThrowBAD_REQUEST() {
         HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto("mechanic1", null)).post();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
+    }
+
+    @Test
+    void testCreateRepairingPackWithEmptyInvoicedDateShouldThrowBAD_REQUEST() {
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).body(new RepairingPackDto(null,2)).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -666,5 +709,6 @@ class DispatcherIT {
         createdInterventions.forEach(id -> DaoFactory.getFactory().getInterventionDao().deleteById(id));
         createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
         createdClients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
+        createdReparatingPack.forEach(id -> DaoFactory.getFactory().getRepairingPackDao().deleteById(id));
     }
 }
