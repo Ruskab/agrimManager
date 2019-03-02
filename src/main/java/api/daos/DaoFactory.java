@@ -1,5 +1,7 @@
 package api.daos;
 
+import api.entity.RepairingPack;
+
 public abstract class DaoFactory {
 
     private static DaoFactory factory = null;
@@ -20,4 +22,6 @@ public abstract class DaoFactory {
     public abstract InterventionDao getInterventionDao();
 
     public abstract MechanicDao getMechanicDao();
+
+    public abstract RepairingPackDao getRepairingPackDao();
 }

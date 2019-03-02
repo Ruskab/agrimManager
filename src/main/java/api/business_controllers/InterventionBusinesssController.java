@@ -23,9 +23,9 @@ public class InterventionBusinesssController {
             setVehicle(interventionDto, intervention);
         }
 
-        if (intervention.getWork().isPresent()) {
-            //Optional<Work> workOpt = DaoFactory.getFactory().getWorkDao().read(interventionDto.getId());
-            //workOpt.ifPresent(work -> work.setWork(work));
+        if (intervention.getRepairingPack().isPresent()) {
+            //Optional<RepairingPack> workOpt = DaoFactory.getFactory().getWorkDao().read(interventionDto.getId());
+            //workOpt.ifPresent(work -> work.setRepairingPack(work));
             DaoFactory.getFactory().getInterventionDao().create(intervention);
         }
 
