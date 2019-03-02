@@ -325,7 +325,7 @@ class DispatcherIT {
 
     @Test
     void testCreateRepairingPackWithEmptyInvoicedDateShouldThrowBAD_REQUEST() {
-        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).body(new RepairingPackDto(null,2)).post();
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).body(new RepairingPackDto(null, 2)).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
