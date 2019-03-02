@@ -1,7 +1,5 @@
 package api.daos;
 
-import api.entity.RepairingPack;
-
 public abstract class DaoFactory {
 
     private static DaoFactory factory = null;
