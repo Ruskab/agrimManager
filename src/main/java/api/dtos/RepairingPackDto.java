@@ -1,5 +1,7 @@
 package api.dtos;
 
+import api.entity.RepairingPack;
+
 import java.time.LocalDate;
 
 public class RepairingPackDto {
@@ -10,6 +12,12 @@ public class RepairingPackDto {
 
     public RepairingPackDto(){
 
+    }
+
+    public RepairingPackDto(RepairingPack repairingPack){
+        this.id = repairingPack.getId();
+        this.invoicedDate = repairingPack.getInvoicedDate();
+        this.invoicedHours = repairingPack.getInvoicedHours();
     }
 
     public RepairingPackDto(LocalDate invoicedDate, int invoicedHours) {

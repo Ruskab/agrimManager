@@ -42,7 +42,7 @@ public class VehicleApiController {
     private void validateId(String id, String message) {
         validate(id, message);
         if ( !StringUtils.isStrictlyNumeric(id)){
-            throw new NotFoundException(message +  " Should be numeric");
+            throw new ArgumentNotValidException(message +  " Should be numeric");
         }
     }
 
