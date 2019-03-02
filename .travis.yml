@@ -12,7 +12,7 @@ notifications:
 services:
   - mysql
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS hbtest;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS agrimManager;'
 script:
   - mvn verify
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
