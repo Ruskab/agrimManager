@@ -44,6 +44,7 @@ public class InterventionApiController {
     }
 
     public InterventionDto read(String interventionId) {
+        this.validateId(interventionId, "RepairingPack id");
         return this.interventionBusinessController.read(interventionId);
     }
 }

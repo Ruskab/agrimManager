@@ -15,6 +15,10 @@ public class RepairingPack {
 
     private int invoicedHours;
 
+    public RepairingPack(){
+        //JPA
+    }
+
     public RepairingPack(int id, LocalDate invoicedDate, int invoicedHours) {
         this.id = id;
         this.invoicedDate = invoicedDate;

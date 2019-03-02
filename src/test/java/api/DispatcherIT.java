@@ -460,7 +460,7 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
                 .expandPath("s5FdeGf54D").delete();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
     @Test
@@ -512,6 +512,14 @@ class DispatcherIT {
     }
 
     @Test
+    void testReadRepairingPackByIdShoudThrowNotFoundExceptionWithValidId() {
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).path(RepairingPackApiController.ID)
+                .expandPath("99999").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
     void testReadClientVehiclesShoudThrowNotFoundExceptionWithValidClientId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath("99999").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
@@ -531,7 +539,7 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
@@ -539,7 +547,15 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
                 .expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
+    }
+
+    @Test
+    void testReadRepairingPackNotFoundExceptionWithInvalidId() {
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).path(RepairingPackApiController.ID)
+                .expandPath("s5FdeGf54D").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
@@ -566,6 +582,19 @@ class DispatcherIT {
 
         assertThat(clientDto.getFullName(), is("fakeFullNameTest"));
         assertThat(clientDto.getHours(), is(1));
+    }
+
+    @Test
+    void testReadRepairingPack() {
+        RepairingPackDto expectedPackDto = new RepairingPackDto(LocalDate.now().minusDays(1), 2);
+        createdReparatingPack.add(repairingPackApiController.create(expectedPackDto));
+
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).path(RepairingPackApiController.ID)
+                .expandPath(Integer.toString(createdReparatingPack.get(0))).get();
+        RepairingPackDto repairingPackDto = (RepairingPackDto) new Client().submit(request).getBody();
+
+        assertThat(repairingPackDto.getInvoicedDate(), is(expectedPackDto.getInvoicedDate()));
+        assertThat(repairingPackDto.getInvoicedHours(), is(expectedPackDto.getInvoicedHours()));
     }
 
     @Test
@@ -634,6 +663,27 @@ class DispatcherIT {
                 .map(interventionDto -> interventionDto.getId()).collect(Collectors.toList());
 
         assertThat(interventionIds, is(createdInterventions));
+    }
+
+    @Test
+    void testReadAllRepairingPacks() {
+        RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now().minusDays(1), 2);
+        RepairingPackDto repairingPackDto2 = new RepairingPackDto(LocalDate.now().minusDays(2), 3);
+        RepairingPackDto repairingPackDto3 = new RepairingPackDto(LocalDate.now(), 4);
+
+        createdReparatingPack.add(repairingPackApiController.create(repairingPackDto));
+        createdReparatingPack.add(repairingPackApiController.create(repairingPackDto2));
+        createdReparatingPack.add(repairingPackApiController.create(repairingPackDto3));
+
+        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).get();
+        List<RepairingPackDto> repairingPackDtos = (List<RepairingPackDto>) new Client().submit(request).getBody();
+
+        assertThat(repairingPackDtos.get(0).getInvoicedDate(), is(LocalDate.now().minusDays(1)));
+        assertThat(repairingPackDtos.get(1).getInvoicedDate(), is(LocalDate.now().minusDays(2)));
+        assertThat(repairingPackDtos.get(2).getInvoicedDate(), is(LocalDate.now()));
+        assertThat(repairingPackDtos.get(0).getInvoicedHours(), is(2));
+        assertThat(repairingPackDtos.get(1).getInvoicedHours(), is(3));
+        assertThat(repairingPackDtos.get(2).getInvoicedHours(), is(4));
     }
 
     @Test
