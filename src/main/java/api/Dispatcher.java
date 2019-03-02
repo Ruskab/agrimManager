@@ -4,10 +4,8 @@ import api.api_controllers.ClientApiController;
 import api.api_controllers.InterventionApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.ClientDto;
-import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
+import api.dtos.*;
+import api.entity.RepairingPack;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -29,6 +27,7 @@ public class Dispatcher {
     private VehicleApiController vehicleApiController = new VehicleApiController();
     private InterventionApiController interventionApiController = new InterventionApiController();
     private MechanicApiController mechanicApiController = new MechanicApiController();
+    private RepairingPackApiController repairingPackApiController = new RepairingPackApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         final String ERROR_MESSAGE = "{'error':'%S'}";
@@ -113,6 +112,8 @@ public class Dispatcher {
             response.setBody(this.interventionApiController.create((InterventionDto) request.getBody()));
         } else if (request.isEqualsPath(MechanicApiController.MECHANICS)) {
             response.setBody(this.mechanicApiController.create((MechanicDto) request.getBody()));
+        } else if (request.isEqualsPath(RepairingPackApiController.REPAIRING_PACKS)) {
+            response.setBody(this.repairingPackApiController.create((RepairingPackDto) request.getBody()));
         } else if (request.isEqualsPath(MechanicApiController.MECHANICS + MechanicApiController.ID_INTERVENTIONS)) {
             this.mechanicApiController.createIntervention(request.getPath(1), (InterventionDto) request.getBody());
         } else {

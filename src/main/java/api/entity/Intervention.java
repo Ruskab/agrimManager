@@ -24,7 +24,7 @@ public class Intervention {
 
     @JoinColumn
     @ManyToOne
-    private Work work;
+    private RepairingPack repairingPack;
 
     public Intervention() {
         //JPA
@@ -84,11 +84,11 @@ public class Intervention {
         this.vehicle = vehicle;
     }
 
-    public Optional<Work> getWork() {
-        return Optional.ofNullable(work);
+    public Optional<RepairingPack> getRepairingPack() {
+        return Optional.ofNullable(repairingPack);
     }
 
-    public void setWork(Work work) {
-        this.work = work;
+    public void setRepairingPack(RepairingPack repairingPack) {
+        this.repairingPack = repairingPack;
     }
 }

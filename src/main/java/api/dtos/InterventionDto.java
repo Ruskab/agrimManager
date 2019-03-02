@@ -1,7 +1,6 @@
 package api.dtos;
 
 import api.entity.Intervention;
-import api.entity.Work;
 
 import java.time.Period;
 
@@ -31,7 +30,7 @@ public class InterventionDto {
         this.title = intervention.getTitle();
         this.state = intervention.getState();
         intervention.getVehicle().ifPresent(vehicle -> this.vehicleId = Integer.toString(vehicle.getId()));
-        //this.workId = Integer.toString(intervention.getWork());
+        //this.workId = Integer.toString(intervention.getRepairingPack());
         this.period = intervention.getPeriod();
     }
 
