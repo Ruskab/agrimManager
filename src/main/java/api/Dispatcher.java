@@ -67,7 +67,7 @@ public class Dispatcher {
         if (request.isEqualsPath(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)) {
             this.repairingPackApiController.updateReparingPack(request.getPath(1), (String) request.getBody());
         } else {
-            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+            throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 
