@@ -30,11 +30,12 @@ class DispatcherIT {
     private static InterventionBusinesssController interventionBusinesssController;
     private static MechanicApiController mechanicApiController;
     private static RepairingPackApiController repairingPackApiController;
+    private static InterventionApiController interventionApiController;
     private List<Integer> createdClients;
     private List<Integer> createdVehicles;
     private List<Integer> createdInterventions;
     private List<Integer> createdMechanics;
-    private List<Integer> createdReparatingPack;
+    private List<Integer> createdReparatingPacks;
 
     @BeforeAll
     public static void prepare() {
@@ -44,6 +45,7 @@ class DispatcherIT {
         interventionBusinesssController = new InterventionBusinesssController();
         mechanicApiController = new MechanicApiController();
         repairingPackApiController = new RepairingPackApiController();
+        interventionApiController = new InterventionApiController();
     }
 
     @BeforeEach
@@ -52,7 +54,7 @@ class DispatcherIT {
         createdVehicles = new ArrayList<>();
         createdInterventions = new ArrayList<>();
         createdMechanics = new ArrayList<>();
-        createdReparatingPack = new ArrayList<>();
+        createdReparatingPacks = new ArrayList<>();
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
     }
@@ -168,7 +170,7 @@ class DispatcherIT {
                 .body(repairingPackDto).post();
 
         int id = (int) new Client().submit(request).getBody();
-        createdReparatingPack.add(id);
+        createdReparatingPacks.add(id);
 
         Optional<RepairingPack> createdRepairingPack = DaoFactory.getFactory().getRepairingPackDao().read(id);
         assertThat(createdRepairingPack.get().getInvoicedDate(), is(LocalDate.now()));
@@ -344,6 +346,82 @@ class DispatcherIT {
         assertThat(createdUserFullName, is("fakeFullNameTest"));
         assertThat(updatedUser.get().getFullName(), is("updatedName"));
         assertThat(updatedUser.get().getHours(), is(3));
+    }
+
+    @Test
+    void testUpdateInterventionRepairingPack() {
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
+        int existentVehicleId = createdVehicles.get(0);
+        InterventionDto interventionDto = createInterventionDto(Integer.toString(existentVehicleId));
+        Integer createdInterventionId = interventionApiController.create(interventionDto);
+        createdInterventions.add(createdInterventionId);
+        RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now(), 3);
+        String createdRepairingPackId = Integer.toString(repairingPackApiController.create(repairingPackDto));
+        createdReparatingPacks.add(Integer.parseInt(createdRepairingPackId));
+
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
+                .expandPath(Integer.toString(createdInterventionId))
+                .body(createdRepairingPackId)
+                .patch();
+        new Client().submit(request);
+        Optional<api.entity.Intervention> updatedIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId);
+
+        assertThat(updatedIntervention.get().getRepairingPack().get().getInvoicedDate(), is(repairingPackDto.getInvoicedDate()));
+        assertThat(updatedIntervention.get().getRepairingPack().get().getInvoicedHours(), is(repairingPackDto.getInvoicedHours()));
+    }
+
+    @Test
+    void testUpdateInterventionRepairingPackWithNotFoundInterventionShouldThrowNOT_FOUD() {
+        RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now(), 3);
+        String createdRepairingPackId = Integer.toString(repairingPackApiController.create(repairingPackDto));
+        createdReparatingPacks.add(Integer.parseInt(createdRepairingPackId));
+
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
+                .expandPath(Integer.toString(99999))
+                .body(createdRepairingPackId)
+                .patch();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testUpdateInterventionRepairingPackWithNotValidInterventionShouldThrowBAD_REQUEST() {
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
+                .expandPath("q9fs34")
+                .body("99")
+                .patch();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
+    }
+
+    @Test
+    void testUpdateInterventionRepairingPackWithNotValidRepairingPack() {
+        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
+        int existentVehicleId = createdVehicles.get(0);
+        InterventionDto interventionDto = createInterventionDto(Integer.toString(existentVehicleId));
+        Integer createdInterventionId = interventionApiController.create(interventionDto);
+        createdInterventions.add(createdInterventionId);
+
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
+                .expandPath(Integer.toString(createdInterventionId))
+                .body("99999")
+                .patch();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    void testUpdateInterventionRepairingPackWithNotValidRepairingPackShouldThrowBAD_REQUEST() {
+        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
+                .expandPath("99")
+                .body("q9f03")
+                .patch();
+
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
@@ -587,10 +665,10 @@ class DispatcherIT {
     @Test
     void testReadRepairingPack() {
         RepairingPackDto expectedPackDto = new RepairingPackDto(LocalDate.now().minusDays(1), 2);
-        createdReparatingPack.add(repairingPackApiController.create(expectedPackDto));
+        createdReparatingPacks.add(repairingPackApiController.create(expectedPackDto));
 
         HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).path(RepairingPackApiController.ID)
-                .expandPath(Integer.toString(createdReparatingPack.get(0))).get();
+                .expandPath(Integer.toString(createdReparatingPacks.get(0))).get();
         RepairingPackDto repairingPackDto = (RepairingPackDto) new Client().submit(request).getBody();
 
         assertThat(repairingPackDto.getInvoicedDate(), is(expectedPackDto.getInvoicedDate()));
@@ -614,7 +692,7 @@ class DispatcherIT {
         assertThat(interventionDto.getState(), is(State.REPAIR));
         assertThat(interventionDto.getPeriod(), is(expectedInterventionDto1.getPeriod()));
         assertThat(interventionDto.getTitle(), is(expectedInterventionDto1.getTitle()));
-        assertThat(interventionDto.getWorkId(), is(expectedInterventionDto1.getWorkId()));
+        assertThat(interventionDto.getRepairingPackId(), is(expectedInterventionDto1.getRepairingPackId()));
     }
 
     @Test
@@ -671,9 +749,9 @@ class DispatcherIT {
         RepairingPackDto repairingPackDto2 = new RepairingPackDto(LocalDate.now().minusDays(2), 3);
         RepairingPackDto repairingPackDto3 = new RepairingPackDto(LocalDate.now(), 4);
 
-        createdReparatingPack.add(repairingPackApiController.create(repairingPackDto));
-        createdReparatingPack.add(repairingPackApiController.create(repairingPackDto2));
-        createdReparatingPack.add(repairingPackApiController.create(repairingPackDto3));
+        createdReparatingPacks.add(repairingPackApiController.create(repairingPackDto));
+        createdReparatingPacks.add(repairingPackApiController.create(repairingPackDto2));
+        createdReparatingPacks.add(repairingPackApiController.create(repairingPackDto3));
 
         HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).get();
         List<RepairingPackDto> repairingPackDtos = (List<RepairingPackDto>) new Client().submit(request).getBody();
@@ -759,6 +837,6 @@ class DispatcherIT {
         createdInterventions.forEach(id -> DaoFactory.getFactory().getInterventionDao().deleteById(id));
         createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
         createdClients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
-        createdReparatingPack.forEach(id -> DaoFactory.getFactory().getRepairingPackDao().deleteById(id));
+        createdReparatingPacks.forEach(id -> DaoFactory.getFactory().getRepairingPackDao().deleteById(id));
     }
 }

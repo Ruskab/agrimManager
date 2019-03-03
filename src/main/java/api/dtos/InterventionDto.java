@@ -15,13 +15,13 @@ public class InterventionDto {
 
     private String vehicleId;
 
-    private String workId;
+    private String repairingPackId;
 
-    public InterventionDto(String title, Enum state, String vehicleId, String workId, Period period) {
+    public InterventionDto(String title, Enum state, String vehicleId, String repairingPackId, Period period) {
         this.title = title;
         this.state = state;
         this.vehicleId = vehicleId;
-        this.workId = workId;
+        this.repairingPackId = repairingPackId;
         this.period = period;
     }
 
@@ -30,7 +30,7 @@ public class InterventionDto {
         this.title = intervention.getTitle();
         this.state = intervention.getState();
         intervention.getVehicle().ifPresent(vehicle -> this.vehicleId = Integer.toString(vehicle.getId()));
-        //this.workId = Integer.toString(intervention.getRepairingPack());
+        intervention.getRepairingPack().ifPresent(repairingPack -> this.repairingPackId = Integer.toString(repairingPack.getId()));
         this.period = intervention.getPeriod();
     }
 
@@ -67,12 +67,12 @@ public class InterventionDto {
         this.vehicleId = vehicleId;
     }
 
-    public String getWorkId() {
-        return workId;
+    public String getRepairingPackId() {
+        return repairingPackId;
     }
 
-    public void setWorkId(String workId) {
-        this.workId = workId;
+    public void setRepairingPackId(String repairingPackId) {
+        this.repairingPackId = repairingPackId;
     }
 
     public Period getPeriod() {
@@ -90,7 +90,7 @@ public class InterventionDto {
                 ", title='" + title + '\'' +
                 ", state=" + state +
                 ", vehicleId=" + vehicleId +
-                ", workId=" + workId +
+                ", repairingPackId=" + repairingPackId +
                 '}';
     }
 }

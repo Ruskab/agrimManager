@@ -23,12 +23,6 @@ public class InterventionBusinesssController {
             setVehicle(interventionDto, intervention);
         }
 
-        if (intervention.getRepairingPack().isPresent()) {
-            //Optional<RepairingPack> workOpt = DaoFactory.getFactory().getWorkDao().read(interventionDto.getId());
-            //workOpt.ifPresent(work -> work.setRepairingPack(work));
-            DaoFactory.getFactory().getInterventionDao().create(intervention);
-        }
-
         DaoFactory.getFactory().getInterventionDao().create(intervention);
         return intervention.getId();
     }
