@@ -1,4 +1,4 @@
-package api;
+package api.api_controllers;
 
 import api.business_controllers.RepairingPackBusinessController;
 import api.dtos.RepairingPackDto;
@@ -10,7 +10,9 @@ import java.util.List;
 
 public class RepairingPackApiController {
     public static final String REPAIRING_PACKS = "/repairing-packs";
+
     public static final String ID = "/{id}";
+
     private RepairingPackBusinessController repairingPackBusinessController  = new RepairingPackBusinessController();
 
     public int create(RepairingPackDto repairingPackDto) {

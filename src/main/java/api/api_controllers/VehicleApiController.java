@@ -1,4 +1,4 @@
-package api;
+package api.api_controllers;
 
 import api.business_controllers.VehicleBusinessController;
 import api.dtos.VehicleDto;
@@ -9,11 +9,11 @@ import java.util.List;
 
 public class VehicleApiController {
 
-    static final String VEHICLES = "/vehicles";
+    public static final String VEHICLES = "/vehicles";
 
-    static final String ID_ID = "/{id}";
+    public static final String ID_ID = "/{id}";
 
-    VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
+    private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
 
     public Object create(VehicleDto vehicleDto) {
         this.validate(vehicleDto, "vehicleDto");
@@ -22,12 +22,12 @@ public class VehicleApiController {
         return vehicleBusinessController.create(vehicleDto);
     }
 
-    void delete(String id) {
+    public void delete(String id) {
         validateId(id,"Vehicle id");
         vehicleBusinessController.delete(id);
     }
 
-    VehicleDto read(String id) {
+    public VehicleDto read(String id) {
         validateId(id, "vehicle id");
         return vehicleBusinessController.read(id);
     }
