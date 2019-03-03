@@ -5,10 +5,11 @@ branches:
   only:
     - master
     - develop
+    - /^release-.*$/
 notifications:
   email:
     recipients:
-      - ilya.kab@gmail.es
+      - ilya.kab@gmail.com
 services:
   - mysql
 before_install:
