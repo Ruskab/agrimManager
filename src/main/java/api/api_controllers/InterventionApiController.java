@@ -12,9 +12,10 @@ public class InterventionApiController {
     public static final String INTERVENTIONS = "/interventions";
 
     public static final String ID = "/{id}";
+
     public static final String REPAIRING_PACK = "/repairing-pack";
 
-    InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
+    private InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
 
     public int create(InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");

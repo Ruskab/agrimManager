@@ -1,7 +1,6 @@
 package api;
 
-import api.api_controllers.ClientApiController;
-import api.api_controllers.InterventionApiController;
+import api.api_controllers.*;
 import api.business_controllers.ClientBusinessController;
 import api.business_controllers.InterventionBusinesssController;
 import api.business_controllers.VehicleBusinessController;

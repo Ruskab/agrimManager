@@ -1,4 +1,4 @@
-package api;
+package api.api_controllers;
 
 import api.business_controllers.MechanicBusinessController;
 import api.dtos.InterventionDto;
@@ -9,8 +9,11 @@ import com.mysql.cj.core.util.StringUtils;
 
 public class MechanicApiController {
     public static final String MECHANICS = "/mechanics";
+
     public static final String ID = "/{id}";
+
     public static final String ID_INTERVENTIONS = ID + "/interventions";
+
     private MechanicBusinessController mechanicBusinesssController = new MechanicBusinessController();
 
     public int create(MechanicDto mechanicDto) {
