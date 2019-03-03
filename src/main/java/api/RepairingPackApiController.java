@@ -29,6 +29,11 @@ public class RepairingPackApiController {
         return this.repairingPackBusinessController.readAll();
     }
 
+    public void updateReparingPack(String interventionId, String repairingPackId) {
+        this.validateId(interventionId, "intervention id");
+        this.validateId(repairingPackId, "repairing pack id");
+        this.repairingPackBusinessController.updateReparingPack(interventionId, repairingPackId);
+    }
 
     public void validate(Object property, String message) {
         if (property == null || property.toString().equals("")) {

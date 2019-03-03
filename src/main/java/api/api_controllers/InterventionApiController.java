@@ -12,6 +12,7 @@ public class InterventionApiController {
     public static final String INTERVENTIONS = "/interventions";
 
     public static final String ID = "/{id}";
+    public static final String REPAIRING_PACK = "/repairing-pack";
 
     InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
 
@@ -25,6 +26,11 @@ public class InterventionApiController {
         this.validate(interventionId, "intervention id");
         this.validateId(interventionId, "intenvention id");
         this.interventionBusinessController.delete(interventionId);
+    }
+
+    public InterventionDto read(String interventionId) {
+        this.validateId(interventionId, "RepairingPack id");
+        return this.interventionBusinessController.read(interventionId);
     }
 
     public List<InterventionDto> readAll() {
@@ -43,8 +49,4 @@ public class InterventionApiController {
         }
     }
 
-    public InterventionDto read(String interventionId) {
-        this.validateId(interventionId, "RepairingPack id");
-        return this.interventionBusinessController.read(interventionId);
-    }
 }

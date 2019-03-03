@@ -2,6 +2,7 @@ package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.dtos.RepairingPackDto;
+import api.entity.Intervention;
 import api.entity.RepairingPack;
 import api.exceptions.NotFoundException;
 
@@ -22,5 +23,12 @@ public class RepairingPackBusinessController {
     public RepairingPackDto read(String id) {
         return DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(id)).map(RepairingPackDto::new)
                 .orElseThrow(() -> new NotFoundException("Repairing pack not found"));
+    }
+
+    public void updateReparingPack(String interventionId, String repairingPackId) {
+        Intervention intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId)).orElseThrow(() -> new NotFoundException("Intervention not found"));
+        RepairingPack repairingPack = DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(repairingPackId)).orElseThrow(() -> new NotFoundException("Repairing pack not found"));
+        intervention.setRepairingPack(repairingPack);
+        DaoFactory.getFactory().getInterventionDao().update(intervention);
     }
 }

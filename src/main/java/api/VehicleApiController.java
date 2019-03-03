@@ -3,7 +3,6 @@ package api;
 import api.business_controllers.VehicleBusinessController;
 import api.dtos.VehicleDto;
 import api.exceptions.ArgumentNotValidException;
-import api.exceptions.NotFoundException;
 import com.mysql.cj.core.util.StringUtils;
 
 import java.util.List;

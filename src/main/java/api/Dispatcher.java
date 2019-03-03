@@ -42,6 +42,7 @@ public class Dispatcher {
                     this.doPut(request);
                     break;
                 case PATCH:
+                    this.doPatch(request);
                     break;
                 case DELETE:
                     this.doDelete(request);
@@ -59,6 +60,14 @@ public class Dispatcher {
             LOGGER.error("context" ,exception);
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private void doPatch(HttpRequest request) {
+        if (request.isEqualsPath(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)) {
+            this.repairingPackApiController.updateReparingPack(request.getPath(1), (String) request.getBody());
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
 
