@@ -1,6 +1,8 @@
 package api.api_controllers;
 
 import api.business_controllers.ClientBusinessController;
+import api.daos.DaoFactory;
+import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.exceptions.ArgumentNotValidException;
@@ -8,8 +10,11 @@ import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
 import com.mysql.cj.core.util.StringUtils;
 
-import java.util.List;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
+@Path("/clients")
 public class ClientApiController {
 
     public static final String CLIENTS = "/clients";
@@ -20,19 +25,28 @@ public class ClientApiController {
 
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
 
-    public int create(ClientDto clientDto) {
+    static { DaoFactory.setFactory(new DaoFactoryHibr()); }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response create(ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
-        return clientBusinessController.create(clientDto);
+        return Response.status(201).entity(clientBusinessController.create(clientDto)).build();
     }
 
-    public List<ClientDto> readAll() {
-        return this.clientBusinessController.readAll();
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readAll() {
+        return Response.status(200).entity(clientBusinessController.readAll()).build();
     }
 
-    public ClientDto read(String id) {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response read(@PathParam("id") String id) {
         this.validateId(id, "client id");
-        return this.clientBusinessController.read(id);
+        return Response.status(200).entity(this.clientBusinessController.read(id)).build();
     }
 
     public void update(String id, ClientDto clientDto) {
@@ -42,7 +56,9 @@ public class ClientApiController {
         this.clientBusinessController.update(id, clientDto);
     }
 
-    public void delete(String id) {
+    @DELETE
+    @Path("{id}")
+    public void delete(@QueryParam("id") String id) {
         this.validateId(id, "client id: ");
         this.clientBusinessController.delete(id);
     }

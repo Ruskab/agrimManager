@@ -10,6 +10,9 @@ public class ClientDto {
 
     private int hours;
 
+    public ClientDto() {
+    }
+
     public ClientDto(Client client) {
         this.id = client.getId();
         this.fullName = client.getFullName();
