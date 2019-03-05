@@ -49,18 +49,23 @@ public class ClientApiController {
         return Response.status(200).entity(this.clientBusinessController.read(id)).build();
     }
 
-    public void update(String id, ClientDto clientDto) {
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response update(@PathParam("id") String id, ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
         this.validateId(id, "client id: ");
         this.clientBusinessController.update(id, clientDto);
+        return Response.status(200).build();
     }
 
     @DELETE
     @Path("{id}")
-    public void delete(@QueryParam("id") String id) {
+    public Response delete(@PathParam("id") String id) {
         this.validateId(id, "client id: ");
         this.clientBusinessController.delete(id);
+        return Response.status(204).build();
     }
 
     private void validate(Object property, String message) {
