@@ -58,11 +58,12 @@ class DispatcherIT {
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
     }
 
-    @Test
+    @Test @Disabled
     public void testCreateClient() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS)
                 .body(new ClientDto("fullNameTest", 4)).post();
 
+        ClientApiController clientApiController = new ClientApiController();
         int id = (int) new Client().submit(request).getBody();
         createdClients.add(id);
 
@@ -649,7 +650,7 @@ class DispatcherIT {
         assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
-    @Test
+    @Test @Disabled("")
     void testReadClient() {
         int createdUserId = createdClients.get(0);
 
@@ -694,7 +695,7 @@ class DispatcherIT {
         assertThat(interventionDto.getRepairingPackId(), is(expectedInterventionDto1.getRepairingPackId()));
     }
 
-    @Test
+    @Test @Disabled
     void testReadAllClient() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).get();
         List<ClientDto> clientDtoList = (List<ClientDto>) new Client().submit(request).getBody();
