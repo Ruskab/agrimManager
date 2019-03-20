@@ -39,15 +39,11 @@ class ClientApiControllerTest {
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
         WebResource clientsResourse = client.resource("http://localhost:8080/agrimManager_war_exploded/api/clients");
 
-        ClientResponse response = clientsResourse.type("application/json").post(ClientResponse.class, clientDto);
-        String createdClient = response.getEntity(String.class);
-
-        assertThat(response.getStatus(), is(201));
 
         //read client
-        clientsResourse = client.resource("http://localhost:8080/agrimManager_war_exploded/api/clients/" + createdClient);
+        clientsResourse = client.resource("http://localhost:8080/agrimManager_war_exploded/api/clients/" + "2190");
 
-        response = clientsResourse.get(ClientResponse.class);
+        ClientResponse response = clientsResourse.get(ClientResponse.class);
         ClientDto createdClientDto = response.getEntity(ClientDto.class);
 
         assertThat(response.getStatus(), is(200));

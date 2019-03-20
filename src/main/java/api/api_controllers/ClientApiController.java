@@ -47,6 +47,7 @@ public class ClientApiController {
     public Response read(@PathParam("id") String id) {
         this.validateId(id, "client id");
         return Response.status(200).entity(this.clientBusinessController.read(id)).build();
+        //todo handle exceptions like not found
     }
 
     @PUT
