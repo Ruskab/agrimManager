@@ -2,6 +2,9 @@ package api.dtos;
 
 import api.entity.Client;
 
+import javax.faces.bean.RequestScoped;
+
+@RequestScoped
 public class ClientDto {
 
     private int id;

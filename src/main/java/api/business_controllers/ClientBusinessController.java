@@ -15,6 +15,10 @@ public class ClientBusinessController {
 
     private static final String CLIENT_ID = "Client id: ";
 
+    public ClientBusinessController(){
+        //CDI
+    }
+
     public int create(ClientDto clientDto) {
         Client client = new Client(clientDto.getFullName(), clientDto.getHours());
         DaoFactory.getFactory().getClientDao().create(client);
