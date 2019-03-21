@@ -3,6 +3,7 @@ package api.api_controllers;
 import api.dtos.ClientDto;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import com.sun.jersey.api.json.JSONConfiguration;
+
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -41,14 +44,12 @@ class ClientApiControllerTest {
 
 
         //read client
-        clientsResourse = client.resource("http://localhost:8080/agrimManager_war_exploded/api/clients/" + "2190");
+        clientsResourse = client.resource("http://localhost:8080/agrimManager_war_exploded/api/clients/");
 
         ClientResponse response = clientsResourse.get(ClientResponse.class);
-        ClientDto createdClientDto = response.getEntity(ClientDto.class);
+        List<ClientDto> createdClientDto = response.getEntity(new GenericType<List<ClientDto>>(){});
 
         assertThat(response.getStatus(), is(200));
-        assertThat(createdClientDto.getFullName(), is("fullNameTest"));
-        assertThat(createdClientDto.getHours(), is(4));
     }
 
     @Test

@@ -13,6 +13,7 @@ import com.mysql.cj.core.util.StringUtils;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/clients")
 public class ClientApiController {
@@ -37,8 +38,8 @@ public class ClientApiController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readAll() {
-        return Response.status(200).entity(clientBusinessController.readAll()).build();
+    public List<ClientDto> readAll() {
+        return clientBusinessController.readAll();
     }
 
     @GET
