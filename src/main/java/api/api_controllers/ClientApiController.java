@@ -45,10 +45,20 @@ public class ClientApiController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response read(@PathParam("id") String id) {
+    public ClientDto read(@PathParam("id") String id) {
         this.validateId(id, "client id");
-        return Response.status(200).entity(this.clientBusinessController.read(id)).build();
+        return this.clientBusinessController.read(id);
         //todo handle exceptions like not found
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/vehicles/{id}")
+    public ClientVehiclesDto clientVehiclesList(@PathParam("id") String clientId) {
+        validateId(clientId, "client Id");
+        return clientBusinessController.readClientVehicles(Integer.parseInt(clientId))
+                .orElseThrow(() -> new NotFoundException("client with id: " + clientId));
     }
 
     @PUT
@@ -82,9 +92,4 @@ public class ClientApiController {
         }
     }
 
-    public ClientVehiclesDto clientVehiclesList(String clientId) {
-        validateId(clientId, "client Id");
-        return clientBusinessController.readClientVehicles(Integer.parseInt(clientId))
-                .orElseThrow(() -> new NotFoundException("client with id: " + clientId));
-    }
 }
