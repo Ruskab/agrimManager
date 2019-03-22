@@ -13,6 +13,7 @@ import com.mysql.cj.core.util.StringUtils;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/clients")
 public class ClientApiController {
@@ -37,17 +38,27 @@ public class ClientApiController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readAll() {
-        return Response.status(200).entity(clientBusinessController.readAll()).build();
+    public List<ClientDto> readAll() {
+        return clientBusinessController.readAll();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response read(@PathParam("id") String id) {
+    public ClientDto read(@PathParam("id") String id) {
         this.validateId(id, "client id");
-        return Response.status(200).entity(this.clientBusinessController.read(id)).build();
+        return this.clientBusinessController.read(id);
         //todo handle exceptions like not found
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/vehicles/{id}")
+    public ClientVehiclesDto clientVehiclesList(@PathParam("id") String clientId) {
+        validateId(clientId, "client Id");
+        return clientBusinessController.readClientVehicles(Integer.parseInt(clientId))
+                .orElseThrow(() -> new NotFoundException("client with id: " + clientId));
     }
 
     @PUT
@@ -81,9 +92,4 @@ public class ClientApiController {
         }
     }
 
-    public ClientVehiclesDto clientVehiclesList(String clientId) {
-        validateId(clientId, "client Id");
-        return clientBusinessController.readClientVehicles(Integer.parseInt(clientId))
-                .orElseThrow(() -> new NotFoundException("client with id: " + clientId));
-    }
 }

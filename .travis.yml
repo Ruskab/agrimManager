@@ -8,7 +8,6 @@ branches:
   only:
     - master
     - develop
-    - issue#30
 notifications:
   email:
     recipients:

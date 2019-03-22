@@ -9,10 +9,12 @@ import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.*;
+import com.sun.jersey.api.client.ClientResponse;
 import http.*;
 import http.Client;
 import org.junit.jupiter.api.*;
 
+import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -58,16 +60,14 @@ class DispatcherIT {
         createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
     }
 
-    @Test @Disabled
+    @Test
     public void testCreateClient() {
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS)
-                .body(new ClientDto("fullNameTest", 4)).post();
+        Response response = new ClientApiController().create(new ClientDto("fullNameTest", 4));
+        Integer createdClientId = (Integer) response.getEntity();
+        createdClients.add(createdClientId);
 
-        ClientApiController clientApiController = new ClientApiController();
-        int id = (int) new Client().submit(request).getBody();
-        createdClients.add(id);
-
-        Optional<api.entity.Client> createdClient = DaoFactory.getFactory().getClientDao().read(id);
+        Optional<api.entity.Client> createdClient = DaoFactory.getFactory().getClientDao().read((Integer) response.getEntity());
+        assertThat(response.getStatus(), is(ClientResponse.Status.CREATED.getStatusCode()));
         assertThat(createdClient.get().getFullName(), is("fullNameTest"));
         assertThat(createdClient.get().getHours(), is(4));
     }
@@ -650,13 +650,10 @@ class DispatcherIT {
         assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
-    @Test @Disabled("")
+    @Test
     void testReadClient() {
-        int createdUserId = createdClients.get(0);
-
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
-                .expandPath(Integer.toString(createdUserId)).get();
-        ClientDto clientDto = (ClientDto) new Client().submit(request).getBody();
+        Response response = new ClientApiController().read(Integer.toString(createdClients.get(0)));
+        ClientDto clientDto = (ClientDto) response.getEntity();
 
         assertThat(clientDto.getFullName(), is("fakeFullNameTest"));
         assertThat(clientDto.getHours(), is(1));
@@ -695,10 +692,9 @@ class DispatcherIT {
         assertThat(interventionDto.getRepairingPackId(), is(expectedInterventionDto1.getRepairingPackId()));
     }
 
-    @Test @Disabled
+    @Test
     void testReadAllClient() {
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).get();
-        List<ClientDto> clientDtoList = (List<ClientDto>) new Client().submit(request).getBody();
+        List<ClientDto> clientDtoList = new ClientApiController().readAll();
 
         assertThat(clientDtoList.get(0).getFullName(), is("fakeFullNameTest"));
         assertThat(clientDtoList.get(0).getHours(), is(1));
