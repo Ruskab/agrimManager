@@ -1,10 +1,18 @@
 package api.dtos;
 
 import api.entity.Vehicle;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import org.codehaus.jackson.map.ext.JodaSerializers;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class VehicleDto {
+public class VehicleDto implements Serializable {
 
     private int id;
     private String registrationPlate;
@@ -12,8 +20,14 @@ public class VehicleDto {
     private String clientId;
     private String kms;
     private String bodyOnFrame; //bastidor
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate lastRevisionDate;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate itvDate;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate nextItvDate;
     private String airFilterReference;
     private String oilFilterReference;
