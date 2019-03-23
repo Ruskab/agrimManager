@@ -8,9 +8,18 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+    <context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <mime-mapping>
+        <extension>woff2</extension>
+        <mime-type>application/x-font-woff2</mime-type>
+    </mime-mapping>
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>faces/frontend/index.xhtml</welcome-file>
+        <welcome-file>faces/backoffice/operations.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- JSF mapping -->
