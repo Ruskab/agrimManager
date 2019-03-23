@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -76,8 +77,8 @@ class DispatcherIT {
     void testCreateVehicle() {
         int existentClientId = createdClients.get(0);
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId), "AA1234AA");
-        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(vehicleDto).post();
-        int id = (int) new Client().submit(request).getBody();
+        Response response = new VehicleApiController().create(vehicleDto);
+        Integer id = (Integer) response.getEntity();
         createdVehicles.add(id);
 
         Optional<Vehicle> createdVehicle = DaoFactory.getFactory().getVehicleDao().read(id);
@@ -652,8 +653,7 @@ class DispatcherIT {
 
     @Test
     void testReadClient() {
-        Response response = new ClientApiController().read(Integer.toString(createdClients.get(0)));
-        ClientDto clientDto = (ClientDto) response.getEntity();
+        ClientDto clientDto = new ClientApiController().read(Integer.toString(createdClients.get(0)));
 
         assertThat(clientDto.getFullName(), is("fakeFullNameTest"));
         assertThat(clientDto.getHours(), is(1));
@@ -694,12 +694,10 @@ class DispatcherIT {
 
     @Test
     void testReadAllClient() {
+        Stream clients = DaoFactory.getFactory().getClientDao().findAll();
         List<ClientDto> clientDtoList = new ClientApiController().readAll();
 
-        assertThat(clientDtoList.get(0).getFullName(), is("fakeFullNameTest"));
-        assertThat(clientDtoList.get(0).getHours(), is(1));
-        assertThat(clientDtoList.get(1).getFullName(), is("fakeFullNameTest2"));
-        assertThat(clientDtoList.get(1).getHours(), is(2));
+        assertThat((int) clients.count(), is(clientDtoList.size()));
     }
 
     @Test
@@ -714,10 +712,9 @@ class DispatcherIT {
 
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).get();
         List<VehicleDto> vehicleDtoList = (List<VehicleDto>) new Client().submit(request).getBody();
+        Stream persistedVehicles = DaoFactory.getFactory().getVehicleDao().findAll();
 
-        assertThat(vehicleDtoList.get(0).getRegistrationPlate(), is(expectedVehicleDto1.getRegistrationPlate()));
-        assertThat(vehicleDtoList.get(1).getRegistrationPlate(), is(expectedVehicleDto2.getRegistrationPlate()));
-        assertThat(vehicleDtoList.get(2).getRegistrationPlate(), is(expectedVehicleDto3.getRegistrationPlate()));
+        assertThat((int) persistedVehicles.count(), is(vehicleDtoList.size()));
     }
 
     @Test
@@ -764,6 +761,7 @@ class DispatcherIT {
     void testReadClientVehicles() {
         Integer expectedClientId = createdClients.get(0);
         Integer otherClientId = createdClients.get(1);
+
         VehicleDto expectedVehicleDto1 = createVehicleDto(expectedClientId.toString(), "AA1234AA");
         VehicleDto expectedVehicleDto2 = createVehicleDto(expectedClientId.toString(), "BB1234BB");
         VehicleDto expectedVehicleDto3 = createVehicleDto(expectedClientId.toString(), "CC1234CC");
@@ -775,6 +773,7 @@ class DispatcherIT {
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();
         ClientVehiclesDto clientVehiclesDtos = (ClientVehiclesDto) new Client().submit(request).getBody();
+        ClientVehiclesDto clientVehiclesDto = new ClientApiController().clientVehiclesList(Integer.toString(createdClients.get(0)));
 
         assertThat(clientVehiclesDtos.getVehicles(),
                 allOf(
