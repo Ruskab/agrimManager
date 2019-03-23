@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -693,12 +694,10 @@ class DispatcherIT {
 
     @Test
     void testReadAllClient() {
+        Stream clients = DaoFactory.getFactory().getClientDao().findAll();
         List<ClientDto> clientDtoList = new ClientApiController().readAll();
 
-        assertThat(clientDtoList.get(0).getFullName(), is("fakeFullNameTest"));
-        assertThat(clientDtoList.get(0).getHours(), is(1));
-        assertThat(clientDtoList.get(1).getFullName(), is("fakeFullNameTest2"));
-        assertThat(clientDtoList.get(1).getHours(), is(2));
+        assertThat((int) clients.count(), is(clientDtoList.size()));
     }
 
     @Test
@@ -713,10 +712,9 @@ class DispatcherIT {
 
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).get();
         List<VehicleDto> vehicleDtoList = (List<VehicleDto>) new Client().submit(request).getBody();
+        Stream persistedVehicles = DaoFactory.getFactory().getVehicleDao().findAll();
 
-        assertThat(vehicleDtoList.get(0).getRegistrationPlate(), is(expectedVehicleDto1.getRegistrationPlate()));
-        assertThat(vehicleDtoList.get(1).getRegistrationPlate(), is(expectedVehicleDto2.getRegistrationPlate()));
-        assertThat(vehicleDtoList.get(2).getRegistrationPlate(), is(expectedVehicleDto3.getRegistrationPlate()));
+        assertThat((int) persistedVehicles.count(), is(vehicleDtoList.size()));
     }
 
     @Test
