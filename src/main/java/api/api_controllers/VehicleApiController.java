@@ -1,6 +1,8 @@
 package api.api_controllers;
 
 import api.business_controllers.VehicleBusinessController;
+import api.daos.DaoFactory;
+import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
 import api.exceptions.ArgumentNotValidException;
 import com.mysql.cj.core.util.StringUtils;
@@ -16,6 +18,8 @@ public class VehicleApiController {
     public static final String VEHICLES = "/vehicles";
 
     public static final String ID_ID = "/{id}";
+
+    static { DaoFactory.setFactory(new DaoFactoryHibr()); }
 
     private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
 
@@ -45,7 +49,7 @@ public class VehicleApiController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public VehicleDto read(String id) {
+    public VehicleDto read(@PathParam("id") String id) {
         validateId(id, "vehicle id");
         return vehicleBusinessController.read(id);
     }
