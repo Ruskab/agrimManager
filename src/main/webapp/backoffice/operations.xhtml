@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form>
+        <p:growl id="messages" showDetail="true" />
+        <p:toolbar>
+            <f:facet name="left">
+                <p:commandButton value="Volcar datos" action="#{operationsBean.generateFakeData}" update="messages" icon="fa fa-cloud-upload"/>
+            </f:facet>
+
+            <f:facet name="right">
+                <p:commandButton value="Destroy the world" icon="fa fa-fw fa-remove" action="#{operationsBean.destroyTheWorld}" update="messages"/>
+            </f:facet>
+        </p:toolbar>
+    </h:form>
+
+</h:body>
+<ui:debug></ui:debug>
+</html>
