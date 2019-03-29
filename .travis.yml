@@ -8,6 +8,7 @@ branches:
   only:
     - master
     - develop
+    - issue#36
 notifications:
   email:
     recipients:
@@ -16,6 +17,10 @@ services:
   - mysql
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS agrimManager;'
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('admin') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade -u root -padmin
+  - sudo service mysql restart
+
 script:
   - mvn verify
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
