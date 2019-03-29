@@ -17,8 +17,10 @@ services:
   - mysql
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS agrimManager;'
+  - sleep 4
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('admin') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-
+  - sleep 4
+  - sudo mysql_upgrade
   - sudo service mysql restart
 
 script:
