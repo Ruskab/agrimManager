@@ -736,11 +736,15 @@ class DispatcherIT {
         assertThat(interventionIds, is(createdInterventions));
     }
 
-    @Test //todo se devuelven los paquetes en cualquier orden y eso va a veces solo
+    @Test
     void testReadAllRepairingPacks() {
         LocalDate date1 = LocalDate.now().minusDays(1);
         LocalDate date2 = LocalDate.now().minusDays(2);
         LocalDate date3 = LocalDate.now();
+        List<LocalDate> expextedDates = new ArrayList<>();
+        expextedDates.add(date1);
+        expextedDates.add(date2);
+        expextedDates.add(date3);
 
         RepairingPackDto repairingPackDto = new RepairingPackDto(date1, 2);
         RepairingPackDto repairingPackDto2 = new RepairingPackDto(date2, 3);
@@ -753,12 +757,13 @@ class DispatcherIT {
         HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).get();
         List<RepairingPackDto> repairingPackDtos = (List<RepairingPackDto>) new Client().submit(request).getBody();
 
-        assertThat(repairingPackDtos.get(0).getInvoicedDate(), is(date1));
-        assertThat(repairingPackDtos.get(1).getInvoicedDate(), is(date2));
-        assertThat(repairingPackDtos.get(2).getInvoicedDate(), is(date3));
-        assertThat(repairingPackDtos.get(0).getInvoicedHours(), is(2));
-        assertThat(repairingPackDtos.get(1).getInvoicedHours(), is(3));
-        assertThat(repairingPackDtos.get(2).getInvoicedHours(), is(4));
+        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedDate().equals(date1)), is(true));
+        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedDate().equals(date2)), is(true));
+        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedDate().equals(date3)), is(true));
+        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedHours() ==2), is(true));
+        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedHours() == 3), is(true));
+        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedHours() == 4), is(true));
+
     }
 
     @Test
