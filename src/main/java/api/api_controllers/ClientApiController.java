@@ -8,7 +8,7 @@ import api.dtos.ClientVehiclesDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
-import com.mysql.cj.core.util.StringUtils;
+import com.mysql.cj.util.StringUtils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
