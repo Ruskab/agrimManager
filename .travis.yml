@@ -20,7 +20,7 @@ before_install:
   - sleep 4
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('admin') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sleep 4
-  - sudo mysql_upgrade
+  - sudo mysql_upgrade -uroot -padmin
   - sudo service mysql restart
 
 script:
