@@ -10,7 +10,7 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agrim_manager?useSSL=false&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
+            <property name="javax.persistence.jdbc.url" value="${db.url}" />
             <property name="javax.persistence.jdbc.user" value="${db.username}"/>
             <property name="javax.persistence.jdbc.password" value="${db.password}" />
             <property name="hibernate.show_sql" value="true" />
