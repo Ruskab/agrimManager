@@ -1,1 +1,1 @@
-war:deploy target/agrimManager-1.1.0-SNAPSHOT.war --app agrim-manager
+web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
