@@ -34,8 +34,16 @@ before_install:
   - sudo mysql_upgrade -u root -padmin
   - sudo service mysql restart
 
-
 script:
   - mvn verify
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
   - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU
+  app: agrim-manager
+  on:
+    repo: Ruskab/agrimManager
+    branch: master
