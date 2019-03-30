@@ -1,6 +1,12 @@
 language: java
 addons:
   chrome: stable
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
 
 jdk:
   - openjdk11
@@ -8,14 +14,27 @@ branches:
   only:
     - master
     - develop
+    - issue#36
 notifications:
   email:
     recipients:
       - ilya.kab@gmail.es
 services:
   - mysql
+
+test:
+  adapter: mysql2
+  database: agrim_manager
+  username: root
+  encoding: utf8
+
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS agrimManager;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS agrim_manager;'
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('admin') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade -u root -padmin
+  - sudo service mysql restart
+
+
 script:
   - mvn verify
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
