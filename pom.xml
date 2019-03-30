@@ -197,11 +197,6 @@
 			<!--<artifactId>swagger-ui</artifactId>-->
 			<!--<version>3.20.9</version>-->
 		<!--</dependency>-->
-		<dependency>
-			<groupId>com.github.jsimone</groupId>
-			<artifactId>webapp-runner</artifactId>
-			<version>8.5.39.0</version>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -275,28 +270,18 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.2</version>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
+						<id>copy-dependencies</id>
 						<phase>package</phase>
-						<goals><goal>copy</goal></goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.github.jsimone</groupId>
-									<artifactId>webapp-runner</artifactId>
-									<version>9.0.17.0</version>
-									<destFileName>webapp-runner.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
+						<goals><goal>copy-dependencies</goal></goals>
 					</execution>
 				</executions>
 			</plugin>
-
 
 		</plugins>
 	</build>
