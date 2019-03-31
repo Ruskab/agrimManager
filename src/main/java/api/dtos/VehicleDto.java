@@ -1,13 +1,10 @@
 package api.dtos;
 
 import api.entity.Vehicle;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import org.codehaus.jackson.map.ext.JodaSerializers;
 
 import java.io.Serializable;
 import java.time.LocalDate;

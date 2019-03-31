@@ -9,9 +9,9 @@ import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.*;
-import com.sun.jersey.api.client.ClientResponse;
 import http.*;
 import http.Client;
+import org.glassfish.jersey.client.ClientResponse;
 import org.junit.jupiter.api.*;
 
 import javax.ws.rs.core.Response;
@@ -68,7 +68,7 @@ class DispatcherIT {
         createdClients.add(createdClientId);
 
         Optional<api.entity.Client> createdClient = DaoFactory.getFactory().getClientDao().read((Integer) response.getEntity());
-        assertThat(response.getStatus(), is(ClientResponse.Status.CREATED.getStatusCode()));
+        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
         assertThat(createdClient.get().getFullName(), is("fullNameTest"));
         assertThat(createdClient.get().getHours(), is(4));
     }

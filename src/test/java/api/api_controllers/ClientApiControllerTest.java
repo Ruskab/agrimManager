@@ -6,15 +6,11 @@ import api.dtos.builder.VehicleDtoBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import com.sun.jersey.api.json.JSONConfiguration;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -31,14 +27,6 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 class ClientApiControllerTest {
 
     Client client;
-    static ClientConfig clientConfig;
-
-    @BeforeAll
-    static void init() {
-        clientConfig = new DefaultClientConfig();
-        clientConfig.getFeatures().put(
-                JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-    }
 
     @BeforeEach
     void setUp()
