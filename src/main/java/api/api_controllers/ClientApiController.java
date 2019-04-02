@@ -48,9 +48,6 @@ public class ClientApiController {
     public List<ClientDto> readAll()
     {
         Properties prop = this.loadPropertiesFile("config.properties");
-        System.err.println("DATABASE URL: " + prop.get("db.url") + "USER : " + prop.get("db.username"));
-
-
         return clientBusinessController.readAll();
     }
 

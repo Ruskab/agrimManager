@@ -64,7 +64,7 @@ public class OperationsBean {
     }
 
     private Integer addFakeVehicle(VehicleDto vehicleDto ) {
-        Response response = client.target("http://localhost:8080/agrimManager_war_exploded/api/vehicles")
+        Response response = client.target("/api/vehicles")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -109,7 +109,8 @@ public class OperationsBean {
     }
 
     private Integer addFakeClient(ClientDto clientDto) {
-        Response response = client.target("http://localhost:8080/agrimManager_war_exploded/api/clients")
+
+        Response response = client.target("${app.url}/api/clients")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -123,16 +124,16 @@ public class OperationsBean {
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = client.target("http://localhost:8080/agrimManager_war_exploded/api/vehicles/")
+        List<VehicleDto> vehicleDtoList = client.target("${app.url}/api/vehicles/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {});
-        vehicleDtoList.forEach(vehicleDto -> client.target("http://localhost:8080/agrimManager_war_exploded/api/vehicles/" + vehicleDto.getId())
+        vehicleDtoList.forEach(vehicleDto -> client.target("${app.url}/api/vehicles/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target("http://localhost:8080/agrimManager_war_exploded/api/clients/")
+        List<ClientDto> clientDtoLIst = client.target("${app.url}agrimManager_war_exploded/api/clients/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {});
-        clientDtoLIst.forEach(clientDto -> client.target("http://localhost:8080/agrimManager_war_exploded/api/clients/" + clientDto.getId())
+        clientDtoLIst.forEach(clientDto -> client.target("${app.url}/api/clients/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
