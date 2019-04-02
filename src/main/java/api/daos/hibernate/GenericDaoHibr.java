@@ -65,7 +65,6 @@ public class GenericDaoHibr<T, I> implements GenericDao<T, I> {
         Root<T> rootEntry = cq.from(entityClass);
         CriteriaQuery<T> all = cq.select(rootEntry);
         TypedQuery allQuery = entityManager.createQuery(all);
-        System.out.println("Accediendo a la base de datos");
         return allQuery.getResultStream();
     }
 
