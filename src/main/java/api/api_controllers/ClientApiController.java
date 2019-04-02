@@ -33,7 +33,9 @@ public class ClientApiController {
 
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
 
-    static { DaoFactory.setFactory(new DaoFactoryHibr()); }
+    static {
+        DaoFactory.setFactory(new DaoFactoryHibr());
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -45,24 +47,8 @@ public class ClientApiController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ClientDto> readAll()
-    {
-        Properties prop = this.loadPropertiesFile("config.properties");
+    public List<ClientDto> readAll() {
         return clientBusinessController.readAll();
-    }
-
-    private Properties loadPropertiesFile(String filePath) {
-
-        Properties prop = new Properties();
-
-        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-            prop.load(resourceAsStream);
-        } catch (IOException e) {
-            System.err.println("Unable to load properties file : " + filePath);
-        }
-
-        return prop;
-
     }
 
     @GET

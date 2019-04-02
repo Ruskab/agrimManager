@@ -20,6 +20,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -31,6 +33,8 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 public class OperationsBean {
 
     Client client;
+    Properties properties;
+
 
     @PostConstruct
     public void init(){
@@ -43,6 +47,7 @@ public class OperationsBean {
         // Create a Jackson Provider
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
+        properties = this.loadPropertiesFile("config.properties");
     }
 
     public void generateFakeData() {
@@ -64,7 +69,8 @@ public class OperationsBean {
     }
 
     private Integer addFakeVehicle(VehicleDto vehicleDto ) {
-        Response response = client.target("/api/vehicles")
+
+        Response response = client.target(properties.getProperty("app.url")+"/api/vehicles")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -110,7 +116,7 @@ public class OperationsBean {
 
     private Integer addFakeClient(ClientDto clientDto) {
 
-        Response response = client.target("${app.url}/api/clients")
+        Response response = client.target(new Properties().getProperty("app.url")+"/api/clients")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -124,22 +130,34 @@ public class OperationsBean {
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = client.target("${app.url}/api/vehicles/")
+        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty("app.url")+"/api/vehicles/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {});
-        vehicleDtoList.forEach(vehicleDto -> client.target("${app.url}/api/vehicles/" + vehicleDto.getId())
+        vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty("app.url")+"/api/vehicles/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target("${app.url}agrimManager_war_exploded/api/clients/")
+        List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url")+"/agrimManager_war_exploded/api/clients/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {});
-        clientDtoLIst.forEach(clientDto -> client.target("${app.url}/api/clients/" + clientDto.getId())
+        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty("app.url")+"/api/clients/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    private Properties loadPropertiesFile(String filePath) {
+
+        Properties prop = new Properties();
+
+        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+            prop.load(resourceAsStream);
+        } catch (IOException e) {
+            System.err.println("Unable to load properties file : " + filePath);
+        }
+        return prop;
     }
 }
 
