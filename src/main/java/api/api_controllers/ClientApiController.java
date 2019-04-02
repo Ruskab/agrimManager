@@ -48,7 +48,7 @@ public class ClientApiController {
     public List<ClientDto> readAll()
     {
         Properties prop = this.loadPropertiesFile("config.properties");
-        LOGGER.info("DATABASE URL: {} ", prop.get("db.url"), prop.get("db.username"));
+        LOGGER.error("DATABASE URL: {} {}", prop.get("db.url"), prop.get("db.username"));
 
         return clientBusinessController.readAll();
     }
