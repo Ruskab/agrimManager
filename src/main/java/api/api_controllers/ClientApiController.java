@@ -3,21 +3,28 @@ package api.api_controllers;
 import api.business_controllers.ClientBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
+import api.daos.hibernate.GenericDaoHibr;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
 import com.mysql.cj.util.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 @Path("/clients")
 public class ClientApiController {
 
+    private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
     public static final String CLIENTS = "/clients";
 
     public static final String ID = "/{id}";
@@ -38,8 +45,26 @@ public class ClientApiController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ClientDto> readAll() {
+    public List<ClientDto> readAll()
+    {
+        Properties prop = this.loadPropertiesFile("config.properties");
+        LOGGER.info("DATABASE URL: {} ", prop.get("db.url"), prop.get("db.username"));
+
         return clientBusinessController.readAll();
+    }
+
+    private Properties loadPropertiesFile(String filePath) {
+
+        Properties prop = new Properties();
+
+        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+            prop.load(resourceAsStream);
+        } catch (IOException e) {
+            System.err.println("Unable to load properties file : " + filePath);
+        }
+
+        return prop;
+
     }
 
     @GET
