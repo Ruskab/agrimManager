@@ -116,7 +116,7 @@ public class OperationsBean {
 
     private Integer addFakeClient(ClientDto clientDto) {
 
-        Response response = client.target(new Properties().getProperty("app.url")+"/api/clients")
+        Response response = client.target(properties.getProperty("app.url")+"/api/clients")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
