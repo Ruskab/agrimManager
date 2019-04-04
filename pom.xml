@@ -41,6 +41,11 @@
 
 		<profile>
 			<id>prod</id>
+			<activation>
+				<property>
+					<name>env.DYNO</name>
+				</property>
+			</activation>
 			<properties>
 				<env>prod</env>
 			</properties>
