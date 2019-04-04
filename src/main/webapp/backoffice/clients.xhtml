@@ -20,13 +20,13 @@
                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                      rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{lazyClientsView.selectedClientDto}" id="clientTable" lazy="true">
             <p:ajax event="rowSelect" listener="#{lazyClientsView.onRowSelect}" update=":data-view-clients-form:clientDetail" oncomplete="PF('clientDialog').show()" />
-            <p:column headerText="Id" sortBy="#{client.id}" filterBy="#{client.id}">
+            <p:column headerText="Id" sortBy="#{client.id}" >
                 <h:outputText value="#{client.id}" />
             </p:column>
             <p:column headerText="Full Name" sortBy="#{client.fullName}" filterBy="#{client.fullName}">
                 <h:outputText value="#{client.fullName}" />
             </p:column>
-            <p:column headerText="Facturable hours" sortBy="#{client.hours}" filterBy="#{client.hours}">
+            <p:column headerText="Facturable hours" sortBy="#{client.hours}">
                 <h:outputText value="#{client.hours}" />
             </p:column>
         </p:dataTable>

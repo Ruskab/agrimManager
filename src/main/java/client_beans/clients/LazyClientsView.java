@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "lazyClientsView")
 @ViewScoped
@@ -25,8 +26,11 @@ public class LazyClientsView implements Serializable {
 
     private ClientApiController clientApiController = new ClientApiController();
 
+    private List<ClientDto> clientDtos;
+
     @PostConstruct
     public void init() {
+        clientDtos = clientApiController.readAll();
         lazyModel = new LazyDataModel<ClientDto>() {
             @Override
             public int getRowCount() {
@@ -35,7 +39,10 @@ public class LazyClientsView implements Serializable {
 
             @Override
             public List<ClientDto> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-                return clientApiController.readAll();
+                return clientDtos.stream()
+                        .skip(first)
+                        .filter(client -> client.getFullName().contains((String) filters.getOrDefault("fullName", "")))
+                        .collect(Collectors.toList());
             }
 
             @Override
