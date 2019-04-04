@@ -55,7 +55,7 @@ public class OperationsBean {
         List<Integer> vehiclesIds = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
-            ClientDto clientDto = new ClientDto("fake Client " + i, new Random().ints(0, 40).findFirst().getAsInt());
+            ClientDto clientDto = new ClientDto(getRandomName(), new Random().ints(0, 40).findFirst().getAsInt());
             clientsIds.add(addFakeClient(clientDto)) ;
         }
         addMessage("Success", "Added new 30 clients");
@@ -66,6 +66,12 @@ public class OperationsBean {
             vehiclesIds.add(addFakeVehicle(vehicleDto));
         }
         addMessage("Success", "Added new 60 vehicles");
+    }
+
+    private String getRandomName(){
+        List<String> randomNames = Arrays.asList("Consuela Brumbaugh","Magdalen Slocumb","Modesta Alto","Geoffrey Sandridge","Ignacia Morace","An Madson","Angelica Wilder","Kanisha Pinard","Janae Eakin","Rogelio Bohan","Rhonda Yopp","Hyon Jiang","Linnie Embree","Mathilda Burgard","Foster Adkison","Fernande Cranford","Britteny Bevil","Son Pharr","Nanci Orourke","Mandie Bernett","Christene Delucia","Elly Garbett","Terra Cullinan","Anita Grimes","Lemuel Boyers","Simona Mccrae","Madelene Flickinger","Dave Chadwell","Adam Dirksen","Piper Kirker");
+        Collections.shuffle(randomNames);
+        return randomNames.get(0);
     }
 
     private Integer addFakeVehicle(VehicleDto vehicleDto ) {
@@ -136,8 +142,9 @@ public class OperationsBean {
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
+    //todo peta de lo lindo revisar
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url")+"/agrimManager_war_exploded/api/clients/")
+        List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url")+"/api/clients/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {});
         clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty("app.url")+"/api/clients/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
