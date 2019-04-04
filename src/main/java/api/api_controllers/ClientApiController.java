@@ -27,6 +27,7 @@ public class ClientApiController {
     private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
     public static final String CLIENTS = "/clients";
 
+
     public static final String ID = "/{id}";
 
     public static final String ID_VEHICLES = ID + "/vehicles";
