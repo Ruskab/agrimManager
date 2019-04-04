@@ -142,6 +142,7 @@ public class OperationsBean {
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
+    //todo peta de lo lindo revisar
     private void deleteAllClients() {
         List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url")+"/api/clients/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {});
