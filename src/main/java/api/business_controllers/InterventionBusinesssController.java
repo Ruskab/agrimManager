@@ -7,7 +7,7 @@ import api.entity.State;
 import api.entity.Vehicle;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
-import com.mysql.cj.core.util.StringUtils;
+import com.mysql.cj.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;

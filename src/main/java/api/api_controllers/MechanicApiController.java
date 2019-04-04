@@ -5,7 +5,7 @@ import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
-import com.mysql.cj.core.util.StringUtils;
+import com.mysql.cj.util.StringUtils;
 
 public class MechanicApiController {
     public static final String MECHANICS = "/mechanics";
