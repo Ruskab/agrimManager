@@ -20,6 +20,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -31,6 +33,8 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 public class OperationsBean {
 
     Client client;
+    Properties properties;
+
 
     @PostConstruct
     public void init(){
@@ -43,6 +47,7 @@ public class OperationsBean {
         // Create a Jackson Provider
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
+        properties = this.loadPropertiesFile("config.properties");
     }
 
     public void generateFakeData() {
@@ -50,7 +55,7 @@ public class OperationsBean {
         List<Integer> vehiclesIds = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
-            ClientDto clientDto = new ClientDto("fake Client " + i, new Random().ints(0, 40).findFirst().getAsInt());
+            ClientDto clientDto = new ClientDto(getRandomName(), new Random().ints(0, 40).findFirst().getAsInt());
             clientsIds.add(addFakeClient(clientDto)) ;
         }
         addMessage("Success", "Added new 30 clients");
@@ -63,8 +68,15 @@ public class OperationsBean {
         addMessage("Success", "Added new 60 vehicles");
     }
 
+    private String getRandomName(){
+        List<String> randomNames = Arrays.asList("Consuela Brumbaugh","Magdalen Slocumb","Modesta Alto","Geoffrey Sandridge","Ignacia Morace","An Madson","Angelica Wilder","Kanisha Pinard","Janae Eakin","Rogelio Bohan","Rhonda Yopp","Hyon Jiang","Linnie Embree","Mathilda Burgard","Foster Adkison","Fernande Cranford","Britteny Bevil","Son Pharr","Nanci Orourke","Mandie Bernett","Christene Delucia","Elly Garbett","Terra Cullinan","Anita Grimes","Lemuel Boyers","Simona Mccrae","Madelene Flickinger","Dave Chadwell","Adam Dirksen","Piper Kirker");
+        Collections.shuffle(randomNames);
+        return randomNames.get(0);
+    }
+
     private Integer addFakeVehicle(VehicleDto vehicleDto ) {
-        Response response = client.target("http://localhost:8080/agrimManager_war_exploded/api/vehicles")
+
+        Response response = client.target(properties.getProperty("app.url")+"/api/vehicles")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -109,7 +121,8 @@ public class OperationsBean {
     }
 
     private Integer addFakeClient(ClientDto clientDto) {
-        Response response = client.target("http://localhost:8080/agrimManager_war_exploded/api/clients")
+
+        Response response = client.target(properties.getProperty("app.url")+"/api/clients")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -123,22 +136,34 @@ public class OperationsBean {
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = client.target("http://localhost:8080/agrimManager_war_exploded/api/vehicles/")
+        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty("app.url")+"/api/vehicles/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {});
-        vehicleDtoList.forEach(vehicleDto -> client.target("http://localhost:8080/agrimManager_war_exploded/api/vehicles/" + vehicleDto.getId())
+        vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty("app.url")+"/api/vehicles/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target("http://localhost:8080/agrimManager_war_exploded/api/clients/")
+        List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url")+"/api/clients/")
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {});
-        clientDtoLIst.forEach(clientDto -> client.target("http://localhost:8080/agrimManager_war_exploded/api/clients/" + clientDto.getId())
+        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty("app.url")+"/api/clients/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    private Properties loadPropertiesFile(String filePath) {
+
+        Properties prop = new Properties();
+
+        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+            prop.load(resourceAsStream);
+        } catch (IOException e) {
+            System.err.println("Unable to load properties file : " + filePath);
+        }
+        return prop;
     }
 }
 
