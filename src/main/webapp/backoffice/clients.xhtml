@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>JSF 2.2 Hello World</title>
+
+</h:head>
+<h:body>
+    <h:form id="data-view-clients-form">
+
+        <p:growl id="messages" showDetail="true"  ><p:autoUpdate/></p:growl>
+
+        <p:dataTable var="client" value="#{lazyClientsView.lazyModel}" paginator="true" rows="10"
+                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{lazyClientsView.selectedClientDto}" id="clientTable" lazy="true">
+            <p:ajax event="rowSelect" listener="#{lazyClientsView.onRowSelect}" update=":data-view-clients-form:clientDetail" oncomplete="PF('clientDialog').show()" />
+            <p:column headerText="Id" sortBy="#{client.id}" >
+                <h:outputText value="#{client.id}" />
+            </p:column>
+            <p:column headerText="Full Name" sortBy="#{client.fullName}" filterBy="#{client.fullName}">
+                <h:outputText value="#{client.fullName}" />
+            </p:column>
+            <p:column headerText="Facturable hours" sortBy="#{client.hours}">
+                <h:outputText value="#{client.hours}" />
+            </p:column>
+        </p:dataTable>
+
+        <p:dialog header="Client Info" widgetVar="clientDialog" modal="true" showEffect="fade" hideEffect="fade"
+                  resizable="false">
+            <p:outputPanel id="clientDetail" style="text-align:center;">
+                <p:panelGrid columns="2" rendered="#{not empty lazyClientsView.selectedClientDto}" columnClasses="label,value">
+                    <f:facet name="header">
+                    </f:facet>
+
+                    <h:outputText value="Id:"/>
+                    <h:outputText value="#{lazyClientsView.selectedClientDto.id}"/>
+
+                    <h:outputText value="Name:"/>
+                    <h:outputText value="#{lazyClientsView.selectedClientDto.fullName}"/>
+
+                    <h:outputText value="Hours:"/>
+                    <h:outputText value="#{lazyClientsView.selectedClientDto.hours}"/>
+
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+
+    </h:form>
+
+</h:body>
+<ui:debug></ui:debug>
+</html>

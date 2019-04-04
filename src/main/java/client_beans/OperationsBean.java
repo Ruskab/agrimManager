@@ -1,11 +1,15 @@
 package client_beans;
 
+import api.api_controllers.ClientApiController;
+import api.api_controllers.VehicleApiController;
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 
@@ -34,10 +38,11 @@ public class OperationsBean {
 
     Client client;
     Properties properties;
-
+    private static String API_PATH = "/api/v0";
+    private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
 
     @PostConstruct
-    public void init(){
+    public void init() {
         // Create an ObjectMapper to be used for (de)serializing to/from JSON.
         ObjectMapper objectMapper = new ObjectMapper();
         // Register the JavaTimeModule for JSR-310 DateTime (de)serialization
@@ -56,7 +61,7 @@ public class OperationsBean {
 
         for (int i = 0; i < 30; i++) {
             ClientDto clientDto = new ClientDto(getRandomName(), new Random().ints(0, 40).findFirst().getAsInt());
-            clientsIds.add(addFakeClient(clientDto)) ;
+            clientsIds.add(addFakeClient(clientDto));
         }
         addMessage("Success", "Added new 30 clients");
         for (int i = 0; i < 60; i++) {
@@ -68,15 +73,15 @@ public class OperationsBean {
         addMessage("Success", "Added new 60 vehicles");
     }
 
-    private String getRandomName(){
-        List<String> randomNames = Arrays.asList("Consuela Brumbaugh","Magdalen Slocumb","Modesta Alto","Geoffrey Sandridge","Ignacia Morace","An Madson","Angelica Wilder","Kanisha Pinard","Janae Eakin","Rogelio Bohan","Rhonda Yopp","Hyon Jiang","Linnie Embree","Mathilda Burgard","Foster Adkison","Fernande Cranford","Britteny Bevil","Son Pharr","Nanci Orourke","Mandie Bernett","Christene Delucia","Elly Garbett","Terra Cullinan","Anita Grimes","Lemuel Boyers","Simona Mccrae","Madelene Flickinger","Dave Chadwell","Adam Dirksen","Piper Kirker");
+    private String getRandomName() {
+        List<String> randomNames = Arrays.asList("Consuela Brumbaugh", "Magdalen Slocumb", "Modesta Alto", "Geoffrey Sandridge", "Ignacia Morace", "An Madson", "Angelica Wilder", "Kanisha Pinard", "Janae Eakin", "Rogelio Bohan", "Rhonda Yopp", "Hyon Jiang", "Linnie Embree", "Mathilda Burgard", "Foster Adkison", "Fernande Cranford", "Britteny Bevil", "Son Pharr", "Nanci Orourke", "Mandie Bernett", "Christene Delucia", "Elly Garbett", "Terra Cullinan", "Anita Grimes", "Lemuel Boyers", "Simona Mccrae", "Madelene Flickinger", "Dave Chadwell", "Adam Dirksen", "Piper Kirker");
         Collections.shuffle(randomNames);
         return randomNames.get(0);
     }
 
-    private Integer addFakeVehicle(VehicleDto vehicleDto ) {
+    private Integer addFakeVehicle(VehicleDto vehicleDto) {
 
-        Response response = client.target(properties.getProperty("app.url")+"/api/vehicles")
+        Response response = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -97,12 +102,12 @@ public class OperationsBean {
                 .setClientId(clientId)
                 .setBrand(brands.get(0))
                 .setKMS("03-03-2017 94744")
-                .setBodyOnFrame("VF1KC0JEF"+new Random().ints(1, 5000).findFirst().getAsInt()+"32")
+                .setBodyOnFrame("VF1KC0JEF" + new Random().ints(1, 5000).findFirst().getAsInt() + "32")
                 .setLastRevisionDate(LocalDate.now().minusMonths(new Random().ints(1, 5).findFirst().getAsInt()))
                 .setItvDate(LocalDate.now().minusMonths(new Random().ints(1, 5).findFirst().getAsInt()))
                 .setNextItvDate(LocalDate.now().plusYears(new Random().ints(1, 5).findFirst().getAsInt()))
                 .setAirFilterReference(new Random().ints(1000, 100000000).findFirst().getAsInt() + "3")
-                .setOilFilterReference(new Random().ints(1000, 100000000).findFirst().getAsInt() +"1")
+                .setOilFilterReference(new Random().ints(1000, 100000000).findFirst().getAsInt() + "1")
                 .setFuelFilter(new Random().ints(1000, 100000000).findFirst().getAsInt() + "2")
                 .setMotorOil("5.5  5W30")
                 .createVehicleDto();
@@ -122,31 +127,34 @@ public class OperationsBean {
 
     private Integer addFakeClient(ClientDto clientDto) {
 
-        Response response = client.target(properties.getProperty("app.url")+"/api/clients")
+        Response response = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
     }
 
-    public void destroyTheWorld(){
+    public void destroyTheWorld() {
         deleteAllVehicles();
         addMessage("Success", "All vehicles deleted");
+        LOGGER.info("All vehicles deleted");
         deleteAllClients();
         addMessage("Success", "All clients deleted");
+        LOGGER.info("All clients deleted");
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty("app.url")+"/api/vehicles/")
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {});
-        vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty("app.url")+"/api/vehicles/" + vehicleDto.getId())
+        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
+                });
+        vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES + "/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
-    //todo peta de lo lindo revisar
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url")+"/api/clients/")
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {});
-        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty("app.url")+"/api/clients/" + clientDto.getId())
+        List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS)
+                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {
+                });
+        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty("app.url") +  API_PATH + ClientApiController.CLIENTS + "/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 

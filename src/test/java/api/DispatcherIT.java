@@ -466,7 +466,6 @@ class DispatcherIT {
     }
 
     @Test @Disabled
-        //@Ignore("Foreign key error")
     void testDeleteClientWithVehiclesShouldThrowInternal_Server_Error() {
         int createdClientId = createdClients.get(0);
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(0).toString(), "AA1234AA")));
