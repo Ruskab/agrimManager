@@ -8,13 +8,21 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
-
 </h:head>
+
 <h:body>
     <ui:composition template="/templates/master_layout.xhtml">
+        <ui:define name="header">
+            <div class="p-col bordered">
+                <h1>Header</h1>
+            </div>
+        </ui:define>
 
+        <ui:define name="content">
+            <div class="p-col bordered">
+                <h1>Content</h1>
+            </div>
+        </ui:define>
     </ui:composition>
-
 </h:body>
 </html>

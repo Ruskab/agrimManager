@@ -9,6 +9,9 @@
 
 <h:head>
 
+    <h:outputStylesheet name="primeflex.css" library="css"/>
+
+
     <style type="text/css">
         .box,
         .sample-layout > div {
@@ -42,7 +45,7 @@
             padding-bottom: 1em;
         }
 
-        </style>
+    </style>
 
 </h:head>
 <h:body>
@@ -62,8 +65,8 @@
 
     <h3>Dynamic</h3>
     <h:form>
-        <p:commandButton icon="pi pi-plus" action="#{flexGrid.increment}" update="output" />
-        <p:commandButton icon="pi pi-minus" action="#{flexGrid.decrease}" update="output" />
+        <p:commandButton icon="pi pi-plus" action="#{flexGrid.increment}" update="output"/>
+        <p:commandButton icon="pi pi-minus" action="#{flexGrid.decrease}" update="output"/>
 
         <p:outputPanel id="output">
             <div class="p-grid" style="margin-top: .5em">
@@ -394,32 +397,6 @@
     </div>
 
     <h3>Panel Integration</h3>
-    <div class="p-grid">
-        <div class="p-col">
-            <p-panel header="Godfather">
-                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-            </p-panel>
-        </div>
-        <div class="p-col">
-            <p-panel header="Godfather">
-                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-            </p-panel>
-        </div>
-        <div class="p-col">
-            <p-panel header="Godfather">
-                The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-            </p-panel>
-        </div>
-    </div>
 
     <h3>Sample Layout</h3>
     <div class="p-grid sample-layout">
@@ -435,22 +412,27 @@
                     <div class="p-grid">
                         <div class="p-col-12 p-md-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet, orci nec
                             dictum convallis, ligula mauris vestibulum turpis, nec varius tortor quam at diam. Nullam a viverra nibh.
-                            In tincidunt tempor lectus quis vulputate. Pellentesque nec dui aliquam, lobortis est in, lobortis ante</div>
+                            In tincidunt tempor lectus quis vulputate. Pellentesque nec dui aliquam, lobortis est in, lobortis ante
+                        </div>
                         <div class="p-col-12 p-md-4">Maecenas vel nisi aliquet, vulputate tortor id, laoreet massa. Maecenas mattis
                             tristique bibendum. Suspendisse vel mi dictum, vestibulum lacus quis, pulvinar quam. Proin vulputate, nibh
                             at finibus varius, leo eros lacinia elit, nec blandit odio tellus a justo. Donec nec ex auctor, tristique
-                            nulla nec, rutrum sapien.</div>
+                            nulla nec, rutrum sapien.
+                        </div>
                         <div class="p-col-12 p-md-4">Proin efficitur in leo eget ornare. Nam vestibulum neque sed velit sagittis
                             sodales. Sed scelerisque hendrerit magna a hendrerit. Cras tempor sem at justo pharetra convallis.
                             Curabitur vel sodales purus. Vestibulum interdum facilisis nulla imperdiet suscipit. Quisque lectus felis,
-                            condimentum eget hendrerit sit amet.</div>
+                            condimentum eget hendrerit sit amet.
+                        </div>
 
                         <div class="p-col-12 p-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien
                             facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque
-                            neque orci, ullamcorper vitae ligula quis, dignissim euismod augue.</div>
+                            neque orci, ullamcorper vitae ligula quis, dignissim euismod augue.
+                        </div>
                         <div class="p-col-12 p-md-6">Fusce ullamcorper congue massa, eget ullamcorper nunc lobortis egestas. Lorem
                             ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dui eget dolor feugiat dapibus. Aliquam
-                            pretium leo et egestas luctus. Nunc facilisis gravida tellus.</div>
+                            pretium leo et egestas luctus. Nunc facilisis gravida tellus.
+                        </div>
                     </div>
                 </div>
             </div>

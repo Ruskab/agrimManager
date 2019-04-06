@@ -7,31 +7,24 @@
 >
 
 <h:head>
-    <h:outputStylesheet name="master-layour.css" library="css" />
+    <h:outputStylesheet name="master-layour.css" library="css"/>
+    <h:outputStylesheet name="primeflex.css" library="css"/>
 </h:head>
 
 <h:body>
 
-    <div id="page">
-
-        <div id="header">
+    <div id="page" class="p-col-12">
+        <div id="header" class="p-grid">
             <ui:insert name="header">
                 <ui:include src="/components/header.xhtml"/>
             </ui:insert>
         </div>
 
-        <div id="content">
+        <div id="content" class="p-grid">
             <ui:insert name="content">
                 <ui:include src="/components/content.xhtml"/>
             </ui:insert>
         </div>
-
-        <div id="footer">
-            <ui:insert name="footer">
-                <ui:include src="/components/footer.xhtml"/>
-            </ui:insert>
-        </div>
-
     </div>
 
 </h:body>
