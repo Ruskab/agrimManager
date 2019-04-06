@@ -14,7 +14,6 @@ branches:
   only:
     - master
     - develop
-    - issue#36
 notifications:
   email:
     recipients:
