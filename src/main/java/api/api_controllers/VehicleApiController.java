@@ -54,6 +54,28 @@ public class VehicleApiController {
         return vehicleBusinessController.read(id);
     }
 
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response update(@PathParam("id") String id, VehicleDto vehicleDto) {
+        this.validate(vehicleDto, "vehicleDto");
+        this.validate(vehicleDto.getRegistrationPlate(), "vehicle Registration plate");
+        this.validate(vehicleDto.getBrand(), "vehicle Brand");
+        this.validate(vehicleDto.getKms(), "vehicle KMS");
+        this.validate(vehicleDto.getBodyOnFrame(), "vehicle BodyOnFrame");
+        this.validate(vehicleDto.getLastRevisionDate(), "vehicle LastRevisionDate");
+        this.validate(vehicleDto.getItvDate(), "vehicle ItvDate");
+        this.validate(vehicleDto.getNextItvDate(), "vehicle NextItvDate");
+        this.validate(vehicleDto.getAirFilterReference(), "vehicle AirFilterReference");
+        this.validate(vehicleDto.getOilFilterReference(), "vehicle OilFilterReference");
+        this.validate(vehicleDto.getFuelFilter(), "vehicle FuelFilter");
+        this.validate(vehicleDto.getMotorOil(), "vehicle MotorOil");
+        this.validateId(id, "Vehicle id: ");
+        this.vehicleBusinessController.update(id, vehicleDto);
+        return Response.status(200).build();
+    }
+
+
     private void validate(Object property, String message) {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is missing");

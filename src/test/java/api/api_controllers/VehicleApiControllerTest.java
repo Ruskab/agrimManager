@@ -97,7 +97,7 @@ class VehicleApiControllerTest {
         assertThat(deleteResponse.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
     }
 
-    @Test @Disabled("Me queda hacer la funcionalidad ")
+    @Test
     void update_client() {
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
 
