@@ -8,7 +8,6 @@ import api.entity.Vehicle;
 import api.exceptions.NotFoundException;
 
 import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
