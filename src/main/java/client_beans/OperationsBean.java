@@ -12,6 +12,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
+import org.primefaces.event.CloseEvent;
+import org.primefaces.event.DashboardReorderEvent;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.DashboardColumn;
+import org.primefaces.model.DashboardModel;
+import org.primefaces.model.DefaultDashboardColumn;
+import org.primefaces.model.DefaultDashboardModel;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -36,6 +43,8 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 @ViewScoped
 public class OperationsBean {
 
+    private DashboardModel model;
+
     Client client;
     Properties properties;
     private static String API_PATH = "/api/v0";
@@ -53,6 +62,54 @@ public class OperationsBean {
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = this.loadPropertiesFile("config.properties");
+
+        initDashboard();
+
+    }
+
+    private void initDashboard() {
+        model = new DefaultDashboardModel();
+        DashboardColumn column1 = new DefaultDashboardColumn();
+        DashboardColumn column2 = new DefaultDashboardColumn();
+
+        column1.addWidget("createFakeData");
+        column2.addWidget("deleteAllData");
+        model.addColumn(column1);
+        model.addColumn(column2);
+    }
+
+    public void handleReorder(DashboardReorderEvent event) {
+        FacesMessage message = new FacesMessage();
+        message.setSeverity(FacesMessage.SEVERITY_INFO);
+        message.setSummary("Reordered: " + event.getWidgetId());
+        message.setDetail("Item index: " + event.getItemIndex() + ", Column index: " + event.getColumnIndex() + ", Sender index: " + event.getSenderColumnIndex());
+
+        addMessage(message);
+    }
+
+    public void handleClose(CloseEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Closed", "Closed panel id:'" + event.getComponent().getId() + "'");
+
+        addMessage(message);
+    }
+
+    public void handleToggle(ToggleEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, event.getComponent().getId() + " toggled", "Status:" + event.getVisibility().name());
+
+        addMessage(message);
+    }
+
+    public DashboardModel getModel() {
+        return model;
+    }
+
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void addMessage(FacesMessage facesMessage) {
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
     }
 
     public void generateFakeData() {
@@ -158,10 +215,7 @@ public class OperationsBean {
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
-    public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+
 
     private Properties loadPropertiesFile(String filePath) {
 
