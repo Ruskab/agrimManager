@@ -250,6 +250,9 @@
 				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					<argLine>-Duser.timezone=UTC</argLine>
+					<excludes>
+						<exclude>**/ClientApiControllerTest.java</exclude>
+					</excludes>
 				</configuration>
 				<dependencies>
 					<dependency>
