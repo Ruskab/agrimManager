@@ -20,7 +20,7 @@
     </mime-mapping>
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>faces/backoffice/index.xhtml</welcome-file>
+        <welcome-file>faces/backoffice/clients.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- JSF mapping -->
