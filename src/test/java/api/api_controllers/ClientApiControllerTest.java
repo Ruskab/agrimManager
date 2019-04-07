@@ -23,7 +23,6 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-@Disabled("Falta configurar Travis para que arranque el servidor...")
 class ClientApiControllerTest {
 
     Client client;
