@@ -3,7 +3,6 @@ package api.api_controllers;
 import api.business_controllers.ClientBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.daos.hibernate.GenericDaoHibr;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.exceptions.ArgumentNotValidException;
@@ -16,10 +15,7 @@ import org.apache.logging.log4j.Logger;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Properties;
 
 @Path("/clients")
 public class ClientApiController {
@@ -43,6 +39,7 @@ public class ClientApiController {
     public Response create(ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
+        LOGGER.info("ClienteDto valido");
         return Response.status(201).entity(clientBusinessController.create(clientDto)).build();
     }
 
@@ -78,6 +75,7 @@ public class ClientApiController {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
         this.validateId(id, "client id: ");
+        LOGGER.info("ClienteDto valido");
         this.clientBusinessController.update(id, clientDto);
         return Response.status(200).build();
     }
