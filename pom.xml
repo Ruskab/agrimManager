@@ -252,6 +252,7 @@
 					<argLine>-Duser.timezone=UTC</argLine>
 					<excludes>
 						<exclude>**/ClientApiControllerTest.java</exclude>
+						<exclude>**/VehicleApiControllerTest.java</exclude>
 					</excludes>
 				</configuration>
 				<dependencies>
