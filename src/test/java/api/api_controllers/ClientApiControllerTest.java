@@ -26,17 +26,14 @@ class ClientApiControllerTest {
 
     Client client;
     Properties properties;
-    private static String API_PATH = "/api/v0";
+    public static final String APP_BASE_URL = "app.url";
+    private static final String API_PATH = "/api/v0";
 
     @BeforeEach
     void setUp() {
-// Create an ObjectMapper to be used for (de)serializing to/from JSON.
         ObjectMapper objectMapper = new ObjectMapper();
-        // Register the JavaTimeModule for JSR-310 DateTime (de)serialization
         objectMapper.registerModule(new JavaTimeModule());
-        // Configure the object mapper te serialize to timestamp strings.
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        // Create a Jackson Provider
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = this.loadPropertiesFile("config.properties");
@@ -47,14 +44,14 @@ class ClientApiControllerTest {
 
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
 
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
 
         assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
         String id = response.readEntity(String.class);
 
-        ClientDto createdClientDto = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS + "/" + id)
+        ClientDto createdClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .get(ClientDto.class);
 
@@ -65,12 +62,12 @@ class ClientApiControllerTest {
     @Test
     void delete_client() {
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         String id = response.readEntity(String.class);
 
-        Response deleteResponse = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS + "/" + id)
+        Response deleteResponse = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .delete();
 
@@ -81,27 +78,27 @@ class ClientApiControllerTest {
     void update_client() {
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
 
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
 
         assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
         String id = response.readEntity(String.class);
 
-        ClientDto createdClientDto = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS + "/" + id)
+        ClientDto createdClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .get(ClientDto.class);
 
         createdClientDto.setFullName("newFullName");
         createdClientDto.setHours(5);
 
-        Response updateResponse = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS + "/" + id)
+        Response updateResponse = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.entity(createdClientDto, MediaType.APPLICATION_JSON_TYPE));
 
         assertThat(updateResponse.getStatus(), is(Response.Status.OK.getStatusCode()));
 
-        ClientDto updatedClientDto = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS + "/" + id)
+        ClientDto updatedClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .get(ClientDto.class);
 

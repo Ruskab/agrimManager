@@ -33,17 +33,13 @@ class VehicleApiControllerTest {
     Client client;
     Properties properties;
     Integer createdClientId;
-    private static String API_PATH = "/api/v0";
+    private static final String API_PATH = "/api/v0";
 
     @BeforeEach
     void setUp() {
-// Create an ObjectMapper to be used for (de)serializing to/from JSON.
         ObjectMapper objectMapper = new ObjectMapper();
-        // Register the JavaTimeModule for JSR-310 DateTime (de)serialization
         objectMapper.registerModule(new JavaTimeModule());
-        // Configure the object mapper te serialize to timestamp strings.
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        // Create a Jackson Provider
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = this.loadPropertiesFile("config.properties");
@@ -97,7 +93,7 @@ class VehicleApiControllerTest {
         assertThat(deleteResponse.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
     }
 
-    @Test @Disabled("Me queda hacer la funcionalidad ")
+    @Test
     void update_client() {
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
 
