@@ -25,17 +25,14 @@
                                  selection="#{lazyVehiclesView.selectedVehicleDto}" id="vehicleTable" lazy="true">
                         <p:ajax event="rowSelect" listener="#{lazyVehiclesView.onRowSelect}"
                                 update=":data-view-vehicles-form:vehicleDetail" oncomplete="PF('vehicleDialog').show()"/>
-                        <p:column headerText="Registration plate" sortBy="#{vehicle.registrationPlate}">
-                            <h:outputText value="#{vehicle.registrationPlate}"/>
+                        <p:column headerText="Registration plate" sortBy="#{vehicle.registrationPlate}" filterBy="#{vehicle.registrationPlate}">
+                            <h:outputText value="#{vehicle.registrationPlate}" />
                         </p:column>
                         <p:column headerText="Brand" sortBy="#{vehicle.brand}" filterBy="#{vehicle.brand}">
                             <h:outputText value="#{vehicle.brand}"/>
                         </p:column>
                         <p:column headerText="Client" >
                             <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}"/>
-                        </p:column>
-                        <p:column headerText="kms" sortBy="#{vehicle.kms}" filterBy="#{vehicle.kms}">
-                            <h:outputText value="#{vehicle.kms}"/>
                         </p:column>
                         <p:column headerText="body On Frame" sortBy="#{vehicle.bodyOnFrame}" filterBy="#{vehicle.bodyOnFrame}">
                             <h:outputText value="#{vehicle.bodyOnFrame}"/>
@@ -49,38 +46,25 @@
                         <p:column headerText="Next ItvDate" sortBy="#{vehicle.nextItvDate}" filterBy="#{vehicle.nextItvDate}">
                             <h:outputText value="#{vehicle.nextItvDate}"/>
                         </p:column>
-                        <p:column headerText="Air Filter Reference" sortBy="#{vehicle.airFilterReference}" filterBy="#{vehicle.airFilterReference}">
-                            <h:outputText value="#{vehicle.airFilterReference}"/>
-                        </p:column>
-                        <p:column headerText="Oil Filter Reference" sortBy="#{vehicle.oilFilterReference}" filterBy="#{vehicle.oilFilterReference}">
-                            <h:outputText value="#{vehicle.oilFilterReference}"/>
-                        </p:column>
-                        <p:column headerText="Fuel Filter" sortBy="#{vehicle.fuelFilter}" filterBy="#{vehicle.fuelFilter}">
-                            <h:outputText value="#{vehicle.fuelFilter}"/>
-                        </p:column>
-                        <p:column headerText="Motor Oil" sortBy="#{vehicle.motorOil}" filterBy="#{vehicle.motorOil}">
-                            <h:outputText value="#{vehicle.motorOil}"/>
-                        </p:column>
-
                     </p:dataTable>
 
-                    <p:dialog header="Client Info" widgetVar="clientDialog" modal="true" showEffect="fade"
+                    <p:dialog header="Vehicles Full Info" widgetVar="vehicleDialog" modal="true" showEffect="fade"
                               hideEffect="fade"
                               resizable="false">
                         <p:outputPanel id="vehicleDetail" style="text-align:center;">
-                            <p:panelGrid columns="2" rendered="#{not empty lazyClientsView.selectedClientDto}"
+                            <p:panelGrid columns="2" rendered="#{not empty lazyVehiclesView.selectedVehicleDto}"
                                          columnClasses="label,value">
                                 <f:facet name="header">
                                 </f:facet>
 
-                                <h:outputText value="Id:"/>
-                                <h:outputText value="#{lazyClientsView.selectedClientDto.id}"/>
+                                <h:outputText value="Registration plate:"/>
+                                <h:outputText value="#{lazyVehiclesView.selectedVehicleDto.registrationPlate}"/>
 
-                                <h:outputText value="Name:"/>
-                                <h:outputText value="#{lazyClientsView.selectedClientDto.fullName}"/>
+                                <h:outputText value="Brand:"/>
+                                <h:outputText value="#{lazyVehiclesView.selectedVehicleDto.brand}"/>
 
-                                <h:outputText value="Hours:"/>
-                                <h:outputText value="#{lazyClientsView.selectedClientDto.hours}"/>
+                                <h:outputText value="Client:"/>
+                                <h:outputText value="#{lazyVehiclesView.getClientDto(lazyVehiclesView.selectedVehicleDto.clientId)}"/>
 
                             </p:panelGrid>
                         </p:outputPanel>
