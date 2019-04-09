@@ -83,7 +83,7 @@ public class LazyVehiclesView implements Serializable {
     }
 
     public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Vehicle Selected", ((ClientDto) event.getObject()).getFullName());
+        FacesMessage msg = new FacesMessage("Vehicle Selected", ((VehicleDto) event.getObject()).getRegistrationPlate());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }
