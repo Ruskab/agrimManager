@@ -13,19 +13,19 @@
             <p:growl id="headerMessages"/>
 
             <p:menubar>
-                <p:submenu label="Api Services" icon="fa fa-xs fa-database">
-                    <p:menuitem value="Clients" url="#{request.contextPath}/api/v0/clients" />
+                <p:submenu label="#{msg['web.header.api-services']}" icon="fa fa-xs fa-database">
+                    <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/api/v0/clients" />
                     <p:separator />
-                    <p:menuitem value="Vehicles" url="#{request.contextPath}/api/v0/vehicles" />
+                    <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/api/v0/vehicles" />
                     <p:separator />
-                    <p:menuitem value="Interventions" url="#" />
+                    <p:menuitem value="#{msg['web.header.interventions']}" url="#" />
                     <p:separator />
-                    <p:menuitem value="Repairing Packs" url="#" />
+                    <p:menuitem value="#{msg['web.header.repairing-paks']}" url="#" />
                 </p:submenu>
 
-                <p:menuitem value="Clients" url="#{request.contextPath}/backoffice/clients.xhtml" icon="fa fa-user-circle fa-xs" />
-                <p:menuitem value="Vehicles" url="#{request.contextPath}/backoffice/vehicles.xhtml" icon="fa fa fa-car fa-xs" />
-                <p:menuitem value="Operations" url="#{request.contextPath}/backoffice/operations.xhtml" icon="fa fa-xs fa-bomb" />
+                <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/backoffice/clients.xhtml" icon="fa fa-user-circle fa-xs" />
+                <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/backoffice/vehicles.xhtml" icon="fa fa fa-car fa-xs" />
+                <p:menuitem value="#{msg['web.header.operations']}" url="#{request.contextPath}/backoffice/operations.xhtml" icon="fa fa-xs fa-bomb" />
 
                 <f:facet name="options">
                     <p:commandButton type="button" value="Logout" icon="fa fa-home" />
