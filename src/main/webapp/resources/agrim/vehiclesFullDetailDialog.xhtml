@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<title>vehicles full detail dialog</title>
+
+
+<composite:interface>
+    <composite:attribute name="selectedVehicle" required="true" type="api.dtos.VehicleDto"/>
+    <composite:attribute name="clientName" required="true" type="java.lang.String"/>
+</composite:interface>
+
+<composite:implementation>
+    <p:dialog header="Vehicles Full Info" widgetVar="vehicleDialog" modal="true" showEffect="fade"
+              hideEffect="fade" resizable="false">
+        <p:outputPanel id="vehicleDetail" style="text-align:center;">
+            <p:panelGrid columns="2" rendered="#{not empty cc.attrs.selectedVehicle}"
+                         columnClasses="label,value">
+                <f:facet name="header">
+                </f:facet>
+
+                <h:outputText value="Registration plate:"/>
+                <h:outputText value="#{cc.attrs.selectedVehicle.registrationPlate}"/>
+
+                <h:outputText value="Brand:"/>
+                <h:outputText value="#{cc.attrs.selectedVehicle.brand}"/>
+
+                <h:outputText value="Client:"/>
+                <h:outputText value="#{cc.attrs.clientName}"/>
+
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+</composite:implementation>
+
+</html>

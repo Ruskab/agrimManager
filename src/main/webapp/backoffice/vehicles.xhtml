@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:agrim="http://java.sun.com/jsf/composite/agrim"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -24,7 +25,7 @@
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
                                  selection="#{lazyVehiclesView.selectedVehicleDto}" id="vehicleTable" lazy="true">
                         <p:ajax event="rowSelect" listener="#{lazyVehiclesView.onRowSelect}"
-                                update=":data-view-vehicles-form:vehicleDetail" oncomplete="PF('vehicleDialog').show()"/>
+                                update=":data-view-vehicles-form:vehiclesEditDialog:vehicleDetail" oncomplete="PF('vehicleDialog').show()"/>
                         <p:column headerText="Registration plate" sortBy="#{vehicle.registrationPlate}" filterBy="#{vehicle.registrationPlate}">
                             <h:outputText value="#{vehicle.registrationPlate}" />
                         </p:column>
@@ -48,27 +49,7 @@
                         </p:column>
                     </p:dataTable>
 
-                    <p:dialog header="Vehicles Full Info" widgetVar="vehicleDialog" modal="true" showEffect="fade"
-                              hideEffect="fade"
-                              resizable="false">
-                        <p:outputPanel id="vehicleDetail" style="text-align:center;">
-                            <p:panelGrid columns="2" rendered="#{not empty lazyVehiclesView.selectedVehicleDto}"
-                                         columnClasses="label,value">
-                                <f:facet name="header">
-                                </f:facet>
-
-                                <h:outputText value="Registration plate:"/>
-                                <h:outputText value="#{lazyVehiclesView.selectedVehicleDto.registrationPlate}"/>
-
-                                <h:outputText value="Brand:"/>
-                                <h:outputText value="#{lazyVehiclesView.selectedVehicleDto.brand}"/>
-
-                                <h:outputText value="Client:"/>
-                                <h:outputText value="#{lazyVehiclesView.getClientDto(lazyVehiclesView.selectedVehicleDto.clientId)}"/>
-
-                            </p:panelGrid>
-                        </p:outputPanel>
-                    </p:dialog>
+                    <agrim:vehiclesFullDetailDialog id="vehiclesEditDialog" selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}" clientName="#{lazyVehiclesView.getClientDto(lazyVehiclesView.selectedVehicleDto.clientId)}"/>
                 </h:form>
             </div>
         </ui:define>
