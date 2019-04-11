@@ -11,18 +11,19 @@
     <title>Master template</title>
     <h:outputStylesheet name="master-layour.css" library="css"/>
     <h:outputStylesheet name="primeflex.css" library="css"/>
+    <h:outputStylesheet name="normalize.css" library="css"/>
 </h:head>
 
 <h:body>
 
     <div id="page" class="p-col-12">
-        <div id="header" class="p-grid p-align-stretch ">
+        <div id="header" class="p-grid p-align-stretch header">
             <ui:insert name="header">
                 <ui:include src="/templates/header.xhtml"/>
             </ui:insert>
         </div>
 
-        <div id="content" class="p-grid">
+        <div id="content" class="p-grid content">
             <ui:insert name="content">
                 <ui:include src="/templates/content.xhtml"/>
             </ui:insert>
