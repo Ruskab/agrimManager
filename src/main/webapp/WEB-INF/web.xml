@@ -8,6 +8,11 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+    XHTML
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
     <!--Iconos primefaces-->
     <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
