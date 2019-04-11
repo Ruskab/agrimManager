@@ -16,7 +16,7 @@
             <p:growl id="headerMessages"/>
 
             <p:menubar>
-                <p:submenu label="#{msg['web.header.api-services']}" icon="fa fa-xs fa-database">
+                <p:submenu label="#{msg['web.header.api-services']}" icon="pi pi-globe">
                     <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/api/v0/clients"/>
                     <p:separator/>
                     <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/api/v0/vehicles"/>
@@ -27,14 +27,14 @@
                 </p:submenu>
 
                 <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/backoffice/clients.xhtml"
-                            icon="fa fa-user-circle fa-xs"/>
+                            icon="pi pi-users"/>
                 <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/backoffice/vehicles.xhtml"
                             icon="fa fa fa-car fa-xs"/>
                 <p:menuitem value="#{msg['web.header.operations']}"
                             url="#{request.contextPath}/backoffice/operations.xhtml" icon="fa fa-xs fa-bomb"/>
 
                 <f:facet name="options">
-                    <p:commandButton type="button" value="Logout" icon="fa fa-home"/>
+                    <p:commandButton type="button" value="Logout" icon="pi pi-home"/>
                 </f:facet>
             </p:menubar>
         </h:form>
