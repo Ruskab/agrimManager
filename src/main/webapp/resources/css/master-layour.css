@@ -1,43 +1,20 @@
-#page {
-    padding: 20px;
-    width: 1850px;
-    height: 680px;
+.page {
+    width: 100vw;
+    height: 100vh;
     border: 3px solid #db260f;
 }
 
-#header {
+.header {
     height: 100px;
-    border: 1px solid #000;
+    border: 1px solid #db260f;
 }
 
-#content {
-    height: available;
-    border: 1px solid #000;
+.content {
+    height: 100vh;
+    border: 1px solid #000000;
 }
 
-#footer {
-    height: 200px;
-    border: 1px solid #000;
-}
-
-#dev-page {
-    height: 680px;
-    border: 3px solid #db260f;
-}
-
-#dev-header {
-    height: 100px;
-    border: 1px solid #000;
-}
-
-#dev-content {
-    height: available;
-    border: 1px solid #000;
-}
-
-#dev-footer {
-    height: 200px;
-    border: 1px solid #000;
+.footer {
 }
 
 .bordered {
