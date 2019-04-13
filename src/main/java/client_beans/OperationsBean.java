@@ -173,7 +173,7 @@ public class OperationsBean {
         String saltchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
         while (salt.length() < 8) { // length of the random string.
-            int index = (rnd.nextInt() * saltchars.length());
+            int index = rnd.nextInt(saltchars.length());
             salt.append(saltchars.charAt(index));
         }
         return salt.toString();
