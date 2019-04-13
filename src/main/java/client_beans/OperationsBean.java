@@ -12,6 +12,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
+import org.primefaces.event.CloseEvent;
+import org.primefaces.event.DashboardReorderEvent;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.DashboardColumn;
+import org.primefaces.model.DashboardModel;
+import org.primefaces.model.DefaultDashboardColumn;
+import org.primefaces.model.DefaultDashboardModel;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -36,23 +43,72 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 @ViewScoped
 public class OperationsBean {
 
+    public static final String SUCCESS = "Success";
+    public static final String APP_BASE_URL = "app.url";
+    private DashboardModel model;
+
     Client client;
     Properties properties;
-    private static String API_PATH = "/api/v0";
+    private static final String API_PATH = "/api/v0";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
+    Random rnd = new Random();
 
     @PostConstruct
     public void init() {
-        // Create an ObjectMapper to be used for (de)serializing to/from JSON.
         ObjectMapper objectMapper = new ObjectMapper();
-        // Register the JavaTimeModule for JSR-310 DateTime (de)serialization
         objectMapper.registerModule(new JavaTimeModule());
-        // Configure the object mapper te serialize to timestamp strings.
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        // Create a Jackson Provider
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = this.loadPropertiesFile("config.properties");
+
+        initDashboard();
+
+    }
+
+    private void initDashboard() {
+        model = new DefaultDashboardModel();
+        DashboardColumn column1 = new DefaultDashboardColumn();
+        DashboardColumn column2 = new DefaultDashboardColumn();
+
+        column1.addWidget("createFakeData");
+        column2.addWidget("deleteAllData");
+        model.addColumn(column1);
+        model.addColumn(column2);
+    }
+
+    public void handleReorder(DashboardReorderEvent event) {
+        FacesMessage message = new FacesMessage();
+        message.setSeverity(FacesMessage.SEVERITY_INFO);
+        message.setSummary("Reordered: " + event.getWidgetId());
+        message.setDetail("Item index: " + event.getItemIndex() + ", Column index: " + event.getColumnIndex() + ", Sender index: " + event.getSenderColumnIndex());
+
+        addMessage(message);
+    }
+
+    public void handleClose(CloseEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Closed", "Closed panel id:'" + event.getComponent().getId() + "'");
+
+        addMessage(message);
+    }
+
+    public void handleToggle(ToggleEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, event.getComponent().getId() + " toggled", "Status:" + event.getVisibility().name());
+
+        addMessage(message);
+    }
+
+    public DashboardModel getModel() {
+        return model;
+    }
+
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void addMessage(FacesMessage facesMessage) {
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
     }
 
     public void generateFakeData() {
@@ -60,17 +116,17 @@ public class OperationsBean {
         List<Integer> vehiclesIds = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
-            ClientDto clientDto = new ClientDto(getRandomName(), new Random().ints(0, 40).findFirst().getAsInt());
+            ClientDto clientDto = new ClientDto(getRandomName(), rnd.ints(0, 40).findFirst().getAsInt());
             clientsIds.add(addFakeClient(clientDto));
         }
-        addMessage("Success", "Added new 30 clients");
+        addMessage(SUCCESS, "Added new 30 clients");
         for (int i = 0; i < 60; i++) {
 
             Collections.shuffle(clientsIds);
             VehicleDto vehicleDto = createFakeVehicleDto(clientsIds.get(0).toString());
             vehiclesIds.add(addFakeVehicle(vehicleDto));
         }
-        addMessage("Success", "Added new 60 vehicles");
+        addMessage(SUCCESS, "Added new 60 vehicles");
     }
 
     private String getRandomName() {
@@ -81,7 +137,7 @@ public class OperationsBean {
 
     private Integer addFakeVehicle(VehicleDto vehicleDto) {
 
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -102,32 +158,30 @@ public class OperationsBean {
                 .setClientId(clientId)
                 .setBrand(brands.get(0))
                 .setKMS("03-03-2017 94744")
-                .setBodyOnFrame("VF1KC0JEF" + new Random().ints(1, 5000).findFirst().getAsInt() + "32")
-                .setLastRevisionDate(LocalDate.now().minusMonths(new Random().ints(1, 5).findFirst().getAsInt()))
-                .setItvDate(LocalDate.now().minusMonths(new Random().ints(1, 5).findFirst().getAsInt()))
-                .setNextItvDate(LocalDate.now().plusYears(new Random().ints(1, 5).findFirst().getAsInt()))
-                .setAirFilterReference(new Random().ints(1000, 100000000).findFirst().getAsInt() + "3")
-                .setOilFilterReference(new Random().ints(1000, 100000000).findFirst().getAsInt() + "1")
-                .setFuelFilter(new Random().ints(1000, 100000000).findFirst().getAsInt() + "2")
+                .setBodyOnFrame("VF1KC0JEF" + rnd.ints(1, 5000).findFirst().getAsInt() + "32")
+                .setLastRevisionDate(LocalDate.now().minusMonths(rnd.ints(1, 5).findFirst().getAsInt()))
+                .setItvDate(LocalDate.now().minusMonths(rnd.ints(1, 5).findFirst().getAsInt()))
+                .setNextItvDate(LocalDate.now().plusYears(rnd.ints(1, 5).findFirst().getAsInt()))
+                .setAirFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "3")
+                .setOilFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "1")
+                .setFuelFilter(rnd.ints(1000, 100000000).findFirst().getAsInt() + "2")
                 .setMotorOil("5.5  5W30")
                 .createVehicleDto();
     }
 
     private String getSaltString() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String saltchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
         while (salt.length() < 8) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
+            int index = (rnd.nextInt() * saltchars.length());
+            salt.append(saltchars.charAt(index));
         }
-        String saltStr = salt.toString();
-        return saltStr;
+        return salt.toString();
     }
 
     private Integer addFakeClient(ClientDto clientDto) {
 
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -135,33 +189,30 @@ public class OperationsBean {
 
     public void destroyTheWorld() {
         deleteAllVehicles();
-        addMessage("Success", "All vehicles deleted");
+        addMessage(SUCCESS, "All vehicles deleted");
         LOGGER.info("All vehicles deleted");
         deleteAllClients();
-        addMessage("Success", "All clients deleted");
+        addMessage(SUCCESS, "All clients deleted");
         LOGGER.info("All clients deleted");
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
                 });
-        vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES + "/" + vehicleDto.getId())
+        vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VehicleApiController.VEHICLES + "/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target(properties.getProperty("app.url") + API_PATH + ClientApiController.CLIENTS)
+        List<ClientDto> clientDtoLIst = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {
                 });
-        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty("app.url") +  API_PATH + ClientApiController.CLIENTS + "/" + clientDto.getId())
+        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty(APP_BASE_URL) +  API_PATH + ClientApiController.CLIENTS + "/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 
-    public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+
 
     private Properties loadPropertiesFile(String filePath) {
 

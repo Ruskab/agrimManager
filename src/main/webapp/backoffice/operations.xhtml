@@ -8,21 +8,33 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+    <title>Operations Dashboard</title>
 </h:head>
 <h:body>
-    <h:form>
-        <p:growl id="messages" showDetail="true" />
-        <p:toolbar>
-            <f:facet name="left">
-                <p:commandButton value="Volcar datos" action="#{operationsBean.generateFakeData}" update="messages" icon="fa fa-cloud-upload"/>
-            </f:facet>
+    <ui:composition template="/templates/master_layout.xhtml">
 
-            <f:facet name="right">
-                <p:commandButton value="Destroy the world" icon="fa fa-fw fa-remove" action="#{operationsBean.destroyTheWorld}" update="messages"/>
-            </f:facet>
-        </p:toolbar>
-    </h:form>
+        <ui:define name="content">
+            <div class="p-col">
+                <h:form>
+                    <p:growl id="messages" showDetail="true"/>
+                    <p:dashboard id="board" model="#{operationsBean.model}">
+                        <p:ajax event="reorder" listener="#{operationsBean.handleReorder}" update="messages"/>
 
+                        <p:panel id="createFakeData" header="Create Fake Data">
+                            <p:commandButton value="Volcar datos" action="#{operationsBean.generateFakeData}"
+                                             update="messages" icon="fa fa-cloud-upload"/>
+                        </p:panel>
+
+                        <p:panel id="deleteAllData" header="Destroy Everithing">
+                            <p:commandButton value="Destroy" icon="fa fa-fw fa-remove"
+                                             action="#{operationsBean.destroyTheWorld}" update="messages"/> </p:panel>
+                    </p:dashboard>
+
+                    <div style="clear:both"/>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
 </h:body>
 <ui:debug></ui:debug>
 </html>

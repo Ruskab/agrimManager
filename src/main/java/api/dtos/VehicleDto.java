@@ -44,7 +44,7 @@ public class VehicleDto implements Serializable {
         this.itvDate = vehicle.getItvDate();
         this.nextItvDate = vehicle.getNextItvDate();
         this.airFilterReference = vehicle.getAirFilterReference();
-        this.oilFilterReference = vehicle.getAirFilterReference();
+        this.oilFilterReference = vehicle.getOilFilterReference();
         this.fuelFilter = vehicle.getFuelFilter();
         this.motorOil = vehicle.getMotorOil();
     }

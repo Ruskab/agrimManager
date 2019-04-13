@@ -1,27 +1,25 @@
-#page {
-    width: 800px;
-    margin: 0 auto;
+.page {
+    width: 100vw;
+    height: 100vh;
+    border: 3px solid #db260f;
 }
 
-#header {
-    width: max-content;
-    height: auto;
-    max-height: 300px;
-    border: 1px solid #000;
-    margin-bottom: 16px;
-}
-
-#content {
-    width: 100%;
-    height: 200px;
-    margin-right: 16px;
-    margin-bottom: 16px;
-    border: 1px solid #000;
-}
-
-#footer {
-    width: 100%;
+.header {
     height: 100px;
+    border: 1px solid #db260f;
+}
+
+.content {
+    height: 100vh;
+    border: 1px solid #000000;
+}
+
+.footer {
+}
+
+.bordered {
     border: 1px solid #000;
+    margin: 2px;
+    padding: 4px;
 }
 

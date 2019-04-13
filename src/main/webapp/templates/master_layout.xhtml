@@ -5,33 +5,32 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 >
+<title>Master template</title>
 
 <h:head>
-    <h:outputStylesheet name="master-layour.css" library="css" />
+    <title>Master template</title>
+    <h:outputStylesheet name="master-layour.css" library="css"/>
+    <h:outputStylesheet name="primeflex.css" library="css"/>
+    <h:outputStylesheet name="normalize.css" library="css"/>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+
+
 </h:head>
 
 <h:body>
 
-    <div id="page">
-
-        <div id="header">
+    <div id="page" class="p-col-12">
+        <div id="header" class="p-grid p-align-stretch header">
             <ui:insert name="header">
-                <ui:include src="/components/header.xhtml"/>
+                <ui:include src="/templates/header.xhtml"/>
             </ui:insert>
         </div>
 
-        <div id="content">
+        <div id="content" class="p-grid content">
             <ui:insert name="content">
-                <ui:include src="/components/content.xhtml"/>
+                <ui:include src="/templates/content.xhtml"/>
             </ui:insert>
         </div>
-
-        <div id="footer">
-            <ui:insert name="footer">
-                <ui:include src="/components/footer.xhtml"/>
-            </ui:insert>
-        </div>
-
     </div>
 
 </h:body>

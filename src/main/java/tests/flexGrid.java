@@ -1,14 +1,14 @@
 package tests;
 
 import javax.annotation.PostConstruct;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+@ViewScoped
+@ManagedBean(name = "flexGrid")
 public class flexGrid {
     private List<Integer> columns;
 

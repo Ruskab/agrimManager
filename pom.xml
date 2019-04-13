@@ -12,7 +12,6 @@
 
 	<name>${project.groupId}.${project.artifactId}</name>
 
-	<!-- <url>http://www.example.com</url> -->
 	<properties>
 		<encoding>UTF-8</encoding>
 		<project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
@@ -192,11 +191,18 @@
 			<artifactId>jquery</artifactId>
 			<version>3.3.1-2</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.webjars</groupId>-->
-			<!--<artifactId>swagger-ui</artifactId>-->
-			<!--<version>3.20.9</version>-->
-		<!--</dependency>-->
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>swagger-ui</artifactId>
+			<version>3.20.9</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -250,6 +256,10 @@
 				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					<argLine>-Duser.timezone=UTC</argLine>
+					<excludes>
+						<exclude>**/ClientApiControllerTest.java</exclude>
+						<exclude>**/VehicleApiControllerTest.java</exclude>
+					</excludes>
 				</configuration>
 				<dependencies>
 					<dependency>
