@@ -3,7 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <title>vehicles full detail dialog</title>
 
 
@@ -13,25 +14,90 @@
 </composite:interface>
 
 <composite:implementation>
-    <p:dialog header="Vehicles Full Info" widgetVar="vehicleDialog" modal="true" showEffect="fade"
-              hideEffect="fade" resizable="false">
-        <p:outputPanel id="vehicleDetail" style="text-align:center;">
-            <p:panelGrid columns="2" rendered="#{not empty cc.attrs.selectedVehicle}"
-                         columnClasses="label,value">
-                <f:facet name="header">
+    <c:set value="#{cc.attrs.selectedVehicle}" target="#{editBean}" property="selectedVehicleDto"></c:set>
+
+    <p:dialog id="vehicleDetail" widgetVar="vehicleEditDialog" header="Vehicles Full Info" modal="true" showEffect="fade"
+              hideEffect="fade" resizable="false" styleClass="vehicle-edit-dialog">
+
+        <p:tabView>
+            <p:tab id="basicInfoTab" title="Basic">
+                <f:facet name="actions">
+                    <h:commandButton value="Save" action="#{editBean.save}" />
                 </f:facet>
+                <p:panel header="#{msg['web.vehicles.edit.basicinfo.header']}">
+                    <p:messages/>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.registrationPlate}" required="true"
+                                     label="registrationplate"/>
 
-                <h:outputText value="Registration plate:"/>
-                <h:outputText value="#{cc.attrs.selectedVehicle.registrationPlate}"/>
 
-                <h:outputText value="Brand:"/>
-                <h:outputText value="#{cc.attrs.selectedVehicle.brand}"/>
+                        <h:outputText value="#{msg['web.vehicles.edit.basicinfo.brand']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.brand}" required="true" label="brand"/>
 
-                <h:outputText value="Client:"/>
-                <h:outputText value="#{cc.attrs.clientName}"/>
+                        <h:outputText value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.clientId}" readonly="true"/>
 
-            </p:panelGrid>
-        </p:outputPanel>
+                        <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.basicinfo.KMS']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.kms}" label="kms"/>
+
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+            <p:tab id="ITV" title="ITV">
+                <f:facet name="actions">
+                    <h:commandButton value="Save" action="#{editBean.save}" />
+                </f:facet>
+                <p:panel header="#{msg['web.vehicles.edit.itv.header']}">
+                    <p:messages/>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+
+                        <p:outputLabel for="lastItvDateBtn" value="#{msg['web.vehicles.edit.itv.last']}"/>
+                        <p:calendar id="lastItvDateBtn" value="#{editBean.selectedVehicleDto.itvDate}" showOn="button" pattern="dd/MM/yyyy">
+                            <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
+                        </p:calendar>
+
+                        <p:outputLabel for="nextItvDateBtn" value="#{msg['web.vehicles.edit.itv.next']}"/>
+                        <p:calendar id="nextItvDateBtn" value="#{editBean.selectedVehicleDto.nextItvDate}" showOn="button" pattern="dd/MM/yyyy">
+                            <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
+                        </p:calendar>
+
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+            <p:tab id="revision" title="Revision">
+                <f:facet name="actions">
+                    <h:commandButton value="Save" action="#{editBean.save}" />
+                </f:facet>
+                <p:panel header="#{msg['web.vehicles.edit.revision.header']}">
+                    <p:messages/>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+
+                        <p:outputLabel for="lastRevisionBtn" value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"/>
+                        <p:calendar id="lastRevisionBtn" value="#{editBean.selectedVehicleDto.lastRevisionDate}" showOn="button" pattern="dd/MM/yyyy">
+                            <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
+                        </p:calendar>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.airFilterReference']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.airFilterReference}"/>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.oilFilterReference']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.oilFilterReference}"/>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.fuelFilter']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.fuelFilter}"/>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}"/>
+                        <p:inputText value="#{editBean.selectedVehicleDto.motorOil}"/>
+
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+        </p:tabView>
+
     </p:dialog>
 </composite:implementation>
 
