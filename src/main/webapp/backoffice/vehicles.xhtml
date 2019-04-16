@@ -17,7 +17,6 @@
             <div class="p-col bordered">
                 <h:form id="data-view-vehicles-form">
 
-                    <p:growl id="contentMessages" showDetail="true"><p:autoUpdate/></p:growl>
 
                     <p:dataTable var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -60,7 +59,6 @@
                 </h:form>
 
                 <h:form id="creteVehicleForm">
-                    <p:growl id="createVehicleMessages" showDetail="true"><p:autoUpdate/></p:growl>
 
                     <p:commandButton id="crateVehicleBtn" icon="fa fa-plus" value="create"
                                      oncomplete="PF('vehicleCreateDialog').show()"/>
