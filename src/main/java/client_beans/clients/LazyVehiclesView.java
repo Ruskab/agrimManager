@@ -4,6 +4,7 @@ import api.api_controllers.ClientApiController;
 import api.api_controllers.VehicleApiController;
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
+import client_beans.vehicles.VehicleGateway;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -25,8 +26,9 @@ public class LazyVehiclesView implements Serializable {
     private LazyDataModel<VehicleDto> lazyModel;
 
     private VehicleDto selectedVehicleDto;
+    private String clientName;
 
-    private VehicleApiController vehicleApiController = new VehicleApiController();
+    private VehicleGateway vehicleGateway = new VehicleGateway();
 
     private ClientApiController clientApiController = new ClientApiController();
 
@@ -34,11 +36,11 @@ public class LazyVehiclesView implements Serializable {
 
     @PostConstruct
     public void init() {
-        vehicleDtos = vehicleApiController.readAll();
+        vehicleDtos = vehicleGateway.readAll();
         lazyModel = new LazyDataModel<VehicleDto>() {
             @Override
             public int getRowCount() {
-                return vehicleApiController.readAll().size();
+                return vehicleGateway.readAll().size();
             }
 
             @Override
@@ -56,7 +58,7 @@ public class LazyVehiclesView implements Serializable {
 
             @Override
             public VehicleDto getRowData(String rowKey) {
-                return vehicleApiController.read(rowKey);
+                return vehicleGateway.read(rowKey);
             }
         };
 
@@ -78,12 +80,17 @@ public class LazyVehiclesView implements Serializable {
         return clientApiController.read(clientId).getFullName();
     }
 
-    public void setService(VehicleApiController vehicleApiController) {
-        this.vehicleApiController = vehicleApiController;
-    }
 
     public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Vehicle Selected", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        String clientId = ((VehicleDto) event.getObject()).getClientId();
+        clientName = clientApiController.read(clientId).getFullName();
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }

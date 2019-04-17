@@ -36,7 +36,7 @@
                         <p:inputText value="#{editBean.selectedVehicleDto.brand}" required="true" label="brand"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
-                        <p:inputText value="#{editBean.selectedVehicleDto.clientId}" readonly="true"/>
+                        <p:inputText value="#{cc.attrs.clientName}" readonly="true"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
                         <p:inputText value="#{editBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>

@@ -17,7 +17,6 @@
             <div class="p-col bordered">
                 <h:form id="data-view-vehicles-form">
 
-                    <p:growl id="contentMessages" showDetail="true"><p:autoUpdate/></p:growl>
 
                     <p:dataTable var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -34,7 +33,7 @@
                             <h:outputText value="#{vehicle.brand}"/>
                         </p:column>
                         <p:column headerText="Client">
-                            <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}"/>
+                            <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}" />
                         </p:column>
                         <p:column headerText="body On Frame" sortBy="#{vehicle.bodyOnFrame}"
                                   filterBy="#{vehicle.bodyOnFrame}">
@@ -54,13 +53,11 @@
                     </p:dataTable>
 
 
-                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent"
-                                                    selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
-                                                    clientName="#{lazyVehiclesView.getClientDto(lazyVehiclesView.selectedVehicleDto.clientId)}"/>
+                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent" selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
+                    clientName="#{lazyVehiclesView.clientName}"/>
                 </h:form>
 
                 <h:form id="creteVehicleForm">
-                    <p:growl id="createVehicleMessages" showDetail="true"><p:autoUpdate/></p:growl>
 
                     <p:commandButton id="crateVehicleBtn" icon="fa fa-plus" value="create"
                                      oncomplete="PF('vehicleCreateDialog').show()"/>
