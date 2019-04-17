@@ -1,6 +1,7 @@
 package client_beans.vehicles;
 
 import api.dtos.VehicleDto;
+import client_beans.clients.ClientGateway;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -14,6 +15,7 @@ public class EditBean {
 
     private VehicleDto selectedVehicleDto;
     private VehicleGateway vehicleGateway;
+    private String clientName;
 
     @PostConstruct
     public void init() {
@@ -26,6 +28,14 @@ public class EditBean {
 
     public void setSelectedVehicleDto(VehicleDto selectedVehicleDto) {
         this.selectedVehicleDto = selectedVehicleDto;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     public void save() {

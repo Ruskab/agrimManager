@@ -33,7 +33,7 @@
                             <h:outputText value="#{vehicle.brand}"/>
                         </p:column>
                         <p:column headerText="Client">
-                            <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}"/>
+                            <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}" />
                         </p:column>
                         <p:column headerText="body On Frame" sortBy="#{vehicle.bodyOnFrame}"
                                   filterBy="#{vehicle.bodyOnFrame}">
@@ -53,9 +53,8 @@
                     </p:dataTable>
 
 
-                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent"
-                                                    selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
-                                                    clientName="#{lazyVehiclesView.getClientDto(lazyVehiclesView.selectedVehicleDto.clientId)}"/>
+                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent" selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
+                    clientName="#{lazyVehiclesView.clientName}"/>
                 </h:form>
 
                 <h:form id="creteVehicleForm">

@@ -1,8 +1,8 @@
-package client_beans.vehicles;
+package client_beans.clients;
 
 import api.api_controllers.VehicleApiController;
+import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
-import api.entity.Vehicle;
 import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -18,23 +18,22 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.util.List;
 import java.util.Properties;
 
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
-public class VehicleGateway {
+public class ClientGateway {
 
     Client client;
     Properties properties;
     private static final String API_PATH = "/api/v0";
     public static final String APP_BASE_URL = "app.url";
-    public static final String VEHICLES = "/vehicles";
+    public static final String CLIENTS = "/clients";
 
-    private static final Logger LOGGER = LogManager.getLogger(VehicleGateway.class);
+    private static final Logger LOGGER = LogManager.getLogger(ClientGateway.class);
 
-    public VehicleGateway() {
+    public ClientGateway() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -43,32 +42,29 @@ public class VehicleGateway {
         properties = new PropertyLoader().loadPropertiesFile("config.properties");
     }
 
-    public String create(VehicleDto vehicleDto){
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+    public String create(ClientDto clientDto) {
+        Response response = client.target(properties.getProperty("app.url") + API_PATH + CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(String.class);
     }
 
-    public Integer update(VehicleDto vehicleDto){
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VEHICLES + "/" + vehicleDto.getId())
+    public Integer update(ClientDto clientDto) {
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + CLIENTS + "/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON)
-                .put(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
+                .put(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.getStatus();
-
     }
 
-
-    public List<VehicleDto> readAll() {
-        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VEHICLES)
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
+    public List<ClientDto> readAll() {
+        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + CLIENTS)
+                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {
                 });
     }
 
-    public VehicleDto read(String vehicleId) {
-        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VEHICLES + "/" + vehicleId)
+    public ClientDto read(String clientId) {
+        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + CLIENTS + "/" + clientId)
                 .request(MediaType.APPLICATION_JSON)
-                .get(VehicleDto.class);
-
+                .get(ClientDto.class);
     }
 }

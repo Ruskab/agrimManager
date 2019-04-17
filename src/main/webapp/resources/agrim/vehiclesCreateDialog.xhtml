@@ -28,9 +28,10 @@
                         <p:inputText id="brand" value="#{createBean.selectedVehicleDto.brand}" required="true" label="brand"/>
                         <p:message for="brand" />
 
-                        <h:outputLabel for="client" value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
-                        <p:inputText id="client" value="#{createBean.selectedVehicleDto.clientId}" readonly="true"/>
-                        <p:message for="client" />
+                        <h:outputLabel for="autoCompleteClientName" value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
+                        <p:autoComplete id="autoCompleteClientName" value="#{createBean.selectedClient}" completeMethod="#{createBean.completeClient}"
+                                        var="client" itemLabel="#{client.fullName}" itemValue="#{client}" converter="client_beans.util.converters.ClientConverter" forceSelection="true" minQueryLength="3" effect="fade" />
+                        <p:message for="autoCompleteClientName" />
 
                         <h:outputLabel for="bodyOnFrame" value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
                         <p:inputText id="bodyOnFrame" value="#{createBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
@@ -103,7 +104,7 @@
                             <h:outputText value="#{createBean.selectedVehicleDto.brand}" required="true" label="brand"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.client']}" styleClass="outputLabel"/>
-                            <h:outputText value="#{empty createBean.selectedVehicleDto.clientId ? '-' : createBean.selectedVehicleDto.clientId}" readonly="true"/>
+                            <h:outputText value="#{empty createBean.selectedClient.fullName ? '-' : createBean.selectedClient.fullName}" readonly="true"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}" styleClass="outputLabel"/>
                             <h:outputText value="#{empty createBean.selectedVehicleDto.bodyOnFrame ? '-' : createBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
