@@ -3,6 +3,7 @@ package client_beans.vehicles;
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import client_beans.clients.ClientGateway;
+import com.mysql.cj.util.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.primefaces.PrimeFaces;
@@ -54,19 +55,28 @@ public class CreateBean {
     }
 
     public void create() {
-        //todo añadir mensaje vehiculo guardado
-        if (selectedClient != null){
-            selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
+        if (selectedClient == null) {
+            LOGGER.error("Cliente vacio");
+            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
         }
-        String vehicleId = vehicleGateway.create(selectedVehicleDto);
-        String message = vehicleId != "0" ? "Successful" : "Error";
-        FacesMessage msg = new FacesMessage(message, "Vehicle created" + vehicleId);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        if("".equals(vehicleId))
-            PrimeFaces.current().ajax().update("createDialogMsgs");
-        else
-            PrimeFaces.current().ajax().update("createDialogMsgs");
+        selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
 
+        String vehicleId = vehicleGateway.create(selectedVehicleDto);
+        String message = StringUtils.isStrictlyNumeric(vehicleId) ? "Successful" : "Error";
+
+        if ("Error".equals(message)) {
+            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "create vehicle"));
+            return;
+        }
+        FacesContext.getCurrentInstance().addMessage("globalMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "create vehicle"));
+        PrimeFaces.current().executeScript("PF('vehicleCreateDialog').hide();");
+        resertWizard();
+    }
+
+    private void resertWizard() {
+        PrimeFaces.current().executeScript("PF('createVehicleWizzard').loadStep('basicInfoTab', false)");
+        selectedVehicleDto = new VehicleDto();
+        selectedClient = null;
     }
 
     public List<ClientDto> completeClient(String query) {
@@ -84,14 +94,11 @@ public class CreateBean {
     }
 
     public String onFlowProcess(FlowEvent event) {
-        if(skip) {
+        if (skip) {
             skip = false;   //reset in case user goes back
             return "confirm";
-        }
-        else {
+        } else {
             return event.getNewStep();
         }
     }
-
-
 }
