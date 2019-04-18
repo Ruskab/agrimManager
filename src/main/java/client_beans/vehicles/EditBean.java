@@ -15,7 +15,6 @@ public class EditBean {
 
     private VehicleDto selectedVehicleDto;
     private VehicleGateway vehicleGateway;
-    private String clientName;
 
     @PostConstruct
     public void init() {
@@ -30,18 +29,14 @@ public class EditBean {
         this.selectedVehicleDto = selectedVehicleDto;
     }
 
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
     public void save() {
         Integer responseStatus = vehicleGateway.update(selectedVehicleDto);
         String message = responseStatus == 200 ? "Successful" : "Error";
-        FacesMessage msg = new FacesMessage(message, "Al guardar el vehiculo");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        if ("Error".equals(message)) {
+            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "update vehicle"));
+            return;
+        }
+        FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "update vehicle"));
+
     }
 }
