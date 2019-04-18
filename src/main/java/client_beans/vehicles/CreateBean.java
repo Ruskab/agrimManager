@@ -3,8 +3,10 @@ package client_beans.vehicles;
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import client_beans.clients.ClientGateway;
+import com.mysql.cj.util.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 
 import javax.annotation.PostConstruct;
@@ -12,7 +14,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +29,6 @@ public class CreateBean {
 
     private List<ClientDto> clientDtos;
     private ClientDto selectedClient;
-
-
-
-    private String selectedClientName;
-
 
     @PostConstruct
     public void init() {
@@ -50,22 +46,6 @@ public class CreateBean {
         this.selectedVehicleDto = selectedVehicleDto;
     }
 
-    public List<ClientDto> getClientDtos() {
-        return clientDtos;
-    }
-
-    public void setClientDtos(List<ClientDto> clientDtos) {
-        this.clientDtos = clientDtos;
-    }
-
-    public String getSelectedClientName() {
-        return selectedClientName;
-    }
-
-    public void setSelectedClientName(String selectedClientName) {
-        this.selectedClientName = selectedClientName;
-    }
-
     public ClientDto getSelectedClient() {
         return selectedClient;
     }
@@ -75,14 +55,28 @@ public class CreateBean {
     }
 
     public void create() {
-        if (selectedClient != null){
-            selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
+        if (selectedClient == null) {
+            LOGGER.error("Cliente vacio");
+            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
         }
+        selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
 
         String vehicleId = vehicleGateway.create(selectedVehicleDto);
-        String message = vehicleId != "0" ? "Successful" : "Error";
-        FacesMessage msg = new FacesMessage(message, "Vehicle created" + vehicleId);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        String message = StringUtils.isStrictlyNumeric(vehicleId) ? "Successful" : "Error";
+
+        if ("Error".equals(message)) {
+            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "create vehicle"));
+            return;
+        }
+        FacesContext.getCurrentInstance().addMessage("globalMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "create vehicle"));
+        PrimeFaces.current().executeScript("PF('vehicleCreateDialog').hide();");
+        resertWizard();
+    }
+
+    private void resertWizard() {
+        PrimeFaces.current().executeScript("PF('createVehicleWizzard').loadStep('basicInfoTab', false)");
+        selectedVehicleDto = new VehicleDto();
+        selectedClient = null;
     }
 
     public List<ClientDto> completeClient(String query) {
@@ -100,14 +94,11 @@ public class CreateBean {
     }
 
     public String onFlowProcess(FlowEvent event) {
-        if(skip) {
+        if (skip) {
             skip = false;   //reset in case user goes back
             return "confirm";
-        }
-        else {
+        } else {
             return event.getNewStep();
         }
     }
-
-
 }
