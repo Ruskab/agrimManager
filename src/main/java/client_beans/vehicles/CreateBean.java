@@ -5,6 +5,7 @@ import api.dtos.VehicleDto;
 import client_beans.clients.ClientGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 
 import javax.annotation.PostConstruct;
@@ -12,7 +13,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +28,6 @@ public class CreateBean {
 
     private List<ClientDto> clientDtos;
     private ClientDto selectedClient;
-
-
-
-    private String selectedClientName;
-
 
     @PostConstruct
     public void init() {
@@ -50,22 +45,6 @@ public class CreateBean {
         this.selectedVehicleDto = selectedVehicleDto;
     }
 
-    public List<ClientDto> getClientDtos() {
-        return clientDtos;
-    }
-
-    public void setClientDtos(List<ClientDto> clientDtos) {
-        this.clientDtos = clientDtos;
-    }
-
-    public String getSelectedClientName() {
-        return selectedClientName;
-    }
-
-    public void setSelectedClientName(String selectedClientName) {
-        this.selectedClientName = selectedClientName;
-    }
-
     public ClientDto getSelectedClient() {
         return selectedClient;
     }
@@ -75,14 +54,19 @@ public class CreateBean {
     }
 
     public void create() {
+        //todo añadir mensaje vehiculo guardado
         if (selectedClient != null){
             selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
         }
-
         String vehicleId = vehicleGateway.create(selectedVehicleDto);
         String message = vehicleId != "0" ? "Successful" : "Error";
         FacesMessage msg = new FacesMessage(message, "Vehicle created" + vehicleId);
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        if("".equals(vehicleId))
+            PrimeFaces.current().ajax().update("createDialogMsgs");
+        else
+            PrimeFaces.current().ajax().update("createDialogMsgs");
+
     }
 
     public List<ClientDto> completeClient(String query) {

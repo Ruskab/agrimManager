@@ -22,7 +22,10 @@
         <p:tabView>
             <p:tab id="basicInfoTab" title="Basic">
                 <f:facet name="actions">
-                    <h:commandButton value="Save" action="#{editBean.save}" />
+                    <p:commandButton id="saveButton" value="Save"
+                                     action="#{editBean.save}"
+                                     update="@(.vehicles-datatable)"
+                                     oncomplete="PF('vehicleEditDialog').hide()"/>
                 </f:facet>
                 <p:panel header="#{msg['web.vehicles.edit.basicinfo.header']}">
                     <p:messages/>
@@ -49,7 +52,7 @@
             </p:tab>
             <p:tab id="ITV" title="ITV">
                 <f:facet name="actions">
-                    <h:commandButton value="Save" action="#{editBean.save}" />
+                    <p:commandButton value="Save" action="#{editBean.save}" />
                 </f:facet>
                 <p:panel header="#{msg['web.vehicles.edit.itv.header']}">
                     <p:messages/>
@@ -70,7 +73,7 @@
             </p:tab>
             <p:tab id="revision" title="Revision">
                 <f:facet name="actions">
-                    <h:commandButton value="Save" action="#{editBean.save}" />
+                    <p:commandButton  value="Save" action="#{editBean.save}"/>
                 </f:facet>
                 <p:panel header="#{msg['web.vehicles.edit.revision.header']}">
                     <p:messages/>
