@@ -2,7 +2,6 @@ package client_beans.util.converters;
 
 import api.dtos.ClientDto;
 import client_beans.clients.ClientGateway;
-import org.junit.platform.commons.util.StringUtils;
 import org.primefaces.component.calendar.Calendar;
 
 import javax.faces.application.FacesMessage;
@@ -11,8 +10,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @FacesConverter("client_beans.util.converters.ClientConverter")
 public class ClientConverter implements Converter {

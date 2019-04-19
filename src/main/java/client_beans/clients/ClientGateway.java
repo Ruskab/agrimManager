@@ -1,8 +1,6 @@
 package client_beans.clients;
 
-import api.api_controllers.VehicleApiController;
 import api.dtos.ClientDto;
-import api.dtos.VehicleDto;
 import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -27,9 +25,9 @@ public class ClientGateway {
 
     Client client;
     Properties properties;
-    private static final String API_PATH = "/api/v0";
+    private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
-    public static final String CLIENTS = "/clients";
+    public static final String CLIENTS = "api.clients.path";
 
     private static final Logger LOGGER = LogManager.getLogger(ClientGateway.class);
 
@@ -43,27 +41,29 @@ public class ClientGateway {
     }
 
     public String create(ClientDto clientDto) {
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + CLIENTS)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS))
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
+        LOGGER.info("API Crear cliente {} : Status: {}", clientDto.getFullName(), response.getStatus());
         return response.readEntity(String.class);
     }
 
     public Integer update(ClientDto clientDto) {
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + CLIENTS + "/" + clientDto.getId())
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
+        LOGGER.info("API Actualizar cliente {} : Status: {}", clientDto.getId(), response.getStatus());
         return response.getStatus();
     }
 
     public List<ClientDto> readAll() {
-        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + CLIENTS)
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS))
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {
                 });
     }
 
     public ClientDto read(String clientId) {
-        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + CLIENTS + "/" + clientId)
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + clientId)
                 .request(MediaType.APPLICATION_JSON)
                 .get(ClientDto.class);
     }

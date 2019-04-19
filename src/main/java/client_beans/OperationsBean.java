@@ -45,12 +45,11 @@ public class OperationsBean {
 
     public static final String SUCCESS = "Success";
     public static final String APP_BASE_URL = "app.url";
-    private DashboardModel model;
-
-    Client client;
-    Properties properties;
-    private static final String API_PATH = "/api/v0";
+    private static final String API_PATH = "app.api.base.path";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
+    Properties properties;
+    Client client;
+    private DashboardModel model;
     Random rnd = new Random();
 
     @PostConstruct
@@ -137,7 +136,7 @@ public class OperationsBean {
 
     private Integer addFakeVehicle(VehicleDto vehicleDto) {
 
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VehicleApiController.VEHICLES)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -181,7 +180,7 @@ public class OperationsBean {
 
     private Integer addFakeClient(ClientDto clientDto) {
 
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(Integer.class);
@@ -197,7 +196,7 @@ public class OperationsBean {
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VehicleApiController.VEHICLES)
+        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
                 });
         vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VehicleApiController.VEHICLES + "/" + vehicleDto.getId())
@@ -205,10 +204,10 @@ public class OperationsBean {
     }
 
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
+        List<ClientDto> clientDtoLIst = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {
                 });
-        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty(APP_BASE_URL) +  API_PATH + ClientApiController.CLIENTS + "/" + clientDto.getId())
+        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty(APP_BASE_URL) +  properties.getProperty(API_PATH) + ClientApiController.CLIENTS + "/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON).delete());
     }
 

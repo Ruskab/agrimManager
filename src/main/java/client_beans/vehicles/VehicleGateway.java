@@ -28,10 +28,9 @@ public class VehicleGateway {
 
     Client client;
     Properties properties;
-    private static final String API_PATH = "/api/v0";
+    private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
-    public static final String VEHICLES = "/vehicles";
-
+    public static final String VEHICLES = "api.vehicles.path";
     private static final Logger LOGGER = LogManager.getLogger(VehicleGateway.class);
 
     public VehicleGateway() {
@@ -43,30 +42,29 @@ public class VehicleGateway {
         properties = new PropertyLoader().loadPropertiesFile("config.properties");
     }
 
-    public String create(VehicleDto vehicleDto){
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+    public String create(VehicleDto vehicleDto) {
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(String.class);
     }
 
-    public Integer update(VehicleDto vehicleDto){
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VEHICLES + "/" + vehicleDto.getId())
+    public Integer update(VehicleDto vehicleDto) {
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.getStatus();
 
     }
 
-
     public List<VehicleDto> readAll() {
-        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VEHICLES)
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES))
                 .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
                 });
     }
 
     public VehicleDto read(String vehicleId) {
-        return client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VEHICLES + "/" + vehicleId)
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + vehicleId)
                 .request(MediaType.APPLICATION_JSON)
                 .get(VehicleDto.class);
 
