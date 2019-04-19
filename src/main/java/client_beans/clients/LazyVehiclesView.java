@@ -45,7 +45,7 @@ public class LazyVehiclesView implements Serializable {
 
             @Override
             public List<VehicleDto> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-                return vehicleDtos.stream()
+                return vehicleGateway.readAll().stream()
                         .skip(first)
                         .filter(client -> client.getBrand().contains((String) filters.getOrDefault("brand", "")))
                         .collect(Collectors.toList());

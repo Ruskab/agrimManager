@@ -17,10 +17,11 @@
             <div class="p-col bordered">
                 <h:form id="data-view-vehicles-form">
 
-                    <p:dataTable var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
+                    <p:dataTable id="vehicleTable" styleClass="vehicles-datatable"
+                                 var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
-                                 selection="#{lazyVehiclesView.selectedVehicleDto}" id="vehicleTable" styleClass="vehicles-datatable" lazy="true">
+                                 selection="#{lazyVehiclesView.selectedVehicleDto}" lazy="true">
                         <p:ajax event="rowSelect" listener="#{lazyVehiclesView.onRowSelect}"
                                 update="@(.vehicle-edit-dialog)"
                                 oncomplete="PF('vehicleEditDialog').show()"/>
