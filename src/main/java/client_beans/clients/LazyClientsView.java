@@ -24,17 +24,17 @@ public class LazyClientsView implements Serializable {
 
     private ClientDto selectedClientDto;
 
-    private ClientApiController clientApiController = new ClientApiController();
+    private ClientGateway clientGateway = new ClientGateway();
 
     private List<ClientDto> clientDtos;
 
     @PostConstruct
     public void init() {
-        clientDtos = clientApiController.readAll();
+        clientDtos = clientGateway.readAll();
         lazyModel = new LazyDataModel<ClientDto>() {
             @Override
             public int getRowCount() {
-                return clientApiController.readAll().size();
+                return clientGateway.readAll().size();
             }
 
             @Override
@@ -52,7 +52,7 @@ public class LazyClientsView implements Serializable {
 
             @Override
             public ClientDto getRowData(String rowKey) {
-                return clientApiController.read(rowKey);
+                return clientGateway.read(rowKey);
             }
         };
 
@@ -68,10 +68,6 @@ public class LazyClientsView implements Serializable {
 
     public void setSelectedClientDto(ClientDto selectedClientDto) {
         this.selectedClientDto = selectedClientDto;
-    }
-
-    public void setService(ClientApiController clientApiController) {
-        this.clientApiController = clientApiController;
     }
 
     public void onRowSelect(SelectEvent event) {
