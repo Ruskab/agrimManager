@@ -27,16 +27,11 @@ public class LazyVehiclesView implements Serializable {
 
     private VehicleDto selectedVehicleDto;
     private String clientName;
-
     private VehicleGateway vehicleGateway = new VehicleGateway();
-
-    private ClientApiController clientApiController = new ClientApiController();
-
-    private List<VehicleDto> vehicleDtos;
+    private ClientGateway clientGateway = new ClientGateway();
 
     @PostConstruct
     public void init() {
-        vehicleDtos = vehicleGateway.readAll();
         lazyModel = new LazyDataModel<VehicleDto>() {
             @Override
             public int getRowCount() {
@@ -77,13 +72,13 @@ public class LazyVehiclesView implements Serializable {
     }
 
     public String getClientDto(String clientId){
-        return clientApiController.read(clientId).getFullName();
+        return clientGateway.read(clientId).getFullName();
     }
 
 
     public void onRowSelect(SelectEvent event) {
         String clientId = ((VehicleDto) event.getObject()).getClientId();
-        clientName = clientApiController.read(clientId).getFullName();
+        clientName = clientGateway.read(clientId).getFullName();
     }
 
     public String getClientName() {
