@@ -19,33 +19,47 @@
     <p:dialog id="vehicleDetail" widgetVar="vehicleEditDialog" header="Vehicles Full Info" modal="true" showEffect="fade"
               hideEffect="fade" resizable="false" styleClass="vehicle-edit-dialog">
 
+        <p:messages id="editVehicleMessages" for="editMessages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+
+
+
         <p:tabView>
             <p:tab id="basicInfoTab" title="Basic">
+
                 <f:facet name="actions">
                     <p:commandButton id="saveButton" value="Save"
+                                     process="@(.vehicle-edit-dialog)"
                                      action="#{editBean.save}"
-                                     update="@(.vehicles-datatable)"
-                                     oncomplete="PF('vehicleEditDialog').hide()"/>
+                                     update="@(.vehicles-datatable), @(.edit-vehicle-panel)"/>
                 </f:facet>
-                <p:panel header="#{msg['web.vehicles.edit.basicinfo.header']}">
-                    <p:messages/>
-                    <h:panelGrid columns="2" columnClasses="label, value">
-                        <h:outputText value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
-                        <p:inputText value="#{editBean.selectedVehicleDto.registrationPlate}" required="true"
-                                     label="registrationplate"/>
+
+                <p:panel id="editVehiclePanel" header="#{msg['web.vehicles.edit.basicinfo.header']}" styleClass="edit-vehicle-panel">
+
+                    <h:panelGrid columns="3" cellpadding="5">
+
+                        <h:outputLabel for="registationplate" value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
+                        <p:inputText id="registationplate" value="#{editBean.selectedVehicleDto.registrationPlate}" required="true"/>
+                        <p:message for="registationplate" />
 
 
-                        <h:outputText value="#{msg['web.vehicles.edit.basicinfo.brand']}"/>
-                        <p:inputText value="#{editBean.selectedVehicleDto.brand}" required="true" label="brand"/>
+                        <h:outputText for="brand" value="#{msg['web.vehicles.edit.basicinfo.brand']}"/>
+                        <p:inputText id="brand" value="#{editBean.selectedVehicleDto.brand}" required="true" label="brand"/>
+                        <p:message for="brand" />
+
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
-                        <p:inputText value="#{cc.attrs.clientName}" readonly="true"/>
+                        <p:inputText id="client" value="#{cc.attrs.clientName}" readonly="true"/>
+                        <p:message for="client" />
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
-                        <p:inputText value="#{editBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
+                        <p:inputText id="bodyOnFrame" value="#{editBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
+                        <p:message for="bodyOnFrame" />
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.KMS']}"/>
-                        <p:inputText value="#{editBean.selectedVehicleDto.kms}" label="kms"/>
+                        <p:inputText id="KMS" value="#{editBean.selectedVehicleDto.kms}" label="kms"/>
+                        <p:message for="KMS" />
 
                     </h:panelGrid>
                 </p:panel>
