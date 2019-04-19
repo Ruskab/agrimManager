@@ -39,15 +39,13 @@
                                   filterBy="#{vehicle.bodyOnFrame}">
                             <h:outputText value="#{vehicle.bodyOnFrame}"/>
                         </p:column>
-                        <p:column headerText="Last Revision Date" sortBy="#{vehicle.lastRevisionDate}"
-                                  filterBy="#{vehicle.lastRevisionDate}">
+                        <p:column headerText="Last Revision Date" sortBy="#{vehicle.lastRevisionDate}">
                             <h:outputText value="#{vehicle.lastRevisionDate}"/>
                         </p:column>
-                        <p:column headerText="itv Date" sortBy="#{vehicle.itvDate}" filterBy="#{vehicle.itvDate}">
+                        <p:column headerText="itv Date" sortBy="#{vehicle.itvDate}" >
                             <h:outputText value="#{vehicle.itvDate}"/>
                         </p:column>
-                        <p:column headerText="Next ItvDate" sortBy="#{vehicle.nextItvDate}"
-                                  filterBy="#{vehicle.nextItvDate}">
+                        <p:column headerText="Next ItvDate" sortBy="#{vehicle.nextItvDate}">
                             <h:outputText value="#{vehicle.nextItvDate}"/>
                         </p:column>
                     </p:dataTable>

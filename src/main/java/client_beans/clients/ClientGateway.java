@@ -67,4 +67,10 @@ public class ClientGateway {
                 .request(MediaType.APPLICATION_JSON)
                 .get(ClientDto.class);
     }
+
+    public void delete(int id) {
+        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + id)
+                .request(MediaType.APPLICATION_JSON)
+                .delete();
+    }
 }

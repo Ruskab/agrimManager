@@ -69,4 +69,10 @@ public class VehicleGateway {
                 .get(VehicleDto.class);
 
     }
+
+    public void delete(int id) {
+        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + id)
+                .request(MediaType.APPLICATION_JSON)
+                .delete();
+    }
 }

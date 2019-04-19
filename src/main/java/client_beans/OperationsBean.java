@@ -1,10 +1,10 @@
 package client_beans;
 
-import api.api_controllers.ClientApiController;
-import api.api_controllers.VehicleApiController;
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
+import client_beans.clients.ClientGateway;
+import client_beans.vehicles.VehicleGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -25,14 +25,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -43,12 +35,10 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 @ViewScoped
 public class OperationsBean {
 
+    VehicleGateway vehicleGateway = new VehicleGateway();
+    ClientGateway clientGateway = new ClientGateway();
     public static final String SUCCESS = "Success";
-    public static final String APP_BASE_URL = "app.url";
-    private static final String API_PATH = "app.api.base.path";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
-    Properties properties;
-    Client client;
     private DashboardModel model;
     Random rnd = new Random();
 
@@ -58,9 +48,6 @@ public class OperationsBean {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
-        client = ClientBuilder.newClient().register(jsonProvider);
-        properties = this.loadPropertiesFile("config.properties");
-
         initDashboard();
 
     }
@@ -135,11 +122,7 @@ public class OperationsBean {
     }
 
     private Integer addFakeVehicle(VehicleDto vehicleDto) {
-
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
-        return response.readEntity(Integer.class);
+        return Integer.parseInt(vehicleGateway.create(vehicleDto));
     }
 
     private VehicleDto createFakeVehicleDto(String clientId) {
@@ -179,11 +162,7 @@ public class OperationsBean {
     }
 
     private Integer addFakeClient(ClientDto clientDto) {
-
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + ClientApiController.CLIENTS)
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
-        return response.readEntity(Integer.class);
+        return Integer.parseInt(clientGateway.create(clientDto));
     }
 
     public void destroyTheWorld() {
@@ -196,33 +175,13 @@ public class OperationsBean {
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
-                });
-        vehicleDtoList.forEach(vehicleDto -> client.target(properties.getProperty(APP_BASE_URL) + API_PATH + VehicleApiController.VEHICLES + "/" + vehicleDto.getId())
-                .request(MediaType.APPLICATION_JSON).delete());
+        List<VehicleDto> vehicleDtoList = vehicleGateway.readAll();
+        vehicleDtoList.forEach(vehicleDto -> vehicleGateway.delete(vehicleDto.getId()));
     }
 
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + ClientApiController.CLIENTS)
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<ClientDto>>() {
-                });
-        clientDtoLIst.forEach(clientDto -> client.target(properties.getProperty(APP_BASE_URL) +  properties.getProperty(API_PATH) + ClientApiController.CLIENTS + "/" + clientDto.getId())
-                .request(MediaType.APPLICATION_JSON).delete());
-    }
-
-
-
-    private Properties loadPropertiesFile(String filePath) {
-
-        Properties prop = new Properties();
-
-        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-            prop.load(resourceAsStream);
-        } catch (IOException e) {
-            System.err.println("Unable to load properties file : " + filePath);
-        }
-        return prop;
+        List<ClientDto> clientDtoLIst = clientGateway.readAll();
+        clientDtoLIst.forEach(clientDto -> clientGateway.delete(clientDto.getId()));
     }
 }
 
