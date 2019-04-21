@@ -4,7 +4,7 @@ import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
-import api.exceptions.ArgumentNotValidException;
+import api.exception.ArgumentNotValidException;
 import com.mysql.cj.util.StringUtils;
 
 import javax.ws.rs.*;

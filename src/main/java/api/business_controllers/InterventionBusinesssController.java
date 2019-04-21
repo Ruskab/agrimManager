@@ -5,8 +5,8 @@ import api.dtos.InterventionDto;
 import api.entity.Intervention;
 import api.entity.State;
 import api.entity.Vehicle;
-import api.exceptions.ArgumentNotValidException;
-import api.exceptions.NotFoundException;
+import api.exception.ArgumentNotValidException;
+import api.exception.NotFoundException;
 import com.mysql.cj.util.StringUtils;
 
 import java.util.List;

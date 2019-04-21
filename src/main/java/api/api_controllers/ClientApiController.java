@@ -5,9 +5,9 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
-import api.exceptions.ArgumentNotValidException;
-import api.exceptions.NotFoundException;
-import api.exceptions.RequestInvalidException;
+import api.exception.ArgumentNotValidException;
+import api.exception.NotFoundException;
+import api.exception.RequestInvalidException;
 import com.mysql.cj.util.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +55,7 @@ public class ClientApiController {
     public ClientDto read(@PathParam("id") String id) {
         this.validateId(id, "client id");
         return this.clientBusinessController.read(id);
-        //todo handle exceptions like not found
+        //todo handle exception like not found
     }
 
 

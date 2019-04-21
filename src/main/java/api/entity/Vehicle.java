@@ -15,7 +15,6 @@ public class Vehicle {
 
     private String brand;
 
-    @JoinColumn
     @ManyToOne
     private Client client;
 
