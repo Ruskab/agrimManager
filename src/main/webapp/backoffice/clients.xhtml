@@ -14,70 +14,54 @@
     <ui:composition template="/templates/master_layout.xhtml">
 
         <ui:define name="content">
-            <div class="p-col bordered">
-                <h:form id="data-view-clients-form">
+            <div class="p-grid">
+                <div class="p-col-12">
+                    <h:form id="data-view-clients-form">
 
-                    <p:growl id="contentMessages" showDetail="true"><p:autoUpdate/></p:growl>
+                        <p:growl id="contentMessages" showDetail="true"><p:autoUpdate/></p:growl>
 
-                    <p:dataView styleClass="clients-data-view" var="client" value="#{clientsBean.clients}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
-                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+                        <p:dataView styleClass="clients-data-view" var="client" value="#{clientsBean.clients}" rows="12"
+                                    paginator="true" rowsPerPageTemplate="6,12,16"
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
-                        <p:dataViewGridItem>
-                            <p:panel header="#{client.fullName}" style="text-align:center">
-                                <h:panelGrid columns="1" style="width:100%">
-                                    <h:outputText value="To facture: #{client.hours} hours" />
-                                    <p:commandLink update="@(.client-detail)" oncomplete="PF('clientDialog').show()" title="View Detail">
-                                        <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;" />
-                                        <f:setPropertyActionListener value="#{client}" target="#{clientsBean.selectedClient}" />
+                            <p:dataViewGridItem>
+                                <p:panel header="#{client.fullName}" style="text-align:center">
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <h:outputText value="To facture: #{client.hours} hours"/>
+
+                                        <p:commandLink action="#{clientsBean.openClientDialog}" update="@(.client-detail)" title="View Detail">
+                                            <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                            <f:setPropertyActionListener value="#{client}"
+                                                                         target="#{clientsBean.selectedClient}"/>
+                                        </p:commandLink>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:dataViewGridItem>
+
+                            <p:dataViewListItem  >
+                                <h:panelGrid columns="2" columnClasses="logo,detail">
+
+                                    <p:outputPanel>
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:outputText value="Client:"/>
+                                            <h:outputText value="#{client.fullName}" style="font-weight: bold"/>
+                                        </h:panelGrid>
+                                    </p:outputPanel>
+
+                                    <p:commandLink action="#{clientsBean.openClientDialog}" update="@(.client-detail)" title="View Detail">
+                                        <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                        <f:setPropertyActionListener value="#{client}"
+                                                                     target="#{clientsBean.selectedClient}"/>
                                     </p:commandLink>
                                 </h:panelGrid>
-                            </p:panel>
-                        </p:dataViewGridItem>
+                            </p:dataViewListItem>
+                        </p:dataView>
+                    </h:form>
+                </div>
 
-                        <p:dataViewListItem>
-                            <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-
-                                <p:outputPanel>
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <h:outputText value="Client:" />
-                                        <h:outputText value="#{client.fullName}" style="font-weight: bold"/>
-                                    </h:panelGrid>
-                                </p:outputPanel>
-
-                                <p:commandLink update="@(.client-detail)" oncomplete="PF('clientDialog').show()" title="View Detail">
-                                    <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;" />
-                                    <f:setPropertyActionListener value="#{client}" target="#{clientsBean.selectedClient}" />
-                                </p:commandLink>
-                            </h:panelGrid>
-                        </p:dataViewListItem>
-                    </p:dataView>
-
-                    <p:dialog header="Client Info" widgetVar="clientDialog" modal="true" showEffect="fade"
-                              hideEffect="fade"
-                              resizable="false">
-                        <p:outputPanel id="clientDetail" style="text-align:center;" styleClass="client-detail">
-                            <p:panelGrid columns="2" rendered="#{not empty clientsBean.selectedClient}"
-                                         columnClasses="label,value">
-                                <f:facet name="header">
-                                </f:facet>
-
-                                <h:outputText value="Id:"/>
-                                <h:outputText value="#{clientsBean.selectedClient.id}"/>
-
-                                <h:outputText value="Name:"/>
-                                <h:outputText value="#{clientsBean.selectedClient.fullName}"/>
-
-                                <h:outputText value="Hours:"/>
-                                <h:outputText value="#{clientsBean.selectedClient.hours}"/>
-
-                            </p:panelGrid>
-                        </p:outputPanel>
-                    </p:dialog>
-                </h:form>
             </div>
         </ui:define>
     </ui:composition>
 </h:body>
-<ui:debug></ui:debug>
 </html>
