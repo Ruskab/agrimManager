@@ -2,8 +2,8 @@ package api.api_controllers;
 
 import api.business_controllers.InterventionBusinesssController;
 import api.dtos.InterventionDto;
-import api.exceptions.ArgumentNotValidException;
-import api.exceptions.RequestInvalidException;
+import api.exception.ArgumentNotValidException;
+import api.exception.RequestInvalidException;
 import com.mysql.cj.util.StringUtils;
 
 import java.util.List;

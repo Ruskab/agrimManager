@@ -5,8 +5,8 @@ import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.entity.Intervention;
 import api.entity.Mechanic;
-import api.exceptions.ArgumentNotValidException;
-import api.exceptions.NotFoundException;
+import api.exception.ArgumentNotValidException;
+import api.exception.NotFoundException;
 
 public class MechanicBusinessController {
 
