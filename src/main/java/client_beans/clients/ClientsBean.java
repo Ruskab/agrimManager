@@ -30,8 +30,8 @@ public class ClientsBean implements Serializable {
         Map<String, List<String>> params = new HashMap<>();
         params.put("parameters", clientParams);
         Map<String,Object> options = new HashMap<>();
-        options.put("resizable", false);
-        options.put("contentHeight", 320);
+        options.put("responsive", true);
+
         PrimeFaces.current().dialog().openDynamic("clientsInfo", options, params);
     }
 
