@@ -17,7 +17,7 @@
         <p:wizard id="creteVehicleWizzard" widgetVar="createVehicleWizzard" flowListener="#{createBean.onFlowProcess}" styleClass="create-vehicle-wizzard">
             <p:tab id="basicInfoTab" title="Basic">
                 <p:panel header="#{msg['web.vehicles.edit.basicinfo.header']}">
-                    <h:panelGrid columns="3" >
+                    <p:panelGrid columns="3" layout="grid" >
                         <h:outputLabel for="registationplate" value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
                         <p:inputText id="registationplate" value="#{createBean.selectedVehicleDto.registrationPlate}" required="true"/>
                         <p:message for="registationplate" />
@@ -41,14 +41,14 @@
 
                         <h:outputLabel for="skipBtn" value="Skip to last: "/>
                         <h:selectBooleanCheckbox id="skipBtn" value="#{createBean.skip}"/>
-                    </h:panelGrid>
+                    </p:panelGrid>
                 </p:panel>
             </p:tab>
 
             <p:tab id="ITV" title="ITV">
                 <p:panel header="#{msg['web.vehicles.edit.itv.header']}">
                     <p:messages/>
-                    <h:panelGrid columns="2" columnClasses="label, value">
+                    <p:panelGrid columns="2" columnClasses="label, value" layout="grid">
                         <p:outputLabel for="lastItvDateBtn" value="#{msg['web.vehicles.edit.itv.last']}"/>
                         <p:calendar id="lastItvDateBtn" value="#{createBean.selectedVehicleDto.itvDate}" showOn="button"
                                     pattern="dd/MM/yyyy">
@@ -60,14 +60,14 @@
                                     showOn="button" pattern="dd/MM/yyyy">
                             <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
                         </p:calendar>
-                    </h:panelGrid>
+                    </p:panelGrid>
                 </p:panel>
             </p:tab>
 
             <p:tab id="revision" title="Revision">
                 <p:panel header="#{msg['web.vehicles.edit.itv.header']}">
                     <p:messages/>
-                    <h:panelGrid columns="2" columnClasses="label, value">
+                    <p:panelGrid columns="2" columnClasses="label, value" layout="grid">
                         <p:outputLabel for="lastRevisionBtn"
                                        value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"/>
                         <p:calendar id="lastRevisionBtn" value="#{createBean.selectedVehicleDto.lastRevisionDate}"
@@ -86,7 +86,7 @@
 
                         <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}"/>
                         <p:inputText value="#{createBean.selectedVehicleDto.motorOil}"/>
-                    </h:panelGrid>
+                    </p:panelGrid>
                 </p:panel>
             </p:tab>
 
@@ -94,7 +94,7 @@
                 <p:panel header="Confirmation">
                     <p:growl id="dialogGlobalMessages" for="globalMessages" ><p:autoUpdate></p:autoUpdate></p:growl>
                     <p:messages id="createDialogMessages" for="confirmMessages" showDetail="true" closable="true"></p:messages>
-                    <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                    <p:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid" layout="grid">
                         <h:panelGrid columns="2" columnClasses="label, value">
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.registationplate']}" style="font-weight: bold;"/>
                             <h:outputText value="#{createBean.selectedVehicleDto.registrationPlate}" required="true"
@@ -143,7 +143,7 @@
                             <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}" styleClass="outputLabel"/>
                             <h:outputText value="#{empty createBean.selectedVehicleDto.motorOil ? '-' : createBean.selectedVehicleDto.motorOil}"/>
                         </h:panelGrid>
-                    </h:panelGrid>
+                    </p:panelGrid>
                     <p:commandButton value="Create"
                                      process="@form"
                                      action="#{createBean.create}"

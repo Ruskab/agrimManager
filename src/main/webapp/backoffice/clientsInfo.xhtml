@@ -14,62 +14,76 @@
 
     <h:form id="editClientForm" styleClass="edit-client-form">
         <p:messages id="editClientMessages" for="editMessages" showDetail="true" closable="true">
-            <p:autoUpdate />
+            <p:autoUpdate/>
         </p:messages>
 
-        <p:tabView>
-            <p:tab id="basicInfoTab" title="Contact">
-                <p:panel id="editClientPanel" styleClass="edit-client-panel" header="#{msg['web.clients.clientInfo.basicinfo.header']}">
-                    <h:panelGrid columns="3" cellpadding="5">
-                        <h:outputLabel for="fullName" value="#{msg['web.clients.clientInfo.basicinfo.fullInfo']}"/>
-                        <p:inputText id="fullName" value="#{clientInfoBean.clientDto.fullName}" required="true"/>
-                        <p:message for="fullName" />
-                    </h:panelGrid>
-                </p:panel>
-                    <p:commandButton id="saveButton" value="Save" style="margin-top: 2%;"
-                                     process="@(.edit-client-form)"
-                                     action="#{clientInfoBean.save}"
-                                     update="@(.clients-data-view), @(.edit-client-panel)"/>
-            </p:tab>
+        <div class="p-grid">
+                <p:tabView>
+                    <p:tab id="basicInfoTab" title="Contact">
+                        <p:panel id="editClientPanel" styleClass="edit-client-panel"
+                                 header="#{msg['web.clients.clientInfo.basicinfo.header']}">
+                            <p:panelGrid layout="grid" columns="3" cellpadding="5">
+                                <h:outputLabel for="fullName"
+                                               value="#{msg['web.clients.clientInfo.basicinfo.fullInfo']}"/>
+                                <p:inputText id="fullName" value="#{clientInfoBean.clientDto.fullName}"
+                                             required="true"/>
+                                <p:message for="fullName"/>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:commandButton id="saveButton" value="Save" style="margin-top: 2%;"
+                                         process="@(.edit-client-form)"
+                                         action="#{clientInfoBean.save}"
+                                         update="@(.clients-data-view), @(.edit-client-panel)"/>
+                    </p:tab>
 
-            <p:tab id="vehicles" title="#{msg['web.clients.clientInfo.vehiclestab.header']}">
-                <p:dataScroller value="#{clientInfoBean.vehicles}" var="vehicle"  chunkSize="5"  mode="inline" scrollHeight="200" >
-                    <f:facet name="header">
-                        #{msg['web.clients.clientInfo.vehiclestab.datascroller.header']}
-                    </f:facet>
+                    <p:tab id="vehicles" title="#{msg['web.clients.clientInfo.vehiclestab.header']}">
+                        <p:dataScroller value="#{clientInfoBean.vehicles}" var="vehicle" chunkSize="5" mode="inline"
+                                        scrollHeight="200">
+                            <f:facet name="header">
+                                #{msg['web.clients.clientInfo.vehiclestab.datascroller.header']}
+                            </f:facet>
 
-                    <h:panelGrid columns="2" style="width:100%">
+                            <h:panelGrid columns="2" style="width:100%">
 
-                        <p:outputPanel>
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <h:outputText value="#{msg['web.clients.clientInfo.vehiclestab.datascroller.registrationplate']}" />
-                                <h:outputText value="#{vehicle.registrationPlate}" style="font-weight: bold"/>
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText
+                                                value="#{msg['web.clients.clientInfo.vehiclestab.datascroller.registrationplate']}"/>
+                                        <h:outputText value="#{vehicle.registrationPlate}" style="font-weight: bold"/>
 
-                                <h:outputText value="#{msg['web.clients.clientInfo.vehiclestab.datascroller.brand']}" />
-                                <h:outputText value="#{vehicle.brand}" style="font-weight: bold"/>
+                                        <h:outputText
+                                                value="#{msg['web.clients.clientInfo.vehiclestab.datascroller.brand']}"/>
+                                        <h:outputText value="#{vehicle.brand}" style="font-weight: bold"/>
 
-                                <h:outputText value="#{msg['web.clients.clientInfo.vehiclestab.datascroller.nextitv']}" />
-                                <h:outputText value="#{vehicle.nextItvDate}" style="font-weight: bold"/>
+                                        <h:outputText
+                                                value="#{msg['web.clients.clientInfo.vehiclestab.datascroller.nextitv']}"/>
+                                        <h:outputText value="#{vehicle.nextItvDate}" style="font-weight: bold"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
                             </h:panelGrid>
-                        </p:outputPanel>
-                    </h:panelGrid>
-                </p:dataScroller>
-            </p:tab>
-            <p:tab id="billable" title="#{msg['web.clients.clientInfo.billabletab.header']}">
+                        </p:dataScroller>
+                    </p:tab>
+                    <p:tab id="billable" title="#{msg['web.clients.clientInfo.billabletab.header']}">
 
-                <p:panel header="#{msg['web.clients.clientInfo.billabletab.header']}">
-                    <p:messages/>
-                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:panel header="#{msg['web.clients.clientInfo.billabletab.header']}">
+                            <p:messages/>
+                            <h:panelGrid columns="3" cellpadding="5">
 
-                        <p:outputLabel for="toInvoice" value="#{msg['web.clients.clientInfo.billabletab.toinvoice']}"/>
-                        <p:spinner id="toInvoice" value="#{clientInfoBean.clientDto.hours}" min="0" max="999" suffix="h"/>
-                        <p:message for="toInvoice" />
-                    </h:panelGrid>
-                </p:panel>
-                <p:commandButton  value="Save" action="#{clientInfoBean.save}" style="margin-top: 2%;"/>
-            </p:tab>
-        </p:tabView>
+                                <p:outputLabel for="toInvoice"
+                                               value="#{msg['web.clients.clientInfo.billabletab.toinvoice']}"/>
+                                <p:spinner id="toInvoice" value="#{clientInfoBean.clientDto.hours}" min="0" max="999"
+                                           suffix="h"/>
+                                <p:message for="toInvoice"/>
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:commandButton value="Save" action="#{clientInfoBean.save}" style="margin-top: 2%;"/>
+                    </p:tab>
+                </p:tabView>
+        </div>
+
+
     </h:form>
+
 
 </h:body>
 </html>
