@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+
+    <p:dialog id="vehicleCreateDialog" widgetVar="vehicleCreateDialog" styleClass="vehicle-create-dialog"
+              header="Vehicles Full Info" modal="true"
+              showEffect="fade" hideEffect="fade" resizable="false">
+
+        <p:wizard id="creteVehicleWizzard" widgetVar="createVehicleWizzard" flowListener="#{createBean.onFlowProcess}" styleClass="create-vehicle-wizzard">
+            <p:tab id="basicInfoTab" title="Basic">
+                <p:panel header="#{msg['web.vehicles.edit.basicinfo.header']}">
+                    <h:panelGrid columns="3" >
+                        <h:outputLabel for="registationplate" value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
+                        <p:inputText id="registationplate" value="#{createBean.selectedVehicleDto.registrationPlate}" required="true"/>
+                        <p:message for="registationplate" />
+
+                        <h:outputLabel for="brand" value="#{msg['web.vehicles.edit.basicinfo.brand']}"/>
+                        <p:inputText id="brand" value="#{createBean.selectedVehicleDto.brand}" required="true" label="brand"/>
+                        <p:message for="brand" />
+
+                        <h:outputLabel for="autoCompleteClientName" value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
+                        <p:autoComplete id="autoCompleteClientName" value="#{createBean.selectedClient}" completeMethod="#{createBean.completeClient}"
+                                        var="client" itemLabel="#{client.fullName}" itemValue="#{client}" required="true" converter="client_beans.util.converters.ClientConverter" forceSelection="true" minQueryLength="3" effect="fade" />
+                        <p:message for="autoCompleteClientName" />
+
+                        <h:outputLabel for="bodyOnFrame" value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
+                        <p:inputText id="bodyOnFrame" value="#{createBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
+                        <p:message for="bodyOnFrame" />
+
+                        <h:outputLabel for="KMS" value="#{msg['web.vehicles.edit.basicinfo.KMS']}"/>
+                        <p:inputText id="KMS" value="#{createBean.selectedVehicleDto.kms}" label="kms"/>
+                        <p:message for="KMS"  />
+
+                        <h:outputLabel for="skipBtn" value="Skip to last: "/>
+                        <h:selectBooleanCheckbox id="skipBtn" value="#{createBean.skip}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="ITV" title="ITV">
+                <p:panel header="#{msg['web.vehicles.edit.itv.header']}">
+                    <p:messages/>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <p:outputLabel for="lastItvDateBtn" value="#{msg['web.vehicles.edit.itv.last']}"/>
+                        <p:calendar id="lastItvDateBtn" value="#{createBean.selectedVehicleDto.itvDate}" showOn="button"
+                                    pattern="dd/MM/yyyy">
+                            <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
+                        </p:calendar>
+
+                        <p:outputLabel for="nextItvDateBtn" value="#{msg['web.vehicles.edit.itv.next']}"/>
+                        <p:calendar id="nextItvDateBtn" value="#{createBean.selectedVehicleDto.nextItvDate}"
+                                    showOn="button" pattern="dd/MM/yyyy">
+                            <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
+                        </p:calendar>
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="revision" title="Revision">
+                <p:panel header="#{msg['web.vehicles.edit.itv.header']}">
+                    <p:messages/>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <p:outputLabel for="lastRevisionBtn"
+                                       value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"/>
+                        <p:calendar id="lastRevisionBtn" value="#{createBean.selectedVehicleDto.lastRevisionDate}"
+                                    showOn="button" pattern="dd/MM/yyyy">
+                            <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
+                        </p:calendar>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.airFilterReference']}"/>
+                        <p:inputText value="#{createBean.selectedVehicleDto.airFilterReference}"/>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.oilFilterReference']}"/>
+                        <p:inputText value="#{createBean.selectedVehicleDto.oilFilterReference}"/>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.fuelFilter']}"/>
+                        <p:inputText value="#{createBean.selectedVehicleDto.fuelFilter}"/>
+
+                        <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}"/>
+                        <p:inputText value="#{createBean.selectedVehicleDto.motorOil}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+
+            <p:tab id="confirm" title="Confirmation">
+                <p:panel header="Confirmation">
+                    <p:growl id="dialogGlobalMessages" for="globalMessages" ><p:autoUpdate></p:autoUpdate></p:growl>
+                    <p:messages id="createDialogMessages" for="confirmMessages" showDetail="true" closable="true"></p:messages>
+                    <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="#{msg['web.vehicles.edit.basicinfo.registationplate']}" style="font-weight: bold;"/>
+                            <h:outputText value="#{createBean.selectedVehicleDto.registrationPlate}" required="true"
+                                          label="registrationplate"/>
+
+                            <h:outputText value="#{msg['web.vehicles.edit.basicinfo.brand']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{createBean.selectedVehicleDto.brand}" required="true" label="brand"/>
+
+                            <h:outputText value="#{msg['web.vehicles.edit.basicinfo.client']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedClient.fullName ? '-' : createBean.selectedClient.fullName}" readonly="true"/>
+
+                            <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.bodyOnFrame ? '-' : createBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
+
+                            <h:outputText value="#{msg['web.vehicles.edit.basicinfo.KMS']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.kms ? '-' : createBean.selectedVehicleDto.kms}" label="kms"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <p:outputLabel for="lastItvDateBtn" value="#{msg['web.vehicles.edit.itv.last']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.itvDate ? '-' : createBean.selectedVehicleDto.itvDate}" >
+                            </h:outputText>
+
+                            <p:outputLabel for="nextItvDateBtn" value="#{msg['web.vehicles.edit.itv.next']}" styleClass="outputLabel"/>
+                            <h:outputText  value="#{empty createBean.selectedVehicleDto.nextItvDate ? '-' : createBean.selectedVehicleDto.nextItvDate}">
+                            </h:outputText>
+
+                            <p:outputLabel for="lastRevisionBtn"
+                                           value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.lastRevisionDate ? '-' : createBean.selectedVehicleDto.lastRevisionDate}">
+                            </h:outputText>
+
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" columnClasses="label, value">
+
+                            <h:outputText value="#{msg['web.vehicles.edit.revision.airFilterReference']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.airFilterReference ? '-' : createBean.selectedVehicleDto.airFilterReference}"/>
+
+                            <h:outputText value="#{msg['web.vehicles.edit.revision.oilFilterReference']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.oilFilterReference ? '-' : createBean.selectedVehicleDto.oilFilterReference}"/>
+
+                            <h:outputText value="#{msg['web.vehicles.edit.revision.fuelFilter']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.fuelFilter? '-' : createBean.selectedVehicleDto.fuelFilter}"/>
+
+                            <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}" styleClass="outputLabel"/>
+                            <h:outputText value="#{empty createBean.selectedVehicleDto.motorOil ? '-' : createBean.selectedVehicleDto.motorOil}"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    <p:commandButton value="Create"
+                                     process="@form"
+                                     action="#{createBean.create}"
+                                     update="createDialogMessages"
+                    />
+
+                </p:panel>
+            </p:tab>
+        </p:wizard>
+    </p:dialog>
+</composite:implementation>
+
+</html>

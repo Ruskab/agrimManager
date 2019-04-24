@@ -3,7 +3,6 @@ package api.entity;
 import javax.persistence.*;
 
 @Entity
-
 @Table(name = "client")
 public class Client {
 

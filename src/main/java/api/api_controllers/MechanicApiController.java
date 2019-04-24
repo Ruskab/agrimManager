@@ -3,8 +3,8 @@ package api.api_controllers;
 import api.business_controllers.MechanicBusinessController;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.exceptions.ArgumentNotValidException;
-import api.exceptions.NotFoundException;
+import api.exception.ArgumentNotValidException;
+import api.exception.NotFoundException;
 import com.mysql.cj.util.StringUtils;
 
 public class MechanicApiController {

@@ -14,43 +14,51 @@
     <ui:composition template="/templates/master_layout.xhtml">
 
         <ui:define name="content">
-            <div class="p-col bordered">
+            <div class="p-col">
                 <h:form id="data-view-vehicles-form">
 
-                    <p:growl id="contentMessages" showDetail="true"><p:autoUpdate/></p:growl>
-
-                    <p:dataTable var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
+                    <p:dataTable id="vehicleTable" styleClass="vehicles-datatable"
+                                 var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
-                                 selection="#{lazyVehiclesView.selectedVehicleDto}" id="vehicleTable" lazy="true">
+                                 selection="#{lazyVehiclesView.selectedVehicleDto}" lazy="true">
                         <p:ajax event="rowSelect" listener="#{lazyVehiclesView.onRowSelect}"
-                                update=":data-view-vehicles-form:vehiclesEditDialog:vehicleDetail" oncomplete="PF('vehicleDialog').show()"/>
-                        <p:column headerText="Registration plate" sortBy="#{vehicle.registrationPlate}" filterBy="#{vehicle.registrationPlate}">
-                            <h:outputText value="#{vehicle.registrationPlate}" />
+                                update="@(.vehicle-edit-dialog)"
+                                oncomplete="PF('vehicleEditDialog').show()"/>
+                        <p:column headerText="Registration plate" sortBy="#{vehicle.registrationPlate}"
+                                  filterBy="#{vehicle.registrationPlate}">
+                            <h:outputText value="#{vehicle.registrationPlate}"/>
                         </p:column>
                         <p:column headerText="Brand" sortBy="#{vehicle.brand}" filterBy="#{vehicle.brand}">
                             <h:outputText value="#{vehicle.brand}"/>
                         </p:column>
-                        <p:column headerText="Client" >
-                            <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}"/>
+                        <p:column headerText="Client">
+                            <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}" />
                         </p:column>
-                        <p:column headerText="body On Frame" sortBy="#{vehicle.bodyOnFrame}" filterBy="#{vehicle.bodyOnFrame}">
+                        <p:column headerText="body On Frame" sortBy="#{vehicle.bodyOnFrame}"
+                                  filterBy="#{vehicle.bodyOnFrame}">
                             <h:outputText value="#{vehicle.bodyOnFrame}"/>
                         </p:column>
-                        <p:column headerText="Last Revision Date" sortBy="#{vehicle.lastRevisionDate}" filterBy="#{vehicle.lastRevisionDate}">
+                        <p:column headerText="Last Revision Date" sortBy="#{vehicle.lastRevisionDate}">
                             <h:outputText value="#{vehicle.lastRevisionDate}"/>
                         </p:column>
-                        <p:column headerText="itv Date" sortBy="#{vehicle.itvDate}" filterBy="#{vehicle.itvDate}">
+                        <p:column headerText="itv Date" sortBy="#{vehicle.itvDate}" >
                             <h:outputText value="#{vehicle.itvDate}"/>
                         </p:column>
-                        <p:column headerText="Next ItvDate" sortBy="#{vehicle.nextItvDate}" filterBy="#{vehicle.nextItvDate}">
+                        <p:column headerText="Next ItvDate" sortBy="#{vehicle.nextItvDate}">
                             <h:outputText value="#{vehicle.nextItvDate}"/>
                         </p:column>
                     </p:dataTable>
 
-                    <i class="pi pi-volume-down"></i>
+                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent" selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
+                    clientName="#{lazyVehiclesView.clientName}"/>
+                </h:form>
 
-                    <agrim:vehiclesFullDetailDialog id="vehiclesEditDialog" selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}" clientName="#{lazyVehiclesView.getClientDto(lazyVehiclesView.selectedVehicleDto.clientId)}"/>
+                <h:form id="creteVehicleForm">
+
+                    <p:commandButton id="crateVehicleBtn" icon="fa fa-plus" value="create"
+                                     oncomplete="PF('vehicleCreateDialog').show()"/>
+                    <agrim:vehiclesCreateDialog/>
                 </h:form>
             </div>
         </ui:define>

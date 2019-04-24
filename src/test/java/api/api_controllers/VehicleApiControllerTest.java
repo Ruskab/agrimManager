@@ -33,7 +33,8 @@ class VehicleApiControllerTest {
     Client client;
     Properties properties;
     Integer createdClientId;
-    private static final String API_PATH = "/api/v0";
+    private static final String API_PATH = "app.api.base.path";
+    public static final String APP_BASE_URL = "app.url";
 
     @BeforeEach
     void setUp() {
@@ -52,14 +53,14 @@ class VehicleApiControllerTest {
     void create_and_read_vehicle() {
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
 
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
 
         assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
         String id = response.readEntity(String.class);
 
-        VehicleDto createdVehicleDto = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES + "/" + id)
+        VehicleDto createdVehicleDto = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .get(VehicleDto.class);
 
@@ -81,12 +82,12 @@ class VehicleApiControllerTest {
     void delete_client() {
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
 
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         String id = response.readEntity(String.class);
 
-        Response deleteResponse = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES + "/" + id)
+        Response deleteResponse = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .delete();
 
@@ -97,25 +98,25 @@ class VehicleApiControllerTest {
     void update_client() {
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
 
-        Response response = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
 
         String id = response.readEntity(String.class);
 
-        VehicleDto createdVehicleDto = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES + "/" + id)
+        VehicleDto createdVehicleDto = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .get(VehicleDto.class);
 
         createdVehicleDto.setRegistrationPlate("CCDDAABB");
 
-        Response updateResponse = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES + "/" + id)
+        Response updateResponse = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.entity(createdVehicleDto, MediaType.APPLICATION_JSON_TYPE));
 
         assertThat(updateResponse.getStatus(), is(Response.Status.OK.getStatusCode()));
 
-        VehicleDto updatedVehicleDto = client.target(properties.getProperty("app.url") + API_PATH + VehicleApiController.VEHICLES + "/" + id)
+        VehicleDto updatedVehicleDto = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .get(VehicleDto.class);
 

@@ -1,19 +1,16 @@
 package client_beans.clients;
 
-import api.api_controllers.ClientApiController;
-import api.api_controllers.VehicleApiController;
-import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
+import client_beans.vehicles.VehicleGateway;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,28 +22,62 @@ public class LazyVehiclesView implements Serializable {
     private LazyDataModel<VehicleDto> lazyModel;
 
     private VehicleDto selectedVehicleDto;
-
-    private VehicleApiController vehicleApiController = new VehicleApiController();
-
-    private ClientApiController clientApiController = new ClientApiController();
-
-    private List<VehicleDto> vehicleDtos;
+    private String clientName;
+    private VehicleGateway vehicleGateway = new VehicleGateway();
+    private ClientGateway clientGateway = new ClientGateway();
 
     @PostConstruct
     public void init() {
-        vehicleDtos = vehicleApiController.readAll();
         lazyModel = new LazyDataModel<VehicleDto>() {
             @Override
             public int getRowCount() {
-                return vehicleApiController.readAll().size();
+                return vehicleGateway.readAll().size();
             }
 
             @Override
             public List<VehicleDto> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-                return vehicleDtos.stream()
+                Comparator<VehicleDto> registrationPlateComparator = Comparator.comparing(VehicleDto::getRegistrationPlate);
+                Comparator<VehicleDto> brandComparator = Comparator.comparing(VehicleDto::getBrand);
+                Comparator<VehicleDto> bodyOnFrameComparator = Comparator.comparing(VehicleDto::getBodyOnFrame);
+
+
+                List<VehicleDto> filtered = vehicleGateway.readAll().stream()
                         .skip(first)
+                        .filter(vehicleDto -> doFilter(vehicleDto, filters))
                         .filter(client -> client.getBrand().contains((String) filters.getOrDefault("brand", "")))
                         .collect(Collectors.toList());
+
+                if (sortField == null){
+                    return filtered;
+                }
+
+                switch (sortField) {
+                    case "registrationPlate":
+                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? registrationPlateComparator : registrationPlateComparator.reversed()).collect(Collectors.toList());
+                    case "brand":
+                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? brandComparator : brandComparator.reversed()).collect(Collectors.toList());
+                    case "bodyOnFrame":
+                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? bodyOnFrameComparator : bodyOnFrameComparator.reversed()).collect(Collectors.toList());
+                    default:
+                        return null;
+                }
+            }
+
+            private boolean doFilter(VehicleDto vehicleDto, Map<String, Object> filters) {
+                if (filters == null || filters.isEmpty()) {
+                    return true;
+                }
+
+                return containsSearchString(vehicleDto.getRegistrationPlate(), filters.get("registrationPlate"))
+                        && containsSearchString(vehicleDto.getBrand(), filters.get("brand"))
+                        && containsSearchString(vehicleDto.getBodyOnFrame(), filters.get("bodyOnFrame"));
+            }
+
+            private boolean containsSearchString(String name, Object searchExpresion) {
+                if (!(searchExpresion instanceof String)) {
+                    return true;
+                }
+                return name.contains((String) searchExpresion);
             }
 
             @Override
@@ -56,10 +87,9 @@ public class LazyVehiclesView implements Serializable {
 
             @Override
             public VehicleDto getRowData(String rowKey) {
-                return vehicleApiController.read(rowKey);
+                return vehicleGateway.read(rowKey);
             }
         };
-
     }
 
     public LazyDataModel<VehicleDto> getLazyModel() {
@@ -74,16 +104,22 @@ public class LazyVehiclesView implements Serializable {
         this.selectedVehicleDto = selectedVehicleDto;
     }
 
-    public String getClientDto(String clientId){
-        return clientApiController.read(clientId).getFullName();
+    public String getClientDto(String clientId) {
+        return clientGateway.read(clientId).getFullName();
     }
 
-    public void setService(VehicleApiController vehicleApiController) {
-        this.vehicleApiController = vehicleApiController;
-    }
 
     public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Vehicle Selected", ((VehicleDto) event.getObject()).getRegistrationPlate());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        String clientId = ((VehicleDto) event.getObject()).getClientId();
+        clientName = clientGateway.read(clientId).getFullName();
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }
+

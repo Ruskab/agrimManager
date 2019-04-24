@@ -5,7 +5,7 @@ import api.dtos.VehicleDto;
 import api.entity.Client;
 import api.entity.Vehicle;
 import api.entity.builder.VehicleBuilder;
-import api.exceptions.NotFoundException;
+import api.exception.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -11,7 +11,6 @@ import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.*;
 import http.*;
 import http.Client;
-import org.glassfish.jersey.client.ClientResponse;
 import org.junit.jupiter.api.*;
 
 import javax.ws.rs.core.Response;
