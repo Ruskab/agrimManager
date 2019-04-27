@@ -61,7 +61,7 @@ public class CreateBean {
         }
         selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
 
-        String vehicleId = vehicleGateway.create(selectedVehicleDto);
+        String vehicleId = "error";
         String message = StringUtils.isStrictlyNumeric(vehicleId) ? "Successful" : "Error";
 
         if ("Error".equals(message)) {
