@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:agrim="http://java.sun.com/jsf/composite/agrim"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Clients Datatable</title>
@@ -48,16 +48,22 @@
                         <p:column headerText="Next ItvDate" sortBy="#{vehicle.nextItvDate}" priority="3">
                             <h:outputText value="#{vehicle.nextItvDate}"/>
                         </p:column>
+
                     </p:dataTable>
 
-                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent" selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
-                    clientName="#{lazyVehiclesView.clientName}"/>
+                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent"
+                                                    selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
+                                                    clientName="#{lazyVehiclesView.clientName}"/>
                 </h:form>
 
                 <h:form id="creteVehicleForm">
+                    <p:toolbar>
+                        <f:facet name="left">
+                            <p:commandButton id="crateVehicleBtn" icon="fa fa-plus" value="create"
+                                             oncomplete="PF('vehicleCreateDialog').show()" style="margin-top: 2%;"/>
+                        </f:facet>
+                    </p:toolbar>
 
-                    <p:commandButton id="crateVehicleBtn" icon="fa fa-plus" value="create"
-                                     oncomplete="PF('vehicleCreateDialog').show()" style="margin-top: 2%;"/>
                     <agrim:vehiclesCreateDialog/>
                 </h:form>
             </div>
