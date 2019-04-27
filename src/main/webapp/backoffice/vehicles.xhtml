@@ -17,14 +17,23 @@
             <div class="p-col">
                 <h:form id="data-view-vehicles-form">
 
-                    <p:dataTable id="vehicleTable" styleClass="vehicles-datatable"
+                    <p:dataTable id="vehicleTable" styleClass="vehicles-datatable" widgetVar="vehicleTable"
                                  var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
-                                 selection="#{lazyVehiclesView.selectedVehicleDto}" lazy="true">
+                                 selection="#{lazyVehiclesView.selectedVehicleDto}" lazy="true" filterDelay="200">
+
                         <p:ajax event="rowSelect" listener="#{lazyVehiclesView.onRowSelect}"
                                 update="@(.vehicle-edit-dialog)"
                                 oncomplete="PF('vehicleEditDialog').show()"/>
+
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="#{msg['web.vehicles.datatable.search']}" />
+                                <p:inputText id="globalFilter" onkeyup="PF('vehicleTable').filter()" style="width:150px" placeholder="#{msg['web.vehicles.datatable.search.placeholder']}"/>
+                            </p:outputPanel>
+                        </f:facet>
+
                         <p:column headerText="Registration plate" sortBy="#{vehicle.registrationPlate}"
                                   filterBy="#{vehicle.registrationPlate}" priority="1">
                             <h:outputText value="#{vehicle.registrationPlate}"/>
@@ -32,8 +41,8 @@
                         <p:column headerText="Brand" sortBy="#{vehicle.brand}" filterBy="#{vehicle.brand}" priority="1">
                             <h:outputText value="#{vehicle.brand}"/>
                         </p:column>
-                        <p:column headerText="Client" priority="1">
-                            <h:outputText value="#{lazyVehiclesView.getClientDto(vehicle.clientId)}"/>
+                        <p:column headerText="Client" priority="1" filterBy="#{lazyVehiclesView.clientName}">
+                            <h:outputText value="#{lazyVehiclesView.clientNames.get(vehicle.clientId)}"/>
                         </p:column>
                         <p:column headerText="body On Frame" sortBy="#{vehicle.bodyOnFrame}"
                                   filterBy="#{vehicle.bodyOnFrame}" priority="4">
