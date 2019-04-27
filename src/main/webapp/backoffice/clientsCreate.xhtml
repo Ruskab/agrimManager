@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+    <title>#{msg['web.clients.clientsCreate.title']}</title>
+    <h:outputStylesheet name="master-layour.css" library="css"/>
+</h:head>
+
+<h:body>
+    <h:form id="editClientForm" styleClass="edit-client-form">
+        <p:messages id="editClientMessages" for="editMessages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <div class="p-grid">
+            <p:wizard id="creteClientWizzard" widgetVar="createClientWizzard" flowListener="#{createClientBean.onFlowProcess}" styleClass="create-client-wizzard">
+                <p:tab id="basicInfoTab" title="Basic">
+                    <p:panel header="#{msg['web.clients.clientsCreate.header']}">
+                        <p:panelGrid columns="3" layout="grid" >
+                            <h:outputLabel for="fullName" value="#{msg['web.clients.clientsCreate.fullName']}"/>
+                            <p:inputText id="fullName" value="#{createClientBean.client.fullName}" required="true"/>
+                            <p:message for="fullName" />
+                        </p:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="billable" title="Billable">
+                    <p:panel header="#{msg['web.clients.clientsCreate.fullName']}">
+                        <p:messages/>
+                        <p:panelGrid columns="2" columnClasses="label, value" layout="grid">
+                            <p:outputLabel for="toInvoice"
+                                           value="#{msg['web.clients.clientsCreate.pendingHours']}"/>
+                            <p:spinner id="toInvoice" value="#{createClientBean.client.hours}" min="0" max="999"
+                                       suffix="h"/>
+                        </p:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmation">
+                    <p:panel header="#{msg['web.clients.clientsCreate.confirmtab.header']}">
+                        <p:growl id="dialogGlobalMessages" for="globalMessages" ><p:autoUpdate></p:autoUpdate></p:growl>
+                        <p:messages id="createDialogMessages" for="confirmMessages" showDetail="true" closable="true"></p:messages>
+                        <p:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid" layout="grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="#{msg['web.clients.clientsCreate.fullName']}" styleClass="outputLabel"/>
+                                <h:outputText value="#{createClientBean.client.fullName}" required="true" label="label"/>
+
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="#{msg['web.clients.clientsCreate.pendingHours']}" styleClass="outputLabel"/>
+                                <h:outputText value="#{empty createClientBean.client.hours ? '-' : createClientBean.client.hours}" readonly="true"/>
+                            </h:panelGrid>
+                        </p:panelGrid>
+
+                        <p:commandButton value="Create"
+                                         process="@form"
+                                         action="#{createClientBean.create}"
+                                         update="createDialogMessages" />
+
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+        </div>
+
+    </h:form>
+</h:body>
+
+</html>
