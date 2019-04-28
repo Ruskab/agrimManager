@@ -6,7 +6,9 @@ import api.dtos.MechanicDto;
 import api.exception.ArgumentNotValidException;
 import api.exception.NotFoundException;
 import com.mysql.cj.util.StringUtils;
+import io.swagger.annotations.Api;
 
+@Api(value="/mechanics", description = "Operations about mechanics")
 public class MechanicApiController {
     public static final String MECHANICS = "/mechanics";
 

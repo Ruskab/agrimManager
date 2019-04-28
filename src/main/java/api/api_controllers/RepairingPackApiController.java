@@ -5,9 +5,11 @@ import api.dtos.RepairingPackDto;
 import api.exception.ArgumentNotValidException;
 import api.exception.RequestInvalidException;
 import com.mysql.cj.util.StringUtils;
+import io.swagger.annotations.Api;
 
 import java.util.List;
 
+@Api(value="/repairing-packs", description = "Operations about Repairing packs")
 public class RepairingPackApiController {
     public static final String REPAIRING_PACKS = "/repairing-packs";
 
