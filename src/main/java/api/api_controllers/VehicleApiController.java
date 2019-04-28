@@ -6,12 +6,14 @@ import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
 import api.exception.ArgumentNotValidException;
 import com.mysql.cj.util.StringUtils;
+import io.swagger.annotations.Api;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+@Api(value="/vehicles", description = "Operations about vehicles")
 @Path("/vehicles")
 public class VehicleApiController {
 

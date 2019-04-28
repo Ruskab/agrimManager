@@ -5,9 +5,12 @@ import api.dtos.InterventionDto;
 import api.exception.ArgumentNotValidException;
 import api.exception.RequestInvalidException;
 import com.mysql.cj.util.StringUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import java.util.List;
 
+@Api(value="/interventions", description = "Operations about interventions")
 public class InterventionApiController {
     public static final String INTERVENTIONS = "/interventions";
 
