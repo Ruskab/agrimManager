@@ -1,9 +1,11 @@
 package client_beans;
 
 import api.dtos.ClientDto;
+import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import client_beans.clients.ClientGateway;
+import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -37,6 +39,7 @@ public class OperationsBean {
 
     VehicleGateway vehicleGateway = new VehicleGateway();
     ClientGateway clientGateway = new ClientGateway();
+    MechanicGateway mechanicGateway = new MechanicGateway();
     public static final String SUCCESS = "Success";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
     private DashboardModel model;
@@ -182,6 +185,10 @@ public class OperationsBean {
     private void deleteAllClients() {
         List<ClientDto> clientDtoLIst = clientGateway.readAll();
         clientDtoLIst.forEach(clientDto -> clientGateway.delete(clientDto.getId()));
+    }
+
+    public void createMechanic() {
+        mechanicGateway.create(new MechanicDto("root","admin"));
     }
 }
 
