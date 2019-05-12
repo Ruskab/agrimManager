@@ -28,7 +28,7 @@
     </mime-mapping>
     <!-- WELCOME PAGE -->
     <welcome-file-list>
-        <welcome-file>faces/backoffice/clients.xhtml</welcome-file>
+        <welcome-file>faces/user_access/loginPage.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- JSF MAPPING -->
