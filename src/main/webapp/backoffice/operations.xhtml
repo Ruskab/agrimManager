@@ -28,6 +28,11 @@
                         <p:panel id="deleteAllData" header="Destroy Everithing">
                             <p:commandButton value="Destroy" icon="fa fa-fw fa-remove"
                                              action="#{operationsBean.destroyTheWorld}" update="messages"/> </p:panel>
+
+                        <p:panel id="createMechanic" header="Create users">
+                            <p:commandButton value="Create"
+                                             action="#{operationsBean.createMechanic}" update="messages"/>
+                        </p:panel>
                     </p:dashboard>
 
                     <div style="clear:both"/>

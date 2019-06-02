@@ -1,5 +1,6 @@
 package client_beans.user_access;
 
+import api.api_controllers.MechanicApiController;
 import api.daos.MechanicDao;
 import org.omnifaces.util.Faces;
 
@@ -17,10 +18,11 @@ public class LoginBean {
     private String message;
     private String userName;
     private String password;
-    private MechanicDao mechanicDao;
+    private MechanicApiController mechanicApiController;
 
     @PostConstruct
     public void init() {
+        mechanicApiController = new MechanicApiController();
     }
 
     public String getUserName() {
@@ -48,8 +50,9 @@ public class LoginBean {
     }
 
     public String login() {
-        //boolean authorized = DaoFactory.getFactory().getMechanicDao().findAll().anyMatch(mechanic -> mechanic.getName().equals(userName) && mechanic.getPassword().equals(password));
-        if (true) {
+        boolean authorized = mechanicApiController.readAll().stream().anyMatch(mechanic -> mechanic.getName().equals(userName) && mechanic.getPassword().equals(password));
+
+        if (authorized) {
             // get Http Session and store username
             Faces.getSession().setAttribute("username", userName);
 
