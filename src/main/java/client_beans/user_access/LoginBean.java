@@ -1,7 +1,6 @@
 package client_beans.user_access;
 
 import api.api_controllers.MechanicApiController;
-import api.daos.MechanicDao;
 import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +18,8 @@ public class LoginBean {
     private String userName;
     private String password;
     private MechanicApiController mechanicApiController;
+    public static final String CLIENT_PAGE = "/backoffice/clients.xhtml";
+    public static final String LOGIN_PAGE = "/user_access/loginPage.xhtml";
 
     @PostConstruct
     public void init() {
@@ -56,13 +57,13 @@ public class LoginBean {
             // get Http Session and store username
             Faces.getSession().setAttribute("username", userName);
 
-            return "/backoffice/clients.xhtml";
+            return CLIENT_PAGE;
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Invalid Login!",
                     "Please Try Again!"));
 
-            return "/user_access/loginPage.xhtml";
+            return LOGIN_PAGE;
         }
     }
 
@@ -70,7 +71,7 @@ public class LoginBean {
         HttpSession session = (HttpSession)
                 FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
-        return "/user_access/loginPage.xhtml";
+        return LOGIN_PAGE;
     }
 
 }
