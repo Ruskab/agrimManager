@@ -5,7 +5,7 @@ import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.entity.Client;
 import api.entity.Vehicle;
-import api.exception.NotFoundException;
+import api.exceptions.NotFoundException;
 
 import javax.faces.bean.ApplicationScoped;
 import java.util.List;

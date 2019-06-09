@@ -9,20 +9,26 @@ import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.*;
-import http.*;
 import http.Client;
+import http.HttpException;
+import http.HttpRequest;
+import http.HttpStatus;
 import org.junit.jupiter.api.*;
 
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DispatcherIT {
 
