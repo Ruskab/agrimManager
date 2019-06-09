@@ -5,8 +5,8 @@ import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.entity.Intervention;
 import api.entity.Mechanic;
-import api.exception.ArgumentNotValidException;
-import api.exception.NotFoundException;
+import api.exceptions.FieldInvalidException;
+import api.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +26,7 @@ public class MechanicBusinessController {
 
     private void validate(Object property, String message) {
         if (property == null || property.toString().equals("")) {
-            throw new ArgumentNotValidException(message + " is missing");
+            throw new FieldInvalidException(message + " is missing");
         }
     }
 

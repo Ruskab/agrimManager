@@ -2,14 +2,13 @@ package api.api_controllers;
 
 import api.business_controllers.RepairingPackBusinessController;
 import api.dtos.RepairingPackDto;
-import api.exception.ArgumentNotValidException;
-import api.exception.RequestInvalidException;
+import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 
 import java.util.List;
 
-@Api(value="/repairing-packs", description = "Operations about Repairing packs")
+@Api(value="/repairing-packs")
 public class RepairingPackApiController {
     public static final String REPAIRING_PACKS = "/repairing-packs";
 
@@ -41,13 +40,13 @@ public class RepairingPackApiController {
 
     public void validate(Object property, String message) {
         if (property == null || property.toString().equals("")) {
-            throw new ArgumentNotValidException(message + " is missing");
+            throw new FieldInvalidException(message + " is missing");
         }
     }
 
     private void validateId(String id, String message) {
         if (!StringUtils.isStrictlyNumeric(id)) {
-            throw new RequestInvalidException(message + " Should be numeric");
+            throw new FieldInvalidException(message + " Should be numeric");
         }
     }
 }

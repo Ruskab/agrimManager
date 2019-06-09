@@ -4,7 +4,7 @@ import api.daos.DaoFactory;
 import api.dtos.RepairingPackDto;
 import api.entity.Intervention;
 import api.entity.RepairingPack;
-import api.exception.NotFoundException;
+import api.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
