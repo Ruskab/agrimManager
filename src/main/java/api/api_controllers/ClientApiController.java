@@ -5,9 +5,8 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
-import api.exception.ArgumentNotValidException;
-import api.exception.NotFoundException;
-import api.exception.RequestInvalidException;
+import api.exceptions.FieldInvalidException;
+import api.exceptions.NotFoundException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,7 +60,7 @@ public class ClientApiController {
     public ClientDto read(@PathParam("id") String id) {
         this.validateId(id, "client id");
         return this.clientBusinessController.read(id);
-        //todo handle exception like not found
+        //todo handle exceptions like not found
     }
 
 
@@ -99,13 +98,13 @@ public class ClientApiController {
 
     private void validate(Object property, String message) {
         if (property == null) {
-            throw new ArgumentNotValidException(message + " is missing");
+            throw new FieldInvalidException(message + " is missing");
         }
     }
 
     private void validateId(String id, String message) {
         if (!StringUtils.isStrictlyNumeric(id)) {
-            throw new RequestInvalidException(message + " Should be numeric");
+            throw new FieldInvalidException(message + " Should be numeric");
         }
     }
 

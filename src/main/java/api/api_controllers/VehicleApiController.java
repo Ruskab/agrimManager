@@ -4,7 +4,7 @@ import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
-import api.exception.ArgumentNotValidException;
+import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 
@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value="/vehicles", description = "Operations about vehicles")
+@Api(value="/vehicles")
 @Path("/vehicles")
 public class VehicleApiController {
 
@@ -80,14 +80,14 @@ public class VehicleApiController {
 
     private void validate(Object property, String message) {
         if (property == null) {
-            throw new ArgumentNotValidException(message + " is missing");
+            throw new FieldInvalidException(message + " is missing");
         }
     }
 
     private void validateId(String id, String message) {
         validate(id, message);
         if ( !StringUtils.isStrictlyNumeric(id)){
-            throw new ArgumentNotValidException(message +  " Should be numeric");
+            throw new FieldInvalidException(message +  " Should be numeric");
         }
     }
 }

@@ -5,8 +5,8 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.exception.ArgumentNotValidException;
-import api.exception.NotFoundException;
+import api.exceptions.FieldInvalidException;
+import api.exceptions.NotFoundException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -63,7 +63,7 @@ public class MechanicApiController {
     public MechanicDto read(@PathParam("id") String id) {
         this.validateId(id, "mechanic id");
         return this.mechanicBusinesssController.read(id);
-        //todo handle exception like not found
+        //todo handle exceptions like not found
     }
 
     @DELETE
@@ -79,7 +79,7 @@ public class MechanicApiController {
 
     private void validate(Object property, String message) {
         if (property == null || property.toString().equals("")) {
-            throw new ArgumentNotValidException(message + " is missing");
+            throw new FieldInvalidException(message + " is missing");
         }
     }
 

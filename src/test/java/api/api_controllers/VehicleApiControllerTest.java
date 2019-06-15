@@ -1,7 +1,5 @@
 package api.api_controllers;
 
-import api.business_controllers.ClientBusinessController;
-import api.daos.DaoFactory;
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
@@ -11,7 +9,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
