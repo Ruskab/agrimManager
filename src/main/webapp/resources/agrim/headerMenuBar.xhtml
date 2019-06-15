@@ -35,6 +35,10 @@
                             icon="fa fa fa-car fa-xs"/>
                 <p:menuitem value="#{msg['web.header.operations']}"
                             url="#{request.contextPath}/backoffice/operations.xhtml" icon="fa fa-xs fa-bomb"/>
+                <p:submenu label="#{username}" icon="pi pi-user">
+                    <p:menuitem value="#{msg['web.header.logout']}" action="#{loginBean.logout}"/>
+                    <p:separator/>
+                </p:submenu>
 
             </p:menubar>
         </h:form>

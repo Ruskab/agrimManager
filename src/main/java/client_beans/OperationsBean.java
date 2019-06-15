@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
+import org.omnifaces.util.Faces;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.DashboardReorderEvent;
 import org.primefaces.event.ToggleEvent;
@@ -37,13 +38,14 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 @ViewScoped
 public class OperationsBean {
 
-    VehicleGateway vehicleGateway = new VehicleGateway();
-    ClientGateway clientGateway = new ClientGateway();
-    MechanicGateway mechanicGateway = new MechanicGateway();
+    private VehicleGateway vehicleGateway = new VehicleGateway();
+    private ClientGateway clientGateway = new ClientGateway();
+    private MechanicGateway mechanicGateway = new MechanicGateway();
+    private MechanicDto mechanic;
     public static final String SUCCESS = "Success";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
     private DashboardModel model;
-    Random rnd = new Random();
+    private Random rnd = new Random();
 
     @PostConstruct
     public void init() {
@@ -52,6 +54,7 @@ public class OperationsBean {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         initDashboard();
+        mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
 
     }
 
@@ -62,6 +65,7 @@ public class OperationsBean {
 
         column1.addWidget("createFakeData");
         column2.addWidget("deleteAllData");
+        column2.addWidget("createNewUser");
         model.addColumn(column1);
         model.addColumn(column2);
     }
@@ -187,8 +191,12 @@ public class OperationsBean {
         clientDtoLIst.forEach(clientDto -> clientGateway.delete(clientDto.getId()));
     }
 
-    public void createMechanic() {
-        mechanicGateway.create(new MechanicDto("root","admin"));
+    public MechanicDto getMechanic() {
+        return mechanic;
+    }
+
+    public void setMechanic(MechanicDto mechanic) {
+        this.mechanic = mechanic;
     }
 }
 

@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:agrim="http://java.sun.com/jsf/composite/agrim"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -15,7 +16,7 @@
 
         <ui:define name="content">
             <div class="p-col">
-                <h:form>
+                <h:form id="operationsForm" >
                     <p:growl id="messages" showDetail="true"/>
                     <p:dashboard id="board" model="#{operationsBean.model}">
                         <p:ajax event="reorder" listener="#{operationsBean.handleReorder}" update="messages"/>
@@ -26,16 +27,19 @@
                         </p:panel>
 
                         <p:panel id="deleteAllData" header="Destroy Everithing">
-                            <p:commandButton value="Destroy" icon="fa fa-fw fa-remove"
+                            <p:commandButton value="Destroy" icon="fa fa-fw fa-remove" disabled="#{not operationsBean.mechanic.hasRole('ADMIN')}"
                                              action="#{operationsBean.destroyTheWorld}" update="messages"/> </p:panel>
 
-                        <p:panel id="createMechanic" header="Create users">
-                            <p:commandButton value="Create"
-                                             action="#{operationsBean.createMechanic}" update="messages"/>
-                        </p:panel>
                     </p:dashboard>
 
                     <div style="clear:both"/>
+                </h:form>
+                <h:form id="createMechanicForm">
+                    <p:panel id="createNewUser" header="Create new users">
+                        <p:commandButton value="Create" rendered="#{not operationsBean.mechanic.hasRole('ADMIN')}"
+                                         oncomplete="PF('vmechanicCreateDialog').show()" />
+                        <agrim:mechanicCreateDialog/>
+                    </p:panel>
                 </h:form>
             </div>
         </ui:define>
