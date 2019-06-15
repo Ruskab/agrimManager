@@ -19,7 +19,7 @@ public class MechanicBusinessController {
         this.validate(mechanicDto, "mechanicDto");
         this.validate(mechanicDto.getName(), "mechanicDto Name");
         this.validate(mechanicDto.getPassword(), "mechanicDto Password");
-        Mechanic mechanic = new Mechanic(mechanicDto.getName(), mechanicDto.getPassword());
+        Mechanic mechanic = new Mechanic(mechanicDto);
         DaoFactory.getFactory().getMechanicDao().create(mechanic);
         return mechanic.getId();
     }

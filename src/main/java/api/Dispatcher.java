@@ -4,6 +4,7 @@ import api.api_controllers.*;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;
+import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
 import http.HttpRequest;
@@ -49,6 +50,9 @@ public class Dispatcher {
                     throw new FieldInvalidException("method error: " + request.getMethod());
             }
         } catch (FieldInvalidException exception) {
+            response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
+            response.setStatus(HttpStatus.BAD_REQUEST);
+        } catch (BadRequestException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.BAD_REQUEST);
         } catch (NotFoundException exception) {

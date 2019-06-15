@@ -1,6 +1,8 @@
 package client_beans.user_access;
 
 import api.api_controllers.MechanicApiController;
+import api.dtos.MechanicDto;
+import api.entity.Role;
 import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
@@ -51,12 +56,15 @@ public class LoginBean {
     }
 
     public String login() {
-        boolean authorized = mechanicApiController.readAll().stream().anyMatch(mechanic -> mechanic.getName().equals(userName) && mechanic.getPassword().equals(password));
 
-        if (authorized) {
+        Optional<MechanicDto> mechanicDto = mechanicApiController.readAll().stream()
+                .filter(mechanic -> mechanic.getName().equals(userName) && mechanic.getPassword().equals(password))
+                .findFirst();
+
+        if (mechanicDto.isPresent()) {
             // get Http Session and store username
             Faces.getSession().setAttribute("username", userName);
-
+            Faces.getSession().setAttribute("mechanic", mechanicDto.get());
             return CLIENT_PAGE;
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
