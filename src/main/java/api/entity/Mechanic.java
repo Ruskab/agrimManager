@@ -1,7 +1,7 @@
 package api.entity;
 
 import api.dtos.MechanicDto;
-import client_beans.util.converters.MechanicRoleConverter;
+import api.converters.MechanicRoleConverter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
