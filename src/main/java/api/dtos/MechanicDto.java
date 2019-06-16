@@ -4,12 +4,13 @@ import api.entity.Intervention;
 import api.entity.Mechanic;
 import api.entity.Role;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MechanicDto {
+public class MechanicDto implements Serializable {
     private int id;
 
     private String name;

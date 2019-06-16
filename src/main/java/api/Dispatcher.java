@@ -49,9 +49,7 @@ public class Dispatcher {
                 default: // Unexpected
                     throw new FieldInvalidException("method error: " + request.getMethod());
             }
-        } catch (FieldInvalidException exception) {
-            response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
-            response.setStatus(HttpStatus.BAD_REQUEST);
+
         } catch (BadRequestException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.BAD_REQUEST);

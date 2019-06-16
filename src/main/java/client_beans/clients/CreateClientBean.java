@@ -1,9 +1,6 @@
 package client_beans.clients;
 
 import api.dtos.ClientDto;
-import api.dtos.VehicleDto;
-import client_beans.clients.ClientGateway;
-import client_beans.vehicles.VehicleGateway;
 import com.mysql.cj.util.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,22 +12,18 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @ManagedBean
 @ViewScoped
 public class CreateClientBean {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateClientBean.class);
-    private VehicleGateway vehicleGateway;
     private ClientGateway clientGateway;
 
     private ClientDto client;
 
     @PostConstruct
     public void init() {
-        vehicleGateway = new VehicleGateway();
         clientGateway = new ClientGateway();
         client = new ClientDto();
     }

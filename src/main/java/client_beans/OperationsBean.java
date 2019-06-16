@@ -5,7 +5,6 @@ import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import client_beans.clients.ClientGateway;
-import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -40,7 +39,6 @@ public class OperationsBean {
 
     private VehicleGateway vehicleGateway = new VehicleGateway();
     private ClientGateway clientGateway = new ClientGateway();
-    private MechanicGateway mechanicGateway = new MechanicGateway();
     private MechanicDto mechanic;
     public static final String SUCCESS = "Success";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
@@ -49,10 +47,6 @@ public class OperationsBean {
 
     @PostConstruct
     public void init() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         initDashboard();
         mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
 

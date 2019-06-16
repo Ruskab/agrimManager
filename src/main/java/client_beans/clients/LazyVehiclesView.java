@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 @ViewScoped
 public class LazyVehiclesView implements Serializable {
 
-    final private static String NOT_NAME = "NOT NAME";
+    private static final String NOT_NAME = "NOT NAME";
+    private static final String VEHICLE_BRAND = "brand";
     private LazyDataModel<VehicleDto> lazyModel;
     private VehicleDto selectedVehicleDto;
     private String clientName;
@@ -63,7 +64,7 @@ public class LazyVehiclesView implements Serializable {
                 switch (sortField) {
                     case "registrationPlate":
                         return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? registrationPlateComparator : registrationPlateComparator.reversed()).collect(Collectors.toList());
-                    case "brand":
+                    case VEHICLE_BRAND:
                         return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? brandComparator : brandComparator.reversed()).collect(Collectors.toList());
                     case "bodyOnFrame":
                         return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? bodyOnFrameComparator : bodyOnFrameComparator.reversed()).collect(Collectors.toList());
@@ -78,7 +79,7 @@ public class LazyVehiclesView implements Serializable {
                 }
 
                 return containsSearchString(vehicleDto.getRegistrationPlate(), filters.get("registrationPlate"))
-                        && containsSearchString(vehicleDto.getBrand(), filters.get("brand"))
+                        && containsSearchString(vehicleDto.getBrand(), filters.get(VEHICLE_BRAND))
                         && containsSearchString(vehicleDto.getBodyOnFrame(), filters.get("bodyOnFrame"))
                         && doFilterClientName(vehicleDto.getClientId(), filters.get("clientName"))
                         && globalContainsSearch(vehicleDto, filters.get("globalFilter"));
