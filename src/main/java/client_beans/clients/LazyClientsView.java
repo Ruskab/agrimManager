@@ -1,6 +1,5 @@
 package client_beans.clients;
 
-import api.api_controllers.ClientApiController;
 import api.dtos.ClientDto;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;

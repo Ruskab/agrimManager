@@ -16,12 +16,14 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.beans.Transient;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
-public class ClientGateway {
+public class ClientGateway implements Serializable {
 
     Client client;
     Properties properties;

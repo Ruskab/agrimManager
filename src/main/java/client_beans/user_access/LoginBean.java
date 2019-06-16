@@ -2,7 +2,6 @@ package client_beans.user_access;
 
 import api.api_controllers.MechanicApiController;
 import api.dtos.MechanicDto;
-import api.entity.Role;
 import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
@@ -11,9 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
