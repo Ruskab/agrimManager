@@ -3,7 +3,6 @@ package client_beans.util.filters;
 import org.omnifaces.filter.HttpFilter;
 import org.omnifaces.util.Servlets;
 
-import javax.faces.context.FacesContext;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
