@@ -16,20 +16,21 @@
 <composite:implementation>
     <h:form id="loginForm">
         <p:growl id="msg" showDetail="true" life="4000" />
-        <p:panel id="loginPnl" header="Login"
-                 style="width: 350px; margin: 0 auto;">
-            <h:panelGrid id="loginPanel" columns="2" cellpadding="5">
-                <h:outputText value="Username" />
+        <p:panel id="loginPnl" header="Login">
+            <h:panelGrid id="loginPanel" layout="grid" columns="2" cellpadding="1"
+                         columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-6">
+                <h:outputLabel for="username" value="#{msg['web.login.username']}" />
                 <p:inputText id="username" value="#{loginBean.userName}"></p:inputText>
                 <p:spacer /><p:spacer />
-                <h:outputText value="Password" />
+                <h:outputLabel for="password" value="#{msg['web.login.password']}" />
                 <p:password id="password" value="#{loginBean.password}"
                             feedback="false"></p:password>
                 <p:message for="password"></p:message>
             </h:panelGrid>
-            <h:panelGrid columns="1" cellpadding="10" width="100%">
+
+            <h:panelGrid layout="grid" columns="1" cellpadding="10" width="100%">
                 <p:commandButton id="loginButton" action="#{loginBean.login}"
-                                 value="Login" update="loginForm" ajax="true" style="float: right;">
+                                 value="Login" update="loginForm" ajax="true">
                 </p:commandButton>
             </h:panelGrid>
         </p:panel>
