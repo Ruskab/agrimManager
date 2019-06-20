@@ -4,9 +4,9 @@ import api.api_controllers.*;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.*;
-import api.exception.ArgumentNotValidException;
-import api.exception.NotFoundException;
-import api.exception.RequestInvalidException;
+import api.exceptions.BadRequestException;
+import api.exceptions.FieldInvalidException;
+import api.exceptions.NotFoundException;
 import http.HttpRequest;
 import http.HttpResponse;
 import http.HttpStatus;
@@ -47,9 +47,10 @@ public class Dispatcher {
                     this.doDelete(request);
                     break;
                 default: // Unexpected
-                    throw new RequestInvalidException("method error: " + request.getMethod());
+                    throw new FieldInvalidException("method error: " + request.getMethod());
             }
-        } catch (ArgumentNotValidException | RequestInvalidException exception) {
+
+        } catch (BadRequestException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.BAD_REQUEST);
         } catch (NotFoundException exception) {
@@ -66,7 +67,7 @@ public class Dispatcher {
         if (request.isEqualsPath(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)) {
             this.repairingPackApiController.updateReparingPack(request.getPath(1), (String) request.getBody());
         } else {
-            throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
+            throw new FieldInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 
@@ -128,7 +129,7 @@ public class Dispatcher {
         } else if (request.isEqualsPath(MechanicApiController.MECHANICS + MechanicApiController.ID_INTERVENTIONS)) {
             this.mechanicApiController.createIntervention(request.getPath(1), (InterventionDto) request.getBody());
         } else {
-            throw new RequestInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
+            throw new FieldInvalidException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 }

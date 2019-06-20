@@ -2,7 +2,6 @@ package client_beans.vehicles;
 
 import api.api_controllers.VehicleApiController;
 import api.dtos.VehicleDto;
-import api.entity.Vehicle;
 import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -18,13 +17,13 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
+import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
-public class VehicleGateway {
+public class VehicleGateway implements Serializable {
 
     Client client;
     Properties properties;

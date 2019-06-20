@@ -24,13 +24,13 @@
                                     paginator="true" rowsPerPageTemplate="6,12,16"
                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                     gridIcon="pi pi-th-large" listIcon="pi pi-bars">
-
                             <p:dataViewGridItem>
                                 <p:panel header="#{client.fullName}" style="text-align:center">
                                     <h:panelGrid columns="1" style="width:100%">
                                         <h:outputText value="To facture: #{client.hours} hours"/>
 
-                                        <p:commandLink action="#{clientsBean.openClientDialog}" update="@(.client-detail)" title="View Detail">
+                                        <p:commandLink action="#{clientsBean.openClientDialog}"
+                                                       update="@(.client-detail)" title="View Detail">
                                             <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
                                             <f:setPropertyActionListener value="#{client}"
                                                                          target="#{clientsBean.selectedClient}"/>
@@ -39,7 +39,7 @@
                                 </p:panel>
                             </p:dataViewGridItem>
 
-                            <p:dataViewListItem  >
+                            <p:dataViewListItem>
                                 <h:panelGrid columns="2" columnClasses="logo,detail">
 
                                     <p:outputPanel>
@@ -49,7 +49,8 @@
                                         </h:panelGrid>
                                     </p:outputPanel>
 
-                                    <p:commandLink action="#{clientsBean.openClientDialog}" update="@(.client-detail)" title="View Detail">
+                                    <p:commandLink action="#{clientsBean.openClientDialog}" update="@(.client-detail)"
+                                                   title="View Detail">
                                         <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
                                         <f:setPropertyActionListener value="#{client}"
                                                                      target="#{clientsBean.selectedClient}"/>
@@ -58,8 +59,24 @@
                             </p:dataViewListItem>
                         </p:dataView>
                     </h:form>
-                </div>
 
+                </div>
+                <div class="p-col-12 table ">
+                    <h:form>
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <p:commandButton value="#{msg['web.btn.create']}"
+                                                 action="#{clientsBean.openCreateClientDialog}"
+                                                 update="@(.client-detail)" title="Create new">
+                                    <f:setPropertyActionListener value="#{client}"
+                                                                 target="#{clientsBean.selectedClient}"/>
+                                </p:commandButton>
+                            </f:facet>
+
+                        </p:toolbar>
+
+                    </h:form>
+                </div>
             </div>
         </ui:define>
     </ui:composition>

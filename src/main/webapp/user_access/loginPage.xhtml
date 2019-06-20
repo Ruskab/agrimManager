@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:agrim="http://java.sun.com/jsf/composite/agrim"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Login page</title>
+</h:head>
+<h:body>
+    <ui:composition template="/templates/master_layout.xhtml">
+
+        <ui:define name="header"></ui:define>
+
+        <ui:define name="content">
+            <div class="p-grid" >
+                <div class="p-col-4"/>
+                <div class="p-col-4">
+                    <agrim:loginPanel></agrim:loginPanel>
+                </div>
+                <div class="p-col-4"/>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+</html>

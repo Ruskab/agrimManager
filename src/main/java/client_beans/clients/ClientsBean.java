@@ -29,6 +29,16 @@ public class ClientsBean implements Serializable {
         clientParams.add(Integer.toString(selectedClient.getId()));
         Map<String, List<String>> params = new HashMap<>();
         params.put("parameters", clientParams);
+        Map<String,Object> options = setupDialogOptions();
+        PrimeFaces.current().dialog().openDynamic("clientsInfo", options, params);
+    }
+
+    public void openCreateClientDialog() {
+        Map<String,Object> options = setupDialogOptions();
+        PrimeFaces.current().dialog().openDynamic("clientsCreate", options, null);
+    }
+
+    private Map<String,Object> setupDialogOptions() {
         Map<String,Object> options = new HashMap<>();
         options.put("modal", true);
         options.put("resizable", true);
@@ -37,8 +47,7 @@ public class ClientsBean implements Serializable {
         options.put("height", 471);
         options.put("contentWidth", "100%");
         options.put("contentHeight", "100%");
-
-        PrimeFaces.current().dialog().openDynamic("clientsInfo", options, params);
+        return options;
     }
 
     public List<ClientDto> getClients() {

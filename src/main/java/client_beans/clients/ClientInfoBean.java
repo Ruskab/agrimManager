@@ -19,7 +19,6 @@ public class ClientInfoBean implements Serializable {
 
     private ClientDto clientDto;
     private List<VehicleDto> vehicles;
-    private VehicleGateway vehicleGateway;
     private ClientGateway clientGateway = new ClientGateway();
 
     @PostConstruct
@@ -29,7 +28,7 @@ public class ClientInfoBean implements Serializable {
                 .getExternalContext()
                 .getRequestParameterMap()
                 .get("parameters");
-        clientDto = new ClientGateway().read(clientId);
+        clientDto = clientGateway.read(clientId);
         //todo hacer que se recupere el listado de vehiculos del cliente con una peticion concreta
         vehicles = new VehicleGateway().readAll();
         vehicles = vehicles.stream().filter(vehicle -> vehicle.getClientId().equals(Integer.toString(clientDto.getId()))).collect(Collectors.toList());

@@ -14,8 +14,8 @@
             <property name="javax.persistence.jdbc.user" value="${db.username}"/>
             <property name="javax.persistence.jdbc.password" value="${db.password}" />
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="${db.hbm2ddl.auto}" value="${db.hbm2ddl.auto.key}" />
         </properties>
     </persistence-unit>
 

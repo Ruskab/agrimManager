@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+
+    <p:dialog id="mechanicCreateDialog" widgetVar="vmechanicCreateDialog" styleClass="mechanic-create-dialog"
+              header="Mechanic Full Info" modal="true"
+              responsive="true" showEffect="fade" hideEffect="fade" resizable="false">
+
+        <p:panelGrid columns="3" layout="grid" columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-5,ui-g-12 ui-md-4">
+            <f:facet name="header">
+                <h:outputText value="#{msg['web.mechanics.create.header']}"></h:outputText>
+            </f:facet>
+            <h:outputLabel for="username"
+                           value="#{msg['web.mechanics.create.username']}"/>
+            <p:inputText id="username" value="#{mechanicCreateBean.mechanicDto.name}"
+                         required="true"/>
+            <p:message for="username"/>
+
+            <h:outputLabel for="password" value="#{msg['web.mechanics.create.password']}"/>
+            <p:inputText id="password" value="#{mechanicCreateBean.mechanicDto.password}" required="true"
+                         label="passrowrd"/>
+            <p:message for="password"/>
+
+            <h:outputLabel for="rolesChecboxMenu" value="#{msg['web.mechanics.create.roles']}"/>
+
+
+            <p:selectCheckboxMenu id="rolesChecboxMenu" value="#{mechanicCreateBean.mechanicDto.roles}" label="roles">
+                <f:selectItems value="#{mechanicCreateBean.roles}"/>
+            </p:selectCheckboxMenu>
+            <p:message for="rolesChecboxMenu"/>
+
+        </p:panelGrid>
+        <f:facet name="footer">
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton value="Create"
+                                     process="@form"
+                                     action="#{mechanicCreateBean.create}"
+                                     oncomplete="PF('vmechanicCreateDialog').hide()"/>
+                </f:facet>
+            </p:toolbar>
+
+        </f:facet>
+    </p:dialog>
+</composite:implementation>
+
+</html>

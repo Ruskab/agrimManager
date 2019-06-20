@@ -8,12 +8,12 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-    XHTML
+    <!--PRIMEFACES THEMES-->
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
-    <!--Iconos primefaces-->
+    <!--PRIMEFACES ICONS-->
     <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>
@@ -22,17 +22,16 @@
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/faces-config.xml</param-value>
     </context-param>
-
     <mime-mapping>
         <extension>woff2</extension>
         <mime-type>application/x-font-woff2</mime-type>
     </mime-mapping>
-    <!-- Welcome page -->
+    <!-- WELCOME PAGE -->
     <welcome-file-list>
-        <welcome-file>faces/backoffice/clients.xhtml</welcome-file>
+        <welcome-file>faces/user_access/loginPage.xhtml</welcome-file>
     </welcome-file-list>
 
-    <!-- JSF mapping -->
+    <!-- JSF MAPPING -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -40,11 +39,30 @@
     </servlet>
 
     <servlet>
+        <servlet-name>Jersey2Config</servlet-name>
+        <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>0.0.0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:8080/api/v0</param-value>
+        </init-param>
+
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet>
         <servlet-name>Jersey Api Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>api.api_controllers</param-value>
+            <param-value>
+                io.swagger.jaxrs.listing,
+                api.api_controllers,
+                api.exceptions.handlers
+            </param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -52,11 +70,11 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>Jersey Api Service</servlet-name>
         <url-pattern>/api/v0/*</url-pattern>
     </servlet-mapping>
-
     <!-- Map these files with JSF -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
