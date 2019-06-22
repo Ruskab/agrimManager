@@ -8,18 +8,23 @@ import api.entity.Mechanic;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MechanicBusinessController {
 
     private static final String MECHANIC_ID = "Mechanic id: ";
+    private InterventionBusinesssController intrventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
         this.validate(mechanicDto, "mechanicDto");
         this.validate(mechanicDto.getName(), "mechanicDto Name");
         this.validate(mechanicDto.getPassword(), "mechanicDto Password");
         Mechanic mechanic = new Mechanic(mechanicDto);
+        List<InterventionDto> interventionDtos = new ArrayList<>();
+        mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(intrventionBO.read(Integer.toString(id))));
+        mechanic.setInterventionList(interventionDtos.stream().map(Intervention::new).collect(Collectors.toList()));
         DaoFactory.getFactory().getMechanicDao().create(mechanic);
         return mechanic.getId();
     }

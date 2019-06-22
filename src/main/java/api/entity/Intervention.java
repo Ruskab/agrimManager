@@ -1,5 +1,7 @@
 package api.entity;
 
+import api.dtos.InterventionDto;
+
 import javax.persistence.*;
 import java.time.Period;
 import java.util.Optional;
@@ -41,6 +43,10 @@ public class Intervention {
         this.title = title;
         this.state = state;
         this.period = period;
+    }
+
+    public Intervention(InterventionDto interventionDto){
+        //todo plantearme si Intervention deberia de conocer a su BO
     }
 
 

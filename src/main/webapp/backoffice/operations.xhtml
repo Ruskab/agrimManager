@@ -36,7 +36,7 @@
                 </h:form>
                 <h:form id="createMechanicForm">
                     <p:panel id="createNewUser" header="Create new users">
-                        <p:commandButton value="Create" rendered="#{not operationsBean.mechanic.hasRole('ADMIN')}"
+                        <p:commandButton value="Create" rendered="#{operationsBean.mechanic.hasRole('ADMIN')}"
                                          oncomplete="PF('vmechanicCreateDialog').show()" />
                         <agrim:mechanicCreateDialog/>
                     </p:panel>
