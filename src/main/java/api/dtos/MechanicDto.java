@@ -5,6 +5,7 @@ import api.entity.Mechanic;
 import api.entity.Role;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class MechanicDto implements Serializable {
 
     private String password;
 
-    private List<Integer> interventionIds;
+    private List<Integer> interventionIds = new ArrayList<>();
 
     private Set<Role> roles = new HashSet<>();
 
@@ -109,4 +110,14 @@ public class MechanicDto implements Serializable {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "MechanicDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", interventionIds=" + interventionIds +
+                ", roles=" + roles +
+                '}';
+    }
 }

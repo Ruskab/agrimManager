@@ -4,49 +4,76 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
 import api.entity.Client;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class ClientBusinessControllerIT {
 
     private static ClientBusinessController clientBusinessController;
-    private static List<Integer> createdUsers;
+    private static List<Integer> createdclients;
 
     @BeforeAll
     static void prepare() {
-        createdUsers = new ArrayList<>();
+        createdclients = new ArrayList<>();
         DaoFactory.setFactory(new DaoFactoryHibr());
         clientBusinessController = new ClientBusinessController();
-        createdUsers.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
-        createdUsers.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
+        createdclients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
+        createdclients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
+    }
+
+
+    @Test
+    void testCreateClient() {
+        int createdClientId= clientBusinessController.create(new ClientDto("fullName", 1));
+        createdclients.add(createdClientId);
+
+        Optional<Client> createdClient = DaoFactory.getFactory().getClientDao().read(createdClientId);
+        assertThat(createdClient.isPresent(), is(true));
+        assertThat(createdClient.get().getId(), is(createdClientId));
+        assertThat(createdClient.get().getFullName(), is("fullName"));
+        assertThat(createdClient.get().getHours(), is(1));
     }
 
     @Test
-    public void testReadClient() {
+    public void testReadMechanic() {
+        ClientDto clientDto = clientBusinessController.read(Integer.toString(createdclients.get(0)));
+
+        assertThat(clientDto.getFullName(),is("fakeFullNameTest"));
+        assertThat(clientDto.getHours(),is(1));
+    }
+
+    @Test
+    public void testReadAllClients() {
         List<ClientDto> clients = this.clientBusinessController.readAll();
-        assertThat(clients.size(),is(greaterThan(0)));
+        assertThat(clients.size(),is(greaterThanOrEqualTo(2)));
     }
 
     @Test
-    public void testUpdateUser(){
-        int createdUserId = createdUsers.get(0);
-        String createdUserFullName = DaoFactory.getFactory().getClientDao().read(createdUserId).get().getFullName();
+    public void testUpdateClient(){
+        int createdClientId = createdclients.get(0);
+        String createdClientFullName = DaoFactory.getFactory().getClientDao().read(createdClientId).get().getFullName();
 
-        clientBusinessController.update(Integer.toString(createdUserId), new ClientDto("updatedName",1));
-        Optional<Client> updatedUser = DaoFactory.getFactory().getClientDao().read(createdUserId);
+        clientBusinessController.update(Integer.toString(createdClientId), new ClientDto("updatedName",1));
+        Optional<Client> updatedUser = DaoFactory.getFactory().getClientDao().read(createdClientId);
 
-        assertThat(createdUserFullName, is("fakeFullNameTest"  ));
+        assertThat(createdClientFullName, is("fakeFullNameTest"  ));
         assertThat(updatedUser.get().getFullName(), is("updatedName"));
     }
 
+
+
     @AfterAll
     static void deleteCreatedUsers(){
-        createdUsers.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
+        createdclients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
     }
 
 
