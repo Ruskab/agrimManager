@@ -1,28 +1,41 @@
 .page {
     width: 100vw;
     height: 100vh;
-    border: 3px solid #db260f;
-}
-
-.header {
-    height: 100px;
-    border: 1px solid #db260f;
-}
-
-.content {
-    height: 100vh;
-    border: 1px solid #000000;
-}
-
-.footer {
 }
 
 .bordered {
     border: 1px solid #000;
-    margin: 2px;
-    padding: 4px;
 }
 
 .outputLabel {
     font-weight: bold;
 }
+
+.ui-datascroller .ui-datascroller-item {
+    border-bottom: 1px solid #A8A8A8 !important;
+    padding: 5px;
+}
+
+@media (min-width: 960px) {
+    .clients-page .ui-dialog {
+        width: 950px ! important;
+    }
+}
+
+
+@media (min-width: 640px) and (max-width: 960px) {
+    .clients-page .ui-dialog {
+        width: 557px ! important;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 640px) {
+    .clients-page .ui-dialog {
+        width: 360px ! important;
+    }
+}
+
+.vehicles-datatable .ui-datatable-header {
+    text-align: right !important;
+}
+

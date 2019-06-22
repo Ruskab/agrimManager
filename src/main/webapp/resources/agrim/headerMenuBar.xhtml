@@ -14,7 +14,7 @@
 </composite:interface>
 
 <composite:implementation>
-    <div class="p-col bordered">
+    <div class="p-grid">
         <h:form>
             <p:growl id="headerMessages"/>
 
@@ -35,10 +35,11 @@
                             icon="fa fa fa-car fa-xs"/>
                 <p:menuitem value="#{msg['web.header.operations']}"
                             url="#{request.contextPath}/backoffice/operations.xhtml" icon="fa fa-xs fa-bomb"/>
+                <p:submenu label="#{username}" icon="pi pi-user">
+                    <p:menuitem value="#{msg['web.header.logout']}" action="#{loginBean.logout}"/>
+                    <p:separator/>
+                </p:submenu>
 
-                <f:facet name="options">
-                    <p:commandButton type="button" value="Logout" icon="pi pi-home"/>
-                </f:facet>
             </p:menubar>
         </h:form>
     </div>

@@ -2,11 +2,15 @@ package api.dtos;
 
 import api.entity.Intervention;
 import api.entity.Mechanic;
+import api.entity.Role;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MechanicDto {
+public class MechanicDto implements Serializable {
     private int id;
 
     private String name;
@@ -14,6 +18,8 @@ public class MechanicDto {
     private String password;
 
     private List<Integer> interventionIds;
+
+    private Set<Role> roles = new HashSet<>();
 
     public MechanicDto(String name, String password, List<Integer> interventionIds) {
         this.name = name;
@@ -26,6 +32,9 @@ public class MechanicDto {
         this.password = password;
     }
 
+    public MechanicDto() {
+    }
+
     public MechanicDto(Mechanic mechanic) {
         this.id = mechanic.getId();
         this.name = mechanic.getName();
@@ -34,6 +43,7 @@ public class MechanicDto {
                 .stream()
                 .map(Intervention::getId)
                 .collect(Collectors.toList());
+        this.roles = mechanic.getRoles();
     }
 
     public int getId() {
@@ -67,4 +77,36 @@ public class MechanicDto {
     public void setInterventionIds(List<Integer> interventionIds) {
         this.interventionIds = interventionIds;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean hasRole(Role role) {
+        return roles.contains(role);
+    }
+
+    public boolean hasAnyRole(List<Role> roles) {
+        return roles.stream().anyMatch(roles::contains);
+    }
+
+    public void addRole(Role role) {
+        if (!hasRole(role)) {
+            roles.add(role);
+        }
+    }
+
+    public boolean anyRoleGranted(Role... roles) {
+        for (Role role : roles) {
+            if (this.hasRole(role)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

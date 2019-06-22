@@ -1,8 +1,13 @@
 package api.entity;
 
+import api.dtos.MechanicDto;
+import api.converters.MechanicRoleConverter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "mechanic")
@@ -16,9 +21,14 @@ public class Mechanic {
 
     private String password;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "mechanic_roles", joinColumns = @JoinColumn(name = "ID"))
+    @Enumerated(EnumType.STRING)
+    @Convert(converter = MechanicRoleConverter.class)
+    private Set<Role> roles = new HashSet<>();
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Intervention> interventionList;
-
 
     public Mechanic() {
         //JPA
@@ -28,6 +38,12 @@ public class Mechanic {
         this.name = name;
         this.password = password;
         this.interventionList = new ArrayList<>();
+    }
+
+    public Mechanic(MechanicDto mechanicDto){
+        this.name = mechanicDto.getName();
+        this.password = mechanicDto.getPassword();
+        this.roles = mechanicDto.getRoles();
     }
 
     public Mechanic(String name, String password, List<Intervention> interventions) {
@@ -62,6 +78,14 @@ public class Mechanic {
 
     public void setInterventionList(List<Intervention> interventionList) {
         this.interventionList = interventionList;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
 }

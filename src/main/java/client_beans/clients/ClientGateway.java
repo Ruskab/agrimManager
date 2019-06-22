@@ -16,12 +16,14 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.beans.Transient;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
-public class ClientGateway {
+public class ClientGateway implements Serializable {
 
     Client client;
     Properties properties;
@@ -66,5 +68,11 @@ public class ClientGateway {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + clientId)
                 .request(MediaType.APPLICATION_JSON)
                 .get(ClientDto.class);
+    }
+
+    public void delete(int id) {
+        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + id)
+                .request(MediaType.APPLICATION_JSON)
+                .delete();
     }
 }

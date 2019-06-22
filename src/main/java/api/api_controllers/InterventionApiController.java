@@ -2,12 +2,13 @@ package api.api_controllers;
 
 import api.business_controllers.InterventionBusinesssController;
 import api.dtos.InterventionDto;
-import api.exceptions.ArgumentNotValidException;
-import api.exceptions.RequestInvalidException;
+import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
+import io.swagger.annotations.Api;
 
 import java.util.List;
 
+@Api(value="/interventions")
 public class InterventionApiController {
     public static final String INTERVENTIONS = "/interventions";
 
@@ -40,13 +41,14 @@ public class InterventionApiController {
 
     private void validate(Object property, String message) {
         if (property == null) {
-            throw new ArgumentNotValidException(message + " is missing");
+            throw new FieldInvalidException(message + " is missing");
         }
     }
 
+
     private void validateId(String id, String message) {
         if (!StringUtils.isStrictlyNumeric(id)) {
-            throw new RequestInvalidException(message + " Should be numeric");
+            throw new FieldInvalidException(message + " Should be numeric");
         }
     }
 

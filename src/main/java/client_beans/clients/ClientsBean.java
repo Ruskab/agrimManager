@@ -1,37 +1,69 @@
 package client_beans.clients;
 
-import api.business_controllers.ClientBusinessController;
 import api.dtos.ClientDto;
-import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortOrder;
+import org.primefaces.PrimeFaces;
 
-import javax.faces.bean.ManagedProperty;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@ManagedBean
 @ViewScoped
-public class ClientsBean {
+public class ClientsBean implements Serializable {
 
-    private LazyDataModel model;
+    private List<ClientDto> clients;
+    private ClientDto selectedClient;
 
-    @ManagedProperty("#{carService}")
-    private ClientBusinessController clientBusinessController;
-
-    public ClientsBean() {
-        model = new LazyDataModel<ClientDto>() {
-            @Override
-            public List<ClientDto> load(int first, int pageSize, String  sortField,
-                                        SortOrder sortOrder, Map<String,Object> filters) {
-                List<ClientDto> clientDtos;
-                clientDtos = clientBusinessController.readAll();
-                model.setRowCount(clientDtos.size());
-                return clientDtos;
-            }
-        };
+    @PostConstruct
+    public void init() {
+        clients = new ClientGateway().readAll();
     }
 
-    public LazyDataModel getModel() {
-        return model;
+    public void openClientDialog() {
+        List<String> clientParams = new ArrayList<>();
+        clientParams.add(Integer.toString(selectedClient.getId()));
+        Map<String, List<String>> params = new HashMap<>();
+        params.put("parameters", clientParams);
+        Map<String,Object> options = setupDialogOptions();
+        PrimeFaces.current().dialog().openDynamic("clientsInfo", options, params);
     }
+
+    public void openCreateClientDialog() {
+        Map<String,Object> options = setupDialogOptions();
+        PrimeFaces.current().dialog().openDynamic("clientsCreate", options, null);
+    }
+
+    private Map<String,Object> setupDialogOptions() {
+        Map<String,Object> options = new HashMap<>();
+        options.put("modal", true);
+        options.put("resizable", true);
+        options.put("responsive", true);
+        options.put("draggable", true);
+        options.put("height", 471);
+        options.put("contentWidth", "100%");
+        options.put("contentHeight", "100%");
+        return options;
+    }
+
+    public List<ClientDto> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<ClientDto> clients) {
+        this.clients = clients;
+    }
+
+    public ClientDto getSelectedClient() {
+        return selectedClient;
+    }
+
+    public void setSelectedClient(ClientDto selectedClient) {
+        this.selectedClient = selectedClient;
+    }
+
 }

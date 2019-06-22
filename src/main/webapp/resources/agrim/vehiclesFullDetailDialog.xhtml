@@ -16,85 +16,93 @@
 <composite:implementation>
     <c:set value="#{cc.attrs.selectedVehicle}" target="#{editBean}" property="selectedVehicleDto"></c:set>
 
-    <p:dialog id="vehicleDetail" widgetVar="vehicleEditDialog" header="Vehicles Full Info" modal="true" showEffect="fade"
-              hideEffect="fade" resizable="false" styleClass="vehicle-edit-dialog">
+    <p:dialog id="vehicleDetail" widgetVar="vehicleEditDialog" header="Vehicles Full Info" modal="true"
+              showEffect="fade"
+              hideEffect="fade" resizable="false" styleClass="vehicle-edit-dialog" responsive="true">
 
         <p:messages id="editVehicleMessages" for="editMessages" showDetail="true" closable="true">
-            <p:autoUpdate />
+            <p:autoUpdate/>
         </p:messages>
 
+        <div class="p-grid">
+            <p:tabView>
+                <p:tab id="basicInfoTab" title="Basic">
+                    <f:facet name="actions">
+                        <p:commandButton id="saveButton" value="Save"
+                                         process="@(.vehicle-edit-dialog)"
+                                         action="#{editBean.save}"
+                                         update="@(.vehicles-datatable), @(.edit-vehicle-panel)"/>
+                    </f:facet>
 
+                    <p:panelGrid layout="grid" columns="3" cellpadding="5"
+                                 columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-5,ui-g-12 ui-md-4">
 
-        <p:tabView>
-            <p:tab id="basicInfoTab" title="Basic">
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['web.vehicles.edit.basicinfo.header']}"></h:outputText>
+                        </f:facet>
 
-                <f:facet name="actions">
-                    <p:commandButton id="saveButton" value="Save"
-                                     process="@(.vehicle-edit-dialog)"
-                                     action="#{editBean.save}"
-                                     update="@(.vehicles-datatable), @(.edit-vehicle-panel)"/>
-                </f:facet>
-
-                <p:panel id="editVehiclePanel" header="#{msg['web.vehicles.edit.basicinfo.header']}" styleClass="edit-vehicle-panel">
-
-                    <h:panelGrid columns="3" cellpadding="5">
-
-                        <h:outputLabel for="registationplate" value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
-                        <p:inputText id="registationplate" value="#{editBean.selectedVehicleDto.registrationPlate}" required="true"/>
-                        <p:message for="registationplate" />
-
+                        <h:outputLabel for="registationplate"
+                                       value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
+                        <p:inputText id="registationplate" value="#{editBean.selectedVehicleDto.registrationPlate}"
+                                     required="true"/>
+                        <p:message for="registationplate"/>
 
                         <h:outputText for="brand" value="#{msg['web.vehicles.edit.basicinfo.brand']}"/>
-                        <p:inputText id="brand" value="#{editBean.selectedVehicleDto.brand}" required="true" label="brand"/>
-                        <p:message for="brand" />
-
+                        <p:inputText id="brand" value="#{editBean.selectedVehicleDto.brand}" required="true"
+                                     label="brand"/>
+                        <p:message for="brand"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
                         <p:inputText id="client" value="#{cc.attrs.clientName}" readonly="true"/>
-                        <p:message for="client" />
+                        <p:message for="client"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
-                        <p:inputText id="bodyOnFrame" value="#{editBean.selectedVehicleDto.bodyOnFrame}" label="bodyframe"/>
-                        <p:message for="bodyOnFrame" />
+                        <p:inputText id="bodyOnFrame" value="#{editBean.selectedVehicleDto.bodyOnFrame}"
+                                     label="bodyframe"/>
+                        <p:message for="bodyOnFrame"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.KMS']}"/>
                         <p:inputText id="KMS" value="#{editBean.selectedVehicleDto.kms}" label="kms"/>
-                        <p:message for="KMS" />
+                        <p:message for="KMS"/>
+                    </p:panelGrid>
+                </p:tab>
 
-                    </h:panelGrid>
-                </p:panel>
-            </p:tab>
-            <p:tab id="ITV" title="ITV">
-                <f:facet name="actions">
-                    <p:commandButton value="Save" action="#{editBean.save}" />
-                </f:facet>
-                <p:panel header="#{msg['web.vehicles.edit.itv.header']}">
+                <p:tab id="ITV" title="ITV">
+                    <f:facet name="actions">
+                        <p:commandButton value="Save" action="#{editBean.save}"/>
+                    </f:facet>
                     <p:messages/>
-                    <h:panelGrid columns="2" columnClasses="label, value">
+                    <p:panelGrid layout="grid" columns="2"  columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-7">
+
+                        <f:facet name="header"><h:outputText
+                                value="#{msg['web.vehicles.edit.itv.header']}"></h:outputText></f:facet>
 
                         <p:outputLabel for="lastItvDateBtn" value="#{msg['web.vehicles.edit.itv.last']}"/>
-                        <p:calendar id="lastItvDateBtn" value="#{editBean.selectedVehicleDto.itvDate}" showOn="button" pattern="dd/MM/yyyy">
+                        <p:calendar id="lastItvDateBtn" value="#{editBean.selectedVehicleDto.itvDate}"
+                                    showOn="button" pattern="dd/MM/yyyy">
                             <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
                         </p:calendar>
 
                         <p:outputLabel for="nextItvDateBtn" value="#{msg['web.vehicles.edit.itv.next']}"/>
-                        <p:calendar id="nextItvDateBtn" value="#{editBean.selectedVehicleDto.nextItvDate}" showOn="button" pattern="dd/MM/yyyy">
+                        <p:calendar id="nextItvDateBtn" value="#{editBean.selectedVehicleDto.nextItvDate}"
+                                    showOn="button" pattern="dd/MM/yyyy">
                             <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
                         </p:calendar>
+                    </p:panelGrid>
+                </p:tab>
 
-                    </h:panelGrid>
-                </p:panel>
-            </p:tab>
-            <p:tab id="revision" title="Revision">
-                <f:facet name="actions">
-                    <p:commandButton  value="Save" action="#{editBean.save}"/>
-                </f:facet>
-                <p:panel header="#{msg['web.vehicles.edit.revision.header']}">
+                <p:tab id="revision" title="Revision">
+                    <f:facet name="actions">
+                        <p:commandButton value="Save" action="#{editBean.save}"/>
+                    </f:facet>
                     <p:messages/>
-                    <h:panelGrid columns="2" columnClasses="label, value">
-
-                        <p:outputLabel for="lastRevisionBtn" value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"/>
-                        <p:calendar id="lastRevisionBtn" value="#{editBean.selectedVehicleDto.lastRevisionDate}" showOn="button" pattern="dd/MM/yyyy">
+                    <p:panelGrid layout="grid" columns="2" columnClasses="ui-g-12 ui-md-4,ui-g-12 ui-md-6">
+                        <f:facet name="header"><h:outputText
+                                value="#{msg['web.vehicles.edit.revision.header']}"></h:outputText></f:facet>
+                        <p:outputLabel for="lastRevisionBtn"
+                                       value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"/>
+                        <p:calendar id="lastRevisionBtn" value="#{editBean.selectedVehicleDto.lastRevisionDate}"
+                                    showOn="button" pattern="dd/MM/yyyy">
                             <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
                         </p:calendar>
 
@@ -109,12 +117,11 @@
 
                         <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}"/>
                         <p:inputText value="#{editBean.selectedVehicleDto.motorOil}"/>
+                    </p:panelGrid>
+                </p:tab>
 
-                    </h:panelGrid>
-                </p:panel>
-            </p:tab>
-        </p:tabView>
-
+            </p:tabView>
+        </div>
     </p:dialog>
 </composite:implementation>
 

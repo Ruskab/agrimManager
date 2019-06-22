@@ -5,7 +5,8 @@ import api.dtos.InterventionDto;
 import api.entity.Intervention;
 import api.entity.State;
 import api.entity.Vehicle;
-import api.exceptions.ArgumentNotValidException;
+import api.exceptions.BadRequestException;
+import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
 import com.mysql.cj.util.StringUtils;
 
@@ -29,7 +30,7 @@ public class InterventionBusinesssController {
 
     public static void setVehicle(InterventionDto interventionDto, Intervention intervention) {
         Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(interventionDto.getVehicleId()))
-                .orElseThrow(() -> new ArgumentNotValidException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
+                .orElseThrow(() -> new BadRequestException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
         intervention.setVehicle(vehicle);
     }
 
@@ -39,6 +40,7 @@ public class InterventionBusinesssController {
         DaoFactory.getFactory().getInterventionDao().deleteById(intervention.getId());
     }
 
+
     public static boolean isCaffeIntervention(InterventionDto interventionDto) {
         return (interventionDto.getVehicleId() == null || interventionDto.getVehicleId().isEmpty())
                 && interventionDto.getState().equals(State.CAFFE);
@@ -46,10 +48,10 @@ public class InterventionBusinesssController {
 
     private void validateInterventionDto(InterventionDto interventionDto) {
         if (interventionDto.getState().equals(State.CAFFE) && interventionDto.getVehicleId() != null) {
-            throw new ArgumentNotValidException("Invalid intervention, CAFFE shouldnt have vehicle id: " + interventionDto.getVehicleId());
+            throw new BadRequestException("Invalid intervention, CAFFE shouldnt have vehicle id: " + interventionDto.getVehicleId());
         }
         if (interventionDto.getState().equals(State.REPAIR) && interventionDto.getVehicleId() == null) {
-            throw new ArgumentNotValidException("Invalid intervention, REPAIR should have vehicle id");
+            throw new BadRequestException("Invalid intervention, REPAIR should have vehicle id");
         }
     }
 
@@ -73,7 +75,7 @@ public class InterventionBusinesssController {
 
     private void validate(Object property, String message) {
         if (property == null) {
-            throw new ArgumentNotValidException(message + " is missing");
+            throw new FieldInvalidException(message + " is missing");
         }
     }
 }

@@ -25,7 +25,6 @@ public class CreateBean {
     private boolean skip;
     private VehicleDto selectedVehicleDto;
     private VehicleGateway vehicleGateway;
-    private ClientGateway clientGateway;
 
     private List<ClientDto> clientDtos;
     private ClientDto selectedClient;
@@ -33,9 +32,8 @@ public class CreateBean {
     @PostConstruct
     public void init() {
         vehicleGateway = new VehicleGateway();
-        clientGateway = new ClientGateway();
         selectedVehicleDto = new VehicleDto();
-        clientDtos = clientGateway.readAll();
+        clientDtos = new ClientGateway().readAll();
     }
 
     public VehicleDto getSelectedVehicleDto() {
@@ -58,10 +56,10 @@ public class CreateBean {
         if (selectedClient == null) {
             LOGGER.error("Cliente vacio");
             FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
+            return;
         }
         selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
-
-        String vehicleId = vehicleGateway.create(selectedVehicleDto);
+        String vehicleId =  vehicleGateway.create(selectedVehicleDto);
         String message = StringUtils.isStrictlyNumeric(vehicleId) ? "Successful" : "Error";
 
         if ("Error".equals(message)) {
