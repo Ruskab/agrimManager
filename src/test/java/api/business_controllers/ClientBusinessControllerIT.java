@@ -69,8 +69,6 @@ public class ClientBusinessControllerIT {
         assertThat(updatedUser.get().getFullName(), is("updatedName"));
     }
 
-
-
     @AfterAll
     static void deleteCreatedUsers(){
         createdclients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
