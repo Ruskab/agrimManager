@@ -20,6 +20,7 @@ public class InterventionDto {
     public InterventionDto(String title, Enum state, String vehicleId, String repairingPackId, Period period) {
         this.title = title;
         this.state = state;
+        //todo si es de caffe no deberia de tener vehicle
         this.vehicleId = vehicleId;
         this.repairingPackId = repairingPackId;
         this.period = period;
