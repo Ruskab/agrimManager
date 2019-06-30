@@ -1,8 +1,10 @@
 package api.dtos;
 
 import api.entity.Intervention;
+import api.entity.State;
 
-import java.time.Period;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class InterventionDto {
     private int id;
@@ -11,19 +13,22 @@ public class InterventionDto {
 
     private Enum state;
 
-    private Period period;
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
 
     private String vehicleId;
 
     private String repairingPackId;
 
-    public InterventionDto(String title, Enum state, String vehicleId, String repairingPackId, Period period) {
+    public InterventionDto(String title, State state, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
         this.title = title;
         this.state = state;
         //todo si es de caffe no deberia de tener vehicle
         this.vehicleId = vehicleId;
         this.repairingPackId = repairingPackId;
-        this.period = period;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public InterventionDto(Intervention intervention) {
@@ -32,7 +37,7 @@ public class InterventionDto {
         this.state = intervention.getState();
         intervention.getVehicle().ifPresent(vehicle -> this.vehicleId = Integer.toString(vehicle.getId()));
         intervention.getRepairingPack().ifPresent(repairingPack -> this.repairingPackId = Integer.toString(repairingPack.getId()));
-        this.period = intervention.getPeriod();
+        this.startTime = intervention();
     }
 
 
@@ -76,13 +81,6 @@ public class InterventionDto {
         this.repairingPackId = repairingPackId;
     }
 
-    public Period getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(Period period) {
-        this.period = period;
-    }
 
     @Override
     public String toString() {
@@ -93,5 +91,21 @@ public class InterventionDto {
                 ", vehicleId=" + vehicleId +
                 ", repairingPackId=" + repairingPackId +
                 '}';
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 }

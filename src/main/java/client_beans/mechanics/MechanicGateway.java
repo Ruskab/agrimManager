@@ -1,5 +1,6 @@
 package client_beans.mechanics;
 
+import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import client_beans.util.PropertyLoader;
@@ -72,5 +73,11 @@ public class MechanicGateway {
         client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .delete();
+    }
+
+    public String addIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + mechanic)
+                .request(MediaType.APPLICATION_JSON)
+                .post();
     }
 }

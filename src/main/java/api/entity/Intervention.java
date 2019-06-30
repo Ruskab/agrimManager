@@ -3,7 +3,7 @@ package api.entity;
 import api.dtos.InterventionDto;
 
 import javax.persistence.*;
-import java.time.Period;
+import java.time.Duration;
 import java.util.Optional;
 
 @Entity
@@ -18,7 +18,7 @@ public class Intervention {
 
     private Enum state;
 
-    private Period period;
+    private Duration period;
 
     @JoinColumn
     @ManyToOne
@@ -32,14 +32,14 @@ public class Intervention {
         //JPA
     }
 
-    public Intervention(String title, Enum state, Period period, Vehicle vehicle) {
+    public Intervention(String title, Enum state, Duration period, Vehicle vehicle) {
         this.title = title;
         this.state = state;
         this.period = period;
         this.vehicle = vehicle;
     }
 
-    public Intervention(String title, Enum state, Period period) {
+    public Intervention(String title, Enum state, Duration period) {
         this.title = title;
         this.state = state;
         this.period = period;
@@ -74,11 +74,11 @@ public class Intervention {
         this.state = state;
     }
 
-    public Period getPeriod() {
+    public Duration getPeriod() {
         return period;
     }
 
-    public void setPeriod(Period period) {
+    public void setPeriod(Duration period) {
         this.period = period;
     }
 

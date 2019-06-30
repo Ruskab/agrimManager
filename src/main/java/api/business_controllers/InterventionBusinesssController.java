@@ -18,7 +18,7 @@ public class InterventionBusinesssController {
     public int create(InterventionDto interventionDto) {
         validateInterventionDto(interventionDto);
 
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getPeriod());
+        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getDuration());
 
         if (!isCaffeIntervention(interventionDto)) {
             setVehicle(interventionDto, intervention);

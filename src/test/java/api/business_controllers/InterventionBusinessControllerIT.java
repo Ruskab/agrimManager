@@ -8,12 +8,12 @@ import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Intervention;
 import api.entity.State;
-import api.entity.Vehicle;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,13 +128,13 @@ public class InterventionBusinessControllerIT {
 
     private static InterventionDto createInterventionDto(String vehicleId) {
         return new InterventionDto("Reparacion", State.REPAIR, vehicleId, null,
-                Period.between(LocalDate.now(), LocalDate.now().plusDays(1)));
+                Period.between(LocalDate.now(), LocalDate.now().plusDays(1)), LocalDateTime.now());
     }
 
 
     private static InterventionDto createCaffeInterventionDto() {
         return new InterventionDto("Caffe", State.CAFFE, null, null,
-                Period.between(LocalDate.now(), LocalDate.now().plusDays(1)));
+                Period.between(LocalDate.now(), LocalDate.now().plusDays(1)), LocalDateTime.now());
     }
 
     private static VehicleDto createVehicleDto(String clientId, String registrationPlate) {

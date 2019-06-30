@@ -1,18 +1,17 @@
 package client_beans;
 
 import api.dtos.ClientDto;
+import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
+import api.entity.State;
 import client_beans.clients.ClientGateway;
+import client_beans.interventions.InterventionGateway;
+import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.omnifaces.util.Faces;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.DashboardReorderEvent;
@@ -27,10 +26,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
-
-import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
 
 @ManagedBean
@@ -39,11 +38,21 @@ public class OperationsBean {
 
     private VehicleGateway vehicleGateway = new VehicleGateway();
     private ClientGateway clientGateway = new ClientGateway();
+    private InterventionGateway interventionGateway = new InterventionGateway();
+    private MechanicGateway mechanicGateway = new MechanicGateway();
     private MechanicDto mechanic;
     public static final String SUCCESS = "Success";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
     private DashboardModel model;
     private Random rnd = new Random();
+
+    public MechanicDto getMechanic() {
+        return mechanic;
+    }
+
+    public void setMechanic(MechanicDto mechanic) {
+        this.mechanic = mechanic;
+    }
 
     @PostConstruct
     public void init() {
@@ -101,6 +110,7 @@ public class OperationsBean {
     public void generateFakeData() {
         List<Integer> clientsIds = new ArrayList<>();
         List<Integer> vehiclesIds = new ArrayList<>();
+        List<Integer> interventionsIds = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
             ClientDto clientDto = new ClientDto(getRandomName(), rnd.ints(0, 40).findFirst().getAsInt());
@@ -108,13 +118,21 @@ public class OperationsBean {
         }
         addMessage(SUCCESS, "Added new 30 clients");
         for (int i = 0; i < 60; i++) {
-
             Collections.shuffle(clientsIds);
             VehicleDto vehicleDto = createFakeVehicleDto(clientsIds.get(0).toString());
             vehiclesIds.add(addFakeVehicle(vehicleDto));
         }
         addMessage(SUCCESS, "Added new 60 vehicles");
+
+        for (int i = 0; i < 10; i++){
+            Collections.shuffle(vehiclesIds);
+            InterventionDto interventionDto = createFakeInterventionDto(vehiclesIds.get(0).toString());
+            interventionsIds.add(addFakeIntervention(interventionDto));
+        }
     }
+
+
+
 
     private String getRandomName() {
         List<String> randomNames = Arrays.asList("Consuela Brumbaugh", "Magdalen Slocumb", "Modesta Alto", "Geoffrey Sandridge", "Ignacia Morace", "An Madson", "Angelica Wilder", "Kanisha Pinard", "Janae Eakin", "Rogelio Bohan", "Rhonda Yopp", "Hyon Jiang", "Linnie Embree", "Mathilda Burgard", "Foster Adkison", "Fernande Cranford", "Britteny Bevil", "Son Pharr", "Nanci Orourke", "Mandie Bernett", "Christene Delucia", "Elly Garbett", "Terra Cullinan", "Anita Grimes", "Lemuel Boyers", "Simona Mccrae", "Madelene Flickinger", "Dave Chadwell", "Adam Dirksen", "Piper Kirker");
@@ -124,6 +142,10 @@ public class OperationsBean {
 
     private Integer addFakeVehicle(VehicleDto vehicleDto) {
         return Integer.parseInt(vehicleGateway.create(vehicleDto));
+    }
+
+    private Integer addFakeIntervention(InterventionDto interventionDto) {
+        return Integer.parseInt(mechanicGateway.addIntervention(mechanic, interventionDto));
     }
 
     private VehicleDto createFakeVehicleDto(String clientId) {
@@ -162,6 +184,23 @@ public class OperationsBean {
         return salt.toString();
     }
 
+    private InterventionDto createFakeInterventionDto(String vehicleId) {
+        List<String> titles = Arrays.asList("Ruedas", "Volante", "Capo", "Sistema", "Maletero", "Puerta", "Pintura", "faros", "Luces", "motor");
+        Collections.shuffle(titles);
+        int startTime = getStartTime();
+        int endTime = getEndTime();
+        InterventionDto interventionDto = new InterventionDto(titles.get(0), State.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(endTime));
+        return interventionDto;
+    }
+
+    private int getEndTime() {
+        return rnd.ints(1, 20).findFirst().getAsInt();
+    }
+
+    private int getStartTime() {
+        return rnd.ints(0,8).findFirst().getAsInt();
+    }
+
     private Integer addFakeClient(ClientDto clientDto) {
         return Integer.parseInt(clientGateway.create(clientDto));
     }
@@ -185,12 +224,8 @@ public class OperationsBean {
         clientDtoLIst.forEach(clientDto -> clientGateway.delete(clientDto.getId()));
     }
 
-    public MechanicDto getMechanic() {
-        return mechanic;
-    }
 
-    public void setMechanic(MechanicDto mechanic) {
-        this.mechanic = mechanic;
-    }
+
+
 }
 
