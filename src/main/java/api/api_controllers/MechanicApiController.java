@@ -38,13 +38,15 @@ public class MechanicApiController {
         return this.mechanicBusinesssController.create(mechanicDto);
     }
 
-    //@POST
-    //@ApiOperation(value = "Create new Mechanic Intervention")
-    //@Consumes(MediaType.APPLICATION_JSON)
-    public void createIntervention(String mechanicId, InterventionDto interventionDto) {
+    @POST
+    @ApiOperation(value = "Create new Mechanic Intervention")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}/interventions")
+    public void createIntervention(@PathParam("id") String mechanicId, InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
         this.validate(interventionDto.getState(), "State");
-        this.validate(interventionDto.getDuration(), "Period");
+        this.validate(interventionDto.getStartTime(), "Start Time");
+        this.validate(interventionDto.getEndTime(), "EndTime Time");
         this.validateId(mechanicId, "Mechanic id");
         this.mechanicBusinesssController.createIntervention(mechanicId, interventionDto);
     }

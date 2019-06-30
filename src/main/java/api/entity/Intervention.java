@@ -3,12 +3,15 @@ package api.entity;
 import api.dtos.InterventionDto;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Entity
 @Table(name = "intervention")
-public class Intervention {
+public class Intervention implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +19,11 @@ public class Intervention {
 
     private String title;
 
-    private Enum state;
+    private State state;
 
-    private Duration period;
+    private LocalDate startTime;
+
+    private LocalDate endTime;
 
     @JoinColumn
     @ManyToOne
@@ -32,17 +37,17 @@ public class Intervention {
         //JPA
     }
 
-    public Intervention(String title, Enum state, Duration period, Vehicle vehicle) {
+    public Intervention(String title, State state) {
         this.title = title;
         this.state = state;
-        this.period = period;
         this.vehicle = vehicle;
     }
 
-    public Intervention(String title, Enum state, Duration period) {
+    public Intervention(String title, State state, LocalDate startTIme, LocalDate endTime) {
         this.title = title;
         this.state = state;
-        this.period = period;
+        this.startTime = startTIme;
+        this.endTime = endTime;
     }
 
     public Intervention(InterventionDto interventionDto){
@@ -66,20 +71,12 @@ public class Intervention {
         this.title = title;
     }
 
-    public Enum getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(Enum state) {
+    public void setState(State state) {
         this.state = state;
-    }
-
-    public Duration getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(Duration period) {
-        this.period = period;
     }
 
     public Optional<Vehicle> getVehicle() {
@@ -96,5 +93,21 @@ public class Intervention {
 
     public void setRepairingPack(RepairingPack repairingPack) {
         this.repairingPack = repairingPack;
+    }
+
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDate startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDate endTime) {
+        this.endTime = endTime;
     }
 }

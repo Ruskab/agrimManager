@@ -39,7 +39,7 @@ public class MechanicBusinessController {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
                     .orElseThrow(() -> new NotFoundException("Mechanic not found"));
 
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getDuration());
+        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState());
 
         if (!InterventionBusinesssController.isCaffeIntervention(interventionDto)) {
             InterventionBusinesssController.setVehicle(interventionDto, intervention);

@@ -2,26 +2,34 @@ package api.dtos;
 
 import api.entity.Intervention;
 import api.entity.State;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class InterventionDto {
+public class InterventionDto implements Serializable {
     private int id;
 
     private String title;
 
-    private Enum state;
+    private State state;
 
-    private LocalDateTime startTime;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate startTime;
 
-    private LocalDateTime endTime;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate endTime;
 
     private String vehicleId;
 
     private String repairingPackId;
 
-    public InterventionDto(String title, State state, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
+    public InterventionDto(String title, State state, String vehicleId, String repairingPackId, LocalDate startTime, LocalDate endTime) {
         this.title = title;
         this.state = state;
         //todo si es de caffe no deberia de tener vehicle
@@ -37,9 +45,13 @@ public class InterventionDto {
         this.state = intervention.getState();
         intervention.getVehicle().ifPresent(vehicle -> this.vehicleId = Integer.toString(vehicle.getId()));
         intervention.getRepairingPack().ifPresent(repairingPack -> this.repairingPackId = Integer.toString(repairingPack.getId()));
-        this.startTime = intervention();
+        this.startTime = intervention.getStartTime();
+        this.endTime = intervention.getEndTime();
     }
 
+    public InterventionDto(){
+
+    }
 
     public int getId() {
         return id;
@@ -57,11 +69,11 @@ public class InterventionDto {
         this.title = title;
     }
 
-    public Enum getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(Enum state) {
+    public void setState(State state) {
         this.state = state;
     }
 
@@ -93,19 +105,19 @@ public class InterventionDto {
                 '}';
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(LocalDate endTime) {
         this.endTime = endTime;
     }
 }

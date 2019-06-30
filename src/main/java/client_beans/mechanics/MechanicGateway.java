@@ -78,6 +78,6 @@ public class MechanicGateway {
     public String addIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + mechanic)
                 .request(MediaType.APPLICATION_JSON)
-                .post();
+                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE)).readEntity(String.class);
     }
 }
