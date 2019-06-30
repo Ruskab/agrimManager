@@ -57,16 +57,16 @@ public class MechanicGateway {
 
     }
 
-    public List<VehicleDto> readAll() {
+    public List<MechanicDto> readAll() {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS))
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
+                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<MechanicDto>>() {
                 });
     }
 
-    public VehicleDto read(String mechanicId) {
+    public MechanicDto read(String mechanicId) {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + mechanicId)
                 .request(MediaType.APPLICATION_JSON)
-                .get(VehicleDto.class);
+                .get(MechanicDto.class);
 
     }
 

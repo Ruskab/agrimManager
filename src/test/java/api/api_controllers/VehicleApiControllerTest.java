@@ -69,7 +69,7 @@ class VehicleApiControllerTest {
         assertThat(createdVehicleDto.getBrand(), is("Opel"));
         assertThat(createdVehicleDto.getKms(), is("03-03-2017 94744"));
         assertThat(createdVehicleDto.getBodyOnFrame(), is("VF1KC0JEF31065732"));
-        assertThat(createdVehicleDto.getLastRevisionDate(), is(LocalDate.now().minusMonths(2)));
+        assertThat(createdVehicleDto.getLastRevisionDate(), is(LocalDate .now().minusMonths(2)));
         assertThat(createdVehicleDto.getItvDate(), is(LocalDate.now().minusMonths(3)));
         assertThat(createdVehicleDto.getNextItvDate(), is(LocalDate.now().plusYears(1)));
         assertThat(createdVehicleDto.getAirFilterReference(), is("1813029400"));
