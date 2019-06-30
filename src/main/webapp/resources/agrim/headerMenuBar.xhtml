@@ -24,7 +24,7 @@
                     <p:separator/>
                     <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/api/v0/vehicles"/>
                     <p:separator/>
-                    <p:menuitem value="#{msg['web.header.interventions']}" url="#"/>
+                    <p:menuitem value="#{msg['web.header.interventions']}" url="#{request.contextPath}/api/v0/interventions"/>
                     <p:separator/>
                     <p:menuitem value="#{msg['web.header.repairing-paks']}" url="#"/>
                 </p:submenu>
@@ -33,6 +33,8 @@
                             icon="pi pi-users"/>
                 <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/backoffice/vehicles.xhtml"
                             icon="fa fa fa-car fa-xs"/>
+                <p:menuitem value="#{msg['web.header.interventions']}" url="#{request.contextPath}/backoffice/interventions.xhtml"
+                            icon="fa fa fa-wrench fa-xs"/>
                 <p:menuitem value="#{msg['web.header.operations']}"
                             url="#{request.contextPath}/backoffice/operations.xhtml" icon="fa fa-xs fa-bomb"/>
                 <p:submenu label="#{username}" icon="pi pi-user">

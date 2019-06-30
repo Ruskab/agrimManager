@@ -127,9 +127,10 @@ public class OperationsBean {
         for (int i = 0; i < 10; i++){
             Collections.shuffle(vehiclesIds);
             InterventionDto interventionDto = createFakeInterventionDto(vehiclesIds.get(0).toString());
-            interventionsIds.add(addFakeIntervention(interventionDto));
-            mechanicGateway.addIntervention(mechanic, interventionDto);
+            addFakeIntervention(interventionDto);
         }
+
+        addMessage(SUCCESS, "Added new 10 interventions to " + mechanic.getName());
     }
 
 
@@ -145,8 +146,8 @@ public class OperationsBean {
         return Integer.parseInt(vehicleGateway.create(vehicleDto));
     }
 
-    private Integer addFakeIntervention(InterventionDto interventionDto) {
-        return Integer.parseInt(mechanicGateway.addIntervention(mechanic, interventionDto));
+    private void addFakeIntervention(InterventionDto interventionDto) {
+        mechanicGateway.addIntervention(mechanic, interventionDto);
     }
 
     private VehicleDto createFakeVehicleDto(String clientId) {
@@ -190,7 +191,7 @@ public class OperationsBean {
         Collections.shuffle(titles);
         int startTime = getStartTime();
         int endTime = getEndTime();
-        InterventionDto interventionDto = new InterventionDto(titles.get(0), State.REPAIR, vehicleId, null, LocalDate.now().minusDays(startTime), LocalDate.now().plusDays(1));
+        InterventionDto interventionDto = new InterventionDto(titles.get(0), State.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
         return interventionDto;
     }
 

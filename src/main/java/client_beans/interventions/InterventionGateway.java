@@ -62,8 +62,8 @@ public class InterventionGateway {
                 });
     }
 
-    public InterventionDto read(String clientId) {
-        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + clientId)
+    public InterventionDto read(String interventionId) {
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + interventionId)
                 .request(MediaType.APPLICATION_JSON)
                 .get(InterventionDto.class);
     }

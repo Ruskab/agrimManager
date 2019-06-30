@@ -115,7 +115,7 @@ class VehicleApiControllerTest {
 
     private InterventionDto createInterventionDto(String vehicleId) {
         return new InterventionDto("Reparacion", State.REPAIR, vehicleId, null,
-                LocalDate.now().minusDays(1), LocalDate.now().plusDays(1));
+                LocalDateTime.now().minusHours(1), LocalDateTime.now().plusHours(1));
     }
 
     @Test

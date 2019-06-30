@@ -34,10 +34,26 @@
                             </p:outputPanel>
                         </f:facet>
 
-                        <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" priority="1">
-                            <h:outputText value="#{intervention.vehicle}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.startTime}" priority="3">
+                            <h:outputText value="#{intervention.startTime}"/>
                         </p:column>
-                        <p:column headerText="#{msg['web.interventions.datatable.header.state']}" sortBy="#{intervention.state}" filterBy="#{intervention.state}" priority="1">
+                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.endTime}" priority="3">
+                            <h:outputText value="#{intervention.endTime}"/>
+                        </p:column>
+
+                        <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{lazyInterventionsView.vehicleReference}" priority="1">
+                            <h:outputText value="#{lazyInterventionsView.vehicles.get(intervention.vehicleId)}"/>
+                        </p:column>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.type']}"
+                                  filterBy="#{intervention.state}" filterMatchMode="equals" priority="1">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('interventionTable').filter()" styleClass="custom-filter">
+
+                                    <f:selectItem itemLabel="All" itemValue="" />
+                                    <f:selectItem itemLabel="Repair" itemValue="REPAIR" />
+                                    <f:selectItem itemLabel="Caffe" itemValue="CAFFE" />
+                                </p:selectOneButton>
+                            </f:facet>
                             <h:outputText value="#{intervention.state}"/>
                         </p:column>
                     </p:dataTable>

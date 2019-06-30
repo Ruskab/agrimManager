@@ -1,5 +1,6 @@
 package api.business_controllers;
 
+import api.AgrimDomainFactory;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
@@ -47,8 +48,8 @@ public class InterventionBusinessControllerIT {
         createdclients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(Integer.toString(createdclients.get(0)), "111111")));
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(Integer.toString(createdclients.get(0)), "222222")));
-        createdInterventions.add(interventionBusinesssController.create(createInterventionDto(Integer.toString(createdVehicles.get(0)))));
-        createdInterventions.add(interventionBusinesssController.create(createCaffeInterventionDto()));
+        createdInterventions.add(interventionBusinesssController.create(AgrimDomainFactory.createInterventionDto(Integer.toString(createdVehicles.get(0)))));
+        createdInterventions.add(interventionBusinesssController.create(AgrimDomainFactory.createCaffeInterventionDto()));
     }
 
 
@@ -57,7 +58,7 @@ public class InterventionBusinessControllerIT {
         int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);
-        int createdInterventionId = interventionBusinesssController.create(createInterventionDto(Integer.toString(createdVehicleId)));
+        int createdInterventionId = interventionBusinesssController.create(AgrimDomainFactory.createInterventionDto(Integer.toString(createdVehicleId)));
 
         createdclients.add(createdClientId);
         createdVehicles.add(createdVehicleId);
@@ -73,7 +74,7 @@ public class InterventionBusinessControllerIT {
 
     @Test
     void testCreateInterventionCAFFE() {
-        int createdInterventionId = interventionBusinesssController.create(createCaffeInterventionDto());
+        int createdInterventionId = interventionBusinesssController.create(AgrimDomainFactory.createCaffeInterventionDto());
         createdInterventions.add(createdInterventionId);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId);
@@ -124,17 +125,6 @@ public class InterventionBusinessControllerIT {
         createdclients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
         createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
         createdInterventions.forEach(id -> DaoFactory.getFactory().getInterventionDao().deleteById(id));
-    }
-
-    private static InterventionDto createInterventionDto(String vehicleId) {
-        return new InterventionDto("Reparacion", State.REPAIR, vehicleId, null,
-                LocalDate.now().minusDays(1), LocalDate.now().plusDays(1));
-    }
-
-
-    private static InterventionDto createCaffeInterventionDto() {
-        return new InterventionDto("Caffe", State.CAFFE, null, null,
-                LocalDate.now().minusDays(1), LocalDate.now().plusDays(1));
     }
 
     private static VehicleDto createVehicleDto(String clientId, String registrationPlate) {

@@ -1,9 +1,11 @@
 package client_beans.interventions;
 
 import api.dtos.InterventionDto;
+import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import client_beans.clients.ClientGateway;
 import client_beans.vehicles.VehicleGateway;
+import org.omnifaces.util.Faces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -13,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,28 +27,33 @@ public class LazyInterventionsView implements Serializable {
     private static final String NOT_NAME = "NOT NAME";
     private LazyDataModel<InterventionDto> lazyModel;
     private InterventionDto selectedInterventionDto;
+    private MechanicDto mechanic;
+    private Map<String, String> vehicles = new HashMap<>();
+    private String vehicleReference;
+
     private InterventionGateway interventionGateway = new InterventionGateway();
     private VehicleGateway vehicleGateway = new VehicleGateway();
     private ClientGateway clientGateway = new ClientGateway();
 
     @PostConstruct
     public void init() {
-        List<InterventionDto> intervetions = interventionGateway.readAll();
-//        intervetions.forEach(interventionDto -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId()).getFullName()));
+        mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
+        List<Integer> intervetionIds = mechanic.getInterventionIds();
+        intervetionIds.forEach(id -> setVehicleInfo(id));
         lazyModel = new LazyDataModel<InterventionDto>() {
 
             @Override
             public int getRowCount() {
-                return interventionGateway.readAll().size();
+                return mechanic.getInterventionIds().size();
             }
 
             @Override
             public List<InterventionDto> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
-                List<InterventionDto> filtered = interventionGateway.readAll().stream()
+                List<InterventionDto> filtered = mechanic.getInterventionIds().stream()
                         .skip(first)
-                        //.filter(vehicleDto -> doFilter(vehicleDto, filters))
-                        //.filter(client -> client.getBrand().contains((String) filters.getOrDefault("brand", "")))
+                        .map(id -> interventionGateway.read(Integer.toString(id)))
+                        .filter(intervention -> doFilter(intervention, filters))
                         .collect(Collectors.toList());
 
                 if (sortField == null) {
@@ -56,48 +64,46 @@ public class LazyInterventionsView implements Serializable {
             }
 
             private List<InterventionDto> sortRows(String sortField, SortOrder sortOrder, List<InterventionDto> filtered) {
-                Comparator<InterventionDto> stateComparator = Comparator.comparing(InterventionDto::getState);
-                Comparator<InterventionDto> titleComparator = Comparator.comparing(InterventionDto::getTitle);
+                Comparator<InterventionDto> startDateComparador = Comparator.comparing(InterventionDto::getStartTime);
+                Comparator<InterventionDto> endDateComparador = Comparator.comparing(InterventionDto::getEndTime);
 
                 switch (sortField) {
-                    case "state":
-                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? titleComparator : titleComparator.reversed()).collect(Collectors.toList());
-                    case "title":
-                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? titleComparator : titleComparator.reversed()).collect(Collectors.toList());
+                    case "startTime":
+                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? startDateComparador : startDateComparador.reversed()).collect(Collectors.toList());
+                    case "endTime":
+                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? endDateComparador : endDateComparador.reversed()).collect(Collectors.toList());
                     default:
                         return null;
                 }
             }
 
-//            private boolean doFilter(VehicleDto vehicleDto, Map<String, Object> filters) {
-//                if (filters == null || filters.isEmpty()) {
-//                    return true;
-//                }
-//
-//                return containsSearchString(vehicleDto.getRegistrationPlate(), filters.get("registrationPlate"))
-//                        && containsSearchString(vehicleDto.getBodyOnFrame(), filters.get("bodyOnFrame"))
-//                        && doFilterClientName(vehicleDto.getClientId(), filters.get("clientName"))
-//                        && globalContainsSearch(vehicleDto, filters.get("globalFilter"));
-//            }
-//
-//            private boolean doFilterClientName(String clientId, Object clientName) {
-//                if (!(clientName instanceof String)) {
-//                    return true;
-//                }
-//
-//                return clientNames.getOrDefault(clientId, NOT_NAME).toLowerCase().contains(((String) clientName).toLowerCase());
-//            }
+            private boolean doFilter(InterventionDto interventionDto, Map<String, Object> filters) {
+                if (filters == null || filters.isEmpty()) {
+                    return true;
+                }
 
-//            private boolean globalContainsSearch(VehicleDto vehicle, Object key) {
-//                if (!(key instanceof String)) {
-//                    return true;
-//                }
-//                String searchExpresion = ((String) key).toLowerCase();
-//                return vehicle.getRegistrationPlate().toLowerCase().contains(searchExpresion)
-//                        || vehicle.getBrand().toLowerCase().contains(searchExpresion)
-//                        || vehicle.getBodyOnFrame().toLowerCase().contains(searchExpresion)
-//                        || clientNames.getOrDefault(vehicle.getClientId(), NOT_NAME).toLowerCase().contains(searchExpresion);
-//            }
+                return containsSearchString(interventionDto.getState().name(), filters.get("state"))
+                        && doFilterVehicleReference(interventionDto.getVehicleId(), filters.get("vehicleReference"))
+                        && globalContainsSearch(interventionDto, filters.get("globalFilter"));
+            }
+
+            private boolean doFilterVehicleReference(String vehicleId, Object vehicleReference) {
+                if (!(vehicleReference instanceof String)) {
+                    return true;
+                }
+                return vehicles.getOrDefault(vehicleId, NOT_NAME).toLowerCase().contains(((String) vehicleReference).toLowerCase());
+            }
+
+            private boolean globalContainsSearch(InterventionDto intervention, Object key) {
+                if (!(key instanceof String)) {
+                    return true;
+                }
+                String searchExpresion = ((String) key).toLowerCase();
+                return intervention.getTitle().toLowerCase().contains(searchExpresion)
+                        || intervention.getState().name().toLowerCase().contains(searchExpresion)
+                        || intervention.getStartTime().toString().toLowerCase().contains(searchExpresion)
+                        || vehicles.getOrDefault(intervention.getVehicleId(), NOT_NAME).toLowerCase().contains(searchExpresion);
+            }
 
             private boolean containsSearchString(String name, Object searchExpresion) {
                 if (!(searchExpresion instanceof String)) {
@@ -118,6 +124,15 @@ public class LazyInterventionsView implements Serializable {
         };
     }
 
+    private void setVehicleInfo(Integer id) {
+        InterventionDto intervention = interventionGateway.read(Integer.toString(id));
+        vehicles.putIfAbsent(intervention.getVehicleId(), getVehicleReference(vehicleGateway.read(intervention.getVehicleId())));
+    }
+
+    public String getVehicleReference(VehicleDto vehicleDto) {
+        return String.format("%s - %s", vehicleDto.getBrand(), vehicleDto.getRegistrationPlate());
+    }
+
     public LazyDataModel<InterventionDto> getLazyModel() {
         return lazyModel;
     }
@@ -136,24 +151,26 @@ public class LazyInterventionsView implements Serializable {
 
 
     public void onRowSelect(SelectEvent event) {
-        String clientId = ((VehicleDto) event.getObject()).getClientId();
-    //    clientName = getClientNames().get(clientId);
+        String vehicleId = ((InterventionDto) event.getObject()).getVehicleId();
+        vehicleReference = getVehicles().get(vehicleId);
     }
 
-//    public String getClientName() {
-//        return clientName;
-//    }
 
-//    public void setClientName(String clientName) {
-//        this.clientName = clientName;
-//    }
+    public Map<String, String> getVehicles() {
+        return vehicles;
+    }
 
-//    public Map<String, String> getClientNames() {
-//        return clientNames;
-//    }
-//
-//    public void setClientNames(Map<String, String> clientNames) {
-//        this.clientNames = clientNames;
-//    }
+    //
+    public void setVehicles(Map<String, String> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public String getVehicleReference() {
+        return vehicleReference;
+    }
+
+    public void setVehicleReference(String vehicleReference) {
+        this.vehicleReference = vehicleReference;
+    }
 }
 
