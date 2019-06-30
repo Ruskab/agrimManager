@@ -25,7 +25,6 @@ public class AuthorizationFilter extends HttpFilter {
             if (!resourceRequest) { // Prevent browser from caching restricted resources. See also https://stackoverflow.com/q/4194207/157882
                 Servlets.setNoCacheHeaders(response);
             }
-
             chain.doFilter(request, response); // So, just continue request.
         }
         else {

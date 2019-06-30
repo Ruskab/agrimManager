@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:agrim="http://java.sun.com/jsf/composite/agrim"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Interventins datatable</title>
+</h:head>
+<h:body>
+    <ui:composition template="/templates/master_layout.xhtml">
+
+        <ui:define name="content">
+            <div class="p-col">
+                <h:form id="data-view-vehicles-form">
+
+                    <p:dataTable id="interventionTable" styleClass="interventions-datatable" widgetVar="interventionTable"
+                                 var="intervention" value="#{lazyInterventionsView.lazyModel}" paginator="true" rows="10"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 rowsPerPageTemplate="5,10,15" selectionMode="single"
+                                 selection="#{lazyInterventionsView.selectedInterventionDto}" lazy="true" filterDelay="200">
+
+                        <p:ajax event="rowSelect" listener="#{lazyInterventionsView.onRowSelect}"
+                                update="@(.intervention-edit-dialog)"
+                                oncomplete="PF('interventionEditDialog').show()"/>
+
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="#{msg['web.interventions.datatable.search']}" />
+                                <p:inputText id="globalFilter" onkeyup="PF('interventionTable').filter()" style="width:150px" placeholder="#{msg['web.interventions.datatable.search.placeholder']}"/>
+                            </p:outputPanel>
+                        </f:facet>
+
+                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.startTime}" priority="3">
+                            <h:outputText value="#{intervention.startTime}"/>
+                        </p:column>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.endTime}" priority="3">
+                            <h:outputText value="#{intervention.endTime}"/>
+                        </p:column>
+
+                        <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{lazyInterventionsView.vehicleReference}" priority="1">
+                            <h:outputText value="#{lazyInterventionsView.vehicles.get(intervention.vehicleId)}"/>
+                        </p:column>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.type']}"
+                                  filterBy="#{intervention.state}" filterMatchMode="equals" priority="1">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('interventionTable').filter()" styleClass="custom-filter">
+
+                                    <f:selectItem itemLabel="All" itemValue="" />
+                                    <f:selectItem itemLabel="Repair" itemValue="REPAIR" />
+                                    <f:selectItem itemLabel="Caffe" itemValue="CAFFE" />
+                                </p:selectOneButton>
+                            </f:facet>
+                            <h:outputText value="#{intervention.state}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+<ui:debug></ui:debug>
+</html>

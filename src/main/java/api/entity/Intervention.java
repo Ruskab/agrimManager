@@ -3,12 +3,13 @@ package api.entity;
 import api.dtos.InterventionDto;
 
 import javax.persistence.*;
-import java.time.Period;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Entity
 @Table(name = "intervention")
-public class Intervention {
+public class Intervention implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +17,11 @@ public class Intervention {
 
     private String title;
 
-    private Enum state;
+    private State state;
 
-    private Period period;
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
 
     @JoinColumn
     @ManyToOne
@@ -32,17 +35,11 @@ public class Intervention {
         //JPA
     }
 
-    public Intervention(String title, Enum state, Period period, Vehicle vehicle) {
+    public Intervention(String title, State state, LocalDateTime startTIme, LocalDateTime endTime) {
         this.title = title;
         this.state = state;
-        this.period = period;
-        this.vehicle = vehicle;
-    }
-
-    public Intervention(String title, Enum state, Period period) {
-        this.title = title;
-        this.state = state;
-        this.period = period;
+        this.startTime = startTIme;
+        this.endTime = endTime;
     }
 
     public Intervention(InterventionDto interventionDto){
@@ -66,20 +63,12 @@ public class Intervention {
         this.title = title;
     }
 
-    public Enum getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(Enum state) {
+    public void setState(State state) {
         this.state = state;
-    }
-
-    public Period getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(Period period) {
-        this.period = period;
     }
 
     public Optional<Vehicle> getVehicle() {
@@ -96,5 +85,21 @@ public class Intervention {
 
     public void setRepairingPack(RepairingPack repairingPack) {
         this.repairingPack = repairingPack;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 }

@@ -1,5 +1,6 @@
 package client_beans.mechanics;
 
+import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import client_beans.util.PropertyLoader;
@@ -29,6 +30,7 @@ public class MechanicGateway {
     private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
     public static final String MECHANICS = "api.mechanics.path";
+    private static final String MECHANIC_INTERVENTIONS = "api.mechanics.interventions.path";
     private static final Logger LOGGER = LogManager.getLogger(MechanicGateway.class);
 
     public MechanicGateway() {
@@ -72,5 +74,11 @@ public class MechanicGateway {
         client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .delete();
+    }
+
+    public void addIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
+        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + mechanic.getId() + properties.getProperty(MECHANIC_INTERVENTIONS))
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
     }
 }
