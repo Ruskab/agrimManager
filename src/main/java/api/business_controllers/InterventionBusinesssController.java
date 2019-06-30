@@ -16,17 +16,16 @@ import java.util.stream.Collectors;
 public class InterventionBusinesssController {
 
     public int create(InterventionDto interventionDto) {
-//        validateInterventionDto(interventionDto);
-//
-//        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getStartTime(), interventionDto.getEndTime());
-//
-//        if (!isCaffeIntervention(interventionDto)) {
-//            setVehicle(interventionDto, intervention);
-//        }
-//
-//        DaoFactory.getFactory().getInterventionDao().create(intervention);
-//        return intervention.getId();
-        return 1;
+        validateInterventionDto(interventionDto);
+
+        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getStartTime(), interventionDto.getEndTime());
+
+        if (!isCaffeIntervention(interventionDto)) {
+            setVehicle(interventionDto, intervention);
+        }
+
+        DaoFactory.getFactory().getInterventionDao().create(intervention);
+        return intervention.getId();
     }
 
     public static void setVehicle(InterventionDto interventionDto, Intervention intervention) {

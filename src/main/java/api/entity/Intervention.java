@@ -4,8 +4,6 @@ import api.dtos.InterventionDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -21,9 +19,9 @@ public class Intervention implements Serializable {
 
     private State state;
 
-    private LocalDate startTime;
+    private LocalDateTime startTime;
 
-    private LocalDate endTime;
+    private LocalDateTime endTime;
 
     @JoinColumn
     @ManyToOne
@@ -37,13 +35,7 @@ public class Intervention implements Serializable {
         //JPA
     }
 
-    public Intervention(String title, State state) {
-        this.title = title;
-        this.state = state;
-        this.vehicle = vehicle;
-    }
-
-    public Intervention(String title, State state, LocalDate startTIme, LocalDate endTime) {
+    public Intervention(String title, State state, LocalDateTime startTIme, LocalDateTime endTime) {
         this.title = title;
         this.state = state;
         this.startTime = startTIme;
@@ -95,19 +87,19 @@ public class Intervention implements Serializable {
         this.repairingPack = repairingPack;
     }
 
-    public LocalDate getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDate getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 }

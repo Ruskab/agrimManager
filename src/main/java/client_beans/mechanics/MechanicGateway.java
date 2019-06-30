@@ -30,6 +30,7 @@ public class MechanicGateway {
     private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
     public static final String MECHANICS = "api.mechanics.path";
+    private static final String MECHANIC_INTERVENTIONS = "api.mechanics.interventions.path";
     private static final Logger LOGGER = LogManager.getLogger(MechanicGateway.class);
 
     public MechanicGateway() {
@@ -75,9 +76,9 @@ public class MechanicGateway {
                 .delete();
     }
 
-    public String addIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
-        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + mechanic)
+    public void addIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
+        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + mechanic.getId() + properties.getProperty(MECHANIC_INTERVENTIONS))
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE)).readEntity(String.class);
+                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
     }
 }
