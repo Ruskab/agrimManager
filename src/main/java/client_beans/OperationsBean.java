@@ -124,7 +124,7 @@ public class OperationsBean {
         }
         addMessage(SUCCESS, "Added new 60 vehicles");
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 5; i++){
             Collections.shuffle(vehiclesIds);
             InterventionDto interventionDto = createFakeInterventionDto(vehiclesIds.get(0).toString());
             addFakeIntervention(interventionDto);
