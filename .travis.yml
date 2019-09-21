@@ -12,8 +12,9 @@ jdk:
   - openjdk11
 branches:
   only:
-    - master
     - develop
+    - /^release-[0-999].[0-999]$/
+    - master
 notifications:
   email:
     recipients:
@@ -35,6 +36,7 @@ before_install:
 
 script:
   - mvn verify
+# test unitario  de integracion con cobertura
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
   - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
 
