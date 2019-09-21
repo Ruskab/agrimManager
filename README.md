@@ -12,6 +12,9 @@
 
 ![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ilya.dev%3AagrimManager&metric=alert_status)
 
+[![BCH compliance](https://bettercodehub.com/edge/badge/Ruskab/agrimManager?branch=develop)](https://bettercodehub.com/)
+
+
 ## Diseño de entidades
 ![themes-entities-class-diagram](https://user-images.githubusercontent.com/16058725/48664196-4ac42880-ea9b-11e8-860c-1c8610d95c49.png)
 
