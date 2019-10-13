@@ -16,8 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value="/mechanics")
-@Path("mechanics")
+@Api(value=MechanicApiController.MECHANICS)
+@Path(MechanicApiController.MECHANICS)
 public class MechanicApiController {
     public static final String MECHANICS = "/mechanics";
 
