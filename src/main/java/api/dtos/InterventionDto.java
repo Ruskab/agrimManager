@@ -8,7 +8,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class InterventionDto implements Serializable {
@@ -50,7 +49,7 @@ public class InterventionDto implements Serializable {
         this.endTime = intervention.getEndTime();
     }
 
-    public InterventionDto(){
+    public InterventionDto() {
 
     }
 

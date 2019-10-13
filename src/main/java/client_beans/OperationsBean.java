@@ -26,7 +26,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.time.Duration;
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -38,13 +38,12 @@ public class OperationsBean {
 
     private VehicleGateway vehicleGateway = new VehicleGateway();
     private ClientGateway clientGateway = new ClientGateway();
-    private InterventionGateway interventionGateway = new InterventionGateway();
     private MechanicGateway mechanicGateway = new MechanicGateway();
     private MechanicDto mechanic;
     public static final String SUCCESS = "Success";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
     private DashboardModel model;
-    private Random rnd = new Random();
+    private Random rnd = new SecureRandom();
 
     public MechanicDto getMechanic() {
         return mechanic;
@@ -110,7 +109,6 @@ public class OperationsBean {
     public void generateFakeData() {
         List<Integer> clientsIds = new ArrayList<>();
         List<Integer> vehiclesIds = new ArrayList<>();
-        List<Integer> interventionsIds = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
             ClientDto clientDto = new ClientDto(getRandomName(), rnd.ints(0, 40).findFirst().getAsInt());
@@ -124,7 +122,7 @@ public class OperationsBean {
         }
         addMessage(SUCCESS, "Added new 60 vehicles");
 
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             Collections.shuffle(vehiclesIds);
             InterventionDto interventionDto = createFakeInterventionDto(vehiclesIds.get(0).toString());
             addFakeIntervention(interventionDto);
@@ -132,8 +130,6 @@ public class OperationsBean {
 
         addMessage(SUCCESS, "Added new 10 interventions to " + mechanic.getName());
     }
-
-
 
 
     private String getRandomName() {
@@ -190,9 +186,7 @@ public class OperationsBean {
         List<String> titles = Arrays.asList("Ruedas", "Volante", "Capo", "Sistema", "Maletero", "Puerta", "Pintura", "faros", "Luces", "motor");
         Collections.shuffle(titles);
         int startTime = getStartTime();
-        int endTime = getEndTime();
-        InterventionDto interventionDto = new InterventionDto(titles.get(0), State.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
-        return interventionDto;
+        return new InterventionDto(titles.get(0), State.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
     }
 
     private int getEndTime() {
@@ -200,7 +194,7 @@ public class OperationsBean {
     }
 
     private int getStartTime() {
-        return rnd.ints(0,8).findFirst().getAsInt();
+        return rnd.ints(0, 8).findFirst().getAsInt();
     }
 
     private Integer addFakeClient(ClientDto clientDto) {
@@ -225,8 +219,6 @@ public class OperationsBean {
         List<ClientDto> clientDtoLIst = clientGateway.readAll();
         clientDtoLIst.forEach(clientDto -> clientGateway.delete(clientDto.getId()));
     }
-
-
 
 
 }

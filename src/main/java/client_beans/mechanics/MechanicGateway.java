@@ -2,7 +2,6 @@ package client_beans.mechanics;
 
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
 import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -25,13 +24,12 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class MechanicGateway {
 
-    Client client;
-    Properties properties;
+    private Client client;
+    private Properties properties;
     private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
     public static final String MECHANICS = "api.mechanics.path";
     private static final String MECHANIC_INTERVENTIONS = "api.mechanics.interventions.path";
-    private static final Logger LOGGER = LogManager.getLogger(MechanicGateway.class);
 
     public MechanicGateway() {
         ObjectMapper objectMapper = new ObjectMapper();

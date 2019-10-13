@@ -25,12 +25,11 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class VehicleGateway implements Serializable {
 
-    Client client;
-    Properties properties;
+    private Client client;
+    private Properties properties;
     private static final String API_PATH = "app.api.base.path";
-    public static final String APP_BASE_URL = "app.url";
-    public static final String VEHICLES = "api.vehicles.path";
-    private static final Logger LOGGER = LogManager.getLogger(VehicleGateway.class);
+    private static final String APP_BASE_URL = "app.url";
+    private static final String VEHICLES = "api.vehicles.path";
 
     public VehicleGateway() {
         ObjectMapper objectMapper = new ObjectMapper();
