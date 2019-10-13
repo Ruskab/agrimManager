@@ -23,8 +23,8 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class InterventionGateway {
 
-    Client client;
-    Properties properties;
+    private Client client;
+    private Properties properties;
     private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
     public static final String INTERVENTIONS = "api.interventions.path";

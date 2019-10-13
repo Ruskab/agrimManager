@@ -10,10 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ManagedBean(name = "lazyVehiclesView")
@@ -46,7 +43,7 @@ public class LazyVehiclesView implements Serializable {
                 List<VehicleDto> filtered = vehicleGateway.readAll().stream()
                         .skip(first)
                         .filter(vehicleDto -> doFilter(vehicleDto, filters))
-                        .filter(vehicleDto -> vehicleDto.getBrand().contains((String) filters.getOrDefault("brand", "")))
+                        .filter(vehicleDto -> vehicleDto.getBrand().contains((String) filters.getOrDefault(VEHICLE_BRAND, "")))
                         .collect(Collectors.toList());
 
                 if (sortField == null) {
@@ -69,7 +66,7 @@ public class LazyVehiclesView implements Serializable {
                     case "bodyOnFrame":
                         return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? bodyOnFrameComparator : bodyOnFrameComparator.reversed()).collect(Collectors.toList());
                     default:
-                        return null;
+                        return Collections.emptyList();
                 }
             }
 
