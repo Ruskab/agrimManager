@@ -9,7 +9,6 @@ public class RepairingPack {
 
     private static final long serialVersionUID = 1905122041950251207L;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
