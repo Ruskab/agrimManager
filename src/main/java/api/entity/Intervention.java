@@ -1,7 +1,5 @@
 package api.entity;
 
-import api.dtos.InterventionDto;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -41,11 +39,6 @@ public class Intervention implements Serializable {
         this.startTime = startTIme;
         this.endTime = endTime;
     }
-
-    public Intervention(InterventionDto interventionDto){
-        //todo plantearme si Intervention deberia de conocer a su BO
-    }
-
 
     public int getId() {
         return id;
