@@ -6,9 +6,10 @@ import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 
+import javax.ws.rs.Path;
 import java.util.List;
 
-@Api(value="/repairing-packs")
+@Api(value=RepairingPackApiController.REPAIRING_PACKS)
 public class RepairingPackApiController {
     public static final String REPAIRING_PACKS = "/repairing-packs";
 

@@ -13,8 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value="/vehicles")
-@Path("/vehicles")
+@Api(value=VehicleApiController.VEHICLES)
+@Path(VehicleApiController.VEHICLES)
 public class VehicleApiController {
 
     public static final String VEHICLES = "/vehicles";

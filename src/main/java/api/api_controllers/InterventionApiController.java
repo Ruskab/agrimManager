@@ -13,8 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Api(value="/interventions")
-@Path("/interventions")
+@Api(value=InterventionApiController.INTERVENTIONS)
+@Path(InterventionApiController.INTERVENTIONS)
 public class InterventionApiController {
     public static final String INTERVENTIONS = "/interventions";
 
