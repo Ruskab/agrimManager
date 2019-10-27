@@ -17,18 +17,15 @@ public class InterventionBusinesssController {
 
     public int create(InterventionDto interventionDto) {
         validateInterventionDto(interventionDto);
-
         Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getStartTime(), interventionDto.getEndTime());
-
         if (!isCaffeIntervention(interventionDto)) {
             setVehicle(interventionDto, intervention);
         }
-
         DaoFactory.getFactory().getInterventionDao().create(intervention);
         return intervention.getId();
     }
 
-    public static void setVehicle(InterventionDto interventionDto, Intervention intervention) {
+    static void setVehicle(InterventionDto interventionDto, Intervention intervention) {
         Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(interventionDto.getVehicleId()))
                 .orElseThrow(() -> new BadRequestException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
         intervention.setVehicle(vehicle);
@@ -41,7 +38,7 @@ public class InterventionBusinesssController {
     }
 
 
-    public static boolean isCaffeIntervention(InterventionDto interventionDto) {
+    static boolean isCaffeIntervention(InterventionDto interventionDto) {
         return (interventionDto.getVehicleId() == null || interventionDto.getVehicleId().isEmpty())
                 && interventionDto.getState().equals(State.CAFFE);
     }

@@ -5,8 +5,11 @@ import api.dtos.InterventionDto;
 import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,6 +27,9 @@ public class InterventionApiController {
 
     private InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
 
+    @POST
+    @ApiOperation(value = "Create new intervention")
+    @Consumes(MediaType.APPLICATION_JSON)
     public int create(InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
         this.validate(interventionDto.getState(), "State");

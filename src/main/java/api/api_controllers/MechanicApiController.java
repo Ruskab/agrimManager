@@ -46,7 +46,6 @@ public class MechanicApiController {
         this.validate(interventionDto, "interventionDto");
         this.validate(interventionDto.getState(), "State");
         this.validate(interventionDto.getStartTime(), "Start Time");
-        this.validate(interventionDto.getEndTime(), "EndTime Time");
         this.validateId(mechanicId, "Mechanic id");
         this.mechanicBusinesssController.createIntervention(mechanicId, interventionDto);
     }
