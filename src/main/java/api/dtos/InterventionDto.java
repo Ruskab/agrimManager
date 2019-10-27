@@ -121,4 +121,8 @@ public class InterventionDto implements Serializable {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
+
+    public static boolean isActiveIntervention(InterventionDto interventionDto){
+        return interventionDto.getEndTime() == null;
+    }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:P="http://java.sun.com/jsf/html">
+
+<head>
+    <title>Intervention Panel</title>
+</head>
+
+
+<composite:interface/>
+
+<composite:implementation>
+    <P:form id="activeInterventionForm">
+        <p:growl id="msg" showDetail="true" life="4000"/>
+        <p:panel id="pnlIntervention" header="#{msg['web.intervention.show.title']}">
+            <h:panelGrid id="pnlGridIntervention" layout="grid" columns="2" cellpadding="1"
+                         columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-8">
+                <h:outputLabel for="outPId" value="#{msg['web.interventions.id']}"/>
+                <h:outputText id="outPId" value="#{activeInterventionBean.activeIntervention.id}"/>
+                <h:outputLabel for="outPTitle" value="#{msg['web.interventions.title']}"/>
+                <h:outputText id="outPTitle" value="#{activeInterventionBean.activeIntervention.title}"/>
+            </h:panelGrid>
+
+            <h:panelGrid layout="pnlGritEndIntrv" columns="1" cellpadding="10" width="100%">
+                <p:commandButton id="btnEndIntrv" action="#{activeInterventionBean.finishActiveIntervention}"
+                                 value="Finish" update="activeInterventionForm" ajax="true">
+                </p:commandButton>
+            </h:panelGrid>
+        </p:panel>
+    </P:form>
+</composite:implementation>
+
+</html>

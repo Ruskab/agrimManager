@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -31,7 +32,8 @@ public class VehicleDto implements Serializable {
     private String fuelFilter;
     private String motorOil;
 
-    public VehicleDto(){}
+    public VehicleDto() {
+    }
 
     public VehicleDto(Vehicle vehicle) {
         this.id = vehicle.getId();
@@ -151,6 +153,11 @@ public class VehicleDto implements Serializable {
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
+    }
+
+    @Transient
+    public String getVehicleDataSheet() {
+        return String.format("%s %s %s", registrationPlate, brand, bodyOnFrame);
     }
 
     @Override

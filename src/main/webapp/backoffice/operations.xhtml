@@ -41,6 +41,13 @@
                         <agrim:mechanicCreateDialog/>
                     </p:panel>
                 </h:form>
+                <h:form id="createInterventionForm">
+                    <p:panel id="createNewIntervention" header="Create new interventions">
+                        <p:commandButton value="Create"
+                                         oncomplete="PF('interventionCreateDialog').show()" />
+                        <agrim:interventionsCreateDialog/>
+                    </p:panel>
+                </h:form>
             </div>
         </ui:define>
     </ui:composition>
