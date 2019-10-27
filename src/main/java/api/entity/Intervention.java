@@ -1,7 +1,5 @@
 package api.entity;
 
-import api.dtos.InterventionDto;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -10,6 +8,9 @@ import java.util.Optional;
 @Entity
 @Table(name = "intervention")
 public class Intervention implements Serializable {
+
+    private static final long serialVersionUID = 1905122041950251207L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +42,6 @@ public class Intervention implements Serializable {
         this.startTime = startTIme;
         this.endTime = endTime;
     }
-
-    public Intervention(InterventionDto interventionDto){
-        //todo plantearme si Intervention deberia de conocer a su BO
-    }
-
 
     public int getId() {
         return id;

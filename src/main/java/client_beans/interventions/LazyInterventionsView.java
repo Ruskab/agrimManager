@@ -15,10 +15,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ManagedBean(name = "lazyInterventionsView")
@@ -34,7 +31,6 @@ public class LazyInterventionsView implements Serializable {
 
     private InterventionGateway interventionGateway = new InterventionGateway();
     private VehicleGateway vehicleGateway = new VehicleGateway();
-    private ClientGateway clientGateway = new ClientGateway();
     private MechanicGateway mechanicGateway = new MechanicGateway();
 
     @PostConstruct
@@ -43,7 +39,7 @@ public class LazyInterventionsView implements Serializable {
         mechanic = mechanicGateway.read(Integer.toString(mechanic.getId()));
 
         List<Integer> intervetionIds = mechanic.getInterventionIds();
-        intervetionIds.forEach(id -> setVehicleInfo(id));
+        intervetionIds.forEach(this::setVehicleInfo);
         lazyModel = new LazyDataModel<InterventionDto>() {
 
             @Override
@@ -77,7 +73,7 @@ public class LazyInterventionsView implements Serializable {
                     case "endTime":
                         return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? endDateComparador : endDateComparador.reversed()).collect(Collectors.toList());
                     default:
-                        return null;
+                        return Collections.emptyList();
                 }
             }
 
@@ -148,11 +144,6 @@ public class LazyInterventionsView implements Serializable {
     public void setSelectedInterventionDto(InterventionDto selectedInterventionDto) {
         this.selectedInterventionDto = selectedInterventionDto;
     }
-
-//    public String getClientDto(String clientId) {
-//        return getClientNames().getOrDefault(clientId, NOT_NAME);
-//    }
-
 
     public void onRowSelect(SelectEvent event) {
         String vehicleId = ((InterventionDto) event.getObject()).getVehicleId();

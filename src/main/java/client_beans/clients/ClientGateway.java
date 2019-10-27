@@ -16,7 +16,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.beans.Transient;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
@@ -25,8 +24,8 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class ClientGateway implements Serializable {
 
-    Client client;
-    Properties properties;
+    private Client client;
+    private Properties properties;
     private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
     public static final String CLIENTS = "api.clients.path";

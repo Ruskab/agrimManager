@@ -9,12 +9,12 @@ import javax.faces.bean.ViewScoped;
 
 @ViewScoped
 @ManagedBean(name = "flexGrid")
-public class flexGrid {
+public class FlexGrid {
     private List<Integer> columns;
 
     @PostConstruct
     public void init() {
-        columns = new ArrayList<Integer>();
+        columns = new ArrayList<>();
         for (int i = 1; i <7; i++) {
             columns.add(i);
         }

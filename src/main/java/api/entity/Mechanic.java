@@ -4,6 +4,7 @@ import api.dtos.MechanicDto;
 import api.converters.MechanicRoleConverter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "mechanic")
-public class Mechanic {
+public class Mechanic implements Serializable {
+
+    private static final long serialVersionUID = 1905122041950251207L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

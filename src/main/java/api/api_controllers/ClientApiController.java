@@ -18,8 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value="/clients")
-@Path("/clients")
+@Api(value=ClientApiController.CLIENTS)
+@Path(ClientApiController.CLIENTS)
 public class ClientApiController {
 
     private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
