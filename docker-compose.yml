@@ -4,7 +4,7 @@ services:
 
   mysql:
     container_name: mysql-db
-    image: mysql:8.0.17
+    image: mysql:5.7.28
     environment:
       # So you don't have to use root, but you can if you like
       # MYSQL_USER: 'user'
