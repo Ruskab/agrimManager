@@ -31,6 +31,8 @@ test:
   encoding: utf8
 
 before_install:
+  - docker-compose --version
+  - docker-compose up
   - mysql -e 'CREATE DATABASE IF NOT EXISTS agrim_manager;'
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('admin') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo mysql_upgrade -u root -padmin
