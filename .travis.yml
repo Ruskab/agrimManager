@@ -16,9 +16,6 @@ notifications:
 services:
   - docker
 
-test:
-  adapter: mysql2
-
 before_install:
   - docker-compose --version
   - docker-compose up -d
