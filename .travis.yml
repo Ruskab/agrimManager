@@ -15,12 +15,14 @@ branches:
     - develop
     - /^release-[0-999].[0-999]$/
     - master
+    - issue#74
 notifications:
   email:
     recipients:
       - ilya.kab@gmail.es
 services:
   - mysql
+  - docker
 
 test:
   adapter: mysql2
