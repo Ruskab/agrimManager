@@ -4,5 +4,6 @@
 *.iml
 *.ipr
 *.env
+.env
 
 target
