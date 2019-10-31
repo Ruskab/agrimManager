@@ -1,18 +1,18 @@
 version: '3'
 
 services:
-
   mysql:
     container_name: mysql-db
     image: mysql:5.7.28
-    # <Port exposed> : < MySQL Port running inside container>
     ports:
       - "33060:3306"
-    # Where our data will be persisted
     volumes:
       - mysql-db-data://var/lib/mysql
     env_file:
       - .env
-# Names our volume
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+
 volumes:
   mysql-db-data:
