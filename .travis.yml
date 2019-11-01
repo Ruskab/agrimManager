@@ -8,7 +8,7 @@ branches:
     - develop
     - /^release-[0-999].[0-999]$/
     - master
-    - issue#74
+    - issue#75
 notifications:
   email:
     recipients:
