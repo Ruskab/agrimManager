@@ -62,6 +62,18 @@
 			</properties>
 		</profile>
 
+		<profile>
+			<id>tomcat</id>
+			<activation>
+				<property>
+					<name>env.MYSQL_HOST</name>
+				</property>
+			</activation>
+			<properties>
+				<env>tomcat</env>
+			</properties>
+		</profile>
+
 	</profiles>
 
 	<repositories>
@@ -244,7 +256,7 @@
 	</dependencies>
 
 	<build>
-		<!-- Loading all ${} -->
+        <finalName>agrimManager</finalName>
 		<filters>
 			<filter>src/main/resources/env/config.${env}.properties</filter>
 		</filters>
@@ -295,7 +307,6 @@
 				<configuration>
 					<argLine>-Duser.timezone=UTC</argLine>
 					<excludes>
-						<exclude>**/ClientApiControllerTest.java</exclude>
 						<exclude>**/VehicleApiControllerTest.java</exclude>
 						<exclude>**/LoginEndToEnd.java</exclude>
 					</excludes>
