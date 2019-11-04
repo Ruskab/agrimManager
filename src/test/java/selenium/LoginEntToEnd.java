@@ -12,9 +12,9 @@ class LoginEntToEnd {
 
     @Test
     void create_and_read_clientDto() {
-        System.setProperty("webdriver.chrome.driver","C:\\forja/workspace/components/selenium/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","C:\\forja/components/selenium/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get("http://localhost:8080/");
+        driver.get("http://localhost:8080/agrimManager");
         driver.findElement(By.xpath("//*[@id=\"j_idt12:loginForm:username\"]")).sendKeys("ruskab");
         driver.findElement(By.xpath("//*[@id=\"j_idt12:loginForm:password\"]")).sendKeys("test");
         driver.findElement(By.xpath("//*[@id=\"j_idt12:loginForm:loginButton\"]")).click();
