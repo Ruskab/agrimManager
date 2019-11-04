@@ -3,7 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:agrim="http://java.sun.com/jsf/composite/agrim"
+      xmlns:p="http://primefaces.org/ui">
 
 <head>
     <title>Header menu</title>
@@ -19,6 +20,7 @@
             <p:growl id="headerMessages"/>
 
             <p:menubar>
+
                 <p:submenu label="#{msg['web.header.api-services']}" icon="pi pi-globe">
                     <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/api/v0/clients"/>
                     <p:separator/>
@@ -29,12 +31,17 @@
                     <p:menuitem value="#{msg['web.header.repairing-paks']}" url="#"/>
                 </p:submenu>
 
-                <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/backoffice/clients.xhtml"
-                            icon="pi pi-users"/>
-                <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/backoffice/vehicles.xhtml"
-                            icon="fa fa fa-car fa-xs"/>
-                <p:menuitem value="#{msg['web.header.interventions']}" url="#{request.contextPath}/backoffice/interventions.xhtml"
-                            icon="fa fa fa-wrench fa-xs"/>
+                <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/backoffice/clients.xhtml" icon="pi pi-users"/>
+
+                <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/backoffice/vehicles.xhtml" icon="fa fa fa-car fa-xs"/>
+
+                <p:submenu label="#{msg['web.header.interventions']}" icon="fa fa fa-wrench fa-xs">
+                    <p:menuitem value="#{msg['web.header.interventions']}" url="#{request.contextPath}/backoffice/interventions.xhtml"/>
+                    <p:separator/>
+                    <p:menuitem value="#{msg['web.header.newintervention']}" oncomplete="PF('interventionCreateDialog').show()"/>
+                    <p:separator/>
+                </p:submenu>
+
                 <p:menuitem value="#{msg['web.header.operations']}"
                             url="#{request.contextPath}/backoffice/operations.xhtml" icon="fa fa-xs fa-bomb"/>
                 <p:submenu label="#{username}" icon="pi pi-user">
@@ -43,6 +50,9 @@
                 </p:submenu>
 
             </p:menubar>
+        </h:form>
+        <h:form>
+            <agrim:interventionsCreateDialog/>
         </h:form>
     </div>
 </composite:implementation>
