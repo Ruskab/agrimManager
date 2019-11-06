@@ -39,6 +39,18 @@
 		</profile>
 
 		<profile>
+			<id>pre</id>
+			<activation>
+				<property>
+					<name>env.SONAR</name>
+				</property>
+			</activation>
+			<properties>
+				<env>pre</env>
+			</properties>
+		</profile>
+
+		<profile>
 			<id>prod</id>
 			<activation>
 				<property>
@@ -50,12 +62,6 @@
 			</properties>
 		</profile>
 
-		<profile>
-			<id>test</id>
-			<properties>
-				<env>test</env>
-			</properties>
-		</profile>
 	</profiles>
 
 	<repositories>
