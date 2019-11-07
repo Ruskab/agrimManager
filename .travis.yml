@@ -21,6 +21,7 @@ before_install:
   - docker-compose -f docker-compose-travis.yml up -d
 
 script:
+  - mvn test -Denvironment=database
   - mvn verify
   # test unitario  de integracion con cobertura
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify

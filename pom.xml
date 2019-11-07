@@ -67,7 +67,7 @@
 			<activation>
 				<property>
 					<name>environment</name>
-					<value>localhost</value>
+					<value>tomcat</value>
 				</property>
 			</activation>
 			<properties>

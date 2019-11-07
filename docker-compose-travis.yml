@@ -20,7 +20,7 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_HOST: mysql
+      MYSQL_HOST: ${MYSQL_DATABASE}
     ports:
       - "8080:8080"
     links:
