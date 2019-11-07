@@ -8,7 +8,7 @@ COPY . .
 
 RUN mvn test -Denvironment=database
 
-RUN mvn clean install -DskipTests -Denvironment=localhost
+RUN mvn clean install -Denvironment=localhost
 
 FROM tomcat:9.0
 
