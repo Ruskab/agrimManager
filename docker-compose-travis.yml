@@ -5,7 +5,7 @@ services:
     container_name: mysql-db
     image: mysql:5.7.28
     ports:
-      - "3360:3306"
+      - "33060:3306"
     volumes:
       - mysql-db-data://var/lib/mysql
     env_file:
