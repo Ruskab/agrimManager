@@ -4,6 +4,8 @@ import api.dtos.ClientDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +26,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 class ClientApiControllerIT {
 
+    private static final Logger LOGGER = LogManager.getLogger(ClientApiControllerIT.class);
     Client client;
     Properties properties;
     public static final String APP_BASE_URL = "app.url";
@@ -43,7 +46,7 @@ class ClientApiControllerIT {
     void create_and_read_clientDto() {
 
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
-
+        LOGGER.info(" peticion a {}", properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS);
         Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
