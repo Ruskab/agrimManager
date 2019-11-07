@@ -22,7 +22,7 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-class ClientApiControllerTest {
+class ClientApiControllerIT {
 
     Client client;
     Properties properties;

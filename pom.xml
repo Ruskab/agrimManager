@@ -66,11 +66,25 @@
 			<id>tomcat</id>
 			<activation>
 				<property>
-					<name>env.MYSQL_HOST</name>
+					<name>environment</name>
+					<value>tomcat</value>
 				</property>
 			</activation>
 			<properties>
 				<env>tomcat</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>database</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>database</value>
+				</property>
+			</activation>
+			<properties>
+				<env>database</env>
 			</properties>
 		</profile>
 
@@ -307,7 +321,6 @@
 				<configuration>
 					<argLine>-Duser.timezone=UTC</argLine>
 					<excludes>
-						<exclude>**/VehicleApiControllerTest.java</exclude>
 						<exclude>**/LoginEndToEnd.java</exclude>
 					</excludes>
 				</configuration>

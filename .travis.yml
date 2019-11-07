@@ -18,9 +18,11 @@ services:
 
 before_install:
   - touch .env
-  - docker-compose up -d
+  - docker-compose -f docker-compose-travis.yml up -d
 
 script:
+  - docker ps
+  - mvn test -Denvironment=database
   - mvn verify
   # test unitario  de integracion con cobertura
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify

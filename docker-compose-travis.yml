@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-
   mysql:
     container_name: mysql-db
     image: mysql:5.7.28
+    ports:
+      - "33060:3306"
     volumes:
       - mysql-db-data://var/lib/mysql
     env_file:
@@ -19,19 +20,11 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_HOST: mysql
+      MYSQL_HOST: ${MYSQL_DATABASE}
     ports:
       - "8080:8080"
     links:
       - mysql
-
-  nginx:
-    container_name: nginx
-    build: ./nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/sites-available://etc/nginx/sites-available
 
 volumes:
   mysql-db-data:
