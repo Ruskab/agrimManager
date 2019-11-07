@@ -28,7 +28,7 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-class VehicleApiControllerTest {
+class VehicleApiControllerIT {
 
     Client client;
     Properties properties;

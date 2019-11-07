@@ -6,7 +6,9 @@ ENV MYSQL_HOST mysql
 
 COPY . .
 
-RUN mvn clean install -DskipTests
+RUN mvn test -Denvironment=database
+
+RUN mvn clean install -DskipTests -Denvironment=localhost
 
 FROM tomcat:9.0
 
