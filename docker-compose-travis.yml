@@ -17,6 +17,8 @@ services:
   tomcat:
     container_name: tomcat9
     build: .
+    depends_on:
+      - mysql
     environment:
       MYSQL_HOST: mysql
     ports:
