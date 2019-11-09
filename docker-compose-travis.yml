@@ -20,7 +20,7 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_HOST: mysql
     ports:
