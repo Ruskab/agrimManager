@@ -46,8 +46,8 @@ class ClientApiControllerIT {
     void create_and_read_clientDto() {
 
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
-        //LOGGER.info(" peticion a {}", properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS);
-        Response response = client.target("http://localhost:8080/agrimManager")
+        LOGGER.info(" peticion a {}", properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS);
+        Response response = client.target("http://localhost:8080/agrimManager/api/v0/clients")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
 
@@ -56,11 +56,9 @@ class ClientApiControllerIT {
 
         String id = response.readEntity(String.class);
 
-        ClientDto createdClientDto = client.target("http://localhost:8080/agrimManager" + "/" + id)
+        ClientDto createdClientDto = client.target("http://localhost:8080/agrimManager/api/v0/clients" + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .get(ClientDto.class);
-
-        LOGGER.error(response);
 
         assertThat(createdClientDto.getFullName(), is("fullNameTest"));
         assertThat(createdClientDto.getHours(), is(4));
