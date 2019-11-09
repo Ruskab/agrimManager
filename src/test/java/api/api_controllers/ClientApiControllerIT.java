@@ -45,23 +45,29 @@ class ClientApiControllerIT {
     @Test
     void create_and_read_clientDto() {
 
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
-        LOGGER.info(" peticion a {}", properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS);
-        Response response = client.target("http://localhost:8080/agrimManager/api/v0/clients")
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
+        try {
+            ClientDto clientDto = new ClientDto("fullNameTest", 4);
+            LOGGER.info(" peticion a {}", properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS);
+            Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
 
-        //assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
-        LOGGER.error(response);
+            //assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
+            LOGGER.error(response);
 
-        String id = response.readEntity(String.class);
+            String id = response.readEntity(String.class);
 
-        ClientDto createdClientDto = client.target("http://localhost:8080/agrimManager/api/v0/clients" + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .get(ClientDto.class);
+            ClientDto createdClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
+                    .request(MediaType.APPLICATION_JSON)
+                    .get(ClientDto.class);
 
-        assertThat(createdClientDto.getFullName(), is("fullNameTest"));
-        assertThat(createdClientDto.getHours(), is(4));
+            assertThat(createdClientDto.getFullName(), is("fullNameTest"));
+            assertThat(createdClientDto.getHours(), is(4));
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
+        }
+
     }
 
     @Test

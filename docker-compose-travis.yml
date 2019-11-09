@@ -20,6 +20,8 @@ services:
     depends_on:
       - mysql
     environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_HOST: mysql
     ports:
       - "8080:8080"
