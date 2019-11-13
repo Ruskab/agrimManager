@@ -11,8 +11,8 @@ services:
     env_file:
       - .env
     environment:
-      MYSQL_ROOT_PASSWORD: ${TRAVIS_MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${TRAVIS_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
 
   tomcat:
     container_name: tomcat9
@@ -20,9 +20,9 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${TRAVIS_MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_HOST: mysql
+      - MYSQL_ROOT_PASSWORD=${TRAVIS_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_HOST=mysql
     env_file:
       - .env
     ports:
