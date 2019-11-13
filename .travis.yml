@@ -18,6 +18,7 @@ services:
 
 script:
   - ls /home/travis/build/Ruskab/agrimManager/target/
+  - docker-compose -f docker-compose-travis.yml up -d
   - docker ps
   - mvn test -Denvironment=database
   # test unitario  de integracion con cobertura
