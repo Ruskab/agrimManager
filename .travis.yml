@@ -17,8 +17,6 @@ services:
   - docker
 
 script:
-  - mvn clean install -DskipTests -Denvironment=tomcat
-  - ls /usr/local/tomcat/webapps/target/
   - docker-compose -f docker-compose-travis.yml up -d
   - docker ps
   - mvn test -Denvironment=database
