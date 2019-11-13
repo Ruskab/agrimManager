@@ -18,7 +18,7 @@ services:
 
 script:
   - mvn clean install -DskipTests -Denvironment=tomcat
-  - ls /home/travis/build/Ruskab/agrimManager/target/
+  - ls /target/
   - docker-compose -f docker-compose-travis.yml up -d
   - docker ps
   - mvn test -Denvironment=database
