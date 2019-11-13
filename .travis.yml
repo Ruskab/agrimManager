@@ -17,7 +17,6 @@ services:
   - docker
 
 before_install:
-  - touch .env
   - docker-compose -f docker-compose-travis.yml up -d
 
 script:
