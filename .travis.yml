@@ -16,10 +16,8 @@ notifications:
 services:
   - docker
 
-before_install:
-  - docker-compose -f docker-compose-travis.yml up -d
-
 script:
+  - docker-compose -f docker-compose-travis.yml up -d
   - docker ps
   - mvn test -Denvironment=database
   # test unitario  de integracion con cobertura
