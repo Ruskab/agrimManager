@@ -32,8 +32,5 @@ services:
     build: ./nginx
     ports:
       - "80:80"
-    volumes:
-      - ./nginx/sites-available://etc/nginx/sites-available
-
 volumes:
   mysql-db-data:
