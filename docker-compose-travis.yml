@@ -25,8 +25,6 @@ services:
       - TRAVIS_MYSQL_ROOT_PASSWORD
     ports:
       - "127.0.0.1:8080:8080"
-    volumes:
-      - /home/travis/build/Ruskab/agrimManager/target/agrimManager.war://usr/local/tomcat/webapps/
     links:
       - mysql
 
