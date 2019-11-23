@@ -23,13 +23,12 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class InterventionGateway {
 
-    private Client client;
-    private Properties properties;
-    private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
     public static final String INTERVENTIONS = "api.interventions.path";
-
+    private static final String API_PATH = "app.api.base.path";
     private static final Logger LOGGER = LogManager.getLogger(InterventionGateway.class);
+    private Client client;
+    private Properties properties;
 
     public InterventionGateway() {
         ObjectMapper objectMapper = new ObjectMapper();

@@ -80,6 +80,10 @@ public class InterventionCreateBean {
         return skip;
     }
 
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+
     public String onFlowProcess(FlowEvent event) {
         if (skip) {
             skip = false;   //reset in case user goes back
@@ -103,9 +107,5 @@ public class InterventionCreateBean {
 
     public void setSelectedIntervention(InterventionDto selectedIntervention) {
         this.selectedIntervention = selectedIntervention;
-    }
-
-    public void setSkip(boolean skip) {
-        this.skip = skip;
     }
 }

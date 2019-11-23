@@ -24,13 +24,12 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class ClientGateway implements Serializable {
 
-    private Client client;
-    private Properties properties;
-    private static final String API_PATH = "app.api.base.path";
     public static final String APP_BASE_URL = "app.url";
     public static final String CLIENTS = "api.clients.path";
-
+    private static final String API_PATH = "app.api.base.path";
     private static final Logger LOGGER = LogManager.getLogger(ClientGateway.class);
+    private Client client;
+    private Properties properties;
 
     public ClientGateway() {
         ObjectMapper objectMapper = new ObjectMapper();

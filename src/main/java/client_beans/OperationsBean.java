@@ -7,7 +7,6 @@ import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.State;
 import client_beans.clients.ClientGateway;
-import client_beans.interventions.InterventionGateway;
 import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
@@ -29,19 +28,23 @@ import javax.faces.context.FacesContext;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 
 @ManagedBean
 @ViewScoped
 public class OperationsBean {
 
+    public static final String SUCCESS = "Success";
+    private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
     private VehicleGateway vehicleGateway = new VehicleGateway();
     private ClientGateway clientGateway = new ClientGateway();
     private MechanicGateway mechanicGateway = new MechanicGateway();
     private MechanicDto mechanic;
-    public static final String SUCCESS = "Success";
-    private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
     private DashboardModel model;
     private Random rnd = new SecureRandom();
 
