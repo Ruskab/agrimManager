@@ -14,7 +14,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
 
-    @Context private HttpServletRequest request;
+    @Context
+    private HttpServletRequest request;
 
     @Context
     private HttpServletResponse response;

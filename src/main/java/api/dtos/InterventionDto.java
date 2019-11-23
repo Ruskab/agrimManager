@@ -53,6 +53,10 @@ public class InterventionDto implements Serializable {
 
     }
 
+    public static boolean isActiveIntervention(InterventionDto interventionDto) {
+        return interventionDto.getEndTime() == null;
+    }
+
     public int getId() {
         return id;
     }
@@ -93,7 +97,6 @@ public class InterventionDto implements Serializable {
         this.repairingPackId = repairingPackId;
     }
 
-
     @Override
     public String toString() {
         return "InterventionDto{" +
@@ -119,9 +122,5 @@ public class InterventionDto implements Serializable {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-    }
-
-    public static boolean isActiveIntervention(InterventionDto interventionDto){
-        return interventionDto.getEndTime() == null;
     }
 }

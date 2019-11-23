@@ -1,6 +1,12 @@
 package api.daos.hibernate;
 
-import api.daos.*;
+import api.daos.ClientDao;
+import api.daos.DaoFactory;
+import api.daos.InterventionDao;
+import api.daos.MechanicDao;
+import api.daos.RepairingPackDao;
+import api.daos.VehicleDao;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 

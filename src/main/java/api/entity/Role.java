@@ -5,7 +5,7 @@ public enum Role {
     MECHANIC("mechanic"),
     DEVELOPER("developer");
 
-private String value;
+    private String value;
 
     Role(String value) {
         this.value = value;

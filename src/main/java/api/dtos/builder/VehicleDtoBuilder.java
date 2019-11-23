@@ -8,7 +8,7 @@ public class VehicleDtoBuilder {
 
     VehicleDto vehicleDto;
 
-    public VehicleDtoBuilder (){
+    public VehicleDtoBuilder() {
         this.vehicleDto = new VehicleDto();
     }
 

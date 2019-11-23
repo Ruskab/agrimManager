@@ -15,6 +15,17 @@ import java.util.stream.Collectors;
 
 public class InterventionBusinesssController {
 
+    static void setVehicle(InterventionDto interventionDto, Intervention intervention) {
+        Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(interventionDto.getVehicleId()))
+                .orElseThrow(() -> new BadRequestException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
+        intervention.setVehicle(vehicle);
+    }
+
+    static boolean isCaffeIntervention(InterventionDto interventionDto) {
+        return (interventionDto.getVehicleId() == null || interventionDto.getVehicleId().isEmpty())
+                && interventionDto.getState().equals(State.CAFFE);
+    }
+
     public int create(InterventionDto interventionDto) {
         validateInterventionDto(interventionDto);
         Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getStartTime(), interventionDto.getEndTime());
@@ -25,22 +36,10 @@ public class InterventionBusinesssController {
         return intervention.getId();
     }
 
-    static void setVehicle(InterventionDto interventionDto, Intervention intervention) {
-        Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(interventionDto.getVehicleId()))
-                .orElseThrow(() -> new BadRequestException("vehicle with id: " + interventionDto.getVehicleId() + "dont exists"));
-        intervention.setVehicle(vehicle);
-    }
-
     public void delete(String interventionId) {
         Intervention intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
                 .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
         DaoFactory.getFactory().getInterventionDao().deleteById(intervention.getId());
-    }
-
-
-    static boolean isCaffeIntervention(InterventionDto interventionDto) {
-        return (interventionDto.getVehicleId() == null || interventionDto.getVehicleId().isEmpty())
-                && interventionDto.getState().equals(State.CAFFE);
     }
 
     private void validateInterventionDto(InterventionDto interventionDto) {
@@ -65,8 +64,8 @@ public class InterventionBusinesssController {
 
     private void validateId(String id, String message) {
         validate(id, message);
-        if ( !StringUtils.isStrictlyNumeric(id)){
-            throw new NotFoundException(message +  " Should be numeric");
+        if (!StringUtils.isStrictlyNumeric(id)) {
+            throw new NotFoundException(message + " Should be numeric");
         }
     }
 

@@ -1,9 +1,17 @@
 package api;
 
-import api.api_controllers.*;
+import api.api_controllers.ClientApiController;
+import api.api_controllers.InterventionApiController;
+import api.api_controllers.MechanicApiController;
+import api.api_controllers.RepairingPackApiController;
+import api.api_controllers.VehicleApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.*;
+import api.dtos.ClientDto;
+import api.dtos.InterventionDto;
+import api.dtos.MechanicDto;
+import api.dtos.RepairingPackDto;
+import api.dtos.VehicleDto;
 import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
@@ -15,12 +23,13 @@ import org.apache.logging.log4j.Logger;
 
 public class Dispatcher {
 
+    private static final Logger LOGGER = LogManager.getLogger(Dispatcher.class);
+    private static final String REQUEST_ERROR = "request error: ";
+
     static {
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
 
-    private static final Logger LOGGER = LogManager.getLogger(Dispatcher.class);
-    private static final String REQUEST_ERROR = "request error: ";
     private ClientApiController clientApiController = new ClientApiController();
     private VehicleApiController vehicleApiController = new VehicleApiController();
     private InterventionApiController interventionApiController = new InterventionApiController();
@@ -57,7 +66,7 @@ public class Dispatcher {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.NOT_FOUND);
         } catch (Exception exception) {  // Unexpected
-            LOGGER.error("context" ,exception);
+            LOGGER.error("context", exception);
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -4,7 +4,10 @@ import api.daos.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -14,10 +17,8 @@ import java.util.stream.Stream;
 
 public class GenericDaoHibr<T, I> implements GenericDao<T, I> {
 
-    Class<T> entityClass;
-
     private static final Logger LOGGER = LogManager.getLogger(GenericDaoHibr.class);
-
+    Class<T> entityClass;
     EntityManager entityManager;
 
     GenericDaoHibr(EntityManagerFactory entityManagerFactory) {

@@ -1,6 +1,11 @@
 package api.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -35,7 +40,7 @@ public class Vehicle implements Serializable {
         //JPA
     }
 
-    public Vehicle(String registrationPlate){
+    public Vehicle(String registrationPlate) {
         this.registrationPlate = registrationPlate;
     }
 
