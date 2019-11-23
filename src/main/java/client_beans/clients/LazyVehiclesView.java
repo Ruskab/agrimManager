@@ -10,7 +10,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @ManagedBean(name = "lazyVehiclesView")
@@ -51,6 +55,16 @@ public class LazyVehiclesView implements Serializable {
                 }
 
                 return sortRows(sortField, sortOrder, filtered);
+            }
+
+            @Override
+            public VehicleDto getRowData(String rowKey) {
+                return vehicleGateway.read(rowKey);
+            }
+
+            @Override
+            public Integer getRowKey(VehicleDto vehicleDto) {
+                return vehicleDto.getId();
             }
 
             private List<VehicleDto> sortRows(String sortField, SortOrder sortOrder, List<VehicleDto> filtered) {
@@ -106,16 +120,6 @@ public class LazyVehiclesView implements Serializable {
                     return true;
                 }
                 return name.contains((String) searchExpresion);
-            }
-
-            @Override
-            public Integer getRowKey(VehicleDto vehicleDto) {
-                return vehicleDto.getId();
-            }
-
-            @Override
-            public VehicleDto getRowData(String rowKey) {
-                return vehicleGateway.read(rowKey);
             }
         };
     }

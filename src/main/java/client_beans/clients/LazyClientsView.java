@@ -45,13 +45,13 @@ public class LazyClientsView implements Serializable {
             }
 
             @Override
-            public Integer getRowKey(ClientDto clientDto) {
-                return clientDto.getId();
+            public ClientDto getRowData(String rowKey) {
+                return clientGateway.read(rowKey);
             }
 
             @Override
-            public ClientDto getRowData(String rowKey) {
-                return clientGateway.read(rowKey);
+            public Integer getRowKey(ClientDto clientDto) {
+                return clientDto.getId();
             }
         };
 

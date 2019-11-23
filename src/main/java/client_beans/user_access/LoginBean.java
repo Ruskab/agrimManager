@@ -16,12 +16,12 @@ import java.util.Optional;
 @SessionScoped
 public class LoginBean {
 
+    public static final String CLIENT_PAGE = "/backoffice/clients.xhtml";
+    public static final String LOGIN_PAGE = "/user_access/loginPage.xhtml";
     private String message;
     private String userName;
     private String password;
     private MechanicApiController mechanicApiController;
-    public static final String CLIENT_PAGE = "/backoffice/clients.xhtml";
-    public static final String LOGIN_PAGE = "/user_access/loginPage.xhtml";
 
     @PostConstruct
     public void init() {
