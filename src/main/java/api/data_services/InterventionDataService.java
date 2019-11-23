@@ -12,7 +12,7 @@ public class InterventionDataService {
     private static final String VEHICLE_ID_MSG = "Vehicle id: ";
     private static final String REPAIRING_PACK_ID_MSG = "RepairingPack id: ";
 
-    public Intervention createIntervention(InterventionDto interventionDto){
+    public Intervention createIntervention(InterventionDto interventionDto) {
         Intervention intervention = new Intervention();
         intervention.setRepairingPack(readRepairingPack(interventionDto.getRepairingPackId()));
         intervention.setVehicle(readVehicle(interventionDto.getVehicleId()));
@@ -23,12 +23,12 @@ public class InterventionDataService {
         return intervention;
     }
 
-    private Vehicle readVehicle(String id){
+    private Vehicle readVehicle(String id) {
         return DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(id))
                 .orElseThrow(() -> new NotFoundException(VEHICLE_ID_MSG + id));
     }
 
-    private RepairingPack readRepairingPack(String id){
+    private RepairingPack readRepairingPack(String id) {
         return DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(id))
                 .orElseThrow(() -> new NotFoundException(REPAIRING_PACK_ID_MSG + id));
     }

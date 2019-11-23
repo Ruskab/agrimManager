@@ -30,7 +30,7 @@ public class MechanicBusinessController {
         return mechanic.getId();
     }
 
-    private Intervention createIntervention(InterventionDto interventionDto){
+    private Intervention createIntervention(InterventionDto interventionDto) {
         return new InterventionDataService().createIntervention(interventionDto);
     }
 
@@ -42,7 +42,7 @@ public class MechanicBusinessController {
 
     public void createIntervention(String mechanicId, InterventionDto interventionDto) {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
-                    .orElseThrow(() -> new NotFoundException("Mechanic not found"));
+                .orElseThrow(() -> new NotFoundException("Mechanic not found"));
 
         Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getStartTime(), interventionDto.getEndTime());
 

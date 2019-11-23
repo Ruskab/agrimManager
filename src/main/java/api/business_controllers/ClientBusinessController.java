@@ -17,7 +17,7 @@ public class ClientBusinessController {
 
     private static final String CLIENT_ID = "Client id: ";
 
-    public ClientBusinessController(){
+    public ClientBusinessController() {
         //CDI
     }
 

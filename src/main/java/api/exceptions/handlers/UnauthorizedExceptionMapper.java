@@ -13,7 +13,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class UnauthorizedExceptionMapper implements ExceptionMapper<UnauthorizedException> {
 
-    @Context private HttpServletRequest request;
+    @Context
+    private HttpServletRequest request;
 
     @Context
     private HttpServletResponse response;
