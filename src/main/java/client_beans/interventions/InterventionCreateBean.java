@@ -29,14 +29,12 @@ public class InterventionCreateBean {
     private static final Logger LOGGER = LogManager.getLogger(InterventionCreateBean.class);
     private VehicleDto selectedVehicle;
     private InterventionDto selectedIntervention;
-    private InterventionGateway interventionGateway;
     private MechanicGateway mechanicGateway;
     private List<VehicleDto> vehicles;
     private boolean skip;
 
     @PostConstruct
     public void init() {
-        interventionGateway = new InterventionGateway();
         mechanicGateway = new MechanicGateway();
         selectedIntervention = new InterventionDto();
         vehicles = new VehicleGateway().readAll();
@@ -49,8 +47,6 @@ public class InterventionCreateBean {
         selectedIntervention.setStartTime(LocalDateTime.now());
         selectedIntervention.setState(State.REPAIR);
         mechanicGateway.addIntervention(mechanic, selectedIntervention);
-
-//        Faces.getSession().setAttribute("activeIntervention", interventionId);
         PrimeFaces.current().executeScript("PF('interventionCreateDialog').hide();");
         resetWizard();
     }
@@ -86,7 +82,7 @@ public class InterventionCreateBean {
 
     public String onFlowProcess(FlowEvent event) {
         if (skip) {
-            skip = false;   //reset in case user goes back
+            skip = false;
             return "confirm";
         } else {
             return event.getNewStep();
