@@ -49,7 +49,7 @@ public class ActiveInterventionBean {
                 .findFirst().orElse(null);
     }
 
-    public void finishActiveIntervention(){
+    public void finishActiveIntervention() {
         activeIntervention.setEndTime(LocalDateTime.now());
         interventionGateway.update(activeIntervention);
     }

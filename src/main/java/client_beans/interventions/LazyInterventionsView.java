@@ -3,7 +3,6 @@ package client_beans.interventions;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
-import client_beans.clients.ClientGateway;
 import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.omnifaces.util.Faces;
@@ -15,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +34,6 @@ public class LazyInterventionsView implements Serializable {
 
     private InterventionGateway interventionGateway = new InterventionGateway();
     private VehicleGateway vehicleGateway = new VehicleGateway();
-    private ClientGateway clientGateway = new ClientGateway();
     private MechanicGateway mechanicGateway = new MechanicGateway();
 
     @PostConstruct
@@ -43,7 +42,7 @@ public class LazyInterventionsView implements Serializable {
         mechanic = mechanicGateway.read(Integer.toString(mechanic.getId()));
 
         List<Integer> intervetionIds = mechanic.getInterventionIds();
-        intervetionIds.forEach(id -> setVehicleInfo(id));
+        intervetionIds.forEach(this::setVehicleInfo);
         lazyModel = new LazyDataModel<InterventionDto>() {
 
             @Override
@@ -67,6 +66,16 @@ public class LazyInterventionsView implements Serializable {
                 return sortRows(sortField, sortOrder, filtered);
             }
 
+            @Override
+            public InterventionDto getRowData(String rowKey) {
+                return interventionGateway.read(rowKey);
+            }
+
+            @Override
+            public Integer getRowKey(InterventionDto interventionDto) {
+                return interventionDto.getId();
+            }
+
             private List<InterventionDto> sortRows(String sortField, SortOrder sortOrder, List<InterventionDto> filtered) {
                 Comparator<InterventionDto> startDateComparador = Comparator.comparing(InterventionDto::getStartTime);
                 Comparator<InterventionDto> endDateComparador = Comparator.comparing(InterventionDto::getEndTime);
@@ -77,7 +86,7 @@ public class LazyInterventionsView implements Serializable {
                     case "endTime":
                         return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? endDateComparador : endDateComparador.reversed()).collect(Collectors.toList());
                     default:
-                        return null;
+                        return Collections.emptyList();
                 }
             }
 
@@ -115,16 +124,6 @@ public class LazyInterventionsView implements Serializable {
                 }
                 return name.contains((String) searchExpresion);
             }
-
-            @Override
-            public Integer getRowKey(InterventionDto interventionDto) {
-                return interventionDto.getId();
-            }
-
-            @Override
-            public InterventionDto getRowData(String rowKey) {
-                return interventionGateway.read(rowKey);
-            }
         };
     }
 
@@ -148,11 +147,6 @@ public class LazyInterventionsView implements Serializable {
     public void setSelectedInterventionDto(InterventionDto selectedInterventionDto) {
         this.selectedInterventionDto = selectedInterventionDto;
     }
-
-//    public String getClientDto(String clientId) {
-//        return getClientNames().getOrDefault(clientId, NOT_NAME);
-//    }
-
 
     public void onRowSelect(SelectEvent event) {
         String vehicleId = ((InterventionDto) event.getObject()).getVehicleId();

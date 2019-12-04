@@ -22,8 +22,7 @@ public class ClientInfoBean implements Serializable {
     private ClientGateway clientGateway = new ClientGateway();
 
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         String clientId = FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getRequestParameterMap()

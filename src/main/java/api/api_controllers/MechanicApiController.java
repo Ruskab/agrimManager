@@ -11,13 +11,19 @@ import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value="/mechanics")
-@Path("mechanics")
+@Api(value = MechanicApiController.MECHANICS)
+@Path(MechanicApiController.MECHANICS)
 public class MechanicApiController {
     public static final String MECHANICS = "/mechanics";
 
@@ -25,11 +31,11 @@ public class MechanicApiController {
 
     public static final String ID_INTERVENTIONS = ID + "/interventions";
 
-    private MechanicBusinessController mechanicBusinesssController = new MechanicBusinessController();
-
     static {
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
+
+    private MechanicBusinessController mechanicBusinesssController = new MechanicBusinessController();
 
     @POST
     @ApiOperation(value = "Create new Mechanic")
@@ -77,7 +83,6 @@ public class MechanicApiController {
     }
 
 
-
     private void validate(Object property, String message) {
         if (property == null || property.toString().equals("")) {
             throw new FieldInvalidException(message + " is missing");
@@ -86,8 +91,8 @@ public class MechanicApiController {
 
     private void validateId(String id, String message) {
         validate(id, message);
-        if ( !StringUtils.isStrictlyNumeric(id)){
-            throw new NotFoundException(message +  " Should be numeric");
+        if (!StringUtils.isStrictlyNumeric(id)) {
+            throw new NotFoundException(message + " Should be numeric");
         }
     }
 }

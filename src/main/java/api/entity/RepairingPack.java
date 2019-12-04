@@ -1,11 +1,18 @@
 package api.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "repairing_pack")
-public class RepairingPack {
+public class RepairingPack implements Serializable {
+
+    private static final long serialVersionUID = 1905122041950251207L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +22,7 @@ public class RepairingPack {
 
     private int invoicedHours;
 
-    public RepairingPack(){
+    public RepairingPack() {
         //JPA
     }
 

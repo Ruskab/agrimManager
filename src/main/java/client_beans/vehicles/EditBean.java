@@ -1,7 +1,6 @@
 package client_beans.vehicles;
 
 import api.dtos.VehicleDto;
-import client_beans.clients.ClientGateway;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;

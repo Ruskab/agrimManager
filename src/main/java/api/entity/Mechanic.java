@@ -1,9 +1,23 @@
 package api.entity;
 
-import api.dtos.MechanicDto;
 import api.converters.MechanicRoleConverter;
+import api.dtos.MechanicDto;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Convert;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +25,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "mechanic")
-public class Mechanic {
+public class Mechanic implements Serializable {
+
+    private static final long serialVersionUID = 1905122041950251207L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +56,7 @@ public class Mechanic {
         this.interventionList = new ArrayList<>();
     }
 
-    public Mechanic(MechanicDto mechanicDto){
+    public Mechanic(MechanicDto mechanicDto) {
         this.name = mechanicDto.getName();
         this.password = mechanicDto.getPassword();
         this.roles = mechanicDto.getRoles();

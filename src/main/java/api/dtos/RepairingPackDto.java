@@ -10,11 +10,11 @@ public class RepairingPackDto {
     private LocalDate invoicedDate;
     private int invoicedHours;
 
-    public RepairingPackDto(){
+    public RepairingPackDto() {
 
     }
 
-    public RepairingPackDto(RepairingPack repairingPack){
+    public RepairingPackDto(RepairingPack repairingPack) {
         this.id = repairingPack.getId();
         this.invoicedDate = repairingPack.getInvoicedDate();
         this.invoicedHours = repairingPack.getInvoicedHours();

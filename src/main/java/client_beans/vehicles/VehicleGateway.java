@@ -6,8 +6,6 @@ import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 
@@ -25,12 +23,11 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class VehicleGateway implements Serializable {
 
-    Client client;
-    Properties properties;
     private static final String API_PATH = "app.api.base.path";
-    public static final String APP_BASE_URL = "app.url";
-    public static final String VEHICLES = "api.vehicles.path";
-    private static final Logger LOGGER = LogManager.getLogger(VehicleGateway.class);
+    private static final String APP_BASE_URL = "app.url";
+    private static final String VEHICLES = "api.vehicles.path";
+    private Client client;
+    private Properties properties;
 
     public VehicleGateway() {
         ObjectMapper objectMapper = new ObjectMapper();

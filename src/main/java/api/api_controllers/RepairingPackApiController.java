@@ -5,23 +5,33 @@ import api.dtos.RepairingPackDto;
 import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Api(value="/repairing-packs")
+@Path(RepairingPackApiController.REPAIRING_PACKS)
+@Api(value = RepairingPackApiController.REPAIRING_PACKS)
 public class RepairingPackApiController {
     public static final String REPAIRING_PACKS = "/repairing-packs";
 
     public static final String ID = "/{id}";
 
-    private RepairingPackBusinessController repairingPackBusinessController  = new RepairingPackBusinessController();
+    private RepairingPackBusinessController repairingPackBusinessController = new RepairingPackBusinessController();
 
+    @POST
+    @ApiOperation(value = "Create new RepairingPack")
+    @Consumes(MediaType.APPLICATION_JSON)
     public int create(RepairingPackDto repairingPackDto) {
         this.validate(repairingPackDto, "repairingPackDto");
         this.validate(repairingPackDto.getInvoicedHours(), "Invoiced hours");
         this.validate(repairingPackDto.getInvoicedDate(), "Invoiced Date");
         return this.repairingPackBusinessController.create(repairingPackDto);
     }
+
 
     public RepairingPackDto read(String id) {
         this.validateId(id, "RepairingPack id");

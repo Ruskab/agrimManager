@@ -26,8 +26,7 @@ public class AuthorizationFilter extends HttpFilter {
                 Servlets.setNoCacheHeaders(response);
             }
             chain.doFilter(request, response); // So, just continue request.
-        }
-        else {
+        } else {
             Servlets.facesRedirect(request, response, loginURL);
         }
     }

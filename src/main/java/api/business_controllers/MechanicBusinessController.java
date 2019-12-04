@@ -1,6 +1,7 @@
 package api.business_controllers;
 
 import api.daos.DaoFactory;
+import api.data_services.InterventionDataService;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.entity.Intervention;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class MechanicBusinessController {
 
     private static final String MECHANIC_ID = "Mechanic id: ";
-    private InterventionBusinesssController intrventionBO = new InterventionBusinesssController();
+    private InterventionBusinesssController interventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
         this.validate(mechanicDto, "mechanicDto");
@@ -23,10 +24,14 @@ public class MechanicBusinessController {
         this.validate(mechanicDto.getPassword(), "mechanicDto Password");
         Mechanic mechanic = new Mechanic(mechanicDto);
         List<InterventionDto> interventionDtos = new ArrayList<>();
-        mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(intrventionBO.read(Integer.toString(id))));
-        mechanic.setInterventionList(interventionDtos.stream().map(Intervention::new).collect(Collectors.toList()));
+        mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(interventionBO.read(Integer.toString(id))));
+        mechanic.setInterventionList(interventionDtos.stream().map(this::createIntervention).collect(Collectors.toList()));
         DaoFactory.getFactory().getMechanicDao().create(mechanic);
         return mechanic.getId();
+    }
+
+    private Intervention createIntervention(InterventionDto interventionDto) {
+        return new InterventionDataService().createIntervention(interventionDto);
     }
 
     private void validate(Object property, String message) {
@@ -37,7 +42,7 @@ public class MechanicBusinessController {
 
     public void createIntervention(String mechanicId, InterventionDto interventionDto) {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
-                    .orElseThrow(() -> new NotFoundException("Mechanic not found"));
+                .orElseThrow(() -> new NotFoundException("Mechanic not found"));
 
         Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getStartTime(), interventionDto.getEndTime());
 

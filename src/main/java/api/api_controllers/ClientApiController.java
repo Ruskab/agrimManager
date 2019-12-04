@@ -13,28 +13,32 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value="/clients")
-@Path("/clients")
+@Api(value = ClientApiController.CLIENTS)
+@Path(ClientApiController.CLIENTS)
 public class ClientApiController {
 
-    private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
     public static final String CLIENTS = "/clients";
-
-
     public static final String ID = "/{id}";
-
     public static final String ID_VEHICLES = ID + "/vehicles";
-
-    private ClientBusinessController clientBusinessController = new ClientBusinessController();
+    private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
 
     static {
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
+
+    private ClientBusinessController clientBusinessController = new ClientBusinessController();
 
     @POST
     @ApiOperation(value = "Create new client")

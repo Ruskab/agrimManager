@@ -8,20 +8,29 @@ import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value="/vehicles")
-@Path("/vehicles")
+@Api(value = VehicleApiController.VEHICLES)
+@Path(VehicleApiController.VEHICLES)
 public class VehicleApiController {
 
     public static final String VEHICLES = "/vehicles";
 
     public static final String ID_ID = "/{id}";
 
-    static { DaoFactory.setFactory(new DaoFactoryHibr()); }
+    static {
+        DaoFactory.setFactory(new DaoFactoryHibr());
+    }
 
     private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
 
@@ -37,7 +46,7 @@ public class VehicleApiController {
     @DELETE
     @Path("{id}")
     public Response delete(@PathParam("id") String id) {
-        validateId(id,"Vehicle id");
+        validateId(id, "Vehicle id");
         vehicleBusinessController.delete(id);
         return Response.status(204).build();
     }
@@ -86,8 +95,8 @@ public class VehicleApiController {
 
     private void validateId(String id, String message) {
         validate(id, message);
-        if ( !StringUtils.isStrictlyNumeric(id)){
-            throw new FieldInvalidException(message +  " Should be numeric");
+        if (!StringUtils.isStrictlyNumeric(id)) {
+            throw new FieldInvalidException(message + " Should be numeric");
         }
     }
 }

@@ -16,25 +16,23 @@ public class ClientConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
-        if(value != null && value.trim().length() > 0) {
+        if (value != null && value.trim().length() > 0) {
             try {
                 ClientGateway clientGateway = new ClientGateway();
                 return clientGateway.read(value);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid client."));
             }
-        }
-        else {
+        } else {
             return null;
         }
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
-        if(value != null) {
+        if (value != null) {
             return String.valueOf(((ClientDto) value).getId());
-        }
-        else {
+        } else {
             return null;
         }
     }

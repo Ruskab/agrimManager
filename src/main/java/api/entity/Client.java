@@ -1,10 +1,18 @@
 package api.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Serializable {
+
+    private static final long serialVersionUID = 1905122041950251207L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +24,11 @@ public class Client {
     @Column(nullable = true)
     private int hours;
 
-    public Client(){
+    public Client() {
         //JPA
     }
 
-    public Client(String fullName, int hours){
+    public Client(String fullName, int hours) {
         this.fullName = fullName;
         this.hours = hours;
     }
