@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: mysql-db
+    image: mysql:5.7.28
+    ports:
+      - "127.0.0.1:33060:3306"
+    volumes:
+      - mysql-db-data://var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${TRAVIS_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - TRAVIS_MYSQL_ROOT_PASSWORD
+
+  tomcat:
+    container_name: tomcat9
+    build: .
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${TRAVIS_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_HOST=mysql
+      - TRAVIS_MYSQL_ROOT_PASSWORD
+    ports:
+      - "127.0.0.1:8080:8080"
+    links:
+      - mysql
+
+volumes:
+  mysql-db-data:

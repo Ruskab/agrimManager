@@ -62,6 +62,32 @@
 			</properties>
 		</profile>
 
+		<profile>
+			<id>tomcat</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>tomcat</value>
+				</property>
+			</activation>
+			<properties>
+				<env>tomcat</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>database</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>database</value>
+				</property>
+			</activation>
+			<properties>
+				<env>database</env>
+			</properties>
+		</profile>
+
 	</profiles>
 
 	<repositories>
@@ -244,7 +270,7 @@
 	</dependencies>
 
 	<build>
-		<!-- Loading all ${} -->
+        <finalName>agrimManager</finalName>
 		<filters>
 			<filter>src/main/resources/env/config.${env}.properties</filter>
 		</filters>
@@ -295,8 +321,6 @@
 				<configuration>
 					<argLine>-Duser.timezone=UTC</argLine>
 					<excludes>
-						<exclude>**/ClientApiControllerTest.java</exclude>
-						<exclude>**/VehicleApiControllerTest.java</exclude>
 						<exclude>**/LoginEndToEnd.java</exclude>
 					</excludes>
 				</configuration>
