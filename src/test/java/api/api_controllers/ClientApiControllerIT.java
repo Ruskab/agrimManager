@@ -4,6 +4,8 @@ import api.dtos.ClientDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +24,9 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-class ClientApiControllerTest {
+class ClientApiControllerIT {
 
+    private static final Logger LOGGER = LogManager.getLogger(ClientApiControllerIT.class);
     Client client;
     Properties properties;
     public static final String APP_BASE_URL = "app.url";
@@ -42,21 +45,29 @@ class ClientApiControllerTest {
     @Test
     void create_and_read_clientDto() {
 
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
+        try {
+            ClientDto clientDto = new ClientDto("fullNameTest", 4);
+            LOGGER.info(" peticion a {}", properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS);
+            Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
 
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
+            //assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
+            LOGGER.error(response);
 
-        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
-        String id = response.readEntity(String.class);
+            String id = response.readEntity(String.class);
 
-        ClientDto createdClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .get(ClientDto.class);
+            ClientDto createdClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
+                    .request(MediaType.APPLICATION_JSON)
+                    .get(ClientDto.class);
 
-        assertThat(createdClientDto.getFullName(), is("fullNameTest"));
-        assertThat(createdClientDto.getHours(), is(4));
+            assertThat(createdClientDto.getFullName(), is("fullNameTest"));
+            assertThat(createdClientDto.getHours(), is(4));
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.error(e.getMessage());
+        }
+
     }
 
     @Test
