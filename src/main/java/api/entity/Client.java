@@ -28,9 +28,13 @@ public class Client implements Serializable {
         //JPA
     }
 
-    public Client(String fullName, int hours) {
+    private Client(String fullName, int hours) {
         this.fullName = fullName;
         this.hours = hours;
+    }
+
+    public static Client create(String fullName, int hours) {
+        return new Client(fullName, hours);
     }
 
     public int getId() {

@@ -22,7 +22,7 @@ public class ClientBusinessController {
     }
 
     public int create(ClientDto clientDto) {
-        Client client = new Client(clientDto.getFullName(), clientDto.getHours());
+        Client client = Client.create(clientDto.getFullName(), clientDto.getHours());
         DaoFactory.getFactory().getClientDao().create(client);
         return client.getId();
     }
