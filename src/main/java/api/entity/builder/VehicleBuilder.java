@@ -76,7 +76,7 @@ public class VehicleBuilder {
     public VehicleBuilder byDefault() {
         VehicleBuilder vehicleBuilder = new VehicleBuilder("AA1234BB");
         return vehicleBuilder
-                .setClient(new Client("fakeClient", 3))
+                .setClient(Client.create("fakeClient", 3))
                 .setBrand("Opel")
                 .setKMS("03-03-2017 94744")
                 .setBodyOnFrame("VF1KC0JEF31065732")
