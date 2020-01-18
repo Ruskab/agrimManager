@@ -29,14 +29,13 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-@Disabled
 class VehicleApiControllerIT {
 
-    Client client;
-    Properties properties;
-    Integer createdClientId;
+    private Client client;
+    private Properties properties;
+    private Integer createdClientId;
     private static final String API_PATH = "app.api.base.path";
-    public static final String APP_BASE_URL = "app.url";
+    private static final String APP_BASE_URL = "app.url";
 
     @BeforeEach
     void setUp() {
