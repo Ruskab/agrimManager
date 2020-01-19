@@ -129,7 +129,9 @@ public class LazyInterventionsView implements Serializable {
 
     private void setVehicleInfo(Integer id) {
         InterventionDto intervention = interventionGateway.read(Integer.toString(id));
-        vehicles.putIfAbsent(intervention.getVehicleId(), getVehicleReference(vehicleGateway.read(intervention.getVehicleId())));
+        if (intervention.getVehicleId() != null){
+            vehicles.putIfAbsent(intervention.getVehicleId(), getVehicleReference(vehicleGateway.read(intervention.getVehicleId())));
+        }
     }
 
     public String getVehicleReference(VehicleDto vehicleDto) {
