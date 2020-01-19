@@ -16,7 +16,7 @@ import java.util.Optional;
 @SessionScoped
 public class LoginBean {
 
-    public static final String CLIENT_PAGE = "/backoffice/clients.xhtml";
+    public static final String HOME_PAGE = "/backoffice/home.xhtml";
     public static final String LOGIN_PAGE = "/user_access/loginPage.xhtml";
     private String message;
     private String userName;
@@ -62,7 +62,7 @@ public class LoginBean {
             // get Http Session and store username
             Faces.getSession().setAttribute("username", userName);
             Faces.getSession().setAttribute("mechanic", mechanicDto.get());
-            return CLIENT_PAGE;
+            return HOME_PAGE;
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Invalid Login!",

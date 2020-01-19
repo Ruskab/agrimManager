@@ -16,7 +16,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class InterventionCreateBean {
         vehicles = new VehicleGateway().readAll();
     }
 
-    public void create() {
+    public void create() throws IOException {
         MechanicDto mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
         validateSelection();
         selectedIntervention.setStartTime(LocalDateTime.now());
@@ -49,6 +51,8 @@ public class InterventionCreateBean {
         mechanicGateway.addIntervention(mechanic, selectedIntervention);
         PrimeFaces.current().executeScript("PF('interventionCreateDialog').hide();");
         resetWizard();
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect(externalContext.getRequestContextPath().concat("/backoffice/home.xhtml"));
     }
 
     private void validateSelection() {

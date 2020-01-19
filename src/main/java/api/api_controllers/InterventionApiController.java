@@ -6,14 +6,18 @@ import api.exceptions.FieldInvalidException;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Api(value = InterventionApiController.INTERVENTIONS)
@@ -26,6 +30,9 @@ public class InterventionApiController {
     public static final String REPAIRING_PACK = "/repairing-pack";
 
     private InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
+
+    private static final Logger LOGGER = LogManager.getLogger(InterventionApiController.class);
+
 
     @POST
     @ApiOperation(value = "Create new intervention")
@@ -49,6 +56,21 @@ public class InterventionApiController {
         this.validateId(interventionId, "RepairingPack id");
         return this.interventionBusinessController.read(interventionId);
     }
+
+    @PUT
+    @ApiOperation(value = "Update intervention information")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public Response update(@PathParam("id") String id, InterventionDto interventionDto) {
+        this.validateId(id, "intervention id: ");
+        this.validate(interventionDto, "interventionDto");
+        this.validate(interventionDto.getInterventionType(), "interventionDto interventionType");
+        this.validate(interventionDto.getStartTime(), "interventionDto startType");
+        LOGGER.info("ClienteDto valido");
+        this.interventionBusinessController.update(id, interventionDto);
+        return Response.status(200).build();
+    }
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

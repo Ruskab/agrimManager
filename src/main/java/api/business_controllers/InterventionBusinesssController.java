@@ -62,6 +62,14 @@ public class InterventionBusinesssController {
                 .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
     }
 
+    public void update(String id, InterventionDto interventionDto) {
+        Intervention intervention = DaoFactory.getFactory().getInterventionDao().read((Integer.parseInt(id)))
+                .orElseThrow(() -> new NotFoundException("Intervention ID" + id));
+
+        intervention.setEndTime(interventionDto.getEndTime());
+        DaoFactory.getFactory().getInterventionDao().update(intervention);
+    }
+
     private void validateId(String id, String message) {
         validate(id, message);
         if (!StringUtils.isStrictlyNumeric(id)) {
