@@ -5,7 +5,7 @@ import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
-import api.entity.State;
+import api.entity.InterventionType;
 import client_beans.clients.ClientGateway;
 import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
@@ -189,7 +189,7 @@ public class OperationsBean {
         List<String> titles = Arrays.asList("Ruedas", "Volante", "Capo", "Sistema", "Maletero", "Puerta", "Pintura", "faros", "Luces", "motor");
         Collections.shuffle(titles);
         int startTime = getStartTime();
-        return new InterventionDto(titles.get(0), State.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
+        return new InterventionDto(titles.get(0), InterventionType.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
     }
 
     private int getEndTime() {

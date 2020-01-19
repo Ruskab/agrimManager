@@ -3,7 +3,7 @@ package client_beans.interventions;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
-import api.entity.State;
+import api.entity.InterventionType;
 import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +45,7 @@ public class InterventionCreateBean {
         validateSelection();
         selectedIntervention.setVehicleId(Integer.toString(selectedVehicle.getId()));
         selectedIntervention.setStartTime(LocalDateTime.now());
-        selectedIntervention.setState(State.REPAIR);
+        selectedIntervention.setInterventionType(InterventionType.REPAIR);
         mechanicGateway.addIntervention(mechanic, selectedIntervention);
         PrimeFaces.current().executeScript("PF('interventionCreateDialog').hide();");
         resetWizard();

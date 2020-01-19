@@ -3,7 +3,7 @@ package api.business_controllers;
 import api.daos.DaoFactory;
 import api.dtos.InterventionDto;
 import api.entity.Intervention;
-import api.entity.State;
+import api.entity.InterventionType;
 import api.entity.Vehicle;
 import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
@@ -23,12 +23,12 @@ public class InterventionBusinesssController {
 
     static boolean isCaffeIntervention(InterventionDto interventionDto) {
         return (interventionDto.getVehicleId() == null || interventionDto.getVehicleId().isEmpty())
-                && interventionDto.getState().equals(State.CAFFE);
+                && interventionDto.getInterventionType().equals(InterventionType.CAFFE);
     }
 
     public int create(InterventionDto interventionDto) {
         validateInterventionDto(interventionDto);
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getState(), interventionDto.getStartTime(), interventionDto.getEndTime());
+        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto.getStartTime(), interventionDto.getEndTime());
         if (!isCaffeIntervention(interventionDto)) {
             setVehicle(interventionDto, intervention);
         }
@@ -43,10 +43,10 @@ public class InterventionBusinesssController {
     }
 
     private void validateInterventionDto(InterventionDto interventionDto) {
-        if (interventionDto.getState().equals(State.CAFFE) && interventionDto.getVehicleId() != null) {
+        if (interventionDto.getInterventionType().equals(InterventionType.CAFFE) && interventionDto.getVehicleId() != null) {
             throw new BadRequestException("Invalid intervention, CAFFE shouldnt have vehicle id: " + interventionDto.getVehicleId());
         }
-        if (interventionDto.getState().equals(State.REPAIR) && interventionDto.getVehicleId() == null) {
+        if (interventionDto.getInterventionType().equals(InterventionType.REPAIR) && interventionDto.getVehicleId() == null) {
             throw new BadRequestException("Invalid intervention, REPAIR should have vehicle id");
         }
     }

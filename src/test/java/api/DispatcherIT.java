@@ -114,7 +114,7 @@ class DispatcherIT {
         assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
 //        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getState(), is(State.REPAIR));
+        assertThat(createdIntervention.get().getInterventionType(), is(InterventionType.REPAIR));
         assertThat(createdIntervention.get().getVehicle().get().getId(), is(existentVehicleId));
     }
 
@@ -129,7 +129,7 @@ class DispatcherIT {
         assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Caffe"));
 //        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getState(), is(State.CAFFE));
+        assertThat(createdIntervention.get().getInterventionType(), is(InterventionType.CAFFE));
     }
 
     @Test @Disabled("no se que coño pasa")
@@ -151,7 +151,7 @@ class DispatcherIT {
 
         //assertThat(mechanic.get().getInterventionList().get(0).getPeriod(), is(interventionDto.getPeriod()));
         assertThat(Integer.toString(mechanic.get().getInterventionList().get(0).getVehicle().get().getId()), is(interventionDto.getVehicleId()));
-        assertThat(mechanic.get().getInterventionList().get(0).getState(), is(interventionDto.getState()));
+        assertThat(mechanic.get().getInterventionList().get(0).getInterventionType(), is(interventionDto.getInterventionType()));
     }
 
     @Test
@@ -692,7 +692,7 @@ class DispatcherIT {
 
         assertThat(interventionDto.getId(), is(createdInterventionId));
         assertThat(interventionDto.getVehicleId(), is(createdVehicles.get(0).toString()));
-        assertThat(interventionDto.getState(), is(State.REPAIR));
+        assertThat(interventionDto.getInterventionType(), is(InterventionType.REPAIR));
 //        assertThat(interventionDto.getPeriod(), is(expectedInterventionDto1.getPeriod()));
         assertThat(interventionDto.getTitle(), is(expectedInterventionDto1.getTitle()));
         assertThat(interventionDto.getRepairingPackId(), is(expectedInterventionDto1.getRepairingPackId()));

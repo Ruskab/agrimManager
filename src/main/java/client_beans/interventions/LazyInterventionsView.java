@@ -95,7 +95,7 @@ public class LazyInterventionsView implements Serializable {
                     return true;
                 }
 
-                return containsSearchString(interventionDto.getState().name(), filters.get("state"))
+                return containsSearchString(interventionDto.getInterventionType().name(), filters.get("state"))
                         && doFilterVehicleReference(interventionDto.getVehicleId(), filters.get("vehicleReference"))
                         && globalContainsSearch(interventionDto, filters.get("globalFilter"));
             }
@@ -113,7 +113,7 @@ public class LazyInterventionsView implements Serializable {
                 }
                 String searchExpresion = ((String) key).toLowerCase();
                 return intervention.getTitle().toLowerCase().contains(searchExpresion)
-                        || intervention.getState().name().toLowerCase().contains(searchExpresion)
+                        || intervention.getInterventionType().name().toLowerCase().contains(searchExpresion)
                         || intervention.getStartTime().toString().toLowerCase().contains(searchExpresion)
                         || vehicles.getOrDefault(intervention.getVehicleId(), NOT_NAME).toLowerCase().contains(searchExpresion);
             }

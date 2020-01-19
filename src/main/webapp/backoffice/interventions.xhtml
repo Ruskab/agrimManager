@@ -46,7 +46,7 @@
                             <h:outputText value="#{lazyInterventionsView.vehicles.get(intervention.vehicleId)}"/>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.type']}"
-                                  filterBy="#{intervention.state}" filterMatchMode="equals" priority="1">
+                                  filterBy="#{intervention.interventionType}" filterMatchMode="equals" priority="1">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('interventionTable').filter()" styleClass="custom-filter">
 
@@ -55,7 +55,7 @@
                                     <f:selectItem itemLabel="Caffe" itemValue="CAFFE" />
                                 </p:selectOneButton>
                             </f:facet>
-                            <h:outputText value="#{intervention.state}"/>
+                            <h:outputText value="#{intervention.interventionType}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

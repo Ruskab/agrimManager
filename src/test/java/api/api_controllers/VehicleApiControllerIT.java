@@ -4,14 +4,13 @@ import api.dtos.ClientDto;
 import api.dtos.InterventionDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
-import api.entity.State;
+import api.entity.InterventionType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
@@ -115,7 +114,7 @@ class VehicleApiControllerIT {
     }
 
     private InterventionDto createInterventionDto(String vehicleId) {
-        return new InterventionDto("Reparacion", State.REPAIR, vehicleId, null,
+        return new InterventionDto("Reparacion", InterventionType.REPAIR, vehicleId, null,
                 LocalDateTime.now().minusHours(1), LocalDateTime.now().plusHours(1));
     }
 

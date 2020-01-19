@@ -18,7 +18,7 @@ public class InterventionDataService {
         intervention.setVehicle(readVehicle(interventionDto.getVehicleId()));
         intervention.setEndTime(interventionDto.getEndTime());
         intervention.setStartTime(interventionDto.getStartTime());
-        intervention.setState(interventionDto.getState());
+        intervention.setInterventionType(interventionDto.getInterventionType());
         intervention.setTitle(interventionDto.getTitle());
         return intervention;
     }

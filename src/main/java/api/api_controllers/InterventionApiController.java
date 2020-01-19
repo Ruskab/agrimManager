@@ -32,7 +32,7 @@ public class InterventionApiController {
     @Consumes(MediaType.APPLICATION_JSON)
     public int create(InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
-        this.validate(interventionDto.getState(), "State");
+        this.validate(interventionDto.getInterventionType(), "State");
         return interventionBusinessController.create(interventionDto);
     }
 

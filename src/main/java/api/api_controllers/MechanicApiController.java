@@ -50,7 +50,7 @@ public class MechanicApiController {
     @Path("/{id}/interventions")
     public void createIntervention(@PathParam("id") String mechanicId, InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
-        this.validate(interventionDto.getState(), "State");
+        this.validate(interventionDto.getInterventionType(), "State");
         this.validate(interventionDto.getStartTime(), "Start Time");
         this.validateId(mechanicId, "Mechanic id");
         this.mechanicBusinesssController.createIntervention(mechanicId, interventionDto);

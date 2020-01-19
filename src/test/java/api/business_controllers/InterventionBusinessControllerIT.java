@@ -8,14 +8,12 @@ import api.dtos.InterventionDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Intervention;
-import api.entity.State;
+import api.entity.InterventionType;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -68,7 +66,7 @@ public class InterventionBusinessControllerIT {
         assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
 //        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getState(), is(State.REPAIR));
+        assertThat(createdIntervention.get().getInterventionType(), is(InterventionType.REPAIR));
         assertThat(createdIntervention.get().getVehicle().get().getId(), is(createdVehicleId));
     }
 
@@ -81,7 +79,7 @@ public class InterventionBusinessControllerIT {
         assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.get().getTitle(), is("Caffe"));
 //        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getState(), is(State.CAFFE));
+        assertThat(createdIntervention.get().getInterventionType(), is(InterventionType.CAFFE));
         assertThat(createdIntervention.get().getVehicle(), is(Optional.empty()));
     }
 

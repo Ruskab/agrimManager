@@ -1,6 +1,6 @@
 package api.entity;
 
-public enum State {
+public enum InterventionType {
     CAFFE,
     REPAIR
 }
