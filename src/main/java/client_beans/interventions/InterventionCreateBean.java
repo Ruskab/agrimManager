@@ -31,7 +31,7 @@ public class InterventionCreateBean {
     private InterventionDto selectedIntervention;
     private MechanicGateway mechanicGateway;
     private List<VehicleDto> vehicles;
-    private boolean skip;
+    private boolean isCaffe;
 
     @PostConstruct
     public void init() {
@@ -43,9 +43,9 @@ public class InterventionCreateBean {
     public void create() {
         MechanicDto mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
         validateSelection();
-        selectedIntervention.setVehicleId(Integer.toString(selectedVehicle.getId()));
         selectedIntervention.setStartTime(LocalDateTime.now());
-        selectedIntervention.setInterventionType(InterventionType.REPAIR);
+        selectedIntervention.setVehicleId(selectedVehicle != null ? Integer.toString(selectedVehicle.getId()) : null);
+        selectedIntervention.setInterventionType(selectedVehicle != null ? InterventionType.REPAIR : InterventionType.CAFFE);
         mechanicGateway.addIntervention(mechanic, selectedIntervention);
         PrimeFaces.current().executeScript("PF('interventionCreateDialog').hide();");
         resetWizard();
@@ -55,10 +55,6 @@ public class InterventionCreateBean {
         if (selectedIntervention == null) {
             LOGGER.error("Intervention empty");
             FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intervention empty", ""));
-        }
-        if (selectedVehicle == null) {
-            LOGGER.error("Vehiculo no seleccionado");
-            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Vehicle not selected", ""));
         }
     }
 
@@ -72,21 +68,16 @@ public class InterventionCreateBean {
         return vehicles.stream().filter(vehicleDto -> vehicleDto.getVehicleDataSheet().toLowerCase().contains(query.toLowerCase())).collect(toList());
     }
 
-    public boolean isSkip() {
-        return skip;
+    public boolean isCaffe() {
+        return isCaffe;
     }
 
-    public void setSkip(boolean skip) {
-        this.skip = skip;
+    public void setCaffe(boolean caffe) {
+        this.isCaffe = caffe;
     }
 
     public String onFlowProcess(FlowEvent event) {
-        if (skip) {
-            skip = false;
-            return "confirm";
-        } else {
             return event.getNewStep();
-        }
     }
 
     public VehicleDto getSelectedVehicle() {

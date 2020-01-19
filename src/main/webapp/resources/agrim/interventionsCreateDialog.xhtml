@@ -26,14 +26,16 @@
                     <h:outputLabel for="autoCompleteVehicleDataSheet" value="#{msg['web.interventions.edit.vehicle.datasheet']}"/>
                     <p:autoComplete id="autoCompleteVehicleDataSheet" value="#{interventionCreateBean.selectedVehicle}"
                                     completeMethod="#{interventionCreateBean.completeVehicleDataSheet}"
-                                    var="vehicle" itemLabel="#{vehicle.vehicleDataSheet}" itemValue="#{vehicle}" required="true"
+                                    var="vehicle" itemLabel="#{vehicle.vehicleDataSheet}" itemValue="#{vehicle}" required="#{!interventionCreateBean.caffe}"
                                     converter="client_beans.util.converters.VehicleConverter" forceSelection="true"
                                     minQueryLength="3" effect="fade"/>
                     <p:message for="autoCompleteVehicleDataSheet"/>
 
                     <f:facet name="footer">
-                        <h:outputLabel for="btnSkip" value="Skip to last: "/>
-                        <h:selectBooleanCheckbox id="btnSkip" value="#{interventionCreateBean.skip}"/>
+                        <h:outputLabel for="btnCaffe" value="#{msg['web.interventionCreateDialog.iscaffe']}"/>
+                        <h:selectBooleanCheckbox id="btnCaffe" value="#{interventionCreateBean.caffe}" >
+                            <p:ajax event="change" update="selectVehicleTab"/>
+                        </h:selectBooleanCheckbox>
                     </f:facet>
                 </p:panelGrid>
             </p:tab>
@@ -47,7 +49,7 @@
                 </p:panelGrid>
             </p:tab>
 
-            <p:tab id="confirm" title="Confirmation">
+            <p:tab id="dasd" title="Confirmation">
                 <p:panel header="#{msg['web.vehicles.edit.itv.confirmtab.header']}">
                     <p:growl id="dialogGlobalMessages" for="globalMessages"><p:autoUpdate/></p:growl>
 
