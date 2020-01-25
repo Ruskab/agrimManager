@@ -11,7 +11,6 @@ import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.omnifaces.util.Faces;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.DashboardReorderEvent;
 import org.primefaces.event.ToggleEvent;
@@ -34,6 +33,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+import static client_beans.util.SessionUtil.getSessionMechanic;
+
 
 @ManagedBean
 @ViewScoped
@@ -41,9 +43,9 @@ public class OperationsBean {
 
     public static final String SUCCESS = "Success";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
-    private VehicleGateway vehicleGateway = new VehicleGateway();
-    private ClientGateway clientGateway = new ClientGateway();
-    private MechanicGateway mechanicGateway = new MechanicGateway();
+    private VehicleGateway vehicleGateway;
+    private ClientGateway clientGateway;
+    private MechanicGateway mechanicGateway;
     private MechanicDto mechanic;
     private DashboardModel model;
     private Random rnd = new SecureRandom();
@@ -58,8 +60,11 @@ public class OperationsBean {
 
     @PostConstruct
     public void init() {
+        clientGateway = new ClientGateway(getAuthToken());
+        vehicleGateway = new VehicleGateway(getAuthToken());
+        mechanicGateway = new MechanicGateway(getAuthToken());
         initDashboard();
-        mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
+        mechanic = getSessionMechanic("mechanic");
 
     }
 

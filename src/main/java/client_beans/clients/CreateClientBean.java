@@ -13,18 +13,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class CreateClientBean {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateClientBean.class);
     private ClientGateway clientGateway;
-
     private ClientDto client;
 
     @PostConstruct
     public void init() {
-        clientGateway = new ClientGateway();
+        clientGateway = new ClientGateway(getAuthToken());
         client = new ClientDto();
     }
 

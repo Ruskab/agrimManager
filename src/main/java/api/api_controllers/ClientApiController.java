@@ -7,6 +7,7 @@ import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
+import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,6 +42,7 @@ public class ClientApiController {
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
 
     @POST
+    @Secured
     @ApiOperation(value = "Create new client")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(ClientDto clientDto) {
@@ -51,6 +53,7 @@ public class ClientApiController {
     }
 
     @GET
+    @Secured
     @ApiOperation(value = "Get all clients")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClientDto> readAll() {
@@ -58,6 +61,7 @@ public class ClientApiController {
     }
 
     @GET
+    @Secured
     @ApiOperation(value = "Get client by ID")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
@@ -69,6 +73,7 @@ public class ClientApiController {
 
 
     @GET
+    @Secured
     @ApiOperation(value = "Get all client vehicles ")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/vehicles/{id}")
@@ -79,6 +84,7 @@ public class ClientApiController {
     }
 
     @PUT
+    @Secured
     @ApiOperation(value = "Update client information")
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
@@ -92,6 +98,7 @@ public class ClientApiController {
     }
 
     @DELETE
+    @Secured
     @ApiOperation(value = "Delete client by Id")
     @Path("{id}")
     public Response delete(@PathParam("id") String id) {

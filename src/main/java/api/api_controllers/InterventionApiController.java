@@ -3,6 +3,7 @@ package api.api_controllers;
 import api.business_controllers.InterventionBusinesssController;
 import api.dtos.InterventionDto;
 import api.exceptions.FieldInvalidException;
+import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +36,7 @@ public class InterventionApiController {
 
 
     @POST
+    @Secured
     @ApiOperation(value = "Create new intervention")
     @Consumes(MediaType.APPLICATION_JSON)
     public int create(InterventionDto interventionDto) {
@@ -73,6 +75,7 @@ public class InterventionApiController {
 
 
     @GET
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public List<InterventionDto> readAll() {
         return this.interventionBusinessController.readAll();

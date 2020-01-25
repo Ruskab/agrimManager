@@ -54,6 +54,14 @@ public class MechanicBusinessControllerIT {
     }
 
     @Test
+    public void testFindByNameMechanic() {
+        List<MechanicDto> mechanicDtos = mechanicBusinessControler.findBy(createdMechanic1.getName());
+
+        assertThat(mechanicDtos.get(0).getName(),is("fakeName"));
+        assertThat(mechanicDtos.get(0).getPassword(),is("password"));
+    }
+
+    @Test
     public void testReadAllMechanic(){
         List<MechanicDto> mechanicDtos = mechanicBusinessControler.readAll();
 

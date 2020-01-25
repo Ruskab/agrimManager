@@ -13,6 +13,8 @@ import javax.faces.bean.ViewScoped;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class ActiveInterventionBean {
@@ -34,9 +36,9 @@ public class ActiveInterventionBean {
 
     @PostConstruct
     public void init() {
-        interventionGateway = new InterventionGateway();
-        mechanicGateway = new MechanicGateway();
-        vehicleGateway = new VehicleGateway();
+        interventionGateway = new InterventionGateway(getAuthToken());
+        mechanicGateway = new MechanicGateway(getAuthToken());
+        vehicleGateway = new VehicleGateway(getAuthToken());
         Optional<InterventionDto> optionalIntervention = Optional.empty();
         String interventionId = (String) Faces.getSession().getAttribute("activeIntervention");
         if (interventionId == null) {

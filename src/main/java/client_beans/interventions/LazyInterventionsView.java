@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+import static client_beans.util.SessionUtil.getSessionMechanic;
+
 @ManagedBean(name = "lazyInterventionsView")
 @ViewScoped
 public class LazyInterventionsView implements Serializable {
@@ -32,13 +35,16 @@ public class LazyInterventionsView implements Serializable {
     private Map<String, String> vehicles = new HashMap<>();
     private String vehicleReference;
 
-    private InterventionGateway interventionGateway = new InterventionGateway();
-    private VehicleGateway vehicleGateway = new VehicleGateway();
-    private MechanicGateway mechanicGateway = new MechanicGateway();
+    private InterventionGateway interventionGateway;
+    private VehicleGateway vehicleGateway;
+    private MechanicGateway mechanicGateway;
 
     @PostConstruct
     public void init() {
-        mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
+        interventionGateway = new InterventionGateway(getAuthToken());
+        vehicleGateway = new VehicleGateway(getAuthToken());
+        mechanicGateway = new MechanicGateway(getAuthToken());
+        mechanic = getSessionMechanic("mechanic");
         mechanic = mechanicGateway.read(Integer.toString(mechanic.getId()));
 
         List<Integer> intervetionIds = mechanic.getInterventionIds();
@@ -129,7 +135,7 @@ public class LazyInterventionsView implements Serializable {
 
     private void setVehicleInfo(Integer id) {
         InterventionDto intervention = interventionGateway.read(Integer.toString(id));
-        if (intervention.getVehicleId() != null){
+        if (intervention.getVehicleId() != null) {
             vehicles.putIfAbsent(intervention.getVehicleId(), getVehicleReference(vehicleGateway.read(intervention.getVehicleId())));
         }
     }

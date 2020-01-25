@@ -4,6 +4,7 @@ import api.daos.MechanicDao;
 import api.entity.Mechanic;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.stream.Stream;
 
 class MechanicDaoHibr extends GenericDaoHibr<Mechanic, Integer> implements MechanicDao {
 
@@ -11,4 +12,8 @@ class MechanicDaoHibr extends GenericDaoHibr<Mechanic, Integer> implements Mecha
         super(entityManagerFactory);
     }
 
+    @Override
+    public Stream<Mechanic> findBy(String name) {
+        return entityManager.createNamedQuery("MechanicNames", Mechanic.class).setParameter("name", name).getResultStream();
+    }
 }

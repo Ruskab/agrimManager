@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean(name = "lazyClientsView")
 @ViewScoped
 public class LazyClientsView implements Serializable {
@@ -23,12 +25,13 @@ public class LazyClientsView implements Serializable {
 
     private ClientDto selectedClientDto;
 
-    private ClientGateway clientGateway = new ClientGateway();
+    private ClientGateway clientGateway;
 
     private List<ClientDto> clientDtos;
 
     @PostConstruct
     public void init() {
+        clientGateway = new ClientGateway(getAuthToken());
         clientDtos = clientGateway.readAll();
         lazyModel = new LazyDataModel<ClientDto>() {
             @Override

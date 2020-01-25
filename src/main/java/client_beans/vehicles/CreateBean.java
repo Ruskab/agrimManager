@@ -17,6 +17,8 @@ import javax.faces.context.FacesContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class CreateBean {
@@ -31,9 +33,9 @@ public class CreateBean {
 
     @PostConstruct
     public void init() {
-        vehicleGateway = new VehicleGateway();
+        vehicleGateway = new VehicleGateway(getAuthToken());
+        clientDtos = new ClientGateway(getAuthToken()).readAll();
         selectedVehicleDto = new VehicleDto();
-        clientDtos = new ClientGateway().readAll();
     }
 
     public VehicleDto getSelectedVehicleDto() {
