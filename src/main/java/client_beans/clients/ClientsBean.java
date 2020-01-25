@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class ClientsBean implements Serializable {
@@ -21,7 +23,7 @@ public class ClientsBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        clients = new ClientGateway().readAll();
+        clients = new ClientGateway(getAuthToken()).readAll();
     }
 
     public void openClientDialog() {

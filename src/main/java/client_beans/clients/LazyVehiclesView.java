@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean(name = "lazyVehiclesView")
 @ViewScoped
 public class LazyVehiclesView implements Serializable {
@@ -27,11 +29,13 @@ public class LazyVehiclesView implements Serializable {
     private VehicleDto selectedVehicleDto;
     private String clientName;
     private Map<String, String> clientNames = new HashMap<>();
-    private VehicleGateway vehicleGateway = new VehicleGateway();
-    private ClientGateway clientGateway = new ClientGateway();
+    private VehicleGateway vehicleGateway;
+    private ClientGateway clientGateway;
 
     @PostConstruct
     public void init() {
+        vehicleGateway = new VehicleGateway(getAuthToken());
+        clientGateway = new ClientGateway(getAuthToken());
         List<VehicleDto> vehicles = vehicleGateway.readAll();
         vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId()).getFullName()));
         lazyModel = new LazyDataModel<VehicleDto>() {

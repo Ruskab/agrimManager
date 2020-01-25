@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class EditBean {
@@ -17,7 +19,7 @@ public class EditBean {
 
     @PostConstruct
     public void init() {
-        vehicleGateway = new VehicleGateway();
+        vehicleGateway = new VehicleGateway(getAuthToken());
     }
 
     public VehicleDto getSelectedVehicleDto() {

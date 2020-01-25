@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static client_beans.util.SessionUtil.getAuthToken;
 import static java.util.stream.Collectors.toList;
 
 @ManagedBean
@@ -37,9 +38,9 @@ public class InterventionCreateBean {
 
     @PostConstruct
     public void init() {
-        mechanicGateway = new MechanicGateway();
+        mechanicGateway = new MechanicGateway(getAuthToken());
         selectedIntervention = new InterventionDto();
-        vehicles = new VehicleGateway().readAll();
+        vehicles = new VehicleGateway(getAuthToken()).readAll();
     }
 
     public void create() throws IOException {

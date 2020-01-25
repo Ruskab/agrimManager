@@ -7,6 +7,7 @@ import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
+import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,6 +39,7 @@ public class MechanicApiController {
     private MechanicBusinessController mechanicBusinesssController = new MechanicBusinessController();
 
     @POST
+    @Secured
     @ApiOperation(value = "Create new Mechanic")
     @Consumes(MediaType.APPLICATION_JSON)
     public int create(MechanicDto mechanicDto) {
@@ -45,6 +47,7 @@ public class MechanicApiController {
     }
 
     @POST
+    @Secured
     @ApiOperation(value = "Create new Mechanic Intervention")
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/interventions")
@@ -57,6 +60,7 @@ public class MechanicApiController {
     }
 
     @GET
+    @Secured
     @ApiOperation(value = "Get all mechanics")
     @Produces(MediaType.APPLICATION_JSON)
     public List<MechanicDto> readAll() {
@@ -64,6 +68,7 @@ public class MechanicApiController {
     }
 
     @GET
+    @Secured
     @ApiOperation(value = "Get mechanic by ID")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
@@ -74,6 +79,7 @@ public class MechanicApiController {
     }
 
     @DELETE
+    @Secured
     @ApiOperation(value = "Delete mechanic by Id")
     @Path("{id}")
     public Response delete(@PathParam("id") String id) {

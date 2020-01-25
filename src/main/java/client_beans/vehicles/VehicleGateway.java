@@ -13,6 +13,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
@@ -28,19 +29,22 @@ public class VehicleGateway implements Serializable {
     private static final String VEHICLES = "api.vehicles.path";
     private Client client;
     private Properties properties;
+    private String authToken;
 
-    public VehicleGateway() {
+    public VehicleGateway(String authToken) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = new PropertyLoader().loadPropertiesFile("config.properties");
+        this.authToken = authToken;
     }
 
     public String create(VehicleDto vehicleDto) {
         Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(String.class);
     }
@@ -48,6 +52,7 @@ public class VehicleGateway implements Serializable {
     public Integer update(VehicleDto vehicleDto) {
         Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .put(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
         return response.getStatus();
 
@@ -55,13 +60,16 @@ public class VehicleGateway implements Serializable {
 
     public List<VehicleDto> readAll() {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES))
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<VehicleDto>>() {
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<List<VehicleDto>>() {
                 });
     }
 
     public VehicleDto read(String vehicleId) {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + vehicleId)
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .get(VehicleDto.class);
 
     }
@@ -69,6 +77,7 @@ public class VehicleGateway implements Serializable {
     public void delete(int id) {
         client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .delete();
     }
 }

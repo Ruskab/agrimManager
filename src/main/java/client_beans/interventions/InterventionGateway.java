@@ -14,6 +14,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -29,19 +30,22 @@ public class InterventionGateway {
     private static final Logger LOGGER = LogManager.getLogger(InterventionGateway.class);
     private Client client;
     private Properties properties;
+    private String authToken;
 
-    public InterventionGateway() {
+    public InterventionGateway(String authToken) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = new PropertyLoader().loadPropertiesFile("config.properties");
+        this.authToken = authToken;
     }
 
     public String create(InterventionDto interventionDto) {
         Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS))
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
         LOGGER.info("API Crear intervention {} : Status: {}", interventionDto.getId(), response.getStatus());
         return response.readEntity(String.class);
@@ -50,6 +54,7 @@ public class InterventionGateway {
     public Integer update(InterventionDto interventionDto) {
         Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + interventionDto.getId())
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .put(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
         LOGGER.info("API Actualizar intervention {} : Status: {}", interventionDto.getId(), response.getStatus());
         return response.getStatus();
@@ -57,19 +62,23 @@ public class InterventionGateway {
 
     public List<InterventionDto> readAll() {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS))
-                .request(MediaType.APPLICATION_JSON).get(new GenericType<List<InterventionDto>>() {
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<List<InterventionDto>>() {
                 });
     }
 
     public InterventionDto read(String interventionId) {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + interventionId)
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .get(InterventionDto.class);
     }
 
     public void delete(int id) {
         client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
                 .delete();
     }
 }

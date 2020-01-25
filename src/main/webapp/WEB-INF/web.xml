@@ -61,7 +61,8 @@
             <param-value>
                 io.swagger.jaxrs.listing,
                 api.api_controllers,
-                api.exceptions.handlers
+                api.exceptions.handlers,
+                api.filters
             </param-value>
         </init-param>
         <init-param>

@@ -5,6 +5,7 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
 import api.exceptions.FieldInvalidException;
+import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 
@@ -35,6 +36,7 @@ public class VehicleApiController {
     private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
 
     @POST
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(VehicleDto vehicleDto) {
         this.validate(vehicleDto, "vehicleDto");
@@ -44,6 +46,7 @@ public class VehicleApiController {
     }
 
     @DELETE
+    @Secured
     @Path("{id}")
     public Response delete(@PathParam("id") String id) {
         validateId(id, "Vehicle id");
@@ -52,12 +55,14 @@ public class VehicleApiController {
     }
 
     @GET
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public List<VehicleDto> readAll() {
         return this.vehicleBusinessController.readAll();
     }
 
     @GET
+    @Secured
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public VehicleDto read(@PathParam("id") String id) {
@@ -66,6 +71,7 @@ public class VehicleApiController {
     }
 
     @PUT
+    @Secured
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response update(@PathParam("id") String id, VehicleDto vehicleDto) {

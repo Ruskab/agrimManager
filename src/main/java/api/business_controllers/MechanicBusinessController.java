@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class MechanicBusinessController {
 
     private static final String MECHANIC_ID = "Mechanic id: ";
+    private static final String MECHANIC_NAME = "Mechanic name: ";
     private InterventionBusinesssController interventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
@@ -60,6 +61,10 @@ public class MechanicBusinessController {
     public MechanicDto read(String id) {
         return DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(id)).map(MechanicDto::new)
                 .orElseThrow(() -> new NotFoundException(MECHANIC_ID + id));
+    }
+
+    public List<MechanicDto> findBy(String name) {
+        return DaoFactory.getFactory().getMechanicDao().findBy(name).map(MechanicDto::new).collect(Collectors.toList());
     }
 
     public void delete(String id) {

@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -25,6 +27,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "mechanic")
+@NamedQueries({@NamedQuery(name = "MechanicNames", query = "select m from Mechanic m where m.name=:name")})
 public class Mechanic implements Serializable {
 
     private static final long serialVersionUID = 1905122041950251207L;
