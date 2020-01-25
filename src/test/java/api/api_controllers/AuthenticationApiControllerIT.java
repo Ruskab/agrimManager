@@ -50,12 +50,11 @@ class AuthenticationApiControllerIT {
 
     @Test
     void authenticate_user() {
-        CredentialsDto credentialsDto = new CredentialsDto("mechanicName", "mechanicPass");
-
         MechanicDto mechanicDto = new MechanicDto();
         mechanicDto.setName("mechanicName");
         mechanicDto.setPassword("mechanicPass");
         createdMechanics.add(mechanicApiController.create(mechanicDto));
+        CredentialsDto credentialsDto = new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword());
 
         Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + AuthenticationApiController.AUTH)
                 .request(MediaType.APPLICATION_JSON)
