@@ -27,7 +27,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "mechanic")
-@NamedQueries({@NamedQuery(name = "MechanicNames", query = "select m from Mechanic m where m.name=:name")})
+@NamedQuery(name = "MechanicNames", query = "select m from Mechanic m where m.name=:name")
 public class Mechanic implements Serializable {
 
     private static final long serialVersionUID = 1905122041950251207L;

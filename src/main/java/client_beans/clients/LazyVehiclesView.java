@@ -30,14 +30,12 @@ public class LazyVehiclesView implements Serializable {
     private String clientName;
     private Map<String, String> clientNames = new HashMap<>();
     private VehicleGateway vehicleGateway;
-    private ClientGateway clientGateway;
 
     @PostConstruct
     public void init() {
         vehicleGateway = new VehicleGateway(getAuthToken());
-        clientGateway = new ClientGateway(getAuthToken());
         List<VehicleDto> vehicles = vehicleGateway.readAll();
-        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId()).getFullName()));
+        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), new ClientGateway(getAuthToken()).read(vehicle.getClientId()).getFullName()));
         lazyModel = new LazyDataModel<VehicleDto>() {
 
             @Override

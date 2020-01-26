@@ -197,10 +197,6 @@ public class OperationsBean {
         return new InterventionDto(titles.get(0), InterventionType.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
     }
 
-    private int getEndTime() {
-        return rnd.ints(1, 20).findFirst().getAsInt();
-    }
-
     private int getStartTime() {
         return rnd.ints(0, 8).findFirst().getAsInt();
     }

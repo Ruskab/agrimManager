@@ -38,7 +38,6 @@ public class ActiveInterventionBean {
     public void init() {
         interventionGateway = new InterventionGateway(getAuthToken());
         mechanicGateway = new MechanicGateway(getAuthToken());
-        vehicleGateway = new VehicleGateway(getAuthToken());
         Optional<InterventionDto> optionalIntervention = Optional.empty();
         String interventionId = (String) Faces.getSession().getAttribute("activeIntervention");
         if (interventionId == null) {
@@ -48,7 +47,7 @@ public class ActiveInterventionBean {
         } else {
             activeIntervention = interventionGateway.read(interventionId);
         }
-        optionalIntervention.ifPresent(intervention -> vehicle = vehicleGateway.read(activeIntervention.getVehicleId()));
+        optionalIntervention.ifPresent(intervention -> vehicle = new VehicleGateway(getAuthToken()).read(activeIntervention.getVehicleId()));
     }
 
     private Optional<InterventionDto> tryFindActiveIntervention(MechanicDto mechanic) {
