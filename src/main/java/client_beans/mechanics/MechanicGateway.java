@@ -16,12 +16,13 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Properties;
 
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
-public class MechanicGateway {
+public class MechanicGateway implements Serializable {
 
     public static final String APP_BASE_URL = "app.url";
     public static final String MECHANICS = "api.mechanics.path";

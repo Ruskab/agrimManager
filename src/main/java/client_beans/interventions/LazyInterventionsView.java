@@ -5,7 +5,6 @@ import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
-import org.omnifaces.util.Faces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -37,15 +36,13 @@ public class LazyInterventionsView implements Serializable {
 
     private InterventionGateway interventionGateway;
     private VehicleGateway vehicleGateway;
-    private MechanicGateway mechanicGateway;
 
     @PostConstruct
     public void init() {
         interventionGateway = new InterventionGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
-        mechanicGateway = new MechanicGateway(getAuthToken());
         mechanic = getSessionMechanic("mechanic");
-        mechanic = mechanicGateway.read(Integer.toString(mechanic.getId()));
+        mechanic = new MechanicGateway(getAuthToken()).read(Integer.toString(mechanic.getId()));
 
         List<Integer> intervetionIds = mechanic.getInterventionIds();
         intervetionIds.forEach(this::setVehicleInfo);

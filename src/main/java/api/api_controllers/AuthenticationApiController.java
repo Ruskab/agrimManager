@@ -3,6 +3,7 @@ package api.api_controllers;
 import api.business_controllers.AuthenticationBusinessController;
 import api.dtos.CredentialsDto;
 import api.exceptions.FieldInvalidException;
+import api.exceptions.NotFoundException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -45,7 +46,7 @@ public class AuthenticationApiController {
         }
     }
 
-    private void authenticate(String username, String password) throws Exception {
+    private void authenticate(String username, String password) throws NotFoundException {
         // Authenticate against a database, LDAP, file or whatever
         // Throw an Exception if the credentials are invalid
         authenticationBusinesssController.authenticateCredentials(username, password);

@@ -28,7 +28,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private MechanicApiController mechanicApiController = new MechanicApiController();
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext) {
         // Get the Authorization header from the request
         String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
@@ -67,7 +67,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                         .build());
     }
 
-    private void validateToken(String token) throws NotAuthorizedException {
+    private void validateToken(String token) {
         // Check if the token was issued by the server and if it's not expired
         // Throw an Exception if the token is invalid
         String credentials = new String(Base64.getDecoder().decode(token.getBytes()));

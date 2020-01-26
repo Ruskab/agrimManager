@@ -2,10 +2,8 @@ package api.dtos;
 
 import api.entity.Client;
 
-import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
-@RequestScoped
 public class ClientDto implements Serializable {
 
     private static final long serialVersionUID = 6285845014865471015L;

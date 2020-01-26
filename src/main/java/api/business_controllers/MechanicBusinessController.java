@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class MechanicBusinessController {
 
     private static final String MECHANIC_ID = "Mechanic id: ";
-    private static final String MECHANIC_NAME = "Mechanic name: ";
     private InterventionBusinesssController interventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
