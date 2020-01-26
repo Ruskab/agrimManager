@@ -72,7 +72,7 @@ public class LoginBean {
             Faces.getSession().setAttribute("mechanic", mechanicDto.get());
             Faces.getSession().setAttribute("token", "Bearer " + response.getEntity());
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-            externalContext.redirect(externalContext.getRequestContextPath().concat("/backoffice/home.xhtml"));
+            externalContext.redirect(externalContext.getRequestContextPath().concat(HOME_PAGE));
             return HOME_PAGE;
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
