@@ -1,0 +1,23 @@
+name: maven unit test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Mysql DB
+        run: mysql -u${{ secrets.AGRIM_DB_USER }} -p${{ secrets.AGRIM_DB_PASS }} -e "CREATE DATABASE ${{ secrets.AGRIM_DB_NAME }};"
+
+      - uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Unit tests + Integration Tests
+        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT
+        env:
+          AGRIM_DB_USER: ${{ secrets.AGRIM_DB_USER }}
+          AGRIM_DB_PASS: ${{ secrets.AGRIM_DB_PASS }}

@@ -39,6 +39,19 @@
 		</profile>
 
 		<profile>
+			<id>github</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>github</value>
+				</property>
+			</activation>
+			<properties>
+				<env>github</env>
+			</properties>
+		</profile>
+
+		<profile>
 			<id>pre</id>
 			<activation>
 				<property>

@@ -4,6 +4,9 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
 import api.entity.Client;
+import client_beans.util.PropertyLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,18 +14,25 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class ClientBusinessControllerTest {
+public class ClientBusinessControllerIT {
 
     private static ClientBusinessController clientBusinessController;
     private static List<Integer> createdclients;
+    private static final Logger LOGGER = LogManager.getLogger(ClientBusinessControllerIT.class);
 
     @BeforeAll
     static void prepare() {
+        Properties properties = new PropertyLoader().loadPropertiesFile("config.properties");
+
+        LOGGER.info("prueba1 : {}" , properties.getProperty("db.username"));
+        LOGGER.info("prueba2 : {}" , properties.getProperty("db.password"));
+
         createdclients = new ArrayList<>();
         DaoFactory.setFactory(new DaoFactoryHibr());
         clientBusinessController = new ClientBusinessController();
