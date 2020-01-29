@@ -20,19 +20,14 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class ClientBusinessControllerIT {
+public class ClientBusinessControllerTest {
 
     private static ClientBusinessController clientBusinessController;
     private static List<Integer> createdclients;
-    private static final Logger LOGGER = LogManager.getLogger(ClientBusinessControllerIT.class);
+    private static final Logger LOGGER = LogManager.getLogger(ClientBusinessControllerTest.class);
 
     @BeforeAll
     static void prepare() {
-        Properties properties = new PropertyLoader().loadPropertiesFile("config.properties");
-
-        LOGGER.info("prueba1 : {}" , properties.getProperty("db.username"));
-        LOGGER.info("prueba2 : {}" , properties.getProperty("db.password"));
-
         createdclients = new ArrayList<>();
         DaoFactory.setFactory(new DaoFactoryHibr());
         clientBusinessController = new ClientBusinessController();
