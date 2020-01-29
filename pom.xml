@@ -52,6 +52,32 @@
 		</profile>
 
 		<profile>
+			<id>githubdocker</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>githubdocker</value>
+				</property>
+			</activation>
+			<properties>
+				<env>githubdocker</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>githubendtoend</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>githubendtoend</value>
+				</property>
+			</activation>
+			<properties>
+				<env>githubendtoend</env>
+			</properties>
+		</profile>
+
+		<profile>
 			<id>pre</id>
 			<activation>
 				<property>
