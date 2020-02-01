@@ -39,10 +39,10 @@ public class InterventionApiController {
     @Secured
     @ApiOperation(value = "Create new intervention")
     @Consumes(MediaType.APPLICATION_JSON)
-    public int create(InterventionDto interventionDto) {
+    public Response create(InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
         this.validate(interventionDto.getInterventionType(), "State");
-        return interventionBusinessController.create(interventionDto);
+        return Response.status(201).entity(interventionBusinessController.create(interventionDto)).build();
     }
 
     public void delete(String interventionId) {

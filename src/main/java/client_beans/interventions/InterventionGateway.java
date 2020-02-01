@@ -48,25 +48,23 @@ public class InterventionGateway implements Serializable {
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
-        LOGGER.info("API Crear intervention {} : Status: {}", interventionDto.getId(), response.getStatus());
+        checkResponseStatus(response, Response.Status.CREATED);
         return response.readEntity(String.class);
     }
 
-    public Integer update(InterventionDto interventionDto) {
+    public void update(InterventionDto interventionDto) {
         Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + interventionDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .put(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
-        LOGGER.info("API Actualizar intervention {} : Status: {}", interventionDto.getId(), response.getStatus());
-        return response.getStatus();
+        checkResponseStatus(response, Response.Status.OK);
     }
 
     public List<InterventionDto> readAll() {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<InterventionDto>>() {
-                });
+                .get(new GenericType<List<InterventionDto>>() {});
     }
 
     public InterventionDto read(String interventionId) {
@@ -76,10 +74,17 @@ public class InterventionGateway implements Serializable {
                 .get(InterventionDto.class);
     }
 
-    public void delete(int id) {
-        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + id)
+    public void delete(Integer id) {
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .delete();
+        checkResponseStatus(response, Response.Status.NO_CONTENT);
+    }
+
+    private void checkResponseStatus(Response response, Response.Status status) {
+        if (response.getStatus() != status.getStatusCode()) {
+            throw new IllegalStateException(String.format("API invalid status: %s", response.getStatus()));
+        }
     }
 }

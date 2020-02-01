@@ -107,7 +107,7 @@ class DispatcherIT {
 
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
-        int id = (int) new Client().submit(request).getBody();
+        Integer id = (Integer) ((Response) new Client().submit(request).getBody()).getEntity();
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
@@ -122,7 +122,7 @@ class DispatcherIT {
     void testCreateInterventionCAFFE() {
         InterventionDto interventionDto = AgrimDomainFactory.createCaffeInterventionDto();
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
-        int id = (int) new Client().submit(request).getBody();
+        Integer id = (Integer) ((Response) new Client().submit(request).getBody()).getEntity();
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
@@ -360,7 +360,8 @@ class DispatcherIT {
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
         int existentVehicleId = createdVehicles.get(0);
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
-        Integer createdInterventionId = interventionApiController.create(interventionDto);
+        Response response = interventionApiController.create(interventionDto);
+        Integer createdInterventionId = (Integer) response.getEntity();
         createdInterventions.add(createdInterventionId);
         RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now(), 3);
         String createdRepairingPackId = Integer.toString(repairingPackApiController.create(repairingPackDto));
@@ -409,7 +410,8 @@ class DispatcherIT {
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
         int existentVehicleId = createdVehicles.get(0);
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
-        Integer createdInterventionId = interventionApiController.create(interventionDto);
+        Response response = interventionApiController.create(interventionDto);
+        Integer createdInterventionId = (Integer) response.getEntity();
         createdInterventions.add(createdInterventionId);
 
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)

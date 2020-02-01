@@ -60,9 +60,10 @@ public class ActiveInterventionBean {
 
     public void finishActiveIntervention() {
         activeIntervention.setEndTime(LocalDateTime.now());
-        Integer status = interventionGateway.update(activeIntervention);
-        if (200 == status) {
+        try {
+            interventionGateway.update(activeIntervention);
             activeIntervention = null;
+        } catch (IllegalStateException e) {
         }
     }
 
