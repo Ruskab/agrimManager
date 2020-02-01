@@ -207,8 +207,12 @@ class VehicleApiControllerIT {
     }
 
     @AfterEach
-    void delete_mechanic() {
+    void delete_data() {
         createdMechanics.forEach(mechanic -> mechanicApiController.delete(mechanic.toString()));
+        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .delete();
     }
 
 
