@@ -17,4 +17,8 @@ public class PropertyLoader {
         }
         return prop;
     }
+
+    public boolean isProduction() {
+        return this.loadPropertiesFile("config.properties").getProperty("api.environment").equals("production");
+    }
 }
