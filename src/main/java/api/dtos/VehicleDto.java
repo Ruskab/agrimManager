@@ -51,6 +51,11 @@ public class VehicleDto implements Serializable {
         this.motorOil = vehicle.getMotorOil();
     }
 
+    public VehicleDto(String registrationPlate, String clientId) {
+        this.registrationPlate = registrationPlate;
+        this.clientId = clientId;
+    }
+
     public String getKms() {
         return kms;
     }
