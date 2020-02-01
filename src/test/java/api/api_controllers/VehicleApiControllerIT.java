@@ -1,5 +1,6 @@
 package api.api_controllers;
 
+import api.PropertiesResolver;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.dtos.InterventionDto;
@@ -52,7 +53,7 @@ class VehicleApiControllerIT {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
-        properties = this.loadPropertiesFile("config.properties");
+        properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         Response response = new ClientApiController().create(new ClientDto("fake", 3));
         createdClientId = (Integer) response.getEntity();
         MechanicDto mechanicDto = new MechanicDto();
@@ -186,19 +187,6 @@ class VehicleApiControllerIT {
     private InterventionDto createInterventionDto(String vehicleId) {
         return new InterventionDto("Reparacion", InterventionType.REPAIR, vehicleId, null,
                 LocalDateTime.now().minusHours(1), LocalDateTime.now().plusHours(1));
-    }
-
-    //todo mover a clase comun se usa en muchos lados
-    private Properties loadPropertiesFile(String filePath) {
-
-        Properties prop = new Properties();
-
-        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-            prop.load(resourceAsStream);
-        } catch (IOException e) {
-            System.err.println("Unable to load properties file : " + filePath);
-        }
-        return prop;
     }
 
     private VehicleDto createVehicleDto(String clientId, String registrationPlate) {

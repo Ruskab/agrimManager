@@ -826,8 +826,6 @@ class DispatcherIT {
                 .createVehicleDto();
     }
 
-
-
     @AfterEach
     void clean() {
         createdMechanics.forEach(id -> DaoFactory.getFactory().getMechanicDao().deleteById(id));

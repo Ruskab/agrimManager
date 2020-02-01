@@ -19,7 +19,6 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-
 public class VehicleBusinessControllerIT {
 
     private static VehicleBusinessController vehicleBusinessController;
@@ -40,7 +39,6 @@ public class VehicleBusinessControllerIT {
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(Integer.toString(createdclients.get(0)), "111111")));
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(Integer.toString(createdclients.get(0)), "222222")));
     }
-
 
     @Test
     void testCreateVehicle() {
