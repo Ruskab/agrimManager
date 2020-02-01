@@ -50,7 +50,6 @@ public class InterventionBusinessControllerIT {
         createdInterventions.add(interventionBusinesssController.create(AgrimDomainFactory.createCaffeInterventionDto()));
     }
 
-
     @Test
     void testCreateIntervention() {
         int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));

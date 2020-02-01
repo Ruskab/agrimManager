@@ -1,5 +1,6 @@
 package api.api_controllers;
 
+import api.PropertiesResolver;
 import api.dtos.CredentialsDto;
 import api.dtos.MechanicDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,11 +46,13 @@ class AuthenticationApiControllerIT {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
-        properties = this.loadPropertiesFile("config.properties");
+        properties = new PropertiesResolver().loadPropertiesFile("config.properties");
+
     }
 
     @Test
     void authenticate_user() {
+
         MechanicDto mechanicDto = new MechanicDto();
         mechanicDto.setName("mechanicName");
         mechanicDto.setPassword("mechanicPass");
@@ -67,19 +70,6 @@ class AuthenticationApiControllerIT {
     @AfterEach
     void delete_mechanic() {
         createdMechanics.forEach(mechanic -> mechanicApiController.delete(mechanic.toString()));
-    }
-
-    //todo mover a clase comun se usa en muchos lados
-    private Properties loadPropertiesFile(String filePath) {
-
-        Properties prop = new Properties();
-
-        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-            prop.load(resourceAsStream);
-        } catch (IOException e) {
-            System.err.println("Unable to load properties file : " + filePath);
-        }
-        return prop;
     }
 
 }
