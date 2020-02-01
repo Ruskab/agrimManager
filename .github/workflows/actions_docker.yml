@@ -21,17 +21,17 @@ jobs:
       - name: Build the docker-compose
         run: docker-compose -f docker-compose-github.yml up -d
 
-      - name: Sleep 60 s
+      - name: Sleep 30s
         uses: jakejarvis/wait-action@master
         with:
           time: '30s'
 
-      - name: Check running containers
+      - name: Check docker running containers
         run: docker ps
 
-      - name: execute Unit and bussiness controller test + create database
+      - name: Unit and Bussiness controllers tests + create database
         run: mvn test -Denvironment=githubdocker
 
 
-      - name: execute API tests
-        run: mvn verify -Denvironment=githubendtoend
+      - name: API tests
+        run: mvn test -Denvironment=githubendtoend -Dtest=api.api_controllers.*IT
