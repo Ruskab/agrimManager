@@ -4,6 +4,7 @@ import api.PropertiesResolver;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.dtos.MechanicDto;
+import client_beans.clients.ClientGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -39,6 +40,7 @@ class ClientApiControllerIT {
     private List<Integer> createdMechanics = new ArrayList<>();
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
+    private ClientGateway clientGateway;
 
     @BeforeEach
     void setUp() {
@@ -53,83 +55,40 @@ class ClientApiControllerIT {
         mechanicDto.setPassword("mechanicPass");
         createdMechanics.add(mechanicApiController.create(mechanicDto));
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
+        clientGateway = new ClientGateway(authToken);
+
     }
 
     @Test
     void create_and_read_clientDto() {
-        try {
             ClientDto clientDto = new ClientDto("fullNameTest", 4);
-            Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
-                    .request(MediaType.APPLICATION_JSON)
-                    .header(HttpHeaders.AUTHORIZATION, authToken)
-                    .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
+            String clientId = clientGateway.create(clientDto);
 
-            assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
-
-            String id = response.readEntity(String.class);
-            ClientDto createdClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
-                    .request(MediaType.APPLICATION_JSON)
-                    .header(HttpHeaders.AUTHORIZATION, authToken)
-                    .get(ClientDto.class);
+            ClientDto createdClientDto = clientGateway.read(clientId);
 
             assertThat(createdClientDto.getFullName(), is("fullNameTest"));
             assertThat(createdClientDto.getHours(), is(4));
-        } catch (Exception e) {
-            LOGGER.error(e);
-            LOGGER.error(e.getMessage());
-        }
     }
 
     @Test
     void delete_client() {
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
-        String id = response.readEntity(String.class);
+        String clientId = clientGateway.create(clientDto);
 
-        Response deleteResponse = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
-
-        assertThat(deleteResponse.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
+        clientGateway.delete(Integer.parseInt(clientId));
     }
 
     @Test
     void update_client() {
         ClientDto clientDto = new ClientDto("fullNameTest", 4);
-
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
-
-        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
-        String id = response.readEntity(String.class);
-
-        ClientDto createdClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(ClientDto.class);
-
+        String clientId = clientGateway.create(clientDto);
+        ClientDto createdClientDto = clientGateway.read(clientId);
         createdClientDto.setFullName("newFullName");
         createdClientDto.setHours(5);
 
-        Response updateResponse = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .put(Entity.entity(createdClientDto, MediaType.APPLICATION_JSON_TYPE));
+        clientGateway.update(createdClientDto);
 
-        assertThat(updateResponse.getStatus(), is(Response.Status.OK.getStatusCode()));
-
-        ClientDto updatedClientDto = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + ClientApiController.CLIENTS + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(ClientDto.class);
-
-        assertThat(updateResponse.getStatus(), is(Response.Status.OK.getStatusCode()));
+        ClientDto updatedClientDto = clientGateway.read(clientId);
         assertThat(updatedClientDto.getFullName(), is("newFullName"));
         assertThat(updatedClientDto.getHours(), is(5));
     }
