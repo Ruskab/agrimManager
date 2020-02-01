@@ -1,4 +1,4 @@
-name: maven unit test
+name: Unit tests + Bussiness Controller IT
 
 on: [push]
 
@@ -26,7 +26,7 @@ jobs:
           java-version: 1.8
 
       - name: Unit tests + Integration Tests
-        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT
+        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT
         env:
           AGRIM_DB_USER: ${{ secrets.AGRIM_DB_USER }}
           AGRIM_DB_PASS: ${{ secrets.AGRIM_DB_PASS }}

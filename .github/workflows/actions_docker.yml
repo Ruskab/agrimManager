@@ -1,4 +1,4 @@
-name: docker compose github
+name: API contoller tests in deployed application
 
 on: [push]
 
