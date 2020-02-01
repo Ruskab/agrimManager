@@ -107,7 +107,7 @@ class DispatcherIT {
 
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
-        int id = (int) new Client().submit(request).getBody();
+        Integer id = (Integer) ((Response) new Client().submit(request).getBody()).getEntity();
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
@@ -122,7 +122,7 @@ class DispatcherIT {
     void testCreateInterventionCAFFE() {
         InterventionDto interventionDto = AgrimDomainFactory.createCaffeInterventionDto();
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
-        int id = (int) new Client().submit(request).getBody();
+        Integer id = (Integer) ((Response) new Client().submit(request).getBody()).getEntity();
         createdInterventions.add(id);
 
         Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
