@@ -21,8 +21,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -137,8 +135,14 @@ class ClientApiControllerIT {
     }
 
     @AfterEach
-    void delete_mechanic() {
+    void delete_data() {
         createdMechanics.forEach(mechanic -> mechanicApiController.delete(mechanic.toString()));
+        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .delete();
+
     }
+
 
 }

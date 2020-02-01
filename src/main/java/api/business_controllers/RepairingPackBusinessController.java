@@ -31,4 +31,10 @@ public class RepairingPackBusinessController {
         intervention.setRepairingPack(repairingPack);
         DaoFactory.getFactory().getInterventionDao().update(intervention);
     }
+
+    public void delete(Integer id) {
+        RepairingPack repairingPack = DaoFactory.getFactory().getRepairingPackDao().read((id))
+                .orElseThrow(() -> new NotFoundException("" + id));
+        DaoFactory.getFactory().getRepairingPackDao().deleteById(repairingPack.getId());
+    }
 }
