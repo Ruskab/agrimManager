@@ -37,14 +37,13 @@ public class ClientInfoBean implements Serializable {
     }
 
     public void save() {
-        Integer responseStatus = clientGateway.update(clientDto);
-        String message = responseStatus == 200 ? "Successful" : "Error";
-        if ("Error".equals(message)) {
-            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "update client"));
+        try {
+            clientGateway.update(clientDto);
+            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update client"));
+        }catch (IllegalStateException e){
+            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update client"));
             return;
         }
-        FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "update client"));
-
     }
 
     public ClientDto getClientDto() {

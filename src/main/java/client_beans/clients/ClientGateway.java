@@ -48,25 +48,24 @@ public class ClientGateway implements Serializable {
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
-        LOGGER.info("API Crear cliente {} : Status: {}", clientDto.getFullName(), response.getStatus());
+        checkResponseStatus(response, Response.Status.CREATED);
         return response.readEntity(String.class);
     }
 
-    public Integer update(ClientDto clientDto) {
+    public void update(ClientDto clientDto) throws IllegalStateException {
         Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + clientDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .put(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
         LOGGER.info("API Actualizar cliente {} : Status: {}", clientDto.getId(), response.getStatus());
-        return response.getStatus();
+        checkResponseStatus(response, Response.Status.OK);
     }
 
     public List<ClientDto> readAll() {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<ClientDto>>() {
-                });
+                .get(new GenericType<List<ClientDto>>() {});
     }
 
     public ClientDto read(String clientId) {
@@ -77,9 +76,17 @@ public class ClientGateway implements Serializable {
     }
 
     public void delete(int id) {
-        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + id)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .delete();
+        checkResponseStatus(response, Response.Status.NO_CONTENT);
     }
+
+    private void checkResponseStatus(Response response, Response.Status status) {
+        if (response.getStatus() != status.getStatusCode()) {
+            throw new IllegalStateException(String.format("Client API invalid status: %s", response.getStatus()));
+        }
+    }
+
 }

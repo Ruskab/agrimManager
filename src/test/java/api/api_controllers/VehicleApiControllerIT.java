@@ -8,6 +8,8 @@ import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.InterventionType;
+import client_beans.clients.ClientGateway;
+import client_beans.vehicles.VehicleGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -39,12 +41,13 @@ class VehicleApiControllerIT {
 
     private Client client;
     private Properties properties;
-    private Integer createdClientId;
     private String authToken;
     private List<Integer> createdMechanics = new ArrayList<>();
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private static final String API_PATH = "app.api.base.path";
     private static final String APP_BASE_URL = "app.url";
+    private VehicleGateway vehicleGateway;
+    private ClientGateway clientGateway;
 
     @BeforeEach
     void setUp() {
@@ -54,34 +57,25 @@ class VehicleApiControllerIT {
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
-        Response response = new ClientApiController().create(new ClientDto("fake", 3));
-        createdClientId = (Integer) response.getEntity();
         MechanicDto mechanicDto = new MechanicDto();
         mechanicDto.setName("mechanicName");
         mechanicDto.setPassword("mechanicPass");
         createdMechanics.add(mechanicApiController.create(mechanicDto));
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
+        vehicleGateway = new VehicleGateway(authToken);
+        clientGateway = new ClientGateway(authToken);
     }
 
     @Test
     void create_and_read_vehicle() {
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
+        String clientId = clientGateway.create(new ClientDto("fake", 3));
+        VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
+        String vehicleId = vehicleGateway.create(vehicleDto);
 
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
-
-        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
-        String id = response.readEntity(String.class);
-
-        VehicleDto createdVehicleDto = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(VehicleDto.class);
+        VehicleDto createdVehicleDto = vehicleGateway.read(vehicleId);
 
         assertThat(createdVehicleDto.getRegistrationPlate(), is("AABBDDCC"));
-        assertThat(createdVehicleDto.getClientId(), is(createdClientId.toString()));
+        assertThat(createdVehicleDto.getClientId(), is(clientId));
         assertThat(createdVehicleDto.getBrand(), is("Opel"));
         assertThat(createdVehicleDto.getKms(), is("03-03-2017 94744"));
         assertThat(createdVehicleDto.getBodyOnFrame(), is("VF1KC0JEF31065732"));
@@ -95,92 +89,26 @@ class VehicleApiControllerIT {
     }
 
     @Test
-    void create_and_read_mechanic_intervention() {
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
+    void delete_vehicle() {
+        String clientId = clientGateway.create(new ClientDto("fake", 3));
+        VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
 
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
+        String vehicleId = vehicleGateway.create(vehicleDto);
 
-        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
-        String id = response.readEntity(String.class);
-        InterventionDto interventionDto = createInterventionDto(id);
-
-        Response response1 = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + MechanicApiController.MECHANICS + "/122/interventions")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
-
-
-        VehicleDto createdVehicleDto = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(VehicleDto.class);
-
-        assertThat(createdVehicleDto.getRegistrationPlate(), is("AABBDDCC"));
-        assertThat(createdVehicleDto.getClientId(), is(createdClientId.toString()));
-        assertThat(createdVehicleDto.getBrand(), is("Opel"));
-        assertThat(createdVehicleDto.getKms(), is("03-03-2017 94744"));
-        assertThat(createdVehicleDto.getBodyOnFrame(), is("VF1KC0JEF31065732"));
-        assertThat(createdVehicleDto.getLastRevisionDate(), is(LocalDate.now().minusMonths(2)));
-        assertThat(createdVehicleDto.getItvDate(), is(LocalDate.now().minusMonths(3)));
-        assertThat(createdVehicleDto.getNextItvDate(), is(LocalDate.now().plusYears(1)));
-        assertThat(createdVehicleDto.getAirFilterReference(), is("1813029400"));
-        assertThat(createdVehicleDto.getOilFilterReference(), is("1812344000"));
-        assertThat(createdVehicleDto.getFuelFilter(), is("181315400"));
-        assertThat(createdVehicleDto.getMotorOil(), is("5.5  5W30"));
+        vehicleGateway.delete(Integer.parseInt(vehicleId));
     }
 
     @Test
-    void delete_client() {
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
-
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
-        String id = response.readEntity(String.class);
-
-        Response deleteResponse = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
-
-        assertThat(deleteResponse.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
-    }
-
-    @Test
-    void update_client() {
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "AABBDDCC");
-
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
-
-        String id = response.readEntity(String.class);
-
-        VehicleDto createdVehicleDto = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(VehicleDto.class);
-
+    void update_vehicle() {
+        String clientId = clientGateway.create(new ClientDto("fake", 3));
+        VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
+        String vehicleId = vehicleGateway.create(vehicleDto);
+        VehicleDto createdVehicleDto = vehicleGateway.read(vehicleId);
         createdVehicleDto.setRegistrationPlate("CCDDAABB");
 
-        Response updateResponse = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .put(Entity.entity(createdVehicleDto, MediaType.APPLICATION_JSON_TYPE));
+        vehicleGateway.update(createdVehicleDto);
 
-        assertThat(updateResponse.getStatus(), is(Response.Status.OK.getStatusCode()));
-
-        VehicleDto updatedVehicleDto = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES + "/" + id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(VehicleDto.class);
-
-        assertThat(updateResponse.getStatus(), is(Response.Status.OK.getStatusCode()));
+        VehicleDto updatedVehicleDto = vehicleGateway.read(vehicleId);
         assertThat(updatedVehicleDto.getRegistrationPlate(), is("CCDDAABB"));
     }
 

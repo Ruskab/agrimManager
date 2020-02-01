@@ -31,13 +31,13 @@ public class EditBean {
     }
 
     public void save() {
-        Integer responseStatus = vehicleGateway.update(selectedVehicleDto);
-        String message = responseStatus == 200 ? "Successful" : "Error";
-        if ("Error".equals(message)) {
-            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "update vehicle"));
+        try {
+            vehicleGateway.update(selectedVehicleDto);
+        } catch (IllegalStateException e) {
+            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update vehicle"));
             return;
         }
-        FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "update vehicle"));
+        FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update vehicle"));
 
     }
 }

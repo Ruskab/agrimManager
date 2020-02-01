@@ -46,15 +46,16 @@ public class VehicleGateway implements Serializable {
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
+        checkResponseStatus(response, Response.Status.CREATED);
         return response.readEntity(String.class);
     }
 
-    public Integer update(VehicleDto vehicleDto) {
+    public void update(VehicleDto vehicleDto) {
         Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + vehicleDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .put(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
-        return response.getStatus();
+        checkResponseStatus(response, Response.Status.OK);
 
     }
 
@@ -62,8 +63,7 @@ public class VehicleGateway implements Serializable {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<VehicleDto>>() {
-                });
+                .get(new GenericType<List<VehicleDto>>() {});
     }
 
     public VehicleDto read(String vehicleId) {
@@ -74,10 +74,17 @@ public class VehicleGateway implements Serializable {
 
     }
 
-    public void delete(int id) {
-        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + id)
+    public void delete(Integer id) {
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .delete();
+        checkResponseStatus(response, Response.Status.NO_CONTENT);
+    }
+
+    private void checkResponseStatus(Response response, Response.Status status) {
+        if (response.getStatus() != status.getStatusCode()) {
+            throw new IllegalStateException(String.format("Client API invalid status: %s", response.getStatus()));
+        }
     }
 }
