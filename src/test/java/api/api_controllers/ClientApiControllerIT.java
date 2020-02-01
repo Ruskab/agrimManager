@@ -138,10 +138,6 @@ class ClientApiControllerIT {
 
     @AfterEach
     void delete_data() {
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + DeleteDataApiController.DELETE_DATA)
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
         createdMechanics.forEach(mechanic -> mechanicApiController.delete(mechanic.toString()));
     }
 
