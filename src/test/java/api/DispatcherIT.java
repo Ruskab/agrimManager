@@ -360,7 +360,8 @@ class DispatcherIT {
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
         int existentVehicleId = createdVehicles.get(0);
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
-        Integer createdInterventionId = interventionApiController.create(interventionDto);
+        Response response = interventionApiController.create(interventionDto);
+        Integer createdInterventionId = (Integer) response.getEntity();
         createdInterventions.add(createdInterventionId);
         RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now(), 3);
         String createdRepairingPackId = Integer.toString(repairingPackApiController.create(repairingPackDto));
@@ -409,7 +410,8 @@ class DispatcherIT {
         createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
         int existentVehicleId = createdVehicles.get(0);
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
-        Integer createdInterventionId = interventionApiController.create(interventionDto);
+        Response response = interventionApiController.create(interventionDto);
+        Integer createdInterventionId = (Integer) response.getEntity();
         createdInterventions.add(createdInterventionId);
 
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)

@@ -67,6 +67,7 @@ public class InterventionBusinesssController {
                 .orElseThrow(() -> new NotFoundException("Intervention ID" + id));
 
         intervention.setEndTime(interventionDto.getEndTime());
+        intervention.setTitle(interventionDto.getTitle());
         DaoFactory.getFactory().getInterventionDao().update(intervention);
     }
 
