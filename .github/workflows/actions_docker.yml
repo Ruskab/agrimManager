@@ -21,10 +21,12 @@ jobs:
       - name: Build the docker-compose
         run: docker-compose -f docker-compose-github.yml up -d
 
-      - name: Sleep 30s
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '30s'
+      - name: Wait for the environment in docker to get up
+        run: |
+          while ! docker exec mysql-db mysqladmin --user=${{ secrets.AGRIM_DB_USER }} --password=${{ secrets.AGRIM_DB_PASS }} --host "127.0.0.1" ping --silent &> /dev/null ; do
+              echo "Waiting for database connection..."
+              sleep 2
+          done
 
       - name: Check docker running containers
         run: docker ps
