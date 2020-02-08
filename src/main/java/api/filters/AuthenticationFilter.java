@@ -1,6 +1,6 @@
 package api.filters;
 
-import api.api_controllers.MechanicApiController;
+import api.business_controllers.MechanicBusinessController;
 import api.dtos.MechanicDto;
 
 import javax.annotation.Priority;
@@ -11,7 +11,6 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
@@ -22,10 +21,9 @@ import java.util.function.Predicate;
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
+    public static final String DELIMITER = "###";
     private static final String REALM = "example";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
-    public static final String DELIMITER = "###";
-    private MechanicApiController mechanicApiController = new MechanicApiController();
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
@@ -71,7 +69,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         // Check if the token was issued by the server and if it's not expired
         // Throw an Exception if the token is invalid
         String credentials = new String(Base64.getDecoder().decode(token.getBytes()));
-        List<MechanicDto> mechanicDtos = mechanicApiController.readAll();
+        List<MechanicDto> mechanicDtos = new MechanicBusinessController().readAll();
         if (mechanicDtos.stream().noneMatch(isValidMechanic(credentials))) {
             throw new NotAuthorizedException("", "Usuario no autorizado");
         }

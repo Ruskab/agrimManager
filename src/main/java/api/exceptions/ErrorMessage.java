@@ -1,10 +1,16 @@
 package api.exceptions;
 
-public class ErrorMessage {
+import java.io.Serializable;
 
-    private final String error;
-    private final String message;
-    private final String path;
+public class ErrorMessage implements Serializable {
+
+    private String error;
+    private String message;
+    private String path;
+
+    public ErrorMessage(){
+
+    }
 
     public ErrorMessage(Exception exception, String path) {
         this.error = exception.getClass().getSimpleName();

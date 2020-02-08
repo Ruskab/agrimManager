@@ -17,7 +17,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
@@ -25,7 +27,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -49,7 +50,6 @@ class DeleteDataApiControllerIT {
     private static RepairingPackBusinessController repairingPackBusinessController;
     Client client;
     Properties properties;
-    private List<Integer> createdMechanics = new ArrayList<>();
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
 
@@ -65,7 +65,7 @@ class DeleteDataApiControllerIT {
         MechanicDto mechanicDto = new MechanicDto();
         mechanicDto.setName("mechanicName");
         mechanicDto.setPassword("mechanicPass");
-        createdMechanics.add(mechanicApiController.create(mechanicDto));
+        mechanicApiController.create(mechanicDto);
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
@@ -96,6 +96,14 @@ class DeleteDataApiControllerIT {
                 .delete();
 
         assertThat(response.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
+    }
 
+    @AfterEach
+    void delete_data() {
+//        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+//                .request(MediaType.APPLICATION_JSON)
+//                .header(HttpHeaders.AUTHORIZATION, authToken)
+//                .delete();
+        new DeleteDataApiController().deleteAll();
     }
 }

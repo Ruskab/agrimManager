@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
+import static api.AgrimDomainFactory.createCaffeInterventionDto;
 import static api.AgrimDomainFactory.createMechanic;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
@@ -21,11 +22,14 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 public class MechanicBusinessControllerIT {
 
     private static MechanicBusinessController mechanicBusinessControler;
+    private static InterventionBusinesssController interventionBusinesssController;
 
     @BeforeAll
     static void prepare() {
         DaoFactory.setFactory(new DaoFactoryHibr());
         mechanicBusinessControler = new MechanicBusinessController();
+        interventionBusinesssController = new InterventionBusinesssController();
+
     }
 
     @AfterAll
@@ -82,6 +86,20 @@ public class MechanicBusinessControllerIT {
 
         Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId);
         assertThat(deletedMechanic.isPresent(), is(false));
+    }
+
+    @Test
+    public void testDeleteMechanicWithInterventionsShouldDeleteInterventions() {
+        Integer mechanicToDeleteId = mechanicBusinessControler.create(createMechanic());
+        DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId).get();
+        mechanicBusinessControler.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto() );
+        mechanicBusinessControler.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto() );
+
+        mechanicBusinessControler.delete(Integer.toString(mechanicToDeleteId));
+
+        Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId);
+        assertThat(deletedMechanic.isPresent(), is(false));
+        assertThat(new InterventionBusinesssController().readAll().isEmpty(), is(true));
     }
 
 }

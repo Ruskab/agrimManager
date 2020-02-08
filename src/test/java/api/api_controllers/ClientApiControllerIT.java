@@ -18,10 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -37,7 +35,6 @@ class ClientApiControllerIT {
     private static final String API_PATH = "/api/v0";
     Client client;
     Properties properties;
-    private List<Integer> createdMechanics = new ArrayList<>();
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
     private ClientGateway clientGateway;
@@ -53,7 +50,7 @@ class ClientApiControllerIT {
         MechanicDto mechanicDto = new MechanicDto();
         mechanicDto.setName("mechanicName");
         mechanicDto.setPassword("mechanicPass");
-        createdMechanics.add(mechanicApiController.create(mechanicDto));
+        mechanicApiController.create(mechanicDto);
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
         clientGateway = new ClientGateway(authToken);
 
@@ -61,13 +58,13 @@ class ClientApiControllerIT {
 
     @Test
     void create_and_read_clientDto() {
-            ClientDto clientDto = new ClientDto("fullNameTest", 4);
-            String clientId = clientGateway.create(clientDto);
+        ClientDto clientDto = new ClientDto("fullNameTest", 4);
+        String clientId = clientGateway.create(clientDto);
 
-            ClientDto createdClientDto = clientGateway.read(clientId);
+        ClientDto createdClientDto = clientGateway.read(clientId);
 
-            assertThat(createdClientDto.getFullName(), is("fullNameTest"));
-            assertThat(createdClientDto.getHours(), is(4));
+        assertThat(createdClientDto.getFullName(), is("fullNameTest"));
+        assertThat(createdClientDto.getHours(), is(4));
     }
 
     @Test
@@ -95,11 +92,11 @@ class ClientApiControllerIT {
 
     @AfterEach
     void delete_data() {
-        createdMechanics.forEach(mechanic -> mechanicApiController.delete(mechanic.toString()));
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
+//        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+//                .request(MediaType.APPLICATION_JSON)
+//                .header(HttpHeaders.AUTHORIZATION, authToken)
+//                .delete();
+        new DeleteDataApiController().deleteAll();
     }
 
 
