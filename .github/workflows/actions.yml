@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: creare database mysql
-        run: mysql -uroot -proot -e "CREATE DATABASE ${{ secrets.AGRIM_DB_NAME }};"
+        run: mysql -uroot -proot < mysqldump/init.sql
 
       - name: creare user mysql
         run: mysql -uroot -proot -e "create user ${{ secrets.AGRIM_DB_USER }}@localhost identified by '${{ secrets.AGRIM_DB_PASS }}'; "
@@ -17,7 +17,7 @@ jobs:
         run: mysql -uroot -proot -e "show databases;"
 
       - name: grant privilegies to user
-        run: mysql -uroot -proot -e "grant all privileges on agrim_manager.* to ${{ secrets.AGRIM_DB_USER }}@localhost;" agrim_manager 
+        run: mysql -uroot -proot -e "grant all privileges on agrim_manager.* to ${{ secrets.AGRIM_DB_USER }}@localhost;" agrim_manager
 
       - uses: actions/checkout@v1
       - name: Setup JDK 1.8
