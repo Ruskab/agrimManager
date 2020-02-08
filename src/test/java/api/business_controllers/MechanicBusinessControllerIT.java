@@ -1,5 +1,6 @@
 package api.business_controllers;
 
+import api.AgrimDomainFactory;
 import api.api_controllers.DeleteDataApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
+import static api.AgrimDomainFactory.createMechanic;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -54,16 +56,18 @@ public class MechanicBusinessControllerIT {
 
     @Test
     public void testFindByNameMechanic() {
-        mechanicBusinessControler.create(new MechanicDto("mechanic1", "secretPass"));
+        mechanicBusinessControler.create(createMechanic());
 
-        List<MechanicDto> mechanicDtos = mechanicBusinessControler.findBy("mechanic1");
+        List<MechanicDto> mechanicDtos = mechanicBusinessControler.findBy("mechanic");
 
-        assertThat(mechanicDtos.get(0).getName(), is("mechanic1"));
+        assertThat(mechanicDtos.get(0).getName(), is("mechanic"));
         assertThat(mechanicDtos.get(0).getPassword(), is("secretPass"));
     }
 
     @Test
     public void testReadAllMechanic() {
+        mechanicBusinessControler.create(createMechanic());
+        mechanicBusinessControler.create(createMechanic());
         List<MechanicDto> mechanicDtos = mechanicBusinessControler.readAll();
 
         assertThat(mechanicDtos.size(), greaterThanOrEqualTo(2));
