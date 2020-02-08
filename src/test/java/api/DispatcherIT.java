@@ -1,30 +1,40 @@
 package api;
 
-import api.api_controllers.*;
+import api.api_controllers.ClientApiController;
+import api.api_controllers.DeleteDataApiController;
+import api.api_controllers.InterventionApiController;
+import api.api_controllers.MechanicApiController;
+import api.api_controllers.RepairingPackApiController;
+import api.api_controllers.VehicleApiController;
 import api.business_controllers.ClientBusinessController;
-import api.business_controllers.InterventionBusinesssController;
 import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.*;
+import api.dtos.ClientDto;
+import api.dtos.ClientVehiclesDto;
+import api.dtos.InterventionDto;
+import api.dtos.MechanicDto;
+import api.dtos.RepairingPackDto;
+import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
-import api.entity.*;
+import api.entity.RepairingPack;
 import http.Client;
 import http.HttpException;
 import http.HttpRequest;
 import http.HttpStatus;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static org.hamcrest.Matchers.*;
+import static api.AgrimDomainFactory.createClientDto;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -33,138 +43,25 @@ class DispatcherIT {
 
     private static ClientBusinessController clientBusinessController;
     private static VehicleBusinessController vehicleBusinessController;
-    private static InterventionBusinesssController interventionBusinesssController;
-    private static MechanicApiController mechanicApiController;
     private static RepairingPackApiController repairingPackApiController;
     private static InterventionApiController interventionApiController;
-    private List<Integer> createdClients;
-    private List<Integer> createdVehicles;
-    private List<Integer> createdInterventions;
-    private List<Integer> createdMechanics;
-    private List<Integer> createdReparatingPacks;
 
     @BeforeAll
     public static void prepare() {
         DaoFactory.setFactory(new DaoFactoryHibr());
         clientBusinessController = new ClientBusinessController();
         vehicleBusinessController = new VehicleBusinessController();
-        interventionBusinesssController = new InterventionBusinesssController();
-        mechanicApiController = new MechanicApiController();
         repairingPackApiController = new RepairingPackApiController();
         interventionApiController = new InterventionApiController();
     }
 
+    @AfterAll
+    static void deleteCreatedUsers() {
+        new DeleteDataApiController().deleteAll();
+    }
+
     @BeforeEach
     public void init() {
-        createdClients = new ArrayList<>();
-        createdVehicles = new ArrayList<>();
-        createdInterventions = new ArrayList<>();
-        createdMechanics = new ArrayList<>();
-        createdReparatingPacks = new ArrayList<>();
-        createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
-        createdClients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
-    }
-
-    @Test
-    public void testCreateClient() {
-        Response response = new ClientApiController().create(new ClientDto("fullNameTest", 4));
-        Integer createdClientId = (Integer) response.getEntity();
-        createdClients.add(createdClientId);
-
-        Optional<api.entity.Client> createdClient = DaoFactory.getFactory().getClientDao().read((Integer) response.getEntity());
-        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
-        assertThat(createdClient.get().getFullName(), is("fullNameTest"));
-        assertThat(createdClient.get().getHours(), is(4));
-    }
-
-    @Test
-    void testCreateVehicle() {
-        int existentClientId = createdClients.get(0);
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId), "AA1234AA");
-        Response response = new VehicleApiController().create(vehicleDto);
-        Integer id = (Integer) response.getEntity();
-        createdVehicles.add(id);
-
-        Optional<Vehicle> createdVehicle = DaoFactory.getFactory().getVehicleDao().read(id);
-        assertThat(createdVehicle.get().getRegistrationPlate(), is("AA1234AA"));
-        assertThat(createdVehicle.get().getClient().getId(), is(existentClientId));
-        assertThat(createdVehicle.get().getBrand(), is("Opel"));
-        assertThat(createdVehicle.get().getBodyOnFrame(), is(vehicleDto.getBodyOnFrame()));
-        assertThat(createdVehicle.get().getItvDate(), is(vehicleDto.getItvDate()));
-        assertThat(createdVehicle.get().getNextItvDate(), is(vehicleDto.getNextItvDate()));
-        assertThat(createdVehicle.get().getKms(), is(vehicleDto.getKms()));
-        assertThat(createdVehicle.get().getLastRevisionDate(), is(vehicleDto.getLastRevisionDate()));
-        assertThat(createdVehicle.get().getAirFilterReference(), is(vehicleDto.getAirFilterReference()));
-        assertThat(createdVehicle.get().getFuelFilter(), is(vehicleDto.getFuelFilter()));
-        assertThat(createdVehicle.get().getOilFilterReference(), is(vehicleDto.getOilFilterReference()));
-        assertThat(createdVehicle.get().getMotorOil(), is(vehicleDto.getMotorOil()));
-    }
-
-    @Test
-    void testCreateInterventionREPAIR() {
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
-        int existentVehicleId = createdVehicles.get(0);
-
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
-        Integer id = (Integer) ((Response) new Client().submit(request).getBody()).getEntity();
-        createdInterventions.add(id);
-
-        Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
-        assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
-//        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getInterventionType(), is(InterventionType.REPAIR));
-        assertThat(createdIntervention.get().getVehicle().get().getId(), is(existentVehicleId));
-    }
-
-    @Test
-    void testCreateInterventionCAFFE() {
-        InterventionDto interventionDto = AgrimDomainFactory.createCaffeInterventionDto();
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
-        Integer id = (Integer) ((Response) new Client().submit(request).getBody()).getEntity();
-        createdInterventions.add(id);
-
-        Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(id);
-        assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
-        assertThat(createdIntervention.get().getTitle(), is("Caffe"));
-//        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getInterventionType(), is(InterventionType.CAFFE));
-    }
-
-    @Test @Disabled("no se que coño pasa")
-    void testAddInterventionREPAIRtoMechanic() {
-        int existentClientId = clientBusinessController.create(new ClientDto("fakeFullNameTest", 1));
-        createdClients.add(existentClientId);
-        int existentVehicleId = vehicleBusinessController.create(createVehicleDto(Integer.toString(existentClientId), "AA1234AA"));
-        createdVehicles.add(existentVehicleId);
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
-        int existentMechanic = mechanicApiController.create(new MechanicDto("mechanic1", "secretPass"));
-        createdMechanics.add(existentMechanic);
-
-        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS + MechanicApiController.ID_INTERVENTIONS).expandPath(Integer.toString(existentMechanic)).body(interventionDto).post();
-        new Client().submit(request).getBody();
-
-
-
-        Optional<Mechanic> mechanic = DaoFactory.getFactory().getMechanicDao().read(existentMechanic);
-
-        //assertThat(mechanic.get().getInterventionList().get(0).getPeriod(), is(interventionDto.getPeriod()));
-        assertThat(Integer.toString(mechanic.get().getInterventionList().get(0).getVehicle().get().getId()), is(interventionDto.getVehicleId()));
-        assertThat(mechanic.get().getInterventionList().get(0).getInterventionType(), is(interventionDto.getInterventionType()));
-    }
-
-    @Test
-    public void testCreateMechanic() {
-        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS)
-                .body(new MechanicDto("mechanic1", "secretPass")).post();
-
-        int id = (int) new Client().submit(request).getBody();
-        createdMechanics.add(id);
-
-        Optional<Mechanic> createdMechanic = DaoFactory.getFactory().getMechanicDao().read(id);
-        assertThat(createdMechanic.get().getName(), is("mechanic1"));
-        assertThat(createdMechanic.get().getPassword(), is("secretPass"));
     }
 
     @Test
@@ -177,7 +74,6 @@ class DispatcherIT {
                 .body(repairingPackDto).post();
 
         int id = (int) new Client().submit(request).getBody();
-        createdReparatingPacks.add(id);
 
         Optional<RepairingPack> createdRepairingPack = DaoFactory.getFactory().getRepairingPackDao().read(id);
         assertThat(createdRepairingPack.get().getInvoicedDate(), is(LocalDate.now()));
@@ -232,7 +128,6 @@ class DispatcherIT {
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
     }
 
-
     @Test
     void testCreateVehicleWithoutClientDto() {
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(null).post();
@@ -267,7 +162,7 @@ class DispatcherIT {
 
     @Test
     void testCreateVehicleWithoutRegistrationPlate() {
-        int existentClientId = createdClients.get(0);
+        int existentClientId = clientBusinessController.create(createClientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId), null);
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(vehicleDto).post();
 
@@ -287,14 +182,6 @@ class DispatcherIT {
     @Test
     void testCreateInterventionRepairWithoutVehicleId() {
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(null);
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
-        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
-    }
-
-    @Test @Disabled
-    void testCreateInterventionCaffeWithVehicleIdShouldThrowBadRequest() {
-        InterventionDto interventionDto = AgrimDomainFactory.createCaffeInterventionDto();
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -341,31 +228,14 @@ class DispatcherIT {
     }
 
     @Test
-    void testUpdateClient() {
-        int createdUserId = createdClients.get(0);
-        String createdUserFullName = DaoFactory.getFactory().getClientDao().read(createdUserId).get().getFullName();
-
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
-                .expandPath(Integer.toString(createdUserId)).body(new ClientDto("updatedName", 3)).put();
-        new Client().submit(request);
-        Optional<api.entity.Client> updatedUser = DaoFactory.getFactory().getClientDao().read(createdUserId);
-
-        assertThat(createdUserFullName, is("fakeFullNameTest"));
-        assertThat(updatedUser.get().getFullName(), is("updatedName"));
-        assertThat(updatedUser.get().getHours(), is(3));
-    }
-
-    @Test
     void testUpdateInterventionRepairingPack() {
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
-        int existentVehicleId = createdVehicles.get(0);
+        Integer createdClient = clientBusinessController.create(createClientDto());
+        int existentVehicleId = vehicleBusinessController.create(createVehicleDto(createdClient.toString(), "AA1234AA"));
         InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
         Response response = interventionApiController.create(interventionDto);
         Integer createdInterventionId = (Integer) response.getEntity();
-        createdInterventions.add(createdInterventionId);
         RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now(), 3);
         String createdRepairingPackId = Integer.toString(repairingPackApiController.create(repairingPackDto));
-        createdReparatingPacks.add(Integer.parseInt(createdRepairingPackId));
 
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
                 .expandPath(Integer.toString(createdInterventionId))
@@ -378,11 +248,10 @@ class DispatcherIT {
         assertThat(updatedIntervention.get().getRepairingPack().get().getInvoicedHours(), is(repairingPackDto.getInvoicedHours()));
     }
 
-    @Test @Disabled
+    @Test
     void testUpdateInterventionRepairingPackWithNotFoundInterventionShouldThrowNOT_FOUD() {
-        RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now(), 3);
+        RepairingPackDto repairingPackDto = createRepairingPack();
         String createdRepairingPackId = Integer.toString(repairingPackApiController.create(repairingPackDto));
-        createdReparatingPacks.add(Integer.parseInt(createdRepairingPackId));
 
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
                 .expandPath(Integer.toString(99999))
@@ -402,25 +271,6 @@ class DispatcherIT {
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
-    }
-
-    @Test
-    @Disabled("no se poruqe no arranca")
-    void testUpdateInterventionRepairingPackWithNotValidRepairingPack() {
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
-        int existentVehicleId = createdVehicles.get(0);
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
-        Response response = interventionApiController.create(interventionDto);
-        Integer createdInterventionId = (Integer) response.getEntity();
-        createdInterventions.add(createdInterventionId);
-
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS + InterventionApiController.ID + InterventionApiController.REPAIRING_PACK)
-                .expandPath(Integer.toString(createdInterventionId))
-                .body("99999")
-                .patch();
-
-        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(), is(HttpStatus.NOT_FOUND));
     }
 
     @Test
@@ -462,75 +312,14 @@ class DispatcherIT {
     }
 
     @Test
-    void testDeleteClient() {
-        int createdClientId = createdClients.get(0);
-
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
-                .expandPath(Integer.toString(createdClientId)).delete();
-        new Client().submit(request);
-        createdClients.remove(0);
-        Optional<api.entity.Client> deletedClient = DaoFactory.getFactory().getClientDao().read(createdClientId);
-
-        assertThat(deletedClient.isPresent(), is(false));
-    }
-
-    @Test @Disabled
-    void testDeleteClientWithVehiclesShouldThrowInternal_Server_Error() {
-        int createdClientId = createdClients.get(0);
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(0).toString(), "AA1234AA")));
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
-                .expandPath(Integer.toString(createdClientId)).delete();
-
-        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
-        assertThat(exception.getHttpStatus(), is(HttpStatus.INTERNAL_SERVER_ERROR));
-    }
-
-    @Test
-    void testDeleteVehicle() {
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
-        int createdVehicleId = createdVehicles.get(0);
-
-        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
-                .expandPath(Integer.toString(createdVehicleId)).delete();
-        new Client().submit(request);
-        createdVehicles.remove(0);
-        assertThat(DaoFactory.getFactory().getVehicleDao().read(createdVehicleId).isPresent(), is(false));
-    }
-
-    @Test
-    void testDeleteCAFFEIntervention() {
-        createdInterventions.add(interventionBusinesssController.create(AgrimDomainFactory.createCaffeInterventionDto()));
-        int createdInterventionId = createdInterventions.get(0);
-
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
-                .expandPath(Integer.toString(createdInterventionId)).delete();
-        new Client().submit(request);
-        createdInterventions.remove(0);
-        assertThat(DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).isPresent(), is(false));
-    }
-
-    @Test
-    void testDeleteREPAIRIntervention() {
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(createdClients.get(1).toString(), "AA1234AA")));
-        createdInterventions.add(interventionBusinesssController.create(AgrimDomainFactory.createInterventionDto(createdVehicles.get(0).toString())));
-        int createdInterventionId = createdInterventions.get(0);
-
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
-                .expandPath(Integer.toString(createdInterventionId)).delete();
-        new Client().submit(request);
-        createdInterventions.remove(0);
-        assertThat(DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).isPresent(), is(false));
-    }
-
-    @Test
     void testDeleteVehicleWithoutClientId() {
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(null, "AA1234AA")));
-        int createdVehicleId = createdVehicles.get(0);
+        int createdVehicleId = vehicleBusinessController.create(createVehicleDto(null, "AA1234AA"));
+        ;
 
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).path(VehicleApiController.ID_ID)
                 .expandPath(Integer.toString(createdVehicleId)).delete();
         new Client().submit(request);
-        createdVehicles.remove(0);
+
         assertThat(DaoFactory.getFactory().getVehicleDao().read(createdVehicleId).isPresent(), is(false));
     }
 
@@ -660,20 +449,12 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClient() {
-        ClientDto clientDto = new ClientApiController().read(Integer.toString(createdClients.get(0)));
-
-        assertThat(clientDto.getFullName(), is("fakeFullNameTest"));
-        assertThat(clientDto.getHours(), is(1));
-    }
-
-    @Test
     void testReadRepairingPack() {
         RepairingPackDto expectedPackDto = new RepairingPackDto(LocalDate.now().minusDays(1), 2);
-        createdReparatingPacks.add(repairingPackApiController.create(expectedPackDto));
+        int interventionPackId = repairingPackApiController.create(expectedPackDto);
 
         HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).path(RepairingPackApiController.ID)
-                .expandPath(Integer.toString(createdReparatingPacks.get(0))).get();
+                .expandPath(Integer.toString(interventionPackId)).get();
         RepairingPackDto repairingPackDto = (RepairingPackDto) new Client().submit(request).getBody();
 
         assertThat(repairingPackDto.getInvoicedDate(), is(expectedPackDto.getInvoicedDate()));
@@ -681,128 +462,25 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadIntervention() {
-        VehicleDto expectedVehicleDto1 = createVehicleDto(createdClients.get(0).toString(), "AA1234AA");
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
-        InterventionDto expectedInterventionDto1 = AgrimDomainFactory.createInterventionDto(createdVehicles.get(0).toString());
-        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto1));
-        int createdInterventionId = createdInterventions.get(0);
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).path(InterventionApiController.ID)
-                .expandPath(Integer.toString(createdInterventionId)).get();
-
-        InterventionDto interventionDto = (InterventionDto) new Client().submit(request).getBody();
-
-        assertThat(interventionDto.getId(), is(createdInterventionId));
-        assertThat(interventionDto.getVehicleId(), is(createdVehicles.get(0).toString()));
-        assertThat(interventionDto.getInterventionType(), is(InterventionType.REPAIR));
-//        assertThat(interventionDto.getPeriod(), is(expectedInterventionDto1.getPeriod()));
-        assertThat(interventionDto.getTitle(), is(expectedInterventionDto1.getTitle()));
-        assertThat(interventionDto.getRepairingPackId(), is(expectedInterventionDto1.getRepairingPackId()));
-    }
-
-    @Test
-    void testReadAllClient() {
-        Stream clients = DaoFactory.getFactory().getClientDao().findAll();
-        List<ClientDto> clientDtoList = new ClientApiController().readAll();
-
-        assertThat((int) clients.count(), is(clientDtoList.size()));
-    }
-
-    @Test
-    void testReadAllVehicles() {
-        VehicleDto expectedVehicleDto1 = createVehicleDto(createdClients.get(0).toString(), "AA1234AA");
-        VehicleDto expectedVehicleDto2 = createVehicleDto(createdClients.get(0).toString(), "BB1234BB");
-        VehicleDto expectedVehicleDto3 = createVehicleDto(createdClients.get(0).toString(), "CC1234CC");
-
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto2));
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto3));
-
-        HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).get();
-        List<VehicleDto> vehicleDtoList = (List<VehicleDto>) new Client().submit(request).getBody();
-        Stream persistedVehicles = DaoFactory.getFactory().getVehicleDao().findAll();
-
-        assertThat((int) persistedVehicles.count(), is(vehicleDtoList.size()));
-    }
-
-    @Test @Disabled
-    void testReadAllInterventions() {
-        VehicleDto expectedVehicleDto1 = createVehicleDto(createdClients.get(0).toString(), "AA1234AA");
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
-        InterventionDto expectedInterventionDto1 = AgrimDomainFactory.createInterventionDto(createdVehicles.get(0).toString());
-        InterventionDto expectedInterventionDto2 = AgrimDomainFactory.createInterventionDto(createdVehicles.get(0).toString());
-        InterventionDto expectedInterventionDto3 = AgrimDomainFactory.createInterventionDto(null);
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
-        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto1));
-        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto2));
-        createdInterventions.add(interventionBusinesssController.create(expectedInterventionDto3));
-
-        HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).get();
-        List<Integer> interventionIds = ((List<InterventionDto>) new Client().submit(request).getBody()).stream()
-                .map(interventionDto -> interventionDto.getId()).collect(Collectors.toList());
-
-        assertThat(interventionIds, is(createdInterventions));
-    }
-
-    @Test @Disabled
-    void testReadAllRepairingPacks() {
-        LocalDate date1 = LocalDate.now().minusDays(1);
-        LocalDate date2 = LocalDate.now().minusDays(2);
-        LocalDate date3 = LocalDate.now();
-        List<LocalDate> expextedDates = new ArrayList<>();
-        expextedDates.add(date1);
-        expextedDates.add(date2);
-        expextedDates.add(date3);
-
-        RepairingPackDto repairingPackDto = new RepairingPackDto(date1, 2);
-        RepairingPackDto repairingPackDto2 = new RepairingPackDto(date2, 3);
-        RepairingPackDto repairingPackDto3 = new RepairingPackDto(date3, 4);
-
-        createdReparatingPacks.add(repairingPackApiController.create(repairingPackDto));
-        createdReparatingPacks.add(repairingPackApiController.create(repairingPackDto2));
-        createdReparatingPacks.add(repairingPackApiController.create(repairingPackDto3));
-
-        HttpRequest request = HttpRequest.builder(RepairingPackApiController.REPAIRING_PACKS).get();
-        List<RepairingPackDto> repairingPackDtos = (List<RepairingPackDto>) new Client().submit(request).getBody();
-
-        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedDate().equals(date1)), is(true));
-        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedDate().equals(date2)), is(true));
-        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedDate().equals(date3)), is(true));
-        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedHours() ==2), is(true));
-        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedHours() == 3), is(true));
-        assertThat(repairingPackDtos.stream().anyMatch(rp -> rp.getInvoicedHours() == 4), is(true));
-
-    }
-
-    @Test @Disabled
     void testReadClientVehicles() {
-        Integer expectedClientId = createdClients.get(0);
-        Integer otherClientId = createdClients.get(1);
+        Integer expectedClientId = clientBusinessController.create(createClientDto());
+        Integer otherClientId = clientBusinessController.create(createClientDto());
 
-        VehicleDto expectedVehicleDto1 = createVehicleDto(expectedClientId.toString(), "AA1234AA");
-        VehicleDto expectedVehicleDto2 = createVehicleDto(expectedClientId.toString(), "BB1234BB");
-        VehicleDto expectedVehicleDto3 = createVehicleDto(expectedClientId.toString(), "CC1234CC");
-        VehicleDto expectedVehicleDto4 = createVehicleDto(otherClientId.toString(), "DD1234DD");
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto1));
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto2));
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto3));
-        createdVehicles.add(vehicleBusinessController.create(expectedVehicleDto4));
+        int createdVehicle1 = vehicleBusinessController.create(createVehicleDto(expectedClientId.toString(), "AA1234AA"));
+        int createdVehicle2 = vehicleBusinessController.create(createVehicleDto(expectedClientId.toString(), "BB1234BB"));
+        int createdVehicle3 = vehicleBusinessController.create(createVehicleDto(expectedClientId.toString(), "CC1234CC"));
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();
         ClientVehiclesDto clientVehiclesDtos = (ClientVehiclesDto) new Client().submit(request).getBody();
-        ClientVehiclesDto clientVehiclesDto = new ClientApiController().clientVehiclesList(Integer.toString(createdClients.get(0)));
 
-        assertThat(clientVehiclesDtos.getVehicles(),
-                allOf(
-                        contains(createdVehicles.get(0), createdVehicles.get(1), createdVehicles.get(2)),
-                        not(contains(createdVehicles.get(3))))
-        );
+        assertThat(clientVehiclesDtos.getVehicles().size(), is(3));
+        assertThat(clientVehiclesDtos.getVehicles(), containsInAnyOrder(createdVehicle1, createdVehicle2, createdVehicle3));
         assertThat(clientVehiclesDtos.getClientDto().getId(), is(expectedClientId));
     }
 
     @Test
     void testReadClientVehiclesWithoutVehiclesShouldReturnClientVehicleDtoWithoutVehicles() {
-        Integer expectedClientId = createdClients.get(0);
+        Integer expectedClientId = clientBusinessController.create(createClientDto());
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();
         ClientVehiclesDto clientVehiclesDtos = (ClientVehiclesDto) new Client().submit(request).getBody();
@@ -828,12 +506,8 @@ class DispatcherIT {
                 .createVehicleDto();
     }
 
-    @AfterEach
-    void clean() {
-        createdMechanics.forEach(id -> DaoFactory.getFactory().getMechanicDao().deleteById(id));
-        createdInterventions.forEach(id -> DaoFactory.getFactory().getInterventionDao().deleteById(id));
-        createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
-        createdClients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
-        createdReparatingPacks.forEach(id -> DaoFactory.getFactory().getRepairingPackDao().deleteById(id));
+    private RepairingPackDto createRepairingPack() {
+        return new RepairingPackDto(LocalDate.now(), 3);
     }
+
 }

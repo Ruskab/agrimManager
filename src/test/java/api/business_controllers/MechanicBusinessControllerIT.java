@@ -1,5 +1,7 @@
 package api.business_controllers;
 
+import api.AgrimDomainFactory;
+import api.api_controllers.DeleteDataApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.MechanicDto;
@@ -8,10 +10,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static api.AgrimDomainFactory.createMechanic;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -19,24 +21,21 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 public class MechanicBusinessControllerIT {
 
     private static MechanicBusinessController mechanicBusinessControler;
-    private static List<Integer> createdMechanics;
-    private static MechanicDto createdMechanic1;
-    private static MechanicDto createdMechanic2;
 
     @BeforeAll
     static void prepare() {
-        createdMechanics = new ArrayList<>();
         DaoFactory.setFactory(new DaoFactoryHibr());
         mechanicBusinessControler = new MechanicBusinessController();
-        createdMechanic1 = new MechanicDto("fakeName", "password");
-        createdMechanic2 = new MechanicDto("fakeName2", "password2");
-        createdMechanics.add(mechanicBusinessControler.create(createdMechanic1));
-        createdMechanics.add(mechanicBusinessControler.create(createdMechanic2));
     }
 
-    @Test void testCreateMechanic() {
-        int createdMechanicId= mechanicBusinessControler.create(new MechanicDto("mechanic1", "secretPass"));
-        createdMechanics.add(createdMechanicId);
+    @AfterAll
+    static void deleteCreatedUsers() {
+        new DeleteDataApiController().deleteAll();
+    }
+
+    @Test
+    void testCreateMechanic() {
+        int createdMechanicId = mechanicBusinessControler.create(new MechanicDto("mechanic1", "secretPass"));
 
         Optional<Mechanic> createdMechanic = DaoFactory.getFactory().getMechanicDao().read(createdMechanicId);
         assertThat(createdMechanic.isPresent(), is(true));
@@ -47,41 +46,42 @@ public class MechanicBusinessControllerIT {
 
     @Test
     public void testReadMechanic() {
-        MechanicDto mechanicDtos = this.mechanicBusinessControler.read(Integer.toString(createdMechanics.get(0)));
+        int createdMechanicId = mechanicBusinessControler.create(new MechanicDto("mechanic1", "secretPass"));
 
-        assertThat(mechanicDtos.getName(),is("fakeName"));
-        assertThat(mechanicDtos.getPassword(),is("password"));
+        MechanicDto mechanicDtos = mechanicBusinessControler.read(Integer.toString(createdMechanicId));
+
+        assertThat(mechanicDtos.getName(), is("mechanic1"));
+        assertThat(mechanicDtos.getPassword(), is("secretPass"));
     }
 
     @Test
     public void testFindByNameMechanic() {
-        List<MechanicDto> mechanicDtos = mechanicBusinessControler.findBy(createdMechanic1.getName());
+        mechanicBusinessControler.create(createMechanic());
 
-        assertThat(mechanicDtos.get(0).getName(),is("fakeName"));
-        assertThat(mechanicDtos.get(0).getPassword(),is("password"));
+        List<MechanicDto> mechanicDtos = mechanicBusinessControler.findBy("mechanic");
+
+        assertThat(mechanicDtos.get(0).getName(), is("mechanic"));
+        assertThat(mechanicDtos.get(0).getPassword(), is("secretPass"));
     }
 
     @Test
-    public void testReadAllMechanic(){
+    public void testReadAllMechanic() {
+        mechanicBusinessControler.create(createMechanic());
+        mechanicBusinessControler.create(createMechanic());
         List<MechanicDto> mechanicDtos = mechanicBusinessControler.readAll();
 
         assertThat(mechanicDtos.size(), greaterThanOrEqualTo(2));
     }
 
     @Test
-    public void testDeleteMechanic(){
-        int createdMechanicId = createdMechanics.get(0);
-        int deleteMechanic = mechanicBusinessControler.create(new MechanicDto("toDelele", "toDelete"));
-        DaoFactory.getFactory().getMechanicDao().read(createdMechanicId).get();
+    public void testDeleteMechanic() {
+        int mechanicToDeleteId = mechanicBusinessControler.create(new MechanicDto("toDelele", "toDelete"));
+        DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId).get();
 
-        mechanicBusinessControler.delete(Integer.toString(deleteMechanic));
+        mechanicBusinessControler.delete(Integer.toString(mechanicToDeleteId));
 
-        Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(deleteMechanic);
+        Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId);
         assertThat(deletedMechanic.isPresent(), is(false));
     }
 
-    @AfterAll
-    static void deleteCreatedUsers(){
-        createdMechanics.forEach(id -> DaoFactory.getFactory().getMechanicDao().deleteById(id));
-    }
 }

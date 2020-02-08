@@ -2,6 +2,7 @@ package api;
 
 import api.dtos.ClientDto;
 import api.dtos.InterventionDto;
+import api.dtos.MechanicDto;
 import api.dtos.RepairingPackDto;
 import api.dtos.VehicleDto;
 import api.entity.Client;
@@ -43,5 +44,9 @@ public class AgrimDomainFactory {
 
     public static RepairingPackDto createRepairingPackDto() {
         return new RepairingPackDto(LocalDate.now(), 10);
+    }
+
+    public static MechanicDto createMechanic() {
+        return new MechanicDto("mechanic", "secretPass");
     }
 }

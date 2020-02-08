@@ -7,8 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v1
+      - name: Setup JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
       - name: creare database mysql
-        run: mysql -uroot -proot -e "CREATE DATABASE ${{ secrets.AGRIM_DB_NAME }};"
+        run: mysql -uroot -proot < mysqldump/init.sql
 
       - name: creare user mysql
         run: mysql -uroot -proot -e "create user ${{ secrets.AGRIM_DB_USER }}@localhost identified by '${{ secrets.AGRIM_DB_PASS }}'; "
@@ -17,13 +23,15 @@ jobs:
         run: mysql -uroot -proot -e "show databases;"
 
       - name: grant privilegies to user
-        run: mysql -uroot -proot -e "grant all privileges on agrim_manager.* to ${{ secrets.AGRIM_DB_USER }}@localhost;" agrim_manager 
+        run: mysql -uroot -proot -e "grant all privileges on agrim_manager.* to ${{ secrets.AGRIM_DB_USER }}@localhost;" agrim_manager
 
-      - uses: actions/checkout@v1
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+
+      - uses: actions/cache@v1
         with:
-          java-version: 1.8
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Unit tests + Integration Tests
         run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT
