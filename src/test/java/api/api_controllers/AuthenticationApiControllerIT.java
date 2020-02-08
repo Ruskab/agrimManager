@@ -17,10 +17,9 @@ import org.junit.jupiter.api.Test;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -36,6 +35,7 @@ class AuthenticationApiControllerIT {
     private static final String API_PATH = "/api/v0";
     Client client;
     Properties properties;
+    private String authToken;
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private List<Integer> createdMechanics = new ArrayList<>();
 
@@ -46,8 +46,12 @@ class AuthenticationApiControllerIT {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
+        MechanicDto mechanicDto = new MechanicDto();
+        mechanicDto.setName("mechanicName");
+        mechanicDto.setPassword("mechanicPass");
+        createdMechanics.add(mechanicApiController.create(mechanicDto));
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
-
     }
 
     @Test
@@ -70,6 +74,10 @@ class AuthenticationApiControllerIT {
     @AfterEach
     void delete_mechanic() {
         createdMechanics.forEach(mechanic -> mechanicApiController.delete(mechanic.toString()));
+        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .delete();
     }
 
 }
