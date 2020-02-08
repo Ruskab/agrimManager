@@ -8,12 +8,11 @@ services:
     ports:
       - "127.0.0.1:33060:3306"
     volumes:
-      - mysql-db-data://var/lib/mysql
+      - ./mysqldump:/docker-entrypoint-initdb.d
     env_file:
       - .env
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
 volumes:
   mysql-db-data:
