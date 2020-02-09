@@ -1,18 +1,16 @@
 package api.api_controllers;
 
+import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.dtos.CredentialsDto;
 import api.dtos.MechanicDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
@@ -32,7 +30,6 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 class AuthenticationApiControllerIT {
 
     public static final String APP_BASE_URL = "app.url";
-    private static final Logger LOGGER = LogManager.getLogger(AuthenticationApiControllerIT.class);
     private static final String API_PATH = "/api/v0";
     Client client;
     Properties properties;
@@ -47,22 +44,16 @@ class AuthenticationApiControllerIT {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
-        MechanicDto mechanicDto = new MechanicDto();
-        mechanicDto.setName("mechanicName");
-        mechanicDto.setPassword("mechanicPass");
-        mechanicApiController.create(mechanicDto);
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
+        mechanicApiController.create(MechanicDtoMother.mechanicDto());
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
     }
 
     @Test
     void authenticate_user() {
-
-        MechanicDto mechanicDto = new MechanicDto();
-        mechanicDto.setName("mechanicName");
-        mechanicDto.setPassword("mechanicPass");
+        MechanicDto mechanicDto = MechanicDtoMother.mechanicDto();
         createdMechanics.add(mechanicApiController.create(mechanicDto));
-        CredentialsDto credentialsDto = new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword());
+        CredentialsDto credentialsDto = new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
 
         Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + AuthenticationApiController.AUTH)
                 .request(MediaType.APPLICATION_JSON)

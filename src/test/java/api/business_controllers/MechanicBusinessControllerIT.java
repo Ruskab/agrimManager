@@ -1,6 +1,6 @@
 package api.business_controllers;
 
-import api.AgrimDomainFactory;
+import api.MechanicDtoMother;
 import api.api_controllers.DeleteDataApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
@@ -14,22 +14,20 @@ import java.util.List;
 import java.util.Optional;
 
 import static api.AgrimDomainFactory.createCaffeInterventionDto;
-import static api.AgrimDomainFactory.createMechanic;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class MechanicBusinessControllerIT {
 
-    private static MechanicBusinessController mechanicBusinessControler;
+    private static MechanicBusinessController mechanicBusinessController;
     private static InterventionBusinesssController interventionBusinesssController;
 
     @BeforeAll
     static void prepare() {
         DaoFactory.setFactory(new DaoFactoryHibr());
-        mechanicBusinessControler = new MechanicBusinessController();
+        mechanicBusinessController = new MechanicBusinessController();
         interventionBusinesssController = new InterventionBusinesssController();
-
     }
 
     @AfterAll
@@ -39,50 +37,48 @@ public class MechanicBusinessControllerIT {
 
     @Test
     void testCreateMechanic() {
-        int createdMechanicId = mechanicBusinessControler.create(new MechanicDto("mechanic1", "secretPass"));
+        Integer createdMechanicId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
         Optional<Mechanic> createdMechanic = DaoFactory.getFactory().getMechanicDao().read(createdMechanicId);
         assertThat(createdMechanic.isPresent(), is(true));
         assertThat(createdMechanic.get().getId(), is(createdMechanicId));
-        assertThat(createdMechanic.get().getName(), is("mechanic1"));
-        assertThat(createdMechanic.get().getPassword(), is("secretPass"));
+        assertThat(createdMechanic.get().getName(), is(MechanicDtoMother.FAKE_NAME));
+        assertThat(createdMechanic.get().getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
     public void testReadMechanic() {
-        int createdMechanicId = mechanicBusinessControler.create(new MechanicDto("mechanic1", "secretPass"));
+        int createdMechanicId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        MechanicDto mechanicDtos = mechanicBusinessControler.read(Integer.toString(createdMechanicId));
+        MechanicDto mechanicDto = mechanicBusinessController.read(Integer.toString(createdMechanicId));
 
-        assertThat(mechanicDtos.getName(), is("mechanic1"));
-        assertThat(mechanicDtos.getPassword(), is("secretPass"));
+        assertThat(mechanicDto.getName(), is(MechanicDtoMother.FAKE_NAME));
+        assertThat(mechanicDto.getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
     public void testFindByNameMechanic() {
-        mechanicBusinessControler.create(createMechanic());
+        mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        List<MechanicDto> mechanicDtos = mechanicBusinessControler.findBy("mechanic");
+        List<MechanicDto> mechanicDtos = mechanicBusinessController.findBy(MechanicDtoMother.FAKE_NAME);
 
-        assertThat(mechanicDtos.get(0).getName(), is("mechanic"));
-        assertThat(mechanicDtos.get(0).getPassword(), is("secretPass"));
+        assertThat(mechanicDtos.get(0).getName(), is(MechanicDtoMother.FAKE_NAME));
+        assertThat(mechanicDtos.get(0).getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
     public void testReadAllMechanic() {
-        mechanicBusinessControler.create(createMechanic());
-        mechanicBusinessControler.create(createMechanic());
-        List<MechanicDto> mechanicDtos = mechanicBusinessControler.readAll();
+        mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
+        mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        assertThat(mechanicDtos.size(), greaterThanOrEqualTo(2));
+        assertThat(mechanicBusinessController.readAll().size(), greaterThanOrEqualTo(2));
     }
 
     @Test
     public void testDeleteMechanic() {
-        int mechanicToDeleteId = mechanicBusinessControler.create(new MechanicDto("toDelele", "toDelete"));
-        DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId).get();
+        int mechanicToDeleteId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        mechanicBusinessControler.delete(Integer.toString(mechanicToDeleteId));
+        mechanicBusinessController.delete(Integer.toString(mechanicToDeleteId));
 
         Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId);
         assertThat(deletedMechanic.isPresent(), is(false));
@@ -90,16 +86,15 @@ public class MechanicBusinessControllerIT {
 
     @Test
     public void testDeleteMechanicWithInterventionsShouldDeleteInterventions() {
-        Integer mechanicToDeleteId = mechanicBusinessControler.create(createMechanic());
-        DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId).get();
-        mechanicBusinessControler.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto() );
-        mechanicBusinessControler.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto() );
+        Integer mechanicToDeleteId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
+        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto());
+        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto());
 
-        mechanicBusinessControler.delete(Integer.toString(mechanicToDeleteId));
+        mechanicBusinessController.delete(Integer.toString(mechanicToDeleteId));
 
         Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId);
         assertThat(deletedMechanic.isPresent(), is(false));
-        assertThat(new InterventionBusinesssController().readAll().isEmpty(), is(true));
+        assertThat(interventionBusinesssController.readAll().isEmpty(), is(true));
     }
 
 }

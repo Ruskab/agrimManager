@@ -189,7 +189,7 @@ class DispatcherIT {
 
     @Test
     void testCreateMechanicWithNullNameShouldThrowBAD_REQUEST() {
-        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto(null, "1234")).post();
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(MechanicDtoMother.withName(null)).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -197,7 +197,7 @@ class DispatcherIT {
 
     @Test
     void testCreateMechanicWithEmptyNameShouldThrowBAD_REQUEST() {
-        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto("", "1234")).post();
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(MechanicDtoMother.withName("")).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -205,7 +205,7 @@ class DispatcherIT {
 
     @Test
     void testCreateMechanicWithEmptyPasswordShouldThrowBAD_REQUEST() {
-        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto("mechanic1", "")).post();
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(MechanicDtoMother.withPassword("")).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -213,7 +213,7 @@ class DispatcherIT {
 
     @Test
     void testCreateMechanicWithNullShouldThrowBAD_REQUEST() {
-        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(new MechanicDto("mechanic1", null)).post();
+        HttpRequest request = HttpRequest.builder(MechanicApiController.MECHANICS).body(MechanicDtoMother.withPassword(null)).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));

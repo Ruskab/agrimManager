@@ -46,7 +46,5 @@ public class AgrimDomainFactory {
         return new RepairingPackDto(LocalDate.now(), 10);
     }
 
-    public static MechanicDto createMechanic() {
-        return new MechanicDto("mechanic", "secretPass");
-    }
+
 }
