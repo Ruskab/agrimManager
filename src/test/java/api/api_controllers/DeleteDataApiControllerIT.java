@@ -1,6 +1,7 @@
 package api.api_controllers;
 
 import api.AgrimDomainFactory;
+import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.business_controllers.ClientBusinessController;
 import api.business_controllers.InterventionBusinesssController;
@@ -42,7 +43,6 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 class DeleteDataApiControllerIT {
 
     public static final String APP_BASE_URL = "app.url";
-    private static final Logger LOGGER = LogManager.getLogger(DeleteDataApiControllerIT.class);
     private static final String API_PATH = "/api/v0";
     private static ClientBusinessController clientBusinessController;
     private static VehicleBusinessController vehicleBusinessController;
@@ -62,11 +62,8 @@ class DeleteDataApiControllerIT {
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
-        MechanicDto mechanicDto = new MechanicDto();
-        mechanicDto.setName("mechanicName");
-        mechanicDto.setPassword("mechanicPass");
-        mechanicApiController.create(mechanicDto);
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
+        mechanicApiController.create(MechanicDtoMother.mechanicDto());
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
 

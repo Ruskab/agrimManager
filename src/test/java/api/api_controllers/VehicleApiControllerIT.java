@@ -1,5 +1,6 @@
 package api.api_controllers;
 
+import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
@@ -57,11 +58,8 @@ class VehicleApiControllerIT {
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
-        MechanicDto mechanicDto = new MechanicDto();
-        mechanicDto.setName("mechanicName");
-        mechanicDto.setPassword("mechanicPass");
-        mechanicApiController.create(mechanicDto);
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
+        mechanicApiController.create(MechanicDtoMother.mechanicDto());
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
     }

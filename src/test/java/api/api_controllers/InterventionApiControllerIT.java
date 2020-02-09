@@ -1,6 +1,7 @@
 package api.api_controllers;
 
 import api.AgrimDomainFactory;
+import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
@@ -58,12 +59,9 @@ class InterventionApiControllerIT {
     }
 
     private void createAuthToken() {
-        MechanicDto mechanicDto = new MechanicDto();
-        mechanicDto.setName("mechanicName");
-        mechanicDto.setPassword("mechanicPass");
         LOGGER.info("creamos mecanico fake authorizado");
-        mechanicApiController.create(mechanicDto);
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
+        mechanicApiController.create(MechanicDtoMother.mechanicDto());
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
     }
 
     private void configureApiClient() {
