@@ -18,7 +18,15 @@ jobs:
           java-version: 1.8
 
       - uses: actions/checkout@v1
-      - name: Build the docker-compose
+
+#      - uses: actions/cache@v1
+#        with:
+#          path: ~/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-maven-
+
+      - name: create Mysql DB and deploy Tomcat 9 with the app
         run: docker-compose -f docker-compose-github.yml up -d
 
       - name: Wait for the environment in docker to get up
@@ -31,7 +39,7 @@ jobs:
       - name: Check docker running containers
         run: docker ps
 
-      - name: Unit and Bussiness controllers tests + create database
+      - name: Unit and Bussiness controllers tests
         run: mvn test -Denvironment=githubdocker
 
 

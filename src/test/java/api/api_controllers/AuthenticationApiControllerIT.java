@@ -12,6 +12,7 @@ import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonP
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
@@ -49,7 +50,7 @@ class AuthenticationApiControllerIT {
         MechanicDto mechanicDto = new MechanicDto();
         mechanicDto.setName("mechanicName");
         mechanicDto.setPassword("mechanicPass");
-        createdMechanics.add(mechanicApiController.create(mechanicDto));
+        mechanicApiController.create(mechanicDto);
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(mechanicDto.getName(), mechanicDto.getPassword())).getEntity();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
     }
@@ -73,7 +74,6 @@ class AuthenticationApiControllerIT {
 
     @AfterEach
     void delete_mechanic() {
-        createdMechanics.forEach(mechanic -> mechanicApiController.delete(mechanic.toString()));
         client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)

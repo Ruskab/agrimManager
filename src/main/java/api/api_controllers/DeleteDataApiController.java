@@ -2,12 +2,14 @@ package api.api_controllers;
 
 import api.business_controllers.ClientBusinessController;
 import api.business_controllers.InterventionBusinesssController;
+import api.business_controllers.MechanicBusinessController;
 import api.business_controllers.RepairingPackBusinessController;
 import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.ClientDto;
 import api.dtos.InterventionDto;
+import api.dtos.MechanicDto;
 import api.dtos.RepairingPackDto;
 import api.dtos.VehicleDto;
 import api.filters.Secured;
@@ -37,6 +39,7 @@ public class DeleteDataApiController {
         DaoFactory.setFactory(new DaoFactoryHibr());
     }
 
+    private MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
     private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
     private InterventionBusinesssController interventionBusinesssController = new InterventionBusinesssController();
@@ -50,10 +53,12 @@ public class DeleteDataApiController {
         if (new PropertyLoader().isProduction()){
             return Response.status(401).build();
         }
+        List<MechanicDto> mechanicDtos = mechanicBusinessController.readAll();
         List<RepairingPackDto> repairingPackDtos = repairingPackBusinessController.readAll();
         List<InterventionDto> interventionDtos = interventionBusinesssController.readAll();
         List<ClientDto> clientDtos = clientBusinessController.readAll();
         List<VehicleDto> vehicleDtos = vehicleBusinessController.readAll();
+        mechanicDtos.forEach(mechanicDto -> mechanicBusinessController.delete(Integer.toString(mechanicDto.getId())));
         interventionDtos.forEach(interventionDto -> interventionBusinesssController.delete(Integer.toString(interventionDto.getId())));
         repairingPackDtos.forEach(repairingPackDto -> repairingPackBusinessController.delete(repairingPackDto.getId()));
         vehicleDtos.forEach(vehicleDto -> vehicleBusinessController.delete(Integer.toString(vehicleDto.getId())));
