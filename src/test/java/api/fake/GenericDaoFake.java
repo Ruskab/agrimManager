@@ -1,4 +1,4 @@
-package api.daos.fake;
+package api.fake;
 
 import api.daos.GenericDao;
 
