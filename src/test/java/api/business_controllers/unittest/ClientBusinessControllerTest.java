@@ -2,7 +2,7 @@ package api.business_controllers.unittest;
 
 import api.business_controllers.ClientBusinessController;
 import api.daos.DaoFactory;
-import api.daos.fake.DaoFactoryFake;
+import api.fake.DaoFactoryFake;
 import api.dtos.ClientDto;
 import api.entity.Client;
 import org.junit.jupiter.api.BeforeEach;
