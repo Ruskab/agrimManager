@@ -5,7 +5,7 @@ import api.daos.DaoFactory;
 import api.daos.fake.DaoFactoryFake;
 import api.dtos.ClientDto;
 import api.entity.Client;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -17,10 +17,10 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 //Unit Tests with Fake doubles
 public class ClientBusinessControllerTest {
 
-    private static ClientBusinessController clientBusinessController;
+    private ClientBusinessController clientBusinessController;
 
-    @BeforeAll
-    static void prepare() {
+    @BeforeEach
+    void setUp() {
         DaoFactory.setFactory(new DaoFactoryFake());
         clientBusinessController = new ClientBusinessController();
     }
