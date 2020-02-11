@@ -94,10 +94,9 @@ class DeleteDataApiControllerIT {
 
     @AfterEach
     void delete_data() {
-//        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-//                .request(MediaType.APPLICATION_JSON)
-//                .header(HttpHeaders.AUTHORIZATION, authToken)
-//                .delete();
-        new DeleteDataApiController().deleteAll();
+        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .delete();
     }
 }
