@@ -1,6 +1,7 @@
 package api.api_controllers;
 
 import api.PropertiesResolver;
+import api.RestClientLoader;
 import api.dtos.CredentialsDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
@@ -8,23 +9,16 @@ import api.object_mothers.ClientDtoMother;
 import api.object_mothers.MechanicDtoMother;
 import client_beans.clients.ClientGateway;
 import client_beans.vehicles.VehicleGateway;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
 import java.util.Properties;
 
-import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
@@ -41,11 +35,7 @@ class VehicleApiControllerIT {
 
     @BeforeEach
     void setUp() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
-        client = ClientBuilder.newClient().register(jsonProvider);
+        client = new RestClientLoader().creteClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
