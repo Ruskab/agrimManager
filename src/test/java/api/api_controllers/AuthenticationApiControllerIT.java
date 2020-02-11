@@ -1,20 +1,15 @@
 package api.api_controllers;
 
 import api.PropertiesResolver;
+import api.RestClientLoader;
 import api.dtos.CredentialsDto;
 import api.dtos.MechanicDto;
 import api.object_mothers.MechanicDtoMother;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -23,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
@@ -39,11 +33,7 @@ class AuthenticationApiControllerIT {
 
     @BeforeEach
     void setUp() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
-        client = ClientBuilder.newClient().register(jsonProvider);
+        client = new RestClientLoader().creteClient();
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
