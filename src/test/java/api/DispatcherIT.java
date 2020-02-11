@@ -10,14 +10,15 @@ import api.business_controllers.ClientBusinessController;
 import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
 import api.dtos.RepairingPackDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.RepairingPack;
+import api.object_mothers.ClientDtoMother;
+import api.object_mothers.InterventionDtoMother;
+import api.object_mothers.MechanicDtoMother;
 import http.Client;
 import http.HttpException;
 import http.HttpRequest;
@@ -32,7 +33,6 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Optional;
 
-import static api.AgrimDomainFactory.createClientDto;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -82,7 +82,8 @@ class DispatcherIT {
 
     @Test
     void testCreateInterventionWithNoExistentVehicle() {
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(99999));
+        String nonexistentVehicleId = "99999";
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(nonexistentVehicleId);
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -154,7 +155,7 @@ class DispatcherIT {
 
     @Test
     void testCreateClientWithoutClientDtoFullName() {
-        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(new ClientDto(null, 1)).post();
+        HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).body(ClientDtoMother.withFullName(null)).post();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -162,7 +163,7 @@ class DispatcherIT {
 
     @Test
     void testCreateVehicleWithoutRegistrationPlate() {
-        int existentClientId = clientBusinessController.create(createClientDto());
+        int existentClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(existentClientId), null);
         HttpRequest request = HttpRequest.builder(VehicleApiController.VEHICLES).body(vehicleDto).post();
 
@@ -181,7 +182,7 @@ class DispatcherIT {
 
     @Test
     void testCreateInterventionRepairWithoutVehicleId() {
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(null);
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(null);
         HttpRequest request = HttpRequest.builder(InterventionApiController.INTERVENTIONS).body(interventionDto).post();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(HttpStatus.BAD_REQUEST, is(exception.getHttpStatus()));
@@ -229,9 +230,9 @@ class DispatcherIT {
 
     @Test
     void testUpdateInterventionRepairingPack() {
-        Integer createdClient = clientBusinessController.create(createClientDto());
+        Integer createdClient = clientBusinessController.create(ClientDtoMother.clientDto());
         int existentVehicleId = vehicleBusinessController.create(createVehicleDto(createdClient.toString(), "AA1234AA"));
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(Integer.toString(existentVehicleId));
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(Integer.toString(existentVehicleId));
         Response response = interventionApiController.create(interventionDto);
         Integer createdInterventionId = (Integer) response.getEntity();
         RepairingPackDto repairingPackDto = new RepairingPackDto(LocalDate.now(), 3);
@@ -288,7 +289,7 @@ class DispatcherIT {
     void testUpdateClientWithoutClientDtoFullName() {
         String id = "1";
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
-                .expandPath(id).body(new ClientDto(null, 1)).put();
+                .expandPath(id).body(ClientDtoMother.withFullName(null)).put();
 
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
@@ -306,7 +307,7 @@ class DispatcherIT {
     @Test
     void testUpdateClientBadRequestException() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS).path(ClientApiController.ID)
-                .expandPath("s5FdeGf54D").body(new ClientDto("updatedName", 1)).put();
+                .expandPath("s5FdeGf54D").body(ClientDtoMother.clientDto()).put();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
@@ -463,8 +464,8 @@ class DispatcherIT {
 
     @Test
     void testReadClientVehicles() {
-        Integer expectedClientId = clientBusinessController.create(createClientDto());
-        Integer otherClientId = clientBusinessController.create(createClientDto());
+        Integer expectedClientId = clientBusinessController.create(ClientDtoMother.clientDto());
+        Integer otherClientId = clientBusinessController.create(ClientDtoMother.clientDto());
 
         int createdVehicle1 = vehicleBusinessController.create(createVehicleDto(expectedClientId.toString(), "AA1234AA"));
         int createdVehicle2 = vehicleBusinessController.create(createVehicleDto(expectedClientId.toString(), "BB1234BB"));
@@ -480,7 +481,7 @@ class DispatcherIT {
 
     @Test
     void testReadClientVehiclesWithoutVehiclesShouldReturnClientVehicleDtoWithoutVehicles() {
-        Integer expectedClientId = clientBusinessController.create(createClientDto());
+        Integer expectedClientId = clientBusinessController.create(ClientDtoMother.clientDto());
 
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath(expectedClientId.toString()).get();
         ClientVehiclesDto clientVehiclesDtos = (ClientVehiclesDto) new Client().submit(request).getBody();

@@ -1,9 +1,5 @@
 package api.stub;
 
-import api.ClientMother;
-import api.InterventionMother;
-import api.MechanicMother;
-import api.RepairingPackMother;
 import api.daos.ClientDao;
 import api.daos.DaoFactory;
 import api.daos.InterventionDao;
@@ -17,6 +13,10 @@ import api.entity.RepairingPack;
 import api.entity.Role;
 import api.entity.Vehicle;
 import api.entity.builder.VehicleBuilder;
+import api.object_mothers.ClientMother;
+import api.object_mothers.InterventionMother;
+import api.object_mothers.MechanicMother;
+import api.object_mothers.RepairingPackMother;
 
 import java.util.Collections;
 import java.util.HashMap;

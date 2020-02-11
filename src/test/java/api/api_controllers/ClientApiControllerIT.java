@@ -1,10 +1,10 @@
 package api.api_controllers;
 
-import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
-import api.dtos.MechanicDto;
+import api.object_mothers.ClientDtoMother;
+import api.object_mothers.MechanicDtoMother;
 import client_beans.clients.ClientGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -21,8 +21,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
@@ -56,26 +54,26 @@ class ClientApiControllerIT {
 
     @Test
     void create_and_read_clientDto() {
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
-        String clientId = clientGateway.create(clientDto);
+        String clientId = clientGateway.create(ClientDtoMother.clientDto());
 
         ClientDto createdClientDto = clientGateway.read(clientId);
 
-        assertThat(createdClientDto.getFullName(), is("fullNameTest"));
-        assertThat(createdClientDto.getHours(), is(4));
+        assertThat(createdClientDto.getFullName(), is(ClientDtoMother.FAKE_FULL_NAME));
+        assertThat(createdClientDto.getHours(), is(ClientDtoMother.HOURS));
     }
 
     @Test
     void delete_client() {
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
-        String clientId = clientGateway.create(clientDto);
+        String clientId = clientGateway.create(ClientDtoMother.clientDto());
 
         clientGateway.delete(Integer.parseInt(clientId));
+
+        assertThat(clientGateway.readAll().isEmpty(), is(true));
     }
 
     @Test
     void update_client() {
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
+        ClientDto clientDto = ClientDtoMother.clientDto();
         String clientId = clientGateway.create(clientDto);
         ClientDto createdClientDto = clientGateway.read(clientId);
         createdClientDto.setFullName("newFullName");
@@ -90,11 +88,10 @@ class ClientApiControllerIT {
 
     @AfterEach
     void delete_data() {
-//        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-//                .request(MediaType.APPLICATION_JSON)
-//                .header(HttpHeaders.AUTHORIZATION, authToken)
-//                .delete();
-        new DeleteDataApiController().deleteAll();
+        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .delete();
     }
 
 

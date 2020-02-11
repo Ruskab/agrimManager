@@ -2,9 +2,10 @@ package api.business_controllers.unittest;
 
 import api.business_controllers.ClientBusinessController;
 import api.daos.DaoFactory;
-import api.fake.DaoFactoryFake;
 import api.dtos.ClientDto;
 import api.entity.Client;
+import api.fake.DaoFactoryFake;
+import api.object_mothers.ClientDtoMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,38 +28,38 @@ public class ClientBusinessControllerTest {
 
     @Test
     void testCreateClient() {
-        clientBusinessController.create(new ClientDto("fullName", 1));
+        clientBusinessController.create(ClientDtoMother.clientDto());
 
         assertThat(DaoFactory.getFactory().getClientDao().findAll().count(), is(1L));
     }
 
     @Test
     public void testReadMechanic() {
-        clientBusinessController.create(new ClientDto("fullName", 1));
+        clientBusinessController.create(ClientDtoMother.clientDto());
 
         ClientDto clientDto = clientBusinessController.read("1");
 
-        assertThat(clientDto.getFullName(), is("fullName"));
-        assertThat(clientDto.getHours(), is(1));
+        assertThat(clientDto.getFullName(), is(ClientDtoMother.FAKE_FULL_NAME));
+        assertThat(clientDto.getHours(), is(ClientDtoMother.HOURS));
     }
 
     @Test
     public void testReadAllClients() {
-        clientBusinessController.create(new ClientDto("fullName", 1));
-        clientBusinessController.create(new ClientDto("fullName", 1));
+        clientBusinessController.create(ClientDtoMother.clientDto());
+        clientBusinessController.create(ClientDtoMother.clientDto());
 
         assertThat(clientBusinessController.readAll().size(), is(greaterThanOrEqualTo(2)));
     }
 
     @Test
     public void testUpdateClient() {
-        clientBusinessController.create(new ClientDto("fullName", 1));
+        clientBusinessController.create(ClientDtoMother.clientDto());
         String createdClientFullName = DaoFactory.getFactory().getClientDao().read(1).get().getFullName();
 
-        clientBusinessController.update("1", new ClientDto("updatedName", 1));
+        clientBusinessController.update("1", ClientDtoMother.withFullName("updatedName"));
 
         Optional<Client> updatedUser = DaoFactory.getFactory().getClientDao().read(1);
-        assertThat(createdClientFullName, is("fullName"));
+        assertThat(createdClientFullName, is(ClientDtoMother.FAKE_FULL_NAME));
         assertThat(updatedUser.get().getFullName(), is("updatedName"));
     }
 

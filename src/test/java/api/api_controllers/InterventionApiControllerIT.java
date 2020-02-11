@@ -1,14 +1,15 @@
 package api.api_controllers;
 
 import api.AgrimDomainFactory;
-import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.entity.InterventionType;
+import api.object_mothers.ClientDtoMother;
+import api.object_mothers.InterventionDtoMother;
+import api.object_mothers.MechanicDtoMother;
 import client_beans.clients.ClientGateway;
 import client_beans.interventions.InterventionGateway;
 import client_beans.vehicles.VehicleGateway;
@@ -21,15 +22,12 @@ import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonP
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
@@ -75,11 +73,11 @@ class InterventionApiControllerIT {
 
     @Test
     void create_and_read_intervention() {
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
+        ClientDto clientDto = ClientDtoMother.clientDto();
         String clientId = clientGateway.create(clientDto);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(vehicleId);
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
 
         String interventionId = interventionGateway.create(interventionDto);
 
@@ -90,11 +88,11 @@ class InterventionApiControllerIT {
 
     @Test
     void delete_intervention() {
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
+        ClientDto clientDto = ClientDtoMother.clientDto();
         String clientId = clientGateway.create(clientDto);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(vehicleId);
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
         String interventionId = interventionGateway.create(interventionDto);
 
         clientGateway.delete(Integer.parseInt(clientId));
@@ -102,11 +100,11 @@ class InterventionApiControllerIT {
 
     @Test
     void update_intervention() {
-        ClientDto clientDto = new ClientDto("fullNameTest", 4);
+        ClientDto clientDto = ClientDtoMother.clientDto();
         String clientId = clientGateway.create(clientDto);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);
-        InterventionDto interventionDto = AgrimDomainFactory.createInterventionDto(vehicleId);
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
         String interventionId = interventionGateway.create(interventionDto);
         InterventionDto createdInterventionDto = interventionGateway.read(interventionId);
         createdInterventionDto.setTitle("new title");
