@@ -1,9 +1,9 @@
 package api.api_controllers;
 
-import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.dtos.CredentialsDto;
 import api.dtos.MechanicDto;
+import api.object_mothers.MechanicDtoMother;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

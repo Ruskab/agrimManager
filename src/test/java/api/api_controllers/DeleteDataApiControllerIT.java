@@ -1,7 +1,6 @@
 package api.api_controllers;
 
 import api.AgrimDomainFactory;
-import api.MechanicDtoMother;
 import api.PropertiesResolver;
 import api.business_controllers.ClientBusinessController;
 import api.business_controllers.InterventionBusinesssController;
@@ -10,17 +9,16 @@ import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.CredentialsDto;
-import api.dtos.MechanicDto;
+import api.object_mothers.ClientDtoMother;
+import api.object_mothers.InterventionDtoMother;
+import api.object_mothers.MechanicDtoMother;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
@@ -33,7 +31,6 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import static api.AgrimDomainFactory.createInterventionDto;
 import static api.AgrimDomainFactory.createVehicle;
 import static java.util.stream.Collectors.toList;
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
@@ -77,14 +74,14 @@ class DeleteDataApiControllerIT {
         List<Integer> clients;
         List<Integer> vehicles;
         List<Integer> repairingPacks;
-        clients = Stream.generate(AgrimDomainFactory::createClientDto).limit(5).map(clientBusinessController::create).collect(toList());
+        clients = Stream.generate(ClientDtoMother::clientDto).limit(5).map(clientBusinessController::create).collect(toList());
         clients.stream().limit(5).map(clientId -> createVehicle(Integer.toString(clientId))).map(vehicleBusinessController::create).collect(toList());
         vehicles = clients.stream().limit(5).map(clientId -> createVehicle(Integer.toString(clientId))).map(vehicleBusinessController::create).collect(toList());
-        Stream.generate(AgrimDomainFactory::createCaffeInterventionDto).limit(5).map(interventionBusinesssController::create).collect(toList());
-        vehicles.stream().limit(5).map(vehicleId -> createInterventionDto(Integer.toString(vehicleId))).map(interventionBusinesssController::create).collect(toList());
+        Stream.generate(InterventionDtoMother::cafe).limit(5).map(interventionBusinesssController::create).collect(toList());
+        vehicles.stream().limit(5).map(vehicleId -> InterventionDtoMother.withVehicle(Integer.toString(vehicleId))).map(interventionBusinesssController::create).collect(toList());
         repairingPacks = Stream.generate(AgrimDomainFactory::createRepairingPackDto).limit(3)
                 .map(repairingPackBusinessController::create).collect(toList());
-        repairingPacks.stream().map(repairingPackId -> createInterventionDto(Integer.toString(vehicles.get(new Random().nextInt(vehicles.size())))))
+        repairingPacks.stream().map(repairingPackId -> InterventionDtoMother.withVehicle(Integer.toString(vehicles.get(new Random().nextInt(vehicles.size())))))
                 .map(interventionBusinesssController::create).collect(toList());
 
         Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + DeleteDataApiController.DELETE_DATA)
@@ -97,10 +94,9 @@ class DeleteDataApiControllerIT {
 
     @AfterEach
     void delete_data() {
-//        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-//                .request(MediaType.APPLICATION_JSON)
-//                .header(HttpHeaders.AUTHORIZATION, authToken)
-//                .delete();
-        new DeleteDataApiController().deleteAll();
+        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .delete();
     }
 }

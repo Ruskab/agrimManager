@@ -1,11 +1,12 @@
 package api.business_controllers;
 
-import api.MechanicDtoMother;
 import api.api_controllers.DeleteDataApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.MechanicDto;
 import api.entity.Mechanic;
+import api.object_mothers.InterventionDtoMother;
+import api.object_mothers.MechanicDtoMother;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static api.AgrimDomainFactory.createCaffeInterventionDto;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -87,8 +87,8 @@ public class MechanicBusinessControllerIT {
     @Test
     public void testDeleteMechanicWithInterventionsShouldDeleteInterventions() {
         Integer mechanicToDeleteId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
-        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto());
-        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), createCaffeInterventionDto());
+        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), InterventionDtoMother.cafe());
+        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), InterventionDtoMother.cafe());
 
         mechanicBusinessController.delete(Integer.toString(mechanicToDeleteId));
 

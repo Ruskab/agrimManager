@@ -3,12 +3,13 @@ package api.business_controllers;
 import api.api_controllers.DeleteDataApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.ClientDto;
 import api.dtos.InterventionDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Intervention;
 import api.entity.InterventionType;
+import api.object_mothers.ClientDtoMother;
+import api.object_mothers.InterventionDtoMother;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static api.AgrimDomainFactory.createCaffeInterventionDto;
-import static api.AgrimDomainFactory.createInterventionDto;
+import static api.entity.InterventionType.CAFFE;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -62,16 +62,16 @@ public class InterventionBusinessControllerIT {
 
     @Test
     void testCreateIntervention() {
-        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);
-        InterventionDto interventionDto = createInterventionDto(Integer.toString(createdVehicleId));
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(Integer.toString(createdVehicleId));
 
         int createdInterventionId = interventionBusinesssController.create(interventionDto);
 
         Intervention createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
         assertThat(createdIntervention.getRepairingPack(), is(Optional.empty()));
-        assertThat(createdIntervention.getTitle(), is("Reparacion"));
+        assertThat(createdIntervention.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
         assertThat(createdIntervention.getStartTime(), is(interventionDto.getStartTime()));
         assertThat(createdIntervention.getEndTime(), is(interventionDto.getEndTime()));
         assertThat(createdIntervention.getInterventionType(), is(InterventionType.REPAIR));
@@ -80,31 +80,31 @@ public class InterventionBusinessControllerIT {
 
     @Test
     void testCreateInterventionCAFFE() {
-        InterventionDto caffeInterventionDto = createCaffeInterventionDto();
+        InterventionDto caffeInterventionDto = InterventionDtoMother.cafe();
         int createdInterventionId = interventionBusinesssController.create(caffeInterventionDto);
 
         Intervention createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
         assertThat(createdIntervention.getRepairingPack(), is(Optional.empty()));
-        assertThat(createdIntervention.getTitle(), is("Caffe"));
+        assertThat(createdIntervention.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
         assertThat(createdIntervention.getStartTime(), is(caffeInterventionDto.getStartTime()));
         assertThat(createdIntervention.getEndTime(), is(caffeInterventionDto.getEndTime()));
-        assertThat(createdIntervention.getInterventionType(), is(InterventionType.CAFFE));
+        assertThat(createdIntervention.getInterventionType(), is(CAFFE));
         assertThat(createdIntervention.getVehicle(), is(Optional.empty()));
     }
 
     @Test
     public void testReadIntervention() {
-        int createdInterventionId = interventionBusinesssController.create(createCaffeInterventionDto());
+        int createdInterventionId = interventionBusinesssController.create(InterventionDtoMother.cafe());
 
         InterventionDto interventionDto = interventionBusinesssController.read(Integer.toString(createdInterventionId));
 
-        assertThat(interventionDto.getTitle(), is("Caffe"));
+        assertThat(interventionDto.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
     }
 
     @Test
     public void testReadAllInterventions() {
-        interventionBusinesssController.create(createCaffeInterventionDto());
-        interventionBusinesssController.create(createCaffeInterventionDto());
+        interventionBusinesssController.create(InterventionDtoMother.cafe());
+        interventionBusinesssController.create(InterventionDtoMother.cafe());
 
         List<InterventionDto> interventionDtos = interventionBusinesssController.readAll();
 
@@ -113,18 +113,18 @@ public class InterventionBusinessControllerIT {
 
     @Test
     public void testUpdateIntervention() {
-        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);
-        InterventionDto interventionDto = createInterventionDto(Integer.toString(createdVehicleId));
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(Integer.toString(createdVehicleId));
         int createdInterventionId = interventionBusinesssController.create(interventionDto);
         String createdInterventionTitle = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get().getTitle();
-        InterventionDto updatedTitleIntervention = createCaffeInterventionDto();
+        InterventionDto updatedTitleIntervention = InterventionDtoMother.cafe();
         updatedTitleIntervention.setTitle("new title");
         interventionBusinesssController.update(Integer.toString(createdInterventionId), updatedTitleIntervention);
 
         Intervention updatedIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
-        assertThat(createdInterventionTitle, is("Reparacion"));
+        assertThat(createdInterventionTitle, is(InterventionDtoMother.FAKE_TITLE));
         assertThat(updatedIntervention.getTitle(), is("new title"));
     }
 

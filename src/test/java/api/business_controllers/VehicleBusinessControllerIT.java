@@ -2,10 +2,10 @@ package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Vehicle;
+import api.object_mothers.ClientDtoMother;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +48,7 @@ public class VehicleBusinessControllerIT {
 
     @Test
     void testCreateVehicle() {
-        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);
 
@@ -69,7 +69,7 @@ public class VehicleBusinessControllerIT {
 
     @Test
     public void testReadVehicle() {
-        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         int createdVehicleId = vehicleBusinessController.create(createVehicleDto(Integer.toString(createdClientId), "222222"));
 
         VehicleDto vehicleDto = vehicleBusinessController.read(Integer.toString(createdVehicleId));
@@ -79,8 +79,8 @@ public class VehicleBusinessControllerIT {
 
     @Test
     public void testReadAllVehicles() {
-        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
-        clientBusinessController.create(new ClientDto("fakeFullName", 1));
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
+        clientBusinessController.create(ClientDtoMother.clientDto());
         vehicleBusinessController.create(createVehicleDto(Integer.toString(createdClientId), "222222"));
         vehicleBusinessController.create(createVehicleDto(Integer.toString(createdClientId), "222222"));
 
@@ -91,7 +91,7 @@ public class VehicleBusinessControllerIT {
 
     @Test
     public void testUpdateVehicle() {
-        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);
         String createdBodyOnFrame = DaoFactory.getFactory().getVehicleDao().read(createdVehicleId).get().getBodyOnFrame();
