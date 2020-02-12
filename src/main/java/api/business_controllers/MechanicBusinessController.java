@@ -8,6 +8,7 @@ import api.entity.Intervention;
 import api.entity.Mechanic;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
+import api.mappers.MechanicMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,16 +55,16 @@ public class MechanicBusinessController {
     }
 
     public List<MechanicDto> readAll() {
-        return DaoFactory.getFactory().getMechanicDao().findAll().map(MechanicDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getMechanicDao().findAll().map(MechanicMapper.INSTANCE::toMechanicDto).collect(Collectors.toList());
     }
 
     public MechanicDto read(String id) {
-        return DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(id)).map(MechanicDto::new)
+        return DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(id)).map(MechanicMapper.INSTANCE::toMechanicDto)
                 .orElseThrow(() -> new NotFoundException(MECHANIC_ID + id));
     }
 
     public List<MechanicDto> findBy(String name) {
-        return DaoFactory.getFactory().getMechanicDao().findBy(name).map(MechanicDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getMechanicDao().findBy(name).map(MechanicMapper.INSTANCE::toMechanicDto).collect(Collectors.toList());
     }
 
     public void delete(String id) {
