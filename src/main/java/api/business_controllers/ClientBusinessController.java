@@ -6,6 +6,7 @@ import api.dtos.ClientVehiclesDto;
 import api.entity.Client;
 import api.entity.Vehicle;
 import api.exceptions.NotFoundException;
+import api.mappers.ClientMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,12 +27,14 @@ public class ClientBusinessController {
     }
 
     public List<ClientDto> readAll() {
-        return DaoFactory.getFactory().getClientDao().findAll().map(ClientDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getClientDao().findAll()
+                .map(ClientMapper.INSTANCE::clientToClientDto)
+                .collect(Collectors.toList());
     }
 
 
     public ClientDto read(String id) {
-        return DaoFactory.getFactory().getClientDao().read(Integer.parseInt(id)).map(ClientDto::new)
+        return DaoFactory.getFactory().getClientDao().read(Integer.parseInt(id)).map(ClientMapper.INSTANCE::clientToClientDto)
                 .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
     }
 

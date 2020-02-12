@@ -1,7 +1,5 @@
 package api.dtos;
 
-import api.entity.Intervention;
-import api.entity.Mechanic;
 import api.entity.Role;
 
 import java.io.Serializable;
@@ -9,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class MechanicDto implements Serializable {
     private int id;
@@ -28,23 +25,7 @@ public class MechanicDto implements Serializable {
         this.interventionIds = interventionIds;
     }
 
-    public MechanicDto(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
-
     public MechanicDto() {
-    }
-
-    public MechanicDto(Mechanic mechanic) {
-        this.id = mechanic.getId();
-        this.name = mechanic.getName();
-        this.password = mechanic.getPassword();
-        this.interventionIds = mechanic.getInterventionList()
-                .stream()
-                .map(Intervention::getId)
-                .collect(Collectors.toList());
-        this.roles = mechanic.getRoles();
     }
 
     public int getId() {
