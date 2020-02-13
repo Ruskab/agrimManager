@@ -18,7 +18,7 @@ services:
 script:
   - docker-compose -f docker-compose-travis.yml up -d
   - docker ps
-  - mvn test -Denvironment=database
+  - mvn clean test -Denvironment=database
   # test unitario  de integracion con cobertura
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=api.business_controllers.*IT,api.api_controllers.*IT,api.DispatcherIT
   - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
