@@ -28,13 +28,13 @@ public class ClientBusinessController {
 
     public List<ClientDto> readAll() {
         return DaoFactory.getFactory().getClientDao().findAll()
-                .map(ClientMapper.INSTANCE::clientToClientDto)
+                .map(ClientMapper.INSTANCE::toClientDto)
                 .collect(Collectors.toList());
     }
 
 
     public ClientDto read(String id) {
-        return DaoFactory.getFactory().getClientDao().read(Integer.parseInt(id)).map(ClientMapper.INSTANCE::clientToClientDto)
+        return DaoFactory.getFactory().getClientDao().read(Integer.parseInt(id)).map(ClientMapper.INSTANCE::toClientDto)
                 .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
     }
 
