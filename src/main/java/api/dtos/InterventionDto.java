@@ -1,6 +1,5 @@
 package api.dtos;
 
-import api.entity.Intervention;
 import api.entity.InterventionType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,16 +36,6 @@ public class InterventionDto implements Serializable {
         this.repairingPackId = repairingPackId;
         this.startTime = startTime;
         this.endTime = endTime;
-    }
-
-    public InterventionDto(Intervention intervention) {
-        this.id = intervention.getId();
-        this.title = intervention.getTitle();
-        this.interventionType = intervention.getInterventionType();
-        intervention.getVehicle().ifPresent(vehicle -> this.vehicleId = Integer.toString(vehicle.getId()));
-        intervention.getRepairingPack().ifPresent(repairingPack -> this.repairingPackId = Integer.toString(repairingPack.getId()));
-        this.startTime = intervention.getStartTime();
-        this.endTime = intervention.getEndTime();
     }
 
     public InterventionDto() {
