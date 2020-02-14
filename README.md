@@ -3,8 +3,18 @@
 ### Tecnologías usadas
 * Java
 * Maven
+* Docker
 * IntelliJ
 * GitHub
+* GitHub Actions ci
+* Travis ci
+* Heruku
+* Bettercodehub
+* Sonarcloud
+* swagger
+* Junit 5
+
+
 
 ### Estado del código
 
