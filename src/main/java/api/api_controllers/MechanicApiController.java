@@ -43,6 +43,9 @@ public class MechanicApiController {
     @ApiOperation(value = "Create new Mechanic")
     @Consumes(MediaType.APPLICATION_JSON)
     public int create(MechanicDto mechanicDto) {
+        this.validate(mechanicDto, "mechanicDto");
+        this.validate(mechanicDto.getName(), "mechanicDto Name");
+        this.validate(mechanicDto.getPassword(), "mechanicDto Password");
         return this.mechanicBusinesssController.create(mechanicDto);
     }
 

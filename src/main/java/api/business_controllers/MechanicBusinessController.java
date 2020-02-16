@@ -20,9 +20,6 @@ public class MechanicBusinessController {
     private InterventionBusinesssController interventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
-        this.validate(mechanicDto, "mechanicDto");
-        this.validate(mechanicDto.getName(), "mechanicDto Name");
-        this.validate(mechanicDto.getPassword(), "mechanicDto Password");
         Mechanic mechanic = new Mechanic(mechanicDto);
         List<InterventionDto> interventionDtos = new ArrayList<>();
         mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(interventionBO.read(Integer.toString(id))));
@@ -33,12 +30,6 @@ public class MechanicBusinessController {
 
     private Intervention createIntervention(InterventionDto interventionDto) {
         return new InterventionDataService().createIntervention(interventionDto);
-    }
-
-    private void validate(Object property, String message) {
-        if (property == null || property.toString().equals("")) {
-            throw new FieldInvalidException(message + " is missing");
-        }
     }
 
     public void createIntervention(String mechanicId, InterventionDto interventionDto) {
