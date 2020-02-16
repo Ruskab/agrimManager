@@ -3,10 +3,13 @@ package api.api_controllers.unittest;
 import api.AgrimDomainFactory;
 import api.api_controllers.VehicleApiController;
 import api.business_controllers.VehicleBusinessController;
+import api.daos.DaoFactory;
+import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
+import api.stub.DaoFactoryStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -27,6 +30,7 @@ class VehicleApiControllerTest {
 
     @BeforeEach
     void setUp() {
+        DaoFactory.setFactory(new DaoFactoryHibr());
         MockitoAnnotations.initMocks(this);
     }
 

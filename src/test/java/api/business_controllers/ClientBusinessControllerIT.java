@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class ClientBusinessControllerTest {
+public class ClientBusinessControllerIT {
 
     private static ClientBusinessController clientBusinessController;
 

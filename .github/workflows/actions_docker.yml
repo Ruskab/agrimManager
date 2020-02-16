@@ -1,4 +1,4 @@
-name: API contoller tests in deployed application
+name: API contoller aceptance tests in deployed application
 
 on: [push]
 

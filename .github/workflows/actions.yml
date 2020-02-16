@@ -1,4 +1,4 @@
-name: Unit tests + Bussiness Controller IT
+name: Unit & Integration Tests
 
 on: [push]
 
@@ -19,9 +19,6 @@ jobs:
       - name: creare user mysql
         run: mysql -uroot -proot -e "create user ${{ secrets.AGRIM_DB_USER }}@localhost identified by '${{ secrets.AGRIM_DB_PASS }}'; "
 
-      - name: show databases
-        run: mysql -uroot -proot -e "show databases;"
-
       - name: grant privilegies to user
         run: mysql -uroot -proot -e "grant all privileges on agrim_manager.* to ${{ secrets.AGRIM_DB_USER }}@localhost;" agrim_manager
 
@@ -33,8 +30,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Unit tests + Integration Tests
-        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT,business_controllers.*Test,api_controllers.*Test
+      - name: Unit tests & Integration Tests
+        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT,business_controllers.unittest.*Test,api_controllers.unittest.*Test
+
+#      - name: Unit tests
+#        run: mvn test -Denvironment=github -Dtest=business_controllers.unittest.*Test,api_controllers.unittest.*Test
+#
+#      - name: Integration tests
+#        run: mvn test -Denvironment=github -Dtest=DispatcherIT,api.business_controllers.*IT
+
         env:
           AGRIM_DB_USER: ${{ secrets.AGRIM_DB_USER }}
           AGRIM_DB_PASS: ${{ secrets.AGRIM_DB_PASS }}
