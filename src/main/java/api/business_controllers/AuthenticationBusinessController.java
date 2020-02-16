@@ -1,18 +1,19 @@
 package api.business_controllers;
 
-import api.dtos.MechanicDto;
 import api.exceptions.NotFoundException;
-
-import java.util.List;
 
 public class AuthenticationBusinessController {
 
     private MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
     public void authenticateCredentials(String username, String password) throws NotFoundException {
-        List<MechanicDto> mechanicDtos = mechanicBusinessController.findBy(username);
-        mechanicDtos.stream().filter(mechanicDto -> password.equals(mechanicDto.getPassword())).findFirst()
-                .orElseThrow(() -> new NotFoundException("Invalid Credentials"));
+        if (nonExistentCredentials(username, password)) {
+            throw new NotFoundException("Invalid Credentials");
+        }
+    }
+
+    private boolean nonExistentCredentials(String username, String password) {
+        return mechanicBusinessController.findBy(username).stream().noneMatch(mechanicDto -> password.equals(mechanicDto.getPassword()));
     }
 
 

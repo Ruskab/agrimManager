@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class VehicleBuilder {
 
-    public static String REGISTRATION_PLATE = "111111";
+    private static final String REGISTRATION_PLATE = "111111";
 
     private Vehicle vehicle;
 
