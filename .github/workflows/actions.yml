@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Unit tests + Integration Tests
-        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT,business_controllers.*Test
+        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT,business_controllers.*Test,api_controllers.*Test
         env:
           AGRIM_DB_USER: ${{ secrets.AGRIM_DB_USER }}
           AGRIM_DB_PASS: ${{ secrets.AGRIM_DB_PASS }}
