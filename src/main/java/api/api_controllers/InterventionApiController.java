@@ -41,7 +41,7 @@ public class InterventionApiController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
-        this.validate(interventionDto.getInterventionType(), "State");
+        this.validate(interventionDto.getInterventionType(), "InterventionType");
         return Response.status(201).entity(interventionBusinessController.create(interventionDto)).build();
     }
 
