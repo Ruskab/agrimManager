@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class VehicleDtoBuilder {
 
-    private static final String REGISTRATION_PLATE = "111111";
-    private static final String CLIENT_ID = "999";
+    public static final String REGISTRATION_PLATE = "111111";
+    public static final String CLIENT_ID = "999";
 
     VehicleDto vehicleDto;
 
