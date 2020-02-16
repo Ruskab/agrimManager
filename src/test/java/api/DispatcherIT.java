@@ -436,14 +436,14 @@ class DispatcherIT {
     }
 
     @Test
-    void testReadClientVehiclesShoudThrowBadRequestExceptionWithInValidClientId() {
+    void testReadClientVehiclesShouldThrowBadRequestExceptionWithInValidClientId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).expandPath("s5FdeGf54D").get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
     }
 
     @Test
-    void testReadClientVehiclesShoudThrowBadRequestExceptionWithoutClientId() {
+    void testReadClientVehiclesShouldThrowBadRequestExceptionWithoutClientId() {
         HttpRequest request = HttpRequest.builder(ClientApiController.CLIENTS + ClientApiController.ID_VEHICLES).get();
         HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
         assertThat(exception.getHttpStatus(), is(HttpStatus.BAD_REQUEST));
