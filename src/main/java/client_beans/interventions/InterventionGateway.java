@@ -5,8 +5,6 @@ import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 
@@ -28,7 +26,6 @@ public class InterventionGateway implements Serializable {
     public static final String APP_BASE_URL = "app.url";
     public static final String INTERVENTIONS = "api.interventions.path";
     private static final String API_PATH = "app.api.base.path";
-    private static final Logger LOGGER = LogManager.getLogger(InterventionGateway.class);
     private Client client;
     private Properties properties;
     private String authToken;
@@ -64,7 +61,8 @@ public class InterventionGateway implements Serializable {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<InterventionDto>>() {});
+                .get(new GenericType<List<InterventionDto>>() {
+                });
     }
 
     public InterventionDto read(String interventionId) {

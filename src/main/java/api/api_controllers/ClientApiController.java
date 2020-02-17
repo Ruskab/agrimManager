@@ -80,7 +80,7 @@ public class ClientApiController {
     public ClientVehiclesDto clientVehiclesList(@PathParam("id") String clientId) {
         validateId(clientId, "client Id");
         return clientBusinessController.readClientVehicles(Integer.parseInt(clientId))
-                .orElseThrow(() -> new NotFoundException("client with id: " + clientId));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("client with id: " + clientId));
     }
 
     @PUT

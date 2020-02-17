@@ -8,7 +8,6 @@ import api.entity.Vehicle;
 import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
-import api.mappers.ClientMapper;
 import api.mappers.InterventionMapper;
 import com.mysql.cj.util.StringUtils;
 
@@ -40,7 +39,7 @@ public class InterventionBusinesssController {
 
     public void delete(String interventionId) {
         Intervention intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
-                .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("Intervention id: " + interventionId));
         DaoFactory.getFactory().getInterventionDao().deleteById(intervention.getId());
     }
 
@@ -61,12 +60,12 @@ public class InterventionBusinesssController {
         validateId(interventionId, "vehicle id");
         return DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
                 .map(InterventionMapper.INSTANCE::toInterventionDto)
-                .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("Intervention id: " + interventionId));
     }
 
     public void update(String id, InterventionDto interventionDto) {
         Intervention intervention = DaoFactory.getFactory().getInterventionDao().read((Integer.parseInt(id)))
-                .orElseThrow(() -> new NotFoundException("Intervention ID" + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("Intervention ID" + id));
 
         intervention.setEndTime(interventionDto.getEndTime());
         intervention.setTitle(interventionDto.getTitle());
@@ -76,7 +75,7 @@ public class InterventionBusinesssController {
     private void validateId(String id, String message) {
         validate(id, message);
         if (!StringUtils.isStrictlyNumeric(id)) {
-            throw new NotFoundException(message + " Should be numeric");
+            throw NotFoundException.throwBecauseOf(message + " Should be numeric");
         }
     }
 

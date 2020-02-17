@@ -24,6 +24,8 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 
@@ -50,6 +52,8 @@ public class DeleteDataApiController {
     @ApiOperation(value = "Dellete all")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteAll() {
+        Instant start = Instant.now();
+
         if (new PropertyLoader().isProduction()){
             return Response.status(401).build();
         }
@@ -63,6 +67,7 @@ public class DeleteDataApiController {
         repairingPackDtos.forEach(repairingPackDto -> repairingPackBusinessController.delete(repairingPackDto.getId()));
         vehicleDtos.forEach(vehicleDto -> vehicleBusinessController.delete(Integer.toString(vehicleDto.getId())));
         clientDtos.forEach(clientDto -> clientBusinessController.delete(Integer.toString(clientDto.getId())));
+        LOGGER.info("All data deleted in: {} ms]", Duration.between(start, Instant.now()).toMillis());
         return Response.status(204).build();
     }
 

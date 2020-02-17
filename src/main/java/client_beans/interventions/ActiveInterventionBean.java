@@ -8,8 +8,10 @@ import client_beans.vehicles.VehicleGateway;
 import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -21,7 +23,6 @@ public class ActiveInterventionBean {
 
     private InterventionGateway interventionGateway;
     private MechanicGateway mechanicGateway;
-    private VehicleGateway vehicleGateway;
 
     private InterventionDto activeIntervention;
     private VehicleDto vehicle;
@@ -64,6 +65,7 @@ public class ActiveInterventionBean {
             interventionGateway.update(activeIntervention);
             activeIntervention = null;
         } catch (IllegalStateException e) {
+            FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
         }
     }
 

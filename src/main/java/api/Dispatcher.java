@@ -100,7 +100,7 @@ public class Dispatcher {
         } else if (request.isEqualsPath(RepairingPackApiController.REPAIRING_PACKS + RepairingPackApiController.ID)) {
             response.setBody(this.repairingPackApiController.read(request.getPath(1)));
         } else {
-            throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
+            throw NotFoundException.throwBecauseOf(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 
@@ -112,7 +112,7 @@ public class Dispatcher {
         } else if (request.isEqualsPath(InterventionApiController.INTERVENTIONS + InterventionApiController.ID)) {
             this.interventionApiController.delete(request.getPath(1));
         } else {
-            throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
+            throw NotFoundException.throwBecauseOf(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 
@@ -120,7 +120,7 @@ public class Dispatcher {
         if (request.isEqualsPath(ClientApiController.CLIENTS + ClientApiController.ID)) {
             this.clientApiController.update(request.getPath(1), (ClientDto) request.getBody());
         } else {
-            throw new NotFoundException(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
+            throw NotFoundException.throwBecauseOf(REQUEST_ERROR + request.getMethod() + ' ' + request.getPath());
         }
     }
 

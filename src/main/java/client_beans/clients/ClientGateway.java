@@ -85,7 +85,6 @@ public class ClientGateway implements Serializable {
 
     private void checkResponseStatus(Response response, Response.Status status) {
         if (response.getStatus() != status.getStatusCode()) {
-            LOGGER.error("Error: {}", response.readEntity(String.class));
             throw new IllegalStateException(String.format("API response invalid status: %s", response.getStatus()));
         }
     }
