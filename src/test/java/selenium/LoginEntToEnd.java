@@ -1,6 +1,7 @@
 package selenium;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,8 @@ class LoginEntToEnd {
     private WebDriver driver;
 
     @Test
-    void create_and_read_clientDto() {
+    @Disabled
+    void login() {
         System.setProperty("webdriver.chrome.driver","C:\\forja/components/selenium/chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://localhost:8080/agrimManager");

@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.ws.rs.core.Response;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -39,7 +41,9 @@ class ClientApiControllerTest {
         ClientDto clientDto = ClientDtoMother.clientDto();
         doReturn(1).when(clientServiceMock).create(clientDto);
 
-        clientApiController.create(clientDto);
+        Response response = clientApiController.create(clientDto);
+
+        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
     }
 
     @Test
