@@ -16,6 +16,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.ws.rs.core.Response;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -39,7 +43,10 @@ class VehicleApiControllerTest {
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle();
         doReturn(1).when(vehicleBusinessController).create(vehicleDto);
 
-        vehicleApiController.create(vehicleDto);
+        Response response = vehicleApiController.create(vehicleDto);
+
+        assertThat(response.getStatus(), is(Response.Status.CREATED.getStatusCode()));
+
     }
 
     @Test

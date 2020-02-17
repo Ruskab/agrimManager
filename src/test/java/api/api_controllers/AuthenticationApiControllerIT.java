@@ -29,7 +29,6 @@ class AuthenticationApiControllerIT {
     Properties properties;
     private String authToken;
     private MechanicApiController mechanicApiController = new MechanicApiController();
-    private List<Integer> createdMechanics = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
@@ -41,8 +40,6 @@ class AuthenticationApiControllerIT {
 
     @Test
     void authenticate_user() {
-        MechanicDto mechanicDto = MechanicDtoMother.mechanicDto();
-        createdMechanics.add(mechanicApiController.create(mechanicDto));
         CredentialsDto credentialsDto = new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
 
         Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + AuthenticationApiController.AUTH)

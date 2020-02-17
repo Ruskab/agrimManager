@@ -13,13 +13,16 @@ import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
 import client_beans.clients.ClientGateway;
 import client_beans.interventions.InterventionGateway;
+import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -27,6 +30,7 @@ import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class InterventionApiControllerIT {
 
@@ -81,7 +85,9 @@ class InterventionApiControllerIT {
         InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
         String interventionId = interventionGateway.create(interventionDto);
 
-        clientGateway.delete(Integer.parseInt(clientId));
+        interventionGateway.delete(Integer.parseInt(interventionId));
+
+        assertThrows(NotFoundException.class, () -> interventionGateway.read(interventionId));
     }
 
     @Test

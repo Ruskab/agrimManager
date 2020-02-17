@@ -13,6 +13,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -21,6 +22,7 @@ import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class VehicleApiControllerIT {
 
@@ -73,6 +75,8 @@ class VehicleApiControllerIT {
         String vehicleId = vehicleGateway.create(vehicleDto);
 
         vehicleGateway.delete(Integer.parseInt(vehicleId));
+
+        assertThrows(NotFoundException.class, () -> vehicleGateway.read(vehicleId));
     }
 
     @Test

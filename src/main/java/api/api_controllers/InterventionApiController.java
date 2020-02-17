@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -45,7 +46,11 @@ public class InterventionApiController {
         return Response.status(201).entity(interventionBusinessController.create(interventionDto)).build();
     }
 
-    public void delete(String interventionId) {
+    @DELETE
+    @Secured
+    @ApiOperation(value = "Delete intervention by Id")
+    @Path("{id}")
+    public void delete(@PathParam("id") String interventionId) {
         this.validate(interventionId, "intervention id");
         this.validateId(interventionId, "intenvention id");
         this.interventionBusinessController.delete(interventionId);
@@ -55,7 +60,7 @@ public class InterventionApiController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public InterventionDto read(@PathParam("id") String interventionId) {
-        this.validateId(interventionId, "RepairingPack id");
+        this.validateId(interventionId, "Intervention id");
         return this.interventionBusinessController.read(interventionId);
     }
 
