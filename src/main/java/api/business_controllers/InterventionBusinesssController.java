@@ -8,7 +8,6 @@ import api.entity.Vehicle;
 import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
-import api.mappers.ClientMapper;
 import api.mappers.InterventionMapper;
 import com.mysql.cj.util.StringUtils;
 

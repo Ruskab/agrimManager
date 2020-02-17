@@ -41,7 +41,7 @@ public class AuthenticationApiController {
             // Return the token on the response
             return Response.ok(token).build();
 
-        } catch (Exception e) {
+        } catch (NotFoundException e) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }

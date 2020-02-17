@@ -1,7 +1,5 @@
 package api.dtos;
 
-import api.entity.Client;
-
 import java.io.Serializable;
 
 public class ClientDto implements Serializable {

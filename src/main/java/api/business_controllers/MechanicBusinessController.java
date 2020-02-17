@@ -6,7 +6,6 @@ import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.entity.Intervention;
 import api.entity.Mechanic;
-import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
 import api.mappers.MechanicMapper;
 

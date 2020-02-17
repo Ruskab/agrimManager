@@ -12,7 +12,6 @@ class LoginEntToEnd {
     private WebDriver driver;
 
     @Test
-    @Disabled
     void login() {
         System.setProperty("webdriver.chrome.driver","C:\\forja/components/selenium/chromedriver.exe");
         driver = new ChromeDriver();

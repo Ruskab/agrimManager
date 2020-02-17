@@ -14,14 +14,14 @@ public class DebugListener implements javax.faces.event.PhaseListener {
     public void afterPhase(PhaseEvent phaseEvent) {
 
         if (log.isInfoEnabled()) {
-            log.info("AFTER PHASE: {}", phaseEvent.getPhaseId().toString());
+            log.info("AFTER PHASE: {}", phaseEvent.getPhaseId());
         }
     }
 
     @Override
     public void beforePhase(PhaseEvent phaseEvent) {
         if (log.isInfoEnabled()) {
-            log.info("BEFORE PHASE: {}", phaseEvent.getPhaseId().toString());
+            log.info("BEFORE PHASE: {}", phaseEvent.getPhaseId());
         }
     }
 
