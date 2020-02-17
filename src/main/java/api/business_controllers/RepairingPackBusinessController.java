@@ -22,19 +22,19 @@ public class RepairingPackBusinessController {
 
     public RepairingPackDto read(String id) {
         return DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(id)).map(RepairingPackDto::new)
-                .orElseThrow(() -> new NotFoundException("Repairing pack not found"));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("Repairing pack not found"));
     }
 
     public void updateReparingPack(String interventionId, String repairingPackId) {
-        Intervention intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId)).orElseThrow(() -> new NotFoundException("Intervention not found"));
-        RepairingPack repairingPack = DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(repairingPackId)).orElseThrow(() -> new NotFoundException("Repairing pack not found"));
+        Intervention intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId)).orElseThrow(() -> NotFoundException.throwBecauseOf("Intervention not found"));
+        RepairingPack repairingPack = DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(repairingPackId)).orElseThrow(() -> NotFoundException.throwBecauseOf("Repairing pack not found"));
         intervention.setRepairingPack(repairingPack);
         DaoFactory.getFactory().getInterventionDao().update(intervention);
     }
 
     public void delete(Integer id) {
         RepairingPack repairingPack = DaoFactory.getFactory().getRepairingPackDao().read((id))
-                .orElseThrow(() -> new NotFoundException("" + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("" + id));
         DaoFactory.getFactory().getRepairingPackDao().deleteById(repairingPack.getId());
     }
 }

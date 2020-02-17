@@ -35,12 +35,12 @@ public class ClientBusinessController {
 
     public ClientDto read(String id) {
         return DaoFactory.getFactory().getClientDao().read(Integer.parseInt(id)).map(ClientMapper.INSTANCE::toClientDto)
-                .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(CLIENT_ID + id));
     }
 
     public void update(String id, ClientDto clientDto) {
         Client client = DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
-                .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(CLIENT_ID + id));
 
         client.setFullName(clientDto.getFullName());
         client.setHours(clientDto.getHours());
@@ -49,7 +49,7 @@ public class ClientBusinessController {
 
     public void delete(String id) {
         Client client = DaoFactory.getFactory().getClientDao().read((Integer.parseInt(id)))
-                .orElseThrow(() -> new NotFoundException(CLIENT_ID + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(CLIENT_ID + id));
 
         DaoFactory.getFactory().getClientDao().deleteById(client.getId());
     }
@@ -63,7 +63,7 @@ public class ClientBusinessController {
     }
 
     private List<Integer> getVehiclesIds(int clientId) {
-        Client client = DaoFactory.getFactory().getClientDao().read(clientId).orElseThrow(() -> new NotFoundException("Client Not Found"));
+        Client client = DaoFactory.getFactory().getClientDao().read(clientId).orElseThrow(() -> NotFoundException.throwBecauseOf("Client Not Found"));
         return DaoFactory.getFactory().getVehicleDao().findByClient(client).map(Vehicle::getId).collect(Collectors.toList());
     }
 

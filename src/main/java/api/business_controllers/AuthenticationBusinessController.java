@@ -8,7 +8,7 @@ public class AuthenticationBusinessController {
 
     public void authenticateCredentials(String username, String password) throws NotFoundException {
         if (nonExistentCredentials(username, password)) {
-            throw new NotFoundException("Invalid Credentials");
+            throw NotFoundException.throwBecauseOf("Invalid Credentials");
         }
     }
 

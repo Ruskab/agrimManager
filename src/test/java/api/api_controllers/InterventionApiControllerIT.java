@@ -13,12 +13,10 @@ import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
 import client_beans.clients.ClientGateway;
 import client_beans.interventions.InterventionGateway;
-import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

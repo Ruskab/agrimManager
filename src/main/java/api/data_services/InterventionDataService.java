@@ -25,11 +25,11 @@ public class InterventionDataService {
 
     private Vehicle readVehicle(String id) {
         return DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(id))
-                .orElseThrow(() -> new NotFoundException(VEHICLE_ID_MSG + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(VEHICLE_ID_MSG + id));
     }
 
     private RepairingPack readRepairingPack(String id) {
         return DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(id))
-                .orElseThrow(() -> new NotFoundException(REPAIRING_PACK_ID_MSG + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(REPAIRING_PACK_ID_MSG + id));
     }
 }

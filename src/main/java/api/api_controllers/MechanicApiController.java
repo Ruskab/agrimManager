@@ -101,7 +101,7 @@ public class MechanicApiController {
     private void validateId(String id, String message) {
         validate(id, message);
         if (!StringUtils.isStrictlyNumeric(id)) {
-            throw new NotFoundException(message + " Should be numeric");
+            throw NotFoundException.throwBecauseOf(message + " Should be numeric");
         }
     }
 }

@@ -9,7 +9,6 @@ import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
-import api.stub.DaoFactoryStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

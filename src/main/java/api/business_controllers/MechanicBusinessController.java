@@ -34,7 +34,7 @@ public class MechanicBusinessController {
 
     public void createIntervention(String mechanicId, InterventionDto interventionDto) {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
-                .orElseThrow(() -> new NotFoundException("Mechanic not found"));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("Mechanic not found"));
 
         Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto.getStartTime(), interventionDto.getEndTime());
 
@@ -51,7 +51,7 @@ public class MechanicBusinessController {
 
     public MechanicDto read(String id) {
         return DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(id)).map(MechanicMapper.INSTANCE::toMechanicDto)
-                .orElseThrow(() -> new NotFoundException(MECHANIC_ID + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(MECHANIC_ID + id));
     }
 
     public List<MechanicDto> findBy(String name) {
@@ -60,7 +60,7 @@ public class MechanicBusinessController {
 
     public void delete(String id) {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read((Integer.parseInt(id)))
-                .orElseThrow(() -> new NotFoundException(MECHANIC_ID + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(MECHANIC_ID + id));
 
         DaoFactory.getFactory().getMechanicDao().deleteById(mechanic.getId());
     }
