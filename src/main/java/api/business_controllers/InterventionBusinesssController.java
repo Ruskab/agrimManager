@@ -8,6 +8,8 @@ import api.entity.Vehicle;
 import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
+import api.mappers.ClientMapper;
+import api.mappers.InterventionMapper;
 import com.mysql.cj.util.StringUtils;
 
 import java.util.List;
@@ -52,13 +54,13 @@ public class InterventionBusinesssController {
     }
 
     public List<InterventionDto> readAll() {
-        return DaoFactory.getFactory().getInterventionDao().findAll().map(InterventionDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getInterventionDao().findAll().map(InterventionMapper.INSTANCE::toInterventionDto).collect(Collectors.toList());
     }
 
     public InterventionDto read(String interventionId) {
         validateId(interventionId, "vehicle id");
         return DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(interventionId))
-                .map(InterventionDto::new)
+                .map(InterventionMapper.INSTANCE::toInterventionDto)
                 .orElseThrow(() -> new NotFoundException("Intervention id: " + interventionId));
     }
 

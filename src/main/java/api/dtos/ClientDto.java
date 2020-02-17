@@ -17,12 +17,6 @@ public class ClientDto implements Serializable {
     public ClientDto() {
     }
 
-    public ClientDto(Client client) {
-        this.id = client.getId();
-        this.fullName = client.getFullName();
-        this.hours = client.getHours();
-    }
-
     public ClientDto(String fullName, int hours) {
         this.fullName = fullName;
         this.hours = hours;

@@ -44,4 +44,4 @@ jobs:
 
 
       - name: API tests
-        run: mvn test -Denvironment=githubendtoend -Dtest=api.api_controllers.*IT
+        run: mvn clean test -Denvironment=githubendtoend -Dtest=api.api_controllers.*IT
