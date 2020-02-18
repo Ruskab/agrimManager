@@ -1,6 +1,5 @@
 package client_beans.vehicles;
 
-import api.api_controllers.VehicleApiController;
 import api.dtos.VehicleDto;
 import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +41,7 @@ public class VehicleGateway implements Serializable {
     }
 
     public String create(VehicleDto vehicleDto) {
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + VehicleApiController.VEHICLES)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(vehicleDto, MediaType.APPLICATION_JSON_TYPE));
