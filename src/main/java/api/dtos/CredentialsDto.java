@@ -16,6 +16,10 @@ public class CredentialsDto implements Serializable {
         this.password = password;
     }
 
+    public static CredentialsDto create(String username, String password) {
+        return new CredentialsDto(username, password);
+    }
+
     public String getUsername() {
         return username;
     }
