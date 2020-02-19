@@ -4,6 +4,8 @@ WORKDIR /usr/local/tomcat/webapps/
 
 COPY . .
 
+ENV DOCKERFILE_MYSQL_PASS=admin
+
 RUN mvn clean install -DskipTests -Denvironment=tomcat
 
 FROM tomcat:9.0
