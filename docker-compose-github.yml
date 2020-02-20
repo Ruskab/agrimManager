@@ -17,15 +17,17 @@ services:
 
   tomcat:
     container_name: tomcat9
-    build: .
+    build:
+      context: .
+      args:
+        MYSQL_USER: ${AGRIM_DB_USER}
+        MYSQL_PASSWORD: ${AGRIM_DB_PASS}
     depends_on:
       - mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${AGRIM_DB_PASS}
       - MYSQL_DATABASE=${AGRIM_DB_NAME}
       - MYSQL_HOST=mysql
-      - MYSQL_USER=${AGRIM_DB_USER}
-      - MYSQL_PASSWORD=${AGRIM_DB_PASS}
     ports:
       - "127.0.0.1:8080:8080"
 
