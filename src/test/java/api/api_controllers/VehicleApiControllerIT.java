@@ -37,7 +37,7 @@ class VehicleApiControllerIT {
 
     @BeforeEach
     void setUp() {
-        client = new RestClientLoader().creteClient();
+        client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();

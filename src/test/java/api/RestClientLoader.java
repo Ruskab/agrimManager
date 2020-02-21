@@ -12,7 +12,7 @@ import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJa
 
 public class RestClientLoader {
 
-    public Client creteClient() {
+    public Client creteRestClient() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);

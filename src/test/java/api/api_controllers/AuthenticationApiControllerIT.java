@@ -3,7 +3,6 @@ package api.api_controllers;
 import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.dtos.CredentialsDto;
-import api.dtos.MechanicDto;
 import api.object_mothers.MechanicDtoMother;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +13,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
@@ -32,7 +29,7 @@ class AuthenticationApiControllerIT {
 
     @BeforeEach
     void setUp() {
-        client = new RestClientLoader().creteClient();
+        client = new RestClientLoader().creteRestClient();
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
