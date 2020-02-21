@@ -3,17 +3,21 @@ package selenium;
 import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
-import api.api_controllers.ClientApiController;
 import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
 import api.object_mothers.MechanicDtoMother;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.HttpHeaders;
@@ -25,22 +29,30 @@ import static com.codeborne.selenide.Selenide.open;
 
 class LoginEntToEnd {
 
-    private static final Logger LOGGER = LogManager.getLogger(LoginEntToEnd.class);
     public static final String APP_BASE_URL = "app.url";
+    private static final Logger LOGGER = LogManager.getLogger(LoginEntToEnd.class);
     private static final String API_PATH = "/api/v0";
+    @Rule
+    public BrowserWebDriverContainer chrome =
+            new BrowserWebDriverContainer()
+                    .withCapabilities(DesiredCapabilities.chrome());
     Client client;
     Properties properties;
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
 
-    @BeforeEach
+    @Before
     void setUp() {
+        RemoteWebDriver driver = chrome.getWebDriver();
+        WebDriverRunner.setWebDriver(driver);
+        LOGGER.info("Creado web driver");
         client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         LOGGER.info("credo el cliente rest y usuario en DB");
     }
+
 
     @Test
     void login() {
@@ -55,8 +67,10 @@ class LoginEntToEnd {
 //        $(By.id("activeInterventionPanel:activeInterventionForm:pnlEmptyActiveIntervention")).shouldHave(Condition.text("No hay intervenciones"));
     }
 
-    @AfterEach
+    @After
     void tearDown() {
+        WebDriverRunner.closeWebDriver();
+
         LOGGER.info("Deleteting all data");
         client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
                 .request(MediaType.APPLICATION_JSON)
