@@ -29,10 +29,6 @@ public class VehicleApiController {
 
     public static final String ID_ID = "/{id}";
 
-    static {
-        DaoFactory.setFactory(new DaoFactoryHibr());
-    }
-
     private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
 
     @POST

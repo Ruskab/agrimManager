@@ -35,10 +35,6 @@ public class ClientApiController {
     public static final String ID_VEHICLES = ID + "/vehicles";
     private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
 
-    static {
-        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
-    }
-
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
 
     @POST

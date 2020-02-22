@@ -1,6 +1,7 @@
 package api.business_controllers;
 
 import api.daos.DaoFactory;
+import api.daos.DaoSupplier;
 import api.data_services.InterventionDataService;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
@@ -14,6 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MechanicBusinessController {
+
+    static {
+        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
+    }
 
     private static final String MECHANIC_ID = "Mechanic id: ";
     private InterventionBusinesssController interventionBO = new InterventionBusinesssController();

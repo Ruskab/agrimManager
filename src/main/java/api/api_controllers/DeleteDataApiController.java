@@ -37,10 +37,6 @@ public class DeleteDataApiController {
     public static final String ID = "/{id}";
     private static final Logger LOGGER = LogManager.getLogger(DeleteDataApiController.class);
 
-    static {
-        DaoFactory.setFactory(new DaoFactoryHibr());
-    }
-
     private MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
     private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
