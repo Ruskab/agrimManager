@@ -2,7 +2,7 @@ package api.api_controllers;
 
 import api.business_controllers.ClientBusinessController;
 import api.daos.DaoFactory;
-import api.daos.hibernate.DaoFactoryHibr;
+import api.daos.DaoSupplier;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.exceptions.FieldInvalidException;
@@ -34,10 +34,6 @@ public class ClientApiController {
     public static final String ID = "/{id}";
     public static final String ID_VEHICLES = ID + "/vehicles";
     private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
-
-    static {
-        DaoFactory.setFactory(new DaoFactoryHibr());
-    }
 
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
 

@@ -1,6 +1,7 @@
 package api.business_controllers;
 
 import api.daos.DaoFactory;
+import api.daos.DaoSupplier;
 import api.dtos.RepairingPackDto;
 import api.entity.Intervention;
 import api.entity.RepairingPack;
@@ -10,6 +11,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RepairingPackBusinessController {
+
+    static {
+        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
+    }
+
     public int create(RepairingPackDto repairingPackDto) {
         RepairingPack repairingPack = new RepairingPack(repairingPackDto.getInvoicedDate(), repairingPackDto.getInvoicedHours());
         DaoFactory.getFactory().getRepairingPackDao().create(repairingPack);

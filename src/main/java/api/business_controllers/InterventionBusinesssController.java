@@ -1,6 +1,7 @@
 package api.business_controllers;
 
 import api.daos.DaoFactory;
+import api.daos.DaoSupplier;
 import api.dtos.InterventionDto;
 import api.entity.Intervention;
 import api.entity.InterventionType;
@@ -15,6 +16,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InterventionBusinesssController {
+
+    static {
+        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
+    }
 
     static void setVehicle(InterventionDto interventionDto, Intervention intervention) {
         Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(interventionDto.getVehicleId()))

@@ -32,10 +32,6 @@ public class MechanicApiController {
 
     public static final String ID_INTERVENTIONS = ID + "/interventions";
 
-    static {
-        DaoFactory.setFactory(new DaoFactoryHibr());
-    }
-
     private MechanicBusinessController mechanicBusinesssController = new MechanicBusinessController();
 
     @POST

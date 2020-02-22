@@ -1,6 +1,7 @@
 package api.business_controllers;
 
 import api.daos.DaoFactory;
+import api.daos.DaoSupplier;
 import api.dtos.VehicleDto;
 import api.entity.Client;
 import api.entity.Vehicle;
@@ -13,6 +14,10 @@ import java.util.stream.Collectors;
 public class VehicleBusinessController {
 
     private static final String VEHICLE_ID_MSG = "Vehicle id: ";
+
+    static {
+        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
+    }
 
     public int create(VehicleDto vehicleDto) {
         Client client = null;

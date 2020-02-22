@@ -1,8 +1,14 @@
 package api.business_controllers;
 
+import api.daos.DaoFactory;
+import api.daos.DaoSupplier;
 import api.exceptions.NotFoundException;
 
 public class AuthenticationBusinessController {
+
+    static {
+        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
+    }
 
     private MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 

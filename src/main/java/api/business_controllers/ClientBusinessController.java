@@ -1,6 +1,7 @@
 package api.business_controllers;
 
 import api.daos.DaoFactory;
+import api.daos.DaoSupplier;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
 import api.entity.Client;
@@ -15,6 +16,10 @@ import java.util.stream.Collectors;
 public class ClientBusinessController {
 
     private static final String CLIENT_ID = "Client id: ";
+
+    static {
+        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
+    }
 
     public ClientBusinessController() {
         //CDI
