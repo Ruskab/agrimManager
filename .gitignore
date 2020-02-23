@@ -7,3 +7,4 @@
 .env
 
 target
+/build/reports/tests/

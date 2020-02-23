@@ -45,7 +45,7 @@ class InterventionApiControllerIT {
 
     @BeforeEach
     void setUp() {
-        client = new RestClientLoader().creteClient();
+        client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         createAuthToken();
         clientGateway = new ClientGateway(authToken);
