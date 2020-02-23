@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -45,7 +46,10 @@ class LoginEntToEnd {
     void setUp() {
         RemoteWebDriver driver = chrome.getWebDriver();
         WebDriverRunner.setWebDriver(driver);
-        LOGGER.info("Creado web driver");
+    }
+
+    @BeforeEach
+    void createMechanic() {
         client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
@@ -53,18 +57,14 @@ class LoginEntToEnd {
         LOGGER.info("credo el cliente rest y usuario en DB");
     }
 
-
     @Test
     void login() {
-        LOGGER.info("star test goes to google");
-        open("https://www.google.com/");
-        LOGGER.info("now in google");
-//        open("http://localhost:8080/agrimManager");
-//        $(By.id("loginPanel:loginForm:username")).setValue(MechanicDtoMother.FAKE_NAME);
-//        $(By.id("loginPanel:loginForm:password")).setValue(MechanicDtoMother.FAKE_PASSWORD);
-//        $(By.id("loginPanel:loginForm:loginButton")).click();
-//        $(By.id("activeInterventionPanel:activeInterventionForm:pnlEmptyActiveIntervention")).shouldBe(Condition.visible);
-//        $(By.id("activeInterventionPanel:activeInterventionForm:pnlEmptyActiveIntervention")).shouldHave(Condition.text("No hay intervenciones"));
+        open("http://localhost:8080/agrimManager");
+        $(By.id("loginPanel:loginForm:username")).setValue(MechanicDtoMother.FAKE_NAME);
+        $(By.id("loginPanel:loginForm:password")).setValue(MechanicDtoMother.FAKE_PASSWORD);
+        $(By.id("loginPanel:loginForm:loginButton")).click();
+        $(By.id("activeInterventionPanel:activeInterventionForm:pnlEmptyActiveIntervention")).shouldBe(Condition.visible);
+        $(By.id("activeInterventionPanel:activeInterventionForm:pnlEmptyActiveIntervention")).shouldHave(Condition.text("No hay intervenciones"));
     }
 
     @After
