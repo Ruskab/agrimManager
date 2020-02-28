@@ -44,8 +44,10 @@
 
                 <p:tab id="confirm" title="Confirmation">
                     <p:panel header="#{msg['web.clients.clientsCreate.confirmtab.header']}">
-                        <p:growl id="dialogGlobalMessages" for="globalMessages" ><p:autoUpdate></p:autoUpdate></p:growl>
-                        <p:messages id="createDialogMessages" for="confirmMessages" showDetail="true" closable="true"></p:messages>
+                        <p:growl id="dialogGlobalMessages" for="globalMessages" >
+                            <p:autoUpdate/>
+                        </p:growl>
+                        <p:messages id="createDialogMessages" for="confirmMessages" showDetail="true" closable="true"/>
                         <p:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid" layout="grid">
                             <h:panelGrid columns="2" columnClasses="label, value">
                                 <h:outputText value="#{msg['web.clients.clientsCreate.fullName']}" styleClass="outputLabel"/>
