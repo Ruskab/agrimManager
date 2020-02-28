@@ -1,20 +1,25 @@
 package api;
 
-import api.dtos.InterventionDto;
-import api.entity.State;
+import api.dtos.RepairingPackDto;
+import api.dtos.VehicleDto;
+import api.dtos.builder.VehicleDtoBuilder;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class AgrimDomainFactory {
 
-    public static InterventionDto createInterventionDto(String vehicleId) {
-        return new InterventionDto("Reparacion", State.REPAIR, vehicleId, null,
-                LocalDateTime.now().minusHours(1), LocalDateTime.now().plusHours(1));
+    public static VehicleDto createVehicle() {
+        return new VehicleDtoBuilder().byDefault().setClientId(VehicleDtoBuilder.CLIENT_ID).createVehicleDto();
     }
 
-    public static InterventionDto createCaffeInterventionDto() {
-        return new InterventionDto("Caffe", State.CAFFE, null, null,
-                LocalDateTime.now().minusHours(1), LocalDateTime.now().plusHours(1));
+    public static VehicleDto createVehicle(String clientId) {
+        VehicleDto vehicleDto = new VehicleDto("AA1234BB", clientId);
+        return vehicleDto;
     }
+
+    public static RepairingPackDto createRepairingPackDto() {
+        return new RepairingPackDto(LocalDate.now(), 10);
+    }
+
 
 }

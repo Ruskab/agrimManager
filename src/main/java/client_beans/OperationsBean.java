@@ -5,14 +5,12 @@ import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
-import api.entity.State;
+import api.entity.InterventionType;
 import client_beans.clients.ClientGateway;
-import client_beans.interventions.InterventionGateway;
 import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.omnifaces.util.Faces;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.DashboardReorderEvent;
 import org.primefaces.event.ToggleEvent;
@@ -29,19 +27,26 @@ import javax.faces.context.FacesContext;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+import static client_beans.util.SessionUtil.getAuthToken;
+import static client_beans.util.SessionUtil.getSessionMechanic;
 
 
 @ManagedBean
 @ViewScoped
 public class OperationsBean {
 
-    private VehicleGateway vehicleGateway = new VehicleGateway();
-    private ClientGateway clientGateway = new ClientGateway();
-    private MechanicGateway mechanicGateway = new MechanicGateway();
-    private MechanicDto mechanic;
     public static final String SUCCESS = "Success";
     private static final Logger LOGGER = LogManager.getLogger(OperationsBean.class);
+    private VehicleGateway vehicleGateway;
+    private ClientGateway clientGateway;
+    private MechanicGateway mechanicGateway;
+    private MechanicDto mechanic;
     private DashboardModel model;
     private Random rnd = new SecureRandom();
 
@@ -55,8 +60,11 @@ public class OperationsBean {
 
     @PostConstruct
     public void init() {
+        clientGateway = new ClientGateway(getAuthToken());
+        vehicleGateway = new VehicleGateway(getAuthToken());
+        mechanicGateway = new MechanicGateway(getAuthToken());
         initDashboard();
-        mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
+        mechanic = getSessionMechanic("mechanic");
 
     }
 
@@ -186,11 +194,7 @@ public class OperationsBean {
         List<String> titles = Arrays.asList("Ruedas", "Volante", "Capo", "Sistema", "Maletero", "Puerta", "Pintura", "faros", "Luces", "motor");
         Collections.shuffle(titles);
         int startTime = getStartTime();
-        return new InterventionDto(titles.get(0), State.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
-    }
-
-    private int getEndTime() {
-        return rnd.ints(1, 20).findFirst().getAsInt();
+        return new InterventionDto(titles.get(0), InterventionType.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
     }
 
     private int getStartTime() {

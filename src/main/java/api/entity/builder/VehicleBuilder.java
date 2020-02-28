@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public class VehicleBuilder {
 
+    public static final String REGISTRATION_PLATE = "111111";
+
     private Vehicle vehicle;
 
     public VehicleBuilder(String registrationPlate) {
@@ -76,7 +78,6 @@ public class VehicleBuilder {
     public VehicleBuilder byDefault() {
         VehicleBuilder vehicleBuilder = new VehicleBuilder("AA1234BB");
         return vehicleBuilder
-                .setClient(new Client("fakeClient", 3))
                 .setBrand("Opel")
                 .setKMS("03-03-2017 94744")
                 .setBodyOnFrame("VF1KC0JEF31065732")

@@ -1,6 +1,7 @@
 package api.business_controllers;
 
 import api.daos.DaoFactory;
+import api.daos.DaoSupplier;
 import api.dtos.VehicleDto;
 import api.entity.Client;
 import api.entity.Vehicle;
@@ -14,11 +15,15 @@ public class VehicleBusinessController {
 
     private static final String VEHICLE_ID_MSG = "Vehicle id: ";
 
+    static {
+        DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
+    }
+
     public int create(VehicleDto vehicleDto) {
         Client client = null;
         if (vehicleDto.getClientId() != null) {
             client = DaoFactory.getFactory().getClientDao().read(Integer.parseInt(vehicleDto.getClientId()))
-                    .orElseThrow(() -> new NotFoundException("Client not found"));
+                    .orElseThrow(() -> NotFoundException.throwBecauseOf("Client not found"));
         }
         Vehicle vehicle = new VehicleBuilder(vehicleDto.getRegistrationPlate())
                 .setBrand(vehicleDto.getBrand()).setClient(client).setKMS(vehicleDto.getKms())
@@ -33,14 +38,14 @@ public class VehicleBusinessController {
 
     public void delete(String id) {
         Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(id))
-                .orElseThrow(() -> new NotFoundException(VEHICLE_ID_MSG + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(VEHICLE_ID_MSG + id));
 
         DaoFactory.getFactory().getVehicleDao().deleteById(vehicle.getId());
     }
 
     public VehicleDto read(String id) {
         return DaoFactory.getFactory().getVehicleDao().read(Integer.parseInt(id)).map(VehicleDto::new)
-                .orElseThrow(() -> new NotFoundException(VEHICLE_ID_MSG + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(VEHICLE_ID_MSG + id));
     }
 
     public List<VehicleDto> readAll() {
@@ -49,7 +54,7 @@ public class VehicleBusinessController {
 
     public void update(String id, VehicleDto vehicleDto) {
         Vehicle vehicle = DaoFactory.getFactory().getVehicleDao().read((Integer.parseInt(id)))
-                .orElseThrow(() -> new NotFoundException(VEHICLE_ID_MSG + id));
+                .orElseThrow(() -> NotFoundException.throwBecauseOf(VEHICLE_ID_MSG + id));
 
         vehicle.setRegistrationPlate(vehicleDto.getRegistrationPlate());
         vehicle.setBrand(vehicleDto.getBrand());

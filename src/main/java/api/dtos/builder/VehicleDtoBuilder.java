@@ -6,9 +6,12 @@ import java.time.LocalDate;
 
 public class VehicleDtoBuilder {
 
+    public static final String REGISTRATION_PLATE = "111111";
+    public static final String CLIENT_ID = "999";
+
     VehicleDto vehicleDto;
 
-    public VehicleDtoBuilder (){
+    public VehicleDtoBuilder() {
         this.vehicleDto = new VehicleDto();
     }
 
@@ -81,6 +84,7 @@ public class VehicleDtoBuilder {
         VehicleDtoBuilder vehicleDtoBuilder = new VehicleDtoBuilder();
         return vehicleDtoBuilder
                 .setId(2)
+                .setRegistrationPlate(REGISTRATION_PLATE)
                 .setClientId("4")
                 .setBrand("Opel")
                 .setKMS("03-03-2017 94744")

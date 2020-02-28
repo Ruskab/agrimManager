@@ -3,7 +3,7 @@ package client_beans.interventions;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
-import api.entity.State;
+import api.entity.InterventionType;
 import client_beans.mechanics.MechanicGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
@@ -16,10 +16,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static client_beans.util.SessionUtil.getAuthToken;
 import static java.util.stream.Collectors.toList;
 
 @ManagedBean
@@ -29,40 +32,34 @@ public class InterventionCreateBean {
     private static final Logger LOGGER = LogManager.getLogger(InterventionCreateBean.class);
     private VehicleDto selectedVehicle;
     private InterventionDto selectedIntervention;
-    private InterventionGateway interventionGateway;
     private MechanicGateway mechanicGateway;
     private List<VehicleDto> vehicles;
-    private boolean skip;
+    private boolean isCaffe;
 
     @PostConstruct
     public void init() {
-        interventionGateway = new InterventionGateway();
-        mechanicGateway = new MechanicGateway();
+        mechanicGateway = new MechanicGateway(getAuthToken());
         selectedIntervention = new InterventionDto();
-        vehicles = new VehicleGateway().readAll();
+        vehicles = new VehicleGateway(getAuthToken()).readAll();
     }
 
-    public void create() {
+    public void create() throws IOException {
         MechanicDto mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
         validateSelection();
-        selectedIntervention.setVehicleId(Integer.toString(selectedVehicle.getId()));
         selectedIntervention.setStartTime(LocalDateTime.now());
-        selectedIntervention.setState(State.REPAIR);
+        selectedIntervention.setVehicleId(selectedVehicle != null ? Integer.toString(selectedVehicle.getId()) : null);
+        selectedIntervention.setInterventionType(selectedVehicle != null ? InterventionType.REPAIR : InterventionType.CAFFE);
         mechanicGateway.addIntervention(mechanic, selectedIntervention);
-
-//        Faces.getSession().setAttribute("activeIntervention", interventionId);
         PrimeFaces.current().executeScript("PF('interventionCreateDialog').hide();");
         resetWizard();
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect(externalContext.getRequestContextPath().concat("/backoffice/home.xhtml"));
     }
 
     private void validateSelection() {
         if (selectedIntervention == null) {
             LOGGER.error("Intervention empty");
             FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intervention empty", ""));
-        }
-        if (selectedVehicle == null) {
-            LOGGER.error("Vehiculo no seleccionado");
-            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Vehicle not selected", ""));
         }
     }
 
@@ -76,17 +73,16 @@ public class InterventionCreateBean {
         return vehicles.stream().filter(vehicleDto -> vehicleDto.getVehicleDataSheet().toLowerCase().contains(query.toLowerCase())).collect(toList());
     }
 
-    public boolean isSkip() {
-        return skip;
+    public boolean isCaffe() {
+        return isCaffe;
+    }
+
+    public void setCaffe(boolean caffe) {
+        this.isCaffe = caffe;
     }
 
     public String onFlowProcess(FlowEvent event) {
-        if (skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
-        } else {
             return event.getNewStep();
-        }
     }
 
     public VehicleDto getSelectedVehicle() {
@@ -103,9 +99,5 @@ public class InterventionCreateBean {
 
     public void setSelectedIntervention(InterventionDto selectedIntervention) {
         this.selectedIntervention = selectedIntervention;
-    }
-
-    public void setSkip(boolean skip) {
-        this.skip = skip;
     }
 }

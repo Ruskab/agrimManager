@@ -1,31 +1,34 @@
 package client_beans.user_access;
 
-import api.api_controllers.MechanicApiController;
+import api.dtos.CredentialsDto;
 import api.dtos.MechanicDto;
+import api.exceptions.UnauthorizedException;
+import client_beans.mechanics.MechanicGateway;
 import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
+import java.io.IOException;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
 public class LoginBean {
 
+    public static final String HOME_PAGE = "/backoffice/home.xhtml";
+    public static final String LOGIN_PAGE = "/user_access/loginPage.xhtml";
     private String message;
     private String userName;
     private String password;
-    private MechanicApiController mechanicApiController;
-    public static final String CLIENT_PAGE = "/backoffice/clients.xhtml";
-    public static final String LOGIN_PAGE = "/user_access/loginPage.xhtml";
+    private AuthenticationGateway authenticateGateway;
 
     @PostConstruct
     public void init() {
-        mechanicApiController = new MechanicApiController();
+        authenticateGateway = new AuthenticationGateway();
     }
 
     public String getUserName() {
@@ -52,24 +55,29 @@ public class LoginBean {
         this.message = message;
     }
 
-    public String login() {
+    public void login() throws IOException {
+        try {
+            String authToken = "Bearer " + authenticateGateway.authenticate(CredentialsDto.create(userName, password));
+            MechanicDto mechanicDto = new MechanicGateway(authToken).readAll().stream()
+                    .filter(mechanic -> mechanic.getName().equals(userName) && mechanic.getPassword().equals(password))
+                    .findFirst().orElseThrow(() -> new UnauthorizedException("mechanic not found with given credentials"));
 
-        Optional<MechanicDto> mechanicDto = mechanicApiController.readAll().stream()
-                .filter(mechanic -> mechanic.getName().equals(userName) && mechanic.getPassword().equals(password))
-                .findFirst();
-
-        if (mechanicDto.isPresent()) {
-            // get Http Session and store username
             Faces.getSession().setAttribute("username", userName);
-            Faces.getSession().setAttribute("mechanic", mechanicDto.get());
-            return CLIENT_PAGE;
-        } else {
+            Faces.getSession().setAttribute("mechanic", mechanicDto);
+            Faces.getSession().setAttribute("token", authToken);
+            redirect(HOME_PAGE);
+
+        } catch (UnauthorizedException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "Invalid Login!",
                     "Please Try Again!"));
-
-            return LOGIN_PAGE;
+            redirect(LOGIN_PAGE);
         }
+    }
+
+    private void redirect(String path) throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect(externalContext.getRequestContextPath().concat(path));
     }
 
     public String logout() {

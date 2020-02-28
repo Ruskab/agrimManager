@@ -15,15 +15,15 @@
 <h:body>
     <ui:composition template="/templates/master_layout.xhtml">
 
-        <ui:define name="header"></ui:define>
+        <ui:define name="header"/>
 
         <ui:define name="content">
             <div class="ui-fluid p-align-center vertical-container" >
-                <div class="ui-g-12 ui-md-2 ui-lg-4"/>
+                <div class="ui-g-12 ui-md-2 ui-lg-4"></div>
                 <div class="ui-g-12 ui-md-8 ui-lg-4">
-                    <agrim:loginPanel></agrim:loginPanel>
+                    <agrim:loginPanel id="loginPanel"/>
                 </div>
-                <div class="ui-g-12 ui-md-2 ui-lg-4"/>
+                <div class="ui-g-12 ui-md-2 ui-lg-4"></div>
             </div>
 
         </ui:define>

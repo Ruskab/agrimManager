@@ -7,10 +7,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class GeneralExceptionMapper implements ExceptionMapper<Throwable> {
 
-    private static final String DESCRIPTION = "Resourse could not be found";
-
     @Override
     public Response toResponse(Throwable throwable) {
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error: " + throwable.getMessage()).build();
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error: " + throwable.getCause() + throwable.getMessage()).build();
     }
 }

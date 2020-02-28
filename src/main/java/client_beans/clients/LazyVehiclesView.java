@@ -10,8 +10,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import static client_beans.util.SessionUtil.getAuthToken;
 
 @ManagedBean(name = "lazyVehiclesView")
 @ViewScoped
@@ -23,13 +29,13 @@ public class LazyVehiclesView implements Serializable {
     private VehicleDto selectedVehicleDto;
     private String clientName;
     private Map<String, String> clientNames = new HashMap<>();
-    private VehicleGateway vehicleGateway = new VehicleGateway();
-    private ClientGateway clientGateway = new ClientGateway();
+    private VehicleGateway vehicleGateway;
 
     @PostConstruct
     public void init() {
+        vehicleGateway = new VehicleGateway(getAuthToken());
         List<VehicleDto> vehicles = vehicleGateway.readAll();
-        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId()).getFullName()));
+        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), new ClientGateway(getAuthToken()).read(vehicle.getClientId()).getFullName()));
         lazyModel = new LazyDataModel<VehicleDto>() {
 
             @Override
@@ -51,6 +57,16 @@ public class LazyVehiclesView implements Serializable {
                 }
 
                 return sortRows(sortField, sortOrder, filtered);
+            }
+
+            @Override
+            public VehicleDto getRowData(String rowKey) {
+                return vehicleGateway.read(rowKey);
+            }
+
+            @Override
+            public Integer getRowKey(VehicleDto vehicleDto) {
+                return vehicleDto.getId();
             }
 
             private List<VehicleDto> sortRows(String sortField, SortOrder sortOrder, List<VehicleDto> filtered) {
@@ -106,16 +122,6 @@ public class LazyVehiclesView implements Serializable {
                     return true;
                 }
                 return name.contains((String) searchExpresion);
-            }
-
-            @Override
-            public Integer getRowKey(VehicleDto vehicleDto) {
-                return vehicleDto.getId();
-            }
-
-            @Override
-            public VehicleDto getRowData(String rowKey) {
-                return vehicleGateway.read(rowKey);
             }
         };
     }

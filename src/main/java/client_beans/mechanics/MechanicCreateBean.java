@@ -15,6 +15,8 @@ import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class MechanicCreateBean {
@@ -26,7 +28,7 @@ public class MechanicCreateBean {
 
     @PostConstruct
     public void init() {
-        mechanicGateway = new MechanicGateway();
+        mechanicGateway = new MechanicGateway(getAuthToken());
         mechanicDto = new MechanicDto();
     }
 

@@ -12,5 +12,4 @@ class ClientDaoHibr extends GenericDaoHibr<Client, Integer> implements ClientDao
     }
 
 
-
 }

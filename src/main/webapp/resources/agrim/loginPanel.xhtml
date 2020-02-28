@@ -18,13 +18,11 @@
     <h:form id="loginForm">
         <p:growl id="msg" showDetail="true" life="4000" />
         <p:panel id="loginPnl" header="Login">
-            <h:panelGrid id="loginPanel" layout="grid" columns="2" cellpadding="1"
-                         columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-8">
+            <h:panelGrid id="loginPanel" layout="grid" columns="2" cellpadding="1" columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-8">
                 <h:outputLabel for="username" value="#{msg['web.login.username']}" />
-                <p:inputText id="username" value="#{loginBean.userName}"></p:inputText>
+                <p:inputText id="username" value="#{loginBean.userName}"/>
                 <h:outputLabel for="password" value="#{msg['web.login.password']}" />
-                <p:password id="password" value="#{loginBean.password}"
-                            feedback="false"></p:password>
+                <p:password id="password" value="#{loginBean.password}" feedback="false"/>
             </h:panelGrid>
 
             <h:panelGrid layout="grid" columns="1" cellpadding="10" width="100%">

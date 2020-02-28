@@ -17,13 +17,16 @@
 		<project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
 		<project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>1.9</jdk.version>
 		<maven.compiler.version>3.5</maven.compiler.version>
 		<maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
 		<maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
 		<junit.jupiter.version>5.2.0</junit.jupiter.version>
 		<junit.platform.version>1.2.0</junit.platform.version>
+		<mockito.version>1.10.19</mockito.version>
+		<hamcrest.junit.version>2.0.0.0</hamcrest.junit.version>
 		<log4j.version>2.11.0</log4j.version>
+		<org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
 	</properties>
 
 	<profiles>
@@ -35,6 +38,45 @@
 			</activation>
 			<properties>
 				<env>dev</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>github</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>github</value>
+				</property>
+			</activation>
+			<properties>
+				<env>github</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>githubdocker</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>githubdocker</value>
+				</property>
+			</activation>
+			<properties>
+				<env>githubdocker</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>githubendtoend</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>githubendtoend</value>
+				</property>
+			</activation>
+			<properties>
+				<env>githubendtoend</env>
 			</properties>
 		</profile>
 
@@ -62,6 +104,32 @@
 			</properties>
 		</profile>
 
+		<profile>
+			<id>tomcat</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>tomcat</value>
+				</property>
+			</activation>
+			<properties>
+				<env>tomcat</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>database</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>database</value>
+				</property>
+			</activation>
+			<properties>
+				<env>database</env>
+			</properties>
+		</profile>
+
 	</profiles>
 
 	<repositories>
@@ -73,6 +141,12 @@
 	</repositories>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>
@@ -89,6 +163,35 @@
 			<version>3.141.59</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.codeborne</groupId>
+			<artifactId>selenide</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers -->
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
+			<version>1.12.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.testcontainers/selenium -->
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>selenium</artifactId>
+			<version>1.12.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>1.12.5</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- Logs -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -103,7 +206,13 @@
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-junit</artifactId>
-			<version>2.0.0.0</version>
+			<version>${hamcrest.junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -111,11 +220,10 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>${junit.jupiter.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- MySQL connector -->
@@ -244,7 +352,7 @@
 	</dependencies>
 
 	<build>
-		<!-- Loading all ${} -->
+        <finalName>agrimManager</finalName>
 		<filters>
 			<filter>src/main/resources/env/config.${env}.properties</filter>
 		</filters>
@@ -256,11 +364,11 @@
 			</resource>
 		</resources>
 
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -278,14 +386,21 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven.compiler.version}</version>
 				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
+					<source>9</source>
+					<target>9</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
+						<!-- other annotation processors -->
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -295,8 +410,6 @@
 				<configuration>
 					<argLine>-Duser.timezone=UTC</argLine>
 					<excludes>
-						<exclude>**/ClientApiControllerTest.java</exclude>
-						<exclude>**/VehicleApiControllerTest.java</exclude>
 						<exclude>**/LoginEndToEnd.java</exclude>
 					</excludes>
 				</configuration>
@@ -341,11 +454,10 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.2</version>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.0.1</version>
+				<version>3.1.1</version>
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
@@ -354,7 +466,14 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>2.0.16</version>
+				<configuration>
+					<jdkVersion>1.8</jdkVersion>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

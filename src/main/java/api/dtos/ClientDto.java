@@ -1,11 +1,7 @@
 package api.dtos;
 
-import api.entity.Client;
-
-import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
-@RequestScoped
 public class ClientDto implements Serializable {
 
     private static final long serialVersionUID = 6285845014865471015L;
@@ -17,12 +13,6 @@ public class ClientDto implements Serializable {
     private int hours;
 
     public ClientDto() {
-    }
-
-    public ClientDto(Client client) {
-        this.id = client.getId();
-        this.fullName = client.getFullName();
-        this.hours = client.getHours();
     }
 
     public ClientDto(String fullName, int hours) {

@@ -4,10 +4,11 @@
 <html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:P="http://java.sun.com/jsf/html">
+      xmlns:P="http://java.sun.com/jsf/html"
+      lang="en">
 
 <head>
-    <title>Intervention Panel</title>
+    <title>Active intervention Panel</title>
 </head>
 
 
@@ -16,13 +17,16 @@
 <composite:implementation>
     <P:form id="activeInterventionForm">
         <p:growl id="msg" showDetail="true" life="4000"/>
-        <p:panel id="pnlIntervention" header="#{msg['web.intervention.show.title']}">
+
+        <p:panel id="pnlEmptyActiveIntervention" rendered="#{empty activeInterventionBean.activeIntervention}" header="#{msg['web.home.panel.no.interventions']}"/>
+
+        <p:panel id="pnlIntervention" header="#{activeInterventionBean.vehicle.vehicleDataSheet}" rendered="#{not empty activeInterventionBean.activeIntervention}">
             <h:panelGrid id="pnlGridIntervention" layout="grid" columns="2" cellpadding="1"
                          columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-8">
-                <h:outputLabel for="outPId" value="#{msg['web.interventions.id']}"/>
-                <h:outputText id="outPId" value="#{activeInterventionBean.activeIntervention.id}"/>
-                <h:outputLabel for="outPTitle" value="#{msg['web.interventions.title']}"/>
-                <h:outputText id="outPTitle" value="#{activeInterventionBean.activeIntervention.title}"/>
+                <h:outputLabel for="strtDate" value="#{msg['web.interventions.type']}"/>
+                <h:outputText id="intrvType" value="#{activeInterventionBean.activeIntervention.interventionType}"/>
+                <h:outputLabel for="strtDate" value="#{msg['web.interventions.startDate']}"/>
+                <h:outputText id="strtDate" value="#{activeInterventionBean.activeIntervention.startTime}"/>
             </h:panelGrid>
 
             <h:panelGrid layout="pnlGritEndIntrv" columns="1" cellpadding="10" width="100%">

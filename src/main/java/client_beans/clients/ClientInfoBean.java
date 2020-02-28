@@ -13,36 +13,37 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class ClientInfoBean implements Serializable {
 
     private ClientDto clientDto;
     private List<VehicleDto> vehicles;
-    private ClientGateway clientGateway = new ClientGateway();
+    private ClientGateway clientGateway;
 
     @PostConstruct
-    public void init()
-    {
+    public void init() {
+        clientGateway = new ClientGateway(getAuthToken());
         String clientId = FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getRequestParameterMap()
                 .get("parameters");
         clientDto = clientGateway.read(clientId);
         //todo hacer que se recupere el listado de vehiculos del cliente con una peticion concreta
-        vehicles = new VehicleGateway().readAll();
+        vehicles = new VehicleGateway(getAuthToken()).readAll();
         vehicles = vehicles.stream().filter(vehicle -> vehicle.getClientId().equals(Integer.toString(clientDto.getId()))).collect(Collectors.toList());
     }
 
     public void save() {
-        Integer responseStatus = clientGateway.update(clientDto);
-        String message = responseStatus == 200 ? "Successful" : "Error";
-        if ("Error".equals(message)) {
-            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "update client"));
+        try {
+            clientGateway.update(clientDto);
+            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update client"));
+        }catch (IllegalStateException e){
+            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update client"));
             return;
         }
-        FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "update client"));
-
     }
 
     public ClientDto getClientDto() {

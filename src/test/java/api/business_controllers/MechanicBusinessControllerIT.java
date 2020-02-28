@@ -1,14 +1,16 @@
 package api.business_controllers;
 
+import api.api_controllers.DeleteDataApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.MechanicDto;
 import api.entity.Mechanic;
+import api.object_mothers.InterventionDtoMother;
+import api.object_mothers.MechanicDtoMother;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,62 +20,81 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class MechanicBusinessControllerIT {
 
-    private static MechanicBusinessController mechanicBusinessControler;
-    private static List<Integer> createdMechanics;
-    private static MechanicDto createdMechanic1;
-    private static MechanicDto createdMechanic2;
+    private static MechanicBusinessController mechanicBusinessController;
+    private static InterventionBusinesssController interventionBusinesssController;
 
     @BeforeAll
     static void prepare() {
-        createdMechanics = new ArrayList<>();
         DaoFactory.setFactory(new DaoFactoryHibr());
-        mechanicBusinessControler = new MechanicBusinessController();
-        createdMechanic1 = new MechanicDto("fakeName", "password");
-        createdMechanic2 = new MechanicDto("fakeName2", "password2");
-        createdMechanics.add(mechanicBusinessControler.create(createdMechanic1));
-        createdMechanics.add(mechanicBusinessControler.create(createdMechanic2));
+        mechanicBusinessController = new MechanicBusinessController();
+        interventionBusinesssController = new InterventionBusinesssController();
     }
 
-    @Test void testCreateMechanic() {
-        int createdMechanicId= mechanicBusinessControler.create(new MechanicDto("mechanic1", "secretPass"));
-        createdMechanics.add(createdMechanicId);
+    @AfterAll
+    static void deleteCreatedUsers() {
+        new DeleteDataApiController().deleteAll();
+    }
+
+    @Test
+    void testCreateMechanic() {
+        Integer createdMechanicId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
         Optional<Mechanic> createdMechanic = DaoFactory.getFactory().getMechanicDao().read(createdMechanicId);
         assertThat(createdMechanic.isPresent(), is(true));
         assertThat(createdMechanic.get().getId(), is(createdMechanicId));
-        assertThat(createdMechanic.get().getName(), is("mechanic1"));
-        assertThat(createdMechanic.get().getPassword(), is("secretPass"));
+        assertThat(createdMechanic.get().getName(), is(MechanicDtoMother.FAKE_NAME));
+        assertThat(createdMechanic.get().getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
     public void testReadMechanic() {
-        MechanicDto mechanicDtos = this.mechanicBusinessControler.read(Integer.toString(createdMechanics.get(0)));
+        int createdMechanicId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        assertThat(mechanicDtos.getName(),is("fakeName"));
-        assertThat(mechanicDtos.getPassword(),is("password"));
+        MechanicDto mechanicDto = mechanicBusinessController.read(Integer.toString(createdMechanicId));
+
+        assertThat(mechanicDto.getName(), is(MechanicDtoMother.FAKE_NAME));
+        assertThat(mechanicDto.getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
-    public void testReadAllMechanic(){
-        List<MechanicDto> mechanicDtos = mechanicBusinessControler.readAll();
+    public void testFindByNameMechanic() {
+        mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        assertThat(mechanicDtos.size(), greaterThanOrEqualTo(2));
+        List<MechanicDto> mechanicDtos = mechanicBusinessController.findBy(MechanicDtoMother.FAKE_NAME);
+
+        assertThat(mechanicDtos.get(0).getName(), is(MechanicDtoMother.FAKE_NAME));
+        assertThat(mechanicDtos.get(0).getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
-    public void testDeleteMechanic(){
-        int createdMechanicId = createdMechanics.get(0);
-        int deleteMechanic = mechanicBusinessControler.create(new MechanicDto("toDelele", "toDelete"));
-        DaoFactory.getFactory().getMechanicDao().read(createdMechanicId).get();
+    public void testReadAllMechanic() {
+        mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
+        mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        mechanicBusinessControler.delete(Integer.toString(deleteMechanic));
+        assertThat(mechanicBusinessController.readAll().size(), greaterThanOrEqualTo(2));
+    }
 
-        Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(deleteMechanic);
+    @Test
+    public void testDeleteMechanic() {
+        int mechanicToDeleteId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
+
+        mechanicBusinessController.delete(Integer.toString(mechanicToDeleteId));
+
+        Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId);
         assertThat(deletedMechanic.isPresent(), is(false));
     }
 
-    @AfterAll
-    static void deleteCreatedUsers(){
-        createdMechanics.forEach(id -> DaoFactory.getFactory().getMechanicDao().deleteById(id));
+    @Test
+    public void testDeleteMechanicWithInterventionsShouldDeleteInterventions() {
+        Integer mechanicToDeleteId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
+        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), InterventionDtoMother.cafe());
+        mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), InterventionDtoMother.cafe());
+
+        mechanicBusinessController.delete(Integer.toString(mechanicToDeleteId));
+
+        Optional<Mechanic> deletedMechanic = DaoFactory.getFactory().getMechanicDao().read(mechanicToDeleteId);
+        assertThat(deletedMechanic.isPresent(), is(false));
+        assertThat(interventionBusinesssController.readAll().isEmpty(), is(true));
     }
+
 }

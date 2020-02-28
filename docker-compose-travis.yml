@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: mysql-db
+    image: mysql:5.7.28
+    ports:
+      - "127.0.0.1:33060:3306"
+    volumes:
+      - ./mysqldump:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=${TRAVIS_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${TRAVIS_USER_NAME}
+      - MYSQL_PASSWORD=${TRAVIS_USER_PASS}
+
+  tomcat:
+    container_name: tomcat9
+    build:
+      context: .
+      args:
+        MYSQL_USER: ${TRAVIS_USER_NAME}
+        MYSQL_PASSWORD: ${TRAVIS_USER_PASS}
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${TRAVIS_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_HOST=mysql
+    ports:
+      - "127.0.0.1:8080:8080"
+    links:
+      - mysql
+
+volumes:
+  mysql-db-data:

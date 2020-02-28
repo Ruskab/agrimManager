@@ -8,4 +8,6 @@ public interface MechanicDao extends GenericDao<Mechanic, Integer> {
 
     Stream<Mechanic> findAll();
 
+    Stream<Mechanic> findBy(String name);
+
 }

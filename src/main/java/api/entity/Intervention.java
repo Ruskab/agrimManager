@@ -1,6 +1,12 @@
 package api.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -18,7 +24,7 @@ public class Intervention implements Serializable {
 
     private String title;
 
-    private State state;
+    private InterventionType interventionType;
 
     private LocalDateTime startTime;
 
@@ -36,9 +42,9 @@ public class Intervention implements Serializable {
         //JPA
     }
 
-    public Intervention(String title, State state, LocalDateTime startTIme, LocalDateTime endTime) {
+    public Intervention(String title, InterventionType interventionType, LocalDateTime startTIme, LocalDateTime endTime) {
         this.title = title;
-        this.state = state;
+        this.interventionType = interventionType;
         this.startTime = startTIme;
         this.endTime = endTime;
     }
@@ -59,12 +65,12 @@ public class Intervention implements Serializable {
         this.title = title;
     }
 
-    public State getState() {
-        return state;
+    public InterventionType getInterventionType() {
+        return interventionType;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setInterventionType(InterventionType interventionType) {
+        this.interventionType = interventionType;
     }
 
     public Optional<Vehicle> getVehicle() {

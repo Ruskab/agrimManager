@@ -8,7 +8,11 @@ public class ClientVehiclesDto {
 
     private List<Integer> vehicles;
 
-    public ClientVehiclesDto(ClientDto clientDto, List<Integer> vehicles) {
+    public static ClientVehiclesDto create(ClientDto clientDto, List<Integer> vehicles) {
+        return new ClientVehiclesDto(clientDto, vehicles);
+    }
+
+    private ClientVehiclesDto(ClientDto clientDto, List<Integer> vehicles) {
         this.clientDto = clientDto;
         this.vehicles = vehicles;
     }

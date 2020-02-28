@@ -10,6 +10,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @FacesConverter("client_beans.util.converters.VehicleConverter")
 public class VehicleConverter implements Converter {
 
@@ -17,7 +19,7 @@ public class VehicleConverter implements Converter {
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
         if (value != null && value.trim().length() > 0) {
             try {
-                VehicleGateway vehicleGateway = new VehicleGateway();
+                VehicleGateway vehicleGateway = new VehicleGateway(getAuthToken());
                 return vehicleGateway.read(value);
             } catch (NumberFormatException e) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid vehicle."));

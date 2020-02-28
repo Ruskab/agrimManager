@@ -1,7 +1,6 @@
 package api.dtos;
 
-import api.entity.Intervention;
-import api.entity.State;
+import api.entity.InterventionType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -15,7 +14,7 @@ public class InterventionDto implements Serializable {
 
     private String title;
 
-    private State state;
+    private InterventionType interventionType;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -29,9 +28,9 @@ public class InterventionDto implements Serializable {
 
     private String repairingPackId;
 
-    public InterventionDto(String title, State state, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
+    public InterventionDto(String title, InterventionType interventionType, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
         this.title = title;
-        this.state = state;
+        this.interventionType = interventionType;
         //todo si es de caffe no deberia de tener vehicle
         this.vehicleId = vehicleId;
         this.repairingPackId = repairingPackId;
@@ -39,18 +38,12 @@ public class InterventionDto implements Serializable {
         this.endTime = endTime;
     }
 
-    public InterventionDto(Intervention intervention) {
-        this.id = intervention.getId();
-        this.title = intervention.getTitle();
-        this.state = intervention.getState();
-        intervention.getVehicle().ifPresent(vehicle -> this.vehicleId = Integer.toString(vehicle.getId()));
-        intervention.getRepairingPack().ifPresent(repairingPack -> this.repairingPackId = Integer.toString(repairingPack.getId()));
-        this.startTime = intervention.getStartTime();
-        this.endTime = intervention.getEndTime();
-    }
-
     public InterventionDto() {
 
+    }
+
+    public static boolean isActiveIntervention(InterventionDto interventionDto) {
+        return interventionDto.getEndTime() == null;
     }
 
     public int getId() {
@@ -69,12 +62,12 @@ public class InterventionDto implements Serializable {
         this.title = title;
     }
 
-    public State getState() {
-        return state;
+    public InterventionType getInterventionType() {
+        return interventionType;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setInterventionType(InterventionType interventionType) {
+        this.interventionType = interventionType;
     }
 
     public String getVehicleId() {
@@ -93,13 +86,12 @@ public class InterventionDto implements Serializable {
         this.repairingPackId = repairingPackId;
     }
 
-
     @Override
     public String toString() {
         return "InterventionDto{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", state=" + state +
+                ", state=" + interventionType +
                 ", vehicleId=" + vehicleId +
                 ", repairingPackId=" + repairingPackId +
                 '}';
@@ -119,9 +111,5 @@ public class InterventionDto implements Serializable {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-    }
-
-    public static boolean isActiveIntervention(InterventionDto interventionDto){
-        return interventionDto.getEndTime() == null;
     }
 }

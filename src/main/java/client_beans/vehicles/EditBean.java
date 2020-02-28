@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import static client_beans.util.SessionUtil.getAuthToken;
+
 @ManagedBean
 @ViewScoped
 public class EditBean {
@@ -17,7 +19,7 @@ public class EditBean {
 
     @PostConstruct
     public void init() {
-        vehicleGateway = new VehicleGateway();
+        vehicleGateway = new VehicleGateway(getAuthToken());
     }
 
     public VehicleDto getSelectedVehicleDto() {
@@ -29,13 +31,13 @@ public class EditBean {
     }
 
     public void save() {
-        Integer responseStatus = vehicleGateway.update(selectedVehicleDto);
-        String message = responseStatus == 200 ? "Successful" : "Error";
-        if ("Error".equals(message)) {
-            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "update vehicle"));
+        try {
+            vehicleGateway.update(selectedVehicleDto);
+        } catch (IllegalStateException e) {
+            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update vehicle"));
             return;
         }
-        FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "update vehicle"));
+        FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update vehicle"));
 
     }
 }

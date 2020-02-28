@@ -1,26 +1,26 @@
 package api.business_controllers;
 
-import api.AgrimDomainFactory;
+import api.api_controllers.DeleteDataApiController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
-import api.dtos.ClientDto;
 import api.dtos.InterventionDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Intervention;
-import api.entity.State;
+import api.entity.InterventionType;
+import api.object_mothers.ClientDtoMother;
+import api.object_mothers.InterventionDtoMother;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.*;
+import static api.entity.InterventionType.CAFFE;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 
@@ -28,103 +28,14 @@ public class InterventionBusinessControllerIT {
 
     private static InterventionBusinesssController interventionBusinesssController;
     private static VehicleBusinessController vehicleBusinessController;
-    private static ClientBusinessController clientBusinessController ;
-    private static List<Integer> createdVehicles;
-    private static List<Integer> createdclients;
-    private static List<Integer> createdInterventions;
+    private static ClientBusinessController clientBusinessController;
 
     @BeforeAll
     static void prepare() {
-        createdVehicles = new ArrayList<>();
-        createdclients = new ArrayList<>();
-        createdclients = new ArrayList<>();
-        createdInterventions = new ArrayList<>();
         DaoFactory.setFactory(new DaoFactoryHibr());
         vehicleBusinessController = new VehicleBusinessController();
         clientBusinessController = new ClientBusinessController();
         interventionBusinesssController = new InterventionBusinesssController();
-
-        createdclients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest", 1)));
-        createdclients.add(clientBusinessController.create(new ClientDto("fakeFullNameTest2", 2)));
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(Integer.toString(createdclients.get(0)), "111111")));
-        createdVehicles.add(vehicleBusinessController.create(createVehicleDto(Integer.toString(createdclients.get(0)), "222222")));
-        createdInterventions.add(interventionBusinesssController.create(AgrimDomainFactory.createInterventionDto(Integer.toString(createdVehicles.get(0)))));
-        createdInterventions.add(interventionBusinesssController.create(AgrimDomainFactory.createCaffeInterventionDto()));
-    }
-
-
-    @Test
-    void testCreateIntervention() {
-        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
-        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
-        int createdVehicleId = vehicleBusinessController.create(vehicleDto);
-        int createdInterventionId = interventionBusinesssController.create(AgrimDomainFactory.createInterventionDto(Integer.toString(createdVehicleId)));
-
-        createdclients.add(createdClientId);
-        createdVehicles.add(createdVehicleId);
-        createdInterventions.add(createdInterventionId);
-
-        Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId);
-        assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
-        assertThat(createdIntervention.get().getTitle(), is("Reparacion"));
-//        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getState(), is(State.REPAIR));
-        assertThat(createdIntervention.get().getVehicle().get().getId(), is(createdVehicleId));
-    }
-
-    @Test
-    void testCreateInterventionCAFFE() {
-        int createdInterventionId = interventionBusinesssController.create(AgrimDomainFactory.createCaffeInterventionDto());
-        createdInterventions.add(createdInterventionId);
-
-        Optional<Intervention> createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId);
-        assertThat(createdIntervention.get().getRepairingPack(), is(Optional.empty()));
-        assertThat(createdIntervention.get().getTitle(), is("Caffe"));
-//        assertThat(createdIntervention.get().getPeriod(), is(Period.between(LocalDate.now(), LocalDate.now().plusDays(1))));
-        assertThat(createdIntervention.get().getState(), is(State.CAFFE));
-        assertThat(createdIntervention.get().getVehicle(), is(Optional.empty()));
-    }
-
-    @Test
-    public void testReadIntervention() {
-        InterventionDto interventionDto = interventionBusinesssController.read(Integer.toString(createdInterventions.get(0)));
-
-        assertThat(interventionDto.getTitle(),is("Reparacion"));
-    }
-
-    @Test
-    public void testReadAllVehicles() {
-        List<InterventionDto> interventionDtos = interventionBusinesssController.readAll();
-        assertThat(interventionDtos.size(),is(greaterThanOrEqualTo(2)));
-    }
-
-    @Test
-    public void testUpdateIntervention(){
-        //todo crear la funcionalidad
-//        int createdClientId = clientBusinessController.create(new ClientDto("fakeFullName", 1));
-//        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
-//        int createdVehicleId = vehicleBusinessController.create(vehicleDto);
-//        InterventionDto interventionDto = createInterventionDto(Integer.toString(createdVehicleId));
-//        int createdInterventionId = interventionBusinesssController.create(interventionDto);
-//
-//        String interventionTitle = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get().getTitle();
-//
-//        createdclients.add(createdClientId);
-//        createdVehicles.add(createdVehicleId);
-//        createdInterventions.add(createdInterventionId);
-//
-//        interventionBusinesssController.update(Integer.toString(createdInterventionId), updateIntervention(interventionDto));
-//        Optional<Intervention> updatedIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId);
-//
-//        assertThat(interventionTitle, is("Rapair"));
-//        assertThat(updatedIntervention.get().getTitle(), is("updatedTitle"));
-    }
-
-    @AfterAll
-    static void deleteCreatedUsers(){
-        createdclients.forEach(id -> DaoFactory.getFactory().getClientDao().deleteById(id));
-        createdVehicles.forEach(id -> DaoFactory.getFactory().getVehicleDao().deleteById(id));
-        createdInterventions.forEach(id -> DaoFactory.getFactory().getInterventionDao().deleteById(id));
     }
 
     private static VehicleDto createVehicleDto(String clientId, String registrationPlate) {
@@ -143,4 +54,79 @@ public class InterventionBusinessControllerIT {
                 .setMotorOil("5.5  5W30")
                 .createVehicleDto();
     }
+
+    @AfterAll
+    static void deleteCreatedUsers() {
+        new DeleteDataApiController().deleteAll();
+    }
+
+    @Test
+    void testCreateIntervention() {
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
+        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
+        int createdVehicleId = vehicleBusinessController.create(vehicleDto);
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(Integer.toString(createdVehicleId));
+
+        int createdInterventionId = interventionBusinesssController.create(interventionDto);
+
+        Intervention createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
+        assertThat(createdIntervention.getRepairingPack(), is(Optional.empty()));
+        assertThat(createdIntervention.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
+        assertThat(createdIntervention.getStartTime(), is(interventionDto.getStartTime()));
+        assertThat(createdIntervention.getEndTime(), is(interventionDto.getEndTime()));
+        assertThat(createdIntervention.getInterventionType(), is(InterventionType.REPAIR));
+        assertThat(createdIntervention.getVehicle().get().getId(), is(createdVehicleId));
+    }
+
+    @Test
+    void testCreateInterventionCAFFE() {
+        InterventionDto caffeInterventionDto = InterventionDtoMother.cafe();
+        int createdInterventionId = interventionBusinesssController.create(caffeInterventionDto);
+
+        Intervention createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
+        assertThat(createdIntervention.getRepairingPack(), is(Optional.empty()));
+        assertThat(createdIntervention.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
+        assertThat(createdIntervention.getStartTime(), is(caffeInterventionDto.getStartTime()));
+        assertThat(createdIntervention.getEndTime(), is(caffeInterventionDto.getEndTime()));
+        assertThat(createdIntervention.getInterventionType(), is(CAFFE));
+        assertThat(createdIntervention.getVehicle(), is(Optional.empty()));
+    }
+
+    @Test
+    public void testReadIntervention() {
+        int createdInterventionId = interventionBusinesssController.create(InterventionDtoMother.cafe());
+
+        InterventionDto interventionDto = interventionBusinesssController.read(Integer.toString(createdInterventionId));
+
+        assertThat(interventionDto.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
+    }
+
+    @Test
+    public void testReadAllInterventions() {
+        interventionBusinesssController.create(InterventionDtoMother.cafe());
+        interventionBusinesssController.create(InterventionDtoMother.cafe());
+
+        List<InterventionDto> interventionDtos = interventionBusinesssController.readAll();
+
+        assertThat(interventionDtos.size(), is(greaterThanOrEqualTo(2)));
+    }
+
+    @Test
+    public void testUpdateIntervention() {
+        int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
+        VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
+        int createdVehicleId = vehicleBusinessController.create(vehicleDto);
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(Integer.toString(createdVehicleId));
+        int createdInterventionId = interventionBusinesssController.create(interventionDto);
+        String createdInterventionTitle = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get().getTitle();
+        InterventionDto updatedTitleIntervention = InterventionDtoMother.cafe();
+        updatedTitleIntervention.setTitle("new title");
+        interventionBusinesssController.update(Integer.toString(createdInterventionId), updatedTitleIntervention);
+
+        Intervention updatedIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
+        assertThat(createdInterventionTitle, is(InterventionDtoMother.FAKE_TITLE));
+        assertThat(updatedIntervention.getTitle(), is("new title"));
+    }
+
+
 }
