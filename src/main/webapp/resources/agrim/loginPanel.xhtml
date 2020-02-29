@@ -16,23 +16,31 @@
 
 <composite:implementation>
     <h:form id="loginForm">
-        <p:growl id="msg" showDetail="true" life="4000" />
-        <p:panel id="loginPnl" header="Login">
-            <h:panelGrid id="loginPanel" layout="grid" columns="2" cellpadding="1"
-                         columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-8">
-                <h:outputLabel for="username" value="#{msg['web.login.username']}" />
-                <p:inputText id="username" value="#{loginBean.userName}"></p:inputText>
-                <h:outputLabel for="password" value="#{msg['web.login.password']}" />
-                <p:password id="password" value="#{loginBean.password}"
-                            feedback="false"></p:password>
-            </h:panelGrid>
 
-            <h:panelGrid layout="grid" columns="1" cellpadding="10" width="100%">
-                <p:commandButton id="loginButton" action="#{loginBean.login}"
-                                 value="Login" update="loginForm" ajax="true">
-                </p:commandButton>
-            </h:panelGrid>
-        </p:panel>
+        <p:growl id="msg" showDetail="true" life="4000"/>
+
+        <h:panelGroup id="loginPanel" layout="block">
+            <div>
+                <h:outputLabel for="username" value="#{msg['web.login.username']}" />
+                <br/>
+                <p:inputText id="username" value="#{loginBean.userName}"/>
+            </div>
+            <div>
+                <h:outputLabel for="password" value="#{msg['web.login.password']}" />
+                <br/>
+                <p:password id="password"
+                            value="#{loginBean.password}"
+                            feedback="false"/>
+            </div>
+            <div>
+                <p:commandButton id="loginButton"
+                                 action="#{loginBean.login}"
+                                 value="Login"
+                                 update="loginForm"
+                                 ajax="true"/>
+            </div>
+
+        </h:panelGroup>
     </h:form>
 </composite:implementation>
 

@@ -4,15 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       lang="en" xml:lang="en"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
->
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <title>Master template</title>
 
 <h:head>
     <title>Master template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet"/>
     <h:outputStylesheet name="normalize.css" library="css"/>
-    <h:outputStylesheet name="master-layour.css" library="css"/>
+    <h:outputStylesheet name="master-layout.css" library="css"/>
     <h:outputStylesheet name="primeflex.css" library="css"/>
     <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
 
@@ -26,7 +26,7 @@
         </ui:insert>
     </div>
 
-    <div id="content" >
+    <div id="main">
         <ui:insert name="content">
             <ui:include src="/templates/content.xhtml"/>
         </ui:insert>

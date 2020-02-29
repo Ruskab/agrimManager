@@ -39,3 +39,15 @@
     text-align: right !important;
 }
 
+.ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button,
+body {
+    font-family: 'Roboto', sans-serif;
+    perspective: unset;
+    -webkit-transform-style:flat;
+    -webkit-perspective:1000px;
+    -webkit-backface-visibility:hidden;
+}
