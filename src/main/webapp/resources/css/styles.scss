@@ -1,0 +1,6 @@
+@mixin ilya($color2) {background: $color2}
+$color: #F7F7F7;
+
+body {
+    @include ilya($color);
+}
