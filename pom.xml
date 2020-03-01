@@ -365,17 +365,40 @@
 				<executions>
 					<execution>
 						<id>sassProcessSource</id>
-						<phase>generate-resources</phase>
 						<goals>
 							<goal>update-stylesheets</goal>
 						</goals>
 						<configuration>
-							<buildDirectory>${project.build.directory}</buildDirectory>
-							<sassSourceDirectory>${basedir}/src/main/webapp/resources/css</sassSourceDirectory>
-							<destination>${basedir}/src/main/webapp/resources/css</destination>
-							<sassOptions>
-								<always_update>true</always_update>
-							</sassOptions>
+							<resources>
+								<resource>
+									<source>
+										<directory>src/main/webapp/resources/css</directory>
+										<includes>
+											<include>*.scss</include>
+										</includes>
+									</source>
+									<destination>src/main/webapp/resources/css</destination>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>sassWatchSource</id>
+						<goals>
+							<goal>watch</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<source>
+										<directory>src/main/webapp/resources/css</directory>
+										<includes>
+											<include>*.scss</include>
+										</includes>
+									</source>
+									<destination>src/main/webapp/resources/css</destination>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>

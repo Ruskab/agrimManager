@@ -56,7 +56,6 @@ public class ClientBusinessController {
     public void update(String id, ClientDto clientDto) {
         BiConsumer<ClientDto, Client> mapFromDto = clientMapper::updateFromDto;
         Consumer<Client> updateEntity = daoFactory.getClientDao()::update;
-
         daoFactory.getClientDao()
                 .read((Integer.parseInt(id)))
                 .ifPresentOrElse(
