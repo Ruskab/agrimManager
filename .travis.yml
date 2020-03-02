@@ -24,7 +24,7 @@ script:
   - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
 
 deploy:
-  edge: true
+  edge: true #fix some issue in travis
   provider: heroku
   api_key:
     secure: $HEROKU

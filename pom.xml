@@ -27,7 +27,6 @@
 		<hamcrest.junit.version>2.0.0.0</hamcrest.junit.version>
 		<log4j.version>2.11.0</log4j.version>
 		<org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
-		<project.basedir>agrimManager</project.basedir>
 	</properties>
 
 	<profiles>
@@ -358,28 +357,6 @@
 		</resources>
 
 		<plugins>
-			<plugin>
-				<groupId>nl.geodienstencentrum.maven</groupId>
-				<artifactId>sass-maven-plugin</artifactId>
-				<version>3.7.2</version>
-				<executions>
-					<execution>
-						<id>sassProcessSource</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>update-stylesheets</goal>
-						</goals>
-						<configuration>
-							<buildDirectory>${project.build.directory}</buildDirectory>
-							<sassSourceDirectory>${basedir}/src/main/webapp/resources/css</sassSourceDirectory>
-							<destination>${basedir}/src/main/webapp/resources/css</destination>
-							<sassOptions>
-								<always_update>true</always_update>
-							</sassOptions>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
