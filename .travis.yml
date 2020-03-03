@@ -6,7 +6,7 @@ jdk:
 branches:
   only:
     - develop
-    - /^release-[0-999].[0-999]$/
+    - "/^release-[0-999].[0-999]$/"
     - master
 notifications:
   email:
@@ -14,20 +14,12 @@ notifications:
       - ilya.kab@gmail.es
 services:
   - docker
-
 script:
-#  - docker-compose -f docker-compose-travis.yml up -d
-#  - docker ps
-#  - mvn clean test -Denvironment=database
-  # all test with coverage
-#  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=business_controllers.unittest.*Test,api_controllers.unittest.*Test,DispatcherIT,api.business_controllers.*IT,api.api_controllers.*IT
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -DskipTests
-#  - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
-
 deploy:
   provider: heroku
   api_key:
-    secure: $HEROKU_KEY
+    secure: q6s4VfXvKJJlFIa3Gt1nSy1mbawveCu7IFIPlKhwR++XCpsetOO4gFdyDik9lY5gyIDwzZyiabz0A47pDTu2SfAKHivhIQ1MpdmoNN9HiXkpvGCDfKG+0FcfuIycwmb3TPFnbTDvmq0t+Brc+oY1oB6Y7pqj0QNCScZbQlso8+V5bRv71k3lJCoR/MhyFd2SMCL1ZfOiHWdCIa5OXfrUG5WknKSw6HoYHhC3v8APixCViLM/hEXPKnhMioJTg0wNVB3qKgsBm2v5zl5GT9rFIqbPMNTMe3DV70W0NUBxoEKLfSRUtz8sKwTxOZcxbqFrv6HuqrTCrAYpC6ZEg5hpGmNYMPYUXQH/qtbwJfyw6aKcWuD3MyDEIoslY5xm4qTcl5cvUU4Pb0+j+m1S3zsgon/gWTT5OlqS0GmWeHxWKI2WnYX7I+vfdfAI7RIWcfVu1/LNQgU0cHnNj7jYzl1YTaxBjaF2PIJlbx6jRCa5Mbbk0cU3jjDl0oOSgDLrvXSK3Vm0ASfOeX73D5bWSrHh10TEtzXnrAaGSpccwEXRyZLcouqF4AbonmCLXCQvWhv+bMw6WfU5m4BmOh+KxkeR+bFk7uyogCcRiToTi0cCe35wNjP0DOrYlCdtNw/hHOiGuTtWg9hatx3EczLIEpsn9RtnjG2YEZoMsqpuUdJNbO4=
   app: agrim-manager
   on:
     repo: Ruskab/agrimManager
