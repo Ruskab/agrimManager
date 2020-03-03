@@ -16,18 +16,19 @@ services:
   - docker
 
 script:
-  - docker-compose -f docker-compose-travis.yml up -d
-  - docker ps
-  - mvn clean test -Denvironment=database
+#  - docker-compose -f docker-compose-travis.yml up -d
+#  - docker ps
+#  - mvn clean test -Denvironment=database
   # all test with coverage
-  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=business_controllers.unittest.*Test,api_controllers.unittest.*Test,DispatcherIT,api.business_controllers.*IT,api.api_controllers.*IT
-  - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
+#  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=business_controllers.unittest.*Test,api_controllers.unittest.*Test,DispatcherIT,api.business_controllers.*IT,api.api_controllers.*IT
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=business_controllers.unittest.*Test
+#  - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
 
 deploy:
   edge: true #fix some issue in travis
   provider: heroku
   api_key:
-    secure: $HEROKU
+    secure: $HEROKU_API_KEY
   app: agrim-manager
   on:
     repo: Ruskab/agrimManager
