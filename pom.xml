@@ -459,6 +459,51 @@
 					<jdkVersion>1.8</jdkVersion>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>nl.geodienstencentrum.maven</groupId>
+				<artifactId>sass-maven-plugin</artifactId>
+				<version>3.7.2</version>
+				<executions>
+					<execution>
+						<id>sassProcessSource</id>
+						<goals>
+							<goal>update-stylesheets</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<source>
+										<directory>src/main/webapp/resources/css</directory>
+										<includes>
+											<include>*.scss</include>
+										</includes>
+									</source>
+									<destination>src/main/webapp/resources/css</destination>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>sassWatchSource</id>
+						<goals>
+							<goal>watch</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<source>
+										<directory>src/main/webapp/resources/css</directory>
+										<includes>
+											<include>*.scss</include>
+										</includes>
+									</source>
+									<destination>src/main/webapp/resources/css</destination>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
