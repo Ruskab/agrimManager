@@ -6,7 +6,7 @@ jdk:
 branches:
   only:
     - develop
-    - "/^release-[0-999].[0-999]$/"
+    - /^release-[0-999].[0-999]$/
     - master
 notifications:
   email:
@@ -14,8 +14,16 @@ notifications:
       - ilya.kab@gmail.es
 services:
   - docker
+
 script:
+#  - docker-compose -f docker-compose-travis.yml up -d
+#  - docker ps
+#  - mvn clean test -Denvironment=database
+  # all test with coverage
+#  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=business_controllers.unittest.*Test,api_controllers.unittest.*Test,DispatcherIT,api.business_controllers.*IT,api.api_controllers.*IT
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -DskipTests
+#  - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
+
 deploy:
   provider: heroku
   api_key:
