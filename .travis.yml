@@ -21,7 +21,7 @@ script:
 #  - mvn clean test -Denvironment=database
   # all test with coverage
 #  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=business_controllers.unittest.*Test,api_controllers.unittest.*Test,DispatcherIT,api.business_controllers.*IT,api.api_controllers.*IT
-  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -Dtest=business_controllers.unittest.*Test
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent clean verify org.jacoco:jacoco-maven-plugin:report -DskipTests
 #  - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ruskab-github -Dsonar.login=$SONAR
 
 deploy:
