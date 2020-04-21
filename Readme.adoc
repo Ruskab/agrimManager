@@ -1,0 +1,28 @@
+= AGRIM MANAGER
+Doc Writer - ilya
+
+== Estado del código
+image:https://travis-ci.org/Ruskab/agrimManager.svg?branch=develop["Build Status", link="https://travis-ci.org/erebor/asciidoctor"]
+image:https://sonarcloud.io/api/project_badges/measure?project=ilya.dev%3AagrimManager&metric=alert_status["Quality Gate"]
+image:https://bettercodehub.com/edge/badge/Ruskab/agrimManager?branch=develop["Better hub", link="https://bettercodehub.com/"]
+
+== Tecnologías usadas
+- Java
+- Maven
+- Docker
+- IntelliJ
+- GitHub
+- GitHub Actions ci
+- Travis ci
+- Heruku
+- Bettercodehub
+- Sonarcloud
+- swagger
+- Junit 5
+
+
+== Continuos integration
+
+image:https://user-images.githubusercontent.com/16058725/55355842-b39bc280-54c9-11e9-8973-101f3d87758b.png[]
+
+Autor: Ilya Kabushko.
