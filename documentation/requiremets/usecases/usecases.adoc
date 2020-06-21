@@ -5,6 +5,7 @@
 
 <<_vehicles>>
 
+
 <<_clients>>
 
 <<_interventions>>
@@ -15,7 +16,7 @@
 == Vehicles management
 [plantuml,svg,align="center"]
 ----
-include::vechileUusecases.puml[]
+include::puml/vechileUusecases.puml[]
 ----
 <<_index>>
 
@@ -23,7 +24,7 @@ include::vechileUusecases.puml[]
 == Clients management
 [plantuml,svg,align="center"]
 ----
-include::clientUsecases.puml[]
+include::puml/clientUsecases.puml[]
 ----
 <<_index>>
 
@@ -31,7 +32,7 @@ include::clientUsecases.puml[]
 == Interventions management
 [plantuml,svg,align="center"]
 ----
-include::interventionUsecases.puml[]
+include::puml/interventionUsecases.puml[]
 ----
 <<_index>>
 
@@ -39,7 +40,7 @@ include::interventionUsecases.puml[]
 == Mechanics management
 [plantuml,svg,align="center"]
 ----
-include::mechianicUsecases.puml[]
+include::puml/mechianicUsecases.puml[]
 ----
 <<_index>>
 
