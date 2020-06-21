@@ -22,6 +22,11 @@ image::png/openDashboard.png[]
 
 [#_vehicles]
 == Vehicles management
+
+=== open Vehicles
+image::png/openVehicles.png[]
+<<_index>>
+
 === create vehicle
 image::png/createVehicle.png[]
 <<_index>>
