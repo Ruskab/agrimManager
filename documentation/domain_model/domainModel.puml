@@ -1,0 +1,13 @@
+@startuml
+object Mechanic
+object Intervention
+object Client
+object Vehicle
+object RepairingPack
+
+Mechanic --> Intervention : create
+Mechanic ..> RepairingPack : create
+Mechanic ..> Vehicle : see
+Client  --o Vehicle : "1"
+RepairingPack o-- Intervention
+@enduml
