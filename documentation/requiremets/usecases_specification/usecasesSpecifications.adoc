@@ -1,0 +1,33 @@
+= USE CASES SPECIFICATIONS
+
+[#_index]
+== Index
+
+<<_vehicles>>
+
+<<_clients>>
+
+<<_interventions>>
+
+<<_mechanics>>
+
+[#_vehicles]
+== Vehicles management
+=== create vehicle
+image::png/createVehicle.png[]
+<<_index>>
+
+[#_clients]
+== Clients management
+<<_index>>
+
+[#_interventions]
+== Interventions management
+<<_index>>
+
+[#_mechanics]
+== Mechanics management
+<<_index>>
+
+
+

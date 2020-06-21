@@ -1,6 +1,0 @@
-@startuml
-actor "Mechanic" as mec
-actor "Developer" as dev
-actor "Admin" as admin
-actor "Time" as time
-@enduml
