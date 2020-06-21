@@ -1,0 +1,104 @@
+@startuml
+
+state 1 as "CONTACT_INFO_OPENED"
+state B1 as "BILLING_INFO_OPENED"
+state A2 as "VEHICLES_INFO_OPENED"
+state 2 as " "
+state A3 as " "
+state B2 as " "
+state B3 as " "
+
+[*] --> 1
+note on link
+    Manager selects a client to update
+end note
+
+1 --> 2
+note on link
+System shows
+* client contact information
+** full Name
+System allows
+* introduce client full name
+* go to client vehicles information
+* go to client billable information
+* save changes
+* cancel
+end note
+
+2 --> 1
+note on link
+ *Mechanic introduces client fullName
+ *and orders save changes
+end note
+
+2 --> A2
+note on link
+    *Mechanic orders go to client vehicles information
+end note
+
+2 --> B1
+note on link
+    Mechanic orders go to billable information
+end note
+
+B1 --> B2
+note on link
+    System shows
+    * client pending hours to invoice
+    System allows
+    * introduce pending hours to invoice
+    * go to client contact information
+    * go to client vehicles information
+    * save changes
+    * cancel
+end note
+
+B2 --> B3
+note on link
+ Mechanic orders save changes
+end note
+
+B2 --> A2
+note on link
+ Mechanic orders go to client vehicles information
+end note
+
+B2 --> 1
+note on link
+ Mechanic orders go to client contact information
+end note
+
+B3 --> B1
+note on link
+System shows client saved
+end note
+
+A2 --> A3
+note on link
+    System shows
+    * client vehicles
+    System allows
+    * add vehicle
+    * remove vehicle
+    * go to contact information
+    * save changes
+    * cancel
+end note
+
+A3 --> A3
+note on link
+ Mechanic orders save changes
+end note
+
+A3 --> B1
+note on link
+ Mechanic orders go to billable information
+end note
+
+A3 --> 1
+note on link
+ Mechanic orders go to contact information
+end note
+
+@enduml

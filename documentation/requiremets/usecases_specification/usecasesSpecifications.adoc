@@ -19,6 +19,8 @@ image::png/createVehicle.png[]
 
 [#_clients]
 == Clients management
+=== update Client
+image::png/updateClient.png[]
 <<_index>>
 
 [#_interventions]
