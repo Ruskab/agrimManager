@@ -5,7 +5,6 @@
 
 <<_vehicles>>
 
-
 <<_clients>>
 
 <<_interventions>>
@@ -14,34 +13,22 @@
 
 [#_vehicles]
 == Vehicles management
-[plantuml,svg,align="center"]
-----
-include::puml/vechileUusecases.puml[]
-----
+image::png/vechileUusecases.png[]
 <<_index>>
 
 [#_clients]
 == Clients management
-[plantuml,svg,align="center"]
-----
-include::puml/clientUsecases.puml[]
-----
+image::png/clientUsecases.png[]
 <<_index>>
 
 [#_interventions]
 == Interventions management
-[plantuml,svg,align="center"]
-----
-include::puml/interventionUsecases.puml[]
-----
+image::png/interventionUsecases.png[]
 <<_index>>
 
 [#_mechanics]
 == Mechanics management
-[plantuml,svg,align="center"]
-----
-include::puml/mechianicUsecases.puml[]
-----
+image::png/mechianicUsecases.png[]
 <<_index>>
 
 
