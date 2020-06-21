@@ -1,0 +1,45 @@
+@startuml
+
+state 1 <<choice>>
+state 2 as " "
+state 4 as " "
+
+[*] --> 1
+note on link
+    mechanic orders open his dashboard
+end note
+
+1 --> 2
+note on link
+    [mechanic has active interventions]
+end note
+
+1 --> 4
+
+4 --> [*]
+note on link
+    * System allows
+    ** order open vehicles
+    ** order open interventions
+    ** order open clients
+    ** order open operations
+    ** order logout
+    ** order create intervention
+    ** order finish intervention
+end note
+
+2 --> [*]
+note on link
+    * System shows
+    ** mechanic active interventions
+    * System allows
+    ** order open vehicles
+    ** order open interventions
+    ** order open clients
+    ** order open operations
+    ** order logout
+    ** order create intervention
+    ** order finish intervention
+end note
+
+@enduml

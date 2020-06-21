@@ -3,6 +3,8 @@
 [#_index]
 == Index
 
+<<_general>>
+
 <<_vehicles>>
 
 <<_clients>>
@@ -10,6 +12,13 @@
 <<_interventions>>
 
 <<_mechanics>>
+
+
+[#_general]
+== General
+=== open Dashboard
+image::png/openDashboard.png[]
+<<_index>>
 
 [#_vehicles]
 == Vehicles management
