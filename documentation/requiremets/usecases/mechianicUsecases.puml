@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+!include actors.puml
+
+package MechanicManagement {
+:mechanic: --> (createMechanic)
+:mechanic: --> (readMechanic)
+:mechanic: --> (updateMechanic)
+:mechanic: --> (deleteMechanic)
+:mechanic: --> (openMechanics)
+:mechanic: --> (login)
+:mechanic: --> (signUp)
+:mechanic: --> (logout)
+}
+
+@enduml

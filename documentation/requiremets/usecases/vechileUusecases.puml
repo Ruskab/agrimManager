@@ -1,0 +1,16 @@
+@startuml
+!include actors.puml
+
+left to right direction
+
+
+package VehiclesManagement {
+:mechanic: --> (createVehicle)
+:mechanic: --> (readVehicle)
+:mechanic: --> (updateVehicle)
+:mechanic: --> (deleteVehicle)
+:mechanic: --> (importVehicles)
+:mechanic: --> (openVehicles)
+}
+
+@enduml

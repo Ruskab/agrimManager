@@ -1,0 +1,47 @@
+= USE CASES
+
+[#_index]
+== Index
+
+<<_vehicles>>
+
+<<_clients>>
+
+<<_interventions>>
+
+<<_mechanics>>
+
+[#_vehicles]
+== Vehicles management
+[plantuml,svg,align="center"]
+----
+include::vechileUusecases.puml[]
+----
+<<_index>>
+
+[#_clients]
+== Clients management
+[plantuml,svg,align="center"]
+----
+include::clientUsecases.puml[]
+----
+<<_index>>
+
+[#_interventions]
+== Interventions management
+[plantuml,svg,align="center"]
+----
+include::interventionUsecases.puml[]
+----
+<<_index>>
+
+[#_mechanics]
+== Mechanics management
+[plantuml,svg,align="center"]
+----
+include::mechianicUsecases.puml[]
+----
+<<_index>>
+
+
+
