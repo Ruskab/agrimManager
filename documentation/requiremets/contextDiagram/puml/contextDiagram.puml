@@ -1,5 +1,4 @@
 @startuml
-
 [*] --> OPENED_DASHBOARD
  note on link
     * login
@@ -7,11 +6,12 @@
  end note
 OPENED_DASHBOARD --> OPENED_VEHICLES
     note on link
-        OpenVehicles
+        * openVehicles
     end note
 OPENED_DASHBOARD --> OPENED_DASHBOARD
     note on link
-        createIntervention
+        * createIntervention
+        * finishIntervention
     end note
 
 OPENED_VEHICLES --> OPENED_VEHICLES
@@ -31,7 +31,7 @@ OPENED_VEHICLES --> OPENED_DASHBOARD
 
 OPENED_DASHBOARD --> OPENED_CLIENTS
     note on link
-        OpenClients
+        * openClients
     end note
 OPENED_CLIENTS --> OPENED_CLIENTS
     note on link
@@ -51,7 +51,7 @@ OPENED_CLIENTS --> OPENED_DASHBOARD
 
 OPENED_DASHBOARD --> OPENED_INTERVENTIONS
     note on link
-        OpenInterventions
+        * openInterventions
     end note
 OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
     note on link
