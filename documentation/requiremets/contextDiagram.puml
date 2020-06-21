@@ -1,0 +1,87 @@
+@startuml
+
+[*] --> OPENED_DASHBOARD
+ note on link
+    * login
+    * sign in
+ end note
+OPENED_DASHBOARD --> OPENED_VEHICLES
+    note on link
+        OpenVehicles
+    end note
+OPENED_DASHBOARD --> OPENED_DASHBOARD
+    note on link
+        createIntervention
+    end note
+
+OPENED_VEHICLES --> OPENED_VEHICLES
+    note on link
+        * createVehicle
+        * deleteVehicle
+        * importVehicles
+        * readVehicle
+        * updateVehicle
+    end note
+OPENED_VEHICLES --> OPENED_DASHBOARD
+    note on link
+    * createIntervention
+    * openDashboard
+    end note
+
+
+OPENED_DASHBOARD --> OPENED_CLIENTS
+    note on link
+        OpenClients
+    end note
+OPENED_CLIENTS --> OPENED_CLIENTS
+    note on link
+    * createClient
+    * readClient
+    * updateClient
+    * deleteClient
+    * addVehicle
+    * deleteVehicle
+    end note
+OPENED_CLIENTS --> OPENED_DASHBOARD
+    note on link
+    * createIntervention
+    * openDashboard
+    end note
+
+
+OPENED_DASHBOARD --> OPENED_INTERVENTIONS
+    note on link
+        OpenInterventions
+    end note
+OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
+    note on link
+        * billing intervention
+        * updateIntervention
+    end note
+OPENED_INTERVENTIONS --> OPENED_DASHBOARD
+    note on link
+    * createIntervention
+    * openDashboard
+    end note
+
+OPENED_DASHBOARD --> [*]
+    note on link
+    * logout
+    * closeApp
+    end note
+OPENED_VEHICLES --> [*]
+    note on link
+    * logout
+    * closeApp
+    end note
+OPENED_CLIENTS --> [*]
+    note on link
+    * logout
+    * closeApp
+    end note
+OPENED_INTERVENTIONS --> [*]
+    note on link
+    * logout
+    * closeApp
+    end note
+@enduml
