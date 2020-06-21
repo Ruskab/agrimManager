@@ -13,8 +13,11 @@ jobs:
         with:
           java-version: 1.9
 
+      - name: init mysql service
+        run: sudo systemctl start mysql
+
       - name: creare database mysql
-        run: mysql -uroot -proot < mysqldump/init.sql
+        run:  mysql -uroot -proot < mysqldump/init.sql
 
       - name: creare user mysql
         run: mysql -uroot -proot -e "create user ${{ secrets.AGRIM_DB_USER }}@localhost identified by '${{ secrets.AGRIM_DB_PASS }}'; "
