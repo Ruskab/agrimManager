@@ -1,0 +1,136 @@
+@startuml
+
+state 1 as " "
+state 2 as " "
+state 3 <<choice>>
+state 4 as " "
+state 5 as " "
+state 6 <<choice>>
+state 7 as " "
+state 8 as " "
+state 9 as ":OPENED_VEHICLES"
+
+[*] --> 1
+note on link
+    mechanic orders create vehicle
+end note
+
+1 --> 2
+note on link
+    * System allows
+    ** input for vehicle registration plate
+    ** input for vehicle brand
+    ** input for vehicle client name
+    ** input for vehicle client body of frame
+    ** input for vehicle KMS
+    ** order skip to last step
+    ** order go to next step
+    ** cancel
+end note
+
+2 --> 2
+note on link
+    * Manager introduces
+    ** vehicle registration plate
+    ** vehicle brand
+    ** vehicle client name
+    ** vehicle client body of frame
+    ** vehicle KMS
+    ** project cost
+end note
+
+2 --> 3
+note on link
+ mechanic orders continue
+end note
+
+3 --> 1
+note on link
+    [empty registration plate OR brand OR client Name]
+end note
+
+3 --> 4
+
+4 --> A0
+note on link
+    System allows
+    * input
+    **vehicle last ITV date
+    **vehicle next ITV date
+    * order go to next step
+    * order go to previous step
+    * cancel
+end note
+
+A0 --> A1
+note on link
+    * Mechanic introduces
+    ** vehicle last ITV
+    ** vehicle next ITV
+    * orders go to next step
+end note
+
+A0 --> 1
+note on link
+    mechanic orders go to previous step
+end note
+
+A1 --> A2
+note on link
+    System allows
+    * input
+    ** vehicle last revision date
+    ** vehicle air filter reference
+    ** vehicle oil filter reference
+    ** vehicle fuel filter reference
+    ** vehicle motor oil
+    * orders go to next step
+    * orders go to previous step
+end note
+
+A2 --> 5
+note on link
+ mechanic orders go to next step
+end note
+A2 --> A0
+note on link
+    mechanic orders go to previous step
+end note
+
+2 --> 5
+note on link
+    mechanic orders skip to last step
+end note
+
+5 --> 6
+
+6 --> 1
+note on link
+    [empty registration plate OR brand OR client Name]
+end note
+
+6 --> 7
+note on link
+    *System shows
+    ** All vehicle information to be created
+    *System allows
+    **confirm vehicle creation
+    **cancel vehicle creation
+    **go to previous step
+end note
+
+7 --> 8
+note on link
+ Mechanic orders confirm vehicle creation
+end note
+
+7 --> A1
+note on link
+    Mechanic orders go to previous step
+end note
+
+8 --> 9
+note on link
+* System shows vehicle is created
+end note
+@enduml
