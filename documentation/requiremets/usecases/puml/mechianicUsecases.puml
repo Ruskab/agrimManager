@@ -3,8 +3,7 @@ left to right direction
 
 package MechanicManagement {
 :mechanic: --> (createMechanic)
-:mechanic: --> (readMechanic)
-:mechanic: --> (updateMechanic)
+:mechanic: --> (openMechanic)
 :mechanic: --> (deleteMechanic)
 :mechanic: --> (openMechanics)
 :mechanic: --> (login)

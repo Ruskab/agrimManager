@@ -5,8 +5,7 @@ left to right direction
 
 package VehiclesManagement {
 :mechanic: --> (createVehicle)
-:mechanic: --> (readVehicle)
-:mechanic: --> (updateVehicle)
+:mechanic: --> (openVehicle)
 :mechanic: --> (deleteVehicle)
 :mechanic: --> (importVehicles)
 :mechanic: --> (openVehicles)

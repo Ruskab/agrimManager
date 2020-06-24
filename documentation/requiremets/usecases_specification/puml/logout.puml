@@ -1,0 +1,23 @@
+@startuml
+
+state 2 as " "
+state 2 as " "
+
+[*] --> 2
+note on link
+    mechanic orders logout
+end note
+
+2 --> [*]
+note on link
+    System allows
+    * introduce
+    ** username
+    ** password
+    * request to login
+    * request to sign in
+end note
+
+
+
+@enduml

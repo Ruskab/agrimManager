@@ -4,8 +4,7 @@ left to right direction
 
 package InterventionsManagement {
 :mechanic: --> (createIntervention)
-:mechanic: --> (readIntervention)
-:mechanic: --> (updateIntervention)
+:mechanic: --> (openIntervention)
 :mechanic: --> (openInterventions)
 }
 @enduml

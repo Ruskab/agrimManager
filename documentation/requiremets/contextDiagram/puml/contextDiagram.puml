@@ -19,8 +19,7 @@ OPENED_VEHICLES --> OPENED_VEHICLES
         * createVehicle
         * deleteVehicle
         * importVehicles
-        * readVehicle
-        * updateVehicle
+        * openVehicle
     end note
 OPENED_VEHICLES --> OPENED_DASHBOARD
     note on link
@@ -36,8 +35,7 @@ OPENED_DASHBOARD --> OPENED_CLIENTS
 OPENED_CLIENTS --> OPENED_CLIENTS
     note on link
     * createClient
-    * readClient
-    * updateClient
+    * openClient
     * deleteClient
     * addVehicle
     * deleteVehicle
@@ -56,7 +54,7 @@ OPENED_DASHBOARD --> OPENED_INTERVENTIONS
 OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
     note on link
         * billing intervention
-        * updateIntervention
+        * openIntervention
     end note
 OPENED_INTERVENTIONS --> OPENED_DASHBOARD
     note on link

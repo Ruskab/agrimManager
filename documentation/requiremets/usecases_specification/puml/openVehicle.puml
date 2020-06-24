@@ -1,0 +1,122 @@
+@startuml
+
+state 0 as ":OPENED_VEHICLES"
+state 1 as "BASIC_INFO"
+state B1 as "ITV_INFO"
+state A2 as "REVISION_INFO"
+state 2 as " "
+state A3 as " "
+state B2 as " "
+
+[*] --> 1
+note on link
+    mechanic introduces a vehicle to open
+end note
+
+1 --> 2
+note on link
+<b>System shows</b>
+* Vehicle basic info
+** registration plate
+** brand
+** client name (only read)
+** body of frame
+** KMS
+<b>System allows</b>
+* introduce vehicle basic info
+* go to vehicle ITV info
+* go to vehicle Revision info
+* save changes
+* cancel
+end note
+
+2 --> 1
+note on link
+* Mechanic introduces vehicle basic info
+* Mechanic orders save changes
+end note
+
+2 --> 0
+note on link
+mechanic orders to cancel
+end note
+
+2 --> A2
+note on link
+Mechanic orders go to ITV information
+end note
+
+2 --> B1
+note on link
+Mechanic orders go to Revision information
+end note
+
+B1 --> B2
+note on link
+    <b>System allows</b>
+    *introduce Last revision Date
+    *introduce Air filter reference
+    *introduce oil filter reference
+    *introduce Fuel filter
+    *introduce motor oil
+    * go to ITV information
+    * go to basic information
+    * save changes
+    * cancel
+end note
+
+B2 --> B1
+note on link
+* Mechanic introduces Revision information
+* Mechanic orders save changes
+end note
+
+B2 --> 0
+note on link
+mechanic orders to cancel
+end note
+
+B2 --> A2
+note on link
+ Mechanic orders go to ITV information
+end note
+
+B2 --> 1
+note on link
+ Mechanic orders go to basic information
+end note
+
+A2 --> A3
+note on link
+    <b>System allows</b>
+    * introduce last ITV date
+    * introduce next ITV date
+    * go to contact information
+    * go to Revision information
+    * save changes
+    * cancel
+end note
+
+A3 --> A2
+note on link
+    * mechanic introduces last ITV date
+    * mechanic introduces next ITV date
+    * mechanic orders to save changes
+end note
+
+A3 --> 0
+note on link
+Mechanic orders to cancel
+end note
+
+A3 --> B1
+note on link
+Mechanic orders go to Revision information
+end note
+
+A3 --> 1
+note on link
+Mechanic orders go to basic information
+end note
+
+@enduml
