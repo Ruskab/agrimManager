@@ -1,5 +1,7 @@
 = USE CASES SPECIFICATIONS
 
+25 use cases
+
 [#_index]
 == Index
 
@@ -16,6 +18,20 @@
 
 [#_general]
 == General
+
+=== Log in
+image::png/login.png[]
+<<_index>>
+
+
+=== Sign in
+image::png/signin.png[]
+<<_index>>
+
+=== Log out
+image::png/logout.png[]
+<<_index>>
+
 === open Dashboard
 image::png/openDashboard.png[]
 <<_index>>
@@ -31,15 +47,41 @@ image::png/openVehicles.png[]
 image::png/createVehicle.png[]
 <<_index>>
 
+=== open vehicle
+image::png/openVehicle.png[]
+<<_index>>
+
+
 [#_clients]
 == Clients management
-=== update Client
-image::png/updateClient.png[]
+
+=== open Clients
+image::png/openClients.png[]
+<<_index>>
+
+=== open client
+image::png/openClient.png[]
 <<_index>>
 
 [#_interventions]
 == Interventions management
 <<_index>>
+
+== Open interventions
+image::png/openInterventions.png[]
+<<_index>>
+
+[#_createIntervention]
+== create intervention
+image::png/createIntervention.png[]
+<<_index>>
+
+
+== Finish intervention
+image::png/finishIntervention.png[]
+<<_index>>
+
+
 
 [#_mechanics]
 == Mechanics management

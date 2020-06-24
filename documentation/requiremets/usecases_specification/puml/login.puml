@@ -1,0 +1,53 @@
+@startuml
+
+state 2 as " "
+state 3 as " "
+state 6 as " "
+state 7 as ":OPENED_DASHBOARD"
+state 4 <<choice>>
+
+[*] --> 2
+note on link
+    mechanic orders login
+end note
+
+2 --> 3
+note on link
+    System allows
+    * introduce
+    ** username
+    ** password
+    * request to login
+end note
+
+3 --> 2
+note on link
+    mechanic introduces username
+    mechanic introduces password
+end note
+
+3 --> 4
+note on link
+    mechanic orders to login
+end note
+
+4 --> 6
+
+6 --> 7
+note on link
+    * System shows
+    ** mechanic active interventions
+    * System allows
+    ** order open vehicles
+    ** order open interventions
+    ** order open clients
+    ** order open operations
+    ** order logout
+    ** order create intervention
+    ** order finish intervention
+end note
+4 --> 2
+note on link
+[the combination of username and password not exists]
+end note
+@enduml

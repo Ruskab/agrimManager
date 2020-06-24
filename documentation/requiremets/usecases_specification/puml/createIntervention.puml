@@ -1,0 +1,119 @@
+@startuml
+
+state 1 as " "
+state 2 as " "
+state 9 as ":OPENED_DASHBOARD"
+state 4 <<choice>>
+state 3 <<choice>>
+
+[*] --> 1
+note on link
+    mechanic orders create new intervention
+end note
+
+1 --> 2
+note on link
+System allows
+* introduce vehicle
+* cancel
+* request for create cafe intervention
+* request go to next step
+end note
+
+2 --> 4
+note on link
+mechanic orders go to next step
+end note
+
+2 --> 10
+note on link
+mechanic orders to cancel
+end note
+
+3 --> 1
+note on link
+[vehicle not introduced]
+end note
+
+4 --> 3
+note on link
+[ordered create normal intervention]
+end note
+
+3 --> 5
+
+4 --> 5
+note on link
+[ordered create cafe intervention]
+end note
+
+5 --> 6
+note on link
+System allows
+* introduce intervention title
+* go to next step
+* go to previous step
+end note
+
+6 --> 5
+note on link
+mechanic introduces intervention title
+end note
+
+6 --> 7
+note on link
+mechanic orders go to next step
+end note
+
+6 --> 10
+note on link
+mechanic orders to cancel
+end note
+
+6 --> 1
+note on link
+mechanic orders go to previous step
+end note
+
+7 --> 8
+note on link
+System shows
+* intervention title
+* intervention vehicle
+System allows
+* Confirm creation
+* Cancel
+* go to previous step
+end note
+
+8 --> 10
+note on link
+mechanic orders confirm creation
+end note
+
+8 --> 10
+note on link
+mechanic orders to cancel
+end note
+
+8 --> 5
+note on link
+mechanic orders go to previous step
+end note
+
+10 --> 9
+note on link
+    System shows
+    * created intervention
+    **Type
+    **Start datetime
+    System allows
+    * order open vehicles
+    * order open interventions
+    * order open clients
+    * order open operations
+    * order logout
+    * order create intervention
+    * order finish intervention
+end note
+@enduml
