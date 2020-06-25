@@ -1,14 +1,18 @@
 @startuml
 
+state 3 <<choice>>
+state 9 as ":OPENED_VEHICLES"
 state 1 as " "
 state 2 as " "
-state 3 <<choice>>
+state 3 as " "
 state 4 as " "
-state 5 as " "
-state 6 <<choice>>
+state 6 as " "
 state 7 as " "
 state 8 as " "
-state 9 as ":OPENED_VEHICLES"
+state 10 as " "
+state A1 as " "
+state A0 as " "
+state A2 as " "
 
 [*] --> 1
 note on link
@@ -17,31 +21,38 @@ end note
 
 1 --> 2
 note on link
-    * System allows
-    ** input for vehicle registration plate
-    ** input for vehicle brand
-    ** input for vehicle client name
-    ** input for vehicle client body of frame
-    ** input for vehicle KMS
-    ** order skip to last step
-    ** order go to next step
+    <b>System allows</b>
+    * input for
+    ** vehicle registration plate
+    ** brand
+    ** client name
+    ** client body of frame
+    ** KMS
+    * order skip to last step
+    * order go to next step
     ** cancel
 end note
 
 2 --> 1
 note on link
-    * Manager introduces
+    * mechanic introduces
     ** vehicle registration plate
     ** vehicle brand
     ** vehicle client name
     ** vehicle client body of frame
     ** vehicle KMS
     ** project cost
+    * mechanic orders go to last step
+end note
+
+2 --> 10
+note on link
+mechanic orders to cancel
 end note
 
 2 --> 3
 note on link
- mechanic orders continue
+ mechanic orders go to next step
 end note
 
 3 --> 1
@@ -49,79 +60,83 @@ note on link
     [empty registration plate OR brand OR client Name]
 end note
 
+3 --> 6
+note on link
+    [skip to last]
+end note
+
 3 --> 4
 
 4 --> A0
 note on link
-    System allows
+    <b>System allows</b>
     * input
-    **vehicle last ITV date
-    **vehicle next ITV date
+    **last ITV date
+    **next ITV date
     * order go to next step
     * order go to previous step
     * cancel
 end note
 
-A0 --> A1
+A0 --> 4
 note on link
-    * Mechanic introduces
-    ** vehicle last ITV
-    ** vehicle next ITV
-    * orders go to next step
+    Mechanic introduces
+    * last ITV
+    * next ITV
+end note
+
+A0 --> 10
+note on link
+mechanic orders to cancel
 end note
 
 A0 --> 1
 note on link
-    mechanic orders go to previous step
+mechanic orders go to previous step
+end note
+
+A0 --> A1
+note on link
+mechanic orders go to next step
 end note
 
 A1 --> A2
 note on link
-    System allows
+    <b>System allows</b>
     * input
-    ** vehicle last revision date
-    ** vehicle air filter reference
-    ** vehicle oil filter reference
-    ** vehicle fuel filter reference
-    ** vehicle motor oil
-    * orders go to next step
-    * orders go to previous step
+    ** last revision date
+    ** air filter reference
+    ** oil filter reference
+    ** fuel filter reference
+    ** motor oil
+    * order go to next step
+    * order go to previous step
+    * order to cancel
 end note
 
-A2 --> 5
-note on link
- mechanic orders go to next step
-end note
 A2 --> A0
 note on link
     mechanic orders go to previous step
 end note
 
-2 --> 5
+A2 --> 10
 note on link
-    mechanic orders skip to last step
+    mechanic orders to cancel
 end note
 
-5 --> 6
-
-6 --> 1
+A2 --> 6
 note on link
-    [empty registration plate OR brand OR client Name]
+ mechanic orders go to next step
 end note
 
 6 --> 7
 note on link
-    *System shows
-    ** All vehicle information to be created
-    *System allows
-    **confirm vehicle creation
-    **cancel vehicle creation
-    **go to previous step
-end note
-
-7 --> 8
-note on link
- Mechanic orders confirm vehicle creation
+    <b>System shows</b>
+    * All vehicle information to be created
+    <b>System allows</b>
+    * confirm vehicle creation
+    * order to cancel
+    * go to previous step
 end note
 
 7 --> A1
@@ -129,8 +144,47 @@ note on link
     Mechanic orders go to previous step
 end note
 
+7 --> 10
+note on link
+    mechanic orders to cancel
+end note
+
+10 --> 9
+note on link
+<b>System shows</b>
+* message vehicle is created
+* all vehicles
+<b>System allows</b>
+* order create vehicle
+* order update vehicle
+* order read vehicle
+* order open dashboard
+* order open interventions
+* order open clients
+* order open operations
+* order logout
+* order create intervention>
+end note
+
+7 --> 8
+note on link
+ Mechanic orders confirm vehicle creation
+end note
+
 8 --> 9
 note on link
-* System shows vehicle is created
+<b>System shows</b>
+* message vehicle is created
+* all vehicles
+<b>System allows</b>
+* order create vehicle
+* order update vehicle
+* order read vehicle
+* order open dashboard
+* order open interventions
+* order open clients
+* order open operations
+* order logout
+* order create intervention>
 end note
 @enduml
