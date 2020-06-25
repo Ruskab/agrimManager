@@ -5,9 +5,11 @@ object Client
 object Vehicle
 object RepairingPack
 
-Mechanic --> Intervention : create
+Mechanic ..> Intervention : create
 Mechanic ..> RepairingPack : create
 Mechanic ..> Vehicle : see
-Client  --o Vehicle : "1"
-RepairingPack o-- Intervention
+Mechanic ..> Client : see
+Client "1" --o Vehicle
+RepairingPack "1" --o Intervention
+Intervention o-- "1" Vehicle
 @enduml
