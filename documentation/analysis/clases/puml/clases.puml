@@ -1,0 +1,52 @@
+@startuml
+skinparam {
+    ActorBackgroundColor red
+    ActorBorderColor blue
+    BoundaryBackgroundColor #629EF9
+    BoundaryBorderColor black
+    BoundaryFontSize 12
+    BoundarySize 10
+    ControlBackgroundColor #b5bd68
+    ControlBorderColor #718c00
+    EntityBackgroundColor #F2AC4E
+    EntityBorderColor black
+}
+
+package Views {
+    boundary MechanicView
+    boundary AdminView
+    boundary DeveloperView
+
+    boundary ClientView
+    boundary VehicleView
+    boundary InterventionView
+    boundary RepairingPackView
+
+    boundary loginView
+    boundary signInView
+}
+
+package Controllers {
+    control createClientController
+    control openClientController
+    control openClientsController
+    control createVehicleController
+    control openVehicleController
+    control openVehiclesController
+    control createInterventionController
+    control finishInterventionController
+    control openInterventionsController
+    control loginController
+    control logoutController
+    control signInController
+    control openDashboardController
+}
+
+package Models {
+    entity Client
+    entity Vehicle
+    entity Intervention
+    entity RepairingPack
+    entity Mechanic
+}
+@enduml
