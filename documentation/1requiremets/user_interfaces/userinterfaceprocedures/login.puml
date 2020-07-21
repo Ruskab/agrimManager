@@ -1,0 +1,19 @@
+@startuml
+!procedure _login()
+    {^"Login"
+      username    | "user   "
+      password | "****     "
+      [login]
+    }
+!endprocedure
+
+!procedure _loginError()
+    {^"Login"
+      username    | "user   "
+      password | "****     "
+      [login] | <color:red>Error
+    }
+!endprocedure
+
+
+@enduml

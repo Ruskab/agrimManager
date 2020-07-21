@@ -1,0 +1,19 @@
+@startuml
+!procedure _openedClients()
+{+
+{* Dashboard | <b>Clients | Vehicles | Interventions | Username }
+
+    {^"<i><color:blue>if exists clients"
+        {#
+            FullName | hours
+            Client 1 | 2 |<&eye>
+            Client 2 | 2 |<&eye>
+        }
+        [create]
+    }
+
+}
+!endprocedure
+
+
+@enduml

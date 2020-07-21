@@ -19,8 +19,23 @@ OPENED_VEHICLES --> OPENED_VEHICLES
         * createVehicle
         * deleteVehicle
         * importVehicles
-        * openVehicle
     end note
+
+OPENED_VEHICLES --> OPENED_VEHICLE
+    note on link
+    * openVehicle
+    end note
+
+OPENED_VEHICLE --> OPENED_VEHICLE
+    note on link
+    * updateVehicle
+    end note
+
+OPENED_VEHICLE --> OPENED_VEHICLES
+    note on link
+        * openVehicles
+    end note
+
 OPENED_VEHICLES --> OPENED_DASHBOARD
     note on link
     * createIntervention
@@ -35,11 +50,26 @@ OPENED_DASHBOARD --> OPENED_CLIENTS
 OPENED_CLIENTS --> OPENED_CLIENTS
     note on link
     * createClient
-    * openClient
     * deleteClient
-    * addVehicle
-    * deleteVehicle
     end note
+
+
+OPENED_CLIENTS -up-> OPENED_CLIENT
+    note on link
+    * openClient
+    end note
+
+OPENED_CLIENT --> OPENED_CLIENT
+    note on link
+    * updateClient
+    end note
+
+OPENED_CLIENT --> OPENED_CLIENTS
+    note on link
+        * openClients
+    end note
+
+
 OPENED_CLIENTS --> OPENED_DASHBOARD
     note on link
     * createIntervention

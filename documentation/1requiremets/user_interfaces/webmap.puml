@@ -1,0 +1,66 @@
+@startuml
+
+!include userinterfaceprocedures/login.puml
+!include userinterfaceprocedures/openedDashboard.puml
+!include userinterfaceprocedures/openedClients.puml
+!include userinterfaceprocedures/openedInterventions.puml
+!include userinterfaceprocedures/openedClient.puml
+!include userinterfaceprocedures/openedVehicles.puml
+!include userinterfaceprocedures/openedVehicle.puml
+!include userinterfaceprocedures/saltProcedure.puml
+!include userinterfaceprocedures/createIntervention.puml
+
+(*) --> SALT(login)
+login --> SALT(openedDashboard) #LawnGreen
+note on link
+login
+end note
+
+openedDashboard --> SALT(selectVehicle)
+note on link
+    createIntervention
+end note
+
+selectVehicle --> SALT(additionalInformation)
+additionalInformation --> SALT(confirm)
+additionalInformation --> selectVehicle
+confirm --> SALT(additionalInformation)
+confirm --> SALT(openedDashboard)
+
+openedDashboard -right-> SALT(openedClients) #LawnGreen
+note on link
+    openClients
+end note
+
+openedClients --> SALT(openedClient) #LawnGreen
+note on link
+    openClient
+end note
+
+openedClient --> openedClients
+note on link
+    openedClients
+end note
+
+openedDashboard --> SALT(openedInterventions) #LawnGreen
+note on link
+    openInterventions
+end note
+
+openedDashboard -left-> SALT(openedVehicles) #LawnGreen
+note on link
+    openVehicles
+end note
+
+openedVehicles -down-> SALT(openedVehicle) #LawnGreen
+note on link
+    openVehicle
+end note
+
+openedVehicle -up-> openedVehicles
+note on link
+    openVehicles
+end note
+
+
+@enduml
