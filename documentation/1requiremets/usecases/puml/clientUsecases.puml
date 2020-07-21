@@ -4,10 +4,12 @@ left to right direction
 
 package ClientsManagement {
 :mechanic: --> (createClient)
+(createClient) ..> (openClients) : <<include>>
 :mechanic: --> (openClient)
+:mechanic: --> (updateClient)
+(updateClient) ..> (openClients) : <<include>>
 :mechanic: --> (deleteClient)
-:mechanic: --> (addVehicle)
-:mechanic: --> (removeVehicle)
+(deleteClient) ..> (openClients) : <<include>>
 :mechanic: --> (openClients)
 }
 

@@ -7,6 +7,7 @@ package MechanicManagement {
 :mechanic: --> (deleteMechanic)
 :mechanic: --> (openMechanics)
 :mechanic: --> (login)
+    (login) .> (openDashboard) : <<include>>
 :mechanic: --> (signUp)
 :mechanic: --> (logout)
 }
