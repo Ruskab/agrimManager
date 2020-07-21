@@ -1,0 +1,41 @@
+@startuml
+!procedure _openedVehicle() #LawnGreen
+{+
+
+    {^"Vehicle info"
+
+        {^"<i><color:blue>if Basic opened"
+            {/ <b>Basic | ITV | Revision }
+            {
+                Registration plate : | "HG7UNQKA"
+                Brand : | "Peugeot"
+                Client Name : | ^Clients^
+                Body of Frame : | "VF1KC0JEF369332"
+                KMS : | "03-03-2017 94744"
+            }
+        }
+
+        {^"<i><color:blue>if ITV opened"
+            {/ Basic | <b>ITV | Revision }
+            {
+                    Last Itv : | "03-03-2012"
+                    Next Itv : | "03-03-2017"
+            }
+        }
+
+        {^"<i><color:blue>if Revision opened"
+
+            {/ Basic | ITV | <b>Revision }
+            {
+                Registration plate : | "HG7UNQKA"
+                Brand : | "Peugeot"
+                Client Name : | ^Clients^
+                Body of Frame : | "VF1KC0JEF369332"
+                KMS : | "03-03-2017 94744"
+            }
+        }
+        }
+}
+!endprocedure
+
+@enduml

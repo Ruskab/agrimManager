@@ -1,0 +1,41 @@
+@startuml
+!procedure _newIntervention()
+{+
+{* Clients | Vehicles | Interventions | Username
+ Interventions | New Intervention }
+}
+!endprocedure
+
+!procedure _selectVehicle()
+{+
+{/ <b>Select vehicle | Additional information | Confirmation }
+{ Vehicle : | "select vehicle <&caret-bottom>"}
+[X] Is another type of work
+[Next]
+}
+!endprocedure
+
+!procedure _additionalInformation()
+{+
+{/ Select vehicle | <b>Additional information | Confirmation }
+{ Description : | " description"}
+[Back] | [Next]
+}
+!endprocedure
+
+!procedure _confirm()
+{+
+{/ Select vehicle | Additional information | <b>Confirmation }
+{
+{#
+.title | vehicle title
+datasheet | vehicle datasheet
+}
+
+[back] | [Create]
+}
+}
+!endprocedure
+
+
+@enduml
