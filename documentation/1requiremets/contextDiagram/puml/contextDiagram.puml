@@ -1,5 +1,7 @@
 @startuml
-[*] --> OPENED_DASHBOARD
+[*] --> INITIAL
+
+INITIAL --> OPENED_DASHBOARD
  note on link
     * login
     * sign in
