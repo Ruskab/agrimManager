@@ -1,117 +1,125 @@
 @startuml
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+}
+
 [*] --> INITIAL
+
+INITIAL --> INITIAL
+note on link
+  sign in
+end note
 
 INITIAL --> OPENED_DASHBOARD
  note on link
-    * login
-    * sign in
+     login
  end note
 OPENED_DASHBOARD --> OPENED_VEHICLES
     note on link
-        * openVehicles
+         openVehicles
     end note
 OPENED_DASHBOARD --> OPENED_DASHBOARD
     note on link
-        * createIntervention
-        * finishIntervention
+         createIntervention
+         finishIntervention
     end note
 
 OPENED_VEHICLES --> OPENED_VEHICLES
     note on link
-        * createVehicle
-        * deleteVehicle
-        * importVehicles
+         createVehicle
+         deleteVehicle
+         importVehicles
     end note
 
 OPENED_VEHICLES --> OPENED_VEHICLE
     note on link
-    * openVehicle
+     openVehicle
     end note
 
 OPENED_VEHICLE --> OPENED_VEHICLE
     note on link
-    * updateVehicle
+     updateVehicle
     end note
 
 OPENED_VEHICLE --> OPENED_VEHICLES
     note on link
-        * openVehicles
+         openVehicles
     end note
 
 OPENED_VEHICLES --> OPENED_DASHBOARD
     note on link
-    * createIntervention
-    * openDashboard
+     createIntervention
+     openDashboard
     end note
 
 
 OPENED_DASHBOARD --> OPENED_CLIENTS
     note on link
-        * openClients
+         openClients
     end note
 OPENED_CLIENTS --> OPENED_CLIENTS
     note on link
-    * createClient
-    * deleteClient
+     createClient
+     deleteClient
     end note
 
 
 OPENED_CLIENTS -up-> OPENED_CLIENT
     note on link
-    * openClient
+     openClient
     end note
 
 OPENED_CLIENT --> OPENED_CLIENT
     note on link
-    * updateClient
+     updateClient
     end note
 
 OPENED_CLIENT --> OPENED_CLIENTS
     note on link
-        * openClients
+         openClients
     end note
 
 
 OPENED_CLIENTS --> OPENED_DASHBOARD
     note on link
-    * createIntervention
-    * openDashboard
+     createIntervention
+     openDashboard
     end note
 
 
 OPENED_DASHBOARD --> OPENED_INTERVENTIONS
     note on link
-        * openInterventions
+         openInterventions
     end note
 OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
     note on link
-        * billing intervention
-        * openIntervention
+         billing intervention
+         openIntervention
     end note
 OPENED_INTERVENTIONS --> OPENED_DASHBOARD
     note on link
-    * createIntervention
-    * openDashboard
+     createIntervention
+     openDashboard
     end note
 
 OPENED_DASHBOARD --> [*]
     note on link
-    * logout
-    * closeApp
+    logout
+    closeApp
     end note
 OPENED_VEHICLES --> [*]
     note on link
-    * logout
-    * closeApp
+    logout
+    closeApp
     end note
 OPENED_CLIENTS --> [*]
     note on link
-    * logout
-    * closeApp
+    logout
+    closeApp
     end note
 OPENED_INTERVENTIONS --> [*]
     note on link
-    * logout
-    * closeApp
+    logout
+    closeApp
     end note
 @enduml
