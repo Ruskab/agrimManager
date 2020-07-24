@@ -4,22 +4,23 @@
     }
 
 state initstate as "INIT"
-state usecase as "login"
+state login
+state openDashboard as ":openDashboard"
 state endstate as ":OPENED_DASHBOARD"
 
-initstate --> usecase
+initstate --> login
 
-state usecase {
+state login {
 
 state 1 as " " #LawnGreen
 state condicional <<choice>>
 state 2 as " " #LawnGreen
 state 3 as " " #LawnGreen
-state 4 as " "
 
 [*] --> 1
 note on link
-User requests to login
+<b>User requests to</b>
+* login
 end note
 
 1 --> 2
@@ -27,18 +28,11 @@ note on link
 <b>System requires</b>
 * username
 * password
-<b>System allows</b>
-* cancel
-end note
-
-2 --> 4
-note on link
-User requests to cancel
 end note
 
 2 --> condicional
 note on link
-User provides
+<b>User provides</b>
 * username
 * password
 end note
@@ -56,26 +50,23 @@ note on link
 * Login successful
 end note
 
-4 --> [*]
-note on link
-<b>System shows</b>
-* Operation cancelled
-end note
 
 }
 
-usecase --> endstate
+login --> openDashboard
+
+openDashboard --> endstate
 note on link
 <b>System shows</b>
-* [mechanic has active interventions] mechanic avtive interventions
+* mechanic avtive interventions [mechanic has active interventions]
 <b>System allows</b>
-* order open vehicles
-* order open interventions
-* order open clients
-* order open operations
-* order create intervention
-* order finish intervention
-* order logout
+* open vehicles
+* open interventions
+* open clients
+* open operations
+* create intervention
+* finish intervention [mechanic has active interventions]
+* logout
 end note
 
 @enduml

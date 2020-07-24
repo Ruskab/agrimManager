@@ -1,21 +1,27 @@
 @startuml
 
-state 2 as " "
-state 2 as " "
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+}
 
-[*] --> 2
+state initial as ":INITIAL"
+
+[*] --> logout
 note on link
-    mechanic orders logout
+<b>mechanic request to</b>
+* logout
 end note
 
-2 --> [*]
+state logout {
+
+[*] --> [*]
+
+}
+logout --> initial
 note on link
-    System allows
-    * introduce
-    ** username
-    ** password
-    * request to login
-    * request to sign in
+    <b>System allows</b>
+    * login
+    * sign in
 end note
 
 
