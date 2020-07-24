@@ -1,49 +1,33 @@
 @startuml
+skinparam {
+        NoteBackgroundColor #whiteSmoke
+}
 
-state 1 <<choice>>
-state 2 as " "
-state 4 as " "
-
-[*] --> 1
+[*] --> openVehicles
 note on link
-    mechanic orders open vehicles
+<b>User requests to</b>
+* openVehicles
 end note
 
-1 --> 2
-note on link
-    [no vehicles to show]
-end note
+state openVehicles {
 
-1 --> 4
+[*] --> [*]
 
-4 --> [*]
-note on link
-    * System shows
-    ** all vehicles
-    * System allows
-    ** order create vehicle
-    ** order update vehicle
-    ** order read vehicle
-    ** order open dashboard
-    ** order open interventions
-    ** order open clients
-    ** order open operations
-    ** order logout
-    ** order create intervention
-end note
 
-2 --> [*]
+}
+
+openVehicles --> [*]
 note on link
-    * System shows
-    ** no vehicles to show
-    * System allows
-    ** order create vehicle
-    ** order open dashboard
-    ** order open interventions
-    ** order open clients
-    ** order open operations
-    ** order logout
-    ** order create intervention
+<b>System shows
+* all vehicles in system
+<b>System allows
+* open vehicles
+* open interventions
+* open clients
+* open operations
+* logout
+* create intervention
+* finish intervention
 end note
 
 @enduml
