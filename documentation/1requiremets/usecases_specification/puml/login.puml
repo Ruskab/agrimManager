@@ -12,25 +12,25 @@ initstate --> login
 
 state login {
 
-state 1 as " " #LawnGreen
+state 1 as " "
 state condicional <<choice>>
-state 2 as " " #LawnGreen
-state 3 as " " #LawnGreen
+state 2 as " "
+state 3 as " "
 
-[*] --> 1
+[*] -[#Green]-> 1
 note on link
 <b>User requests to</b>
 * login
 end note
 
-1 --> 2
+1 -[#Green]-> 2
 note on link
 <b>System requires</b>
 * username
 * password
 end note
 
-2 --> condicional
+2 -[#Green]-> condicional
 note on link
 <b>User provides</b>
 * username
@@ -42,15 +42,13 @@ note on link
 [pair username password not exists]
 end note
 
-condicional --> 3
+condicional -[#Green]-> 3
 
-3 --> [*]
+3 -[#Green]-> [*]
 note on link
 <b>System shows</b>
 * Login successful
 end note
-
-
 }
 
 login --> openDashboard

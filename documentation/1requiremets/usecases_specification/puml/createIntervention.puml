@@ -9,20 +9,20 @@ state OPENED_DASHBOARD as ":OPENED_DASHBOARD"
 [*] --> createIntervention
 
 state createIntervention {
-state 1 as " " #LawnGreen
-state 2 as " " #LawnGreen
-state 4 as " " #LawnGreen
-state 5 as " " #LawnGreen
-state 6 as " " #LawnGreen
-state 7 as " " #LawnGreen
+state 1 as " "
+state 2 as " "
+state 4 as " "
+state 5 as " "
+state 6 as " "
+state 7 as " "
 
-[*] --> 1
+[*] -[#Green]-> 1
 note on link
     <b>mechanic requests to</b>
     * create new intervention
 end note
 
-1 --> 2
+1 -[#Green]-> 2
 note on link
 <b>System requires</b>
 * vehicle
@@ -40,14 +40,14 @@ note on link
 * cancel
 end note
 
-2 --> 4
+2 -[#Green]-> 4
 note on link
 <b>Mechanic provides</b>
 * vehicle
 * intervention type
 end note
 
-4 --> 5
+4 -[#Green]-> 5
 note on link
 <b>System requires</b>
 * intervention description
@@ -62,13 +62,13 @@ note on link
 * go to previus step
 end note
 
-5 --> 6
+5 -[#Green]-> 6
 note on link
 <b>Mechanic provides</b>
 * intervention description
 end note
 
-6 --> 7
+6 -[#Green]-> 7
 note on link
 <b>System shows</b>
 * description
@@ -91,9 +91,10 @@ note on link
 * previous step
 end note
 
-7 --> [*]
+7 -[#Green]-> [*]
 note on link
-mechanic orders confirm creation
+<b>mechanic requests to
+* confirm creation
 end note
 
 }
