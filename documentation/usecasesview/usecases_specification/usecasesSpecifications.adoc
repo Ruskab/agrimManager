@@ -20,35 +20,35 @@
 == General
 
 === Log in
-image::png/login.png[]
+image::svg/login.svg[]
 <<_index>>
 
 
 === Sign in
-image::png/signin.png[]
+image::svg/signin.svg[]
 <<_index>>
 
 === Log out
-image::png/logout.png[]
+image::svg/logout.svg[]
 <<_index>>
 
 === open Dashboard
-image::png/openDashboard.png[]
+image::svg/openDashboard.svg[]
 <<_index>>
 
 [#_vehicles]
 == Vehicles management
 
 === open Vehicles
-image::png/openVehicles.png[]
+image::svg/openVehicles.svg[]
 <<_index>>
 
 === create vehicle
-image::png/createVehicle.png[]
+image::svg/createVehicle.svg[]
 <<_index>>
 
 === open vehicle
-image::png/openVehicle.png[]
+image::svg/openVehicle.svg[]
 <<_index>>
 
 
@@ -56,11 +56,11 @@ image::png/openVehicle.png[]
 == Clients management
 
 === open Clients
-image::png/openClients.png[]
+image::svg/openClients.svg[]
 <<_index>>
 
 === open client
-image::png/openClient.png[]
+image::svg/openClient.svg[]
 <<_index>>
 
 [#_interventions]
@@ -68,17 +68,17 @@ image::png/openClient.png[]
 <<_index>>
 
 == Open interventions
-image::png/openInterventions.png[]
+image::svg/openInterventions.svg[]
 <<_index>>
 
 [#_createIntervention]
 == create intervention
-image::png/createIntervention.png[]
+image::svg/createIntervention.svg[]
 <<_index>>
 
 
 == Finish intervention
-image::png/finishIntervention.png[]
+image::svg/finishIntervention.svg[]
 <<_index>>
 
 

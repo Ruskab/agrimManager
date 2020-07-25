@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="686.25px" preserveAspectRatio="none" style="width:263px;height:686px;" version="1.1" viewBox="0 0 263 686" width="263.75px" zoomAndPan="magnify"><defs><filter height="300%" id="fekq73msxjuji" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FEFECE" filter="url(#fekq73msxjuji)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="165" x="7.5" y="10"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="7.5" x2="172.5" y1="44.5117" y2="44.5117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="140" x="20" y="34.4165">OPEN_VEHICLES</text><rect fill="#FEFECE" filter="url(#fekq73msxjuji)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="153.75" x="13.125" y="610"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="13.125" x2="166.875" y1="644.5117" y2="644.5117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="128.75" x="25.625" y="634.4165">OPEN_VEHICLE</text><rect fill="#FEFECE" filter="url(#fekq73msxjuji)" height="164.5117" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="91.25" x="44.375" y="217.5"/><rect fill="#FFFFFF" height="122.5" rx="15.625" ry="15.625" style="stroke: #FFFFFF; stroke-width: 1.25;" width="83.75" x="48.125" y="255.7617"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="44.375" x2="135.625" y1="252.0117" y2="252.0117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="66.25" x="56.875" y="241.9165">usecase</text><ellipse cx="70.625" cy="280.7617" fill="#000000" filter="url(#fekq73msxjuji)" rx="12.5" ry="12.5" style="stroke: none; stroke-width: 1.25;"/><ellipse cx="70.625" cy="350.7617" fill="none" filter="url(#fekq73msxjuji)" rx="12.5" ry="12.5" style="stroke: #000000; stroke-width: 1.25;"/><ellipse cx="71.25" cy="351.3867" fill="#000000" rx="7.5" ry="7.5" style="stroke: none; stroke-width: 1.25;"/><!--MD5=[27fc3d25a6bb2c44f3a9d673fe76cac2]
+link *start*usecase to *end*usecase--><path d="M70.625,293.7693 C70.625,304.1258 70.625,319.3762 70.625,331.3086 " fill="none" id="*start*usecase-&gt;*end*usecase" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="70.625,337.8888,75.625,326.6388,70.625,331.6388,65.625,326.6388,70.625,337.8888" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[23c818df494d5cf74003ae78d6d87bde]
+link initstate to usecase--><path d="M90,72.9013 C90,106.7775 90,163.0938 90,211.0137 " fill="none" id="initstate-&gt;usecase" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="90,217.415,95,206.165,90,211.165,85,206.165,90,217.415" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M96.25,116.25 L96.25,168.75 L248.75,168.75 L248.75,128.75 L236.25,116.25 L96.25,116.25 " fill="#F5F5F5" filter="url(#fekq73msxjuji)" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M236.25,116.25 L236.25,128.75 L248.75,128.75 L236.25,116.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="126.25" x="103.75" y="139.3689">User requests to</text><ellipse cx="110.625" cy="154.0039" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="88.75" x="120" y="159.8083">openVehicle</text><!--MD5=[5cd4da66311ce5451fc11e2487cf09fe]
+link usecase to endstate--><path d="M90,382.82 C90,453.0363 90,551.0795 90,603.5079 " fill="none" id="usecase-&gt;endstate" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="90,609.9789,95,598.7289,90,603.7289,85,598.7289,90,609.9789" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M96.25,426.25 L96.25,561.25 L241.25,561.25 L241.25,438.75 L228.75,426.25 L96.25,426.25 " fill="#F5F5F5" filter="url(#fekq73msxjuji)" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M228.75,426.25 L228.75,438.75 L241.25,438.75 L228.75,426.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="111.25" x="103.75" y="449.3689">System shows</text><ellipse cx="110.625" cy="464.0039" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="48.75" x="120" y="469.8083">vehicle</text><rect fill="#000000" height="4.375" style="stroke: #000000; stroke-width: 0.0;" width="4.375" x="130" y="483.8184"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="40" x="136.25" y="490.2478">...info</text><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="113.75" x="103.75" y="510.6873">System allows</text><ellipse cx="110.625" cy="525.3223" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="102.5" x="120" y="531.1267">update vehicle</text><ellipse cx="110.625" cy="545.7617" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="97.5" x="120" y="551.5662">open vehicles</text><!--MD5=[0329ee72c9c4f01ac03efef2a0c8aae7]
+@startuml
+    skinparam {
+        NoteBackgroundColor #whiteSmoke
+    }
+
+state initstate as "OPEN_VEHICLES"
+state usecase as "openVehicle"
+state endstate as "OPEN_VEHICLE"
+
+initstate - -> usecase
+note on link
+<b>User requests to</b>
+* openVehicle
+end note
+
+state usecase {
+    [*] - -> [*]
+}
+
+usecase - -> endstate
+note on link
+<b>System shows</b>
+* vehicle
+** ...info
+<b>System allows</b>
+* update vehicle
+* open vehicles
+end note
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.6+8-b765.25
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
