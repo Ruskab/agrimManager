@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1555px" preserveAspectRatio="none" style="width:741px;height:1555px;" version="1.1" viewBox="0 0 741 1555" width="741.25px" zoomAndPan="magnify"><defs><filter height="300%" id="fi5ctsb8w3uyc" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="218.75" x="257.5" y="1478.75"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="257.5" x2="476.25" y1="1513.2617" y2="1513.2617"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="193.75" x="270" y="1503.1665">:OPENED_DASHBOARD</text><rect fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="85" x="324.375" y="10"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="324.375" x2="409.375" y1="44.5117" y2="44.5117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="60" x="336.875" y="34.4165">:INITIAL</text><rect fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="152.5" x="290.625" y="1107.5"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="290.625" x2="443.125" y1="1142.0117" y2="1142.0117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="127.5" x="303.125" y="1131.9165">openDashboard</text><rect fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" height="882.0117" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="718.75" x="7.5" y="148.75"/><rect fill="#FFFFFF" height="840" rx="15.625" ry="15.625" style="stroke: #FFFFFF; stroke-width: 1.25;" width="711.25" x="11.25" y="187.0117"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="7.5" x2="726.25" y1="183.2617" y2="183.2617"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="46.25" x="343.75" y="173.1665">signin</text><rect fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="62.5" x="137.5" y="339.5117"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="137.5" x2="200" y1="374.0234" y2="374.0234"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="0" x="171.25" y="363.9282"/><rect fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="62.5" x="38.75" y="625.7617"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="38.75" x2="101.25" y1="660.2734" y2="660.2734"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="0" x="72.5" y="650.1782"/><rect fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" height="62.5" rx="15.625" ry="15.625" style="stroke: #A80036; stroke-width: 1.875;" width="62.5" x="152.5" y="949.5117"/><line style="stroke: #A80036; stroke-width: 1.875;" x1="152.5" x2="215" y1="984.0234" y2="984.0234"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="0" x="186.25" y="973.9282"/><polygon fill="#FEFECE" filter="url(#fi5ctsb8w3uyc)" points="70,824.5117,85,839.5117,70,854.5117,55,839.5117,70,824.5117" style="stroke: #A80036; stroke-width: 1.875;"/><ellipse cx="168.75" cy="212.0117" fill="#000000" filter="url(#fi5ctsb8w3uyc)" rx="12.5" ry="12.5" style="stroke: none; stroke-width: 1.25;"/><ellipse cx="33.75" cy="980.7617" fill="none" filter="url(#fi5ctsb8w3uyc)" rx="12.5" ry="12.5" style="stroke: #000000; stroke-width: 1.25;"/><ellipse cx="34.375" cy="981.3867" fill="#000000" rx="7.5" ry="7.5" style="stroke: none; stroke-width: 1.25;"/><!--MD5=[98e3777f2355e1b7fb7744a53817b257]
+link *start*signin to 2--><path d="M168.75,225.0055 C168.75,247.5892 168.75,297.9155 168.75,332.7792 " fill="none" id="*start*signin-&gt;2" style="stroke: #008000; stroke-width: 1.25;"/><polygon fill="#008000" points="168.75,339.098,173.75,327.848,168.75,332.848,163.75,327.848,168.75,339.098" style="stroke: #008000; stroke-width: 1.25;"/><path d="M175,253.2617 L175,305.7617 L327.5,305.7617 L327.5,265.7617 L315,253.2617 L175,253.2617 " fill="#F5F5F5" filter="url(#fi5ctsb8w3uyc)" style="stroke: #008000; stroke-width: 1.25;"/><path d="M315,253.2617 L315,265.7617 L327.5,265.7617 L315,253.2617 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="126.25" x="182.5" y="276.3806">User requests to</text><ellipse cx="189.375" cy="291.0156" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="42.5" x="198.75" y="296.8201">signin</text><!--MD5=[eeb69082328d10abd3b14fdeede0d8a3]
+link 2 to 3--><path d="M137.2815,379.7405 C114.5772,387.138 85.5102,400.783 71.25,424.5117 C35.0309,484.7805 47.7838,570.818 59.454,619.1592 " fill="none" id="2-&gt;3" style="stroke: #008000; stroke-width: 1.25;"/><polygon fill="#008000" points="61.0149,625.4367,63.1509,613.3124,59.506,619.3716,53.4467,615.7266,61.0149,625.4367" style="stroke: #008000; stroke-width: 1.25;"/><path d="M77.5,430.7617 L77.5,592.0117 L238.75,592.0117 L238.75,443.2617 L226.25,430.7617 L77.5,430.7617 " fill="#F5F5F5" filter="url(#fi5ctsb8w3uyc)" style="stroke: #008000; stroke-width: 1.25;"/><path d="M226.25,430.7617 L226.25,443.2617 L238.75,443.2617 L226.25,430.7617 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="111.25" x="85" y="453.8806">System shows</text><ellipse cx="91.875" cy="460.5762" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="127.5" x="85" y="480.5701">System requires</text><ellipse cx="91.875" cy="495.2051" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="71.25" x="101.25" y="501.0095">username</text><ellipse cx="91.875" cy="515.6445" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="68.75" x="101.25" y="521.449">password</text><ellipse cx="91.875" cy="536.084" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="118.75" x="101.25" y="541.8884">repeat password</text><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="113.75" x="85" y="562.3279">System allows</text><ellipse cx="91.875" cy="576.9629" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="47.5" x="101.25" y="582.7673">cancel</text><!--MD5=[b1f22f0c97e7f2b556a5a2d67c42ac53]
+link 3 to 4--><path d="M70,688.3892 C70,725.203 70,786.4755 70,818.063 " fill="none" id="3-&gt;4" style="stroke: #008000; stroke-width: 1.25;"/><polygon fill="#008000" points="70,824.333,75,813.083,70,818.083,65,813.083,70,824.333" style="stroke: #008000; stroke-width: 1.25;"/><path d="M76.25,717.0117 L76.25,790.7617 L210,790.7617 L210,729.5117 L197.5,717.0117 L76.25,717.0117 " fill="#F5F5F5" filter="url(#fi5ctsb8w3uyc)" style="stroke: #008000; stroke-width: 1.25;"/><path d="M197.5,717.0117 L197.5,729.5117 L210,729.5117 L197.5,717.0117 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="107.5" x="83.75" y="740.1306">User provides</text><ellipse cx="90.625" cy="754.7656" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="71.25" x="100" y="760.5701">username</text><ellipse cx="90.625" cy="775.2051" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="91.25" x="100" y="781.0095">password x2</text><!--MD5=[8d0349d2492b523f5a0efa7c22a342ff]
+link 4 to *end*signin--><path d="M64.5828,849.3642 C60.3271,856.5067 54.5808,867.068 51.25,877.0117 C41.668,905.6172 37.1388,940.5532 35.1488,961.3661 " fill="none" id="4-&gt;*end*signin" style="stroke: #008000; stroke-width: 1.25;"/><polygon fill="#008000" points="34.5675,967.8533,40.5517,957.0945,35.1254,961.6283,30.5916,956.202,34.5675,967.8533" style="stroke: #008000; stroke-width: 1.25;"/><!--MD5=[e86e91016e2d6c468aa6ffe31bf75a9a]
+link 4 to 9--><path d="M67.429,852.5417 C64.2445,870.3305 60.9479,904.3743 76.25,927.0117 C92.2273,950.6477 122.0079,964.034 146.1794,971.3651 " fill="none" id="4-&gt;9" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="152.1925,973.101,142.7704,965.1772,146.1876,971.3677,139.9971,974.785,152.1925,973.101" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M82.5,883.2617 L82.5,915.7617 L238.75,915.7617 L238.75,895.7617 L226.25,883.2617 L82.5,883.2617 " fill="#F5F5F5" filter="url(#fi5ctsb8w3uyc)" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M226.25,883.2617 L226.25,895.7617 L238.75,895.7617 L226.25,883.2617 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="130" x="90" y="906.3806">[username exists]</text><!--MD5=[ccb9eb92e35289dd6f195be8ee0b0786]
+link 9 to 2--><path d="M215.2188,963.1042 C228.5388,954.3432 242.6538,942.2057 250,927.0117 C347.21,725.9442 356.79,620.6592 250,424.5117 C240.5588,407.1717 222.655,394.6855 206.05,386.253 " fill="none" id="9-&gt;2" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="200.01,383.328,207.957,392.7305,205.6354,386.0514,212.3145,383.7298,200.01,383.328" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M328.75,737.6367 L328.75,770.1367 L673.75,770.1367 L673.75,750.1367 L661.25,737.6367 L328.75,737.6367 " fill="#F5F5F5" filter="url(#fi5ctsb8w3uyc)" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M661.25,737.6367 L661.25,750.1367 L673.75,750.1367 L661.25,737.6367 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="318.75" x="336.25" y="760.7556">System shows error username already used</text><!--MD5=[f629dcd761e2fb19b3a7f32dffebbfa0]
+link startState to signin--><path d="M366.875,72.65 C366.875,90.0125 366.875,113.975 366.875,142.1375 " fill="none" id="startState-&gt;signin" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="366.875,148.5875,371.875,137.3375,366.875,142.3375,361.875,137.3375,366.875,148.5875" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[8bfc989c42bec13ed09a9fd3ebd15238]
+link signin to openDashboard--><path d="M366.875,1031.53 C366.875,1059.1275 366.875,1083.025 366.875,1101.1038 " fill="none" id="signin-&gt;openDashboard" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="366.875,1107.4988,371.875,1096.2488,366.875,1101.2488,361.875,1096.2488,366.875,1107.4988" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[02a5700b98ea6837795e18a48387c89f]
+link openDashboard to 7--><path d="M366.875,1170.1763 C366.875,1237.465 366.875,1399.58 366.875,1472.3355 " fill="none" id="openDashboard-&gt;7" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="366.875,1478.6739,371.875,1467.4239,366.875,1472.4239,361.875,1467.4239,366.875,1478.6739" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M373.125,1213.75 L373.125,1430 L643.125,1430 L643.125,1226.25 L630.625,1213.75 L373.125,1213.75 " fill="#F5F5F5" filter="url(#fi5ctsb8w3uyc)" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M630.625,1213.75 L630.625,1226.25 L643.125,1226.25 L630.625,1213.75 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 1.25;"/><ellipse cx="387.5" cy="1231.0645" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="107.5" x="396.875" y="1236.8689">System shows</text><rect fill="#000000" height="4.375" style="stroke: #000000; stroke-width: 0.0;" width="4.375" x="406.875" y="1250.8789"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="211.25" x="413.125" y="1257.3083">mechanic active interventions</text><ellipse cx="387.5" cy="1271.9434" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="106.25" x="396.875" y="1277.7478">System allows</text><ellipse cx="387.5" cy="1292.3828" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="97.5" x="396.875" y="1298.1873">open vehicles</text><ellipse cx="387.5" cy="1312.8223" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="130" x="396.875" y="1318.6267">open interventions</text><ellipse cx="387.5" cy="1333.2617" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="87.5" x="396.875" y="1339.0662">open clients</text><ellipse cx="387.5" cy="1353.7012" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="115" x="396.875" y="1359.5056">open operations</text><ellipse cx="387.5" cy="1374.1406" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="43.75" x="396.875" y="1379.9451">logout</text><ellipse cx="387.5" cy="1394.5801" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="131.25" x="396.875" y="1400.3845">create intervention</text><ellipse cx="387.5" cy="1415.0195" fill="#000000" rx="3.125" ry="3.125" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="123.75" x="396.875" y="1420.824">finish intervention</text><!--MD5=[4bf383e82293805b8559a9cd02b97908]
+@startuml
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+}
+
+state 7 as ":OPENED_DASHBOARD"
+state startState as ":INITIAL"
+
+startState - -> signin
+
+state signin {
+state 2 as " "
+state 3 as " "
+state 9 as " "
+state 4 <<choice>>
+
+[*] -[#Green]-> 2
+note on link
+    <b>User requests to</b>
+    * signin
+end note
+
+2 -[#Green]-> 3
+note on link
+<b>System shows</b>
+*  
+<b>System requires</b>
+* username
+* password
+* repeat password
+<b>System allows</b>
+* cancel
+end note
+
+3 -[#Green]-> 4
+note on link
+<b>User provides</b>
+* username
+* password x2
+end note
+
+4 -[#Green]-> [*]
+
+4 - -> 9
+note on link
+[username exists]
+end note
+
+9 - -> 2
+note on link
+    System shows error username already used
+end note
+
+}
+
+signin - -> openDashboard
+
+openDashboard - -> 7
+note on link
+    * System shows
+    ** mechanic active interventions
+    * System allows
+    * open vehicles
+    * open interventions
+    * open clients
+    * open operations
+    * logout
+    * create intervention
+    * finish intervention
+end note
+
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.6+8-b765.25
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
