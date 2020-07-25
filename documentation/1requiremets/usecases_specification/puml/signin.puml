@@ -4,8 +4,9 @@ skinparam {
 }
 
 state 7 as ":OPENED_DASHBOARD"
+state startState as ":INITIAL"
 
-[*] --> signin
+startState --> signin
 
 state signin {
 state 2 as " "

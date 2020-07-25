@@ -3,20 +3,20 @@ skinparam {
         NoteBackgroundColor #whiteSmoke
 }
 
-[*] --> openClients
+state startState as ":OPENED_CLIENTS"
+state endState as ":OPENED_CLIENT"
+
+startState --> openClients
 note on link
 <b>User requests to</b>
 * openClients
 end note
 
 state openClients {
-
 [*] --> [*]
-
-
 }
 
-openClients --> [*]
+openClients --> endState
 note on link
 <b>System shows
 * all clients in system

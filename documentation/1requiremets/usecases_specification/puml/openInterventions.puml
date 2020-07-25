@@ -3,17 +3,25 @@ skinparam {
         NoteBackgroundColor #whiteSmoke
 }
 
-[*] --> openInterventions
-note on link
-<b>User requests to</b>
-* openInterventions
-end note
+state startState1 as ":OPENED_VEHICLES"
+state startState2 as ":OPENED_CLIENTS"
+state startState3 as ":OPENED_DASHBOARD"
+state endState as ":OPENED_INTERVENTIONS"
+
+startState1 --> openInterventions
+startState2 --> openInterventions
+startState3 --> openInterventions
 
 state openInterventions {
     [*] --> [*]
+    note on link
+    <b>User requests to</b>
+    * openInterventions
+    end note
+
 }
 
-openInterventions --> [*]
+openInterventions --> endState
 note on link
 <b>System shows
 * all interventions

@@ -3,10 +3,11 @@ skinparam {
     NoteBackgroundColor #whiteSmoke
 }
 
+state initState as ":OPENED_DASHBOARD"
 state openDashboard as ":openDashboard"
 state OPENED_DASHBOARD as ":OPENED_DASHBOARD"
 
-[*] --> finishIntervention
+initState --> finishIntervention
 note on link
     <b>mechanic requests to</b>
      finish intervention
@@ -21,15 +22,15 @@ finishIntervention --> openDashboard
 openDashboard --> OPENED_DASHBOARD
 note on link
 <b>System shows</b>
-    * mechanic active interventions
+* mechanic active interventions
 <b>System allows</b>
-    * order open vehicles
-    * order open interventions
-    * order open clients
-    * order open operations
-    * order logout
-    * order create intervention
-    * order finish intervention
+* open vehicles
+* open interventions
+* open clients
+* open operations
+* logout
+* create intervention
+* finish intervention
 end note
 
 @enduml

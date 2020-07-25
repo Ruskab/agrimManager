@@ -3,11 +3,12 @@ skinparam {
     NoteBackgroundColor #whiteSmoke
 }
 
+state initState as ":OPENED_CLIENTS"
 state OPENED_CLIENTS as ":OPENED_CLIENTS"
 state openClients as ":openClients"
 
 
-[*] --> createClient
+initState --> createClient
 
 state createClient {
 state 1 as " "

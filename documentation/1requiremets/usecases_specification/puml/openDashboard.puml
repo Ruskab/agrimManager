@@ -3,20 +3,28 @@ skinparam {
         NoteBackgroundColor #whiteSmoke
 }
 
-[*] --> openDashboard
+state startState1 as ":OPENED_VEHICLES"
+state startState2 as ":OPENED_CLIENTS"
+state startState3 as ":OPENED_INTERVENTIONS"
+state startState4 as ":INITIAL"
+state endState as ":OPENED_DASHBOARD"
+
+startState1 --> openDashboard
+startState2 --> openDashboard
+startState3 --> openDashboard
+startState4 --> openDashboard
+
+state openDashboard {
+
+[*] --> [*]
 note on link
 <b>User requests to</b>
 * openDashboard
 end note
 
-state openDashboard {
-
-[*] --> [*]
-
-
 }
 
-openDashboard --> [*]
+openDashboard --> endState
 note on link
 <b>System shows
 * mechanic active interventions

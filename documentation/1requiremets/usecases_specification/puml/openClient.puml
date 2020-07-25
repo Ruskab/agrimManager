@@ -5,9 +5,9 @@
         NoteBackgroundColor #whiteSmoke
     }
 
-state initstate as "OPEN_CLIENTS"
+state initstate as ":OPEN_CLIENTS"
 state usecase as "openClient"
-state endstate as "OPEN_CLIENT"
+state endstate as ":OPEN_CLIENT"
 
 initstate --> usecase
 note on link

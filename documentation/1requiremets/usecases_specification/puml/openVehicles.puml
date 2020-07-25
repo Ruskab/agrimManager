@@ -3,7 +3,10 @@ skinparam {
         NoteBackgroundColor #whiteSmoke
 }
 
-[*] --> openVehicles
+state startState as ":OPENED_VEHICLES"
+state endState as ":OPENED_VEHICLE"
+
+startState --> openVehicles
 note on link
 <b>User requests to</b>
 * openVehicles
@@ -16,7 +19,7 @@ state openVehicles {
 
 }
 
-openVehicles --> [*]
+openVehicles --> endState
 note on link
 <b>System shows
 * all vehicles in system

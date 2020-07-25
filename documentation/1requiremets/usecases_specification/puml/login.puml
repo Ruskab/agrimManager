@@ -3,7 +3,7 @@
         NoteBackgroundColor #whiteSmoke
     }
 
-state initstate as "INIT"
+state initstate as ":INITIAL"
 state login
 state openDashboard as ":openDashboard"
 state endstate as ":OPENED_DASHBOARD"

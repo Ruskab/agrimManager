@@ -4,9 +4,17 @@ skinparam {
 }
 
 
+state initState as ":OPENED_DASHBOARD"
+state initState2 as ":OPENED_VEHICLES"
+state initState3 as ":OPENED_INTERVENTIONS"
+state initState4 as ":OPENED_CLIENTS"
 state OPENED_DASHBOARD as ":OPENED_DASHBOARD"
+state openDashboard as ":openDashboard"
 
-[*] --> createIntervention
+initState --> createIntervention
+initState2 --> createIntervention
+initState3 --> createIntervention
+initState4 --> createIntervention
 
 state createIntervention {
 state 1 as " "
@@ -108,12 +116,12 @@ note on link
     **Type
     **Start datetime
     <b>System allows</b>
-    * order open vehicles
-    * order open interventions
-    * order open clients
-    * order open operations
-    * order logout
-    * order create intervention
-    * order finish intervention
+    *  open vehicles
+    *  open interventions
+    *  open clients
+    *  open operations
+    *  logout
+    *  create intervention
+    *  finish intervention
 end note
 @enduml

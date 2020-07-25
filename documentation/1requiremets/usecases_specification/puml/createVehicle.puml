@@ -5,8 +5,9 @@ skinparam {
 
 state OPENED_VEHICLES as ":OPENED_VEHICLES"
 state openVehicles as ":openVehicles"
+state initState as ":OPENED_VEHICLES"
 
-[*] -down-> createVehicle
+initState -down-> createVehicle
 
 state createVehicle {
 state 1 as " "
@@ -23,7 +24,7 @@ note on link
     * create Vehicle
 end note
 
-1 -[#Green]down-> 2
+1 -down-> 2
 note on link
     <b>System requires</b>
     * Registration plate (mandatory)
