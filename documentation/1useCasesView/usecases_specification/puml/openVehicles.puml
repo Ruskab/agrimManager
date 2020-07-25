@@ -1,0 +1,36 @@
+@startuml
+skinparam {
+        NoteBackgroundColor #whiteSmoke
+}
+
+state startState as ":OPENED_VEHICLES"
+state endState as ":OPENED_VEHICLE"
+
+startState --> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+
+state openVehicles {
+
+[*] --> [*]
+
+
+}
+
+openVehicles --> endState
+note on link
+<b>System shows
+* all vehicles in system
+<b>System allows
+* open vehicles
+* open interventions
+* open clients
+* open operations
+* logout
+* create intervention
+* finish intervention
+end note
+
+@enduml

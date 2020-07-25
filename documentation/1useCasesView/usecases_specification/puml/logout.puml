@@ -1,0 +1,35 @@
+@startuml
+
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+}
+
+state initial as ":INITIAL"
+
+state start1 as ":OPENED_DASHBOARD"
+state start2 as ":OPENED_INTERVENTIONS"
+state start3 as ":OPENED_VEHICLES"
+state start4 as ":OPENED_CLIENTS"
+
+start1 --> logout
+start2 --> logout
+start3 --> logout
+start4 --> logout
+
+state logout {
+[*] --> [*]
+    note on link
+    <b>mechanic request to</b>
+    * logout
+    end note
+}
+logout --> initial
+note on link
+    <b>System allows</b>
+    * login
+    * sign in
+end note
+
+
+
+@enduml

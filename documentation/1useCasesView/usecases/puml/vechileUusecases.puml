@@ -1,0 +1,18 @@
+@startuml
+
+left to right direction
+
+
+package VehiclesManagement {
+:mechanic: --> (createVehicle)
+(createVehicle) ..> (openVehicles) :<<include>>
+:mechanic: --> (updateVehicle)
+(updateVehicle) ..> (openVehicles) : <<include>>
+:mechanic: --> (deleteVehicle)
+(deleteVehicle) ..> (openVehicles) : <<include>>
+:mechanic: --> (openVehicle)
+:mechanic: --> (importVehicles)
+:mechanic: --> (openVehicles)
+}
+
+@enduml

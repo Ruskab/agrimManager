@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+
+
+package InterventionsManagement {
+:mechanic: --> (createIntervention)
+(createIntervention) ..> (openDashboard) : <<include>>
+:mechanic: --> (openIntervention)
+:mechanic: --> (openInterventions)
+}
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+
+@startuml
+    skinparam {
+        NoteBackgroundColor #whiteSmoke
+    }
+
+state initstate as ":OPEN_CLIENTS"
+state usecase as "openClient"
+state endstate as ":OPEN_CLIENT"
+
+initstate --> usecase
+note on link
+<b>User requests to</b>
+* openClient
+end note
+
+state usecase {
+    [*] --> [*]
+}
+
+usecase --> endstate
+note on link
+<b>System shows</b>
+* Client
+** full Name
+** billable pending hours
+<b>System allows</b>
+* update client
+* open clients
+end note
+
+@enduml

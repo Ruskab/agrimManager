@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+
+package MechanicManagement {
+:mechanic: --> (createMechanic)
+:mechanic: --> (openMechanic)
+:mechanic: --> (deleteMechanic)
+:mechanic: --> (openMechanics)
+:mechanic: --> (login)
+    (login) .> (openDashboard) : <<include>>
+:mechanic: --> (signUp)
+:mechanic: --> (logout)
+}
+
+@enduml

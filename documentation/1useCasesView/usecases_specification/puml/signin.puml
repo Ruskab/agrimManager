@@ -1,0 +1,73 @@
+@startuml
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+}
+
+state 7 as ":OPENED_DASHBOARD"
+state startState as ":INITIAL"
+
+startState --> signin
+
+state signin {
+state 2 as " "
+state 3 as " "
+state 9 as " "
+state 4 <<choice>>
+
+[*] -[#Green]-> 2
+note on link
+    <b>User requests to</b>
+    * signin
+end note
+
+2 -[#Green]-> 3
+note on link
+<b>System shows</b>
+*  
+<b>System requires</b>
+* username
+* password
+* repeat password
+<b>System allows</b>
+* cancel
+end note
+
+3 -[#Green]-> 4
+note on link
+<b>User provides</b>
+* username
+* password x2
+end note
+
+4 -[#Green]-> [*]
+
+4 --> 9
+note on link
+[username exists]
+end note
+
+9 --> 2
+note on link
+    System shows error username already used
+end note
+
+}
+
+signin --> openDashboard
+
+openDashboard --> 7
+note on link
+    * System shows
+    ** mechanic active interventions
+    * System allows
+    * open vehicles
+    * open interventions
+    * open clients
+    * open operations
+    * logout
+    * create intervention
+    * finish intervention
+end note
+
+
+@enduml

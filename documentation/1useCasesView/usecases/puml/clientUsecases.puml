@@ -1,0 +1,16 @@
+@startuml
+
+left to right direction
+
+package ClientsManagement {
+:mechanic: --> (createClient)
+(createClient) ..> (openClients) : <<include>>
+:mechanic: --> (openClient)
+:mechanic: --> (updateClient)
+(updateClient) ..> (openClients) : <<include>>
+:mechanic: --> (deleteClient)
+(deleteClient) ..> (openClients) : <<include>>
+:mechanic: --> (openClients)
+}
+
+@enduml
