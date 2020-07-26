@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="264px" preserveAspectRatio="none" style="width:605px;height:264px;" version="1.1" viewBox="0 0 605 264" width="605px" zoomAndPan="magnify"><defs><filter height="300%" id="fh7xcyec5bqi5" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[47b632a0e9a752ad76fa7b3c6f98a9fa]
+cluster InterventionsManagement--><polygon fill="#FFFFFF" filter="url(#fh7xcyec5bqi5)" points="22,24,214,24,221,47.6094,583,47.6094,583,252,22,252,22,24" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="22" x2="221" y1="47.6094" y2="47.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="186" x="26" y="40.5332">InterventionsManagement</text><!--MD5=[370f09de3b578360a6dfb01a48af8db0]
+entity mechanic--><ellipse cx="68" cy="116" fill="#FEFECE" filter="url(#fh7xcyec5bqi5)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 1.5;"/><path d="M68,124 L68,151 M55,132 L81,132 M68,151 L55,166 M68,151 L81,166 " fill="none" filter="url(#fh7xcyec5bqi5)" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="38" y="186.0332">mechanic</text><ellipse cx="234.0213" cy="217.9043" fill="#FEFECE" filter="url(#fh7xcyec5bqi5)" rx="75.0213" ry="17.4043" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="114" x="177.0213" y="223.2089">createIntervention</text><ellipse cx="496.3726" cy="200.9745" fill="#FEFECE" filter="url(#fh7xcyec5bqi5)" rx="70.3726" ry="16.4745" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="102" x="445.3726" y="206.2792">openDashboard</text><ellipse cx="233.8989" cy="147.7798" fill="#FEFECE" filter="url(#fh7xcyec5bqi5)" rx="71.8989" ry="16.7798" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="106" x="180.8989" y="153.0845">openIntervention</text><ellipse cx="234.1262" cy="77.8252" fill="#FEFECE" filter="url(#fh7xcyec5bqi5)" rx="74.6262" ry="17.3252" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="113" x="177.6262" y="83.1299">openInterventions</text><!--MD5=[2136aacae65daba95c1d85c0c9dccb6c]
+link mechanic to createIntervention--><path d="M98.3199,160.515 C124.556,171.7131 163.27,188.2372 192.466,200.6989 " fill="none" id="mechanic-&gt;createIntervention" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="197.067,202.6625,190.3597,195.4505,192.4684,200.6997,187.2192,202.8083,197.067,202.6625" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[bca3bc745c23a89e39fecdf2c81c9150]
+link createIntervention to openDashboard--><path d="M306.527,213.3322 C342.705,210.9713 386.527,208.1115 422.859,205.7405 " fill="none" id="createIntervention-&gt;openDashboard" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="428.163,205.3943,418.9215,201.9891,423.1736,205.72,419.4427,209.9721,428.163,205.3943" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="55" x="340" y="204.4951">«include»</text><!--MD5=[bb6be437a6724d0c1a3086b0d13b0310]
+link mechanic to openIntervention--><path d="M98.3199,148 C114.627,148 135.756,148 156.422,148 " fill="none" id="mechanic-&gt;openIntervention" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="161.664,148,152.664,144,156.664,148,152.664,152,161.664,148" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[08cc2e3317a13ef7c03066ae2a551e7a]
+link mechanic to openInterventions--><path d="M98.3199,135.485 C124.556,124.287 163.27,107.763 192.466,95.301 " fill="none" id="mechanic-&gt;openInterventions" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="197.067,93.337,187.2192,93.1913,192.4684,95.2999,190.3598,100.549,197.067,93.337" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[4f695011f066fb41c97f7d4e8e36bc54]
+@startuml
+left to right direction
+
+
+package InterventionsManagement {
+:mechanic: - -> (createIntervention)
+(createIntervention) ..> (openDashboard) : <<include>>
+:mechanic: - -> (openIntervention)
+:mechanic: - -> (openInterventions)
+}
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.6+8-b765.25
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

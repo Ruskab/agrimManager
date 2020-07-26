@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="648px" preserveAspectRatio="none" style="width:409px;height:648px;" version="1.1" viewBox="0 0 409 648" width="409px" zoomAndPan="magnify"><defs><filter height="300%" id="fhi4v80hntcrd" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[e209b37fc91f378abaa2ddf468318055]
+entity actor--><ellipse cx="110.0119" cy="17.5" fill="#FEFECE" filter="url(#fhi4v80hntcrd)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 1.5;"/><path d="M110.0119,25.5 L110.0119,52.5 M97.0119,33.5 L123.0119,33.5 M110.0119,52.5 L97.0119,67.5 M110.0119,52.5 L123.0119,67.5 " fill="none" filter="url(#fhi4v80hntcrd)" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="29" x="95.5119" y="87.5332">User</text><!--MD5=[55492eb1c4b62cc9e892e1fafdaeb44c]
+entity b1--><path d="M89.5119,155 L89.5119,179 M89.5119,167 L106.5119,167 " fill="none" filter="url(#fhi4v80hntcrd)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="118.5119" cy="167" fill="#629EF9" filter="url(#fhi4v80hntcrd)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="65" x="77.5119" y="195.457">ClientsView</text><!--MD5=[bb04a20f8ffc3fa40d9086bdeb8759dc]
+entity b2--><path d="M186.512,155 L186.512,179 M186.512,167 L203.512,167 " fill="none" filter="url(#fhi4v80hntcrd)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="215.512" cy="167" fill="#629EF9" filter="url(#fhi4v80hntcrd)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="58" x="178.012" y="195.457">ClientView</text><!--MD5=[0aac872f208ab6f5f7887aae079fb447]
+entity c1--><ellipse cx="207.012" cy="274" fill="#B5BD68" filter="url(#fhi4v80hntcrd)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="203.012,262,209.012,257,207.012,262,209.012,267,203.012,262" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="133" x="140.512" y="304.5332">OpenClientController</text><!--MD5=[e5f8c6b8840b805c75264b95a6f5cc6b]
+entity e1--><ellipse cx="334.012" cy="494" fill="#F2AC4E" filter="url(#fhi4v80hntcrd)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="322.012" x2="346.012" y1="508" y2="508"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="295.012" y="524.5332">ClientsEntity</text><!--MD5=[d3ebc56a79a5ad2d3ee323b213a67460]
+entity e2--><ellipse cx="334.012" cy="604" fill="#F2AC4E" filter="url(#fhi4v80hntcrd)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="322.012" x2="346.012" y1="618" y2="618"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="71" x="298.512" y="634.5332">ClientEntity</text><!--MD5=[99968eeafbc7379c4679c2781d409b3e]
+entity e4--><ellipse cx="74.0119" cy="494" fill="#F2AC4E" filter="url(#fhi4v80hntcrd)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="62.0119" x2="86.0119" y1="508" y2="508"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="81" x="33.5119" y="524.5332">VehicleEntity</text><!--MD5=[b173ad7416c07f681d6ae7b2d3215148]
+entity e5--><ellipse cx="74.0119" cy="384" fill="#F2AC4E" filter="url(#fhi4v80hntcrd)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="62.0119" x2="86.0119" y1="398" y2="398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="88" x="30.0119" y="414.5332">VehiclesEntity</text><!--MD5=[5ea18c93ccb51d1fa91cb81eafc9d493]
+link actor to b1--><path d="M110.012,91.116 C110.012,108.97 110.012,129.49 110.012,145.584 " fill="none" id="actor-&gt;b1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="110.012,150.862,114.012,141.862,110.012,145.862,106.012,141.862,110.012,150.862" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[dad5d2e1a2a5ca29001c223a65c3ee5f]
+link b1 to b2--><path d="M142.598,174.5 C152.597,174.5 162.596,174.5 172.595,174.5 " fill="none" id="b1-&gt;b2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="177.824,174.5,168.824,170.5,172.824,174.5,168.824,178.5,177.824,174.5" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[dc2076ca3fbf4831a5703d294d0b7c42]
+link b2 to c1--><path d="M207.012,198.086 C207.012,214.022 207.012,235.517 207.012,252.762 " fill="none" id="b2-&gt;c1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="207.012,257.967,211.012,248.967,207.012,252.967,203.012,248.967,207.012,257.967" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[6563a9383af1b6dc4a74a56c1c5abb03]
+link b2 to e4--><path d="M177.778,193.203 C132.162,222.76 45.7829,286.988 12.0119,368 C3.4614,388.511 5.0654,396.891 12.0119,418 C18.9065,438.951 33.2554,458.964 46.4141,474.197 " fill="none" id="b2-&gt;e4" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="49.7286,477.964,46.7888,468.5641,46.4266,474.2094,40.7814,473.8473,49.7286,477.964" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[fe4cda531b7291b3011b8bb76b92be04]
+link c1 to e1--><path d="M226.309,308.233 C238.925,324.617 255.349,347.013 268.012,368 C289.034,402.843 309.083,445.32 321.453,472.979 " fill="none" id="c1-&gt;e1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="323.521,477.626,323.5167,467.7771,321.4883,473.0578,316.2076,471.0294,323.521,477.626" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[1931282211d86d9f99a411be65a51510]
+link c1 to e5--><path d="M177.164,308.237 C156.543,324.982 129.085,347.279 107.683,364.658 " fill="none" id="c1-&gt;e5" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="103.76,367.844,113.2677,365.2743,107.641,364.6915,108.2238,359.0648,103.76,367.844" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[bca748c6c09d0643261a2ea756a052c3]
+link c1 to e2--><path d="M211.473,308.075 C220.319,352.866 242.364,451.403 278.012,528 C287.138,547.6085 300.477,567.8307 311.848,583.5189 " fill="none" id="c1-&gt;e2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="314.998,587.8193,312.9074,578.1949,312.0437,583.7854,306.4532,582.9217,314.998,587.8193" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="20" x="287.9258" y="577.3171">0..*</text><!--MD5=[2de21c3512862aca5ba68747d3cde901]
+link c1 to e4--><path d="M195.215,308.273 C181.674,335.55 158.32,380.87 135.012,418 C123.012,437.115 108.156,457.629 96.1091,473.6 " fill="none" id="c1-&gt;e4" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="92.7905,477.979,101.4145,473.2222,95.8105,473.9941,95.0386,468.3902,92.7905,477.979" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="20" x="75.04" y="467.1076">0..*</text><!--MD5=[33e8d0c7f7c31f643f3847f91d6a1c14]
+link b2 to e2--><path d="M234.967,198.216 C252.697,213.684 275.192,235.39 291.012,258 C352.586,346.002 368.274,373.03 391.012,478 C395.716,499.719 397.539,506.758 391.012,528 C384.719,548.4805 371.549,568.4525 359.452,583.7803 " fill="none" id="b2-&gt;e2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="356.075,587.977,364.8334,583.4726,359.2094,584.0815,358.6005,578.4575,356.075,587.977" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[6594fb97eb32116bfe393e69e56a687a]
+link e5 to e4--><path d="M74.0119,418.237 C74.0119,434.357 74.0119,455.621 74.0119,472.691 " fill="none" id="e5-&gt;e4" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="74.0119,477.844,78.0119,468.844,74.0119,472.844,70.0119,468.844,74.0119,477.844" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[2f4aa5290a976b2f4dd1aafdbeed5e7a]
+link e1 to e2--><path d="M334.012,528.237 C334.012,544.3565 334.012,565.6212 334.012,582.6911 " fill="none" id="e1-&gt;e2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="334.012,587.8436,338.012,578.8436,334.012,582.8436,330.012,578.8436,334.012,587.8436" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[5ee2236777250932ad8a8748e32763c5]
+@startuml
+
+    skinparam {
+    BoundaryBackgroundColor #629EF9
+    BoundaryBorderColor black
+    BoundaryFontSize 12
+    BoundarySize 10
+    ControlBackgroundColor #b5bd68
+    ControlBorderColor #718c00
+    EntityBackgroundColor #F2AC4E
+    EntityBorderColor black
+}
+
+
+actor :User: as actor
+boundary "ClientsView" as b1
+boundary "ClientView" as b2
+control "OpenClientController" as c1
+entity "ClientsEntity" as e1
+entity "ClientEntity" as e2
+entity "VehicleEntity" as e4
+entity "VehiclesEntity" as e5
+
+actor - -> b1
+b1 -right-> b2
+b2 - -> c1
+b2 - -> e4
+c1 - -> e1
+c1 - -> e5
+c1 - -> "0..*" e2
+c1 - -> "0..*" e4
+b2 - - - - -> e2
+e5 - -> e4
+e1 - -> e2
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.6+8-b765.25
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="538px" preserveAspectRatio="none" style="width:399px;height:538px;" version="1.1" viewBox="0 0 399 538" width="399px" zoomAndPan="magnify"><defs><filter height="300%" id="f18h7gbg07mx9k" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[e209b37fc91f378abaa2ddf468318055]
+entity actor--><ellipse cx="55.5" cy="17.5" fill="#FEFECE" filter="url(#f18h7gbg07mx9k)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 1.5;"/><path d="M55.5,25.5 L55.5,52.5 M42.5,33.5 L68.5,33.5 M55.5,52.5 L42.5,67.5 M55.5,52.5 L68.5,67.5 " fill="none" filter="url(#f18h7gbg07mx9k)" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="29" x="41" y="87.5332">User</text><!--MD5=[55492eb1c4b62cc9e892e1fafdaeb44c]
+entity b1--><path d="M35,155 L35,179 M35,167 L52,167 " fill="none" filter="url(#f18h7gbg07mx9k)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="64" cy="167" fill="#629EF9" filter="url(#f18h7gbg07mx9k)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="56" x="27.5" y="195.457">MenuView</text><!--MD5=[bb04a20f8ffc3fa40d9086bdeb8759dc]
+entity b2--><path d="M156,155 L156,179 M156,167 L173,167 " fill="none" filter="url(#f18h7gbg07mx9k)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="185" cy="167" fill="#629EF9" filter="url(#f18h7gbg07mx9k)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="88" x="132.5" y="195.457">DashboardView</text><!--MD5=[3d2111c8a0a2d14b8769ddc11704380e]
+entity c2--><ellipse cx="183.5" cy="274" fill="#B5BD68" filter="url(#f18h7gbg07mx9k)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="179.5,262,185.5,257,183.5,262,185.5,267,179.5,262" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="164" x="101.5" y="304.5332">openDashboardController</text><!--MD5=[c8306153f9cb3c677467ab9071446357]
+entity e3--><ellipse cx="184.5" cy="384" fill="#F2AC4E" filter="url(#f18h7gbg07mx9k)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="172.5" x2="196.5" y1="398" y2="398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="116" x="126.5" y="414.5332">InterventionsEntity</text><!--MD5=[99968eeafbc7379c4679c2781d409b3e]
+entity e4--><ellipse cx="332.5" cy="384" fill="#F2AC4E" filter="url(#f18h7gbg07mx9k)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="320.5" x2="344.5" y1="398" y2="398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="109" x="278" y="414.5332">InterventionEntity</text><!--MD5=[b173ad7416c07f681d6ae7b2d3215148]
+entity e5--><ellipse cx="332.5" cy="494" fill="#F2AC4E" filter="url(#f18h7gbg07mx9k)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="320.5" x2="344.5" y1="508" y2="508"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="81" x="292" y="524.5332">VehicleEntity</text><!--MD5=[3d774add76be5193bed2d701b3921d6e]
+entity e6--><ellipse cx="48.5" cy="384" fill="#F2AC4E" filter="url(#f18h7gbg07mx9k)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="36.5" x2="60.5" y1="398" y2="398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="6" y="414.5332">SessionEntity</text><!--MD5=[5ea18c93ccb51d1fa91cb81eafc9d493]
+link actor to b1--><path d="M55.5,91.116 C55.5,108.97 55.5,129.49 55.5,145.584 " fill="none" id="actor-&gt;b1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="55.5,150.862,59.5,141.862,55.5,145.862,51.5,141.862,55.5,150.862" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[dad5d2e1a2a5ca29001c223a65c3ee5f]
+link b1 to b2--><path d="M83.8594,174.5 C98.2553,174.5 112.651,174.5 127.047,174.5 " fill="none" id="b1-&gt;b2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="132.351,174.5,123.351,170.5,127.351,174.5,123.351,178.5,132.351,174.5" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[173d0493c560d2ee94ef10dbf62f0679]
+link b1 to e6--><path d="M54.7641,198.26 C53.4857,237.799 50.8565,319.116 49.4451,362.77 " fill="none" id="b1-&gt;e6" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="49.2792,367.902,53.5677,359.0358,49.4406,362.9046,45.5719,358.7775,49.2792,367.902" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[4e3a7b128feac607bd74dccab7386e20]
+link b2 to c2--><path d="M177.985,198.086 C179.032,214.022 180.445,235.517 181.578,252.762 " fill="none" id="b2-&gt;c2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="181.92,257.967,185.32,248.7236,181.5915,252.9778,177.3373,249.2493,181.92,257.967" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[91e56ad78e20f56d05447ae001febad7]
+link c2 to e3--><path d="M183.724,308.237 C183.874,324.357 184.071,345.621 184.229,362.691 " fill="none" id="c2-&gt;e3" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="184.276,367.844,188.1936,358.8078,184.2303,362.8442,180.1939,358.8809,184.276,367.844" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[923a0438dea40afd2769c8036f572bb5]
+link c2 to e4--><path d="M216.939,308.237 C240.136,325.051 271.057,347.464 295.076,364.874 " fill="none" id="c2-&gt;e4" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="299.173,367.844,294.2331,359.3236,295.1245,364.9098,289.5383,365.8012,299.173,367.844" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[e8c5cd92cb17f61f1ac617e87b0058f3]
+link c2 to e6--><path d="M153.203,308.237 C132.273,324.982 104.4015,347.279 82.6773,364.658 " fill="none" id="c2-&gt;e6" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="78.6955,367.844,88.2221,365.3452,82.5998,364.7205,83.2245,359.0983,78.6955,367.844" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[71c2f54d4383f6faf0ca775551e9297a]
+link e3 to e4--><path d="M242.602,393 C252.57,393 262.538,393 272.506,393 " fill="none" id="e3-&gt;e4" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="277.718,393,268.718,389,272.718,393,268.718,397,277.718,393" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[fa38b9626d57388fc5ba061cd87d0f1c]
+link e4 to e5--><path d="M332.5,418.237 C332.5,434.3565 332.5,455.6212 332.5,472.6911 " fill="none" id="e4-&gt;e5" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="332.5,477.8436,336.5,468.8436,332.5,472.8436,328.5,468.8436,332.5,477.8436" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[8cc1f3fd6c8c3b221b09c52c8472545c]
+@startuml
+
+    skinparam {
+    BoundaryBackgroundColor #629EF9
+    BoundaryBorderColor black
+    BoundaryFontSize 12
+    BoundarySize 10
+    ControlBackgroundColor #b5bd68
+    ControlBorderColor #718c00
+    EntityBackgroundColor #F2AC4E
+    EntityBorderColor black
+}
+
+
+
+actor :User: as actor
+
+boundary MenuView as b1
+boundary DashboardView as b2
+control openDashboardController as c2
+entity InterventionsEntity as e3
+entity InterventionEntity as e4
+entity VehicleEntity as e5
+entity SessionEntity as e6
+
+actor - -> b1
+b1 -right-> b2
+b1 - -> e6
+b2 - -> c2
+
+c2 - -> e3
+c2 - -> e4
+c2 - -> e6
+e3 -right-> e4
+e4 - -> e5
+
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.6+8-b765.25
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

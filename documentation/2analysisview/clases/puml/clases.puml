@@ -1,16 +1,6 @@
 @startuml
-skinparam {
-    ActorBackgroundColor red
-    ActorBorderColor blue
-    BoundaryBackgroundColor #629EF9
-    BoundaryBorderColor black
-    BoundaryFontSize 12
-    BoundarySize 10
-    ControlBackgroundColor #b5bd68
-    ControlBorderColor #718c00
-    EntityBackgroundColor #F2AC4E
-    EntityBorderColor black
-}
+
+!include skinParams.puml
 
 package Views {
     boundary MechanicView
@@ -21,6 +11,7 @@ package Views {
     boundary VehicleView
     boundary InterventionView
     boundary RepairingPackView
+    boundary MenuView
 
     boundary loginView
     boundary signInView
@@ -43,10 +34,10 @@ package Controllers {
 }
 
 package Models {
-    entity Client
-    entity Vehicle
-    entity Intervention
-    entity RepairingPack
-    entity Mechanic
+    entity ClientEntity
+    entity VehicleEntity
+    entity InterventionEntity
+    entity RepairingPackEntity
+    entity MechanicEntity
 }
 @enduml

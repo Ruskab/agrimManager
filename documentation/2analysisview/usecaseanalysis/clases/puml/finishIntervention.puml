@@ -1,0 +1,29 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+
+actor :User: as actor
+
+view MenuView as b1
+view DashboardView as b2
+controller openDashboardController as c2
+model InterventionsEntity as e3
+model InterventionEntity as e4
+model VehicleEntity as e5
+model SessionEntity as e6
+
+actor --> b1
+b1 -right-> b2
+b1 --> e6
+b2 --> c2
+
+c2 --> e3
+c2 --> e4
+c2 --> e6
+e3 -right-> e4
+e4 --> e5
+
+
+@enduml

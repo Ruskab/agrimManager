@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="669px" preserveAspectRatio="none" style="width:600px;height:669px;" version="1.1" viewBox="0 0 600 669" width="600px" zoomAndPan="magnify"><defs><filter height="300%" id="f10wkjtmhbn2me" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[e209b37fc91f378abaa2ddf468318055]
+entity actor--><ellipse cx="50" cy="17.5" fill="#FEFECE" filter="url(#f10wkjtmhbn2me)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 1.5;"/><path d="M50,25.5 L50,52.5 M37,33.5 L63,33.5 M50,52.5 L37,67.5 M50,52.5 L63,67.5 " fill="none" filter="url(#f10wkjtmhbn2me)" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="29" x="35.5" y="87.5332">User</text><!--MD5=[55492eb1c4b62cc9e892e1fafdaeb44c]
+entity b1--><rect fill="#629EF9" filter="url(#f10wkjtmhbn2me)" height="37.6094" style="stroke: #000000; stroke-width: 1.5;" width="88" x="6" y="191"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="68" x="16" y="215.5332">:MenuView</text><!--MD5=[bb04a20f8ffc3fa40d9086bdeb8759dc]
+entity b2--><rect fill="#629EF9" filter="url(#f10wkjtmhbn2me)" height="37.6094" style="stroke: #000000; stroke-width: 1.5;" width="96" x="287" y="191"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="76" x="297" y="215.5332">:ClientsView</text><!--MD5=[0aac872f208ab6f5f7887aae079fb447]
+entity c1--><rect fill="#B5BD68" filter="url(#f10wkjtmhbn2me)" height="37.6094" style="stroke: #000000; stroke-width: 1.5;" width="164" x="170" y="329"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="144" x="180" y="353.5332">:OpenClientsController</text><!--MD5=[e5f8c6b8840b805c75264b95a6f5cc6b]
+entity e1--><rect fill="#F2AC4E" filter="url(#f10wkjtmhbn2me)" height="37.6094" style="stroke: #000000; stroke-width: 1.5;" width="102" x="138" y="483"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="82" x="148" y="507.5332">:ClientsEntity</text><!--MD5=[d3ebc56a79a5ad2d3ee323b213a67460]
+entity e2--><rect fill="#F2AC4E" filter="url(#f10wkjtmhbn2me)" height="37.6094" style="stroke: #000000; stroke-width: 1.5;" width="95" x="298.5" y="621"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="308.5" y="645.5332">:ClientEntity</text><!--MD5=[5ea18c93ccb51d1fa91cb81eafc9d493]
+link actor to b1--><path d="M50,91.318 C50,121.289 50,160.937 50,185.703 " fill="none" id="actor-&gt;b1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="50,190.753,54,181.753,50,185.753,46,181.753,50,190.753" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M55,126 L55,152 L171,152 L171,136 L161,126 L55,126 " fill="#F5F5F5" filter="url(#f10wkjtmhbn2me)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M161,126 L161,136 L171,136 L161,126 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="95" x="61" y="144.4951">0 : openClients()</text><!--MD5=[dad5d2e1a2a5ca29001c223a65c3ee5f]
+link b1 to b2--><path d="M94.2185,210 C144.808,210 227.617,210 281.72,210 " fill="none" id="b1-&gt;b2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="286.864,210,277.864,206,281.864,210,277.864,214,286.864,210" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M116.5,172 L116.5,198 L260.5,198 L260.5,182 L250.5,172 L116.5,172 " fill="#F5F5F5" filter="url(#f10wkjtmhbn2me)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M250.5,172 L250.5,182 L260.5,182 L250.5,172 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="123" x="122.5" y="190.4951">0 : openClientsView()</text><!--MD5=[dc2076ca3fbf4831a5703d294d0b7c42]
+link b2 to c1--><path d="M286.854,226.77 C272.075,234.128 257.484,244.549 249,259 C237.54,278.521 240.341,304.902 244.74,323.676 " fill="none" id="b2-&gt;c1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="246.012,328.757,247.7064,319.055,244.7976,323.9067,239.9459,320.998,246.012,328.757" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M254,264 L254,290 L382,290 L382,274 L372,264 L254,264 " fill="#F5F5F5" filter="url(#f10wkjtmhbn2me)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M372,264 L372,274 L382,274 L372,264 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="107" x="260" y="282.4951">0 : readAllClients()</text><!--MD5=[fe4cda531b7291b3011b8bb76b92be04]
+link c1 to e1--><path d="M208.86,367.143 C196.674,374.52 184.872,384.352 178,397 C164.301,422.214 171.709,455.935 179.384,478.048 " fill="none" id="c1-&gt;e1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="181.121,482.857,181.8258,473.0334,179.4225,478.1543,174.3016,475.751,181.121,482.857" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M183,410 L183,436 L311,436 L311,420 L301,410 L183,410 " fill="#F5F5F5" filter="url(#f10wkjtmhbn2me)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M301,410 L301,420 L311,420 L301,410 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="107" x="189" y="428.4951">0 : readAllClients()</text><!--MD5=[bca748c6c09d0643261a2ea756a052c3]
+link c1 to e2--><path d="M292.199,367.055 C304.407,374.552 316.549,384.477 324,397 C365.853,467.343 356.902,570.0679 350.115,615.6843 " fill="none" id="c1-&gt;e2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="349.343,620.6989,354.666,612.4125,350.1039,615.7571,346.7592,611.195,349.343,620.6989" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="20" x="327.3875" y="610.2833">0..*</text><!--MD5=[33e8d0c7f7c31f643f3847f91d6a1c14]
+link b2 to e2--><path d="M367.933,229.126 C378.593,236.824 389.164,246.857 395,259 C402.701,275.023 395.456,281.228 395,299 C391.666,428.906 422.577,468.224 380,591 C376.838,600.1177 371.378,609.0447 365.746,616.6794 " fill="none" id="b2-&gt;e2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="362.614,620.7809,371.2561,616.0571,365.6492,616.8076,364.8987,611.2007,362.614,620.7809" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M407,402 L407,444 L588,444 L588,412 L578,402 L407,402 " fill="#F5F5F5" filter="url(#f10wkjtmhbn2me)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M578,402 L578,412 L588,412 L578,402 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="92" x="413" y="420.4951">0 : getFullName</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="413" y="436.8467">0 : getBillablePendingHours</text><!--MD5=[2f4aa5290a976b2f4dd1aafdbeed5e7a]
+link e1 to e2--><path d="M187.775,521.121 C187.46,540.691 190.033,571.6563 207,591 C228.723,615.7662 263.861,627.7607 293.373,633.5665 " fill="none" id="e1-&gt;e2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="298.434,634.5133,290.322,628.9279,293.5191,633.5947,288.8523,636.7918,298.434,634.5133" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M212,556 L212,582 L311,582 L311,566 L301,556 L212,556 " fill="#F5F5F5" filter="url(#f10wkjtmhbn2me)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M301,556 L301,566 L311,566 L301,556 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="218" y="574.4951">0 : getClient()</text><!--MD5=[3e02c9d8c242cf757d9bdfe3b727d456]
+@startuml
+
+skinparam {
+    NoteBorderThickness 0
+    NoteBackgroundColor #whiteSmoke
+    RectangleBackgroundColor #whiteSmoke
+    ArchimateBackgroundColor #whiteSmoke
+}
+
+
+
+actor :User: as actor
+rectangle #629EF9 ":MenuView" as b1
+rectangle #629EF9 ":ClientsView" as b2
+rectangle #b5bd68 ":OpenClientsController" as c1
+rectangle #F2AC4E ":ClientsEntity" as e1
+rectangle #F2AC4E ":ClientEntity" as e2
+
+actor - -> b1
+note on link
+0 : openClients()
+end note
+
+b1 -right-> b2
+note on link
+0 : openClientsView()
+end note
+
+b2 - -> c1
+note on link
+0 : readAllClients()
+end note
+
+c1 - -> e1
+note on link
+0 : readAllClients()
+end note
+
+c1 - -> "0..*" e2
+
+b2 - -> e2
+note on link
+0 : getFullName
+0 : getBillablePendingHours
+end note
+
+e1 - -> e2
+note on link
+0 : getClient()
+end note
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.6+8-b765.25
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

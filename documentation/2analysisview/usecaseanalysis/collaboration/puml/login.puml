@@ -1,0 +1,46 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+archimate  ":User" as actor <<actor>>
+
+view ":LoginView" as b1
+controller ":LoginController" as c1
+model ":MechanicsEntity" as e1
+model ":MechanicEntity" as e2
+model ":SessionEntity" as e3
+
+actor --> b1
+note on link
+1 : login()
+2 : setUsername(username)
+3 : setPassword(password)
+end note
+
+b1 --> c1
+note on link
+4 : login(username, password)
+end note
+
+c1 --> e1
+note on link
+5 : readAll()
+end note
+
+c1 --> e2
+note on link
+6 : getMechanic()
+end note
+
+c1 --> e3
+note on link
+7 : setMechanic()
+end note
+
+e1 --> e2
+note on link
+8 : getMechanic()
+end note
+
+@enduml

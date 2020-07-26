@@ -1,19 +1,22 @@
 @startuml
 
-!include userinterfaceprocedures/login.puml
-!include userinterfaceprocedures/openedDashboard.puml
-!include userinterfaceprocedures/openedClients.puml
-!include userinterfaceprocedures/openedInterventions.puml
-!include userinterfaceprocedures/openedClient.puml
-!include userinterfaceprocedures/openedVehicles.puml
-!include userinterfaceprocedures/openedVehicle.puml
-!include userinterfaceprocedures/saltProcedure.puml
-!include userinterfaceprocedures/createIntervention.puml
+!include ../procedures/login.puml
+!include ../procedures/openedDashboard.puml
+!include ../procedures/openedClients.puml
+!include ../procedures/openedInterventions.puml
+!include ../procedures/openedClient.puml
+!include ../procedures/openedVehicles.puml
+!include ../procedures/openedVehicle.puml
+!include ../procedures/saltProcedure.puml
+!include ../procedures/createIntervention.puml
 
 (*) --> SALT(login)
-login --> SALT(openedDashboard) #LawnGreen
 note on link
 login
+end note
+login --> SALT(openedDashboard) #LawnGreen
+note on link
+openDashboard
 end note
 
 openedDashboard --> SALT(selectVehicle)
