@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="593px" preserveAspectRatio="none" style="width:1298px;height:593px;" version="1.1" viewBox="0 0 1298 593" width="1298px" zoomAndPan="magnify"><defs><filter height="300%" id="ftht7sogl6ged" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[999f80192410ad58725ac6d158b21eb2]
+cluster Views--><polygon fill="#FFFFFF" filter="url(#ftht7sogl6ged)" points="25,26,72,26,79,49.6094,481,49.6094,481,345,25,345,25,26" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="25" x2="79" y1="49.6094" y2="49.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="41" x="29" y="42.5332">Views</text><!--MD5=[ed1d20ea533a2a0e7df5ba3c35e56ced]
+cluster Controllers--><polygon fill="#FFFFFF" filter="url(#ftht7sogl6ged)" points="505,24.5,590,24.5,597,48.1094,1276,48.1094,1276,471,505,471,505,24.5" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="505" x2="597" y1="48.1094" y2="48.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="79" x="509" y="41.0332">Controllers</text><!--MD5=[027ebfd53c01aea08f474edbf35d0797]
+cluster Models--><polygon fill="#FFFFFF" filter="url(#ftht7sogl6ged)" points="22,369,80,369,87,392.6094,386,392.6094,386,581,22,581,22,369" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="22" x2="87" y1="392.6094" y2="392.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="52" x="26" y="385.5332">Models</text><!--MD5=[0121c9298ad809e412df66ebd0e03894]
+entity MechanicView--><path d="M64.5,66 L64.5,90 M64.5,78 L81.5,78 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="93.5" cy="78" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="78" x="46" y="106.457">MechanicView</text><!--MD5=[b3b62de6e35a95cbd09098986bea964f]
+entity AdminView--><path d="M188.5,66 L188.5,90 M188.5,78 L205.5,78 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="217.5" cy="78" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="61" x="178.5" y="106.457">AdminView</text><!--MD5=[d4301b337f7f6d85c7e2189c8a365840]
+entity DeveloperView--><path d="M305.5,66 L305.5,90 M305.5,78 L322.5,78 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="334.5" cy="78" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="82" x="285" y="106.457">DeveloperView</text><!--MD5=[1c64afc0a5c013e327c141248846a7ed]
+entity ClientView--><path d="M415.5,66 L415.5,90 M415.5,78 L432.5,78 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="444.5" cy="78" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="58" x="407" y="106.457">ClientView</text><!--MD5=[7757171fbbfb2eb48dd133ffbd21b08a]
+entity VehicleView--><path d="M53.5,176 L53.5,200 M53.5,188 L70.5,188 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="82.5" cy="188" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="66" x="41" y="216.457">VehicleView</text><!--MD5=[4d5d669286cf153734e0808fdbf46a6e]
+entity InterventionView--><path d="M166.5,176 L166.5,200 M166.5,188 L183.5,188 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="195.5" cy="188" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="89" x="142.5" y="216.457">InterventionView</text><!--MD5=[bf8284962558ca325d4afff9d3d79792]
+entity RepairingPackView--><path d="M299.5,176 L299.5,200 M299.5,188 L316.5,188 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="328.5" cy="188" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="107" x="266.5" y="216.457">RepairingPackView</text><!--MD5=[f5a78d3e2c2bba4955990b9a6243d12e]
+entity MenuView--><path d="M416.5,176 L416.5,200 M416.5,188 L433.5,188 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="445.5" cy="188" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="56" x="409" y="216.457">MenuView</text><!--MD5=[b5c37742c2552546545ff1db6c9c22b8]
+entity loginView--><path d="M53.5,286 L53.5,310 M53.5,298 L70.5,298 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="82.5" cy="298" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="53" x="47.5" y="326.457">loginView</text><!--MD5=[6b2347a91d39457ba1928168a71ff1a1]
+entity signInView--><path d="M145.5,286 L145.5,310 M145.5,298 L162.5,298 " fill="none" filter="url(#ftht7sogl6ged)" style="stroke: #000000; stroke-width: 2.0;"/><ellipse cx="174.5" cy="298" fill="#629EF9" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="60" x="136" y="326.457">signInView</text><!--MD5=[f63c202a6e4b759c74b8768fc01b7814]
+entity createClientController--><ellipse cx="590" cy="76.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="586,64.5,592,59.5,590,64.5,592,69.5,586,64.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="138" x="521" y="107.0332">createClientController</text><!--MD5=[61161d7911914fdf9121991f35cb0f04]
+entity openClientController--><ellipse cx="759" cy="76.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="755,64.5,761,59.5,759,64.5,761,69.5,755,64.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="130" x="694" y="107.0332">openClientController</text><!--MD5=[ad52f4586168a27741d03465c23b7d0c]
+entity openClientsController--><ellipse cx="928" cy="76.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="924,64.5,930,59.5,928,64.5,930,69.5,924,64.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="137" x="859.5" y="107.0332">openClientsController</text><!--MD5=[6494b6beb73e1f5fecca1d656ef82b27]
+entity createVehicleController--><ellipse cx="1106" cy="76.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="1102,64.5,1108,59.5,1106,64.5,1108,69.5,1102,64.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="148" x="1032" y="107.0332">createVehicleController</text><!--MD5=[80bfa34be06997303a32fd8af65d8778]
+entity openVehicleController--><ellipse cx="591" cy="186.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="587,174.5,593,169.5,591,174.5,593,179.5,587,174.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="140" x="521" y="217.0332">openVehicleController</text><!--MD5=[b15d47ab8518b67d1db4b607680933c1]
+entity openVehiclesController--><ellipse cx="770" cy="186.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="766,174.5,772,169.5,770,174.5,772,179.5,766,174.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="147" x="696.5" y="217.0332">openVehiclesController</text><!--MD5=[9fe5083bf123b6495620ed7e7d41811e]
+entity createInterventionController--><ellipse cx="967" cy="186.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="963,174.5,969,169.5,967,174.5,969,179.5,963,174.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="176" x="879" y="217.0332">createInterventionController</text><!--MD5=[19793ccb82dd77da99a7d7c75da496a3]
+entity finishInterventionController--><ellipse cx="1175" cy="186.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="1171,174.5,1177,169.5,1175,174.5,1177,179.5,1171,174.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="169" x="1090.5" y="217.0332">finishInterventionController</text><!--MD5=[9499cacf97555793602be58dd5201700]
+entity openInterventionsController--><ellipse cx="609" cy="296.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="605,284.5,611,279.5,609,284.5,611,289.5,605,284.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="175" x="521.5" y="327.0332">openInterventionsController</text><!--MD5=[f0558ac9e3788c296fb84b744e513bca]
+entity loginController--><ellipse cx="778" cy="296.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="774,284.5,780,279.5,778,284.5,780,289.5,774,284.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="92" x="732" y="327.0332">loginController</text><!--MD5=[5565452fd5db2993ad6df6701b5e67cb]
+entity logoutController--><ellipse cx="910" cy="296.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="906,284.5,912,279.5,910,284.5,912,289.5,906,284.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="101" x="859.5" y="327.0332">logoutController</text><!--MD5=[3764035e638aecf6dc2d1cd844a60537]
+entity signInController--><ellipse cx="1045" cy="296.5" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="1041,284.5,1047,279.5,1045,284.5,1047,289.5,1041,284.5" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="99" x="995.5" y="327.0332">signInController</text><!--MD5=[f4c3d9a91c78a838ceb8ab876f7a665c]
+entity openDashboardController--><ellipse cx="609" cy="421" fill="#B5BD68" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #718C00; stroke-width: 2.0;"/><polygon fill="#718C00" points="605,409,611,404,609,409,611,414,605,409" style="stroke: #718C00; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="164" x="527" y="451.5332">openDashboardController</text><!--MD5=[2867025ecd4cc86603b8f73a9d0bedc4]
+entity ClientEntity--><ellipse cx="74" cy="421" fill="#F2AC4E" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="62" x2="86" y1="435" y2="435"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="71" x="38.5" y="451.5332">ClientEntity</text><!--MD5=[0595b5db4a1902151baeb117919ebc63]
+entity VehicleEntity--><ellipse cx="185" cy="421" fill="#F2AC4E" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="173" x2="197" y1="435" y2="435"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="81" x="144.5" y="451.5332">VehicleEntity</text><!--MD5=[c7d321f5458bfde4574994c6aa28fb4b]
+entity InterventionEntity--><ellipse cx="315" cy="421" fill="#F2AC4E" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="303" x2="327" y1="435" y2="435"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="109" x="260.5" y="451.5332">InterventionEntity</text><!--MD5=[d9fbc68c221cef91a3095dfc9bce24ce]
+entity RepairingPackEntity--><ellipse cx="102" cy="531" fill="#F2AC4E" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="90" x2="114" y1="545" y2="545"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="127" x="38.5" y="561.5332">RepairingPackEntity</text><!--MD5=[d7fe5c6ac41f845df39c878742ea8e78]
+entity MechanicEntity--><ellipse cx="248" cy="531" fill="#F2AC4E" filter="url(#ftht7sogl6ged)" rx="12" ry="12" style="stroke: #000000; stroke-width: 2.0;"/><line style="stroke: #000000; stroke-width: 2.0;" x1="236" x2="260" y1="545" y2="545"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="95" x="200.5" y="561.5332">MechanicEntity</text><!--MD5=[7ee2dd981dd13ba7300f7a2f9841b896]
+link MechanicView to AdminView--><!--MD5=[a950ab1982b6557d2b421cbfb0e80679]
+link AdminView to DeveloperView--><!--MD5=[1c31d5a4d7fdf38c5a375598ad181a00]
+link DeveloperView to ClientView--><!--MD5=[31581ddb580f1b14fd694d827533bb05]
+link MechanicView to VehicleView--><!--MD5=[91ab2ca5751af56783e64c9ae9bc57d4]
+link VehicleView to InterventionView--><!--MD5=[12a433aff60d948ed32389ad38b442b2]
+link InterventionView to RepairingPackView--><!--MD5=[0183ea45e010d7d590618fe012f695c9]
+link RepairingPackView to MenuView--><!--MD5=[b4acb775438d03d82f1b9c8565e6dc49]
+link VehicleView to loginView--><!--MD5=[54ec301c70c9241f62c5d05008a496bb]
+link loginView to signInView--><!--MD5=[e7fb8eb5f94562c557a4e757712e5295]
+link createClientController to openClientController--><!--MD5=[e97787d00b3907e0f78ea0ed9bd6e5e3]
+link openClientController to openClientsController--><!--MD5=[36dd674a5a7a4466eed11b62ee1dea59]
+link openClientsController to createVehicleController--><!--MD5=[d015780fa506276e50a54cae1bd1fb00]
+link createClientController to openVehicleController--><!--MD5=[5296ba8eb4a016c2c848559cc12befd4]
+link openVehicleController to openVehiclesController--><!--MD5=[ea8557e19ca30f5e01e9cc01af3e498a]
+link openVehiclesController to createInterventionController--><!--MD5=[943dc80ecc0c35b843b434bc9ad01525]
+link createInterventionController to finishInterventionController--><!--MD5=[9e8c32aa24187e14b7891c236215af03]
+link openVehicleController to openInterventionsController--><!--MD5=[ad1e437e3a9763e8211d612eecfb4267]
+link openInterventionsController to loginController--><!--MD5=[46f3e566281100ffb1ad45881d865d4c]
+link loginController to logoutController--><!--MD5=[61c84f86f821e5d6e31790439ca75377]
+link logoutController to signInController--><!--MD5=[472cd1c049e341074b0eabf3622df1c7]
+link openInterventionsController to openDashboardController--><!--MD5=[da27cd6ea0c8922cbf5c423e8bacf5f5]
+link ClientEntity to VehicleEntity--><!--MD5=[e5220367cd3bb1e2b12d46ad7a302364]
+link VehicleEntity to InterventionEntity--><!--MD5=[5458638b57146a02c453125335ecbae4]
+link ClientEntity to RepairingPackEntity--><!--MD5=[a8ae9ce9297265ca89be301cbf5ed97c]
+link RepairingPackEntity to MechanicEntity--><!--MD5=[2b55d0bea3d8f75d4863ee1aa9a829bb]
+link ClientView to createClientController--><!--MD5=[b6e4b00aa72222a8f0f7740b83581f2b]
+link loginView to ClientEntity--><!--MD5=[309fe09d58212158c0cdf40022c12a50]
+@startuml
+
+
+skinparam {
+    BoundaryBackgroundColor #629EF9
+    BoundaryBorderColor black
+    BoundaryFontSize 12
+    BoundarySize 10
+    ControlBackgroundColor #b5bd68
+    ControlBorderColor #718c00
+    EntityBackgroundColor #F2AC4E
+    EntityBorderColor black
+}
+
+
+package Views {
+    boundary MechanicView
+    boundary AdminView
+    boundary DeveloperView
+
+    boundary ClientView
+    boundary VehicleView
+    boundary InterventionView
+    boundary RepairingPackView
+    boundary MenuView
+
+    boundary loginView
+    boundary signInView
+}
+
+package Controllers {
+    control createClientController
+    control openClientController
+    control openClientsController
+    control createVehicleController
+    control openVehicleController
+    control openVehiclesController
+    control createInterventionController
+    control finishInterventionController
+    control openInterventionsController
+    control loginController
+    control logoutController
+    control signInController
+    control openDashboardController
+}
+
+package Models {
+    entity ClientEntity
+    entity VehicleEntity
+    entity InterventionEntity
+    entity RepairingPackEntity
+    entity MechanicEntity
+}
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.6+8-b765.25
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
