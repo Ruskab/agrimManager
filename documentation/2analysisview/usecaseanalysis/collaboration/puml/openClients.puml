@@ -1,0 +1,46 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+
+actor :User: as actor
+view ":MenuView" as b1
+view ":ClientsView" as b2
+controller ":OpenClientsController" as c1
+model ":ClientsEntity" as e1
+model ":ClientEntity" as e2
+
+actor --> b1
+note on link
+0 : openClients()
+end note
+
+b1 -right-> b2
+note on link
+0 : openClientsView()
+end note
+
+b2 --> c1
+note on link
+0 : readAllClients()
+end note
+
+c1 --> e1
+note on link
+0 : readAllClients()
+end note
+
+c1 --> "0..*" e2
+
+b2 --> e2
+note on link
+0 : getFullName
+0 : getBillablePendingHours
+end note
+
+e1 --> e2
+note on link
+0 : getClient()
+end note
+@enduml

@@ -1,16 +1,5 @@
 = USE CASES
 
-[#_index]
-== Index
-
-<<_vehicles>>
-
-<<_clients>>
-
-<<_interventions>>
-
-<<_mechanics>>
-
 [#_vehicles]
 == Vehicles management
 image::png/vechileUusecases.png[]

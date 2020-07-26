@@ -11,9 +11,12 @@
 !include ../procedures/createIntervention.puml
 
 (*) --> SALT(login)
-login --> SALT(openedDashboard) #LawnGreen
 note on link
 login
+end note
+login --> SALT(openedDashboard) #LawnGreen
+note on link
+openDashboard
 end note
 
 openedDashboard --> SALT(selectVehicle)

@@ -1,0 +1,33 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor :User: as actor
+view "MenuView" as b0
+view "InterventionCreateView" as b5
+view "InterventionCreateAddVehicleView" as b6
+controller "InterventionCreateConfirmView" as b7
+view "InterventionAdditionalInfoView" as b8
+view "DashboardView" as b9
+controller "InterventionCreateController" as c1
+controller "OpenDashboardController" as c2
+model "InterventionsEntity" as e1
+model "VehiclesEntity" as e2
+
+actor --> b0
+b0 -right-> b5
+actor --> b5
+b5 --> b6
+b5 --> b7
+b5 --> b8
+b5 --> b9
+b6 --> b7
+b6 --> c1
+b8 --> b6
+b8 --> c1
+b7 --> b8
+b7 --> c1
+c1 --> e1
+c1 --> e2
+@enduml

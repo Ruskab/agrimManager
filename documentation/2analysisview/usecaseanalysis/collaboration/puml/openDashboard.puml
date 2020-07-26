@@ -1,0 +1,68 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor :User: as actor
+
+view ":MenuView" as b1
+view ":DashboardView" as b2
+controller ":openDashboardController" as c2
+model ":InterventionsEntity" as e3
+model ":InterventionEntity" as e4
+model ":VehicleEntity" as e5
+model ":SessionEntity" as e6
+
+actor --> b1
+note on link
+0: openDashboard()
+end note
+
+b1 -right-> b2
+note on link
+0 : openDashboardView
+end note
+
+b2 -down-> e4
+note on link
+0 : getStartTime()
+0 : getEndTime()
+0 : getTitle()
+0 : getInterventionType()
+end note
+
+b2 -down-> e5
+note on link
+0 : getRegistrationPlate()
+0 : getBrand()
+0 : getBodyOfFrame()
+end note
+
+b2 -down-> c2
+note on link
+0 : readActiveInterventions(mechanic)
+end note
+
+c2 -down-> e3
+note on link
+0 : readActiveInterventions(mechanic)
+end note
+
+c2 -down-> "0..*" e4
+
+c2 -down-> e6
+note on link
+0 : getMechanic()
+end note
+
+e3 -left-> e4
+note on link
+0 : getIntervention()
+end note
+
+e4 -down-> e5
+note on link
+getVehicle()
+end note
+
+@enduml

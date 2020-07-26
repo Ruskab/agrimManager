@@ -1,0 +1,110 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+archimate  ":User" as actor <<actor>>
+view ":MenuView" as b0
+view ":InterventionCreateView" as b5
+view ":InterventionCreateAddVehicleView" as b6
+view ":InterventionCreateConfirmView" as b7
+view ":InterventionAdditionalInfoView" as b8
+view ":DashboardView" as b9
+controller ":InterventionCreateController" as c1
+model ":InterventionsEntity" as e1
+model ":VehiclesEntity" as e2
+collaboration ":Collaboration OpenDashboard" as s1
+
+actor --> b0
+note on link
+20 : createIntervention()
+end note
+
+b0 -right-> b5
+note on link
+2 : openInterventionCreateView()
+end note
+
+actor --> b5
+note on link
+3 : getVehicles(text)
+4 : setVehicle(vehicle)
+5 : setDescription(description)
+5 : setInterventionType(interventionType)
+6 : createIntervention()
+end note
+
+b5 --> b6
+note on link
+7 : getVehicles(text)
+8 : setVehicle(vehicle)
+9 : setInterventionCoffee()
+end note
+
+b5 --> b7
+note on link
+21 : createIntervention()
+end note
+
+b5 --> b8
+note on link
+10 : setDescription(description)
+end note
+
+b5 --> b9
+note on link
+22 : openDashboard()
+end note
+
+b9 --> s1
+
+b6 --> b7
+note on link
+11 : openInterventionCreateConfirm()
+end note
+
+b6 --> c1
+note on link
+13 : getVehicles(text)
+14 : setVehicle(vehicle)
+15 : setInterventionCoffee()
+end note
+
+b8 -- b6
+note on link
+--> 16 : openCreateAddVehicleView
+<-- 12 : openInterventionAdditionalInfoView
+end note
+
+b8 --> c1
+note on link
+17 : setDescription(description)
+end note
+
+b7 -- b8
+note on link
+<-- 19 : openInterventionAdditionalInfoView()
+--> 18 : openInterventionCreateConfirm()
+end note
+
+b7 --> c1
+note on link
+23 : createIntervention(intervention)
+<b>intervention
+* vehicle
+* interventionType
+* description
+end note
+
+
+c1 --> e1
+note on link
+24 : createIntervention(intervention)
+end note
+
+c1 --> e2
+note on link
+19 : getVehicles(text)
+end note
+
+@enduml
