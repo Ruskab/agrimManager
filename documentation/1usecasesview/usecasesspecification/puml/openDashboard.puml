@@ -1,30 +1,36 @@
 @startuml
-skinparam {
-        NoteBackgroundColor #whiteSmoke
-}
 
-state startState1 as ":OPENED_VEHICLES"
-state startState2 as ":OPENED_CLIENTS"
-state startState3 as ":OPENED_INTERVENTIONS"
-state startState4 as ":INITIAL"
-state endState as ":OPENED_DASHBOARD"
+!include configuration/StateDiagramsSetUp.puml
+
+state startState1 as "OPENED_VEHICLES"
+state startState2 as "OPENED_CLIENTS"
+state startState3 as "OPENED_INTERVENTIONS"
+state startState4 as "INITIAL"
+state startState5 as "OPENED_DASHBOARD"
+state endState as "OPENED_DASHBOARD"
 
 startState1 --> openDashboard
-startState2 --> openDashboard
-startState3 --> openDashboard
-startState4 --> openDashboard
-
-state openDashboard {
-
-[*] --> [*]
 note on link
 <b>User requests to</b>
 * openDashboard
 end note
+startState2 --> openDashboard
+note on link
+<b>User requests to</b>
+* openDashboard
+end note
+startState3 --> openDashboard
+note on link
+<b>User requests to</b>
+* openDashboard
+end note
+startState4 --> openDashboard
 
-}
+startState5 --> openDashboard
 
-openDashboard --> endState
+state openDashboard {
+
+[*] --> [*]
 note on link
 <b>System shows
 * mechanic active interventions
@@ -37,5 +43,10 @@ note on link
 * create intervention
 * finish intervention
 end note
+
+}
+
+openDashboard --> endState
+
 
 @enduml

@@ -1,69 +1,68 @@
 @startuml
 
-!include ../procedures/login.puml
-!include ../procedures/openedDashboard.puml
-!include ../procedures/openedClients.puml
-!include ../procedures/openedInterventions.puml
-!include ../procedures/openedClient.puml
-!include ../procedures/openedVehicles.puml
-!include ../procedures/openedVehicle.puml
-!include ../procedures/saltProcedure.puml
-!include ../procedures/createIntervention.puml
 
-(*) --> SALT(login)
+(*) --> "<img:../png/Agrim_login.png>" as INIT_LOGIN #LawnGreen
+
+'INIT_LOGIN -right-> "<img:../png/Agrim_signin.png>" as INIT_SIGNIN
+
+
+'INIT_SIGNIN --> OPENED_DASHBOARD #LawnGreen
+'note on link
+'sign in
+'end note
+
+INIT_LOGIN --> "<img:../png/Agrim_dashboard.png>" as OPENED_DASHBOARD #LawnGreen
 note on link
 login
 end note
-login --> SALT(openedDashboard) #LawnGreen
-note on link
-openDashboard
-end note
 
-openedDashboard --> SALT(selectVehicle)
-note on link
-    createIntervention
-end note
+'OPENED_DASHBOARD --> "<img:../png/Agrim_newIntervention.png>" as CREATE_INTERVENTION
+'note on link
+'    createIntervention
+'end note
+'
+'CREATE_INTERVENTION --> OPENED_DASHBOARD
 
-selectVehicle --> SALT(additionalInformation)
-additionalInformation --> SALT(confirm)
-additionalInformation --> selectVehicle
-confirm --> SALT(additionalInformation)
-confirm --> SALT(openedDashboard)
-
-openedDashboard -right-> SALT(openedClients) #LawnGreen
+OPENED_DASHBOARD -right-> "<img:../png/Agrim_clients.png>" as OPENED_CLIENTS #LawnGreen
 note on link
     openClients
 end note
 
-openedClients --> SALT(openedClient) #LawnGreen
-note on link
-    openClient
-end note
+'
+'OPENED_CLIENTS --> "<img:../png/Agrim_configClient.png>" as CONFIG_CLIENT
+'note on link
+'configClient
+'end note
 
-openedClient --> openedClients
-note on link
-    openedClients
-end note
-
-openedDashboard --> SALT(openedInterventions) #LawnGreen
+'CONFIG_CLIENT --> OPENED_CLIENTS
+'
+OPENED_DASHBOARD --> "<img:../png/Agrim_Interventions.png>" as OPENED_INTERVENTIONS #LawnGreen
 note on link
     openInterventions
 end note
-
-openedDashboard -left-> SALT(openedVehicles) #LawnGreen
+'
+OPENED_DASHBOARD -left-> "<img:../png/Agrim_vehicles.png>" as OPENED_VEHICLES #LawnGreen
 note on link
     openVehicles
 end note
 
-openedVehicles -down-> SALT(openedVehicle) #LawnGreen
-note on link
-    openVehicle
-end note
+'OPENED_VEHICLES --> "<img:../png/Agrim_configVehicle.png>" as CONFIG_VEHICLE
+'note on link
+'configVehicle
+'end note
+'
+'CONFIG_VEHICLE --> OPENED_VEHICLES
 
-openedVehicle -up-> openedVehicles
-note on link
-    openVehicles
-end note
+OPENED_DASHBOARD --> "<img:../png/Agrim_Operations.png>" as OPENED_OPERATIONS #LawnGreen
 
+OPENED_DASHBOARD --> "<img:../png/Agrim_MyInterventions.png>" as OPENED_MY_INTERVENTIONS #LawnGreen
+
+OPENED_CLIENTS --> OPENED_VEHICLES
+OPENED_CLIENTS --> OPENED_INTERVENTIONS
+OPENED_CLIENTS --> OPENED_DASHBOARD
+OPENED_CLIENTS --> OPENED_MY_INTERVENTIONS
+OPENED_CLIENTS --> OPENED_OPERATIONS
+
+'
 
 @enduml

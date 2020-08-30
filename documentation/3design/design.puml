@@ -1,0 +1,61 @@
+@startuml
+
+!include skinParams.puml
+
+ skinparam linetype polyline
+
+
+
+    boundary XView #9FB7E5
+    control XController #C4E4AB
+    entity XEntity #F8D987
+    entity XEntities #F8D987
+    boundary XStyle as "XStyle - CSS"
+    boundary XTemplate as "XTemplate - xhtml"
+    boundary XBean as "XBean - java"
+    control XApiController as "XApiController - java"
+    control XBusinessController as "XBusinessController - java"
+    control XGateway as "XGateway - java"
+    entity XDao as "XDao - java"
+    entity XDto as "XModel - java"
+    entity XDto2 as "XDto - java"
+    entity XModel as "XEntity - java"
+
+
+    XView -right-> XController
+    XController -right-> XEntity
+    XController -right-> XEntities
+    XView -down-> XEntity
+
+    XTemplate ...[#Gray]up.> XView : <<trace>>
+    XStyle ...[#Gray]up.> XView : <<trace>>
+    XBean ...[#Gray]up.> XView : <<trace>>
+    XGateway ...[#Gray]up.> XController : <<trace>>
+    XDto ...[#Gray]up.> XEntity : <<trace>>
+    XApiController ...[#Gray]up.> XController : <<trace>>
+    XBusinessController ...[#Gray]up.> XController : <<trace>>
+    XDto2 ...[#Gray]up.> XEntity : <<trace>>
+    XModel ...[#Gray]up.> XEntity : <<trace>>
+    XDao ...[#Gray]up.> XEntities : <<trace>>
+
+    XTemplate -right-> XBean
+    XTemplate -left-> XStyle
+    XBean --> XDto
+    XBean -right-> XGateway
+    XDto .[#Gray]right.> XDto2 : <<trace>>
+
+    XGateway .[#Gray]right.> XApiController : <<trace>>
+    XApiController -right-> XBusinessController
+    XGateway --down-> XDto
+    XApiController --down-> XDto2
+    XBusinessController --down-> XModel
+    XBusinessController -right-> XDao
+    XBusinessController -right-> XDto2
+    XDto2 -right-> XModel
+    XDao -right-> XModel
+
+
+
+
+
+@enduml

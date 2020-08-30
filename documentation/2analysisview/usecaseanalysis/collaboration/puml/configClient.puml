@@ -1,0 +1,54 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor user
+view ClientsView
+view ClientInfoView
+controller ClientConfigController
+model ClientDao
+model Client
+model Vehicle
+model VehicleDao
+
+user -right-> ClientsView
+note on link
+    configClient(clientId)
+end note
+
+user -right-> ClientInfoView
+note on link
+setFullName(fullName)
+setBillableHours(billableHours)
+end note
+
+ClientsView -down-> ClientInfoView
+note on link
+   configClient(clientId)
+end note
+
+ClientInfoView -right-> ClientConfigController
+note on link
+    readClient(clientId)
+    readVehicles(clientId)
+end note
+
+
+ClientConfigController --> ClientDao
+note on link
+    readClient(clientId)
+end note
+
+ClientConfigController --> VehicleDao
+note on link
+    readVehicles(clientId)
+end note
+
+ClientInfoView --> Client
+ClientInfoView ----> Vehicle
+ClientConfigController .. "1" Client
+ClientConfigController .. "0..*" Vehicle
+ClientDao .. Client
+VehicleDao .. Vehicle
+@enduml

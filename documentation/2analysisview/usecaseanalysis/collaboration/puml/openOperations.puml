@@ -1,0 +1,23 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor user
+
+view MenuView
+view OperationsView
+
+
+user -right-> MenuView
+note on link
+    openOperations()
+end note
+
+MenuView -right-> OperationsView
+note on link
+    openOperationsView()
+end note
+
+
+@enduml

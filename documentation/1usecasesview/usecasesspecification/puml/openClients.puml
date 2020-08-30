@@ -1,10 +1,15 @@
 @startuml
-skinparam {
-        NoteBackgroundColor #whiteSmoke
-}
 
-state startState as ":OPENED_CLIENTS"
-state endState as ":OPENED_CLIENT"
+!include configuration/StateDiagramsSetUp.puml
+
+state startState as "OPENED_CLIENTS"
+state startState2 as "OPENED_CLIENTS"
+state startState3 as "OPENED_VEHICLES"
+state startState4 as "OPENED_INTERVENTIONS"
+state startState5 as "OPENED_OPERATIONS"
+state endState as "OPENED_CLIENTS"
+
+startState2 --> openClients
 
 startState --> openClients
 note on link
@@ -12,11 +17,26 @@ note on link
 * openClients
 end note
 
+startState3 --> openClients
+note on link
+<b>User requests to</b>
+* openClients
+end note
+
+startState4 --> openClients
+note on link
+<b>User requests to</b>
+* openClients
+end note
+
+startState5 --> openClients
+note on link
+<b>User requests to</b>
+* openClients
+end note
+
 state openClients {
 [*] --> [*]
-}
-
-openClients --> endState
 note on link
 <b>System shows
 * all clients in system
@@ -29,5 +49,8 @@ note on link
 * create intervention
 * finish intervention
 end note
+}
+
+openClients --> endState
 
 @enduml

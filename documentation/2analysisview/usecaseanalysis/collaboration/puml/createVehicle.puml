@@ -1,0 +1,44 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor user
+view ClientsView
+view ClientInfoView
+controller CreateClientController
+model ClientDao
+model Client
+
+user -right-> ClientsView
+note on link
+    createClient()
+end note
+
+user --> ClientInfoView
+note on link
+setFullName(fullName)
+setBillableHours(billableHours)
+end note
+
+ClientsView -down-> ClientInfoView
+note on link
+    new ClientInfoView()
+end note
+
+ClientInfoView -right-> CreateClientController
+note on link
+    createClient(client)
+end note
+
+ClientInfoView --> Client
+
+CreateClientController -right-> ClientDao
+note on link
+    createClient(client)
+end note
+
+ClientDao .. Client
+
+CreateClientController .right. "1" Client
+@enduml

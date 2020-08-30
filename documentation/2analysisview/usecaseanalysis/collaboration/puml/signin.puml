@@ -1,0 +1,56 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor user
+view SignInView
+view LoginView
+controller SignInController
+model MechanicDao
+model Mechanic
+model Session
+collaboration ":Collaboration OpenDashboard" as OpenDashboard
+
+user -right-> LoginView
+note on link
+    signin()
+end note
+
+LoginView -right-> SignInView
+note on link
+    new SignInView
+end note
+
+user -right-> SignInView
+note on link
+    setUsername(string)
+    setPassword(string)
+    setRepeatPassword(string)
+end note
+
+SignInView -right-> SignInController
+note on link
+    signin(username, password, repeatPassword)
+end note
+
+SignInView -up-> OpenDashboard
+note on link
+    openDashboard(session)
+end note
+
+SignInView --> Mechanic
+SignInView --> Session
+note on link
+    setMechanic(mechanic)
+end note
+
+SignInController -down-> MechanicDao
+note on link
+    create(mechanic)
+end note
+
+SignInController --> Mechanic
+MechanicDao -- Mechanic
+
+@enduml

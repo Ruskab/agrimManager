@@ -1,37 +1,49 @@
 @startuml
-skinparam {
-        NoteBackgroundColor #whiteSmoke
-}
 
-state startState1 as ":OPENED_VEHICLES"
-state startState2 as ":OPENED_CLIENTS"
-state startState3 as ":OPENED_DASHBOARD"
-state endState as ":OPENED_INTERVENTIONS"
+!include configuration/StateDiagramsSetUp.puml
+
+state startState1 as "OPENED_VEHICLES"
+state startState2 as "OPENED_CLIENTS"
+state startState3 as "OPENED_DASHBOARD"
+state startState4 as "OPENED_CLIENTS"
+state startState5 as "OPENED_INTERVENTIONS"
+state endState as "OPENED_INTERVENTIONS"
 
 startState1 --> openInterventions
+    note on link
+    <b>User requests to</b>
+    * openInterventions
+    end note
 startState2 --> openInterventions
+    note on link
+    <b>User requests to</b>
+    * openInterventions
+    end note
 startState3 --> openInterventions
-
-state openInterventions {
-    [*] --> [*]
     note on link
     <b>User requests to</b>
     * openInterventions
     end note
 
+startState4 --> openInterventions
+
+startState5 --> openInterventions
+
+state openInterventions {
+    [*] --> [*]
+    note on link
+    <b>System shows
+    * all interventions
+    <b>System allows
+    * open dashboard
+    * open clients
+    * open vehicles
+    * open operations
+    * logout
+    * create intervention
+    end note
 }
 
 openInterventions --> endState
-note on link
-<b>System shows
-* all interventions
-<b>System allows
-* open dashboard
-* open clients
-* open vehicles
-* open operations
-* logout
-* create intervention
-end note
 
 @enduml
