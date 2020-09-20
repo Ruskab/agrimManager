@@ -4,10 +4,10 @@ import api.daos.DaoFactory;
 import api.daos.DaoSupplier;
 import api.dtos.ClientDto;
 import api.dtos.ClientVehiclesDto;
+import api.dtos.mappers.ClientMapper;
 import api.entity.Client;
 import api.entity.Vehicle;
 import api.exceptions.NotFoundException;
-import api.mappers.ClientMapper;
 
 import java.util.List;
 import java.util.Optional;

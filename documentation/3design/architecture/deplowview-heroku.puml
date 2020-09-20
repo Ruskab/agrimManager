@@ -1,0 +1,29 @@
+@startuml
+
+
+
+node Client <<CLIENT>> #cdfca4{
+    [webBrowser] as "web-browser" <<Executable>>
+}
+
+node Webapp <<SERVER>> #cdfca4 {
+
+    node Tomcat <<server>> #edd33e {
+     [webApp] as "agrimManager" <<war>>
+
+    }
+
+
+
+}
+
+node DataBase <<server>> #cdfca4 {
+
+    [MySQL] <<executable>>
+
+}
+
+[webBrowser] -- [webApp]
+[webApp] -- [MySQL]
+
+@enduml

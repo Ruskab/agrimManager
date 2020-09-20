@@ -1,4 +1,4 @@
-package api.converters;
+package api.entity.converters;
 
 import api.entity.Role;
 

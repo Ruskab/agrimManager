@@ -8,7 +8,7 @@ import api.dtos.MechanicDto;
 import api.entity.Intervention;
 import api.entity.Mechanic;
 import api.exceptions.NotFoundException;
-import api.mappers.MechanicMapper;
+import api.dtos.mappers.MechanicMapper;
 
 import java.util.ArrayList;
 import java.util.List;

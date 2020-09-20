@@ -1,0 +1,99 @@
+@startuml
+skinparam linetype polyline
+allow_mixing
+
+
+package api {
+
+        package exceptions {
+            package handlers {
+                Class BadRequestExceptionMapper <<@Provider>> {
+                    + toResponse(e : BadRequestException) : Response
+                }
+            }
+            class BadRequestException
+
+            class ErrorMessage
+
+        }
+
+        package api_controllers {
+            class VehicleApiController <<@Api>><<@Path>> {
+                - VEHICLES : String = "/vehicles"
+                + create(dto : VehicleDto) : VehicleDto
+            }
+        }
+
+        package business_controllers {
+            class VehicleBusinessController {
+                + create(dto : VehicleDto) : int
+            }
+        }
+
+
+
+        package daos {
+            interface VehicleDao {
+                        + create(dto : VehicleDto) : int
+            }
+
+            interface GenericDao <ENTITY, ID> {
+                + create(entity : ENTITY) : void
+            }
+
+            abstract DaoFactory {
+                + getVehicleDao() : VehicleDao
+            }
+
+
+
+            package hibernate {
+
+                class VehicleDaoHibr
+
+                class GenericDaoHibr
+
+                class DaoFactoryHibr {
+                    + getVehicleDao() : VehicleDao
+                }
+            }
+
+            package entities {
+                class Vehicle
+            }
+
+        }
+
+        package dtos {
+            class VehicleDto
+
+            package mappers {
+                class VehicleMapper
+            }
+
+        }
+
+
+}
+
+
+VehicleApiController o--> VehicleBusinessController
+VehicleBusinessController o--> DaoFactory
+VehicleBusinessController ..> VehicleDto
+VehicleBusinessController --> VehicleMapper
+VehicleApiController .right.> BadRequestException
+VehicleBusinessController .right.> BadRequestException
+VehicleDao ..> Vehicle
+VehicleMapper ..> Vehicle
+VehicleMapper ..> VehicleDto
+
+BadRequestExceptionMapper ..> BadRequestException
+BadRequestExceptionMapper ..> ErrorMessage
+VehicleDao <|-- VehicleDaoHibr
+GenericDaoHibr <|-- VehicleDaoHibr
+GenericDao <|-- GenericDaoHibr
+GenericDao <|-- VehicleDao
+DaoFactory <|-- DaoFactoryHibr
+DaoFactory o--> VehicleDao
+
+@enduml
