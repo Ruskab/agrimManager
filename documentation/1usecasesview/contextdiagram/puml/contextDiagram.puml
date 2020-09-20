@@ -1,19 +1,15 @@
 @startuml
-skinparam {
-    NoteBackgroundColor #whiteSmoke
-}
+!include StateDiagramsSetUp.puml
+
 
 [*] --> INITIAL
-
-INITIAL --> INITIAL
-note on link
-  sign in
-end note
 
 INITIAL --> OPENED_DASHBOARD
  note on link
      login
+     sign in
  end note
+
 OPENED_DASHBOARD --> OPENED_VEHICLES
     note on link
          openVehicles
@@ -27,23 +23,9 @@ OPENED_DASHBOARD --> OPENED_DASHBOARD
 OPENED_VEHICLES --> OPENED_VEHICLES
     note on link
          createVehicle
+         configVehicle
          deleteVehicle
          importVehicles
-    end note
-
-OPENED_VEHICLES --> OPENED_VEHICLE
-    note on link
-     openVehicle
-    end note
-
-OPENED_VEHICLE --> OPENED_VEHICLE
-    note on link
-     updateVehicle
-    end note
-
-OPENED_VEHICLE --> OPENED_VEHICLES
-    note on link
-         openVehicles
     end note
 
 OPENED_VEHICLES --> OPENED_DASHBOARD
@@ -57,28 +39,13 @@ OPENED_DASHBOARD --> OPENED_CLIENTS
     note on link
          openClients
     end note
+
 OPENED_CLIENTS --> OPENED_CLIENTS
     note on link
      createClient
+     configClient
      deleteClient
     end note
-
-
-OPENED_CLIENTS -up-> OPENED_CLIENT
-    note on link
-     openClient
-    end note
-
-OPENED_CLIENT --> OPENED_CLIENT
-    note on link
-     updateClient
-    end note
-
-OPENED_CLIENT --> OPENED_CLIENTS
-    note on link
-         openClients
-    end note
-
 
 OPENED_CLIENTS --> OPENED_DASHBOARD
     note on link

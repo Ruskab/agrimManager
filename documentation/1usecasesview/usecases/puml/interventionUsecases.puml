@@ -3,9 +3,13 @@ left to right direction
 
 
 package InterventionsManagement {
-:mechanic: --> (createIntervention)
+:mechanic: --|> :user:
+:developer: --|> :user:
+
+:user: --> (createIntervention)
 (createIntervention) ..> (openDashboard) : <<include>>
-:mechanic: --> (openIntervention)
-:mechanic: --> (openInterventions)
+:admin: --> (openInterventions)
+:developer: --> (openInterventions)
+:user: --> (openMyInterventions)
 }
 @enduml

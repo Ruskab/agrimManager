@@ -7,11 +7,10 @@ actor :User: as actor
 view "MenuView" as b0
 view "InterventionCreateView" as b5
 view "InterventionCreateAddVehicleView" as b6
-controller "InterventionCreateConfirmView" as b7
+controller "InterventionCr1eateConfirmView" as b7
 view "InterventionAdditionalInfoView" as b8
 view "DashboardView" as b9
 controller "InterventionCreateController" as c1
-controller "OpenDashboardController" as c2
 model "InterventionsEntity" as e1
 model "VehiclesEntity" as e2
 

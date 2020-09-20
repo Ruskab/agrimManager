@@ -1,123 +1,59 @@
 @startuml
-skinparam {
-    NoteBackgroundColor #whiteSmoke
-}
 
-state initState as ":OPENED_CLIENTS"
-state OPENED_CLIENTS as ":OPENED_CLIENTS"
+!include configuration/StateDiagramsSetUp.puml
+
+state initState as "OPENED_CLIENTS"
+state OPENED_CLIENTS as "OPENED_CLIENTS"
 state openClients as ":openClients"
 
-
 initState --> createClient
-
-state createClient {
-state 1 as " "
-state A0 as " "
-state A1 as " "
-state 2 as " "
-state 4 as " "
-state 6 as " "
-
-[*]  -[#Green]-> 1
 note on link
-    <b>Mechanic requests to</b>
+    <b>User requests to</b>
     * create Client
 end note
 
-1 -[#Green]-> 2
+state createClient {
+state 1 as " "
+state 2 as " "
+state 6 as " "
+
+[*]  -down-> 1
+
+1 -down-> 2
 note on link
     <b>System requires</b>
     * full Name (mandatory)
+    * Billable hours
     <b>System allows</b>
+    * confirm
     * cancel
 end note
 
-2 --> [*]
+2 -down[#red]-> [*]
 note on link
-<b>mechanic requests to
+<b>User requests to
 * cancel
 end note
 
-2 -[#Green]-> 4
-note on link
-<b>Mechanic provides</b>
-* Full name
-end note
-
-4 -[#Green]-> A0
-note on link
-<b>System requires</b>
-* pending billable hours
-<b>System allows</b>
-* go back
-* cancel
-end note
-
-A0 --> 1
-note on link
-<b>Mechanic requests to</b>
-* go back
-end note
-
-
-A0 --> [*]
-note on link
-<b>Mechanic requests to</b>
-* cancel
-end note
-
-A0 -[#Green]-> A1
+2 -down-> 6
 note on link
 <b>User provides</b>
+* Full name
 * pending billable hours
 end note
 
-A1 -[#Green]-> 6
-note on link
-    <b>System shows</b>
-    * new Client
-    ** Full name
-    ** pending billable hours
-    <b>System allows</b>
-    *confirm creation
-    *cancel
-    *go back
-end note
-
-6 -[#Green]-> [*]
+6 -down-> [*]
 note on link
 <b>User requests to</b>
 * confirm creation
 end note
-6 --> 4
-note on link
-<b>User requests to</b>
-* go back
-end note
 
-6 --> [*]
-note on link
-<b>User requests to</b>
-* cancel
-end note
 }
 
-createClient --> openClients
+createClient -down-> openClients
+createClient -[#red]-> OPENED_CLIENTS
 
-openClients --> OPENED_CLIENTS
-note on link
-<b>System shows</b>
-* all clients in system
-<b>System allows</b>
-* create client
-* update client
-* read client
-* open dashboard
-* open interventions
-* open vehicles
-* open operations
-* logout
-* create intervention
-end note
+openClients -down-> OPENED_CLIENTS
+
 
 @enduml

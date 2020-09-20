@@ -1,6 +1,6 @@
 package api.entity;
 
-import api.converters.MechanicRoleConverter;
+import api.entity.converters.MechanicRoleConverter;
 import api.dtos.MechanicDto;
 
 import javax.persistence.CascadeType;

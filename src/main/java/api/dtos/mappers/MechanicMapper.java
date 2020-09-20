@@ -1,4 +1,4 @@
-package api.mappers;
+package api.dtos.mappers;
 
 import api.dtos.MechanicDto;
 import api.entity.Intervention;

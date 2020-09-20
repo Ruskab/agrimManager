@@ -1,16 +1,36 @@
 @startuml
-skinparam {
-        NoteBackgroundColor #whiteSmoke
-}
+!include configuration/StateDiagramsSetUp.puml
 
-state startState as ":OPENED_VEHICLES"
-state endState as ":OPENED_VEHICLE"
+state startState as "OPENED_VEHICLES"
+state endState as "OPENED_VEHICLE"
 
-startState --> openVehicles
+state startState1 as "OPENED_VEHICLES"
+state startState2 as "OPENED_CLIENTS"
+state startState3 as "OPENED_INTERVENTIONS"
+state startState5 as "OPENED_OPERATION"
+state endState as "OPENED_DASHBOARD"
+
+startState1 --> openVehicles
 note on link
 <b>User requests to</b>
 * openVehicles
 end note
+startState2 --> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+startState3 --> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+startState5 --> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+startState --> openVehicles
 
 state openVehicles {
 

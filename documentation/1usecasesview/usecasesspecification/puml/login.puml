@@ -1,70 +1,49 @@
 @startuml
-    skinparam {
-        NoteBackgroundColor #whiteSmoke
-    }
+!include configuration/StateDiagramsSetUp.puml
 
-state initstate as ":INITIAL"
+state initstate as "INITIAL"
 state login
 state openDashboard as ":openDashboard"
 state endstate as ":OPENED_DASHBOARD"
 
 initstate --> login
+note on link
+<b>User requests to</b>
+* login
+end note
 
 state login {
 
 state 1 as " "
 state condicional <<choice>>
 state 2 as " "
-state 3 as " "
 
-[*] -[#Green]-> 1
-note on link
-<b>User requests to</b>
-* login
-end note
+[*] --> 1
 
-1 -[#Green]-> 2
+1 --> 2
 note on link
 <b>System requires</b>
 * username
 * password
 end note
 
-2 -[#Green]-> condicional
+2 --> condicional
 note on link
 <b>User provides</b>
 * username
 * password
 end note
 
-condicional --> 1
+condicional -[#red]-> 1
 note on link
 [pair username password not exists]
 end note
 
-condicional -[#Green]-> 3
-
-3 -[#Green]-> [*]
-note on link
-<b>System shows</b>
-* Login successful
-end note
+condicional --> [*]
 }
 
 login --> openDashboard
 
 openDashboard --> endstate
-note on link
-<b>System shows</b>
-* mechanic avtive interventions [mechanic has active interventions]
-<b>System allows</b>
-* open vehicles
-* open interventions
-* open clients
-* open operations
-* create intervention
-* finish intervention [mechanic has active interventions]
-* logout
-end note
 
 @enduml

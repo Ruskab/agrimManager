@@ -4,15 +4,23 @@ left to right direction
 
 
 package VehiclesManagement {
-:mechanic: --> (createVehicle)
+:mechanic: --|> :all:
+:admin: --|> :all:
+:developer: --|> :all:
+
+:admin: --|> :superUser:
+:developer: --|> :superUser:
+
+:all: --> (createVehicle)
 (createVehicle) ..> (openVehicles) :<<include>>
-:mechanic: --> (updateVehicle)
-(updateVehicle) ..> (openVehicles) : <<include>>
-:mechanic: --> (deleteVehicle)
+:all: --> (configVehicle)
+(configVehicle) ..> (openVehicles) : <<include>>
+:superUser: --> (deleteVehicle)
 (deleteVehicle) ..> (openVehicles) : <<include>>
-:mechanic: --> (openVehicle)
-:mechanic: --> (importVehicles)
-:mechanic: --> (openVehicles)
+:superUser: --> (importVehicles)
+:all: --> (openVehicles)
+(importVehicles) ..> (openVehicles) : <<include>>
+
 }
 
 @enduml

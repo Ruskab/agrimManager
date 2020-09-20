@@ -48,7 +48,7 @@ image::svg/createVehicle.svg[]
 <<_index>>
 
 === open vehicle
-image::svg/openVehicle.svg[]
+image::svg/configVehicle.svg[]
 <<_index>>
 
 
@@ -60,7 +60,7 @@ image::svg/openClients.svg[]
 <<_index>>
 
 === open client
-image::svg/openClient.svg[]
+image::svg/configClient.svg[]
 <<_index>>
 
 [#_interventions]

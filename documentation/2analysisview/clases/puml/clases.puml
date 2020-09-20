@@ -21,8 +21,10 @@ package Controllers {
     control createClientController
     control openClientController
     control openClientsController
+    control updateClientsController
     control createVehicleController
     control openVehicleController
+    control updateVehicleController
     control openVehiclesController
     control createInterventionController
     control finishInterventionController

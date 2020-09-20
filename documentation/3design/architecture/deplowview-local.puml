@@ -1,0 +1,25 @@
+@startuml
+
+node Client <<CLIENT>> {
+    component webBrowser as "web-browser" <<Executable>>
+}
+
+node Server <<SERVER>> {
+
+    node docker {
+
+    node server-db <<container>> #03dbfc {
+        component MySQL <<executable>>
+    }
+}
+
+    node API <<server>> <<tomcat>> #edd33e {
+        component webApp as "agrimManager" <<war>>
+    }
+
+webBrowser -right-  webApp
+webApp -- MySQL
+
+
+
+@enduml

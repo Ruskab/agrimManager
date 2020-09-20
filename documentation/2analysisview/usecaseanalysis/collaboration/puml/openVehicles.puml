@@ -1,0 +1,50 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor user
+
+view MenuView
+view VehiclesView
+
+controller OpenVehiclesController
+
+model VehicleDao
+model ClientDao
+model Vehicle
+model Client
+
+user --> MenuView
+note on link
+    openVehicles()
+end note
+
+MenuView -right-> VehiclesView
+note on link
+    openVehiclesView()
+end note
+
+VehiclesView -right-> OpenVehiclesController
+note on link
+    readVehicles()
+    readClient(clientId())
+end note
+
+OpenVehiclesController --> VehicleDao
+note on link
+readAllVehicles()
+end note
+
+OpenVehiclesController --> ClientDao
+note on link
+readClient(clientId)
+end note
+
+OpenVehiclesController .. "0..*" Vehicle
+OpenVehiclesController .. "1" Client
+ClientDao .. Client
+VehicleDao .. Vehicle
+VehiclesView --> Vehicle
+VehiclesView --> Client
+@enduml

@@ -9,7 +9,7 @@ import api.entity.Vehicle;
 import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
-import api.mappers.InterventionMapper;
+import api.dtos.mappers.InterventionMapper;
 import com.mysql.cj.util.StringUtils;
 
 import java.util.List;

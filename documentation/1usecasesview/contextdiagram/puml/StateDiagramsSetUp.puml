@@ -1,0 +1,7 @@
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+    ArrowColor #green
+    linetype polyline
+}
+
+hide empty description

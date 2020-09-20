@@ -2,14 +2,26 @@
 left to right direction
 
 package MechanicManagement {
-:mechanic: --> (createMechanic)
-:mechanic: --> (openMechanic)
-:mechanic: --> (deleteMechanic)
-:mechanic: --> (openMechanics)
-:mechanic: --> (login)
-    (login) .> (openDashboard) : <<include>>
-:mechanic: --> (signUp)
-:mechanic: --> (logout)
+:mechanic: --|> :all:
+:admin: --|> :all:
+:developer: --|> :all:
+
+:admin: --|> :superUser:
+:developer: --|> :superUser:
+
+
+:superUser: --> (createMechanic)
+:all: --> (configMechanic)
+:superUser: --> (deleteMechanic)
+:superUser: --> (openMechanics)
+:all: --> (login)
+(login) ..> (openDashboard) : <<include>>
+(signUp) ..> (openDashboard) : <<include>>
+(configMechanic) ..> (openMechanics) : <<include>>
+(createMechanic) ..> (openMechanics) : <<include>>
+(deleteMechanic) ..> (openMechanics) : <<include>>
+:all: --> (signUp)
+:all: --> (logout)
 }
 
 @enduml
