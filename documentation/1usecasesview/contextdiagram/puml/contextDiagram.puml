@@ -57,10 +57,11 @@ OPENED_CLIENTS --> OPENED_DASHBOARD
 OPENED_DASHBOARD --> OPENED_INTERVENTIONS
     note on link
          openInterventions
+         openMyInterventions
     end note
 OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
     note on link
-         billing intervention
+         bill intervention
          openIntervention
     end note
 OPENED_INTERVENTIONS --> OPENED_DASHBOARD

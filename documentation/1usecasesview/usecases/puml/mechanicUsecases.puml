@@ -14,6 +14,7 @@ package MechanicManagement {
 :all: --> (configMechanic)
 :superUser: --> (deleteMechanic)
 :superUser: --> (openMechanics)
+:superUser: --> (openOperations)
 :all: --> (login)
 (login) ..> (openDashboard) : <<include>>
 (signUp) ..> (openDashboard) : <<include>>

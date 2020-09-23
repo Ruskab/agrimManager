@@ -4,41 +4,64 @@
 !include configuration/definitions.puml
 
 actor user
-view ClientsView
-view ClientInfoView
-controller CreateClientController
+view VehiclesView
+view VehicleCreateView
+controller CreateVehicleController
+controller OpenClientsController
+collaboration ":Collaboration OpenVehicles" as OpenVehicles
+model VehicleDao
 model ClientDao
+model Vehicle
 model Client
 
-user -right-> ClientsView
+user -right-> VehiclesView
 note on link
-    createClient()
+    createVehicle()
 end note
 
-user --> ClientInfoView
+user --> VehicleCreateView
 note on link
-setFullName(fullName)
-setBillableHours(billableHours)
+setVehicle(data)
+searchClient(text)
+setClient(clientId)
+confirmCreation()
 end note
 
-ClientsView -down-> ClientInfoView
+VehiclesView -down-> VehicleCreateView
 note on link
-    new ClientInfoView()
+    new VehicleCreateView()
 end note
 
-ClientInfoView -right-> CreateClientController
+VehicleCreateView -right-> CreateVehicleController
 note on link
-    createClient(client)
+    createVehicle(vehicle)
 end note
 
-ClientInfoView --> Client
-
-CreateClientController -right-> ClientDao
+VehicleCreateView -right-> OpenClientsController
 note on link
-    createClient(client)
+    searchClients(query)
 end note
+
+VehicleCreateView --> OpenVehicles
+
+VehicleCreateView --> "1" Vehicle
+VehicleCreateView --> "*" Client
+
+CreateVehicleController -right-> VehicleDao
+note on link
+    createVehicle(vehicle)
+end note
+
+OpenClientsController --> ClientDao
+note on link
+    searchCliensByName(query)
+end note
+
+VehicleDao .... Vehicle
 
 ClientDao .. Client
 
-CreateClientController .right. "1" Client
+CreateVehicleController .right. "1" Vehicle
+
+OpenClientsController .. "*" Client
 @enduml

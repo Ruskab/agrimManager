@@ -92,4 +92,12 @@ public class ClientBusinessController {
                 .map(Vehicle::getId)
                 .collect(toList());
     }
+
+    public List<ClientDto> searchByFullName(String fullName) {
+        return daoFactory.getClientDao()
+                .findAll()
+                .filter(client -> client.getFullName().toLowerCase().contains(fullName.toLowerCase()))
+                .map(clientMapper::toClientDto)
+                .collect(toList());
+    }
 }
