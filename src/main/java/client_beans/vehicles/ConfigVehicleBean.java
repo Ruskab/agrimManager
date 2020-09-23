@@ -12,7 +12,7 @@ import static client_beans.util.SessionUtil.getAuthToken;
 
 @ManagedBean
 @ViewScoped
-public class EditBean {
+public class ConfigVehicleBean {
 
     private VehicleDto selectedVehicleDto;
     private VehicleGateway vehicleGateway;
@@ -20,14 +20,6 @@ public class EditBean {
     @PostConstruct
     public void init() {
         vehicleGateway = new VehicleGateway(getAuthToken());
-    }
-
-    public VehicleDto getSelectedVehicleDto() {
-        return selectedVehicleDto;
-    }
-
-    public void setSelectedVehicleDto(VehicleDto selectedVehicleDto) {
-        this.selectedVehicleDto = selectedVehicleDto;
     }
 
     public void save() {
@@ -39,5 +31,13 @@ public class EditBean {
         }
         FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update vehicle"));
 
+    }
+
+    public VehicleDto getSelectedVehicleDto() {
+        return selectedVehicleDto;
+    }
+
+    public void setSelectedVehicleDto(VehicleDto selectedVehicleDto) {
+        this.selectedVehicleDto = selectedVehicleDto;
     }
 }

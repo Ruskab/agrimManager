@@ -22,12 +22,12 @@ end note
 
 MenuView -right-> VehiclesView
 note on link
-    openVehiclesView()
+    new VehiclesView()
 end note
 
 VehiclesView -right-> OpenVehiclesController
 note on link
-    readVehicles()
+    readAllVehicles()
     readClient(clientId())
 end note
 
@@ -45,6 +45,6 @@ OpenVehiclesController .. "0..*" Vehicle
 OpenVehiclesController .. "1" Client
 ClientDao .. Client
 VehicleDao .. Vehicle
-VehiclesView --> Vehicle
+VehiclesView ----> Vehicle
 VehiclesView --> Client
 @enduml

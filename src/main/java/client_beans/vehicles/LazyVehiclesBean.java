@@ -1,6 +1,7 @@
-package client_beans.clients;
+package client_beans.vehicles;
 
 import api.dtos.VehicleDto;
+import client_beans.clients.ClientGateway;
 import client_beans.vehicles.VehicleGateway;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
@@ -19,9 +20,9 @@ import java.util.stream.Collectors;
 
 import static client_beans.util.SessionUtil.getAuthToken;
 
-@ManagedBean(name = "lazyVehiclesView")
+@ManagedBean(name = "lazyVehiclesBean")
 @ViewScoped
-public class LazyVehiclesView implements Serializable {
+public class LazyVehiclesBean implements Serializable {
 
     private static final String NOT_NAME = "NOT NAME";
     private static final String VEHICLE_BRAND = "brand";
@@ -30,12 +31,14 @@ public class LazyVehiclesView implements Serializable {
     private String clientName;
     private Map<String, String> clientNames = new HashMap<>();
     private VehicleGateway vehicleGateway;
+    private ClientGateway clientGateway;
 
     @PostConstruct
     public void init() {
         vehicleGateway = new VehicleGateway(getAuthToken());
+        clientGateway = new ClientGateway(getAuthToken());
         List<VehicleDto> vehicles = vehicleGateway.readAll();
-        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), new ClientGateway(getAuthToken()).read(vehicle.getClientId()).getFullName()));
+        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId()).getFullName()));
         lazyModel = new LazyDataModel<VehicleDto>() {
 
             @Override
