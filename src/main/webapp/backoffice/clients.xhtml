@@ -6,6 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:agrim="http://java.sun.com/jsf/composite/agrim"
       lang="en" xml:lang="en">
 
 <h:head>
@@ -21,44 +22,22 @@
 
                         <p:growl id="contentMessages" showDetail="true"><p:autoUpdate/></p:growl>
 
-                        <p:dataView styleClass="clients-data-view" var="client" value="#{clientsBean.clients}" rows="12"
-                                    paginator="true" rowsPerPageTemplate="6,12,16"
-                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                    gridIcon="pi pi-th-large" listIcon="pi pi-bars">
-                            <p:dataViewGridItem>
-                                <p:panel header="#{client.fullName}" style="text-align:center">
-                                    <h:panelGrid columns="1" style="width:100%">
-                                        <h:outputText value="To facture: #{client.hours} hours"/>
 
-                                        <p:commandLink action="#{clientsBean.openClientDialog}"
-                                                       update="@(.client-detail)" title="View Detail">
-                                            <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
-                                            <f:setPropertyActionListener value="#{client}"
-                                                                         target="#{clientsBean.selectedClient}"/>
-                                        </p:commandLink>
-                                    </h:panelGrid>
-                                </p:panel>
-                            </p:dataViewGridItem>
+                        <p:dataTable id="clientsTable" widgetVar="clientsTable" rowKey="#{client.id}"
+                                     var="client" value="#{clientsBean.clients}" paginator="true" rows="10" selectionMode="single"
+                                     selection="#{clientsBean.selectedClient}">
 
-                            <p:dataViewListItem>
-                                <h:panelGrid columns="2" columnClasses="logo,detail">
+                            <p:ajax event="rowSelect" update="@(.config-client-dialog)" oncomplete="PF('configClientDialog').show()"/>
 
-                                    <p:outputPanel>
-                                        <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="Client:"/>
-                                            <h:outputText value="#{client.fullName}" style="font-weight: bold"/>
-                                        </h:panelGrid>
-                                    </p:outputPanel>
+                            <p:column headerText="Client" sortBy="#{client.fullName}"
+                                      filterBy="#{client.fullName}" priority="1">
+                                <h:outputText value="#{client.fullName}"/>
+                            </p:column>
 
-                                    <p:commandLink action="#{clientsBean.openClientDialog}" update="@(.client-detail)"
-                                                   title="View Detail">
-                                        <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
-                                        <f:setPropertyActionListener value="#{client}"
-                                                                     target="#{clientsBean.selectedClient}"/>
-                                    </p:commandLink>
-                                </h:panelGrid>
-                            </p:dataViewListItem>
-                        </p:dataView>
+                        </p:dataTable>
+
+                        <agrim:configClient id="configClientComponent" selectedClient="#{clientsBean.selectedClient}"/>
+
                     </h:form>
 
                 </div>

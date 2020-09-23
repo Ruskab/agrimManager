@@ -2,6 +2,7 @@ package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.daos.DaoSupplier;
+import api.daos.VehicleDao;
 import api.dtos.VehicleDto;
 import api.entity.Client;
 import api.entity.Vehicle;
@@ -9,6 +10,7 @@ import api.entity.builder.VehicleBuilder;
 import api.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -79,6 +81,14 @@ public class VehicleBusinessController {
         return DaoFactory.getFactory().getVehicleDao().findAll()
                 .map(VehicleDto::new)
                 .filter(vehicleDto -> vehicleDto.getVehicleDataSheet().toLowerCase().contains(query.toLowerCase()))
+                .collect(toList());
+    }
+
+    public List<VehicleDto> searchByClient(String clientId) {
+        Optional<Client> optClient = DaoFactory.getFactory().getClientDao().read(Integer.parseInt(clientId));
+        return optClient.stream()
+                .flatMap(client -> DaoFactory.getFactory().getVehicleDao().findByClient(client))
+                .map(VehicleDto::new)
                 .collect(toList());
     }
 }

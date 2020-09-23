@@ -2,6 +2,7 @@ package client_beans.clients;
 
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
+import api.entity.Vehicle;
 import client_beans.vehicles.VehicleGateway;
 
 import javax.annotation.PostConstruct;
@@ -17,23 +18,17 @@ import static client_beans.util.SessionUtil.getAuthToken;
 
 @ManagedBean
 @ViewScoped
-public class ClientInfoBean implements Serializable {
+public class ConfigClientBean implements Serializable {
 
     private ClientDto clientDto;
     private List<VehicleDto> vehicles;
     private ClientGateway clientGateway;
+    private VehicleGateway vehicleGateway;
 
     @PostConstruct
     public void init() {
         clientGateway = new ClientGateway(getAuthToken());
-        String clientId = FacesContext.getCurrentInstance()
-                .getExternalContext()
-                .getRequestParameterMap()
-                .get("parameters");
-        clientDto = clientGateway.read(clientId);
-        //todo hacer que se recupere el listado de vehiculos del cliente con una peticion concreta
-        vehicles = new VehicleGateway(getAuthToken()).readAll();
-        vehicles = vehicles.stream().filter(vehicle -> vehicle.getClientId().equals(Integer.toString(clientDto.getId()))).collect(Collectors.toList());
+        vehicleGateway = new VehicleGateway(getAuthToken());
     }
 
     public void save() {
@@ -44,6 +39,10 @@ public class ClientInfoBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update client"));
             return;
         }
+    }
+
+    public void searchClientVehicles() {
+        vehicles = vehicleGateway.searchBy(clientDto);
     }
 
     public ClientDto getClientDto() {

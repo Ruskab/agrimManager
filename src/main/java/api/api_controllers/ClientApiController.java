@@ -52,11 +52,10 @@ public class ClientApiController {
     @ApiOperation(value = "Get all clients")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClientDto> readAll(@QueryParam("query") String fullName) {
-        if (fullName == null) {
-            return clientBusinessController.readAll();
-        } else {
+        if (fullName != null) {
             return clientBusinessController.searchByFullName(fullName);
         }
+        return clientBusinessController.readAll();
     }
 
     @GET
