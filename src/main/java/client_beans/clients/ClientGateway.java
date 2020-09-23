@@ -68,6 +68,14 @@ public class ClientGateway implements Serializable {
                 .get(new GenericType<List<ClientDto>>() {});
     }
 
+    public List<ClientDto> searchBy(String query) {
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS))
+                .queryParam("query", query)
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<List<ClientDto>>() {});
+    }
+
     public ClientDto read(String clientId) {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(CLIENTS) + "/" + clientId)
                 .request(MediaType.APPLICATION_JSON)

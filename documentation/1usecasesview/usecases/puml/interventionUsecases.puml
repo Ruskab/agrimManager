@@ -1,15 +1,19 @@
 @startuml
 left to right direction
 
-
 package InterventionsManagement {
 :mechanic: --|> :user:
 :developer: --|> :user:
+:admin: --|> :superUser:
+:developer: --|> :superUser:
 
 :user: --> (createIntervention)
-(createIntervention) ..> (openDashboard) : <<include>>
-:admin: --> (openInterventions)
-:developer: --> (openInterventions)
+:user: --> (finishIntervention)
+:superUser: --> (openInterventions)
+:admin: --> (billInterventions)
 :user: --> (openMyInterventions)
+(createIntervention) ..> (openDashboard) : <<include>>
+(finishIntervention) ..> (openDashboard) : <<include>>
+(billInterventions) ..> (openInterventions) : <<include>>
 }
 @enduml

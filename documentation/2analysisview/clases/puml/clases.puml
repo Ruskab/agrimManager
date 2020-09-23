@@ -3,16 +3,17 @@
 !include skinParams.puml
 
 package Views {
+    boundary VehicleCreateView
+    boundary VehiclesView
+
+    boundary VehicleView
     boundary MechanicView
     boundary AdminView
     boundary DeveloperView
-
     boundary ClientView
-    boundary VehicleView
     boundary InterventionView
     boundary RepairingPackView
     boundary MenuView
-
     boundary loginView
     boundary signInView
 }

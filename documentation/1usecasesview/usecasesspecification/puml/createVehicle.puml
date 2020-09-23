@@ -14,6 +14,11 @@ end note
 state createVehicle {
 state 1 as " "
 state 2 as " "
+state 3 as " "
+state 4 as " "
+state 6 as " "
+state 7 as " "
+state 4 as " "
 
 [*]  -down-> 1
 
@@ -24,23 +29,66 @@ note on link
     * vehicle information
     ** Registration plate (mandatory)
     ** Brand (mandatory)
-    ** Client Name (mandatory)
+    ** Client Name (mandatory) (should exist)
     ** Body of Frame
     ** KMS
     <b>System allows</b>
+    * provide client to search
     * cancel
 end note
 
 2 -down[#red]-> [*]
 note on link
-    <b>mechanic requests to
+    <b>User requests to
     * cancel
 end note
 
-2 -down-> [*]
+2 --> 3
+note on link
+<b>User provides
+* client name to search
+end note
+
+3 --> 4
+note on link
+<b>System shows
+* clients that matches with the search
+<b>System allows
+* provide client
+end note
+
+4 --> 1
+note on link
+<b>User provides
+* client
+end note
+
+
+2 -down---> 6
 note on link
 <b>User provides</b>
 * vehicle information
+end note
+
+6 -down-> 7
+note on link
+<b>System shows</b>
+* vehicle information
+<b>System allows</b>
+* confirm
+* cancel
+end note
+
+6 -[#red]-> [*]
+note on link
+<b>User requests to</b>
+* cancel
+end note
+
+7 --> [*]
+note on link
+<b>User requests to</b>
+* confirm
 end note
 
 createVehicle --> openVehicles

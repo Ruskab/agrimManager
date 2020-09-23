@@ -15,7 +15,7 @@
               header="Vehicles Full Info" modal="true"
               responsive="true" showEffect="fade" hideEffect="fade" resizable="false">
 
-        <p:wizard id="creteVehicleWizzard" widgetVar="createVehicleWizzard" flowListener="#{createBean.onFlowProcess}"
+        <p:wizard id="creteVehicleWizzard" widgetVar="createVehicleWizzard" flowListener="#{vehicleCreateBean.onFlowProcess}"
                   styleClass="create-vehicle-wizzard">
             <p:tab id="basicInfoTab" title="Basic">
                 <p:panelGrid columns="3" layout="grid" columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-5,ui-g-12 ui-md-4">
@@ -24,35 +24,35 @@
                     </f:facet>
                     <h:outputLabel for="registationplate"
                                    value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
-                    <p:inputText id="registationplate" value="#{createBean.selectedVehicleDto.registrationPlate}"
+                    <p:inputText id="registationplate" value="#{vehicleCreateBean.selectedVehicleDto.registrationPlate}"
                                  required="true"/>
                     <p:message for="registationplate"/>
 
                     <h:outputLabel for="brand" value="#{msg['web.vehicles.edit.basicinfo.brand']}"/>
-                    <p:inputText id="brand" value="#{createBean.selectedVehicleDto.brand}" required="true"
+                    <p:inputText id="brand" value="#{vehicleCreateBean.selectedVehicleDto.brand}" required="true"
                                  label="brand"/>
                     <p:message for="brand"/>
 
                     <h:outputLabel for="autoCompleteClientName" value="#{msg['web.vehicles.edit.basicinfo.client']}"/>
-                    <p:autoComplete id="autoCompleteClientName" value="#{createBean.selectedClient}"
-                                    completeMethod="#{createBean.completeClient}"
+                    <p:autoComplete id="autoCompleteClientName" value="#{vehicleCreateBean.selectedClient}"
+                                    completeMethod="#{vehicleCreateBean.searchClient}"
                                     var="client" itemLabel="#{client.fullName}" itemValue="#{client}" required="true"
                                     converter="client_beans.util.converters.ClientConverter" forceSelection="true"
                                     minQueryLength="3" effect="fade"/>
                     <p:message for="autoCompleteClientName"/>
 
                     <h:outputLabel for="bodyOnFrame" value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
-                    <p:inputText id="bodyOnFrame" value="#{createBean.selectedVehicleDto.bodyOnFrame}"
+                    <p:inputText id="bodyOnFrame" value="#{vehicleCreateBean.selectedVehicleDto.bodyOnFrame}"
                                  label="bodyframe"/>
                     <p:message for="bodyOnFrame"/>
 
                     <h:outputLabel for="KMS" value="#{msg['web.vehicles.edit.basicinfo.KMS']}"/>
-                    <p:inputText id="KMS" value="#{createBean.selectedVehicleDto.kms}" label="kms"/>
+                    <p:inputText id="KMS" value="#{vehicleCreateBean.selectedVehicleDto.kms}" label="kms"/>
                     <p:message for="KMS"/>
 
                     <f:facet name="footer">
                         <h:outputLabel for="skipBtn" value="Skip to last: "/>
-                        <h:selectBooleanCheckbox id="skipBtn" value="#{createBean.skip}"/>
+                        <h:selectBooleanCheckbox id="skipBtn" value="#{vehicleCreateBean.skip}"/>
                     </f:facet>
                 </p:panelGrid>
             </p:tab>
@@ -61,7 +61,7 @@
                 <p:messages/>
                 <p:panelGrid columns="1" layout="grid" columnClasses="ui-g-12 ui-md-12">
                     <f:facet name="header"><h:outputText value="#{msg['web.vehicles.edit.itv.header']}"></h:outputText></f:facet>
-                    <p:calendar id="lastItvDateBtn" value="#{createBean.selectedVehicleDto.itvDate}" showOn="button"
+                    <p:calendar id="lastItvDateBtn" value="#{vehicleCreateBean.selectedVehicleDto.itvDate}" showOn="button"
                                 pattern="dd/MM/yyyy"
                                 placeholder="#{msg['web.vehicles.edit.itv.tooltip.placeholder.last']}">
                         <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
@@ -70,7 +70,7 @@
                                value="#{msg['web.vehicles.edit.itv.tooltip.last']}" trackMouse="true"/>
 
 
-                    <p:calendar id="nextItvDateBtn" value="#{createBean.selectedVehicleDto.nextItvDate}"
+                    <p:calendar id="nextItvDateBtn" value="#{vehicleCreateBean.selectedVehicleDto.nextItvDate}"
                                 placeholder="#{msg['web.vehicles.edit.itv.tooltip.placeholder.next']}" showOn="button"
                                 pattern="dd/MM/yyyy">
                         <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
@@ -86,7 +86,7 @@
                     <f:facet name="header"><h:outputText value="#{msg['web.vehicles.edit.itv.header']}"></h:outputText></f:facet>
 
                     <p:outputLabel for="lastRevisionBtn" value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"/>
-                    <p:calendar id="lastRevisionBtn" value="#{createBean.selectedVehicleDto.lastRevisionDate}"
+                    <p:calendar id="lastRevisionBtn" value="#{vehicleCreateBean.selectedVehicleDto.lastRevisionDate}"
                                 showOn="button" pattern="dd/MM/yyyy">
                         <f:converter converterId="client_beans.util.converters.LocalDateConverter"/>
                     </p:calendar>
@@ -94,20 +94,20 @@
 
                     <h:outputLabel for="airFilterReference"
                                    value="#{msg['web.vehicles.edit.revision.airFilterReference']}"/>
-                    <p:inputText id="airFilterReference" value="#{createBean.selectedVehicleDto.airFilterReference}"/>
+                    <p:inputText id="airFilterReference" value="#{vehicleCreateBean.selectedVehicleDto.airFilterReference}"/>
 
 
                     <h:outputLabel for="oilFilterReference"
                                    value="#{msg['web.vehicles.edit.revision.oilFilterReference']}"/>
-                    <p:inputText id="oilFilterReference" value="#{createBean.selectedVehicleDto.oilFilterReference}"/>
+                    <p:inputText id="oilFilterReference" value="#{vehicleCreateBean.selectedVehicleDto.oilFilterReference}"/>
 
 
                     <h:outputLabel for="fuelFilter" value="#{msg['web.vehicles.edit.revision.fuelFilter']}"/>
-                    <p:inputText id="fuelFilter" value="#{createBean.selectedVehicleDto.fuelFilter}"/>
+                    <p:inputText id="fuelFilter" value="#{vehicleCreateBean.selectedVehicleDto.fuelFilter}"/>
 
 
                     <h:outputLabel for="motorOil" value="#{msg['web.vehicles.edit.revision.motorOil']}"/>
-                    <p:inputText id="motorOil" value="#{createBean.selectedVehicleDto.motorOil}"/>
+                    <p:inputText id="motorOil" value="#{vehicleCreateBean.selectedVehicleDto.motorOil}"/>
 
                 </p:panelGrid>
             </p:tab>
@@ -125,27 +125,27 @@
                         <h:panelGrid columns="2" columnClasses="label, value">
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"
                                           style="font-weight: bold;"/>
-                            <h:outputText value="#{createBean.selectedVehicleDto.registrationPlate}" required="true"
+                            <h:outputText value="#{vehicleCreateBean.selectedVehicleDto.registrationPlate}" required="true"
                                           label="registrationplate"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.brand']}" styleClass="outputLabel"/>
-                            <h:outputText value="#{createBean.selectedVehicleDto.brand}" required="true" label="brand"/>
+                            <h:outputText value="#{vehicleCreateBean.selectedVehicleDto.brand}" required="true" label="brand"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.client']}"
                                           styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedClient.fullName ? '-' : createBean.selectedClient.fullName}"
+                                    value="#{empty vehicleCreateBean.selectedClient.fullName ? '-' : vehicleCreateBean.selectedClient.fullName}"
                                     readonly="true"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"
                                           styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.bodyOnFrame ? '-' : createBean.selectedVehicleDto.bodyOnFrame}"
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.bodyOnFrame ? '-' : vehicleCreateBean.selectedVehicleDto.bodyOnFrame}"
                                     label="bodyframe"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.basicinfo.KMS']}" styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.kms ? '-' : createBean.selectedVehicleDto.kms}"
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.kms ? '-' : vehicleCreateBean.selectedVehicleDto.kms}"
                                     label="kms"/>
                         </h:panelGrid>
 
@@ -153,20 +153,20 @@
                             <p:outputLabel for="lastItvDateBtn" value="#{msg['web.vehicles.edit.itv.last']}"
                                            styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.itvDate ? '-' : createBean.selectedVehicleDto.itvDate}">
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.itvDate ? '-' : vehicleCreateBean.selectedVehicleDto.itvDate}">
                             </h:outputText>
 
                             <p:outputLabel for="nextItvDateBtn" value="#{msg['web.vehicles.edit.itv.next']}"
                                            styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.nextItvDate ? '-' : createBean.selectedVehicleDto.nextItvDate}">
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.nextItvDate ? '-' : vehicleCreateBean.selectedVehicleDto.nextItvDate}">
                             </h:outputText>
 
                             <p:outputLabel for="lastRevisionBtn"
                                            value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"
                                            styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.lastRevisionDate ? '-' : createBean.selectedVehicleDto.lastRevisionDate}">
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.lastRevisionDate ? '-' : vehicleCreateBean.selectedVehicleDto.lastRevisionDate}">
                             </h:outputText>
 
                         </h:panelGrid>
@@ -176,29 +176,29 @@
                             <h:outputText value="#{msg['web.vehicles.edit.revision.airFilterReference']}"
                                           styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.airFilterReference ? '-' : createBean.selectedVehicleDto.airFilterReference}"/>
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.airFilterReference ? '-' : vehicleCreateBean.selectedVehicleDto.airFilterReference}"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.revision.oilFilterReference']}"
                                           styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.oilFilterReference ? '-' : createBean.selectedVehicleDto.oilFilterReference}"/>
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.oilFilterReference ? '-' : vehicleCreateBean.selectedVehicleDto.oilFilterReference}"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.revision.fuelFilter']}"
                                           styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.fuelFilter? '-' : createBean.selectedVehicleDto.fuelFilter}"/>
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.fuelFilter? '-' : vehicleCreateBean.selectedVehicleDto.fuelFilter}"/>
 
                             <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}"
                                           styleClass="outputLabel"/>
                             <h:outputText
-                                    value="#{empty createBean.selectedVehicleDto.motorOil ? '-' : createBean.selectedVehicleDto.motorOil}"/>
+                                    value="#{empty vehicleCreateBean.selectedVehicleDto.motorOil ? '-' : vehicleCreateBean.selectedVehicleDto.motorOil}"/>
                         </h:panelGrid>
                         <f:facet name="footer">
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton value="Create"
                                                      process="@form"
-                                                     action="#{createBean.create}"
+                                                     action="#{vehicleCreateBean.create}"
                                                      update="createDialogMessages"
                                     />
                                 </f:facet>
