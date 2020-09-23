@@ -1,5 +1,6 @@
 package client_beans.vehicles;
 
+import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import client_beans.util.PropertyLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,6 +69,14 @@ public class VehicleGateway implements Serializable {
     public List<VehicleDto> searchBy(String query) {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES))
                 .queryParam("query", query)
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<List<VehicleDto>>() {});
+    }
+
+    public List<VehicleDto> searchBy(ClientDto clientDto) {
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES))
+                .queryParam("clientId", clientDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .get(new GenericType<List<VehicleDto>>() {});

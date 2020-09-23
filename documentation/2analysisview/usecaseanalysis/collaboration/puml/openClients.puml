@@ -20,12 +20,12 @@ end note
 
 MenuView -right-> ClientsView
 note on link
-    openClientsView()
+    new ClientsView()
 end note
 
 ClientsView -right-> OpenClientsController
 note on link
-    readClients()
+    readAllClients()
 end note
 
 OpenClientsController --> ClientDao

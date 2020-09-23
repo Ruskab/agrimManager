@@ -2,6 +2,7 @@ package api.api_controllers;
 
 import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
+import api.daos.VehicleDao;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
 import api.exceptions.FieldInvalidException;
@@ -54,11 +55,14 @@ public class VehicleApiController {
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public List<VehicleDto> readAll(@QueryParam("query") String query) {
-        if (query == null) {
-            return this.vehicleBusinessController.readAll();
+    public List<VehicleDto> readAll(@QueryParam("query") String query, @QueryParam("clientId") String clientId) {
+        if (query != null) {
+            return this.vehicleBusinessController.searchBy(query);
         }
-        return this.vehicleBusinessController.searchBy(query);
+        if (clientId != null) {
+            return vehicleBusinessController.searchByClient(clientId);
+        }
+        return this.vehicleBusinessController.readAll();
     }
 
     @GET
