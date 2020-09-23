@@ -8,6 +8,7 @@ state initState as "OPENED_DASHBOARD"
 state initState2 as "OPENED_VEHICLES"
 state initState3 as "OPENED_INTERVENTIONS"
 state initState4 as "OPENED_CLIENTS"
+state initState5 as "OPENED_OPERATIONS"
 state OPENED_DASHBOARD as "OPENED_DASHBOARD"
 state openDashboard as ":openDashboard"
 
@@ -31,11 +32,18 @@ note on link
     <b>User requests to</b>
     * create new intervention
 end note
+initState5 --> createIntervention
+note on link
+    <b>User requests to</b>
+    * create new intervention
+end note
 
 state createIntervention {
 state 1 as " "
 state 2 as " "
+state 3 as " "
 state 4 as " "
+state 5 as " "
 state 9 as " "
 
 [*] --> 1
@@ -50,8 +58,37 @@ note on link
 * intervention description
 ** REPAIR | CAFE
 <b>System allows</b>
+* provide text for search vehicle datasheet
 * cancel
 end note
+
+2 --> 3
+note on link
+<b>User provides</b>
+* text for search vehicle datasheet
+end note
+
+3 --> 5
+note on link
+<b>System shows</b>
+* vehicle datasheets that match the criteria 
+<b>System allows</b>
+* provide vehicle datasheet
+* cancel
+end note
+
+5 -[#red]-> [*]
+note on link
+<b>User requests to</b>
+* cancel
+end note
+
+5 --> 1
+note on link
+<b>User provides</b>
+* vehicle datasheet
+end note
+
 
 2 -[#red]-> [*]
 note on link
@@ -75,15 +112,9 @@ note on link
 * vehicle datasheet
 <b>System allows
 * confirm creation
-* go back
 * cancel
 end note
 
-9 -up-> 1
-note on link
-<b> User requests
-* go back
-end note
 
 9 -down[#red]-> [*]
 note on link
@@ -91,7 +122,7 @@ note on link
 * cancel
 end note
 
-9 -down-> [*]
+9 -down---> [*]
 note on link
 <b>User requests to
 * confirm creation

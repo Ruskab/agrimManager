@@ -40,7 +40,7 @@
                 <p:submenu label="#{msg['web.header.interventions']}" icon="fa fa fa-wrench fa-xs">
                     <p:menuitem value="#{msg['web.header.interventions']}" url="#{request.contextPath}/backoffice/interventions.xhtml"/>
                     <p:separator/>
-                    <p:menuitem value="#{msg['web.header.newintervention']}" oncomplete="PF('interventionCreateDialog').show()"/>
+                    <p:menuitem value="#{msg['web.header.newintervention']}" oncomplete="PF('createIntervention').show()"/>
                     <p:separator/>
                 </p:submenu>
 
@@ -54,7 +54,7 @@
             </p:menubar>
         </h:form>
         <h:form>
-            <agrim:interventionsCreateDialog/>
+            <agrim:createIntervention/>
         </h:form>
     </div>
 </composite:implementation>

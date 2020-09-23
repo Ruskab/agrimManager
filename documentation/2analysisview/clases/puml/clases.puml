@@ -7,6 +7,8 @@ package Views {
     boundary CreateClientView
     boundary VehiclesView
     boundary ClientsView
+    boundary CreateInterventionView
+    boundary MenuView
 
     boundary VehicleView
     boundary MechanicView
@@ -14,22 +16,21 @@ package Views {
     boundary DeveloperView
     boundary InterventionView
     boundary RepairingPackView
-    boundary MenuView
     boundary loginView
     boundary signInView
 }
 
 package Controllers {
-    control createClientController
     control openClientsController
-    control createVehicleController
     control openVehiclesController
+    control createClientController
+    control createVehicleController
+    control createInterventionController
 
     control openClientController
     control updateClientsController
     control openVehicleController
     control updateVehicleController
-    control createInterventionController
     control finishInterventionController
     control openInterventionsController
     control loginController

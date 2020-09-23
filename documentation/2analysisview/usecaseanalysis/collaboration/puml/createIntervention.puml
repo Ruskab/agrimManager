@@ -5,8 +5,9 @@
 
 actor actor
 view ":MenuView" as MenuView
-view ":InterventionCreateView" as InterventionCreateView
+view CreateInterventionView
 controller InterventionCreateController
+controller OpenVehiclesController
 model InterventionsDao
 model Intervention
 model VehiclesDao
@@ -18,28 +19,33 @@ note on link
     createIntervention()
 end note
 
-actor -right-> InterventionCreateView
+actor -right-> CreateInterventionView
 note on link
-searchVehicle(text)
+searchVehicles(text)
 setType(type)
 setDescription(description)
 confirmCreation()
 end note
 
-MenuView -right-> InterventionCreateView
+MenuView -right-> CreateInterventionView
 note on link
-    openInterventionCreateDialog()
+    new CreateInterventionView()
 end note
 
+CreateInterventionView -right-> "*" Vehicle
 
-InterventionCreateView -up-> s1
+CreateInterventionView -up-> s1
 note on link
     openDashboard()
 end note
 
-InterventionCreateView -right-> InterventionCreateController
+CreateInterventionView --> OpenVehiclesController
 note on link
-    readVehicles(text)
+    searchVehicles(text)
+end note
+
+CreateInterventionView -right-> InterventionCreateController
+note on link
     createIntervention(intervention)
 end note
 
@@ -48,17 +54,17 @@ note on link
     create(intervention)
 end note
 
-InterventionCreateController --> VehiclesDao
+OpenVehiclesController --> VehiclesDao
 note on link
     searchVehicle(text)
 end note
 
 
-InterventionCreateView --> Intervention
+CreateInterventionView --> Intervention
 VehiclesDao -- Vehicle
 InterventionsDao .. Intervention
 InterventionCreateController .. "1" Intervention
-InterventionCreateController .. "*" Vehicle
+OpenVehiclesController .. "*" Vehicle
 
 
 @enduml

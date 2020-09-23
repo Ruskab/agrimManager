@@ -36,6 +36,9 @@ end note
 createClientView --> "1" Client
 
 createClientView --> OpenClients
+note on link
+openClients()
+end note
 
 CreateClientController -right-> ClientDao
 note on link

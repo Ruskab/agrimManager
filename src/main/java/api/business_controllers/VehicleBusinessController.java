@@ -11,6 +11,8 @@ import api.exceptions.NotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class VehicleBusinessController {
 
     private static final String VEHICLE_ID_MSG = "Vehicle id: ";
@@ -49,7 +51,7 @@ public class VehicleBusinessController {
     }
 
     public List<VehicleDto> readAll() {
-        return DaoFactory.getFactory().getVehicleDao().findAll().map(VehicleDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getVehicleDao().findAll().map(VehicleDto::new).collect(toList());
     }
 
     public void update(String id, VehicleDto vehicleDto) {
@@ -71,5 +73,12 @@ public class VehicleBusinessController {
         vehicle.setClient(DaoFactory.getFactory().getClientDao().read((Integer.parseInt(vehicleDto.getClientId())))
                 .orElse(vehicle.getClient()));
         DaoFactory.getFactory().getVehicleDao().update(vehicle);
+    }
+
+    public List<VehicleDto> searchBy(String query) {
+        return DaoFactory.getFactory().getVehicleDao().findAll()
+                .map(VehicleDto::new)
+                .filter(vehicleDto -> vehicleDto.getVehicleDataSheet().toLowerCase().contains(query.toLowerCase()))
+                .collect(toList());
     }
 }
