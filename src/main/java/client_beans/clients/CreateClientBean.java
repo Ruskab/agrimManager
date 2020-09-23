@@ -29,28 +29,23 @@ public class CreateClientBean {
         client = new ClientDto();
     }
 
-    public ClientDto getClient() {
-        return client;
-    }
-
-    public void setClient(ClientDto client) {
-        this.client = client;
-    }
-
     public void create() {
         if (client == null) {
             LOGGER.error("Cliente vacio");
-            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
+            FacesContext.getCurrentInstance()
+                    .addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
         }
 
         String clientId = clientGateway.create(client);
         String message = StringUtils.isStrictlyNumeric(clientId) ? "Successful" : "Error";
 
         if ("Error".equals(message)) {
-            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "create client"));
+            FacesContext.getCurrentInstance()
+                    .addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "create client"));
             return;
         }
-        FacesContext.getCurrentInstance().addMessage("globalMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "create client"));
+        FacesContext.getCurrentInstance()
+                .addMessage("globalMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, message, "create client"));
         PrimeFaces.current().dialog().closeDynamic(null);
         resertWizard();
     }
@@ -62,5 +57,13 @@ public class CreateClientBean {
 
     public String onFlowProcess(FlowEvent event) {
         return event.getNewStep();
+    }
+
+    public ClientDto getClient() {
+        return client;
+    }
+
+    public void setClient(ClientDto client) {
+        this.client = client;
     }
 }

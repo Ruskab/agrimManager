@@ -13,11 +13,11 @@
 </composite:interface>
 
 <composite:implementation>
-    <p:dialog id="interventionCreateDialog" widgetVar="interventionCreateDialog" styleClass="intervention-create-dialog"
+    <p:dialog id="createIntervention" widgetVar="createIntervention" styleClass="intervention-create-dialog"
               header="Intervention Full Info" modal="true"
               responsive="true" showEffect="fade" hideEffect="fade" resizable="false">
 
-        <p:wizard id="creteInterventionWizzard" widgetVar="createInterventionWizzard" flowListener="#{interventionCreateBean.onFlowProcess}"
+        <p:wizard id="creteInterventionWizzard" widgetVar="createInterventionWizzard" flowListener="#{createInterventionBean.onFlowProcess}"
                   styleClass="create-intervention-wizzard">
 
             <p:tab id="selectVehicleTab" title="#{msg['web.interventions.edit.selectvehicle']}">
@@ -27,16 +27,16 @@
                     </f:facet>
 
                     <h:outputLabel for="autoCompleteVehicleDataSheet" value="#{msg['web.interventions.edit.vehicle.datasheet']}"/>
-                    <p:autoComplete id="autoCompleteVehicleDataSheet" value="#{interventionCreateBean.selectedVehicle}"
-                                    completeMethod="#{interventionCreateBean.completeVehicleDataSheet}"
-                                    var="vehicle" itemLabel="#{vehicle.vehicleDataSheet}" itemValue="#{vehicle}" required="#{!interventionCreateBean.caffe}"
+                    <p:autoComplete id="autoCompleteVehicleDataSheet" value="#{createInterventionBean.selectedVehicle}"
+                                    completeMethod="#{createInterventionBean.searchVehicleDataSheet}"
+                                    var="vehicle" itemLabel="#{vehicle.vehicleDataSheet}" itemValue="#{vehicle}" required="#{!createInterventionBean.caffe}"
                                     converter="client_beans.util.converters.VehicleConverter" forceSelection="true"
                                     minQueryLength="3" effect="fade"/>
                     <p:message for="autoCompleteVehicleDataSheet"/>
 
                     <f:facet name="footer">
                         <h:outputLabel for="btnCaffe" value="#{msg['web.interventionCreateDialog.iscaffe']}"/>
-                        <h:selectBooleanCheckbox id="btnCaffe" value="#{interventionCreateBean.caffe}" >
+                        <h:selectBooleanCheckbox id="btnCaffe" value="#{createInterventionBean.caffe}" >
                             <p:ajax event="change" update="selectVehicleTab"/>
                         </h:selectBooleanCheckbox>
                     </f:facet>
@@ -47,7 +47,7 @@
                 <p:panelGrid columns="2" layout="grid" columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-5">
 
                     <h:outputLabel for="inpTitle" value="#{msg['web.interventions.title']}"/>
-                    <p:inputText id="inpTitle" value="#{interventionCreateBean.selectedIntervention.title}" required="false"/>
+                    <p:inputText id="inpTitle" value="#{createInterventionBean.selectedIntervention.title}" required="false"/>
                     <p:message for="inpTitle"/>
                 </p:panelGrid>
             </p:tab>
@@ -62,9 +62,9 @@
                         </f:facet>
                         <h:panelGrid columns="2" columnClasses="label, value">
                             <h:outputLabel for="confTitleOutText" value="#{msg['web.interventions.title']}" style="font-weight: bold;"/>
-                            <h:outputText id="confTitleOutText" value="#{interventionCreateBean.selectedIntervention.title}" required="true" label="intervTitle"/>
+                            <h:outputText id="confTitleOutText" value="#{createInterventionBean.selectedIntervention.title}" required="true" label="intervTitle"/>
                             <h:outputLabel for="vehicleDataSheetOutTxt" value="#{msg['web.vehicles.edit.basicinfo.datasheet']}" styleClass="outputLabel"/>
-                            <h:outputText id="vehicleDataSheetOutTxt" value="#{interventionCreateBean.selectedVehicle.vehicleDataSheet}"/>
+                            <h:outputText id="vehicleDataSheetOutTxt" value="#{createInterventionBean.selectedVehicle.vehicleDataSheet}"/>
                         </h:panelGrid>
 
                         <f:facet name="footer">
@@ -72,7 +72,7 @@
                                 <f:facet name="left">
                                     <p:commandButton value="Create"
                                                      process="@form"
-                                                     action="#{interventionCreateBean.create}"
+                                                     action="#{createInterventionBean.create}"
                                                      update="createDialogMessages"/>
                                 </f:facet>
                             </p:toolbar>

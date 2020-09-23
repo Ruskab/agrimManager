@@ -16,6 +16,7 @@ state createClient {
 state 1 as " "
 state 2 as " "
 state 6 as " "
+state 7 as " "
 
 [*]  -down-> 1
 
@@ -42,7 +43,24 @@ note on link
 * pending billable hours
 end note
 
-6 -down-> [*]
+
+6 -down-> 7
+note on link
+<b>System shows</b>
+* client information
+<b>System allows</b>
+* confirm
+* cancel
+end note
+
+7 -[#red]-> [*]
+note on link
+<b>User requests to</b>
+* cancel
+end note
+
+
+7 -down-> [*]
 note on link
 <b>User requests to</b>
 * confirm creation
@@ -52,7 +70,6 @@ end note
 
 createClient -down-> openClients
 createClient -[#red]-> OPENED_CLIENTS
-
 openClients -down-> OPENED_CLIENTS
 
 

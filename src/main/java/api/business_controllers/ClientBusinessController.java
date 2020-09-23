@@ -24,7 +24,6 @@ public class ClientBusinessController {
         DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
     }
 
-    private DaoFactory daoFactory = DaoFactory.getFactory();
     private ClientMapper clientMapper = ClientMapper.INSTANCE;
 
 
@@ -34,12 +33,12 @@ public class ClientBusinessController {
 
     public int create(ClientDto clientDto) {
         Client client = clientMapper.toClient(clientDto);
-        daoFactory.getClientDao().create(client);
+        DaoFactory.getFactory().getClientDao().create(client);
         return client.getId();
     }
 
     public List<ClientDto> readAll() {
-        return daoFactory.getClientDao()
+        return DaoFactory.getFactory().getClientDao()
                 .findAll()
                 .map(clientMapper::toClientDto)
                 .collect(toList());
@@ -47,7 +46,7 @@ public class ClientBusinessController {
 
 
     public ClientDto read(String id) {
-        return daoFactory.getClientDao()
+        return DaoFactory.getFactory().getClientDao()
                 .read(Integer.parseInt(id))
                 .map(clientMapper::toClientDto)
                 .orElseThrow(() -> NotFoundException.throwBecauseOf(CLIENT_ID + id));
@@ -55,8 +54,8 @@ public class ClientBusinessController {
 
     public void update(String id, ClientDto clientDto) {
         BiConsumer<ClientDto, Client> mapFromDto = clientMapper::updateFromDto;
-        Consumer<Client> updateEntity = daoFactory.getClientDao()::update;
-        daoFactory.getClientDao()
+        Consumer<Client> updateEntity = DaoFactory.getFactory().getClientDao()::update;
+        DaoFactory.getFactory().getClientDao()
                 .read((Integer.parseInt(id)))
                 .ifPresentOrElse(
                         clt -> {
@@ -67,16 +66,16 @@ public class ClientBusinessController {
     }
 
     public void delete(String id) {
-        daoFactory.getClientDao()
+        DaoFactory.getFactory().getClientDao()
                 .read((Integer.parseInt(id)))
                 .map(Client::getId)
                 .ifPresentOrElse(
-                        daoFactory.getClientDao()::deleteById,
+                        DaoFactory.getFactory().getClientDao()::deleteById,
                         () -> NotFoundException.throwBecauseOf(CLIENT_ID + id));
     }
 
     public Optional<ClientVehiclesDto> readClientVehicles(int clientId) {
-        return daoFactory.getClientDao()
+        return DaoFactory.getFactory().getClientDao()
                 .read(clientId)
                 .map(this::mapClientVehiclesDto)
                 .or(Optional::empty);
@@ -87,14 +86,14 @@ public class ClientBusinessController {
     }
 
     private List<Integer> getClientVehicles(Client client) {
-        return daoFactory.getVehicleDao()
+        return DaoFactory.getFactory().getVehicleDao()
                 .findByClient(client)
                 .map(Vehicle::getId)
                 .collect(toList());
     }
 
     public List<ClientDto> searchByFullName(String fullName) {
-        return daoFactory.getClientDao()
+        return DaoFactory.getFactory().getClientDao()
                 .findAll()
                 .filter(client -> client.getFullName().toLowerCase().contains(fullName.toLowerCase()))
                 .map(clientMapper::toClientDto)

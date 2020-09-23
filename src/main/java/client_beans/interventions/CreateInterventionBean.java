@@ -23,24 +23,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static client_beans.util.SessionUtil.getAuthToken;
-import static java.util.stream.Collectors.toList;
 
 @ManagedBean
 @ViewScoped
-public class InterventionCreateBean {
+public class CreateInterventionBean {
 
-    private static final Logger LOGGER = LogManager.getLogger(InterventionCreateBean.class);
+    private static final Logger LOGGER = LogManager.getLogger(CreateInterventionBean.class);
     private VehicleDto selectedVehicle;
     private InterventionDto selectedIntervention;
     private MechanicGateway mechanicGateway;
-    private List<VehicleDto> vehicles;
+    private VehicleGateway vehicleGateway;
     private boolean isCaffe;
 
     @PostConstruct
     public void init() {
         mechanicGateway = new MechanicGateway(getAuthToken());
+        vehicleGateway = new VehicleGateway(getAuthToken());
         selectedIntervention = new InterventionDto();
-        vehicles = new VehicleGateway(getAuthToken()).readAll();
     }
 
     public void create() throws IOException {
@@ -50,10 +49,14 @@ public class InterventionCreateBean {
         selectedIntervention.setVehicleId(selectedVehicle != null ? Integer.toString(selectedVehicle.getId()) : null);
         selectedIntervention.setInterventionType(selectedVehicle != null ? InterventionType.REPAIR : InterventionType.CAFFE);
         mechanicGateway.addIntervention(mechanic, selectedIntervention);
-        PrimeFaces.current().executeScript("PF('interventionCreateDialog').hide();");
+        PrimeFaces.current().executeScript("PF('createIntervention').hide();");
         resetWizard();
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.redirect(externalContext.getRequestContextPath().concat("/backoffice/home.xhtml"));
+    }
+
+    public List<VehicleDto> searchVehicleDataSheet(String query) {
+        return vehicleGateway.searchBy(query);
     }
 
     private void validateSelection() {
@@ -67,10 +70,6 @@ public class InterventionCreateBean {
         PrimeFaces.current().executeScript("PF('createVehicleWizzard').loadStep('selectVehicleTab', false)");
         selectedIntervention = new InterventionDto();
         selectedVehicle = null;
-    }
-
-    public List<VehicleDto> completeVehicleDataSheet(String query) {
-        return vehicles.stream().filter(vehicleDto -> vehicleDto.getVehicleDataSheet().toLowerCase().contains(query.toLowerCase())).collect(toList());
     }
 
     public boolean isCaffe() {

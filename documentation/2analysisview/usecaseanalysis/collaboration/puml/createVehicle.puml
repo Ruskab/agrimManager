@@ -43,6 +43,9 @@ note on link
 end note
 
 VehicleCreateView --> OpenVehicles
+note on link
+openVehicles()
+end note
 
 VehicleCreateView --> "1" Vehicle
 VehicleCreateView --> "*" Client

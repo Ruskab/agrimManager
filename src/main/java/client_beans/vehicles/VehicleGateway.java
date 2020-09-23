@@ -65,6 +65,14 @@ public class VehicleGateway implements Serializable {
                 .get(new GenericType<List<VehicleDto>>() {});
     }
 
+    public List<VehicleDto> searchBy(String query) {
+        return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES))
+                .queryParam("query", query)
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<List<VehicleDto>>() {});
+    }
+
     public VehicleDto read(String vehicleId) {
         return client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(VEHICLES) + "/" + vehicleId)
                 .request(MediaType.APPLICATION_JSON)

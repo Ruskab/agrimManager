@@ -59,6 +59,18 @@ OPENED_DASHBOARD --> OPENED_INTERVENTIONS
          openInterventions
          openMyInterventions
     end note
+
+OPENED_DASHBOARD --> OPENED_OPERATIONS
+    note on link
+        openOperations
+    end note
+
+OPENED_OPERATIONS --> OPENED_DASHBOARD
+note on link
+    createIntervention
+    openDashboard
+end note
+
 OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
     note on link
          bill intervention
