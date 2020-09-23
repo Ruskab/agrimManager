@@ -5,8 +5,9 @@
 
 actor user
 view ClientsView
-view ClientInfoView
+view createClientView
 controller CreateClientController
+collaboration ":Collaboration OpenClients" as OpenClients
 model ClientDao
 model Client
 
@@ -15,23 +16,26 @@ note on link
     createClient()
 end note
 
-user --> ClientInfoView
+user --> createClientView
 note on link
-setFullName(fullName)
-setBillableHours(billableHours)
+    setFullName(fullName)
+    setBillableHours(billableHours)
+    confirmCreation()
 end note
 
-ClientsView -down-> ClientInfoView
+ClientsView -down-> createClientView
 note on link
-    new ClientInfoView()
+    new createClientView()
 end note
 
-ClientInfoView -right-> CreateClientController
+createClientView -right-> CreateClientController
 note on link
     createClient(client)
 end note
 
-ClientInfoView --> Client
+createClientView --> "1" Client
+
+createClientView --> OpenClients
 
 CreateClientController -right-> ClientDao
 note on link

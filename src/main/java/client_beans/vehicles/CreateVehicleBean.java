@@ -20,9 +20,9 @@ import static client_beans.util.SessionUtil.getAuthToken;
 
 @ManagedBean
 @ViewScoped
-public class VehicleCreateBean {
+public class CreateVehicleBean {
 
-    private static final Logger LOGGER = LogManager.getLogger(VehicleCreateBean.class);
+    private static final Logger LOGGER = LogManager.getLogger(CreateVehicleBean.class);
     private boolean skip;
     private VehicleDto selectedVehicleDto;
     private ClientDto selectedClient;

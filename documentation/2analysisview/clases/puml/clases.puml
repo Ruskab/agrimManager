@@ -3,14 +3,15 @@
 !include skinParams.puml
 
 package Views {
-    boundary VehicleCreateView
+    boundary CreateVehicleView
+    boundary CreateClientView
     boundary VehiclesView
+    boundary ClientsView
 
     boundary VehicleView
     boundary MechanicView
     boundary AdminView
     boundary DeveloperView
-    boundary ClientView
     boundary InterventionView
     boundary RepairingPackView
     boundary MenuView
@@ -20,13 +21,14 @@ package Views {
 
 package Controllers {
     control createClientController
-    control openClientController
     control openClientsController
-    control updateClientsController
     control createVehicleController
+    control openVehiclesController
+
+    control openClientController
+    control updateClientsController
     control openVehicleController
     control updateVehicleController
-    control openVehiclesController
     control createInterventionController
     control finishInterventionController
     control openInterventionsController
@@ -37,10 +39,10 @@ package Controllers {
 }
 
 package Models {
-    entity ClientEntity
-    entity VehicleEntity
-    entity InterventionEntity
-    entity RepairingPackEntity
-    entity MechanicEntity
+    entity Client
+    entity Vehicle
+    entity Intervention
+    entity RepairingPack
+    entity Mechanic
 }
 @enduml
