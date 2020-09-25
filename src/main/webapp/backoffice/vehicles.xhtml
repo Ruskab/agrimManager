@@ -19,14 +19,14 @@
                 <h:form id="data-view-vehicles-form">
 
                     <p:dataTable id="vehicleTable" styleClass="vehicles-datatable" widgetVar="vehicleTable"
-                                 var="vehicle" value="#{lazyVehiclesView.lazyModel}" paginator="true" rows="10"
+                                 var="vehicle" value="#{lazyVehiclesBean.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
-                                 selection="#{lazyVehiclesView.selectedVehicleDto}" lazy="true" filterDelay="200">
+                                 selection="#{lazyVehiclesBean.selectedVehicleDto}" lazy="true" filterDelay="200">
 
-                        <p:ajax event="rowSelect" listener="#{lazyVehiclesView.onRowSelect}"
-                                update="@(.vehicle-edit-dialog)"
-                                oncomplete="PF('vehicleEditDialog').show()"/>
+                        <p:ajax event="rowSelect" listener="#{lazyVehiclesBean.onRowSelect}"
+                                update="@(.vehicle-config-dialog)"
+                                oncomplete="PF('vehicleConfigDialog').show()"/>
 
                         <f:facet name="header">
                             <p:outputPanel>
@@ -42,8 +42,8 @@
                         <p:column headerText="Brand" sortBy="#{vehicle.brand}" filterBy="#{vehicle.brand}" priority="1">
                             <h:outputText value="#{vehicle.brand}"/>
                         </p:column>
-                        <p:column headerText="Client" priority="1" filterBy="#{lazyVehiclesView.clientName}">
-                            <h:outputText value="#{lazyVehiclesView.clientNames.get(vehicle.clientId)}"/>
+                        <p:column headerText="Client" priority="1" filterBy="#{lazyVehiclesBean.clientName}">
+                            <h:outputText value="#{lazyVehiclesBean.clientNames.get(vehicle.clientId)}"/>
                         </p:column>
                         <p:column headerText="body On Frame" sortBy="#{vehicle.bodyOnFrame}"
                                   filterBy="#{vehicle.bodyOnFrame}" priority="4">
@@ -61,9 +61,9 @@
 
                     </p:dataTable>
 
-                    <agrim:vehiclesFullDetailDialog id="vehiclesEditComponent"
-                                                    selectedVehicle="#{lazyVehiclesView.selectedVehicleDto}"
-                                                    clientName="#{lazyVehiclesView.clientName}"/>
+                    <agrim:configvehicle id="vehiclesEditComponent"
+                                         selectedVehicle="#{lazyVehiclesBean.selectedVehicleDto}"
+                                         clientName="#{lazyVehiclesBean.clientName}"/>
                 </h:form>
 
                 <h:form id="creteVehicleForm">

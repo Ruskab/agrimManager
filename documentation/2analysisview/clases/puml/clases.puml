@@ -7,13 +7,13 @@ package Views {
     boundary CreateClientView
     boundary VehiclesView
     boundary ClientsView
+    boundary ConfigClientView
+    boundary VehicleConfigView
     boundary CreateInterventionView
     boundary MenuView
 
-    boundary VehicleView
     boundary MechanicView
     boundary AdminView
-    boundary DeveloperView
     boundary InterventionView
     boundary RepairingPackView
     boundary loginView

@@ -12,7 +12,9 @@ import api.exceptions.NotFoundException;
 import api.dtos.mappers.InterventionMapper;
 import com.mysql.cj.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class InterventionBusinesssController {
@@ -88,5 +90,15 @@ public class InterventionBusinesssController {
         if (property == null) {
             throw new FieldInvalidException(message + " is missing");
         }
+    }
+
+    public void finishIntervention(String id) {
+        Optional<Intervention> intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(id));
+        intervention.ifPresent(this::setEndTimeNow);
+    }
+
+    private void setEndTimeNow(Intervention intervention) {
+        intervention.setEndTime(LocalDateTime.now());
+        DaoFactory.getFactory().getInterventionDao().update(intervention);
     }
 }

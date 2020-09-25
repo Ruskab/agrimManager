@@ -60,9 +60,8 @@ public class ActiveInterventionBean {
     }
 
     public void finishActiveIntervention() {
-        activeIntervention.setEndTime(LocalDateTime.now());
         try {
-            interventionGateway.update(activeIntervention);
+            interventionGateway.finishIntervention(activeIntervention);
             activeIntervention = null;
         } catch (IllegalStateException e) {
             FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));

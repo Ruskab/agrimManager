@@ -41,7 +41,8 @@ public class InterventionGateway implements Serializable {
     }
 
     public String create(InterventionDto interventionDto) {
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS))
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
+                .getProperty(INTERVENTIONS))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
@@ -50,10 +51,20 @@ public class InterventionGateway implements Serializable {
     }
 
     public void update(InterventionDto interventionDto) {
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + interventionDto.getId())
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
+                .getProperty(INTERVENTIONS) + "/" + interventionDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .put(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
+        checkResponseStatus(response, Response.Status.OK);
+    }
+
+    public void finishIntervention(InterventionDto interventionDto) {
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
+                .getProperty(INTERVENTIONS) + "/" + interventionDto.getId() + "/finish")
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.OK);
     }
 
@@ -73,7 +84,8 @@ public class InterventionGateway implements Serializable {
     }
 
     public void delete(Integer id) {
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(INTERVENTIONS) + "/" + id)
+        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
+                .getProperty(INTERVENTIONS) + "/" + id)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .delete();

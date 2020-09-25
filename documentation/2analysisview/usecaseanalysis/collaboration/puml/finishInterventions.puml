@@ -1,0 +1,38 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor actor
+
+view DashboardView
+
+controller finishInterventionController
+
+model InterventionDao
+model Intervention
+
+actor --> DashboardView
+note on link
+    finishIntervention(interventionId)
+end note
+
+DashboardView -down-> "1" Intervention
+
+DashboardView -right-> finishInterventionController
+note on link
+    finishIntervention(interventionId)
+end note
+
+finishInterventionController -down-> InterventionDao
+note on link
+    updateIntervention(interventionId, endTime)
+end note
+
+
+finishInterventionController .down. "0..*" Intervention
+InterventionDao -left- Intervention
+
+
+
+@enduml
