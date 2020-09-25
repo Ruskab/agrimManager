@@ -1,5 +1,4 @@
 @startuml
-
 !include skinParams.puml
 
  skinparam linetype polyline
