@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:agrim="http://java.sun.com/jsf/composite/components/agrim"
+      lang="en" xml:lang="en">
+
+<h:head>
+    <title>Home</title>
+</h:head>
+<h:body>
+    <ui:composition template="/templates/master_layout.xhtml">
+
+        <ui:define name="content">
+            <div class="ui-fluid p-align-center vertical-container">
+                <div class="ui-g-12 ui-md-2 ui-lg-4"></div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <h:form id="data-view-clients-form">
+                        <p:growl id="contentMessages" showDetail="true"><p:autoUpdate/></p:growl>
+                    </h:form>
+
+                    <h:form id="activeInterventionsForm">
+
+                        <p:growl id="msg" showDetail="true" life="4000"/>
+
+                        <p:repeat value="#{dashboardBean.activeInterventions}" var="intervention">
+                            <agrim:activeInterventionPanel id="activeIntervention" intervention="#{intervention}" vehicle="#{dashboardBean.searchVehicle(intervention.vehicleId)}"/>
+                        </p:repeat>
+
+                    </h:form>
+
+
+                </div>
+                <div class="ui-g-12 ui-md-2 ui-lg-4"></div>
+
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

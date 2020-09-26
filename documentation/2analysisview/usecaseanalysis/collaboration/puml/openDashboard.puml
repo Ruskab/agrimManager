@@ -27,23 +27,26 @@ note on link
 end note
 
 DashboardView -down-> Session
+note on link
+    getMechanic()
+end note
 DashboardView -down-> Intervention
 DashboardView -down-> Vehicle
 
 DashboardView -right-> openDashboardController
 note on link
-    readActiveInterventions(mechanic)
-    readVehicle(interventionId)
+    searchActiveInterventions(mechanic)
+    searchVehicle(interventionId)
 end note
 
 openDashboardController -down-> InterventionDao
 note on link
-    readActiveInterventions(mechanic)
+    searchActiveInterventions(mechanic)
 end note
 
 openDashboardController -right-> VehicleDao
 note on link
-    readVehicle(interventionId)
+    searchVehicle(interventionId)
 end note
 
 openDashboardController .. Vehicle

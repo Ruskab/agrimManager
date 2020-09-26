@@ -10,5 +10,4 @@ class InterventionDaoHibr extends GenericDaoHibr<Intervention, Integer> implemen
     InterventionDaoHibr(EntityManagerFactory entityManagerFactory) {
         super(entityManagerFactory);
     }
-
 }

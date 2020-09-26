@@ -6,7 +6,7 @@
 
     <lifecycle>
         <phase-listener>
-            client_beans.util.DebugListener
+            front.util.DebugListener
         </phase-listener>
     </lifecycle>
 

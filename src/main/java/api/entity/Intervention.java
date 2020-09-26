@@ -104,4 +104,8 @@ public class Intervention implements Serializable {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
+
+    public boolean isActive() {
+        return endTime == null;
+    }
 }

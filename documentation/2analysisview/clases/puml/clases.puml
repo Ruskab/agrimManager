@@ -11,6 +11,7 @@ package Views {
     boundary VehicleConfigView
     boundary CreateInterventionView
     boundary MenuView
+    boundary DashboardView
 
     boundary MechanicView
     boundary AdminView

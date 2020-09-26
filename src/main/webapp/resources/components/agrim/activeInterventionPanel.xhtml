@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:P="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      lang="en">
+
+<head>
+    <title>Active intervention Panel</title>
+</head>
+
+
+<composite:interface>
+    <composite:attribute name="intervention" required="true" type="api.dtos.InterventionDto"/>
+    <composite:attribute name="vehicle" required="true" type="api.dtos.VehicleDto"/>
+</composite:interface>
+
+<composite:implementation>
+
+        <p:panel id="pnlIntervention" header="#{cc.attrs.vehicle.vehicleDataSheet}">
+            <h:panelGrid id="pnlGridIntervention" layout="grid" columns="2" cellpadding="1"
+                         columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-8">
+                <h:outputLabel for="strtDate" value="#{msg['web.interventions.type']}"/>
+                <h:outputText id="intrvType" value="#{cc.attrs.intervention.interventionType}"/>
+                <h:outputLabel for="strtDate" value="#{msg['web.interventions.startDate']}"/>
+                <h:outputText id="strtDate" value="#{cc.attrs.intervention.startTime}"/>
+            </h:panelGrid>
+
+            <h:panelGrid layout="pnlGritEndIntrv" columns="1" cellpadding="10" width="100%">
+                <p:commandButton id="btnEndIntrv" action="#{dashboardBean.finishActiveIntervention(cc.attrs.intervention)}"
+                                 value="Finish" update="activeInterventionsForm" ajax="true">
+                </p:commandButton>
+            </h:panelGrid>
+        </p:panel>
+</composite:implementation>
+
+</html>

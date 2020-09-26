@@ -3,18 +3,16 @@ package api.business_controllers;
 import api.daos.DaoFactory;
 import api.daos.DaoSupplier;
 import api.dtos.InterventionDto;
+import api.dtos.mappers.InterventionMapper;
 import api.entity.Intervention;
 import api.entity.InterventionType;
 import api.entity.Vehicle;
 import api.exceptions.BadRequestException;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
-import api.dtos.mappers.InterventionMapper;
 import com.mysql.cj.util.StringUtils;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class InterventionBusinesssController {
@@ -36,7 +34,8 @@ public class InterventionBusinesssController {
 
     public int create(InterventionDto interventionDto) {
         validateInterventionDto(interventionDto);
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto.getStartTime(), interventionDto.getEndTime());
+        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto
+                .getStartTime(), interventionDto.getEndTime());
         if (!isCaffeIntervention(interventionDto)) {
             setVehicle(interventionDto, intervention);
         }
@@ -51,16 +50,22 @@ public class InterventionBusinesssController {
     }
 
     private void validateInterventionDto(InterventionDto interventionDto) {
-        if (interventionDto.getInterventionType().equals(InterventionType.CAFFE) && interventionDto.getVehicleId() != null) {
+        if (interventionDto.getInterventionType()
+                .equals(InterventionType.CAFFE) && interventionDto.getVehicleId() != null) {
             throw new BadRequestException("Invalid intervention, CAFFE shouldnt have vehicle id: " + interventionDto.getVehicleId());
         }
-        if (interventionDto.getInterventionType().equals(InterventionType.REPAIR) && interventionDto.getVehicleId() == null) {
+        if (interventionDto.getInterventionType()
+                .equals(InterventionType.REPAIR) && interventionDto.getVehicleId() == null) {
             throw new BadRequestException("Invalid intervention, REPAIR should have vehicle id");
         }
     }
 
     public List<InterventionDto> readAll() {
-        return DaoFactory.getFactory().getInterventionDao().findAll().map(InterventionMapper.INSTANCE::toInterventionDto).collect(Collectors.toList());
+        return DaoFactory.getFactory()
+                .getInterventionDao()
+                .findAll()
+                .map(InterventionMapper.INSTANCE::toInterventionDto)
+                .collect(Collectors.toList());
     }
 
     public InterventionDto read(String interventionId) {
@@ -90,15 +95,5 @@ public class InterventionBusinesssController {
         if (property == null) {
             throw new FieldInvalidException(message + " is missing");
         }
-    }
-
-    public void finishIntervention(String id) {
-        Optional<Intervention> intervention = DaoFactory.getFactory().getInterventionDao().read(Integer.parseInt(id));
-        intervention.ifPresent(this::setEndTimeNow);
-    }
-
-    private void setEndTimeNow(Intervention intervention) {
-        intervention.setEndTime(LocalDateTime.now());
-        DaoFactory.getFactory().getInterventionDao().update(intervention);
     }
 }
