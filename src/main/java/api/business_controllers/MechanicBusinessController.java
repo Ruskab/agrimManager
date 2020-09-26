@@ -5,29 +5,35 @@ import api.daos.DaoSupplier;
 import api.data_services.InterventionDataService;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
+import api.dtos.mappers.InterventionMapper;
+import api.dtos.mappers.MechanicMapper;
 import api.entity.Intervention;
 import api.entity.Mechanic;
 import api.exceptions.NotFoundException;
-import api.dtos.mappers.MechanicMapper;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MechanicBusinessController {
+
+    private static final String MECHANIC_ID = "Mechanic id: ";
 
     static {
         DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
     }
 
-    private static final String MECHANIC_ID = "Mechanic id: ";
     private InterventionBusinesssController interventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
         Mechanic mechanic = new Mechanic(mechanicDto);
         List<InterventionDto> interventionDtos = new ArrayList<>();
         mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(interventionBO.read(Integer.toString(id))));
-        mechanic.setInterventionList(interventionDtos.stream().map(this::createIntervention).collect(Collectors.toList()));
+        mechanic.setInterventionList(interventionDtos.stream()
+                .map(this::createIntervention)
+                .collect(Collectors.toList()));
         DaoFactory.getFactory().getMechanicDao().create(mechanic);
         return mechanic.getId();
     }
@@ -40,7 +46,8 @@ public class MechanicBusinessController {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
                 .orElseThrow(() -> NotFoundException.throwBecauseOf("Mechanic not found"));
 
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto.getStartTime(), interventionDto.getEndTime());
+        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto
+                .getStartTime(), interventionDto.getEndTime());
 
         if (!InterventionBusinesssController.isCaffeIntervention(interventionDto)) {
             InterventionBusinesssController.setVehicle(interventionDto, intervention);
@@ -50,22 +57,51 @@ public class MechanicBusinessController {
     }
 
     public List<MechanicDto> readAll() {
-        return DaoFactory.getFactory().getMechanicDao().findAll().map(MechanicMapper.INSTANCE::toMechanicDto).collect(Collectors.toList());
+        return DaoFactory.getFactory()
+                .getMechanicDao()
+                .findAll()
+                .map(MechanicMapper.INSTANCE::toMechanicDto)
+                .collect(Collectors.toList());
     }
 
     public MechanicDto read(String id) {
-        return DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(id)).map(MechanicMapper.INSTANCE::toMechanicDto)
+        return DaoFactory.getFactory()
+                .getMechanicDao()
+                .read(Integer.parseInt(id))
+                .map(MechanicMapper.INSTANCE::toMechanicDto)
                 .orElseThrow(() -> NotFoundException.throwBecauseOf(MECHANIC_ID + id));
     }
 
     public List<MechanicDto> findBy(String name) {
-        return DaoFactory.getFactory().getMechanicDao().findBy(name).map(MechanicMapper.INSTANCE::toMechanicDto).collect(Collectors.toList());
+        return DaoFactory.getFactory()
+                .getMechanicDao()
+                .findBy(name)
+                .map(MechanicMapper.INSTANCE::toMechanicDto)
+                .collect(Collectors.toList());
     }
+
+    public List<InterventionDto> getActiveInterventions(Integer mechanicId) {
+        return DaoFactory.getFactory().getMechanicDao().read(mechanicId)
+                .stream().flatMap(mechanic -> mechanic.getInterventionList().stream())
+                .filter(Intervention::isActive)
+                .map(InterventionMapper.INSTANCE::toInterventionDto)
+                .collect(Collectors.toList());
+    }
+
 
     public void delete(String id) {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read((Integer.parseInt(id)))
                 .orElseThrow(() -> NotFoundException.throwBecauseOf(MECHANIC_ID + id));
 
         DaoFactory.getFactory().getMechanicDao().deleteById(mechanic.getId());
+    }
+
+    public void finishIntervention(Integer id, String interventionId) {
+        Optional<Mechanic> optMechanic = DaoFactory.getFactory().getMechanicDao().read(id);
+        if (optMechanic.isPresent()) {
+            List<Intervention> interventions = optMechanic.get().getInterventionList();
+            interventions.stream().filter(intervention -> interventionId.equals(Integer.toString(intervention.getId())))
+                    .findFirst().ifPresent(intervention -> intervention.setEndTime(LocalDateTime.now()));
+        }
     }
 }

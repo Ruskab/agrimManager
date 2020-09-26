@@ -1,8 +1,7 @@
 package api.api_controllers;
 
+import api.business_controllers.InterventionBusinesssController;
 import api.business_controllers.MechanicBusinessController;
-import api.daos.DaoFactory;
-import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.exceptions.FieldInvalidException;
@@ -33,6 +32,7 @@ public class MechanicApiController {
     public static final String ID_INTERVENTIONS = ID + "/interventions";
 
     private MechanicBusinessController mechanicBusinesssController = new MechanicBusinessController();
+    private InterventionBusinesssController interventionBusinesssController = new InterventionBusinesssController();
 
     @POST
     @Secured
@@ -65,6 +65,27 @@ public class MechanicApiController {
     public List<MechanicDto> readAll() {
         return mechanicBusinesssController.readAll();
     }
+
+    @GET
+    @Secured
+    @ApiOperation(value = "Get active interventions")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}/interventions")
+    public List<InterventionDto> readActiveInterventions(@PathParam("id") String id) {
+        return mechanicBusinesssController.getActiveInterventions(Integer.parseInt(id));
+    }
+
+    @POST
+    @ApiOperation(value = "Finish active information")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{id}/interventions/{interventionId}/finish")
+    public Response finishIntervention(@PathParam("id") String id, @PathParam("interventionId") String interventionId) {
+        this.validateId(id, "intervention id: ");
+        this.validateId(interventionId, "intervention id: ");
+        this.mechanicBusinesssController.finishIntervention(Integer.parseInt(id), interventionId);
+        return Response.status(200).build();
+    }
+
 
     @GET
     @Secured

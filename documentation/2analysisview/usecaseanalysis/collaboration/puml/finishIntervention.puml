@@ -1,0 +1,46 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor actor
+
+view DashboardView
+
+controller finishInterventionController
+collaboration ":Collaboration OpenDashBoard" as OpenDashBoard
+
+model MechanicDao
+model Mechanic
+model Intervention
+
+actor --> DashboardView
+note on link
+    finishIntervention(interventionId)
+end note
+
+DashboardView -right-> finishInterventionController
+note on link
+    finishIntervention(mechanicId, interventionId)
+end note
+
+DashboardView -- OpenDashBoard
+note on link
+    openDashboard()
+end note
+
+finishInterventionController -down-> MechanicDao
+note on link
+    read(mechanicId)
+    update(mechanic)
+end note
+
+finishInterventionController .down.> "1" Mechanic
+note on link
+    setEntTIme(interventionId, now())
+end note
+
+MechanicDao -- Mechanic
+Mechanic -right- Intervention
+
+@enduml

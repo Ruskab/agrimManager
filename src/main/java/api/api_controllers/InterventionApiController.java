@@ -78,16 +78,6 @@ public class InterventionApiController {
         return Response.status(200).build();
     }
 
-    @POST
-    @ApiOperation(value = "Finish active information")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("{id}/finish")
-    public Response finishIntervention(@PathParam("id") String id) {
-        this.validateId(id, "intervention id: ");
-        this.interventionBusinessController.finishIntervention(id);
-        return Response.status(200).build();
-    }
-
 
     @GET
     @Secured

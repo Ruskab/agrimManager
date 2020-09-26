@@ -6,7 +6,7 @@ import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.MechanicDtoMother;
-import client_beans.clients.ClientGateway;
+import front.gateways.ClientGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
