@@ -5,6 +5,7 @@ import api.dtos.MechanicDto;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ import java.util.Set;
 @Entity
 @Table(name = "mechanic")
 @NamedQuery(name = "MechanicNames", query = "select m from Mechanic m where m.name=:name")
+@NamedQuery(name = "MechanicByCredentials", query = "select m from Mechanic m where m.name=:name and m.password=:password")
 public class Mechanic implements Serializable {
 
     private static final long serialVersionUID = 1905122041950251207L;
@@ -35,6 +37,7 @@ public class Mechanic implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(unique = true)
     private String name;
 
     private String password;

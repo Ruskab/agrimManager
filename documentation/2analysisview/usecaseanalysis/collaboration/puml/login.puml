@@ -20,7 +20,7 @@ end note
 LoginView -right-> LoginController
 note on link
     login(username, password)
-    findBy(username, password)
+    searchBy(username, password)
 end note
 
 LoginView -up-> OpenDashboard
@@ -28,17 +28,17 @@ note on link
     openDashboard(session)
 end note
 
-LoginView --> Session
+LoginView ..> "1" Session
 note on link
     setMechanic(mechanic)
 end note
 
 LoginController -down-> MechanicDao
 note on link
-    findBy(username, password)
+    serchBy(username, password)
 end note
 
-LoginView --> Mechanic
+LoginView ..> "1" Mechanic
 LoginController .. Mechanic
 MechanicDao -- Mechanic
 

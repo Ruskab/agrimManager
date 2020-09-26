@@ -16,4 +16,12 @@ class MechanicDaoHibr extends GenericDaoHibr<Mechanic, Integer> implements Mecha
     public Stream<Mechanic> findBy(String name) {
         return entityManager.createNamedQuery("MechanicNames", Mechanic.class).setParameter("name", name).getResultStream();
     }
+
+    @Override
+    public Stream<Mechanic> findBy(String name, String password) {
+        return entityManager.createNamedQuery("MechanicByCredentials", Mechanic.class)
+                .setParameter("name", name)
+                .setParameter("password", password)
+                .getResultStream();
+    }
 }

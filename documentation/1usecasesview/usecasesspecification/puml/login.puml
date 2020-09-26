@@ -4,7 +4,7 @@
 state initstate as "INITIAL"
 state login
 state openDashboard as ":openDashboard"
-state endstate as ":OPENED_DASHBOARD"
+state endstate as "OPENED_DASHBOARD"
 
 initstate --> login
 note on link

@@ -56,7 +56,9 @@ public class AuthenticationApiController {
         // Issue a token (can be a random String persisted to a database or a JWT token)
         // The issued token must be associated to a user
         // Return the issued token
-        return Base64.getEncoder().encodeToString(String.format("%s###%s###%s", username, password, LocalDate.now().toString()).getBytes());
+        return Base64.getEncoder()
+                .encodeToString(String.format("%s###%s###%s", username, password, LocalDate.now().toString())
+                        .getBytes());
     }
 
     private void validate(Object property, String message) {

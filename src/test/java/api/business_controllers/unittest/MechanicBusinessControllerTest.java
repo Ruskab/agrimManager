@@ -42,7 +42,7 @@ public class MechanicBusinessControllerTest {
 
     @Test
     public void testFindByNameMechanic() {
-        List<MechanicDto> mechanicDtos = mechanicBusinessController.findBy(MechanicDtoMother.FAKE_NAME);
+        List<MechanicDto> mechanicDtos = mechanicBusinessController.searchBy(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
 
         assertThat(mechanicDtos.get(0).getName(), is(MechanicDtoMother.FAKE_NAME));
         assertThat(mechanicDtos.get(0).getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));

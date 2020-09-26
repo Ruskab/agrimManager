@@ -2,7 +2,6 @@ package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.daos.DaoSupplier;
-import api.dtos.MechanicDto;
 import api.exceptions.NotFoundException;
 
 public class AuthenticationBusinessController {
@@ -11,19 +10,11 @@ public class AuthenticationBusinessController {
         DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
     }
 
-    private MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
+    private final MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
     public void authenticateCredentials(String username, String password) throws NotFoundException {
-        if (!existentCredentials(username, password)) {
-            throw NotFoundException.throwBecauseOf("Invalid Credentials");
-        }
+        mechanicBusinessController.searchBy(username, password).stream().findFirst()
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("Invalid credentials"));
     }
-
-    private boolean existentCredentials(String username, String password) {
-        return mechanicBusinessController.findBy(username).stream()
-                .map(MechanicDto::getPassword)
-                .anyMatch(password::equals);
-    }
-
 
 }
