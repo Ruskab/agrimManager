@@ -17,4 +17,9 @@ class MechanicDaoFake extends GenericDaoFake<Mechanic, Integer> implements Mecha
         //TODO
         return Stream.empty();
     }
+
+    @Override
+    public Stream<Mechanic> findBy(String name, String password) {
+        return Stream.empty();
+    }
 }

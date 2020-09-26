@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class MechanicBusinessController {
 
@@ -33,7 +34,7 @@ public class MechanicBusinessController {
         mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(interventionBO.read(Integer.toString(id))));
         mechanic.setInterventionList(interventionDtos.stream()
                 .map(this::createIntervention)
-                .collect(Collectors.toList()));
+                .collect(toList()));
         DaoFactory.getFactory().getMechanicDao().create(mechanic);
         return mechanic.getId();
     }
@@ -61,7 +62,7 @@ public class MechanicBusinessController {
                 .getMechanicDao()
                 .findAll()
                 .map(MechanicMapper.INSTANCE::toMechanicDto)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public MechanicDto read(String id) {
@@ -72,12 +73,12 @@ public class MechanicBusinessController {
                 .orElseThrow(() -> NotFoundException.throwBecauseOf(MECHANIC_ID + id));
     }
 
-    public List<MechanicDto> findBy(String name) {
+    public List<MechanicDto> searchBy(String username, String password) {
         return DaoFactory.getFactory()
                 .getMechanicDao()
-                .findBy(name)
+                .findBy(username, password)
                 .map(MechanicMapper.INSTANCE::toMechanicDto)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public List<InterventionDto> getActiveInterventions(Integer mechanicId) {
@@ -85,7 +86,7 @@ public class MechanicBusinessController {
                 .stream().flatMap(mechanic -> mechanic.getInterventionList().stream())
                 .filter(Intervention::isActive)
                 .map(InterventionMapper.INSTANCE::toInterventionDto)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
 
@@ -104,4 +105,5 @@ public class MechanicBusinessController {
                     .findFirst().ifPresent(intervention -> intervention.setEndTime(LocalDateTime.now()));
         }
     }
+
 }

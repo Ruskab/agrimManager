@@ -16,4 +16,11 @@ class MechanicDaoStub extends GenericDaoStub<Mechanic, Integer> implements Mecha
     public Stream<Mechanic> findBy(String name) {
         return entities.values().stream().filter(mechanic -> name.equals(mechanic.getName()));
     }
+
+    @Override
+    public Stream<Mechanic> findBy(String name, String password) {
+        return entities.values().stream()
+                .filter(mechanic -> name.equals(mechanic.getName()))
+                .filter(mechanic -> password.equals(mechanic.getPassword()));
+    }
 }

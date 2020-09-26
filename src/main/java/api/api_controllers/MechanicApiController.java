@@ -18,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -60,9 +61,12 @@ public class MechanicApiController {
 
     @GET
     @Secured
-    @ApiOperation(value = "Get all mechanics")
+    @ApiOperation(value = "Get mechanics")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<MechanicDto> readAll() {
+    public List<MechanicDto> read(@QueryParam("username") String username, @QueryParam("password") String password) {
+        if (username != null && password != null) {
+             return mechanicBusinesssController.searchBy(username, password);
+        }
         return mechanicBusinesssController.readAll();
     }
 

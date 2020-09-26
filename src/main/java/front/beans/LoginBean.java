@@ -15,6 +15,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
@@ -30,6 +31,44 @@ public class LoginBean {
     @PostConstruct
     public void init() {
         authenticateGateway = new AuthenticationGateway();
+
+    }
+
+    public void login() throws IOException {
+        try {
+            String authToken = "Bearer " + authenticateGateway.authenticate(CredentialsDto.create(userName, password));
+            initSession(authToken);
+            redirect(HOME_PAGE);
+        } catch (UnauthorizedException e) {
+            showMessage(FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!");
+            redirect(LOGIN_PAGE);
+        }
+    }
+
+    private void initSession(String authToken) {
+        List<MechanicDto> mechanics = new MechanicGateway(authToken).searchByCredentials(userName, password);
+        if (mechanics.isEmpty()) {
+            throw new UnauthorizedException("mechanic not found with given credentials");
+        }
+        Faces.getSession().setAttribute("username", userName);
+        Faces.getSession().setAttribute("mechanic", mechanics.get(0));
+        Faces.getSession().setAttribute("token", authToken);
+    }
+
+    private void redirect(String path) throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect(externalContext.getRequestContextPath().concat(path));
+    }
+
+    public String logout() {
+        HttpSession session = (HttpSession)
+                FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.invalidate();
+        return LOGIN_PAGE;
+    }
+
+    private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
     }
 
     public String getUserName() {
@@ -55,37 +94,4 @@ public class LoginBean {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    public void login() throws IOException {
-        try {
-            String authToken = "Bearer " + authenticateGateway.authenticate(CredentialsDto.create(userName, password));
-            MechanicDto mechanicDto = new MechanicGateway(authToken).readAll().stream()
-                    .filter(mechanic -> mechanic.getName().equals(userName) && mechanic.getPassword().equals(password))
-                    .findFirst().orElseThrow(() -> new UnauthorizedException("mechanic not found with given credentials"));
-
-            Faces.getSession().setAttribute("username", userName);
-            Faces.getSession().setAttribute("mechanic", mechanicDto);
-            Faces.getSession().setAttribute("token", authToken);
-            redirect(HOME_PAGE);
-
-        } catch (UnauthorizedException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Invalid Login!",
-                    "Please Try Again!"));
-            redirect(LOGIN_PAGE);
-        }
-    }
-
-    private void redirect(String path) throws IOException {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.redirect(externalContext.getRequestContextPath().concat(path));
-    }
-
-    public String logout() {
-        HttpSession session = (HttpSession)
-                FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        session.invalidate();
-        return LOGIN_PAGE;
-    }
-
 }

@@ -78,6 +78,19 @@ public class MechanicGateway implements Serializable {
                 .get(MechanicDto.class);
     }
 
+    public List<MechanicDto> searchByCredentials(String username, String password) {
+        String mechanicResourcePath = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS);
+        URI endpoint = UriBuilder.fromPath(mechanicResourcePath)
+                .queryParam("username", username)
+                .queryParam("password", password)
+                .build();
+        return client.target(endpoint)
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<List<MechanicDto>>() {
+                });
+    }
+
     public List<InterventionDto> searchInterventions(String mechanicId, Boolean active) {
         String mechanicResourcePath = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
                 .getProperty(MECHANICS);

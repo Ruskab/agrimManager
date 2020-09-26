@@ -10,4 +10,6 @@ public interface MechanicDao extends GenericDao<Mechanic, Integer> {
 
     Stream<Mechanic> findBy(String name);
 
+    Stream<Mechanic> findBy(String name, String password);
+
 }
