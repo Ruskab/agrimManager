@@ -9,6 +9,7 @@ import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,7 +41,7 @@ public class ClientApiController {
     @Secured
     @ApiOperation(value = "Create new client")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(ClientDto clientDto) {
+    public Response create(@ApiParam(value = "Client to create", required = true) ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
         LOGGER.info("ClienteDto valido");
@@ -49,9 +50,9 @@ public class ClientApiController {
 
     @GET
     @Secured
-    @ApiOperation(value = "Get all clients")
+    @ApiOperation(value = "Get clients")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ClientDto> readAll(@QueryParam("query") String fullName) {
+    public List<ClientDto> readAll(@ApiParam(value = "search by full name") @QueryParam("query") String fullName) {
         if (fullName != null) {
             return clientBusinessController.searchByFullName(fullName);
         }
@@ -63,7 +64,7 @@ public class ClientApiController {
     @ApiOperation(value = "Get client by ID")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public ClientDto read(@PathParam("id") String id) {
+    public ClientDto read(@ApiParam(value = "Get by id", required = true ) @PathParam("id") String id) {
         this.validateId(id, "client id");
         return this.clientBusinessController.read(id);
         //todo handle exceptions like not found
@@ -75,7 +76,7 @@ public class ClientApiController {
     @ApiOperation(value = "Get all client vehicles ")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/vehicles/{id}")
-    public ClientVehiclesDto clientVehiclesList(@PathParam("id") String clientId) {
+    public ClientVehiclesDto clientVehiclesList(@ApiParam(value = "Client id", required = true) @PathParam("id") String clientId) {
         validateId(clientId, "client Id");
         return clientBusinessController.readClientVehicles(Integer.parseInt(clientId))
                 .orElseThrow(() -> NotFoundException.throwBecauseOf("client with id: " + clientId));
@@ -86,7 +87,7 @@ public class ClientApiController {
     @ApiOperation(value = "Update client information")
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response update(@PathParam("id") String id, ClientDto clientDto) {
+    public Response update(@ApiParam(value = "client Id", required = true) @PathParam("id") String id, @ApiParam(value = "updated client", required = true) ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
         this.validateId(id, "client id: ");
@@ -99,7 +100,7 @@ public class ClientApiController {
     @Secured
     @ApiOperation(value = "Delete client by Id")
     @Path("{id}")
-    public Response delete(@PathParam("id") String id) {
+    public Response delete(@ApiParam(value = "Client Id", required = true) @PathParam("id") String id) {
         this.validateId(id, "client id: ");
         this.clientBusinessController.delete(id);
         return Response.status(204).build();

@@ -17,6 +17,7 @@ OPENED_DASHBOARD --> OPENED_VEHICLES
 OPENED_DASHBOARD --> OPENED_DASHBOARD
     note on link
          createIntervention
+         pauseIntervention
          finishIntervention
     end note
 
@@ -33,7 +34,6 @@ OPENED_VEHICLES --> OPENED_DASHBOARD
      createIntervention
      openDashboard
     end note
-
 
 OPENED_DASHBOARD --> OPENED_CLIENTS
     note on link
@@ -71,9 +71,15 @@ note on link
     openDashboard
 end note
 
+OPENED_OPERATIONS --> OPENED_OPERATIONS
+note on link
+    importVehicles
+end note
+
 OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
     note on link
-         bill intervention
+         billIntervention
+         configIntervention
          openIntervention
     end note
 OPENED_INTERVENTIONS --> OPENED_DASHBOARD
@@ -85,21 +91,17 @@ OPENED_INTERVENTIONS --> OPENED_DASHBOARD
 OPENED_DASHBOARD --> [*]
     note on link
     logout
-    closeApp
     end note
 OPENED_VEHICLES --> [*]
     note on link
     logout
-    closeApp
     end note
 OPENED_CLIENTS --> [*]
     note on link
     logout
-    closeApp
     end note
 OPENED_INTERVENTIONS --> [*]
     note on link
     logout
-    closeApp
     end note
 @enduml

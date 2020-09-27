@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="595px" preserveAspectRatio="none" style="width:915px;height:595px;" version="1.1" viewBox="0 0 915 595" width="915px" zoomAndPan="magnify"><defs><filter height="300%" id="f15w4m9yigsaxw" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FEFECE" filter="url(#f15w4m9yigsaxw)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="132" x="6" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="122" x="11" y="33.7285">OPENED_CLIENTS</text><rect fill="#FEFECE" filter="url(#f15w4m9yigsaxw)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="132" x="173" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="122" x="178" y="33.7285">OPENED_CLIENTS</text><rect fill="#FEFECE" filter="url(#f15w4m9yigsaxw)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="141" x="340.5" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="131" x="345.5" y="33.7285">OPENED_VEHICLES</text><rect fill="#FEFECE" filter="url(#f15w4m9yigsaxw)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="183" x="516.5" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="173" x="521.5" y="33.7285">OPENED_INTERVENTIONS</text><rect fill="#FEFECE" filter="url(#f15w4m9yigsaxw)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="164" x="735" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="154" x="740" y="33.7285">OPENED_OPERATIONS</text><rect fill="#FEFECE" filter="url(#f15w4m9yigsaxw)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="132" x="345" y="544"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="122" x="350" y="569.7285">OPENED_CLIENTS</text><rect fill="#FEFECE" filter="url(#f15w4m9yigsaxw)" height="318.6094" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="218" x="302" y="164"/><rect fill="#FFFFFF" height="285" rx="12.5" ry="12.5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="212" x="305" y="194.6094"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="302" x2="520" y1="191.6094" y2="191.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="373.5" y="183.5332">openClients</text><ellipse cx="323" cy="214.6094" fill="#000000" filter="url(#f15w4m9yigsaxw)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><ellipse cx="323" cy="457.6094" fill="none" filter="url(#f15w4m9yigsaxw)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="323.5" cy="458.1094" fill="#000000" rx="6" ry="6" style="stroke: none; stroke-width: 1.0;"/><!--MD5=[01edfa4a30657a4511f79893be01b18d]
+link *start*openClients to *end*openClients--><path d="M323,224.7624 C323,261.3714 323,397.4342 323,442.2169 " fill="none" id="*start*openClients-&gt;*end*openClients" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="323,447.4471,327,438.4471,323,442.4471,319,438.4471,323,447.4471" style="stroke: #008000; stroke-width: 1.0;"/><path d="M328,247.6094 L328,420.6094 L478,420.6094 L478,257.6094 L468,247.6094 L328,247.6094 " fill="#F5F5F5" filter="url(#f15w4m9yigsaxw)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M468,247.6094 L468,257.6094 L478,257.6094 L468,247.6094 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="334" y="266.1045">System shows</text><ellipse cx="339.5" cy="277.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="116" x="347" y="282.4561">all clients in system</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="91" x="334" y="298.8076">System allows</text><ellipse cx="339.5" cy="310.5156" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="347" y="315.1592">open vehicles</text><ellipse cx="339.5" cy="326.8672" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="347" y="331.5107">open interventions</text><ellipse cx="339.5" cy="343.2188" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="70" x="347" y="347.8623">open clients</text><ellipse cx="339.5" cy="359.5703" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="92" x="347" y="364.2139">open operations</text><ellipse cx="339.5" cy="375.9219" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="35" x="347" y="380.5654">logout</text><ellipse cx="339.5" cy="392.2734" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="105" x="347" y="396.917">create intervention</text><ellipse cx="339.5" cy="408.625" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="99" x="347" y="413.2686">finish intervention</text><!--MD5=[e263efb3d06dd94bde332f45e340f36f]
+link startState2 to openClients--><path d="M250.285,48.257 C264.186,71.978 289.198,114.657 315.412,159.389 " fill="none" id="startState2-&gt;openClients" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="317.952,163.724,316.8521,153.9367,315.4238,159.4103,309.9502,157.9819,317.952,163.724" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[5b06fafc57c78f515b7445cf278e407f]
+link startState to openClients--><path d="M81.5376,48.259 C96.5496,78.571 124,134 124,134 C124,134 217.208,195.218 297.388,247.88 " fill="none" id="startState-&gt;openClients" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="301.679,250.698,296.3521,242.414,297.4997,247.9533,291.9605,249.1009,301.679,250.698" style="stroke: #008000; stroke-width: 1.0;"/><path d="M129,83 L129,125 L251,125 L251,93 L241,83 L129,83 " fill="#F5F5F5" filter="url(#f15w4m9yigsaxw)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M241,83 L241,93 L251,93 L241,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="135" y="101.4951">User requests to</text><ellipse cx="140.5" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="68" x="148" y="117.8467">openClients</text><!--MD5=[04eda6f9d2af888a33d5d08ec1368ee9]
+link startState3 to openClients--><path d="M411,48.257 C411,71.835 411,114.141 411,158.578 " fill="none" id="startState3-&gt;openClients" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="411,163.724,415,154.724,411,158.724,407,154.724,411,163.724" style="stroke: #008000; stroke-width: 1.0;"/><path d="M416,83 L416,125 L538,125 L538,93 L528,83 L416,83 " fill="#F5F5F5" filter="url(#f15w4m9yigsaxw)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M528,83 L528,93 L538,93 L528,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="422" y="101.4951">User requests to</text><ellipse cx="427.5" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="68" x="435" y="117.8467">openClients</text><!--MD5=[c4ac00fa95e47d616d3aa07745d986d6]
+link startState4 to openClients--><path d="M598.279,48.259 C582.978,78.571 555,134 555,134 C555,134 541.797,151.283 523.387,175.382 " fill="none" id="startState4-&gt;openClients" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="520.142,179.631,528.7839,174.9068,523.1771,175.6575,522.4264,170.0507,520.142,179.631" style="stroke: #008000; stroke-width: 1.0;"/><path d="M589,83 L589,125 L711,125 L711,93 L701,83 L589,83 " fill="#F5F5F5" filter="url(#f15w4m9yigsaxw)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M701,83 L701,93 L711,93 L701,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="595" y="101.4951">User requests to</text><ellipse cx="600.5" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="68" x="608" y="117.8467">openClients</text><!--MD5=[d695ef177515f2b4231b8d4e6e4a1b7b]
+link startState5 to openClients--><path d="M800.676,48.259 C774.982,78.571 728,134 728,134 C728,134 615.393,200.96 524.409,255.063 " fill="none" id="startState5-&gt;openClients" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="520.093,257.629,529.8734,256.4702,524.3914,255.0748,525.7868,249.5928,520.093,257.629" style="stroke: #008000; stroke-width: 1.0;"/><path d="M781,83 L781,125 L903,125 L903,93 L893,83 L781,83 " fill="#F5F5F5" filter="url(#f15w4m9yigsaxw)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M893,83 L893,93 L903,93 L893,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="787" y="101.4951">User requests to</text><ellipse cx="792.5" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="68" x="800" y="117.8467">openClients</text><!--MD5=[316f6ecad7cf5331d8120ace767d38f5]
+link openClients to endState--><path d="M411,483.251 C411,504.7862 411,524.3835 411,538.7622 " fill="none" id="openClients-&gt;endState" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="411,543.8174,415,534.8174,411,538.8174,407,534.8174,411,543.8174" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[f8b7e2661a627465795590c9ea831166]
+@startuml
+
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+    ArrowColor #green
+    NoteBorderColor #green
+    linetype polyline
+}
+
+hide empty description
+
+state startState as "OPENED_CLIENTS"
+state startState2 as "OPENED_CLIENTS"
+state startState3 as "OPENED_VEHICLES"
+state startState4 as "OPENED_INTERVENTIONS"
+state startState5 as "OPENED_OPERATIONS"
+state endState as "OPENED_CLIENTS"
+
+startState2 - -> openClients
+
+startState - -> openClients
+note on link
+<b>User requests to</b>
+* openClients
+end note
+
+startState3 - -> openClients
+note on link
+<b>User requests to</b>
+* openClients
+end note
+
+startState4 - -> openClients
+note on link
+<b>User requests to</b>
+* openClients
+end note
+
+startState5 - -> openClients
+note on link
+<b>User requests to</b>
+* openClients
+end note
+
+state openClients {
+[*] - -> [*]
+note on link
+<b>System shows
+* all clients in system
+<b>System allows
+* open vehicles
+* open interventions
+* open clients
+* open operations
+* logout
+* create intervention
+* finish intervention
+end note
+}
+
+openClients - -> endState
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

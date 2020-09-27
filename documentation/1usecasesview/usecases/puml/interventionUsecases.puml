@@ -12,6 +12,8 @@ package InterventionsManagement {
 :superUser: --> (openInterventions)
 :admin: --> (billInterventions)
 :user: --> (openMyInterventions)
+:user: --> (pauseInterventions)
+:user: --> (resumeInterventions)
 (createIntervention) ..> (openDashboard) : <<include>>
 (finishIntervention) ..> (openDashboard) : <<include>>
 (billInterventions) ..> (openInterventions) : <<include>>

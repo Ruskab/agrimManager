@@ -5,18 +5,16 @@
 package Views {
     boundary CreateVehicleView
     boundary CreateClientView
+    boundary ConfigClientView
+    boundary ConfigVehicleView
     boundary VehiclesView
     boundary ClientsView
-    boundary ConfigClientView
-    boundary VehicleConfigView
     boundary CreateInterventionView
+    boundary InterventionsView
+    boundary MyInterventionsView
     boundary MenuView
     boundary DashboardView
-
-    boundary MechanicView
-    boundary AdminView
-    boundary InterventionView
-    boundary RepairingPackView
+    boundary OperationsView
     boundary loginView
     boundary signInView
 }
@@ -24,27 +22,29 @@ package Views {
 package Controllers {
     control openClientsController
     control openVehiclesController
+    control openDashboardController
+    control openOperations
+    control openInterventionsController
+    control openMyInterventionsController
     control createClientController
     control createVehicleController
     control createInterventionController
-
-    control openClientController
-    control updateClientsController
-    control openVehicleController
-    control updateVehicleController
+    control configClientController
+    control configVehicleController
     control finishInterventionController
-    control openInterventionsController
     control loginController
     control logoutController
     control signInController
-    control openDashboardController
 }
 
 package Models {
     entity Client
     entity Vehicle
     entity Intervention
-    entity RepairingPack
     entity Mechanic
 }
+
+Client *-- Vehicle
+Intervention o-- Vehicle
+Mechanic *-- Intervention
 @enduml
