@@ -50,9 +50,9 @@ note on link
     readMechanics()
 end note
 
-InterventionsView --> Intervention
-InterventionsView --> Vehicle
-InterventionsView --> Mechanic
+InterventionsView --> "*" Intervention
+InterventionsView --> "*" Vehicle
+InterventionsView --> "1" Mechanic
 
 OpenInterventionsController .. "0..*" Intervention
 OpenInterventionsController ..... "1" Vehicle
