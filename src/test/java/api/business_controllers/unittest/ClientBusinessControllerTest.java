@@ -22,8 +22,8 @@ public class ClientBusinessControllerTest {
 
     @BeforeEach
     void setUp() {
-        DaoFactory.setFactory(new DaoFactoryFake());
         clientBusinessController = new ClientBusinessController();
+        DaoFactory.setFactory(new DaoFactoryFake());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ClientBusinessControllerTest {
     }
 
     @Test
-    public void testReadMechanic() {
+    public void testReadClient() {
         clientBusinessController.create(ClientDtoMother.clientDto());
 
         ClientDto clientDto = clientBusinessController.read("1");
