@@ -8,6 +8,7 @@ import api.dtos.MechanicDto;
 import api.dtos.mappers.InterventionMapper;
 import api.dtos.mappers.MechanicMapper;
 import api.entity.Intervention;
+import api.entity.InterventionType;
 import api.entity.Mechanic;
 import api.exceptions.NotFoundException;
 
@@ -47,10 +48,10 @@ public class MechanicBusinessController {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
                 .orElseThrow(() -> NotFoundException.throwBecauseOf("Mechanic not found"));
 
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto
+        Intervention intervention = new Intervention(interventionDto.getTitle(), InterventionType.valueOf(interventionDto.getInterventionType()), interventionDto
                 .getStartTime(), interventionDto.getEndTime());
 
-        if (!InterventionBusinesssController.isCaffeIntervention(interventionDto)) {
+        if (!InterventionBusinesssController.isCaffeIntervention(intervention)) {
             InterventionBusinesssController.setVehicle(interventionDto, intervention);
         }
         mechanic.getInterventionList().add(intervention);
@@ -71,6 +72,14 @@ public class MechanicBusinessController {
                 .read(Integer.parseInt(id))
                 .map(MechanicMapper.INSTANCE::toMechanicDto)
                 .orElseThrow(() -> NotFoundException.throwBecauseOf(MECHANIC_ID + id));
+    }
+
+    public List<MechanicDto> searchBy(String username) {
+        return DaoFactory.getFactory()
+                .getMechanicDao()
+                .findBy(username)
+                .map(MechanicMapper.INSTANCE::toMechanicDto)
+                .collect(toList());
     }
 
     public List<MechanicDto> searchBy(String username, String password) {

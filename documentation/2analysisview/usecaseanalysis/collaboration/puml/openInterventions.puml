@@ -25,7 +25,7 @@ end note
 
 MenuView -right-> InterventionsView
 note on link
-    openInterventionsView()
+    new InterventionsView()
 end note
 
 InterventionsView -right-> OpenInterventionsController

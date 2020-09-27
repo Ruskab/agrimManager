@@ -22,6 +22,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Properties;
 
+import static javax.ws.rs.client.Entity.entity;
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
 public class MechanicGateway implements Serializable {
@@ -33,6 +34,7 @@ public class MechanicGateway implements Serializable {
     private Client client;
     private Properties properties;
     private String authToken;
+    private String resource;
 
     public MechanicGateway(String authToken) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -41,15 +43,16 @@ public class MechanicGateway implements Serializable {
         JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
         client = ClientBuilder.newClient().register(jsonProvider);
         properties = new PropertyLoader().loadPropertiesFile("config.properties");
+        resource = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS);
         this.authToken = authToken;
     }
 
     public String create(MechanicDto mechanicDto) {
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
-                .getProperty(MECHANICS))
+        URI endPoint = UriBuilder.fromPath(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS)).build();
+        Response response = client.target(endPoint)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(mechanicDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(entity(mechanicDto, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(String.class);
     }
 
@@ -58,7 +61,7 @@ public class MechanicGateway implements Serializable {
                 .getProperty(MECHANICS) + "/" + mechanicDto.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .put(Entity.entity(mechanicDto, MediaType.APPLICATION_JSON_TYPE));
+                .put(entity(mechanicDto, MediaType.APPLICATION_JSON_TYPE));
         return response.getStatus();
 
     }
@@ -78,11 +81,10 @@ public class MechanicGateway implements Serializable {
                 .get(MechanicDto.class);
     }
 
-    public List<MechanicDto> searchByCredentials(String username, String password) {
-        String mechanicResourcePath = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS);
-        URI endpoint = UriBuilder.fromPath(mechanicResourcePath)
+    public List<MechanicDto> searchByCredentials(String username) {
+
+        URI endpoint = UriBuilder.fromPath(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS))
                 .queryParam("username", username)
-                .queryParam("password", password)
                 .build();
         return client.target(endpoint)
                 .request(MediaType.APPLICATION_JSON)
@@ -92,9 +94,7 @@ public class MechanicGateway implements Serializable {
     }
 
     public List<InterventionDto> searchInterventions(String mechanicId, Boolean active) {
-        String mechanicResourcePath = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
-                .getProperty(MECHANICS);
-        URI endPoint = UriBuilder.fromPath(mechanicResourcePath)
+        URI endPoint = UriBuilder.fromPath(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS))
                 .path(mechanicId + "/interventions")
                 .queryParam(active.toString())
                 .build();
@@ -106,16 +106,14 @@ public class MechanicGateway implements Serializable {
     }
 
     public void finishIntervention(MechanicDto mechanicDto, InterventionDto interventionDto) {
-        String mechanicResourcePath = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
-                .getProperty(MECHANICS);
-        URI endPoint = UriBuilder.fromPath(mechanicResourcePath)
+        URI endPoint = UriBuilder.fromPath(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS))
                 .path(mechanicDto.getId() + "/interventions/" + interventionDto.getId() + "/finish")
                 .build();
 
         Response response = client.target(endPoint)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.OK);
     }
 
@@ -126,9 +124,9 @@ public class MechanicGateway implements Serializable {
                 .delete();
     }
 
-    public void addIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
-        client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS) + "/" + mechanic
-                .getId() + properties.getProperty(MECHANIC_INTERVENTIONS))
+    public void createIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
+        URI endPoint = UriBuilder.fromPath(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS)).path(mechanic.getId() + "/interventions").build();
+        client.target(endPoint)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));

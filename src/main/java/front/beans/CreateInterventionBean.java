@@ -47,8 +47,8 @@ public class CreateInterventionBean {
         validateSelection();
         selectedIntervention.setStartTime(LocalDateTime.now());
         selectedIntervention.setVehicleId(selectedVehicle != null ? Integer.toString(selectedVehicle.getId()) : null);
-        selectedIntervention.setInterventionType(selectedVehicle != null ? InterventionType.REPAIR : InterventionType.CAFFE);
-        mechanicGateway.addIntervention(mechanic, selectedIntervention);
+        selectedIntervention.setInterventionType(selectedVehicle != null ? "REPAIR" : "CAFFE");
+        mechanicGateway.createIntervention(mechanic, selectedIntervention);
         PrimeFaces.current().executeScript("PF('createIntervention').hide();");
         resetWizard();
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();

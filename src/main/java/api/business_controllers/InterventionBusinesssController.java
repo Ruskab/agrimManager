@@ -27,16 +27,15 @@ public class InterventionBusinesssController {
         intervention.setVehicle(vehicle);
     }
 
-    static boolean isCaffeIntervention(InterventionDto interventionDto) {
-        return (interventionDto.getVehicleId() == null || interventionDto.getVehicleId().isEmpty())
-                && interventionDto.getInterventionType().equals(InterventionType.CAFFE);
+    static boolean isCaffeIntervention(Intervention intervention) {
+        return intervention.getInterventionType().equals(InterventionType.CAFFE);
     }
 
     public int create(InterventionDto interventionDto) {
         validateInterventionDto(interventionDto);
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto
+        Intervention intervention = new Intervention(interventionDto.getTitle(), InterventionType.valueOf(interventionDto.getInterventionType()), interventionDto
                 .getStartTime(), interventionDto.getEndTime());
-        if (!isCaffeIntervention(interventionDto)) {
+        if (!isCaffeIntervention(intervention)) {
             setVehicle(interventionDto, intervention);
         }
         DaoFactory.getFactory().getInterventionDao().create(intervention);
@@ -51,11 +50,11 @@ public class InterventionBusinesssController {
 
     private void validateInterventionDto(InterventionDto interventionDto) {
         if (interventionDto.getInterventionType()
-                .equals(InterventionType.CAFFE) && interventionDto.getVehicleId() != null) {
+                .equals("CAFFE") && interventionDto.getVehicleId() != null) {
             throw new BadRequestException("Invalid intervention, CAFFE shouldnt have vehicle id: " + interventionDto.getVehicleId());
         }
         if (interventionDto.getInterventionType()
-                .equals(InterventionType.REPAIR) && interventionDto.getVehicleId() == null) {
+                .equals("REPAIR") && interventionDto.getVehicleId() == null) {
             throw new BadRequestException("Invalid intervention, REPAIR should have vehicle id");
         }
     }

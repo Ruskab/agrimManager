@@ -38,7 +38,7 @@ note on link
     serchBy(username, password)
 end note
 
-LoginView ..> "1" Mechanic
+LoginView --> "1" Mechanic
 LoginController .. Mechanic
 MechanicDao -- Mechanic
 
