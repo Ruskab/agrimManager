@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1214px" preserveAspectRatio="none" style="width:718px;height:1214px;" version="1.1" viewBox="0 0 718 1214" width="718px" zoomAndPan="magnify"><defs><filter height="300%" id="f3ru8yvouj3ct" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[e7c68bd94755e0c0ea04df9a0637f184]
+cluster configClient--><rect fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" height="1045" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="464" x="54.5" y="158"/><rect fill="#FFFFFF" height="1011.3906" rx="12.5" ry="12.5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="458" x="57.5" y="188.6094"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="54.5" x2="518.5" y1="185.6094" y2="185.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="74" x="249.5" y="176.5332">configClient</text><rect fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="120.5" y="283"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="147.5" y="308.7285"/><rect fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="322.5" y="586"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="349.5" y="611.7285"/><polygon fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" points="358.5,758,370.5,770,358.5,782,346.5,770,358.5,758" style="stroke: #A80036; stroke-width: 1.5;"/><rect fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="198.5" y="1139"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="225.5" y="1164.7285"/><rect fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="310.5" y="867"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="337.5" y="892.7285"/><ellipse cx="145.5" cy="212" fill="#000000" filter="url(#f3ru8yvouj3ct)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="113" x="6" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="103" x="11" y="33.7285">OPEN_CLIENTS</text><rect fill="#FEFECE" filter="url(#f3ru8yvouj3ct)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="113" x="543" y="867"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="103" x="548" y="892.7285">OPEN_CLIENTS</text><ellipse cx="599.5" cy="996" fill="none" filter="url(#f3ru8yvouj3ct)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="600" cy="996.5" fill="#000000" rx="6" ry="6" style="stroke: none; stroke-width: 1.0;"/><!--MD5=[1a5dd34427ed441a470fcff41905a995]
+link initstate to configClient--><path d="M62.5,48.13 C62.5,71.13 62.5,110.945 62.5,145.4513 C62.5,147.6079 62.5,149.7438 62.5,151.8536 C62.5,152.9084 62.5,153.9568 62.5,154.9979 C62.5,155.5185 62.5,156.0373 62.5,156.5541 C62.5,156.8126 62.5,157.0705 62.5,157.328 " fill="none" id="initstate-&gt;configClient" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="62.5,157.328,66.5,148.328,62.5,152.328,58.5,148.328,62.5,157.328" style="stroke: #008000; stroke-width: 1.0;"/><path d="M67.5,83 L67.5,125 L189.5,125 L189.5,93 L179.5,83 L67.5,83 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M179.5,83 L179.5,93 L189.5,93 L179.5,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="73.5" y="101.4951">User requests to</text><ellipse cx="79" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="67" x="86.5" y="117.8467">configClient</text><!--MD5=[e3f4fcee182c004afdfaba8d2c764fb6]
+link *start*configClient to 1--><path d="M145.5,222.19 C145.5,235.18 145.5,259.376 145.5,277.734 " fill="none" id="*start*configClient-&gt;1" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="145.5,282.743,149.5,273.743,145.5,277.743,141.5,273.743,145.5,282.743" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[0ba0d8a0fd0e641c23f69743a446dfe6]
+link 1 to 2--><path d="M170.765,312.091 C214.221,326.009 298.5,353 298.5,353 C298.5,353 330.441,517.27 342.746,580.553 " fill="none" id="1-&gt;2" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="343.736,585.644,345.9449,576.0461,342.7818,580.7359,338.092,577.5728,343.736,585.644" style="stroke: #008000; stroke-width: 1.0;"/><path d="M342.5,358 L342.5,547 L485.5,547 L485.5,368 L475.5,358 L342.5,358 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M475.5,358 L475.5,368 L485.5,368 L475.5,358 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="348.5" y="376.4951">System shows</text><ellipse cx="354" cy="388.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="33" x="361.5" y="392.8467">Client</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="369.5" y="404.0547"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="59" x="374.5" y="409.1982">Full Name</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="369.5" y="420.4063"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="83" x="374.5" y="425.5498">Pending hours</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="369.5" y="436.7578"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="50" x="374.5" y="441.9014">Vehicles</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="91" x="348.5" y="458.2529">System allows</text><ellipse cx="354" cy="469.9609" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="361.5" y="474.6045">Modify</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="369.5" y="485.8125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="57" x="374.5" y="490.9561">Full name</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="369.5" y="502.1641"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="83" x="374.5" y="507.3076">Pending hours</text><ellipse cx="354" cy="519.0156" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="79" x="361.5" y="523.6592">save changes</text><ellipse cx="354" cy="535.3672" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="109" x="361.5" y="540.0107">finish Configuration</text><!--MD5=[5a869d0c450bf69a108028e01ec256d3]
+reverse link 1 to 2--><path d="M146.858,328.447 C150.374,391.73 159.5,556 159.5,556 C159.5,556 270.83,585.017 322.145,598.392 " fill="none" id="1&lt;-2" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="146.575,323.356,143.08,332.5639,146.8521,328.3483,151.0677,332.1205,146.575,323.356" style="stroke: #008000; stroke-width: 1.0;"/><path d="M164.5,423 L164.5,482 L281.5,482 L281.5,433 L271.5,423 L164.5,423 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M271.5,423 L271.5,433 L281.5,433 L271.5,423 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="86" x="170.5" y="441.4951">User provides</text><ellipse cx="176" cy="453.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="57" x="183.5" y="457.8467">Full name</text><ellipse cx="176" cy="469.5547" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="83" x="183.5" y="474.1982">Pending hours</text><!--MD5=[8c316ffe68a835c409c9912a9a463893]
+link 2 to endstate--><path d="M372.6,615.091 C415.772,629.009 499.5,656 499.5,656 C499.5,656 563.465,803.12 589.079,862.032 " fill="none" id="2-&gt;endstate" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="591.146,866.786,591.2274,856.9375,589.1532,862.2003,583.8903,860.126,591.146,866.786" style="stroke: #008000; stroke-width: 1.0;"/><path d="M565.5,747 L565.5,789 L706.5,789 L706.5,757 L696.5,747 L565.5,747 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M696.5,747 L696.5,757 L706.5,757 L696.5,747 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="571.5" y="765.4951">User requests to</text><ellipse cx="577" cy="777.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="107" x="584.5" y="781.8467">finish configuration</text><!--MD5=[eeb69082328d10abd3b14fdeede0d8a3]
+link 2 to 3--><path d="M348.805,626.22 C351.002,658.569 355.396,723.288 357.426,753.187 " fill="none" id="2-&gt;3" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="357.777,758.349,361.1584,749.0988,357.4384,753.3605,353.1768,749.6405,357.777,758.349" style="stroke: #008000; stroke-width: 1.0;"/><path d="M360.5,661 L360.5,703 L482.5,703 L482.5,671 L472.5,661 L360.5,661 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M472.5,661 L472.5,671 L482.5,671 L472.5,661 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="366.5" y="679.4951">User requests to</text><ellipse cx="372" cy="691.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="79" x="379.5" y="695.8467">save changes</text><!--MD5=[b2ac855d378984b70ee6a5bd13272cbd]
+link 3 to 6--><path d="M356.618,780.411 C353.112,797.939 345.48,836.101 340.416,861.42 " fill="none" id="3-&gt;6" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="339.377,866.616,345.063,858.5743,340.3568,861.7129,337.2181,857.0067,339.377,866.616" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[c24e363b82b23e873c94edca50a9731f]
+link 3 to 5--><path d="M360.462,780.086 C365.316,802.57 377.5,859 377.5,859 C377.5,859 377.5,915 377.5,915 C377.5,915 277.183,1073.292 238.481,1134.3617 " fill="none" id="3-&gt;5" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="235.584,1138.9322,243.7807,1133.4719,238.2608,1134.7091,237.0236,1129.1891,235.584,1138.9322" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M343.5,981 L343.5,1007 L497.5,1007 L497.5,991 L487.5,981 L343.5,981 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M487.5,981 L487.5,991 L497.5,991 L487.5,981 " fill="#F5F5F5" style="stroke: #FF0000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="133" x="349.5" y="999.4951">[Error in save changes]</text><!--MD5=[c90787a7860db4a747522be9bdb91b46]
+reverse link 1 to 6--><path d="M143.515,328.321 C142.51,340.63 141.5,353 141.5,353 C141.5,353 141.5,556 141.5,556 C141.5,556 153.5,712 153.5,712 C153.5,712 267.941,821.411 315.327,866.714 " fill="none" id="1&lt;-6" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="143.942,323.085,139.2224,331.7294,143.5348,328.0684,147.1958,332.3809,143.942,323.085" style="stroke: #008000; stroke-width: 1.0;"/><path d="M158.5,661 L158.5,703 L334.5,703 L334.5,671 L324.5,661 L158.5,661 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M324.5,661 L324.5,671 L334.5,671 L324.5,661 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="164.5" y="679.4951">System shows</text><ellipse cx="170" cy="691.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="142" x="177.5" y="695.8467">Successful update client</text><!--MD5=[fc331edf9d9ed5711088ff36eccb7504]
+reverse link 1 to 5--><path d="M139.625,327.991 C136.584,340.408 133.5,353 133.5,353 C133.5,353 121.5,945 121.5,945 C121.5,945 121.5,945 121.5,1078 C121.5,1078 168.893,1115.171 199.068,1138.838 " fill="none" id="1&lt;-5" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="140.826,323.085,134.7987,330.8742,139.6359,327.9413,142.5688,332.7784,140.826,323.085" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M128.5,864 L128.5,906 L268.5,906 L268.5,874 L258.5,864 L128.5,864 " fill="#F5F5F5" filter="url(#f3ru8yvouj3ct)" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M258.5,864 L258.5,874 L268.5,874 L258.5,864 " fill="#F5F5F5" style="stroke: #FF0000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="134.5" y="882.4951">System shows</text><ellipse cx="140" cy="894.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="106" x="147.5" y="898.8467">Error update client</text><!--MD5=[31362eb3c29412f8bbfd54b9940d661e]
+link endstate to *end--><path d="M599.5,907.129 C599.5,928.157 599.5,961.469 599.5,980.464 " fill="none" id="endstate-&gt;*end" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="599.5,985.87,603.5,976.87,599.5,980.87,595.5,976.87,599.5,985.87" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[996299237a66b0b45b8fb4c6d3a24a79]
+@startuml
+
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+    ArrowColor #green
+    NoteBorderColor #green
+    linetype polyline
+}
+
+hide empty description
+
+state initstate as "OPEN_CLIENTS"
+state configClient
+state endstate as "OPEN_CLIENTS"
+
+initstate - -> configClient
+    note on link
+        <b>User requests to</b>
+        * configClient
+    end note
+
+state configClient {
+
+    state 1 as " "
+    state 2 as " "
+    state 3 <<choice>>
+    state 5 as " "
+    state 6 as " "
+
+    [*] -down-> 1
+    
+    1 -down-> 2
+    note on link
+    <b>System shows</b>
+    * Client
+    ** Full Name
+    ** Pending hours
+    ** Vehicles
+    <b>System allows</b>
+    * Modify
+    ** Full name
+    ** Pending hours
+    * save changes
+    * finish Configuration
+    end note
+
+    2 -up-> 1
+    note on link
+    <b>User provides</b>
+    * Full name
+    * Pending hours
+    end note
+
+    2 - - -> endstate
+    note on link
+    <b>User requests to</b>
+    * finish configuration
+    end note
+
+    2 -down-> 3
+    note on link
+    <b>User requests to</b>
+    * save changes
+    end note
+
+    3 -down-> 6
+
+
+    3 -down[#red]- - - -> 5
+    note on link
+        [Error in save changes]
+    end note
+
+    6 -up-> 1
+    note on link
+    <b>System shows</b>
+    * Successful update client
+    end note
+
+    5 -up[#red]-> 1
+    note on link
+    <b>System shows</b>
+    * Error update client
+    end note
+
+}
+
+endstate - -> [*]
+
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

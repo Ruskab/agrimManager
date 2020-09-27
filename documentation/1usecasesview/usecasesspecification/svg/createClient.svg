@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1170px" preserveAspectRatio="none" style="width:496px;height:1170px;" version="1.1" viewBox="0 0 496 1170" width="496px" zoomAndPan="magnify"><defs><filter height="300%" id="f1xrwhxiulsza3" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="132" x="179" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="122" x="184" y="33.7285">OPENED_CLIENTS</text><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="132" x="179" y="1119"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="122" x="184" y="1144.7285">OPENED_CLIENTS</text><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="264.5" y="1018"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="79" x="269.5" y="1043.7285">:openClients</text><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="792.6094" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="478" x="6" y="164"/><rect fill="#FFFFFF" height="759" rx="12.5" ry="12.5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="472" x="9" y="194.6094"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="6" x2="484" y1="191.6094" y2="191.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="76" x="207" y="183.5332">createClient</text><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="211" y="261.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="238" y="287.3379"/><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="211" y="459.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="238" y="485.3379"/><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="117" y="608.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="144" y="634.3379"/><rect fill="#FEFECE" filter="url(#f1xrwhxiulsza3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="117" y="789.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="144" y="815.3379"/><ellipse cx="236" cy="214.6094" fill="#000000" filter="url(#f1xrwhxiulsza3)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><ellipse cx="175" cy="931.6094" fill="none" filter="url(#f1xrwhxiulsza3)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="175.5" cy="932.1094" fill="#000000" rx="6" ry="6" style="stroke: none; stroke-width: 1.0;"/><!--MD5=[1d26e47e1770ee4604ed227d2989ccb0]
+link *start*createClient to 1--><path d="M236,224.6474 C236,232.8014 236,245.1744 236,256.2144 " fill="none" id="*start*createClient-&gt;1" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="236,261.5024,240,252.5024,236,256.5024,232,252.5024,236,261.5024" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[0ba0d8a0fd0e641c23f69743a446dfe6]
+link 1 to 2--><path d="M236,301.7594 C236,337.6204 236,414.8314 236,454.3004 " fill="none" id="1-&gt;2" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="236,459.3814,240,450.3814,236,454.3814,232,450.3814,236,459.3814" style="stroke: #008000; stroke-width: 1.0;"/><path d="M241,324.6094 L241,432.6094 L402,432.6094 L402,334.6094 L392,324.6094 L241,324.6094 " fill="#F5F5F5" filter="url(#f1xrwhxiulsza3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M392,324.6094 L392,334.6094 L402,334.6094 L392,324.6094 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="102" x="247" y="343.1045">System requires</text><ellipse cx="252.5" cy="354.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="127" x="260" y="359.4561">full Name (mandatory)</text><ellipse cx="252.5" cy="371.1641" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="260" y="375.8076">Billable hours</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="91" x="247" y="392.1592">System allows</text><ellipse cx="252.5" cy="403.8672" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="42" x="260" y="408.5107">confirm</text><ellipse cx="252.5" cy="420.2188" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="260" y="424.8623">cancel</text><!--MD5=[d91fadcc59088846e1f96f23b79e28ce]
+link 2 to *end*createClient--><path d="M261.313,492.3164 C284.75,503.1564 316,517.6094 316,517.6094 C316,517.6094 316,590.6094 316,590.6094 C316,590.6094 312,903.6094 312,903.6094 C312,903.6094 225.742,920.6092 190.115,927.6306 " fill="none" id="2-&gt;*end*createClient" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="184.853,928.6676,194.4567,930.8512,189.7586,927.7004,192.9093,923.0023,184.853,928.6676" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M320,696.1094 L320,738.1094 L442,738.1094 L442,706.1094 L432,696.1094 L320,696.1094 " fill="#F5F5F5" filter="url(#f1xrwhxiulsza3)" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M432,696.1094 L432,706.1094 L442,706.1094 L432,696.1094 " fill="#F5F5F5" style="stroke: #FF0000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="326" y="714.6045">User requests to</text><ellipse cx="331.5" cy="726.3125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="339" y="730.9561">cancel</text><!--MD5=[8d5e64f07a3a026530162c78b23a3473]
+link 2 to 6--><path d="M210.587,490.7194 C183.052,501.6744 143,517.6094 143,517.6094 C143,517.6094 142.514,571.0614 142.22,603.4444 " fill="none" id="2-&gt;6" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="142.174,608.4484,146.2561,599.4853,142.2197,603.4486,138.2564,599.4122,142.174,608.4484" style="stroke: #008000; stroke-width: 1.0;"/><path d="M148,522.6094 L148,581.6094 L307,581.6094 L307,532.6094 L297,522.6094 L148,522.6094 " fill="#F5F5F5" filter="url(#f1xrwhxiulsza3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M297,522.6094 L297,532.6094 L307,532.6094 L297,522.6094 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="86" x="154" y="541.1045">User provides</text><ellipse cx="159.5" cy="552.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="57" x="167" y="557.4561">Full name</text><ellipse cx="159.5" cy="569.1641" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="125" x="167" y="573.8076">pending billable hours</text><!--MD5=[2dfa168d6698efd82f568a8036f37f42]
+link 6 to 7--><path d="M142,648.7654 C142,681.6034 142,748.5694 142,784.5194 " fill="none" id="6-&gt;7" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="142,789.5914,146,780.5914,142,784.5914,138,780.5914,142,789.5914" style="stroke: #008000; stroke-width: 1.0;"/><path d="M147,671.6094 L147,762.6094 L279,762.6094 L279,681.6094 L269,671.6094 L147,671.6094 " fill="#F5F5F5" filter="url(#f1xrwhxiulsza3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M269,671.6094 L269,681.6094 L279,681.6094 L269,671.6094 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="153" y="690.1045">System shows</text><ellipse cx="158.5" cy="701.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="98" x="166" y="706.4561">client information</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="91" x="153" y="722.8076">System allows</text><ellipse cx="158.5" cy="734.5156" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="42" x="166" y="739.1592">confirm</text><ellipse cx="158.5" cy="750.8672" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="166" y="755.5107">cancel</text><!--MD5=[091b281bd6ca0dfc3b8ad7e783d9ba64]
+link 7 to *end*createClient--><path d="M116.7044,818.0974 C80.179,828.9084 17,847.6094 17,847.6094 C17,847.6094 17,903.6094 17,903.6094 C17,903.6094 120.133,921.2333 159.752,928.0037 " fill="none" id="7-&gt;*end*createClient" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="165.116,928.9204,156.9191,923.4605,160.1875,928.0775,155.5705,931.346,165.116,928.9204" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M22,852.6094 L22,894.6094 L144,894.6094 L144,862.6094 L134,852.6094 L22,852.6094 " fill="#F5F5F5" filter="url(#f1xrwhxiulsza3)" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M134,852.6094 L134,862.6094 L144,862.6094 L134,852.6094 " fill="#F5F5F5" style="stroke: #FF0000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="28" y="871.1045">User requests to</text><ellipse cx="33.5" cy="882.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="41" y="887.4561">cancel</text><!--MD5=[091b281bd6ca0dfc3b8ad7e783d9ba64]
+link 7 to *end*createClient--><path d="M147.758,829.9764 C150.419,838.9284 153,847.6094 153,847.6094 C153,847.6094 165.075,893.164 171.333,916.7755 " fill="none" id="7-&gt;*end*createClient-1" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="172.646,921.7269,174.2063,912.0024,171.3648,916.8938,166.4734,914.0523,172.646,921.7269" style="stroke: #008000; stroke-width: 1.0;"/><path d="M173,852.6094 L173,894.6094 L299,894.6094 L299,862.6094 L289,852.6094 L173,852.6094 " fill="#F5F5F5" filter="url(#f1xrwhxiulsza3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M289,852.6094 L289,862.6094 L299,862.6094 L289,852.6094 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="179" y="871.1045">User requests to</text><ellipse cx="184.5" cy="882.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="92" x="192" y="887.4561">confirm creation</text><!--MD5=[dd890ed21ff0db9b88a970ac198c076e]
+link initState to createClient--><path d="M245,48.19 C245,70.55 245,110.66 245,158.93 " fill="none" id="initState-&gt;createClient" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="245,163.931,249,154.931,245,158.931,241,154.931,245,163.931" style="stroke: #008000; stroke-width: 1.0;"/><path d="M250,83 L250,125 L372,125 L372,93 L362,83 L250,83 " fill="#F5F5F5" filter="url(#f1xrwhxiulsza3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M362,83 L362,93 L372,93 L362,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="256" y="101.4951">User requests to</text><ellipse cx="261.5" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="73" x="269" y="117.8467">create Client</text><!--MD5=[450637bd7d778f69aba71ce9795ae5bf]
+link createClient to openClients--><path d="M298.252,957.144 C301.282,979.656 303.848,998.72 305.712,1012.57 " fill="none" id="createClient-&gt;openClients" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="306.417,1017.806,309.1805,1008.3528,305.7499,1012.8507,301.252,1009.4201,306.417,1017.806" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[99f2f522ee4899e7889abe4de94381cf]
+link createClient to OPENED_CLIENTS--><path d="M245,957.174 C245,1024.41 245,1082.5469 245,1113.7124 " fill="none" id="createClient-&gt;OPENED_CLIENTS" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="245,1118.8471,249,1109.8471,245,1113.8471,241,1109.8471,245,1118.8471" style="stroke: #FF0000; stroke-width: 1.0;"/><!--MD5=[c6d7320b6dfe013fbc4c747c0f8045b1]
+link openClients to OPENED_CLIENTS--><path d="M296.66,1058.088 C286.213,1074.2493 271.2,1097.4716 260.049,1114.7215 " fill="none" id="openClients-&gt;OPENED_CLIENTS" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="257.302,1118.9704,265.5476,1113.5843,260.0167,1114.7716,258.8295,1109.2407,257.302,1118.9704" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[7bf6e6b088f8097dec19c78b83d648b6]
+@startuml
+
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+    ArrowColor #green
+    NoteBorderColor #green
+    linetype polyline
+}
+
+hide empty description
+
+state initState as "OPENED_CLIENTS"
+state OPENED_CLIENTS as "OPENED_CLIENTS"
+state openClients as ":openClients"
+
+initState - -> createClient
+note on link
+    <b>User requests to</b>
+    * create Client
+end note
+
+state createClient {
+state 1 as " "
+state 2 as " "
+state 6 as " "
+state 7 as " "
+
+[*]  -down-> 1
+
+1 -down-> 2
+note on link
+    <b>System requires</b>
+    * full Name (mandatory)
+    * Billable hours
+    <b>System allows</b>
+    * confirm
+    * cancel
+end note
+
+2 -down[#red]-> [*]
+note on link
+<b>User requests to
+* cancel
+end note
+
+2 -down-> 6
+note on link
+<b>User provides</b>
+* Full name
+* pending billable hours
+end note
+
+
+6 -down-> 7
+note on link
+<b>System shows</b>
+* client information
+<b>System allows</b>
+* confirm
+* cancel
+end note
+
+7 -[#red]-> [*]
+note on link
+<b>User requests to</b>
+* cancel
+end note
+
+
+7 -down-> [*]
+note on link
+<b>User requests to</b>
+* confirm creation
+end note
+
+}
+
+createClient -down-> openClients
+createClient -[#red]-> OPENED_CLIENTS
+openClients -down-> OPENED_CLIENTS
+
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

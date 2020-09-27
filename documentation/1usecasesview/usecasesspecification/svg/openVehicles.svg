@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="594px" preserveAspectRatio="none" style="width:924px;height:594px;" version="1.1" viewBox="0 0 924 594" width="924px" zoomAndPan="magnify"><defs><filter height="300%" id="f1wb5sw4vh0gz3" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FEFECE" filter="url(#f1wb5sw4vh0gz3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="141" x="6" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="131" x="11" y="33.7285">OPENED_VEHICLES</text><rect fill="#FEFECE" filter="url(#f1wb5sw4vh0gz3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="161" x="348" y="543"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="151" x="353" y="568.7285">OPENED_DASHBOARD</text><rect fill="#FEFECE" filter="url(#f1wb5sw4vh0gz3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="141" x="182" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="131" x="187" y="33.7285">OPENED_VEHICLES</text><rect fill="#FEFECE" filter="url(#f1wb5sw4vh0gz3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="132" x="360.5" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="122" x="365.5" y="33.7285">OPENED_CLIENTS</text><rect fill="#FEFECE" filter="url(#f1wb5sw4vh0gz3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="183" x="528" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="173" x="533" y="33.7285">OPENED_INTERVENTIONS</text><rect fill="#FEFECE" filter="url(#f1wb5sw4vh0gz3)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="155" x="746" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="145" x="751" y="33.7285">OPENED_OPERATION</text><rect fill="#FEFECE" filter="url(#f1wb5sw4vh0gz3)" height="131.6094" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="105" x="376" y="164"/><rect fill="#FFFFFF" height="98" rx="12.5" ry="12.5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="99" x="379" y="194.6094"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="376" x2="481" y1="191.6094" y2="191.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="386" y="183.5332">openVehicles</text><ellipse cx="397" cy="214.6094" fill="#000000" filter="url(#f1wb5sw4vh0gz3)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><ellipse cx="397" cy="270.6094" fill="none" filter="url(#f1wb5sw4vh0gz3)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="397.5" cy="271.1094" fill="#000000" rx="6" ry="6" style="stroke: none; stroke-width: 1.0;"/><!--MD5=[9c73b8505b886ec60e3e4e021e6ded2e]
+link *start*openVehicles to *end*openVehicles--><path d="M397,225.0155 C397,233.3007 397,245.501 397,255.0469 " fill="none" id="*start*openVehicles-&gt;*end*openVehicles" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="397,260.3111,401,251.3111,397,255.3111,393,251.3111,397,260.3111" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[cad8610aa8b27b03c2ff5534a7ec1797]
+link startState1 to openVehicles--><path d="M258.186,48.259 C267.135,78.571 283.5,134 283.5,134 C283.5,134 330.775,164.973 371.337,191.548 " fill="none" id="startState1-&gt;openVehicles" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="375.741,194.434,370.4043,186.1564,371.5585,191.6942,366.0206,192.8484,375.741,194.434" style="stroke: #008000; stroke-width: 1.0;"/><path d="M288.5,83 L288.5,125 L410.5,125 L410.5,93 L400.5,83 L288.5,83 " fill="#F5F5F5" filter="url(#f1wb5sw4vh0gz3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M400.5,83 L400.5,93 L410.5,93 L400.5,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="294.5" y="101.4951">User requests to</text><ellipse cx="300" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="307.5" y="117.8467">openVehicles</text><!--MD5=[af1783b8a15c54c46dbdf774e53128ee]
+link startState2 to openVehicles--><path d="M426.692,48.177 C426.944,73.441 427.403,119.261 427.795,158.453 " fill="none" id="startState2-&gt;openVehicles" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="427.847,163.69,431.7568,154.6505,427.797,158.6902,423.7572,154.7304,427.847,163.69" style="stroke: #008000; stroke-width: 1.0;"/><path d="M432.5,83 L432.5,125 L554.5,125 L554.5,93 L544.5,83 L432.5,83 " fill="#F5F5F5" filter="url(#f1wb5sw4vh0gz3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M544.5,83 L544.5,93 L554.5,93 L544.5,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="438.5" y="101.4951">User requests to</text><ellipse cx="444" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="451.5" y="117.8467">openVehicles</text><!--MD5=[508de538c5c084f75ef9e48c3c7e5618]
+link startState3 to openVehicles--><path d="M610.696,48.259 C596.839,78.571 571.5,134 571.5,134 C571.5,134 525.491,164.565 485.668,191.022 " fill="none" id="startState3-&gt;openVehicles" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="481.342,193.895,491.0517,192.2455,485.5064,191.1278,486.6242,185.5824,481.342,193.895" style="stroke: #008000; stroke-width: 1.0;"/><path d="M602.5,83 L602.5,125 L724.5,125 L724.5,93 L714.5,83 L602.5,83 " fill="#F5F5F5" filter="url(#f1wb5sw4vh0gz3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M714.5,83 L714.5,93 L724.5,93 L714.5,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="608.5" y="101.4951">User requests to</text><ellipse cx="614" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="621.5" y="117.8467">openVehicles</text><!--MD5=[3dbf777a85e466917969ef16dc88a7fd]
+link startState5 to openVehicles--><path d="M808.46,48.259 C784.787,78.571 741.5,134 741.5,134 C741.5,134 576.734,184.009 486.291,211.46 " fill="none" id="startState5-&gt;openVehicles" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="481.242,212.992,491.016,214.2043,486.0263,211.5391,488.6914,206.5495,481.242,212.992" style="stroke: #008000; stroke-width: 1.0;"/><path d="M790.5,83 L790.5,125 L912.5,125 L912.5,93 L902.5,83 L790.5,83 " fill="#F5F5F5" filter="url(#f1wb5sw4vh0gz3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M902.5,83 L902.5,93 L912.5,93 L902.5,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="796.5" y="101.4951">User requests to</text><ellipse cx="802" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="809.5" y="117.8467">openVehicles</text><!--MD5=[fdefe930c71f9c2ecf1f2665f03bf804]
+link startState to openVehicles--><path d="M109.64,48.015 C162.375,78.273 259.5,134 259.5,134 C259.5,134 322.484,169.405 371.551,196.987 " fill="none" id="startState-&gt;openVehicles" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="375.954,199.462,370.0685,191.5651,371.5954,197.012,366.1485,198.5389,375.954,199.462" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[950ef6eb268c9e44be7d558b3808cdf5]
+link openVehicles to endState--><path d="M428.5,296 C428.5,369.933 428.5,486.9314 428.5,537.4437 " fill="none" id="openVehicles-&gt;endState" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="428.5,542.6951,432.5,533.6951,428.5,537.6951,424.5,533.6951,428.5,542.6951" style="stroke: #008000; stroke-width: 1.0;"/><path d="M433.5,331 L433.5,504 L591.5,504 L591.5,341 L581.5,331 L433.5,331 " fill="#F5F5F5" filter="url(#f1wb5sw4vh0gz3)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M581.5,331 L581.5,341 L591.5,341 L581.5,331 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="439.5" y="349.4951">System shows</text><ellipse cx="445" cy="361.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="124" x="452.5" y="365.8467">all vehicles in system</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="91" x="439.5" y="382.1982">System allows</text><ellipse cx="445" cy="393.9063" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="78" x="452.5" y="398.5498">open vehicles</text><ellipse cx="445" cy="410.2578" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="452.5" y="414.9014">open interventions</text><ellipse cx="445" cy="426.6094" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="70" x="452.5" y="431.2529">open clients</text><ellipse cx="445" cy="442.9609" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="92" x="452.5" y="447.6045">open operations</text><ellipse cx="445" cy="459.3125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="35" x="452.5" y="463.9561">logout</text><ellipse cx="445" cy="475.6641" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="105" x="452.5" y="480.3076">create intervention</text><ellipse cx="445" cy="492.0156" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="99" x="452.5" y="496.6592">finish intervention</text><!--MD5=[cac4688cf50aeae05c66128e0f0781dd]
+@startuml
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+    ArrowColor #green
+    NoteBorderColor #green
+    linetype polyline
+}
+
+hide empty description
+
+state startState as "OPENED_VEHICLES"
+state endState as "OPENED_VEHICLE"
+
+state startState1 as "OPENED_VEHICLES"
+state startState2 as "OPENED_CLIENTS"
+state startState3 as "OPENED_INTERVENTIONS"
+state startState5 as "OPENED_OPERATION"
+state endState as "OPENED_DASHBOARD"
+
+startState1 - -> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+startState2 - -> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+startState3 - -> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+startState5 - -> openVehicles
+note on link
+<b>User requests to</b>
+* openVehicles
+end note
+startState - -> openVehicles
+
+state openVehicles {
+
+[*] - -> [*]
+
+
+}
+
+openVehicles - -> endState
+note on link
+<b>System shows
+* all vehicles in system
+<b>System allows
+* open vehicles
+* open interventions
+* open clients
+* open operations
+* logout
+* create intervention
+* finish intervention
+end note
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

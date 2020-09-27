@@ -10,12 +10,12 @@
 
 [#_domainModel]
 == domain Model
-image::png/domainModel.png[]
+image::svg/domainModel.svg[]
 <<_index>>
 
 [#_interventionFlow]
 == Intervention statuses
-image::png/interventionFlow.png[]
+image::svg/interventionFlow.svg[]
 <<_index>>
 
 == Glosario de terminos

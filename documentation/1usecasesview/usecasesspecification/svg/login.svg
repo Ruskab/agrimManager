@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="869px" preserveAspectRatio="none" style="width:466px;height:869px;" version="1.1" viewBox="0 0 466 869" width="466px" zoomAndPan="magnify"><defs><filter height="300%" id="f1lp6l4jaucbwn" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FEFECE" filter="url(#f1lp6l4jaucbwn)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="54" x="203" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="208" y="33.7285">INITIAL</text><rect fill="#FEFECE" filter="url(#f1lp6l4jaucbwn)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="116" x="172" y="717"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="106" x="177" y="742.7285">:openDashboard</text><rect fill="#FEFECE" filter="url(#f1lp6l4jaucbwn)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="161" x="149.5" y="818"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="151" x="154.5" y="843.7285">OPENED_DASHBOARD</text><rect fill="#FEFECE" filter="url(#f1lp6l4jaucbwn)" height="491.6094" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="448" x="6" y="164"/><rect fill="#FFFFFF" height="458" rx="12.5" ry="12.5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="442" x="9" y="194.6094"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="6" x2="454" y1="191.6094" y2="191.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="215" y="183.5332">login</text><rect fill="#FEFECE" filter="url(#f1lp6l4jaucbwn)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="89" y="261.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="116" y="287.3379"/><polygon fill="#FEFECE" filter="url(#f1lp6l4jaucbwn)" points="120,559.6094,132,571.6094,120,583.6094,108,571.6094,120,559.6094" style="stroke: #A80036; stroke-width: 1.5;"/><rect fill="#FEFECE" filter="url(#f1lp6l4jaucbwn)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="17" y="410.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="44" y="436.3379"/><ellipse cx="114" cy="214.6094" fill="#000000" filter="url(#f1lp6l4jaucbwn)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><ellipse cx="120" cy="630.6094" fill="none" filter="url(#f1lp6l4jaucbwn)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="120.5" cy="631.1094" fill="#000000" rx="6" ry="6" style="stroke: none; stroke-width: 1.0;"/><!--MD5=[f237a19b6bd9a9487640db6364a35798]
+link *start*login to 1--><path d="M114,224.6474 C114,232.8014 114,245.1744 114,256.2144 " fill="none" id="*start*login-&gt;1" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="114,261.5024,118,252.5024,114,256.5024,110,252.5024,114,261.5024" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[0ba0d8a0fd0e641c23f69743a446dfe6]
+link 1 to 2--><path d="M88.6084,295.1364 C66.8503,305.8694 39,319.6094 39,319.6094 C39,319.6094 39,392.6094 39,392.6094 C39,392.6094 39.447,398.1214 39.9958,404.8914 " fill="none" id="1-&gt;2" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="40.4297,410.2424,43.6889,400.9484,40.0254,405.2587,35.7151,401.5953,40.4297,410.2424" style="stroke: #008000; stroke-width: 1.0;"/><path d="M44,324.6094 L44,383.6094 L167,383.6094 L167,334.6094 L157,324.6094 L44,324.6094 " fill="#F5F5F5" filter="url(#f1lp6l4jaucbwn)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M157,324.6094 L157,334.6094 L167,334.6094 L157,324.6094 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="102" x="50" y="343.1045">System requires</text><ellipse cx="55.5" cy="354.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="57" x="63" y="359.4561">username</text><ellipse cx="55.5" cy="371.1641" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="55" x="63" y="375.8076">password</text><!--MD5=[d3e38fbb296df062c1834f01c213fc36]
+link 2 to condicional--><path d="M44.2644,450.7704 C47.989,482.2854 55,541.6094 55,541.6094 C55,541.6094 88.4794,556.5464 107.383,564.9803 " fill="none" id="2-&gt;condicional" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="112.2884,567.1688,105.6992,559.8488,107.7223,565.1315,102.4396,567.1546,112.2884,567.1688" style="stroke: #008000; stroke-width: 1.0;"/><path d="M60,473.6094 L60,532.6094 L167,532.6094 L167,483.6094 L157,473.6094 L60,473.6094 " fill="#F5F5F5" filter="url(#f1lp6l4jaucbwn)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M157,473.6094 L157,483.6094 L167,483.6094 L157,473.6094 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="86" x="66" y="492.1045">User provides</text><ellipse cx="71.5" cy="503.8125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="57" x="79" y="508.4561">username</text><ellipse cx="71.5" cy="520.1641" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="55" x="79" y="524.8076">password</text><!--MD5=[b263b4bc8153c55c17d1d0668efd7e91]
+link condicional to 1--><path d="M127.321,566.8182 C142.5,558.9574 176,541.6094 176,541.6094 C176,541.6094 176,319.6094 176,319.6094 C176,319.6094 159.61,309.8284 143.683,300.3234 " fill="none" id="condicional-&gt;1" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="139.218,297.6584,144.8972,305.7049,143.5118,300.2203,148.9963,298.8349,139.218,297.6584" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M181,415.6094 L181,441.6094 L412,441.6094 L412,425.6094 L402,415.6094 L181,415.6094 " fill="#F5F5F5" filter="url(#f1lp6l4jaucbwn)" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M402,415.6094 L402,425.6094 L412,425.6094 L402,415.6094 " fill="#F5F5F5" style="stroke: #FF0000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="210" x="187" y="434.1045">[pair username password not exists]</text><!--MD5=[519a62718ead6b0a3a4ca1bba9c8dc9a]
+link condicional to *end*login--><path d="M120,583.8708 C120,592.8498 120,605.4854 120,615.2013 " fill="none" id="condicional-&gt;*end*login" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="120,620.2569,124,611.2569,120,615.2569,116,611.2569,120,620.2569" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[3ff027586ae0f3e062b8762719d196cc]
+link initstate to login--><path d="M230,48.105 C230,70.976 230,112.062 230,158.537 " fill="none" id="initstate-&gt;login" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="230,163.638,234,154.638,230,158.638,226,154.638,230,163.638" style="stroke: #008000; stroke-width: 1.0;"/><path d="M235,83 L235,125 L357,125 L357,93 L347,83 L235,83 " fill="#F5F5F5" filter="url(#f1lp6l4jaucbwn)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M347,83 L347,93 L357,93 L347,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="241" y="101.4951">User requests to</text><ellipse cx="246.5" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="27" x="254" y="117.8467">login</text><!--MD5=[4161a5ef67aeea07140acceacaaf80c8]
+link login to openDashboard--><path d="M230,656.08 C230,678.111 230,697.385 230,711.482 " fill="none" id="login-&gt;openDashboard" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="230,716.817,234,707.817,230,711.817,226,707.817,230,716.817" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[23666a044ee9353181bc2d90c8f3e094]
+link openDashboard to endstate--><path d="M230,757.088 C230,772.9753 230,795.6864 230,812.8393 " fill="none" id="openDashboard-&gt;endstate" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="230,817.9704,234,808.9704,230,812.9704,226,808.9704,230,817.9704" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[882e510e7e2541b9680af0057f9e86fb]
+@startuml
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+    ArrowColor #green
+    NoteBorderColor #green
+    linetype polyline
+}
+
+hide empty description
+
+state initstate as "INITIAL"
+state login
+state openDashboard as ":openDashboard"
+state endstate as "OPENED_DASHBOARD"
+
+initstate - -> login
+note on link
+<b>User requests to</b>
+* login
+end note
+
+state login {
+
+state 1 as " "
+state condicional <<choice>>
+state 2 as " "
+
+[*] - -> 1
+
+1 - -> 2
+note on link
+<b>System requires</b>
+* username
+* password
+end note
+
+2 - -> condicional
+note on link
+<b>User provides</b>
+* username
+* password
+end note
+
+condicional -[#red]-> 1
+note on link
+[pair username password not exists]
+end note
+
+condicional - -> [*]
+}
+
+login - -> openDashboard
+
+openDashboard - -> endstate
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

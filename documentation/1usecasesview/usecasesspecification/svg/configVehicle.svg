@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1345px" preserveAspectRatio="none" style="width:817px;height:1345px;" version="1.1" viewBox="0 0 817 1345" width="817px" zoomAndPan="magnify"><defs><filter height="300%" id="fqgezh96dl6gp" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[f945988a2674c3d8a4333e3c4d21d8ac]
+cluster configVehicle--><rect fill="#FEFECE" filter="url(#fqgezh96dl6gp)" height="1176" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="601" x="59" y="158"/><rect fill="#FFFFFF" height="1142.3906" rx="12.5" ry="12.5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="595" x="62" y="188.6094"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="59" x2="660" y1="185.6094" y2="185.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="84" x="317.5" y="176.5332">configVehicle</text><rect fill="#FEFECE" filter="url(#fqgezh96dl6gp)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="103" y="283"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="130" y="308.7285"/><rect fill="#FEFECE" filter="url(#fqgezh96dl6gp)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="329" y="717"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="356" y="742.7285"/><polygon fill="#FEFECE" filter="url(#fqgezh96dl6gp)" points="371,889,383,901,371,913,359,901,371,889" style="stroke: #A80036; stroke-width: 1.5;"/><rect fill="#FEFECE" filter="url(#fqgezh96dl6gp)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="242" y="1270"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="269" y="1295.7285"/><rect fill="#FEFECE" filter="url(#fqgezh96dl6gp)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="323" y="998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="0" x="350" y="1023.7285"/><ellipse cx="128" cy="212" fill="#000000" filter="url(#fqgezh96dl6gp)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" filter="url(#fqgezh96dl6gp)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="122" x="6" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="112" x="11" y="33.7285">OPEN_VEHICLES</text><rect fill="#FEFECE" filter="url(#fqgezh96dl6gp)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="122" x="684" y="998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="112" x="689" y="1023.7285">OPEN_VEHICLES</text><ellipse cx="745" cy="1127" fill="none" filter="url(#fqgezh96dl6gp)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="745.5" cy="1127.5" fill="#000000" rx="6" ry="6" style="stroke: none; stroke-width: 1.0;"/><!--MD5=[cdd5297cc005bc4854650772dac6a90b]
+link initstate to configVehicle--><path d="M67,48.13 C67,71.13 67,110.945 67,145.4513 C67,147.6079 67,149.7438 67,151.8536 C67,152.9084 67,153.9568 67,154.9979 C67,155.5185 67,156.0373 67,156.5541 C67,156.8126 67,157.0705 67,157.328 " fill="none" id="initstate-&gt;configVehicle" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="67,157.328,71,148.328,67,152.328,63,148.328,67,157.328" style="stroke: #008000; stroke-width: 1.0;"/><path d="M72,83 L72,125 L194,125 L194,93 L184,83 L72,83 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M184,83 L184,93 L194,93 L184,83 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="78" y="101.4951">User requests to</text><ellipse cx="83.5" cy="113.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="77" x="91" y="117.8467">configVehicle</text><!--MD5=[b81bb8b388e232ec71f002e4964d0194]
+link *start*configVehicle to 1--><path d="M128,222.19 C128,235.18 128,259.38 128,277.73 " fill="none" id="*start*configVehicle-&gt;1" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="128,282.74,132,273.74,128,277.74,124,273.74,128,282.74" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[0ba0d8a0fd0e641c23f69743a446dfe6]
+link 1 to 2--><path d="M153.232,311.23 C200.798,324.86 299,353 299,353 C299,353 338.414,627.465 350.512,711.708 " fill="none" id="1-&gt;2" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="351.235,716.744,353.9136,707.2664,350.5235,711.7949,345.995,708.4048,351.235,716.744" style="stroke: #008000; stroke-width: 1.0;"/><path d="M352,358 L352,678 L636,678 L636,368 L626,358 L352,358 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M626,358 L626,368 L636,368 L626,358 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="358" y="376.4951">System shows</text><ellipse cx="363.5" cy="388.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="110" x="371" y="392.8467">Vehicle information</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="404.0547"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="101" x="384" y="409.1982">Registration plate</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="420.4063"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="34" x="384" y="425.5498">Brand</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="436.7578"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="71" x="384" y="441.9014">Client Name</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="453.1094"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="85" x="384" y="458.2529">Body of Frame</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="469.4609"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="29" x="384" y="474.6045">KMS</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="485.8125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="384" y="490.9561">Last ITV</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="502.1641"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="50" x="384" y="507.3076">Next ITV</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="518.5156"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="77" x="384" y="523.6592">Last Revision</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="534.8672"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="111" x="384" y="540.0107">Air Filter Reference</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="551.2188"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="111" x="384" y="556.3623">Oil Filter Reference</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="567.5703"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="58" x="384" y="572.7139">Fuel Filter</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="583.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="53" x="384" y="589.0654">Motor Oil</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="91" x="358" y="605.417">System allows</text><ellipse cx="363.5" cy="617.125" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="38" x="371" y="621.7686">Modify</text><rect fill="#000000" height="3.5" style="stroke: #000000; stroke-width: 0.0;" width="3.5" x="379" y="632.9766"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="237" x="384" y="638.1201">all shown information except client Name</text><ellipse cx="363.5" cy="649.8281" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="79" x="371" y="654.4717">save changes</text><ellipse cx="363.5" cy="666.1797" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="109" x="371" y="670.8232">finish Configuration</text><!--MD5=[5a869d0c450bf69a108028e01ec256d3]
+reverse link 1 to 2--><path d="M128.317,328.29 C129.417,412.535 133,687 133,687 C133,687 270.599,717.508 328.648,730.379 " fill="none" id="1&lt;-2" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="128.251,323.26,124.38,332.3162,128.3224,328.2595,132.3792,332.2019,128.251,323.26" style="stroke: #008000; stroke-width: 1.0;"/><path d="M138,497 L138,539 L282,539 L282,507 L272,497 L138,497 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M272,497 L272,507 L282,507 L272,497 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="86" x="144" y="515.4951">User provides</text><ellipse cx="149.5" cy="527.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="110" x="157" y="531.8467">Vehicle information</text><!--MD5=[8c316ffe68a835c409c9912a9a463893]
+link 2 to endstate--><path d="M379.064,745.873 C423.162,759.724 510,787 510,787 C510,787 662.134,935.898 721.589,994.087 " fill="none" id="2-&gt;endstate" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="725.368,997.786,721.7342,988.632,721.7948,994.2885,716.1383,994.3491,725.368,997.786" style="stroke: #008000; stroke-width: 1.0;"/><path d="M660,878 L660,920 L801,920 L801,888 L791,878 L660,878 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M791,878 L791,888 L801,888 L791,878 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="666" y="896.4951">User requests to</text><ellipse cx="671.5" cy="908.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="107" x="679" y="912.8467">finish configuration</text><!--MD5=[eeb69082328d10abd3b14fdeede0d8a3]
+link 2 to 3--><path d="M356.017,757.22 C359.428,789.727 366.269,854.92 369.386,884.622 " fill="none" id="2-&gt;3" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="369.923,889.739,372.9626,880.3709,369.4016,884.7663,365.0063,881.2052,369.923,889.739" style="stroke: #008000; stroke-width: 1.0;"/><path d="M371,792 L371,834 L493,834 L493,802 L483,792 L371,792 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M483,792 L483,802 L493,802 L483,792 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="377" y="810.4951">User requests to</text><ellipse cx="382.5" cy="822.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="79" x="390" y="826.8467">save changes</text><!--MD5=[b2ac855d378984b70ee6a5bd13272cbd]
+link 3 to 6--><path d="M369.118,911.411 C365.612,928.939 357.98,967.101 352.916,992.42 " fill="none" id="3-&gt;6" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="351.877,997.616,357.563,989.5743,352.8568,992.7129,349.7181,988.0067,351.877,997.616" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[c24e363b82b23e873c94edca50a9731f]
+link 3 to 5--><path d="M373.733,910.271 C382.446,936.639 409,1017 409,1017 C409,1017 409,1017 409,1209 C409,1209 338.087,1248.951 296.486,1272.3883 " fill="none" id="3-&gt;5" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="292.06,1274.8818,301.8646,1273.9491,296.4162,1272.4276,297.9378,1266.9792,292.06,1274.8818" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M414,1112 L414,1138 L568,1138 L568,1122 L558,1112 L414,1112 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M558,1112 L558,1122 L568,1122 L558,1112 " fill="#F5F5F5" style="stroke: #FF0000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="133" x="420" y="1130.4951">[Error in save changes]</text><!--MD5=[c90787a7860db4a747522be9bdb91b46]
+reverse link 1 to 6--><path d="M124.526,328.32 C122.767,340.63 121,353 121,353 C121,353 121,687 121,687 C121,687 154,843 154,843 C154,843 275.987,952.411 326.497,997.714 " fill="none" id="1&lt;-6" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="125.274,323.08,120.0532,331.4313,124.5739,328.0307,127.9744,332.5514,125.274,323.08" style="stroke: #008000; stroke-width: 1.0;"/><path d="M159,792 L159,834 L343,834 L343,802 L333,792 L159,792 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #008000; stroke-width: 1.0;"/><path d="M333,792 L333,802 L343,802 L333,792 " fill="#F5F5F5" style="stroke: #008000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="165" y="810.4951">System shows</text><ellipse cx="170.5" cy="822.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="150" x="178" y="826.8467">Successful update vehicle</text><!--MD5=[fc331edf9d9ed5711088ff36eccb7504]
+reverse link 1 to 5--><path d="M120.656,327.99 C116.855,340.41 113,353 113,353 C113,353 113,687 113,687 C113,687 126,1076 126,1076 C126,1076 126,1076 126,1209 C126,1209 201.235,1251.687 241.792,1274.6976 " fill="none" id="1&lt;-5" style="stroke: #FF0000; stroke-width: 1.0;"/><polygon fill="#FF0000" points="122.158,323.08,115.6872,330.5049,120.687,327.8587,123.3331,332.8585,122.158,323.08" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M130,995 L130,1037 L278,1037 L278,1005 L268,995 L130,995 " fill="#F5F5F5" filter="url(#fqgezh96dl6gp)" style="stroke: #FF0000; stroke-width: 1.0;"/><path d="M268,995 L268,1005 L278,1005 L268,995 " fill="#F5F5F5" style="stroke: #FF0000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="136" y="1013.4951">System shows</text><ellipse cx="141.5" cy="1025.2031" fill="#000000" rx="2.5" ry="2.5" style="stroke: #000000; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="114" x="149" y="1029.8467">Error update vehicle</text><!--MD5=[31362eb3c29412f8bbfd54b9940d661e]
+link endstate to *end--><path d="M745,1038.129 C745,1059.157 745,1092.469 745,1111.464 " fill="none" id="endstate-&gt;*end" style="stroke: #008000; stroke-width: 1.0;"/><polygon fill="#008000" points="745,1116.87,749,1107.87,745,1111.87,741,1107.87,745,1116.87" style="stroke: #008000; stroke-width: 1.0;"/><!--MD5=[2ed793feb97afa9076b50e780f6e25c4]
+@startuml
+
+skinparam {
+    NoteBackgroundColor #whiteSmoke
+    ArrowColor #green
+    NoteBorderColor #green
+    linetype polyline
+}
+
+hide empty description
+
+state initstate as "OPEN_VEHICLES"
+state configVehicle
+state endstate as "OPEN_VEHICLES"
+
+initstate - -> configVehicle
+    note on link
+        <b>User requests to</b>
+        * configVehicle
+    end note
+
+state configVehicle {
+
+    state 1 as " "
+    state 2 as " "
+    state 3 <<choice>>
+    state 5 as " "
+    state 6 as " "
+
+    [*] -down-> 1
+    
+    1 -down-> 2
+    note on link
+    <b>System shows</b>
+    * Vehicle information
+    ** Registration plate
+    ** Brand
+    ** Client Name
+    ** Body of Frame
+    ** KMS
+    ** Last ITV
+    ** Next ITV
+    ** Last Revision
+    ** Air Filter Reference
+    ** Oil Filter Reference
+    ** Fuel Filter
+    ** Motor Oil
+    <b>System allows</b>
+    * Modify
+    ** all shown information except client Name
+    * save changes
+    * finish Configuration
+    end note
+
+    2 -up-> 1
+    note on link
+    <b>User provides</b>
+    * Vehicle information
+    end note
+
+    2 - - -> endstate
+    note on link
+    <b>User requests to</b>
+    * finish configuration
+    end note
+
+    2 -down-> 3
+    note on link
+    <b>User requests to</b>
+    * save changes
+    end note
+
+    3 -down-> 6
+
+    3 -down[#red]- - - -> 5
+    note on link
+        [Error in save changes]
+    end note
+
+    6 -up-> 1
+    note on link
+    <b>System shows</b>
+    * Successful update vehicle
+    end note
+
+    5 -up[#red]-> 1
+    note on link
+    <b>System shows</b>
+    * Error update vehicle
+    end note
+}
+
+endstate - -> [*]
+
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
