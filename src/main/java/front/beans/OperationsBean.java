@@ -194,7 +194,7 @@ public class OperationsBean {
         List<String> titles = Arrays.asList("Ruedas", "Volante", "Capo", "Sistema", "Maletero", "Puerta", "Pintura", "faros", "Luces", "motor");
         Collections.shuffle(titles);
         int startTime = getStartTime();
-        return new InterventionDto(titles.get(0), InterventionType.REPAIR, vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
+        return new InterventionDto(titles.get(0), "REPAIR", vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
     }
 
     private int getStartTime() {

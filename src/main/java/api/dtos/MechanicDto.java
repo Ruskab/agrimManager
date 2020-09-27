@@ -17,7 +17,7 @@ public class MechanicDto implements Serializable {
 
     private List<Integer> interventionIds = new ArrayList<>();
 
-    private Set<Role> roles = new HashSet<>();
+    private Set<String> roles = new HashSet<>();
 
     public MechanicDto(String name, String password, List<Integer> interventionIds) {
         this.name = name;
@@ -60,15 +60,15 @@ public class MechanicDto implements Serializable {
         this.interventionIds = interventionIds;
     }
 
-    public Set<Role> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 
-    public boolean hasRole(Role role) {
+    public boolean hasRole(String role) {
         return roles.contains(role);
     }
 
@@ -76,14 +76,14 @@ public class MechanicDto implements Serializable {
         return roles.stream().anyMatch(roles::contains);
     }
 
-    public void addRole(Role role) {
+    public void addRole(String role) {
         if (!hasRole(role)) {
             roles.add(role);
         }
     }
 
-    public boolean anyRoleGranted(Role... roles) {
-        for (Role role : roles) {
+    public boolean anyRoleGranted(String... roles) {
+        for (String role : roles) {
             if (this.hasRole(role)) {
                 return true;
             }

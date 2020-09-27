@@ -5,7 +5,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       lang="en" xml:lang="en"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:agrim="http://java.sun.com/jsf/composite/components/agrim"
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
@@ -35,27 +34,26 @@
                             </p:outputPanel>
                         </f:facet>
 
-                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.startTime}" priority="3">
-                            <h:outputText value="#{intervention.startTime}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.interventionDto.startTime}" priority="3">
+                            <h:outputText value="#{intervention.interventionDto.startTime}"/>
                         </p:column>
-                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.endTime}" priority="3">
-                            <h:outputText value="#{intervention.endTime}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.interventionDto.endTime}" priority="3">
+                            <h:outputText value="#{intervention.interventionDto.endTime}"/>
                         </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{lazyInterventionsView.vehicleReference}" priority="1">
                             <h:outputText value="#{lazyInterventionsView.vehicles.get(intervention.vehicleId)}"/>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.type']}"
-                                  filterBy="#{intervention.interventionType}" filterMatchMode="equals" priority="1">
+                                  filterBy="#{intervention.interventionDto.interventionType}" filterMatchMode="equals" priority="1">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('interventionTable').filter()" styleClass="custom-filter">
-
                                     <f:selectItem itemLabel="All" itemValue="" />
                                     <f:selectItem itemLabel="Repair" itemValue="REPAIR" />
                                     <f:selectItem itemLabel="Caffe" itemValue="CAFFE" />
                                 </p:selectOneButton>
                             </f:facet>
-                            <h:outputText value="#{intervention.interventionType}"/>
+                            <h:outputText value="#{intervention.interventionDto.interventionType}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

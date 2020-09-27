@@ -10,7 +10,8 @@ import org.omnifaces.util.Faces;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 @ManagedBean(name = "loginBean")
-@SessionScoped
+@RequestScoped
 public class LoginBean {
 
     public static final String HOME_PAGE = "/backoffice/dashboard.xhtml";
@@ -28,10 +29,12 @@ public class LoginBean {
     private String password;
     private AuthenticationGateway authenticateGateway;
 
+    @ManagedProperty(value="#{sessionBean}")
+    private SessionBean sessionBean;
+
     @PostConstruct
     public void init() {
         authenticateGateway = new AuthenticationGateway();
-
     }
 
     public void login() throws IOException {
@@ -53,6 +56,7 @@ public class LoginBean {
         Faces.getSession().setAttribute("username", userName);
         Faces.getSession().setAttribute("mechanic", mechanics.get(0));
         Faces.getSession().setAttribute("token", authToken);
+        sessionBean.setMechanicDto(mechanics.get(0));
     }
 
     private void redirect(String path) throws IOException {
@@ -93,5 +97,13 @@ public class LoginBean {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
     }
 }

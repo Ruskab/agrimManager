@@ -1,6 +1,5 @@
 package api.dtos;
 
-import api.entity.InterventionType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -14,7 +13,7 @@ public class InterventionDto implements Serializable {
 
     private String title;
 
-    private InterventionType interventionType;
+    private String interventionType;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -28,7 +27,7 @@ public class InterventionDto implements Serializable {
 
     private String repairingPackId;
 
-    public InterventionDto(String title, InterventionType interventionType, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
+    public InterventionDto(String title, String interventionType, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
         this.title = title;
         this.interventionType = interventionType;
         //todo si es de caffe no deberia de tener vehicle
@@ -62,11 +61,11 @@ public class InterventionDto implements Serializable {
         this.title = title;
     }
 
-    public InterventionType getInterventionType() {
+    public String getInterventionType() {
         return interventionType;
     }
 
-    public void setInterventionType(InterventionType interventionType) {
+    public void setInterventionType(String interventionType) {
         this.interventionType = interventionType;
     }
 

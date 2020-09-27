@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "mechanic")
@@ -64,7 +65,7 @@ public class Mechanic implements Serializable {
     public Mechanic(MechanicDto mechanicDto) {
         this.name = mechanicDto.getName();
         this.password = mechanicDto.getPassword();
-        this.roles = mechanicDto.getRoles();
+        this.roles = mechanicDto.getRoles().stream().map(Role::getByValue).collect(Collectors.toSet());
     }
 
     public Mechanic(String name, String password, List<Intervention> interventions) {

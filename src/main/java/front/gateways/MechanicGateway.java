@@ -45,8 +45,8 @@ public class MechanicGateway implements Serializable {
     }
 
     public String create(MechanicDto mechanicDto) {
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties
-                .getProperty(MECHANICS))
+        URI endPoint = UriBuilder.fromPath(resource).build();
+        Response response = client.target(endPoint)
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(mechanicDto, MediaType.APPLICATION_JSON_TYPE));

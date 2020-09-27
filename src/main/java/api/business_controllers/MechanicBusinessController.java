@@ -8,6 +8,7 @@ import api.dtos.MechanicDto;
 import api.dtos.mappers.InterventionMapper;
 import api.dtos.mappers.MechanicMapper;
 import api.entity.Intervention;
+import api.entity.InterventionType;
 import api.entity.Mechanic;
 import api.exceptions.NotFoundException;
 
@@ -47,7 +48,7 @@ public class MechanicBusinessController {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
                 .orElseThrow(() -> NotFoundException.throwBecauseOf("Mechanic not found"));
 
-        Intervention intervention = new Intervention(interventionDto.getTitle(), interventionDto.getInterventionType(), interventionDto
+        Intervention intervention = new Intervention(interventionDto.getTitle(), InterventionType.valueOf(interventionDto.getInterventionType()), interventionDto
                 .getStartTime(), interventionDto.getEndTime());
 
         if (!InterventionBusinesssController.isCaffeIntervention(interventionDto)) {

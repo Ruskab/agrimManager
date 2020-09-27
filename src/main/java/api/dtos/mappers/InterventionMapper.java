@@ -2,6 +2,7 @@ package api.dtos.mappers;
 
 import api.dtos.InterventionDto;
 import api.entity.Intervention;
+import api.entity.InterventionType;
 import api.entity.RepairingPack;
 import api.entity.Vehicle;
 import org.mapstruct.Mapper;
@@ -31,6 +32,10 @@ public interface InterventionMapper {
                 .map(RepairingPack::getId)
                 .map(id -> Integer.toString(id))
                 .orElse(null);
+    }
+
+    default String mapType(InterventionType type) {
+        return type.name();
     }
 
 }

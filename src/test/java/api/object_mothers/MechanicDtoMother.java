@@ -1,9 +1,9 @@
 package api.object_mothers;
 
 import api.dtos.MechanicDto;
-import api.entity.Role;
 
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Collections.emptyList;
 
@@ -17,7 +17,9 @@ public class MechanicDtoMother {
     }
 
     public static MechanicDto mechanicDto() {
-        return create(FAKE_NAME, FAKE_PASSWORD, emptyList());
+        MechanicDto mechanicDto = create(FAKE_NAME, FAKE_PASSWORD, emptyList());
+        mechanicDto.setRoles(Set.of("mechanic"));
+        return mechanicDto;
     }
 
     public static MechanicDto withName(String name) {
@@ -33,7 +35,7 @@ public class MechanicDtoMother {
         return create(FAKE_NAME, FAKE_PASSWORD, interventions);
     }
 
-    public static MechanicDto withRoles(List<Role> roles) {
+    public static MechanicDto withRoles(List<String> roles) {
         MechanicDto mechanicDto = create(FAKE_NAME, FAKE_PASSWORD, emptyList());
         roles.forEach(mechanicDto::addRole);
         return mechanicDto;

@@ -3,6 +3,7 @@ package api.data_services;
 import api.daos.DaoFactory;
 import api.dtos.InterventionDto;
 import api.entity.Intervention;
+import api.entity.InterventionType;
 import api.entity.RepairingPack;
 import api.entity.Vehicle;
 import api.exceptions.NotFoundException;
@@ -18,7 +19,7 @@ public class InterventionDataService {
         intervention.setVehicle(readVehicle(interventionDto.getVehicleId()));
         intervention.setEndTime(interventionDto.getEndTime());
         intervention.setStartTime(interventionDto.getStartTime());
-        intervention.setInterventionType(interventionDto.getInterventionType());
+        intervention.setInterventionType(InterventionType.valueOf(interventionDto.getInterventionType()));
         intervention.setTitle(interventionDto.getTitle());
         return intervention;
     }

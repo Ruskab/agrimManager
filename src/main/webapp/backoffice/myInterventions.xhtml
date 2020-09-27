@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      lang="en" xml:lang="en"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:agrim="http://java.sun.com/jsf/composite/components/agrim"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Interventins datatable</title>
+</h:head>
+<h:body>
+    <ui:composition template="/templates/master_layout.xhtml">
+
+        <ui:define name="content">
+            <div class="p-col">
+                <h:form id="data-view-vehicles-form">
+
+                    <p:dataTable id="interventionTable" styleClass="interventions-datatable" widgetVar="interventionTable"
+                                 var="intervention" value="#{myInterventionsBean.interventions}"
+                                 paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records">
+
+                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.interventionDto.startTime}" priority="3">
+                            <h:outputText value="#{intervention.interventionDto.startTime}"/>
+                        </p:column>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.interventionDto.endTime}" priority="3">
+                            <h:outputText value="#{intervention.interventionDto.endTime}"/>
+                        </p:column>
+
+                        <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" priority="1">
+                            <h:outputText value="#{intervention.interventionVehicle()}"/>
+                        </p:column>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.type']}" priority="1">
+                            <h:outputText value="#{intervention.interventionDto.interventionType}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+<ui:debug></ui:debug>
+</html>

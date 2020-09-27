@@ -11,6 +11,7 @@ import org.omnifaces.util.Faces;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.time.Duration;
@@ -31,12 +32,15 @@ public class DashboardBean {
 
     private List<InterventionDto> activeInterventions = new ArrayList<>();
 
+    @ManagedProperty(value="#{sessionBean}")
+    private SessionBean sessionBean;
+
     @PostConstruct
     public void init() {
         interventionGateway = new InterventionGateway(getAuthToken());
         mechanicGateway = new MechanicGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
-        mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
+        mechanic = sessionBean.getMechanicDto();
         activeInterventions = searchActiveInterventions(mechanic);
     }
 
@@ -65,5 +69,13 @@ public class DashboardBean {
 
     public void setActiveInterventions(List<InterventionDto> activeInterventions) {
         this.activeInterventions = activeInterventions;
+    }
+
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
     }
 }

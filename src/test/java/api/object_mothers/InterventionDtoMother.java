@@ -13,28 +13,28 @@ public class InterventionDtoMother {
     public static final String VEHICLE_ID = "999";
     public static final String REPAIRING_PACK_ID = "999";
 
-    public static InterventionDto create(String title, InterventionType interventionType, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
+    public static InterventionDto create(String title, String interventionType, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
         return new InterventionDto(title, interventionType, vehicleId, repairingPackId, startTime, endTime);
     }
 
     public static InterventionDto interventionDto() {
-        return create(FAKE_TITLE, InterventionType.REPAIR, VEHICLE_ID, REPAIRING_PACK_ID, START_TIME, END_TIME);
+        return create(FAKE_TITLE, "REPAIR", VEHICLE_ID, REPAIRING_PACK_ID, START_TIME, END_TIME);
     }
 
     public static InterventionDto withVehicle(String vehicleId) {
-        InterventionDto intervention = create(FAKE_TITLE, InterventionType.REPAIR, vehicleId, REPAIRING_PACK_ID, START_TIME, END_TIME);
+        InterventionDto intervention = create(FAKE_TITLE, "REPAIR", vehicleId, REPAIRING_PACK_ID, START_TIME, END_TIME);
         return intervention;
     }
 
     public static InterventionDto cafe() {
-        return create(FAKE_TITLE, InterventionType.CAFFE, null, REPAIRING_PACK_ID, START_TIME, END_TIME);
+        return create(FAKE_TITLE, "CAFFE", null, REPAIRING_PACK_ID, START_TIME, END_TIME);
     }
 
     public static InterventionDto notFinished() {
-        return create(FAKE_TITLE, InterventionType.REPAIR, VEHICLE_ID, REPAIRING_PACK_ID, START_TIME, null);
+        return create(FAKE_TITLE, "REPAIR", VEHICLE_ID, REPAIRING_PACK_ID, START_TIME, null);
     }
 
-    public static InterventionDto withInterventionType(InterventionType interventionType) {
+    public static InterventionDto withInterventionType(String interventionType) {
         return create(FAKE_TITLE, interventionType, VEHICLE_ID, REPAIRING_PACK_ID, START_TIME, END_TIME);
     }
 
