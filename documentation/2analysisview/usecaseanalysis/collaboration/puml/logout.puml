@@ -1,0 +1,21 @@
+@startuml
+
+!include configuration/skinParams.puml
+!include configuration/definitions.puml
+
+actor user
+
+view MenuView
+model Session
+
+user -right-> MenuView
+note on link
+    logout()
+end note
+
+MenuView -> Session
+note on link
+    invalidateSession()
+end note
+
+@enduml
