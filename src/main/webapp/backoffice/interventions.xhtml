@@ -18,14 +18,10 @@
                 <h:form id="data-view-vehicles-form">
 
                     <p:dataTable id="interventionTable" styleClass="interventions-datatable" widgetVar="interventionTable"
-                                 var="intervention" value="#{lazyInterventionsView.lazyModel}" paginator="true" rows="10"
+                                 var="intervention" value="#{lazyAllInterventionsBean.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
-                                 selection="#{lazyInterventionsView.selectedInterventionDto}" lazy="true" filterDelay="200">
-
-                        <p:ajax event="rowSelect" listener="#{lazyInterventionsView.onRowSelect}"
-                                update="@(.intervention-edit-dialog)"
-                                oncomplete="PF('interventionEditDialog').show()"/>
+                                 selection="#{lazyAllInterventionsBean.selectedInterventionDto}" lazy="true" filterDelay="200">
 
                         <f:facet name="header">
                             <p:outputPanel>
@@ -41,8 +37,8 @@
                             <h:outputText value="#{intervention.interventionDto.endTime}"/>
                         </p:column>
 
-                        <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{lazyInterventionsView.vehicleReference}" priority="1">
-                            <h:outputText value="#{lazyInterventionsView.vehicles.get(intervention.vehicleId)}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{intervention.interventionVehicle}" priority="1">
+                            <h:outputText value="#{intervention.vehicleDto.vehicleDataSheet}"/>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.type']}"
                                   filterBy="#{intervention.interventionDto.interventionType}" filterMatchMode="equals" priority="1">

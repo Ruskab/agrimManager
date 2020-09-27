@@ -23,7 +23,7 @@ end note
 
 MenuView -right-> DashboardView
 note on link
-    openDashboardView
+    new DashboardView()
 end note
 
 DashboardView -down-> Session

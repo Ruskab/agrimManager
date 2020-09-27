@@ -74,6 +74,14 @@ public class MechanicBusinessController {
                 .orElseThrow(() -> NotFoundException.throwBecauseOf(MECHANIC_ID + id));
     }
 
+    public List<MechanicDto> searchBy(String username) {
+        return DaoFactory.getFactory()
+                .getMechanicDao()
+                .findBy(username)
+                .map(MechanicMapper.INSTANCE::toMechanicDto)
+                .collect(toList());
+    }
+
     public List<MechanicDto> searchBy(String username, String password) {
         return DaoFactory.getFactory()
                 .getMechanicDao()

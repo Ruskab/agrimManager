@@ -49,8 +49,9 @@ public class LoginBean {
     }
 
     private void initSession(String authToken) {
-        List<MechanicDto> mechanics = new MechanicGateway(authToken).searchByCredentials(userName, password);
-        if (mechanics.isEmpty()) {
+        List<MechanicDto> mechanics = new MechanicGateway(authToken).searchByCredentials(userName);
+
+        if (mechanics.stream().noneMatch(mechanic -> password.equals(mechanic.getPassword()))) {
             throw new UnauthorizedException("mechanic not found with given credentials");
         }
         Faces.getSession().setAttribute("username", userName);

@@ -151,7 +151,7 @@ public class OperationsBean {
     }
 
     private void addFakeIntervention(InterventionDto interventionDto) {
-        mechanicGateway.addIntervention(mechanic, interventionDto);
+        mechanicGateway.createIntervention(mechanic, interventionDto);
     }
 
     private VehicleDto createFakeVehicleDto(String clientId) {
