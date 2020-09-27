@@ -36,7 +36,6 @@ public class ConfigClientBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update client"));
         }catch (IllegalStateException e){
             FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update client"));
-            return;
         }
     }
 
