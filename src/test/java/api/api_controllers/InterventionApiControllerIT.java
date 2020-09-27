@@ -71,7 +71,7 @@ class InterventionApiControllerIT {
 
         InterventionDto createdInterventionDto = interventionGateway.read(interventionId);
         assertThat(createdInterventionDto.getVehicleId(), is(vehicleId));
-        assertThat(createdInterventionDto.getInterventionType(), is(InterventionType.REPAIR));
+        assertThat(createdInterventionDto.getInterventionType(), is("REPAIR"));
     }
 
     @Test

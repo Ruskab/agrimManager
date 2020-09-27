@@ -51,7 +51,7 @@ public class MechanicBusinessController {
         Intervention intervention = new Intervention(interventionDto.getTitle(), InterventionType.valueOf(interventionDto.getInterventionType()), interventionDto
                 .getStartTime(), interventionDto.getEndTime());
 
-        if (!InterventionBusinesssController.isCaffeIntervention(interventionDto)) {
+        if (!InterventionBusinesssController.isCaffeIntervention(intervention)) {
             InterventionBusinesssController.setVehicle(interventionDto, intervention);
         }
         mechanic.getInterventionList().add(intervention);
