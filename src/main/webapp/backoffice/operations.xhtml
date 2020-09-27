@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       lang="en" xml:lang="en"
       xmlns:agrim="http://java.sun.com/jsf/composite/components/agrim"
@@ -40,13 +39,6 @@
                         <p:commandButton value="Create" rendered="#{operationsBean.mechanic.hasRole('ADMIN')}"
                                          oncomplete="PF('vmechanicCreateDialog').show()" />
                         <agrim:mechanicCreateDialog/>
-                    </p:panel>
-                </h:form>
-                <h:form id="createInterventionForm">
-                    <p:panel id="createNewIntervention" header="Create new interventions">
-                        <p:commandButton value="Create"
-                                         oncomplete="PF('createIntervention').show()" />
-                        <agrim:createIntervention/>
                     </p:panel>
                 </h:form>
             </div>
