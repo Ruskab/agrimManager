@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Unit tests & Integration Tests
-        run: mvn test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT,business_controllers.unittest.*Test,api_controllers.unittest.*Test
+        run: mvn clean test -Denvironment=github -Dtest=api.business_controllers.*IT,DispatcherIT,business_controllers.unittest.*Test,api_controllers.unittest.*Test
 
 #      - name: Unit tests
 #        run: mvn test -Denvironment=github -Dtest=business_controllers.unittest.*Test,api_controllers.unittest.*Test
