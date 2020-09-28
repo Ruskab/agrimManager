@@ -1,0 +1,12 @@
+@startuml
+	class Session {
+	+setMechanic(mechanic)
+	+invalidateSession()
+	+getMechanic()
+	}
+
+	DashboardView --> Session
+	SignInView --> Session
+	InterventionsView --> Session
+	MenuView -> Session
+@enduml

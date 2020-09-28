@@ -1,0 +1,9 @@
+@startuml
+	class ConfigVehicleView {
+	+setVehicleInfo(info)
+	}
+
+	ConfigVehicleView --> Vehicle
+	VehiclesView --> ConfigVehicleView
+	ConfigVehicleView --> ConfigVehicleController
+@enduml

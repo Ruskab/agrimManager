@@ -1,0 +1,8 @@
+@startuml
+	class ConfigVehicleController {
+	+save(vehicle)
+	}
+
+	ConfigVehicleController --> VehiclesDao
+	ConfigVehicleView --> ConfigVehicleController
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+	class SignInView {
+	+setPassword(string)
+	+setUsername(string)
+	+setRepeatPassword(string)
+	}
+
+	SignInView --> SignInController
+	SignInView --> Session
+	SignInView --> OpenDashboard
+	LoginView --> SignInView
+	SignInView --> Mechanic
+@enduml

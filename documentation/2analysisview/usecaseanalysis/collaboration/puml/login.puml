@@ -6,7 +6,7 @@
 actor user
 view LoginView
 controller LoginController
-model MechanicDao
+model MechanicsDao
 model Mechanic
 model Session
 collaboration ":Collaboration OpenDashboard" as OpenDashboard
@@ -33,13 +33,13 @@ note on link
     setMechanic(mechanic)
 end note
 
-LoginController -down-> MechanicDao
+LoginController -down-> MechanicsDao
 note on link
     serchBy(username, password)
 end note
 
 LoginView --> "1" Mechanic
 LoginController .. Mechanic
-MechanicDao -- Mechanic
+MechanicsDao -- Mechanic
 
 @enduml

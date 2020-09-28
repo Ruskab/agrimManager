@@ -1,0 +1,8 @@
+@startuml
+	class CreateVehicleController {
+	+createVehicle(vehicle)
+	}
+
+	CreateVehicleController --> VehiclesDao
+	CreateVehicleView --> CreateVehicleController
+@enduml

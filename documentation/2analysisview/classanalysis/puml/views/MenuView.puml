@@ -1,0 +1,20 @@
+@startuml
+	class MenuView {
+	+openMyInterventions()
+	+logout()
+	+createIntervention()
+	+openOperations()
+	+openInterventions()
+	+openClients()
+	+openDashboard()
+	+openVehicles()
+	}
+
+	MenuView --> VehiclesView
+	MenuView -> Session
+	MenuView --> OperationsView
+	MenuView --> CreateInterventionView
+	MenuView --> InterventionsView
+	MenuView --> ClientsView
+	MenuView --> DashboardView
+@enduml

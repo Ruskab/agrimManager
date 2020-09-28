@@ -5,12 +5,12 @@
 
 actor user
 view VehiclesView
-view VehicleCreateView
+view CreateVehicleView
 controller CreateVehicleController
 controller OpenClientsController
 collaboration ":Collaboration OpenVehicles" as OpenVehicles
-model VehicleDao
-model ClientDao
+model VehiclesDao
+model ClientsDao
 model Vehicle
 model Client
 
@@ -19,7 +19,7 @@ note on link
     createVehicle()
 end note
 
-user --> VehicleCreateView
+user --> CreateVehicleView
 note on link
 setVehicle(data)
 searchClient(text)
@@ -27,42 +27,42 @@ setClient(clientId)
 confirmCreation()
 end note
 
-VehiclesView -down-> VehicleCreateView
+VehiclesView -down-> CreateVehicleView
 note on link
-    new VehicleCreateView()
+    new CreateVehicleView()
 end note
 
-VehicleCreateView -right-> CreateVehicleController
+CreateVehicleView -right-> CreateVehicleController
 note on link
     createVehicle(vehicle)
 end note
 
-VehicleCreateView -right-> OpenClientsController
+CreateVehicleView -right-> OpenClientsController
 note on link
     searchClients(query)
 end note
 
-VehicleCreateView --> OpenVehicles
+CreateVehicleView --> OpenVehicles
 note on link
 openVehicles()
 end note
 
-VehicleCreateView --> "1" Vehicle
-VehicleCreateView --> "*" Client
+CreateVehicleView --> "1" Vehicle
+CreateVehicleView --> "*" Client
 
-CreateVehicleController -right-> VehicleDao
+CreateVehicleController -right-> VehiclesDao
 note on link
     createVehicle(vehicle)
 end note
 
-OpenClientsController --> ClientDao
+OpenClientsController --> ClientsDao
 note on link
     searchCliensByName(query)
 end note
 
-VehicleDao .... Vehicle
+VehiclesDao .... Vehicle
 
-ClientDao .. Client
+ClientsDao .. Client
 
 CreateVehicleController .right. "1" Vehicle
 

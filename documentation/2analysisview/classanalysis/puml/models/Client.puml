@@ -1,0 +1,8 @@
+@startuml
+	class Client {
+	}
+
+	ClientsView --> Client
+	ConfigClientView --> Client
+	VehiclesView --> Client
+@enduml

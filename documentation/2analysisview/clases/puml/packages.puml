@@ -1,0 +1,13 @@
+@startuml
+
+!include skinParams.puml
+
+package Views
+package Controllers
+package Models
+
+Views ..> Controllers
+Views ..> Models
+Controllers ..> Models
+
+@enduml

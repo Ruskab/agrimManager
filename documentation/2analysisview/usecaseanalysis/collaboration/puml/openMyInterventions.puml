@@ -10,9 +10,9 @@ view InterventionsView
 
 controller OpenInterventionsController
 
-model InterventionDao
+model InterventionsDao
 model Intervention
-model VehicleDao
+model VehiclesDao
 model Vehicle
 model Mechanic
 model Session
@@ -39,12 +39,12 @@ note on link
     readVehicle(vehicleId)
 end note
 
-OpenInterventionsController --> InterventionDao
+OpenInterventionsController --> InterventionsDao
 note on link
     readInterventions(mechanicId)
 end note
 
-OpenInterventionsController --> VehicleDao
+OpenInterventionsController --> VehiclesDao
 note on link
     readVehicle(vehicleId)
 end note
@@ -55,7 +55,7 @@ InterventionsView --> Mechanic
 
 OpenInterventionsController .. "0..*" Intervention
 OpenInterventionsController .... "1" Vehicle
-InterventionDao .. Intervention
-VehicleDao .. Vehicle
+InterventionsDao .. Intervention
+VehiclesDao .. Vehicle
 
 @enduml

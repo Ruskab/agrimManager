@@ -10,7 +10,7 @@ view ClientsView
 
 controller OpenClientsController
 
-model ClientDao
+model ClientsDao
 model Client
 
 user --> MenuView
@@ -28,14 +28,14 @@ note on link
     readAllClients()
 end note
 
-OpenClientsController --> ClientDao
+OpenClientsController --> ClientsDao
 note on link
-0 : readAllClients()
+readAllClients()
 end note
 
 OpenClientsController .. "0..*" Client
 
-ClientDao .. Client
+ClientsDao .. Client
 
 ClientsView --> Client
 

@@ -1,0 +1,14 @@
+@startuml
+	class ClientsDao {
+	+createClient(client)
+	+save(client)
+	+readAllClients()
+	+searchCliensByName(query)
+	+readClient(clientId)
+	}
+
+	OpenVehiclesController --> ClientsDao
+	ConfigClientController --> ClientsDao
+	OpenClientsController --> ClientsDao
+	CreateClientController --> ClientsDao
+@enduml

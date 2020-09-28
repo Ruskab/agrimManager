@@ -1,0 +1,9 @@
+@startuml
+	class LoginController {
+	+searchBy(username, password)
+	+login(username, password)
+	}
+
+	LoginView --> LoginController
+	LoginController --> MechanicsDao
+@enduml

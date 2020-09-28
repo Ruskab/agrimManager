@@ -1,0 +1,16 @@
+@startuml
+	class CreateVehicleView {
+	+setClient(clientId)
+	+confirmCreation()
+	+setVehicle(data)
+	+searchClient(text)
+	}
+
+	CreateVehicleView --> OpenClientsController
+	CreateVehicleView --> "*" Client
+	CreateVehicleView --> OpenVehicles
+	CreateVehicleView --> "1" Vehicle
+	CreateVehicleView --> CreateVehicleController
+	user --> CreateVehicleView
+	VehiclesView --> CreateVehicleView
+@enduml

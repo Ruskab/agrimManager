@@ -5,38 +5,38 @@
 
 actor user
 view VehiclesView
-view VehicleInfoView
-controller VehicleConfigController
+view ConfigVehicleView
+controller ConfigVehicleController
 model Vehicle
-model VehicleDao
+model VehiclesDao
 
 user -right-> VehiclesView
 note on link
     configClient(vehicleId, clientFullName)
 end note
 
-user -right-> VehicleInfoView
+user -right-> ConfigVehicleView
 note on link
     setVehicleInfo(info)
 end note
 
-VehiclesView -down-> VehicleInfoView
+VehiclesView -down-> ConfigVehicleView
 note on link
-   configClient(vehicleId, clientFullName)
+   new configVehicle(vehicle, clientFullName)
 end note
 
-VehicleInfoView -right-> VehicleConfigController
+ConfigVehicleView -right-> ConfigVehicleController
 note on link
-    readVehicle(vehicleId)
+    save(vehicle)
 end note
 
 
-VehicleConfigController --> VehicleDao
+ConfigVehicleController --> VehiclesDao
 note on link
-    readVehicles(vehicleId)
+    save(vehicle)
 end note
 
-VehicleInfoView --> Vehicle
-VehicleConfigController .. "1" Vehicle
-VehicleDao .. Vehicle
+ConfigVehicleView --> Vehicle
+ConfigVehicleController .. "1" Vehicle
+VehiclesDao .. Vehicle
 @enduml

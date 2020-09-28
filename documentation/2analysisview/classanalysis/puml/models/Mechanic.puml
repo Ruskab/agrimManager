@@ -1,0 +1,8 @@
+@startuml
+	class Mechanic {
+	}
+
+	InterventionsView --> Mechanic
+	SignInController --> Mechanic
+	SignInView --> Mechanic
+@enduml

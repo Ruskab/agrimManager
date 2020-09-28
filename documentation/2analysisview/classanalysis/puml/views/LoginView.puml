@@ -1,0 +1,12 @@
+@startuml
+	class LoginView {
+	+signin()
+	+login(username, password)
+	}
+
+	LoginView --> LoginController
+	LoginView ..> "1" Session
+	LoginView --> "1" Mechanic
+	LoginView --> SignInView
+	LoginView --> OpenDashboard
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+	class CreateClientController {
+	+createClient(client)
+	}
+
+	CreateClientView --> CreateClientController
+	CreateClientController --> ClientsDao
+@enduml

@@ -7,10 +7,10 @@ actor actor
 
 view DashboardView
 
-controller finishInterventionController
+controller FinishInterventionController
 collaboration ":Collaboration OpenDashBoard" as OpenDashBoard
 
-model MechanicDao
+model MechanicsDao
 model Mechanic
 model Intervention
 
@@ -19,7 +19,7 @@ note on link
     finishIntervention(interventionId)
 end note
 
-DashboardView -right-> finishInterventionController
+DashboardView -right-> FinishInterventionController
 note on link
     finishIntervention(mechanicId, interventionId)
 end note
@@ -29,18 +29,18 @@ note on link
     openDashboard()
 end note
 
-finishInterventionController -down-> MechanicDao
+FinishInterventionController -down-> MechanicsDao
 note on link
     read(mechanicId)
     update(mechanic)
 end note
 
-finishInterventionController .down.> "1" Mechanic
+FinishInterventionController .down.> "1" Mechanic
 note on link
     setEntTIme(interventionId, now())
 end note
 
-MechanicDao -- Mechanic
+MechanicsDao -- Mechanic
 Mechanic -right- Intervention
 
 @enduml

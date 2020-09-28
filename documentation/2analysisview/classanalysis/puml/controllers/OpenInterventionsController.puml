@@ -1,0 +1,12 @@
+@startuml
+	class OpenInterventionsController {
+	+readMechanics()
+	+readInterventions(mechanicId)
+	+readVehicle(vehicleId)
+	}
+
+	OpenInterventionsController --> VehiclesDao
+	OpenInterventionsController --> InterventionsDao
+	OpenInterventionsController --> MechanicsDao
+	InterventionsView --> OpenInterventionsController
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+	class OpenDashboardController {
+	+searchVehicle(vehicleId)
+	+searchActiveInterventions(mechanicId)
+	}
+
+	DashboardView --> OpenDashboardController
+	OpenDashboardController --> VehiclesDao
+	OpenDashboardController --> InterventionsDao
+@enduml

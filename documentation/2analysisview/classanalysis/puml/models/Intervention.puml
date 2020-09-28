@@ -1,0 +1,8 @@
+@startuml
+	class Intervention {
+	}
+
+	CreateInterventionView --> Intervention
+	DashboardView --> Intervention
+	InterventionsView --> Intervention
+@enduml

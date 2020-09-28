@@ -1,0 +1,12 @@
+@startuml
+	class InterventionsView {
+	+openInterventionsView()
+	}
+
+	InterventionsView --> Mechanic
+	InterventionsView --> Intervention
+	InterventionsView --> Session
+	InterventionsView --> Vehicle
+	MenuView --> InterventionsView
+	InterventionsView --> OpenInterventionsController
+@enduml

@@ -5,10 +5,10 @@
 
 actor user
 view ClientsView
-view createClientView
+view CreateClientView
 controller CreateClientController
 collaboration ":Collaboration OpenClients" as OpenClients
-model ClientDao
+model ClientsDao
 model Client
 
 user -right-> ClientsView
@@ -16,36 +16,36 @@ note on link
     createClient()
 end note
 
-user --> createClientView
+user --> CreateClientView
 note on link
     setFullName(fullName)
     setBillableHours(billableHours)
     confirmCreation()
 end note
 
-ClientsView -down-> createClientView
+ClientsView -down-> CreateClientView
 note on link
-    new createClientView()
+    new CreateClientView()
 end note
 
-createClientView -right-> CreateClientController
+CreateClientView -right-> CreateClientController
 note on link
     createClient(client)
 end note
 
-createClientView --> "1" Client
+CreateClientView --> "1" Client
 
-createClientView --> OpenClients
+CreateClientView --> OpenClients
 note on link
 openClients()
 end note
 
-CreateClientController -right-> ClientDao
+CreateClientController -right-> ClientsDao
 note on link
     createClient(client)
 end note
 
-ClientDao .. Client
+ClientsDao .. Client
 
 CreateClientController .right. "1" Client
 @enduml

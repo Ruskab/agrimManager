@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="262px" preserveAspectRatio="none" style="width:177px;height:262px;" version="1.1" viewBox="0 0 177 262" width="177px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ks6mpg35fat6" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[f04d1115a9404fce8f0faf89e2d614ba]
+entity Views--><polygon fill="#FEFECE" filter="url(#f1ks6mpg35fat6)" points="79,8,126,8,133,31.6094,150,31.6094,150,48.6094,79,48.6094,79,8" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="79" x2="133" y1="31.6094" y2="31.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="41" x="83" y="25.5332">Views</text><!--MD5=[1b9dce2ce56fb0e0072eca4d439af425]
+entity Controllers--><polygon fill="#FEFECE" filter="url(#f1ks6mpg35fat6)" points="6,109,91,109,98,132.6094,115,132.6094,115,149.6094,6,149.6094,6,109" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="6" x2="98" y1="132.6094" y2="132.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="79" x="10" y="126.5332">Controllers</text><!--MD5=[ca73e4f6ec3b50150f4a88dd5bb62e34]
+entity Models--><polygon fill="#FEFECE" filter="url(#f1ks6mpg35fat6)" points="73.5,210,131.5,210,138.5,233.6094,155.5,233.6094,155.5,250.6094,73.5,250.6094,73.5,210" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="73.5" x2="138.5" y1="233.6094" y2="233.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="52" x="77.5" y="227.5332">Models</text><!--MD5=[925ab9a538a08a1e98b60985b23e0ae1]
+link Views to Controllers--><path d="M103.8313,49.059 C95.178,64.924 82.9396,87.361 73.6752,104.345 " fill="none" id="Views-&gt;Controllers" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="71.1465,108.981,78.9678,102.9954,73.5408,104.5915,71.9447,99.1645,71.1465,108.981" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[529b1222c35560f1d57d87ec76ec6a96]
+link Views to Models--><path d="M120.254,49.221 C124.597,65.182 130.189,88.326 132.5,109 C134.525,127.109 134.525,131.891 132.5,150 C130.424,168.5741 125.699,189.1426 121.611,204.7041 " fill="none" id="Views-&gt;Models" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="120.254,209.7794,126.4434,202.1184,121.5458,204.9492,118.715,200.0515,120.254,209.7794" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[424488e8f480e7d5928ef5318233d0af]
+link Controllers to Models--><path d="M71.1687,150.059 C79.822,165.9237 92.0604,188.3606 101.3248,205.3454 " fill="none" id="Controllers-&gt;Models" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="103.8535,209.9814,103.0553,200.1649,101.4592,205.5919,96.0322,203.9958,103.8535,209.9814" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[02790b08f006b2e4dab6ea1c02d11127]
+@startuml
+
+
+skinparam {
+    BoundaryBackgroundColor #629EF9
+    BoundaryBorderColor black
+    BoundaryFontSize 12
+    BoundarySize 10
+    ControlBackgroundColor #b5bd68
+    ControlBorderColor #718c00
+    EntityBackgroundColor #F2AC4E
+    EntityBorderColor black
+}
+
+
+package Views
+package Controllers
+package Models
+
+Views ..> Controllers
+Views ..> Models
+Controllers ..> Models
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
