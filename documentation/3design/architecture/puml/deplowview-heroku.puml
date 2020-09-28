@@ -2,11 +2,11 @@
 
 
 
-node Client <<CLIENT>> #cdfca4{
+node Client <<CLIENT>> {
     [webBrowser] as "web-browser" <<Executable>>
 }
 
-node Webapp <<SERVER>> #cdfca4 {
+node Webapp <<SERVER>>  {
 
     node Tomcat <<server>> #edd33e {
      [webApp] as "agrimManager" <<war>>
@@ -17,7 +17,7 @@ node Webapp <<SERVER>> #cdfca4 {
 
 }
 
-node DataBase <<server>> #cdfca4 {
+node DataBase <<server>>  {
 
     [MySQL] <<executable>>
 

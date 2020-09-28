@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="512.5px" preserveAspectRatio="none" style="width:1035px;height:512px;" version="1.1" viewBox="0 0 1035 512" width="1035px" zoomAndPan="magnify"><defs><filter height="300%" id="fb1ltqa6c4nhu" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><ellipse cx="42.0075" cy="21.875" fill="#FEFECE" filter="url(#fb1ltqa6c4nhu)" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.875;"/><path d="M42.0075,31.875 L42.0075,65.625 M25.7575,41.875 L58.2575,41.875 M42.0075,65.625 L25.7575,84.375 M42.0075,65.625 L58.2575,84.375 " fill="none" filter="url(#fb1ltqa6c4nhu)" style="stroke: #A80036; stroke-width: 1.875;"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="35" x="24.5075" y="109.4165">user</text><!--MD5=[879601c54c16cbac2938a49e9c3f5a3f]
+entity ClientsView--><rect fill="#629EF9" filter="url(#fb1ltqa6c4nhu)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="115" x="270.7575" y="38.125"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="90" x="283.2575" y="68.7915">ClientsView</text><!--MD5=[bf310ff65c094f958214110cd3a57689]
+entity CreateClientView--><rect fill="#629EF9" filter="url(#fb1ltqa6c4nhu)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="160" x="104.5075" y="280"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="135" x="117.0075" y="310.6665">CreateClientView</text><!--MD5=[62b2424847b038711ff1f5c929cb6d06]
+entity CreateClientController--><rect fill="#B5BD68" filter="url(#fb1ltqa6c4nhu)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="201.25" x="486.3825" y="280"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="176.25" x="498.8825" y="310.6665">CreateClientController</text><!--MD5=[2faa8fe6fdf0f4e15ddf763708370839]
+entity OpenClients--><rect fill="#CDEBA5" filter="url(#fb1ltqa6c4nhu)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="237.5" x="65.7575" y="452.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="212.5" x="78.2575" y="483.1665">:Collaboration OpenClients</text><!--MD5=[5669fba6a50c5cf79174eff43ebf57d4]
+entity ClientsDao--><rect fill="#F2AC4E" filter="url(#fb1ltqa6c4nhu)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="111.25" x="910.1325" y="280"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="86.25" x="922.6325" y="310.6665">ClientsDao</text><!--MD5=[0ba5ee7700168656dc1b457c6fe9fdac]
+entity Client--><rect fill="#F2AC4E" filter="url(#fb1ltqa6c4nhu)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="70" x="552.0075" y="452.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="45" x="564.5075" y="483.1665">Client</text><!--MD5=[6f176925882fe8d3f63e2fe12010d8ea]
+link user to ClientsView--><path d="M60.3491,61.875 C100.5526,61.875 198.0763,61.875 263.6887,61.875 " fill="none" id="user-&gt;ClientsView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="270.3312,61.875,259.0812,56.875,264.0812,61.875,259.0812,66.875,270.3312,61.875" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M101.695,14.375 L101.695,46.875 L224.195,46.875 L224.195,26.875 L211.695,14.375 L101.695,14.375 " fill="#F5F5F5" filter="url(#fb1ltqa6c4nhu)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M211.695,14.375 L211.695,26.875 L224.195,26.875 L211.695,14.375 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="96.25" x="109.195" y="37.4939">createClient()</text><!--MD5=[ee34477f11b16ede9860ffbd25988d74]
+link user to CreateClientView--><path d="M23.762,104.3663 C9.5307,143.4338 -3.5626,201.995 24.5075,242.5 C41.5454,267.0863 69.9824,281.6125 98.196,290.19 " fill="none" id="user-&gt;CreateClientView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="104.2089,291.9313,94.7941,283.9988,98.2056,290.1924,92.012,293.6039,104.2089,291.9313" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M30.7575,157.5 L30.7575,231.25 L277.0075,231.25 L277.0075,170 L264.5075,157.5 L30.7575,157.5 " fill="#F5F5F5" filter="url(#fb1ltqa6c4nhu)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M264.5075,157.5 L264.5075,170 L277.0075,170 L264.5075,157.5 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="163.75" x="38.2575" y="180.6189">setFullName(fullName)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="220" x="38.2575" y="201.0583">setBillableHours(billableHours)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="122.5" x="38.2575" y="221.4978">confirmCreation()</text><!--MD5=[d23bdb41222177ad3151863a31e26802]
+link ClientsView to CreateClientView--><path d="M329.6513,85.9163 C330.7088,122.51 327.8238,195.0588 293.2575,242.5 C282.8525,256.78 267.9688,268.065 252.5363,276.81 " fill="none" id="ClientsView-&gt;CreateClientView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="246.8338,279.9175,259.1046,278.9235,252.3215,276.9263,254.3187,270.1432,246.8338,279.9175" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M332.0075,178.125 L332.0075,210.625 L525.7575,210.625 L525.7575,190.625 L513.2575,178.125 L332.0075,178.125 " fill="#F5F5F5" filter="url(#fb1ltqa6c4nhu)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M513.2575,178.125 L513.2575,190.625 L525.7575,190.625 L513.2575,178.125 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="167.5" x="339.5075" y="201.2439">new CreateClientView()</text><!--MD5=[419ac1d7506e2e2bc6533ce959fcd271]
+link CreateClientView to CreateClientController--><path d="M264.51,303.75 C326.1413,303.75 411.96,303.75 479.5763,303.75 " fill="none" id="CreateClientView-&gt;CreateClientController" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="486.0613,303.75,474.8113,298.75,479.8113,303.75,474.8113,308.75,486.0613,303.75" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M292.32,256.25 L292.32,288.75 L453.57,288.75 L453.57,268.75 L441.07,256.25 L292.32,256.25 " fill="#F5F5F5" filter="url(#fb1ltqa6c4nhu)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M441.07,256.25 L441.07,268.75 L453.57,268.75 L441.07,256.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="135" x="299.82" y="279.3689">createClient(client)</text><!--MD5=[46f5dd82a6ba8c41459300ee57072ee5]
+link CreateClientView to Client--><path d="M241.5088,327.595 C269.26,338.6962 303.0725,352.3725 333.2575,365 C408.5975,396.5183 495.8375,434.7119 545.9075,456.7978 " fill="none" id="CreateClientView-&gt;Client" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="551.8263,459.4098,543.5525,450.2934,546.1082,456.8865,539.5152,459.4423,551.8263,459.4098" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="533.4344" y="449.8494">1</text><!--MD5=[c7b78ff173456fade8a2872dfdea66cb]
+link CreateClientView to OpenClients--><path d="M184.5075,327.575 C184.5075,358.0575 184.5075,412.4119 184.5075,445.9213 " fill="none" id="CreateClientView-&gt;OpenClients" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="184.5075,452.332,189.5075,441.082,184.5075,446.082,179.5075,441.082,184.5075,452.332" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M190.7575,371.25 L190.7575,403.75 L312.0075,403.75 L312.0075,383.75 L299.5075,371.25 L190.7575,371.25 " fill="#F5F5F5" filter="url(#fb1ltqa6c4nhu)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M299.5075,371.25 L299.5075,383.75 L312.0075,383.75 L299.5075,371.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="95" x="198.2575" y="394.3689">openClients()</text><!--MD5=[61ff29af4497d8ec256e949cea26fdb3]
+link CreateClientController to ClientsDao--><path d="M688.0075,303.75 C756.5125,303.75 844.9063,303.75 903.3638,303.75 " fill="none" id="CreateClientController-&gt;ClientsDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="909.6325,303.75,898.3825,298.75,903.3825,303.75,898.3825,308.75,909.6325,303.75" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M715.7575,256.25 L715.7575,288.75 L877.0075,288.75 L877.0075,268.75 L864.5075,256.25 L715.7575,256.25 " fill="#F5F5F5" filter="url(#fb1ltqa6c4nhu)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M864.5075,256.25 L864.5075,268.75 L877.0075,268.75 L864.5075,256.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="135" x="723.2575" y="279.3689">createClient(client)</text><!--MD5=[596d1ab474876e7244518296a7f8487a]
+link ClientsDao to Client--><path d="M915.4625,327.575 C837.5888,362.5288 689.7838,428.8694 622.255,459.1791 " fill="none" id="ClientsDao-Client" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[5e0004deadefe782d12e29dc3925821a]
+link CreateClientController to Client--><path d="M587.0075,327.575 C587.0075,360.09 587.0075,419.7653 587.0075,452.332 " fill="none" id="CreateClientController-Client" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="576.9177" y="438.9556">1</text><!--MD5=[ff9f2ea7f496de92851e34007e393511]
+@startuml
+
+skinparam {
+    NoteBorderThickness 0
+    NoteBackgroundColor #whiteSmoke
+    RectangleBackgroundColor #whiteSmoke
+    ArchimateBackgroundColor #whiteSmoke
+}
+
+
+actor user
+rectangle #629EF9 ClientsView
+rectangle #629EF9 CreateClientView
+rectangle #b5bd68 CreateClientController
+rectangle #CDEBA5 ":Collaboration OpenClients" as OpenClients
+rectangle #F2AC4E ClientsDao
+rectangle #F2AC4E Client
+
+user -right-> ClientsView
+note on link
+    createClient()
+end note
+
+user - -> CreateClientView
+note on link
+    setFullName(fullName)
+    setBillableHours(billableHours)
+    confirmCreation()
+end note
+
+ClientsView -down-> CreateClientView
+note on link
+    new CreateClientView()
+end note
+
+CreateClientView -right-> CreateClientController
+note on link
+    createClient(client)
+end note
+
+CreateClientView - -> "1" Client
+
+CreateClientView - -> OpenClients
+note on link
+openClients()
+end note
+
+CreateClientController -right-> ClientsDao
+note on link
+    createClient(client)
+end note
+
+ClientsDao .. Client
+
+CreateClientController .right. "1" Client
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

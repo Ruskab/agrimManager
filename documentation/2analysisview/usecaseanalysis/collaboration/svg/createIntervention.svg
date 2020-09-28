@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="828.75px" preserveAspectRatio="none" style="width:1227px;height:828px;" version="1.1" viewBox="0 0 1227 828" width="1227.5px" zoomAndPan="magnify"><defs><filter height="300%" id="f17gdtv1dv3069" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[e209b37fc91f378abaa2ddf468318055]
+entity actor--><ellipse cx="175" cy="21.875" fill="#FEFECE" filter="url(#f17gdtv1dv3069)" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.875;"/><path d="M175,31.875 L175,65.625 M158.75,41.875 L191.25,41.875 M175,65.625 L158.75,84.375 M175,65.625 L191.25,84.375 " fill="none" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 1.875;"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="40" x="155" y="109.4165">actor</text><!--MD5=[f5a78d3e2c2bba4955990b9a6243d12e]
+entity MenuView--><rect fill="#629EF9" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="105" x="7.5" y="300"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="80" x="20" y="330.6665">MenuView</text><!--MD5=[ab5382b488bd2f47ce3ed999a238b00f]
+entity CreateInterventionView--><rect fill="#629EF9" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="207.5" x="407.5" y="300"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="182.5" x="420" y="330.6665">CreateInterventionView</text><!--MD5=[1a03ee00b1302dc274a08062889b248b]
+entity CreateInterventionController--><rect fill="#B5BD68" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="248.75" x="919.375" y="300"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="223.75" x="931.875" y="330.6665">CreateInterventionController</text><!--MD5=[88ec3a0f4b57b0c3bd764aa600ad147c]
+entity OpenVehiclesController--><rect fill="#B5BD68" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="212.5" x="437.5" y="472.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="187.5" x="450" y="503.1665">OpenVehiclesController</text><!--MD5=[dbd7f279121211084b5871fc3663cabf]
+entity InterventionsDao--><rect fill="#F2AC4E" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="158.75" x="964.375" y="472.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="133.75" x="976.875" y="503.1665">InterventionsDao</text><!--MD5=[e3fdc96919b3d0718a6aa38a39f53a06]
+entity Intervention--><rect fill="#F2AC4E" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="117.5" x="838.75" y="645"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="92.5" x="851.25" y="675.6665">Intervention</text><!--MD5=[6e5a8ceef7a3d9ef19b893e365a5e382]
+entity VehiclesDao--><rect fill="#F2AC4E" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="123.75" x="526.875" y="645"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="98.75" x="539.375" y="675.6665">VehiclesDao</text><!--MD5=[c796543839e6086ac460deba3cd4e684]
+entity Vehicle--><rect fill="#F2AC4E" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="82.5" x="418.75" y="768.75"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="57.5" x="431.25" y="799.4165">Vehicle</text><!--MD5=[1f0e52a1457a111061ef2aae8e5ec9c5]
+entity s1--><rect fill="#CDEBA5" filter="url(#f17gdtv1dv3069)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="271.25" x="440.625" y="38.125"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="246.25" x="453.125" y="68.7915">:Collaboration OpenDashboard</text><!--MD5=[3d8348d09ad89d8cd0c0f7dace3a3d24]
+link actor to MenuView--><path d="M154.8388,71.105 C126.7334,83.47 76.9058,110.1987 56.25,151.25 C33.3481,196.765 42.7816,258.065 51.5261,293.6325 " fill="none" id="actor-&gt;MenuView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="53.143,299.965,55.204,287.8277,51.5966,293.9093,45.5149,290.3019,53.143,299.965" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M62.5,188.125 L62.5,220.625 L225,220.625 L225,200.625 L212.5,188.125 L62.5,188.125 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M212.5,188.125 L212.5,200.625 L225,200.625 L212.5,188.125 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="136.25" x="70" y="211.2439">createIntervention()</text><!--MD5=[b9ec5663bc96f666ad06d72c23972b71]
+link actor to CreateInterventionView--><path d="M195.0325,85.7575 C209.37,102.8338 228.3413,127.3313 241.25,151.25 C266.205,197.4887 242.4625,227.055 281.25,262.5 C313.6363,292.095 358.7888,307.4575 400.52,315.3038 " fill="none" id="actor-&gt;CreateInterventionView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="407.1863,316.5,396.9959,309.5921,401.0345,315.3964,395.2302,319.435,407.1863,316.5" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M287.5,157.5 L287.5,251.25 L506.25,251.25 L506.25,170 L493.75,157.5 L287.5,157.5 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M493.75,157.5 L493.75,170 L506.25,170 L493.75,157.5 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="148.75" x="295" y="180.6189">searchVehicles(text)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="98.75" x="295" y="201.0583">setType(type)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="192.5" x="295" y="221.4978">setDescription(description)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="122.5" x="295" y="241.9373">confirmCreation()</text><!--MD5=[29e76145d2dc29153836a68535a78c31]
+link MenuView to CreateInterventionView--><path d="M112.6473,323.75 C182.9163,323.75 309.1287,323.75 400.7475,323.75 " fill="none" id="MenuView-&gt;CreateInterventionView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="407.2825,323.75,396.0325,318.75,401.0325,323.75,396.0325,328.75,407.2825,323.75" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M140.625,276.25 L140.625,308.75 L374.375,308.75 L374.375,288.75 L361.875,276.25 L140.625,276.25 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M361.875,276.25 L361.875,288.75 L374.375,288.75 L361.875,276.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="207.5" x="148.125" y="299.3689">new CreateInterventionView()</text><!--MD5=[bf54c98fe8649cd9358b51b48d233e4e]
+link CreateInterventionView to Vehicle--><path d="M490.14,347.85 C466.5187,375.125 429.6437,423.2612 415,472.5 C384.0263,576.645 426.0513,706.4445 448.0625,762.8673 " fill="none" id="CreateInterventionView-&gt;Vehicle" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="450.385,768.7379,450.8959,756.4374,448.0858,762.9261,441.5971,760.1161,450.385,768.7379" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="6.25" x="440.0741" y="754.993">*</text><!--MD5=[f29ff6c2e55d2ccbb8f4c8adf2e8671c]
+reverse link s1 to CreateInterventionView--><path d="M569.3512,92.3162 C560.1025,131.2138 543.0475,202.1538 527.5,262.5 C524.3225,274.8313 520.6225,288.5425 517.555,299.7425 " fill="none" id="s1&lt;-CreateInterventionView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="570.8763,85.895,563.4112,95.6845,569.4315,91.9757,573.1403,97.9961,570.8763,85.895" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M561.25,188.125 L561.25,220.625 L710,220.625 L710,200.625 L697.5,188.125 L561.25,188.125 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M697.5,188.125 L697.5,200.625 L710,200.625 L697.5,188.125 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="122.5" x="568.75" y="211.2439">openDashboard()</text><!--MD5=[3622722fcaf08974dda2e70386239c50]
+link CreateInterventionView to OpenVehiclesController--><path d="M515.5663,347.575 C521.3938,378.0575 531.785,432.4113 538.1913,465.9213 " fill="none" id="CreateInterventionView-&gt;OpenVehiclesController" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="539.4163,472.3325,542.2157,460.3439,538.2431,466.1936,532.3935,462.221,539.4163,472.3325" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M538.75,391.25 L538.75,423.75 L713.75,423.75 L713.75,403.75 L701.25,391.25 L538.75,391.25 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M701.25,391.25 L701.25,403.75 L713.75,403.75 L701.25,391.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="148.75" x="546.25" y="414.3689">searchVehicles(text)</text><!--MD5=[d99b35b70764764d44660c6b27a4cd17]
+link CreateInterventionView to CreateInterventionController--><path d="M615.185,323.75 C700.1637,323.75 820.8137,323.75 912.4613,323.75 " fill="none" id="CreateInterventionView-&gt;CreateInterventionController" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="919.0088,323.75,907.7588,318.75,912.7588,323.75,907.7588,328.75,919.0088,323.75" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M642.8125,276.25 L642.8125,308.75 L886.5625,308.75 L886.5625,288.75 L874.0625,276.25 L642.8125,276.25 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M874.0625,276.25 L874.0625,288.75 L886.5625,288.75 L874.0625,276.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="217.5" x="650.3125" y="299.3689">createIntervention(intervention)</text><!--MD5=[bba02b72cecc4076b43bf9f45ec59860]
+link CreateInterventionController to InterventionsDao--><path d="M1043.75,347.575 C1043.75,378.0575 1043.75,432.4113 1043.75,465.9213 " fill="none" id="CreateInterventionController-&gt;InterventionsDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="1043.75,472.3325,1048.75,461.0825,1043.75,466.0825,1038.75,461.0825,1043.75,472.3325" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M1050,391.25 L1050,423.75 L1212.5,423.75 L1212.5,403.75 L1200,391.25 L1050,391.25 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M1200,391.25 L1200,403.75 L1212.5,403.75 L1200,391.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="136.25" x="1057.5" y="414.3689">create(intervention)</text><!--MD5=[1a8513f96609cc40d5e42683625eb098]
+link OpenVehiclesController to VehiclesDao--><path d="M549.7263,520.075 C557.795,550.5575 572.1825,604.9113 581.0525,638.4213 " fill="none" id="OpenVehiclesController-&gt;VehiclesDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="582.75,644.8325,584.7039,632.6775,581.1503,638.7907,575.0371,635.237,582.75,644.8325" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M578.75,563.75 L578.75,596.25 L745,596.25 L745,576.25 L732.5,563.75 L578.75,563.75 " fill="#F5F5F5" filter="url(#f17gdtv1dv3069)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M732.5,563.75 L732.5,576.25 L745,576.25 L732.5,563.75 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="140" x="586.25" y="586.8689">searchVehicle(text)</text><!--MD5=[a535b4e8f17356c3d8fbb4389cad23c9]
+link CreateInterventionView to Intervention--><path d="M615.17,335.5463 C655.7788,343.85 700.7237,358.65 735,385 C822.6425,452.375 871.16,581.46 889.2225,638.815 " fill="none" id="CreateInterventionView-&gt;Intervention" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="891.0763,644.7925,892.522,632.5666,889.2262,638.8226,882.9702,635.5267,891.0763,644.7925" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[94adf10cd89fc5ba5849f7be97a393c4]
+link VehiclesDao to Vehicle--><path d="M564.5325,692.8063 C541.515,714.4838 507.0913,746.9024 484.1088,768.5461 " fill="none" id="VehiclesDao-Vehicle" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[e51d558c5641a6905df1bcf3e21f13dd]
+link InterventionsDao to Intervention--><path d="M1024.3288,520.075 C996.3563,552.59 945.0188,612.265 917.0013,644.8325 " fill="none" id="InterventionsDao-Intervention" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[1270788cf23f3617bcb86f92b1b727cd]
+link CreateInterventionController to Intervention--><path d="M1023.9363,347.8775 C1000.9838,375.5575 963.625,424.4463 942.5,472.5 C916.6325,531.3413 904.6513,606.9738 899.995,644.4 " fill="none" id="CreateInterventionController-Intervention" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="890.6927" y="631.3148">1</text><!--MD5=[6eeb786bd01602443b5a81748b6a3018]
+link OpenVehiclesController to Vehicle--><path d="M537.3175,520.0625 C521.7275,574.7413 482.0663,713.8529 466.455,768.6109 " fill="none" id="OpenVehiclesController-Vehicle" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="6.25" x="461.2248" y="755.2433">*</text><!--MD5=[0996dbbb463ab5bf01fab85db37a1c2d]
+@startuml
+
+skinparam {
+    NoteBorderThickness 0
+    NoteBackgroundColor #whiteSmoke
+    RectangleBackgroundColor #whiteSmoke
+    ArchimateBackgroundColor #whiteSmoke
+}
+
+
+actor actor
+rectangle #629EF9 MenuView
+rectangle #629EF9 CreateInterventionView
+rectangle #b5bd68 CreateInterventionController
+rectangle #b5bd68 OpenVehiclesController
+rectangle #F2AC4E InterventionsDao
+rectangle #F2AC4E Intervention
+rectangle #F2AC4E VehiclesDao
+rectangle #F2AC4E Vehicle
+rectangle #CDEBA5 ":Collaboration OpenDashboard" as s1
+
+actor -down-> MenuView
+note on link
+    createIntervention()
+end note
+
+actor -right-> CreateInterventionView
+note on link
+searchVehicles(text)
+setType(type)
+setDescription(description)
+confirmCreation()
+end note
+
+MenuView -right-> CreateInterventionView
+note on link
+    new CreateInterventionView()
+end note
+
+CreateInterventionView -right-> "*" Vehicle
+
+CreateInterventionView -up-> s1
+note on link
+    openDashboard()
+end note
+
+CreateInterventionView - -> OpenVehiclesController
+note on link
+    searchVehicles(text)
+end note
+
+CreateInterventionView -right-> CreateInterventionController
+note on link
+    createIntervention(intervention)
+end note
+
+CreateInterventionController - -> InterventionsDao
+note on link
+    create(intervention)
+end note
+
+OpenVehiclesController - -> VehiclesDao
+note on link
+    searchVehicle(text)
+end note
+
+
+CreateInterventionView - -> Intervention
+VehiclesDao - - Vehicle
+InterventionsDao .. Intervention
+CreateInterventionController .. "1" Intervention
+OpenVehiclesController .. "*" Vehicle
+
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
