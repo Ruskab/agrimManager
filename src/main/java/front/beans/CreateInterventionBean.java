@@ -55,7 +55,7 @@ public class CreateInterventionBean {
         externalContext.redirect(externalContext.getRequestContextPath().concat("/backoffice/dashboard.xhtml"));
     }
 
-    public List<VehicleDto> searchVehicleDataSheet(String query) {
+    public List<VehicleDto> searchVehicles(String query) {
         return vehicleGateway.searchBy(query);
     }
 

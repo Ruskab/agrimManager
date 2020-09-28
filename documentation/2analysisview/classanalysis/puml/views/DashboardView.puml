@@ -1,0 +1,13 @@
+@startuml
+	class DashboardView {
+	+finishIntervention(interventionId)
+	}
+
+	DashboardView --> FinishInterventionController
+	DashboardView --> Intervention
+	DashboardView --> OpenDashboardController
+	actor --> DashboardView
+	DashboardView --> Session
+	DashboardView --> Vehicle
+	MenuView --> DashboardView
+@enduml

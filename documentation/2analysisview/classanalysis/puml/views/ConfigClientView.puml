@@ -1,0 +1,12 @@
+@startuml
+	class ConfigClientView {
+	+setBillableHours(billableHours)
+	+save(client)
+	+setFullName(fullName)
+	}
+
+	ConfigClientView --> Client
+	ClientsView --> ConfigClientView
+	ConfigClientView --> ConfigClientController
+	ConfigClientView ----> Vehicle
+@enduml

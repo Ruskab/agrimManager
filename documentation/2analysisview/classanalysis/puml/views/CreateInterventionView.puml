@@ -1,0 +1,14 @@
+@startuml
+	class CreateInterventionView {
+	+confirmCreation()
+	+setType(type)
+	+setDescription(description)
+	+searchVehicles(text)
+	}
+
+	CreateInterventionView --> Intervention
+	CreateInterventionView --> OpenVehiclesController
+	MenuView --> CreateInterventionView
+	CreateInterventionView --> "*" Vehicle
+	CreateInterventionView --> CreateInterventionController
+@enduml

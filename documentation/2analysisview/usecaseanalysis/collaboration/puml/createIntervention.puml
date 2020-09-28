@@ -4,9 +4,9 @@
 !include configuration/definitions.puml
 
 actor actor
-view ":MenuView" as MenuView
+view MenuView
 view CreateInterventionView
-controller InterventionCreateController
+controller CreateInterventionController
 controller OpenVehiclesController
 model InterventionsDao
 model Intervention
@@ -44,12 +44,12 @@ note on link
     searchVehicles(text)
 end note
 
-CreateInterventionView -right-> InterventionCreateController
+CreateInterventionView -right-> CreateInterventionController
 note on link
     createIntervention(intervention)
 end note
 
-InterventionCreateController --> InterventionsDao
+CreateInterventionController --> InterventionsDao
 note on link
     create(intervention)
 end note
@@ -63,7 +63,7 @@ end note
 CreateInterventionView --> Intervention
 VehiclesDao -- Vehicle
 InterventionsDao .. Intervention
-InterventionCreateController .. "1" Intervention
+CreateInterventionController .. "1" Intervention
 OpenVehiclesController .. "*" Vehicle
 
 

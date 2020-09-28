@@ -1,0 +1,13 @@
+@startuml
+	class VehiclesView {
+	+createVehicle()
+	+configClient(vehicleId, clientFullName)
+	}
+
+	VehiclesView --> ConfigVehicleView
+	VehiclesView ----> Vehicle
+	VehiclesView --> OpenVehiclesController
+	MenuView --> VehiclesView
+	VehiclesView --> Client
+	VehiclesView --> CreateVehicleView
+@enduml

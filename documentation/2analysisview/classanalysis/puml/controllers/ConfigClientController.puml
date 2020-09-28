@@ -1,0 +1,10 @@
+@startuml
+	class ConfigClientController {
+	+save(client)
+	+readVehicles(clientId)
+	}
+
+	ConfigClientController --> VehiclesDao
+	ConfigClientController --> ClientsDao
+	ConfigClientView --> ConfigClientController
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+	class OpenVehiclesController {
+	+readClient(clientId())
+	+readAllVehicles()
+	+searchVehicles(text)
+	}
+
+	OpenVehiclesController --> ClientsDao
+	OpenVehiclesController --> VehiclesDao
+	VehiclesView --> OpenVehiclesController
+	CreateInterventionView --> OpenVehiclesController
+@enduml

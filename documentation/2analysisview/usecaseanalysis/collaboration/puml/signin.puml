@@ -7,7 +7,7 @@ actor user
 view SignInView
 view LoginView
 controller SignInController
-model MechanicDao
+model MechanicsDao
 model Mechanic
 model Session
 collaboration ":Collaboration OpenDashboard" as OpenDashboard
@@ -45,12 +45,12 @@ note on link
     setMechanic(mechanic)
 end note
 
-SignInController -down-> MechanicDao
+SignInController -down-> MechanicsDao
 note on link
     create(mechanic)
 end note
 
 SignInController --> Mechanic
-MechanicDao -- Mechanic
+MechanicsDao -- Mechanic
 
 @enduml

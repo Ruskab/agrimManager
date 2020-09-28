@@ -1,0 +1,12 @@
+@startuml
+	class CreateClientView {
+	+confirmCreation()
+	+setBillableHours(billableHours)
+	+setFullName(fullName)
+	}
+
+	CreateClientView --> CreateClientController
+	ClientsView --> CreateClientView
+	CreateClientView --> "1" Client
+	CreateClientView --> OpenClients
+@enduml

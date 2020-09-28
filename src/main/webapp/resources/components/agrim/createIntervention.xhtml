@@ -28,7 +28,7 @@
 
                     <h:outputLabel for="autoCompleteVehicleDataSheet" value="#{msg['web.interventions.edit.vehicle.datasheet']}"/>
                     <p:autoComplete id="autoCompleteVehicleDataSheet" value="#{createInterventionBean.selectedVehicle}"
-                                    completeMethod="#{createInterventionBean.searchVehicleDataSheet}"
+                                    completeMethod="#{createInterventionBean.searchVehicles}"
                                     var="vehicle" itemLabel="#{vehicle.vehicleDataSheet}" itemValue="#{vehicle}" required="#{!createInterventionBean.caffe}"
                                     converter="front.converters.VehicleConverter" forceSelection="true"
                                     minQueryLength="3" effect="fade"/>

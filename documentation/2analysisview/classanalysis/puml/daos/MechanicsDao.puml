@@ -1,0 +1,14 @@
+@startuml
+	class MechanicsDao {
+	+create(mechanic)
+	+readMechanics()
+	+read(mechanicId)
+	+serchBy(username, password)
+	+update(mechanic)
+	}
+
+	LoginController --> MechanicsDao
+	SignInController --> MechanicsDao
+	FinishInterventionController --> MechanicsDao
+	OpenInterventionsController --> MechanicsDao
+@enduml

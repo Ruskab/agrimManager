@@ -1,0 +1,10 @@
+@startuml
+	class OpenClientsController {
+	+readAllClients()
+	+searchClients(query)
+	}
+
+	CreateVehicleView --> OpenClientsController
+	OpenClientsController --> ClientsDao
+	ClientsView --> OpenClientsController
+@enduml

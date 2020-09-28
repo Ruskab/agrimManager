@@ -1,0 +1,9 @@
+@startuml
+	class SignInController {
+	+signin(username, password, repeatPassword)
+	}
+
+	SignInController --> MechanicsDao
+	SignInController --> Mechanic
+	SignInView --> SignInController
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+	class ClientsView {
+	+configClient(clientId)
+	+createClient()
+	}
+
+	ClientsView --> Client
+	ClientsView --> CreateClientView
+	ClientsView --> ConfigClientView
+	ClientsView --> OpenClientsController
+	MenuView --> ClientsView
+@enduml

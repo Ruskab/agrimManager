@@ -1,0 +1,8 @@
+@startuml
+	class CreateInterventionController {
+	+createIntervention(intervention)
+	}
+
+	CreateInterventionController --> InterventionsDao
+	CreateInterventionView --> CreateInterventionController
+@enduml

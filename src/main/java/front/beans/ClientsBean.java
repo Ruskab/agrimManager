@@ -26,8 +26,6 @@ public class ClientsBean implements Serializable {
         clients = new ClientGateway(getAuthToken()).readAll();
     }
 
-
-
     public void openCreateClientDialog() {
         Map<String, Object> options = setupDialogOptions();
         PrimeFaces.current().dialog().openDynamic("createClient", options, null);

@@ -1,0 +1,9 @@
+@startuml
+	class FinishInterventionController {
+	+finishIntervention(mechanicId, interventionId)
+	}
+
+	DashboardView --> FinishInterventionController
+	FinishInterventionController --> MechanicsDao
+	FinishInterventionController ..> "1" Mechanic
+@enduml

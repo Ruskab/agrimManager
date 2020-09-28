@@ -1,0 +1,11 @@
+@startuml
+	class InterventionsDao {
+	+searchActiveInterventions(mechanicId)
+	+create(intervention)
+	+readInterventions(mechanicId)
+	}
+
+	OpenDashboardController --> InterventionsDao
+	OpenInterventionsController --> InterventionsDao
+	CreateInterventionController --> InterventionsDao
+@enduml

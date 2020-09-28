@@ -1,0 +1,18 @@
+@startuml
+	class VehiclesDao {
+	+save(vehicle)
+	+searchVehicle(text)
+	+searchVehicle(interventionId)
+	+createVehicle(vehicle)
+	+readVehicle(vehicleId)
+	+readAllVehicles()
+	+readVehicles(clientId)
+	}
+
+	ConfigClientController --> VehiclesDao
+	ConfigVehicleController --> VehiclesDao
+	CreateVehicleController --> VehiclesDao
+	OpenDashboardController --> VehiclesDao
+	OpenInterventionsController --> VehiclesDao
+	OpenVehiclesController --> VehiclesDao
+@enduml

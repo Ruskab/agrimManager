@@ -1,0 +1,10 @@
+@startuml
+	class Vehicle {
+	}
+
+	ConfigVehicleView --> Vehicle
+	VehiclesView ----> Vehicle
+	InterventionsView --> Vehicle
+	ConfigClientView ----> Vehicle
+	DashboardView --> Vehicle
+@enduml

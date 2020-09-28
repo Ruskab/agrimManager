@@ -5,50 +5,51 @@
 
 actor user
 view ClientsView
-view ClientInfoView
-controller ClientConfigController
-model ClientDao
+view ConfigClientView
+controller ConfigClientController
+model ClientsDao
 model Client
 model Vehicle
-model VehicleDao
+model VehiclesDao
 
 user -right-> ClientsView
 note on link
     configClient(clientId)
 end note
 
-user -right-> ClientInfoView
+user -right-> ConfigClientView
 note on link
 setFullName(fullName)
 setBillableHours(billableHours)
+save(client)
 end note
 
-ClientsView -down-> ClientInfoView
+ClientsView -down-> ConfigClientView
 note on link
-   configClient(clientId)
+   new ConfigClientView(client)
 end note
 
-ClientInfoView -right-> ClientConfigController
+ConfigClientView -right-> ConfigClientController
 note on link
-    readClient(clientId)
+    readVehicles(clientId)
+    save(client)
+end note
+
+
+ConfigClientController --> ClientsDao
+note on link
+    save(client)
+end note
+
+ConfigClientController --> VehiclesDao
+note on link
     readVehicles(clientId)
 end note
 
-
-ClientConfigController --> ClientDao
-note on link
-    readClient(clientId)
-end note
-
-ClientConfigController --> VehicleDao
-note on link
-    readVehicles(clientId)
-end note
-
-ClientInfoView --> Client
-ClientInfoView ----> Vehicle
-ClientConfigController .. "1" Client
-ClientConfigController .. "0..*" Vehicle
-ClientDao .. Client
-VehicleDao .. Vehicle
+ConfigClientView --> Client
+ConfigClientView ----> Vehicle
+ConfigClientController .. "1" Client
+ConfigClientController .. "0..*" Vehicle
+ClientsDao .. Client
+VehiclesDao .. Vehicle
 @enduml

@@ -10,8 +10,8 @@ view VehiclesView
 
 controller OpenVehiclesController
 
-model VehicleDao
-model ClientDao
+model VehiclesDao
+model ClientsDao
 model Vehicle
 model Client
 
@@ -31,20 +31,20 @@ note on link
     readClient(clientId())
 end note
 
-OpenVehiclesController --> VehicleDao
+OpenVehiclesController --> VehiclesDao
 note on link
 readAllVehicles()
 end note
 
-OpenVehiclesController --> ClientDao
+OpenVehiclesController --> ClientsDao
 note on link
 readClient(clientId)
 end note
 
 OpenVehiclesController .. "0..*" Vehicle
 OpenVehiclesController .. "1" Client
-ClientDao .. Client
-VehicleDao .. Vehicle
+ClientsDao .. Client
+VehiclesDao .. Vehicle
 VehiclesView ----> Vehicle
 VehiclesView --> Client
 @enduml

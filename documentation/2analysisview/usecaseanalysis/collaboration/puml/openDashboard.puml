@@ -8,10 +8,10 @@ actor actor
 view MenuView
 view DashboardView
 
-controller openDashboardController
+controller OpenDashboardController
 
-model InterventionDao
-model VehicleDao
+model InterventionsDao
+model VehiclesDao
 model Intervention
 model Session
 model Vehicle
@@ -33,25 +33,25 @@ end note
 DashboardView -down-> Intervention
 DashboardView -down-> Vehicle
 
-DashboardView -right-> openDashboardController
+DashboardView -right-> OpenDashboardController
 note on link
-    searchActiveInterventions(mechanic)
+    searchActiveInterventions(mechanicId)
+    searchVehicle(vehicleId)
+end note
+
+OpenDashboardController -down-> InterventionsDao
+note on link
+    searchActiveInterventions(mechanicId)
+end note
+
+OpenDashboardController -right-> VehiclesDao
+note on link
     searchVehicle(interventionId)
 end note
 
-openDashboardController -down-> InterventionDao
-note on link
-    searchActiveInterventions(mechanic)
-end note
-
-openDashboardController -right-> VehicleDao
-note on link
-    searchVehicle(interventionId)
-end note
-
-openDashboardController .. Vehicle
-VehicleDao .down.. Vehicle
-openDashboardController .down. "0..*" Intervention
-InterventionDao -left- Intervention
+OpenDashboardController .. Vehicle
+VehiclesDao .down.. Vehicle
+OpenDashboardController .down. "0..*" Intervention
+InterventionsDao -left- Intervention
 
 @enduml
