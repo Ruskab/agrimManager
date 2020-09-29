@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -10,17 +10,17 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class SessionBean {
 
-    private MechanicDto mechanicDto;
+    private Mechanic mechanic;
 
     @PostConstruct
     public void init() {
     }
 
-    public MechanicDto getMechanicDto() {
-        return mechanicDto;
+    public Mechanic getMechanic() {
+        return mechanic;
     }
 
-    public void setMechanicDto(MechanicDto mechanicDto) {
-        this.mechanicDto = mechanicDto;
+    public void setMechanic(Mechanic mechanic) {
+        this.mechanic = mechanic;
     }
 }

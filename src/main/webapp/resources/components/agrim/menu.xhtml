@@ -40,7 +40,7 @@
                 <p:submenu label="#{msg['web.header.interventions']}" icon="fa fa fa-wrench fa-xs">
                     <p:menuitem value="#{msg['web.header.myInterventions']}" url="#{request.contextPath}/backoffice/myInterventions.xhtml"/>
                     <p:separator/>
-                    <p:menuitem value="#{msg['web.header.interventions']}" rendered="#{sessionBean.mechanicDto.anyRoleGranted('ADMIN')}" url="#{request.contextPath}/backoffice/interventions.xhtml"/>
+                    <p:menuitem value="#{msg['web.header.interventions']}" rendered="#{sessionBean.mechanic.anyRoleGranted('ADMIN')}" url="#{request.contextPath}/backoffice/interventions.xhtml"/>
                     <p:separator/>
                     <p:menuitem value="#{msg['web.header.newintervention']}" oncomplete="PF('createIntervention').show()"/>
                     <p:separator/>

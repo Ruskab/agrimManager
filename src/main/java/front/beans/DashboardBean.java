@@ -1,12 +1,11 @@
 package front.beans;
 
 import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import front.dtos.Vehicle;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
-import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -28,7 +27,7 @@ public class DashboardBean {
     private InterventionGateway interventionGateway;
     private MechanicGateway mechanicGateway;
     private VehicleGateway vehicleGateway;
-    private MechanicDto mechanic;
+    private Mechanic mechanic;
 
     private List<InterventionDto> activeInterventions = new ArrayList<>();
 
@@ -40,11 +39,11 @@ public class DashboardBean {
         interventionGateway = new InterventionGateway(getAuthToken());
         mechanicGateway = new MechanicGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
-        mechanic = sessionBean.getMechanicDto();
+        mechanic = sessionBean.getMechanic();
         activeInterventions = searchActiveInterventions(mechanic);
     }
 
-    private List<InterventionDto> searchActiveInterventions(MechanicDto mechanic) {
+    private List<InterventionDto> searchActiveInterventions(Mechanic mechanic) {
         return mechanicGateway.searchInterventions(Integer.toString(mechanic.getId()), true);
     }
 

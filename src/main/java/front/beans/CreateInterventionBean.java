@@ -1,9 +1,8 @@
 package front.beans;
 
 import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import front.dtos.Vehicle;
-import api.entity.InterventionType;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
@@ -43,7 +42,7 @@ public class CreateInterventionBean {
     }
 
     public void create() throws IOException {
-        MechanicDto mechanic = (MechanicDto) Faces.getSession().getAttribute("mechanic");
+        Mechanic mechanic = (Mechanic) Faces.getSession().getAttribute("mechanic");
         validateSelection();
         selectedIntervention.setStartTime(LocalDateTime.now());
         selectedIntervention.setVehicleId(selectedVehicle != null ? Integer.toString(selectedVehicle.getId()) : null);
@@ -62,7 +61,8 @@ public class CreateInterventionBean {
     private void validateSelection() {
         if (selectedIntervention == null) {
             LOGGER.error("Intervention empty");
-            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intervention empty", ""));
+            FacesContext.getCurrentInstance()
+                    .addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intervention empty", ""));
         }
     }
 
@@ -81,7 +81,7 @@ public class CreateInterventionBean {
     }
 
     public String onFlowProcess(FlowEvent event) {
-            return event.getNewStep();
+        return event.getNewStep();
     }
 
     public Vehicle getSelectedVehicle() {

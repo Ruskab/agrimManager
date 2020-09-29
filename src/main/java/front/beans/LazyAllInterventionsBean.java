@@ -1,7 +1,7 @@
 package front.beans;
 
 import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import front.dtos.Vehicle;
 import front.dtos.FullIntervention;
 import front.gateways.InterventionGateway;
@@ -30,8 +30,8 @@ public class    LazyAllInterventionsBean implements Serializable {
 
     private LazyDataModel<FullIntervention> lazyModel;
     private InterventionDto selectedInterventionDto;
-    private List<MechanicDto> mechanics;
-    private MechanicDto user;
+    private List<Mechanic> mechanics;
+    private Mechanic user;
     private List<FullIntervention> fullInterventions = new ArrayList<>();
     private String selectedVehicleReference;
     private InterventionGateway interventionGateway;
@@ -48,7 +48,7 @@ public class    LazyAllInterventionsBean implements Serializable {
         vehicleGateway = new VehicleGateway(getAuthToken());
         mechanics = mechanicGateway.readAll();
         loadFullInterventions(mechanics);
-        user = sessionBean.getMechanicDto();
+        user = sessionBean.getMechanic();
         lazyModel = new LazyDataModel<FullIntervention>() {
 
             @Override
@@ -145,13 +145,13 @@ public class    LazyAllInterventionsBean implements Serializable {
         };
     }
 
-    private void loadFullInterventions(List<MechanicDto> mechanics) {
+    private void loadFullInterventions(List<Mechanic> mechanics) {
         fullInterventions = mechanics.stream()
-                .flatMap(mechanicDto -> toFullInterventionList(mechanicDto).stream())
+                .flatMap(mechanic -> toFullInterventionList(mechanic).stream())
                 .collect(Collectors.toList());
     }
 
-    private List<FullIntervention> toFullInterventionList(MechanicDto mechanic) {
+    private List<FullIntervention> toFullInterventionList(Mechanic mechanic) {
         return mechanic.getInterventionIds().stream()
                 .map(Object::toString)
                 .map(interventionGateway::read)
@@ -159,7 +159,7 @@ public class    LazyAllInterventionsBean implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    private FullIntervention mapToFullIntervention(InterventionDto intervention, MechanicDto mechanic) {
+    private FullIntervention mapToFullIntervention(InterventionDto intervention, Mechanic mechanic) {
         if (intervention.getVehicleId() != null) {
             Vehicle vehicle = vehicleGateway.read(intervention.getVehicleId());
             return FullIntervention.of(mechanic, intervention, vehicle);

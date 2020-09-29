@@ -1,7 +1,7 @@
 package front.gateways;
 
 import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -45,49 +45,49 @@ public class MechanicGateway implements Serializable {
         this.authToken = authToken;
     }
 
-    public String create(MechanicDto mechanicDto) {
+    public String create(Mechanic mechanic) {
         Response response = client.target(UriBuilder.fromPath(resource).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(entity(mechanicDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(entity(mechanic, MediaType.APPLICATION_JSON_TYPE));
         return response.readEntity(String.class);
     }
 
-    public void createIntervention(MechanicDto mechanic, InterventionDto interventionDto) {
+    public void createIntervention(Mechanic mechanic, InterventionDto interventionDto) {
         client.target(UriBuilder.fromPath(resource).path(mechanic.getId() + "/interventions").build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
     }
 
-    public void finishIntervention(MechanicDto mechanicDto, InterventionDto interventionDto) {
-        Response response = client.target(UriBuilder.fromPath(resource).path(mechanicDto.getId() + "/interventions/" + interventionDto.getId() + "/finish").build())
+    public void finishIntervention(Mechanic mechanic, InterventionDto interventionDto) {
+        Response response = client.target(UriBuilder.fromPath(resource).path(mechanic.getId() + "/interventions/" + interventionDto.getId() + "/finish").build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.OK);
     }
 
-    public List<MechanicDto> readAll() {
+    public List<Mechanic> readAll() {
         return client.target(UriBuilder.fromPath(resource).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<MechanicDto>>() {
+                .get(new GenericType<List<Mechanic>>() {
                 });
     }
 
-    public MechanicDto read(String mechanicId) {
+    public Mechanic read(String mechanicId) {
         return client.target(UriBuilder.fromPath(resource).path("/" + mechanicId).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(MechanicDto.class);
+                .get(Mechanic.class);
     }
 
-    public List<MechanicDto> searchByCredentials(String username) {
+    public List<Mechanic> searchByCredentials(String username) {
         return client.target(UriBuilder.fromPath(resource).queryParam("username", username).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<MechanicDto>>() {
+                .get(new GenericType<List<Mechanic>>() {
                 });
     }
 
@@ -99,11 +99,11 @@ public class MechanicGateway implements Serializable {
                 });
     }
 
-    public Integer update(MechanicDto mechanicDto) {
-        Response response = client.target(UriBuilder.fromPath(resource).path("/" + mechanicDto.getId()).build())
+    public Integer update(Mechanic mechanic) {
+        Response response = client.target(UriBuilder.fromPath(resource).path("/" + mechanic.getId()).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .put(entity(mechanicDto, MediaType.APPLICATION_JSON_TYPE));
+                .put(entity(mechanic, MediaType.APPLICATION_JSON_TYPE));
         return response.getStatus();
     }
 

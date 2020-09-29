@@ -1,7 +1,7 @@
 package front.beans;
 
 import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import front.dtos.Client;
 import front.dtos.Vehicle;
 import front.gateways.ClientGateway;
@@ -44,15 +44,15 @@ public class OperationsBean {
     private VehicleGateway vehicleGateway;
     private ClientGateway clientGateway;
     private MechanicGateway mechanicGateway;
-    private MechanicDto mechanic;
+    private Mechanic mechanic;
     private DashboardModel model;
     private Random rnd = new SecureRandom();
 
-    public MechanicDto getMechanic() {
+    public Mechanic getMechanic() {
         return mechanic;
     }
 
-    public void setMechanic(MechanicDto mechanic) {
+    public void setMechanic(Mechanic mechanic) {
         this.mechanic = mechanic;
     }
 

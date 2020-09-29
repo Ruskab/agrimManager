@@ -1,7 +1,7 @@
 package front.beans;
 
 import api.dtos.CredentialsDto;
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import api.exceptions.UnauthorizedException;
 import front.gateways.AuthenticationGateway;
 import front.gateways.MechanicGateway;
@@ -49,7 +49,7 @@ public class LoginBean {
     }
 
     private void initSession(String authToken) {
-        List<MechanicDto> mechanics = new MechanicGateway(authToken).searchByCredentials(userName);
+        List<Mechanic> mechanics = new MechanicGateway(authToken).searchByCredentials(userName);
 
         if (mechanics.stream().noneMatch(mechanic -> password.equals(mechanic.getPassword()))) {
             throw new UnauthorizedException("mechanic not found with given credentials");
@@ -57,7 +57,7 @@ public class LoginBean {
         Faces.getSession().setAttribute("username", userName);
         Faces.getSession().setAttribute("mechanic", mechanics.get(0));
         Faces.getSession().setAttribute("token", authToken);
-        sessionBean.setMechanicDto(mechanics.get(0));
+        sessionBean.setMechanic(mechanics.get(0));
     }
 
     private void redirect(String path) throws IOException {
