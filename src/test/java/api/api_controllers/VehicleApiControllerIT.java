@@ -8,7 +8,10 @@ import api.dtos.builder.VehicleDtoBuilder;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.MechanicDtoMother;
 import front.gateways.ClientGateway;
+import front.gateways.OperationsGateway;
 import front.gateways.VehicleGateway;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,14 +29,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class VehicleApiControllerIT {
 
-    private static final String API_PATH = "/api/v0";
-    private static final String APP_BASE_URL = "app.url";
+    private static final Logger LOGGER = LogManager.getLogger(VehicleApiControllerIT.class);
+
+
     private Client client;
     private Properties properties;
     private String authToken;
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private VehicleGateway vehicleGateway;
     private ClientGateway clientGateway;
+    private OperationsGateway operationsGateway;
 
     @BeforeEach
     void setUp() {
@@ -43,6 +48,8 @@ class VehicleApiControllerIT {
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
+        vehicleGateway = new VehicleGateway(authToken);
+        operationsGateway = new OperationsGateway(authToken);
     }
 
     @Test
@@ -112,10 +119,8 @@ class VehicleApiControllerIT {
 
     @AfterEach
     void delete_data() {
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
+        LOGGER.info("clean database after test");
+        operationsGateway.deleteAll();
     }
 
 

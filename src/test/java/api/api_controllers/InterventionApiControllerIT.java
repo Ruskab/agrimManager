@@ -13,6 +13,7 @@ import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
 import front.gateways.ClientGateway;
 import front.gateways.InterventionGateway;
+import front.gateways.OperationsGateway;
 import front.gateways.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,9 +33,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class InterventionApiControllerIT {
 
-    public static final String APP_BASE_URL = "app.url";
     private static final Logger LOGGER = LogManager.getLogger(InterventionApiControllerIT.class);
-    private static final String API_PATH = "/api/v0";
+
     Client client;
     Properties properties;
     private MechanicApiController mechanicApiController = new MechanicApiController();
@@ -42,6 +42,8 @@ class InterventionApiControllerIT {
     private ClientGateway clientGateway;
     private VehicleGateway vehicleGateway;
     private InterventionGateway interventionGateway;
+    private OperationsGateway operationsGateway;
+
 
     @BeforeEach
     void setUp() {
@@ -51,6 +53,7 @@ class InterventionApiControllerIT {
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
         interventionGateway = new InterventionGateway(authToken);
+        operationsGateway = new OperationsGateway(authToken);
     }
 
     private void createAuthToken() {
@@ -108,10 +111,7 @@ class InterventionApiControllerIT {
     @AfterEach
     void delete_data() {
         LOGGER.info("clean database after test");
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
+       operationsGateway.deleteAll();
     }
 
 }

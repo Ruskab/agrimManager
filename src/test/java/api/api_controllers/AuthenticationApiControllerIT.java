@@ -4,6 +4,10 @@ import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.dtos.CredentialsDto;
 import api.object_mothers.MechanicDtoMother;
+import front.gateways.AuthenticationGateway;
+import front.gateways.OperationsGateway;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,12 +24,14 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 class AuthenticationApiControllerIT {
 
-    public static final String APP_BASE_URL = "app.url";
-    private static final String API_PATH = "/api/v0";
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationApiControllerIT.class);
+
     Client client;
     Properties properties;
     private String authToken;
-    private MechanicApiController mechanicApiController = new MechanicApiController();
+    private final MechanicApiController mechanicApiController = new MechanicApiController();
+    private OperationsGateway operationsGateway;
+    private AuthenticationGateway authenticationGateway;
 
     @BeforeEach
     void setUp() {
@@ -33,26 +39,23 @@ class AuthenticationApiControllerIT {
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
+        authenticationGateway = new AuthenticationGateway();
+        operationsGateway = new OperationsGateway(authToken);
     }
 
     @Test
     void authenticate_user() {
         CredentialsDto credentialsDto = new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
 
-        Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + AuthenticationApiController.AUTH)
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(credentialsDto, MediaType.APPLICATION_JSON_TYPE));
+        String token = authenticationGateway.authenticate(credentialsDto);
 
-        assertThat(response.getStatus(), is(Response.Status.OK.getStatusCode()));
-        assertThat(response.readEntity(String.class).isEmpty(), is(false));
+        assertThat(token.isEmpty(), is(false));
     }
 
     @AfterEach
     void delete_mechanic() {
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
+        LOGGER.info("clean database after test");
+        operationsGateway.deleteAll();
     }
 
 }

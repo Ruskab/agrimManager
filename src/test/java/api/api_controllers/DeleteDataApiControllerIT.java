@@ -13,6 +13,9 @@ import api.dtos.CredentialsDto;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
+import front.gateways.OperationsGateway;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,6 +45,8 @@ class DeleteDataApiControllerIT {
     Client client;
     Properties properties;
     private MechanicApiController mechanicApiController = new MechanicApiController();
+    private OperationsGateway operationsGateway;
+
     private String authToken;
 
 
@@ -52,6 +57,7 @@ class DeleteDataApiControllerIT {
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         DaoFactory.setFactory(new DaoFactoryHibr());
+        operationsGateway = new OperationsGateway(authToken);
     }
 
 
@@ -80,13 +86,5 @@ class DeleteDataApiControllerIT {
                 .delete();
 
         assertThat(response.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
-    }
-
-    @AfterEach
-    void delete_data() {
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
     }
 }

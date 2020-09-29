@@ -7,6 +7,7 @@ import api.dtos.CredentialsDto;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.MechanicDtoMother;
 import front.gateways.ClientGateway;
+import front.gateways.OperationsGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -23,14 +24,14 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 class ClientApiControllerIT {
 
-    public static final String APP_BASE_URL = "app.url";
     private static final Logger LOGGER = LogManager.getLogger(ClientApiControllerIT.class);
-    private static final String API_PATH = "/api/v0";
+
     Client client;
     Properties properties;
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
     private ClientGateway clientGateway;
+    private OperationsGateway operationsGateway;
 
     @BeforeEach
     void setUp() {
@@ -39,6 +40,7 @@ class ClientApiControllerIT {
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
         clientGateway = new ClientGateway(authToken);
+        operationsGateway = new OperationsGateway(authToken);
 
     }
 
@@ -78,10 +80,8 @@ class ClientApiControllerIT {
 
     @AfterEach
     void delete_data() {
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
+        LOGGER.info("clean database after test");
+        operationsGateway.deleteAll();
     }
 
 
