@@ -1,7 +1,7 @@
 package front.beans;
 
-import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
+import front.dtos.Client;
 import front.gateways.ClientGateway;
 import com.mysql.cj.util.StringUtils;
 import front.gateways.VehicleGateway;
@@ -26,7 +26,7 @@ public class CreateVehicleBean {
     private static final Logger LOGGER = LogManager.getLogger(CreateVehicleBean.class);
     private boolean skip;
     private VehicleDto selectedVehicleDto;
-    private ClientDto selectedClient;
+    private Client selectedClient;
     private VehicleGateway vehicleGateway;
     private ClientGateway clientGateway;
 
@@ -59,7 +59,7 @@ public class CreateVehicleBean {
         resertWizard();
     }
 
-    public List<ClientDto> searchClient(String query) {
+    public List<Client> searchClient(String query) {
         return clientGateway.searchBy(query);
     }
 
@@ -94,11 +94,11 @@ public class CreateVehicleBean {
         this.selectedVehicleDto = selectedVehicleDto;
     }
 
-    public ClientDto getSelectedClient() {
+    public Client getSelectedClient() {
         return selectedClient;
     }
 
-    public void setSelectedClient(ClientDto selectedClient) {
+    public void setSelectedClient(Client selectedClient) {
         this.selectedClient = selectedClient;
     }
 }

@@ -1,15 +1,14 @@
 package front.gateways;
 
-import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import front.dtos.Client;
 import front.util.PropertyLoader;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
@@ -28,7 +27,7 @@ public class VehicleGateway implements Serializable {
     private static final String API_PATH = "app.api.base.path";
     private static final String APP_BASE_URL = "app.url";
     private static final String VEHICLES = "api.vehicles.path";
-    private final Client client;
+    private final javax.ws.rs.client.Client client;
     private final String authToken;
     private final String resource;
 
@@ -74,8 +73,8 @@ public class VehicleGateway implements Serializable {
                 .get(new GenericType<List<VehicleDto>>() {});
     }
 
-    public List<VehicleDto> searchBy(ClientDto clientDto) {
-        return client.target(UriBuilder.fromPath(resource).queryParam("clientId", clientDto.getId()))
+    public List<VehicleDto> searchBy(Client client) {
+        return this.client.target(UriBuilder.fromPath(resource).queryParam("clientId", client.getId()))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .get(new GenericType<List<VehicleDto>>() {});

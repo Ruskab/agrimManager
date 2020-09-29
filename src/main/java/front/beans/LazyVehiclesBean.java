@@ -141,7 +141,7 @@ public class LazyVehiclesBean implements Serializable {
         this.selectedVehicleDto = selectedVehicleDto;
     }
 
-    public String getClientDto(String clientId) {
+    public String getClient(String clientId) {
         return getClientNames().getOrDefault(clientId, NOT_NAME);
     }
 

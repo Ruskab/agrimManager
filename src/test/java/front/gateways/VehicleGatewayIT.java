@@ -7,7 +7,7 @@ import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
-import api.object_mothers.ClientDtoMother;
+import api.object_mothers.FrontClientMother;
 import api.object_mothers.MechanicDtoMother;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,7 +51,7 @@ class VehicleGatewayIT {
 
     @Test
     void create_and_read_vehicle() {
-        String clientId = clientGateway.create(ClientDtoMother.clientDto());
+        String clientId = clientGateway.create(FrontClientMother.client());
         VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
         String vehicleId = vehicleGateway.create(vehicleDto);
 
@@ -73,7 +73,7 @@ class VehicleGatewayIT {
 
     @Test
     void delete_vehicle() {
-        String clientId = clientGateway.create(ClientDtoMother.clientDto());
+        String clientId = clientGateway.create(FrontClientMother.client());
         VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
 
         String vehicleId = vehicleGateway.create(vehicleDto);
@@ -85,7 +85,7 @@ class VehicleGatewayIT {
 
     @Test
     void update_vehicle() {
-        String clientId = clientGateway.create(ClientDtoMother.clientDto());
+        String clientId = clientGateway.create(FrontClientMother.client());
         VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
         String vehicleId = vehicleGateway.create(vehicleDto);
         VehicleDto createdVehicleDto = vehicleGateway.read(vehicleId);

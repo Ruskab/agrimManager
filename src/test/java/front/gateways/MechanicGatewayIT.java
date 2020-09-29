@@ -5,21 +5,20 @@ import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
-import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
-import api.object_mothers.ClientDtoMother;
+import api.object_mothers.FrontClientMother;
 import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
+import front.dtos.Client;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.client.Client;
 import java.util.List;
 import java.util.Properties;
 
@@ -31,7 +30,7 @@ class MechanicGatewayIT {
 
     private static final Logger LOGGER = LogManager.getLogger(MechanicGatewayIT.class);
     private final MechanicApiController mechanicApiController = new MechanicApiController();
-    Client client;
+    javax.ws.rs.client.Client client;
     Properties properties;
     private String authToken;
     private Integer mechanicId;
@@ -64,8 +63,8 @@ class MechanicGatewayIT {
 
     @Test
     void add_intervention_to_mechanic() {
-        ClientDto clientDto = ClientDtoMother.clientDto();
-        String clientId = clientGateway.create(clientDto);
+        Client client = FrontClientMother.client();
+        String clientId = clientGateway.create(client);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);
         InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
@@ -80,7 +79,7 @@ class MechanicGatewayIT {
 
     @Test
     void read_mechanic_active_interventions() {
-        ClientDto clientDto = ClientDtoMother.clientDto();
+        Client clientDto = FrontClientMother.client();
         String clientId = clientGateway.create(clientDto);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);

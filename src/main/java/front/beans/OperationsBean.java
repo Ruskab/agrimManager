@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.ClientDto;
+import front.dtos.Client;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
@@ -119,8 +119,8 @@ public class OperationsBean {
         List<Integer> vehiclesIds = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
-            ClientDto clientDto = new ClientDto(getRandomName(), rnd.ints(0, 40).findFirst().getAsInt());
-            clientsIds.add(addFakeClient(clientDto));
+            Client client = Client.builder().fullName(getRandomName()).hours(rnd.ints(0, 40).findFirst().getAsInt()).build();
+            clientsIds.add(addFakeClient(client));
         }
         addMessage(SUCCESS, "Added new 30 clients");
         for (int i = 0; i < 60; i++) {
@@ -201,8 +201,8 @@ public class OperationsBean {
         return rnd.ints(0, 8).findFirst().getAsInt();
     }
 
-    private Integer addFakeClient(ClientDto clientDto) {
-        return Integer.parseInt(clientGateway.create(clientDto));
+    private Integer addFakeClient(Client client) {
+        return Integer.parseInt(clientGateway.create(client));
     }
 
     public void destroyTheWorld() {
@@ -220,8 +220,8 @@ public class OperationsBean {
     }
 
     private void deleteAllClients() {
-        List<ClientDto> clientDtoLIst = clientGateway.readAll();
-        clientDtoLIst.forEach(clientDto -> clientGateway.delete(clientDto.getId()));
+        List<Client> clients = clientGateway.readAll();
+        clients.forEach(client -> clientGateway.delete(client.getId()));
     }
 
 

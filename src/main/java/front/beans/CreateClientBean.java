@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.ClientDto;
+import front.dtos.Client;
 import com.mysql.cj.util.StringUtils;
 import front.gateways.ClientGateway;
 import org.apache.logging.log4j.LogManager;
@@ -22,12 +22,12 @@ public class CreateClientBean {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateClientBean.class);
     private ClientGateway clientGateway;
-    private ClientDto client;
+    private Client client;
 
     @PostConstruct
     public void init() {
         clientGateway = new ClientGateway(getAuthToken());
-        client = new ClientDto();
+        client = new Client();
     }
 
     public void create() {
@@ -53,18 +53,18 @@ public class CreateClientBean {
 
     private void resertWizard() {
         PrimeFaces.current().executeScript("PF('createVehicleWizzard').loadStep('basicInfoTab', false)");
-        client = new ClientDto();
+        client = new Client();
     }
 
     public String onFlowProcess(FlowEvent event) {
         return event.getNewStep();
     }
 
-    public ClientDto getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(ClientDto client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 }

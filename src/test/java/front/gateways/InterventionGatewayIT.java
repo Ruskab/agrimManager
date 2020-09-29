@@ -5,13 +5,13 @@ import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
-import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.dtos.InterventionDto;
 import api.dtos.VehicleDto;
-import api.object_mothers.ClientDtoMother;
+import api.object_mothers.FrontClientMother;
 import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
+import front.dtos.Client;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +19,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.client.Client;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
@@ -30,7 +29,7 @@ class InterventionGatewayIT {
 
     private static final Logger LOGGER = LogManager.getLogger(InterventionGatewayIT.class);
 
-    Client client;
+    javax.ws.rs.client.Client client;
     Properties properties;
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
@@ -60,7 +59,7 @@ class InterventionGatewayIT {
 
     @Test
     void create_and_read_intervention() {
-        ClientDto clientDto = ClientDtoMother.clientDto();
+        Client clientDto = FrontClientMother.client();
         String clientId = clientGateway.create(clientDto);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);
@@ -75,7 +74,7 @@ class InterventionGatewayIT {
 
     @Test
     void delete_intervention() {
-        ClientDto clientDto = ClientDtoMother.clientDto();
+        Client clientDto = FrontClientMother.client();
         String clientId = clientGateway.create(clientDto);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);
@@ -89,7 +88,7 @@ class InterventionGatewayIT {
 
     @Test
     void update_intervention() {
-        ClientDto clientDto = ClientDtoMother.clientDto();
+        Client clientDto = FrontClientMother.client();
         String clientId = clientGateway.create(clientDto);
         VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicleDto);
