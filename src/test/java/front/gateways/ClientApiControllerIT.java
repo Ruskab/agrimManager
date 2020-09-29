@@ -1,13 +1,13 @@
-package api.api_controllers;
+package front.gateways;
 
 import api.PropertiesResolver;
 import api.RestClientLoader;
+import api.api_controllers.AuthenticationApiController;
+import api.api_controllers.MechanicApiController;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.MechanicDtoMother;
-import front.gateways.ClientGateway;
-import front.gateways.OperationsGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -15,8 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
@@ -38,7 +36,8 @@ class ClientApiControllerIT {
         client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD))
+                .getEntity();
         clientGateway = new ClientGateway(authToken);
         operationsGateway = new OperationsGateway(authToken);
 

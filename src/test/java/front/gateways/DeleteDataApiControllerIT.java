@@ -1,8 +1,11 @@
-package api.api_controllers;
+package front.gateways;
 
 import api.AgrimDomainFactory;
 import api.PropertiesResolver;
 import api.RestClientLoader;
+import api.api_controllers.AuthenticationApiController;
+import api.api_controllers.DeleteDataApiController;
+import api.api_controllers.MechanicApiController;
 import api.business_controllers.ClientBusinessController;
 import api.business_controllers.InterventionBusinesssController;
 import api.business_controllers.RepairingPackBusinessController;
@@ -13,10 +16,6 @@ import api.dtos.CredentialsDto;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
-import front.gateways.OperationsGateway;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
