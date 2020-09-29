@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
 
@@ -90,10 +91,10 @@ public class MechanicBusinessController {
                 .collect(toList());
     }
 
-    public List<InterventionDto> getActiveInterventions(Integer mechanicId) {
+    public List<InterventionDto> getMechanicInterventions(Integer mechanicId, Boolean isActive) {
         return DaoFactory.getFactory().getMechanicDao().read(mechanicId)
                 .stream().flatMap(mechanic -> mechanic.getInterventionList().stream())
-                .filter(Intervention::isActive)
+                .filter(intervention -> intervention.isActive() == isActive)
                 .map(InterventionMapper.INSTANCE::toInterventionDto)
                 .collect(toList());
     }

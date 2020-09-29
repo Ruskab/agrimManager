@@ -92,7 +92,7 @@ public class MechanicGateway implements Serializable {
     }
 
     public List<InterventionDto> searchInterventions(String mechanicId, Boolean active) {
-        return client.target(UriBuilder.fromPath(resource).path(mechanicId + "/interventions").queryParam(active.toString()).build())
+        return client.target(UriBuilder.fromPath(resource).path(mechanicId + "/interventions").queryParam("active", active.toString()).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .get(new GenericType<List<InterventionDto>>() {

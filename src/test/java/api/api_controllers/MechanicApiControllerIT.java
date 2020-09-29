@@ -15,6 +15,7 @@ import api.object_mothers.MechanicDtoMother;
 import front.gateways.ClientGateway;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
+import front.gateways.OperationsGateway;
 import front.gateways.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
@@ -36,18 +38,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MechanicApiControllerIT {
 
-    public static final String APP_BASE_URL = "app.url";
     private static final Logger LOGGER = LogManager.getLogger(MechanicApiControllerIT.class);
-    private static final String API_PATH = "/api/v0";
+
     Client client;
     Properties properties;
-    private MechanicApiController mechanicApiController = new MechanicApiController();
+    private final MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
     private Integer mechanicId;
     private ClientGateway clientGateway;
     private VehicleGateway vehicleGateway;
     private InterventionGateway interventionGateway;
     private MechanicGateway mechanicGateway;
+    private OperationsGateway operationsGateway;
 
     @BeforeEach
     void setUp() {
@@ -58,6 +60,7 @@ class MechanicApiControllerIT {
         vehicleGateway = new VehicleGateway(authToken);
         interventionGateway = new InterventionGateway(authToken);
         mechanicGateway = new MechanicGateway(authToken);
+        operationsGateway = new OperationsGateway(authToken);
     }
 
     @Test
@@ -83,18 +86,30 @@ class MechanicApiControllerIT {
 
         MechanicDto updatedMechanic = mechanicGateway.read(Integer.toString(mechanicId));
         assertThat(updatedMechanic.getInterventionIds().isEmpty(), is(false));
+    }
+
+    @Test
+    void read_mechanic_active_interventions() {
+        ClientDto clientDto = ClientDtoMother.clientDto();
+        String clientId = clientGateway.create(clientDto);
+        VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
+        String vehicleId = vehicleGateway.create(vehicleDto);
+        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
+        MechanicDto mechanic = MechanicDtoMother.mechanicDto();
+        mechanic.setId(mechanicId);
+        mechanicGateway.createIntervention(mechanic ,interventionDto);
+
+        List<InterventionDto> interventionDtos = mechanicGateway.searchInterventions(Integer.toString(mechanicId), true);
+
+        assertThat(interventionDtos.isEmpty(), is(false));
 
     }
 
     @AfterEach
     void delete_data() {
         LOGGER.info("clean database after test");
-        client.target(properties.getProperty(APP_BASE_URL) + API_PATH + "/delete")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .delete();
+        operationsGateway.deleteAll();
     }
-
 
     private void createAuthToken() {
         LOGGER.info("creamos mecanico fake authorizado");

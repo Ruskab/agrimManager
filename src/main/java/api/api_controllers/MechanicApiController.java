@@ -75,8 +75,8 @@ public class MechanicApiController {
     @ApiOperation(value = "Get active interventions")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}/interventions")
-    public List<InterventionDto> readActiveInterventions(@PathParam("id") String id) {
-        return mechanicBusinesssController.getActiveInterventions(Integer.parseInt(id));
+    public List<InterventionDto> readInterventions(@PathParam("id") Integer id, @QueryParam("active") Boolean active) {
+        return mechanicBusinesssController.getMechanicInterventions(id, false);
     }
 
     @POST
