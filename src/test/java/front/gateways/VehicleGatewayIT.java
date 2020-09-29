@@ -24,9 +24,9 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class VehicleApiControllerIT {
+class VehicleGatewayIT {
 
-    private static final Logger LOGGER = LogManager.getLogger(VehicleApiControllerIT.class);
+    private static final Logger LOGGER = LogManager.getLogger(VehicleGatewayIT.class);
 
     private Client client;
     private Properties properties;
