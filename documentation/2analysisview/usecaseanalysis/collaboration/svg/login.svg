@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="595px" preserveAspectRatio="none" style="width:977px;height:595px;" version="1.1" viewBox="0 0 977 595" width="977.5px" zoomAndPan="magnify"><defs><filter height="300%" id="flblq7cmur7s1" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><ellipse cx="25.625" cy="194.375" fill="#FEFECE" filter="url(#flblq7cmur7s1)" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.875;"/><path d="M25.625,204.375 L25.625,238.125 M9.375,214.375 L41.875,214.375 M25.625,238.125 L9.375,256.875 M25.625,238.125 L41.875,256.875 " fill="none" filter="url(#flblq7cmur7s1)" style="stroke: #A80036; stroke-width: 1.875;"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="35" x="8.125" y="281.9165">user</text><!--MD5=[156723f38c68f5a944f1b76a14621b0a]
+entity LoginView--><rect fill="#629EF9" filter="url(#flblq7cmur7s1)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="105" x="324.375" y="210.625"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="80" x="336.875" y="241.2915">LoginView</text><!--MD5=[34617022f1a5ee5399747a3c46871a99]
+entity LoginController--><rect fill="#B5BD68" filter="url(#flblq7cmur7s1)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="146.25" x="745" y="210.625"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="121.25" x="757.5" y="241.2915">LoginController</text><!--MD5=[4952cb8ee19a2c5bce958b8dd4c8f062]
+entity MechanicsDao--><rect fill="#F2AC4E" filter="url(#flblq7cmur7s1)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="141.25" x="617.5" y="411.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="116.25" x="630" y="441.9165">MechanicsDao</text><!--MD5=[4c47d1f534553ec0ad9070f35bcc324d]
+entity Mechanic--><rect fill="#F2AC4E" filter="url(#flblq7cmur7s1)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="100" x="638.125" y="535"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="75" x="650.625" y="565.6665">Mechanic</text><!--MD5=[ec12e68d482471526d41adfe4cff0e6f]
+entity Session--><rect fill="#F2AC4E" filter="url(#flblq7cmur7s1)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="87.5" x="396.875" y="411.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="62.5" x="409.375" y="441.9165">Session</text><!--MD5=[ddb106a41997fe9afbefaad7eb0291cd]
+entity OpenDashboard--><rect fill="#CDEBA5" filter="url(#flblq7cmur7s1)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="271.25" x="241.25" y="10"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="246.25" x="253.75" y="40.6665">:Collaboration OpenDashboard</text><!--MD5=[ae1742d26b005c598cb5bf29873d310d]
+link user to LoginView--><path d="M44.0151,234.375 C94.4033,234.375 236.3287,234.375 317.6588,234.375 " fill="none" id="user-&gt;LoginView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="324.3713,234.375,313.1213,229.375,318.1213,234.375,313.1213,239.375,324.3713,234.375" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M71.5625,186.875 L71.5625,219.375 L291.5625,219.375 L291.5625,199.375 L279.0625,186.875 L71.5625,186.875 " fill="#F5F5F5" filter="url(#flblq7cmur7s1)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M279.0625,186.875 L279.0625,199.375 L291.5625,199.375 L279.0625,186.875 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="193.75" x="79.0625" y="209.9939">login(username, password)</text><!--MD5=[00612bbf082436bfb3978d0560ce9303]
+link LoginView to LoginController--><path d="M429.6613,234.375 C506.285,234.375 648.915,234.375 738.3912,234.375 " fill="none" id="LoginView-&gt;LoginController" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="744.74,234.375,733.49,229.375,738.49,234.375,733.49,239.375,744.74,234.375" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M457.1875,166.875 L457.1875,219.375 L712.1875,219.375 L712.1875,179.375 L699.6875,166.875 L457.1875,166.875 " fill="#F5F5F5" filter="url(#flblq7cmur7s1)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M699.6875,166.875 L699.6875,179.375 L712.1875,179.375 L699.6875,166.875 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="193.75" x="464.6875" y="189.9939">login(username, password)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="228.75" x="464.6875" y="210.4333">searchBy(username, password)</text><!--MD5=[2cdbec6da5a2ec00a6a264aa153b7473]
+reverse link OpenDashboard to LoginView--><path d="M376.875,64.2938 C376.875,103.9487 376.875,173.9 376.875,210.0525 " fill="none" id="OpenDashboard&lt;-LoginView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="376.875,57.7275,371.875,68.9775,376.875,63.9775,381.875,68.9775,376.875,57.7275" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M383.125,101.25 L383.125,133.75 L588.125,133.75 L588.125,113.75 L575.625,101.25 L383.125,101.25 " fill="#F5F5F5" filter="url(#flblq7cmur7s1)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M575.625,101.25 L575.625,113.75 L588.125,113.75 L575.625,101.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="178.75" x="390.625" y="124.3689">openDashboard(session)</text><!--MD5=[1388d103e7d0072ce5f15ff6e719b690]
+link LoginView to Session--><path d="M383.12,258.2637 C390.8212,285.7463 404.56,333.425 418.125,373.75 C421.5913,384.0538 425.6887,395.2338 429.4325,405.12 " fill="none" id="LoginView-&gt;Session" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="431.7075,411.0888,432.3708,398.7956,429.4805,405.249,423.0271,402.3587,431.7075,411.0888" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M424.375,330 L424.375,362.5 L623.125,362.5 L623.125,342.5 L610.625,330 L424.375,330 " fill="#F5F5F5" filter="url(#flblq7cmur7s1)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M610.625,330 L610.625,342.5 L623.125,342.5 L610.625,330 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="172.5" x="431.875" y="353.1189">setMechanic(mechanic)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="418.8867" y="397.7144">1</text><!--MD5=[7c7947527e80c8b754fb1e91c7a1da12]
+link LoginController to MechanicsDao--><path d="M759.7763,258.2338 C731.5938,272.4675 700.4638,293.8825 684.375,323.75 C670.9563,348.6613 674.3163,381.5575 679.5337,404.8663 " fill="none" id="LoginController-&gt;MechanicsDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="681.0413,411.1725,683.2877,399.0681,679.5877,405.0939,673.5619,401.3939,681.0413,411.1725" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M690.625,330 L690.625,362.5 L936.875,362.5 L936.875,342.5 L924.375,330 L690.625,330 " fill="#F5F5F5" filter="url(#flblq7cmur7s1)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M924.375,330 L924.375,342.5 L936.875,342.5 L924.375,330 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="220" x="698.125" y="353.1189">serchBy(username, password)</text><!--MD5=[1cb41e0826c52d284a6bf7ccafa1711c]
+link LoginView to Mechanic--><path d="M368.5725,258.2213 C354.1525,301.7613 330.035,398.31 374.375,458.75 C433.395,539.1998 558.0075,555.8334 631.1813,558.2863 " fill="none" id="LoginView-&gt;Mechanic" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="637.6625,558.4709,626.5599,553.1515,631.4151,558.2923,626.2742,563.1474,637.6625,558.4709" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="619.4873" y="553.6528">1</text><!--MD5=[0ebb816b224854289c92a9b83fa3f993]
+link LoginController to Mechanic--><path d="M877.3538,258.2763 C905.7025,272.4763 936.9338,293.845 953.125,323.75 C963.705,343.2913 963.4313,354.0625 953.125,373.75 C907.9463,460.0538 801.7588,513.9263 738.3675,539.5836 " fill="none" id="LoginController-Mechanic" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[870b31ba958113e774145b7073613122]
+link MechanicsDao to Mechanic--><path d="M688.125,459.0563 C688.125,480.7338 688.125,513.1524 688.125,534.7961 " fill="none" id="MechanicsDao-Mechanic" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[cc70bec4b6ef197aac35d8782894dcf7]
+@startuml
+
+skinparam {
+    NoteBorderThickness 0
+    NoteBackgroundColor #whiteSmoke
+    RectangleBackgroundColor #whiteSmoke
+    ArchimateBackgroundColor #whiteSmoke
+}
+
+
+actor user
+rectangle #629EF9 LoginView
+rectangle #b5bd68 LoginController
+rectangle #F2AC4E MechanicsDao
+rectangle #F2AC4E Mechanic
+rectangle #F2AC4E Session
+rectangle #CDEBA5 ":Collaboration OpenDashboard" as OpenDashboard
+
+
+user -right-> LoginView
+note on link
+    login(username, password)
+end note
+
+LoginView -right-> LoginController
+note on link
+    login(username, password)
+    searchBy(username, password)
+end note
+
+LoginView -up-> OpenDashboard
+note on link
+    openDashboard(session)
+end note
+
+LoginView ..> "1" Session
+note on link
+    setMechanic(mechanic)
+end note
+
+LoginController -down-> MechanicsDao
+note on link
+    serchBy(username, password)
+end note
+
+LoginView - -> "1" Mechanic
+LoginController .. Mechanic
+MechanicsDao - - Mechanic
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

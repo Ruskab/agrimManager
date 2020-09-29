@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="806.25px" preserveAspectRatio="none" style="width:860px;height:806px;" version="1.1" viewBox="0 0 860 806" width="860px" zoomAndPan="magnify"><defs><filter height="300%" id="f1blptd0i71ruc" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><ellipse cx="31.7602" cy="21.875" fill="#FEFECE" filter="url(#f1blptd0i71ruc)" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.875;"/><path d="M31.7602,31.875 L31.7602,65.625 M15.5102,41.875 L48.0102,41.875 M31.7602,65.625 L15.5102,84.375 M31.7602,65.625 L48.0102,84.375 " fill="none" filter="url(#f1blptd0i71ruc)" style="stroke: #A80036; stroke-width: 1.875;"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="35" x="14.2602" y="109.4165">user</text><!--MD5=[879601c54c16cbac2938a49e9c3f5a3f]
+entity ClientsView--><rect fill="#629EF9" filter="url(#f1blptd0i71ruc)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="115" x="284.26" y="38.125"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="90" x="296.76" y="68.7915">ClientsView</text><!--MD5=[9314a834bbeec77e884e35924949f9a9]
+entity ConfigClientView--><rect fill="#629EF9" filter="url(#f1blptd0i71ruc)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="157.5" x="108.0101" y="280"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="132.5" x="120.5101" y="310.6665">ConfigClientView</text><!--MD5=[56ad13284546c9a148c7bf8f15b09e48]
+entity ConfigClientController--><rect fill="#B5BD68" filter="url(#f1blptd0i71ruc)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="198.75" x="507.385" y="280"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="173.75" x="519.885" y="310.6665">ConfigClientController</text><!--MD5=[5669fba6a50c5cf79174eff43ebf57d4]
+entity ClientsDao--><rect fill="#F2AC4E" filter="url(#f1blptd0i71ruc)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="111.25" x="341.135" y="452.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="86.25" x="353.635" y="483.1665">ClientsDao</text><!--MD5=[0ba5ee7700168656dc1b457c6fe9fdac]
+entity Client--><rect fill="#F2AC4E" filter="url(#f1blptd0i71ruc)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="70" x="361.76" y="622.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="45" x="374.26" y="653.1665">Client</text><!--MD5=[c796543839e6086ac460deba3cd4e684]
+entity Vehicle--><rect fill="#F2AC4E" filter="url(#f1blptd0i71ruc)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="82.5" x="566.76" y="746.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="57.5" x="579.26" y="776.9165">Vehicle</text><!--MD5=[6e5a8ceef7a3d9ef19b893e365a5e382]
+entity VehiclesDao--><rect fill="#F2AC4E" filter="url(#f1blptd0i71ruc)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="123.75" x="637.385" y="537.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="98.75" x="649.885" y="568.1665">VehiclesDao</text><!--MD5=[6f176925882fe8d3f63e2fe12010d8ea]
+link user to ClientsView--><path d="M50.2238,61.875 C94.0023,61.875 205.7975,61.875 277.535,61.875 " fill="none" id="user-&gt;ClientsView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="283.9175,61.875,272.6675,56.875,277.6675,61.875,272.6675,66.875,283.9175,61.875" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M78.9476,14.375 L78.9476,46.875 L250.1976,46.875 L250.1976,26.875 L237.6976,14.375 L78.9476,14.375 " fill="#F5F5F5" filter="url(#f1blptd0i71ruc)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M237.6976,14.375 L237.6976,26.875 L250.1976,26.875 L237.6976,14.375 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="145" x="86.4476" y="37.4939">configClient(clientId)</text><!--MD5=[e6e9510adeff7e4653be563f746f5f66]
+link user to ConfigClientView--><path d="M15.2432,114.1088 C6.0514,152.7563 1.0301,205.3713 26.7601,242.5 C44.0348,267.4275 73.0271,282.0137 101.6241,290.5438 " fill="none" id="user-&gt;ConfigClientView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="107.716,292.2738,98.2597,284.3908,101.7037,290.5665,95.528,294.0105,107.716,292.2738" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M33.0101,157.5 L33.0101,231.25 L279.2601,231.25 L279.2601,170 L266.7601,157.5 L33.0101,157.5 " fill="#F5F5F5" filter="url(#f1blptd0i71ruc)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M266.7601,157.5 L266.7601,170 L279.2601,170 L266.7601,157.5 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="163.75" x="40.5101" y="180.6189">setFullName(fullName)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="220" x="40.5101" y="201.0583">setBillableHours(billableHours)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="81.25" x="40.5101" y="221.4978">save(client)</text><!--MD5=[9565210aff18593641f6b08a92cd232a]
+link ClientsView to ConfigClientView--><path d="M341.4725,86.0138 C339.8837,122.7438 331.9638,195.48 295.51,242.5 C284.5675,256.615 269.3212,267.8775 253.7013,276.655 " fill="none" id="ClientsView-&gt;ConfigClientView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="247.9375,279.7775,260.2109,278.8149,253.4329,276.8003,255.4474,270.0223,247.9375,279.7775" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M340.51,178.125 L340.51,210.625 L570.51,210.625 L570.51,190.625 L558.01,178.125 L340.51,178.125 " fill="#F5F5F5" filter="url(#f1blptd0i71ruc)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M558.01,178.125 L558.01,190.625 L570.51,190.625 L558.01,178.125 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="203.75" x="348.01" y="201.2439">new ConfigClientView(client)</text><!--MD5=[21506a4cced13b6e8f30089a1277344c]
+link ConfigClientView to ConfigClientController--><path d="M265.7588,303.75 C332.19,303.75 427.7413,303.75 500.8063,303.75 " fill="none" id="ConfigClientView-&gt;ConfigClientController" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="507.3588,303.75,496.1088,298.75,501.1088,303.75,496.1088,308.75,507.3588,303.75" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M293.3225,236.25 L293.3225,288.75 L474.5725,288.75 L474.5725,248.75 L462.0725,236.25 L293.3225,236.25 " fill="#F5F5F5" filter="url(#f1blptd0i71ruc)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M462.0725,236.25 L462.0725,248.75 L474.5725,248.75 L462.0725,236.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="155" x="300.8225" y="259.3689">readVehicles(clientId)</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="81.25" x="300.8225" y="279.8083">save(client)</text><!--MD5=[02da1f1895a59b9efedc34553ae2703e]
+link ConfigClientController to ClientsDao--><path d="M507.1875,316.8513 C447.64,326.2175 380.075,341.6588 361.76,365 C343.0125,388.8925 358.725,423.0425 374.6688,446.935 " fill="none" id="ConfigClientController-&gt;ClientsDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="378.275,452.1713,376.0114,440.0701,374.7298,447.024,367.7758,445.7424,378.275,452.1713" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M368.01,371.25 L368.01,403.75 L475.51,403.75 L475.51,383.75 L463.01,371.25 L368.01,371.25 " fill="#F5F5F5" filter="url(#f1blptd0i71ruc)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M463.01,371.25 L463.01,383.75 L475.51,383.75 L463.01,371.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="81.25" x="375.51" y="394.3689">save(client)</text><!--MD5=[cfc6b2365ecbc669c8804a6c1bb61eae]
+link ConfigClientController to VehiclesDao--><path d="M621.1288,327.7613 C627.64,338.7288 635.0788,352.2438 640.51,365 C664.7325,421.8925 683.2775,492.0563 692.5987,530.8088 " fill="none" id="ConfigClientController-&gt;VehiclesDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="694.1225,537.21,696.3798,525.1076,692.6744,531.1301,686.652,527.4246,694.1225,537.21" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M664.26,371.25 L664.26,403.75 L845.51,403.75 L845.51,383.75 L833.01,371.25 L664.26,371.25 " fill="#F5F5F5" filter="url(#f1blptd0i71ruc)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M833.01,371.25 L833.01,383.75 L845.51,383.75 L833.01,371.25 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="155" x="671.76" y="394.3689">readVehicles(clientId)</text><!--MD5=[c837591119cd2aed62b61b4b202b2922]
+link ConfigClientView to Client--><path d="M200.865,327.8363 C238,387.96 338.4138,550.5338 379.1913,616.555 " fill="none" id="ConfigClientView-&gt;Client" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="382.7163,622.2625,381.0595,610.0634,379.4324,616.9447,372.5511,615.3176,382.7163,622.2625" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[6d0658b42fe72eb0d2d6ec169da6f3d1]
+link ConfigClientView to Vehicle--><path d="M189.5512,327.6313 C198.6088,391.2788 233.0275,573.4775 339.26,670 C402.4437,727.4086 501.8063,752.2339 560.3688,762.3564 " fill="none" id="ConfigClientView-&gt;Vehicle" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="566.6038,763.4053,556.3398,756.6072,560.4405,762.3678,554.6798,766.4684,566.6038,763.4053" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[4b2c7033bd3c0846a19dff8587b5dffb]
+link ConfigClientController to Client--><path d="M592.655,327.8363 C554.3988,389.775 448.9875,560.4413 410.8038,622.2625 " fill="none" id="ConfigClientController-Client" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="405.0148" y="608.8648">1</text><!--MD5=[a61e36c53a81f46e523879d047b3bcec]
+link ConfigClientController to Vehicle--><path d="M606.8213,327.6813 C607.0338,406.4225 607.7375,667.4388 607.9488,746.1121 " fill="none" id="ConfigClientController-Vehicle" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="25" x="579.1019" y="732.7449">0..*</text><!--MD5=[596d1ab474876e7244518296a7f8487a]
+link ClientsDao to Client--><path d="M396.76,500.09 C396.76,532.0588 396.76,590.1688 396.76,622.2338 " fill="none" id="ClientsDao-Client" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[94adf10cd89fc5ba5849f7be97a393c4]
+link VehiclesDao to Vehicle--><path d="M691.085,585.14 C680.3925,614.1787 660.6388,665.905 640.51,708.75 C634.6663,721.1879 627.4463,734.6733 621.2963,745.7031 " fill="none" id="VehiclesDao-Vehicle" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[59e82bca652043b8e7055fa0569a1ef1]
+@startuml
+
+skinparam {
+    NoteBorderThickness 0
+    NoteBackgroundColor #whiteSmoke
+    RectangleBackgroundColor #whiteSmoke
+    ArchimateBackgroundColor #whiteSmoke
+}
+
+
+actor user
+rectangle #629EF9 ClientsView
+rectangle #629EF9 ConfigClientView
+rectangle #b5bd68 ConfigClientController
+rectangle #F2AC4E ClientsDao
+rectangle #F2AC4E Client
+rectangle #F2AC4E Vehicle
+rectangle #F2AC4E VehiclesDao
+
+user -right-> ClientsView
+note on link
+    configClient(clientId)
+end note
+
+user -right-> ConfigClientView
+note on link
+setFullName(fullName)
+setBillableHours(billableHours)
+save(client)
+end note
+
+ClientsView -down-> ConfigClientView
+note on link
+   new ConfigClientView(client)
+end note
+
+ConfigClientView -right-> ConfigClientController
+note on link
+    readVehicles(clientId)
+    save(client)
+end note
+
+
+ConfigClientController - -> ClientsDao
+note on link
+    save(client)
+end note
+
+ConfigClientController - -> VehiclesDao
+note on link
+    readVehicles(clientId)
+end note
+
+ConfigClientView - -> Client
+ConfigClientView - - - -> Vehicle
+ConfigClientController .. "1" Client
+ConfigClientController .. "0..*" Vehicle
+ClientsDao .. Client
+VehiclesDao .. Vehicle
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

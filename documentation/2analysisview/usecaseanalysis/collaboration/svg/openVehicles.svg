@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="765px" preserveAspectRatio="none" style="width:1057px;height:765px;" version="1.1" viewBox="0 0 1057 765" width="1057.5px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ahcymd08jzfi" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><ellipse cx="60" cy="21.875" fill="#FEFECE" filter="url(#f1ahcymd08jzfi)" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.875;"/><path d="M60,31.875 L60,65.625 M43.75,41.875 L76.25,41.875 M60,65.625 L43.75,84.375 M60,65.625 L76.25,84.375 " fill="none" filter="url(#f1ahcymd08jzfi)" style="stroke: #A80036; stroke-width: 1.875;"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="35" x="42.5" y="109.4165">user</text><!--MD5=[f5a78d3e2c2bba4955990b9a6243d12e]
+entity MenuView--><rect fill="#629EF9" filter="url(#f1ahcymd08jzfi)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="105" x="7.5" y="238.75"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="80" x="20" y="269.4165">MenuView</text><!--MD5=[cde785e7aa7fa884f5332c0fa561ef76]
+entity VehiclesView--><rect fill="#629EF9" filter="url(#f1ahcymd08jzfi)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="127.5" x="341.25" y="238.75"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="102.5" x="353.75" y="269.4165">VehiclesView</text><!--MD5=[88ec3a0f4b57b0c3bd764aa600ad147c]
+entity OpenVehiclesController--><rect fill="#B5BD68" filter="url(#f1ahcymd08jzfi)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="212.5" x="700" y="238.75"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="187.5" x="712.5" y="269.4165">OpenVehiclesController</text><!--MD5=[6e5a8ceef7a3d9ef19b893e365a5e382]
+entity VehiclesDao--><rect fill="#F2AC4E" filter="url(#f1ahcymd08jzfi)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="123.75" x="863.125" y="496.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="98.75" x="875.625" y="526.9165">VehiclesDao</text><!--MD5=[5669fba6a50c5cf79174eff43ebf57d4]
+entity ClientsDao--><rect fill="#F2AC4E" filter="url(#f1ahcymd08jzfi)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="111.25" x="621.875" y="411.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="86.25" x="634.375" y="441.9165">ClientsDao</text><!--MD5=[c796543839e6086ac460deba3cd4e684]
+entity Vehicle--><rect fill="#F2AC4E" filter="url(#f1ahcymd08jzfi)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="82.5" x="792.5" y="705"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="57.5" x="805" y="735.6665">Vehicle</text><!--MD5=[0ba5ee7700168656dc1b457c6fe9fdac]
+entity Client--><rect fill="#F2AC4E" filter="url(#f1ahcymd08jzfi)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="70" x="520" y="581.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="45" x="532.5" y="611.9165">Client</text><!--MD5=[a268f506b33d2fbb3afc3eb21b6af607]
+link user to MenuView--><path d="M60,114.1475 C60,151.6112 60,201.1713 60,232.1287 " fill="none" id="user-&gt;MenuView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="60,238.4412,65,227.1912,60,232.1912,55,227.1912,60,238.4412" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M66.25,157.5 L66.25,190 L200,190 L200,170 L187.5,157.5 L66.25,157.5 " fill="#F5F5F5" filter="url(#f1ahcymd08jzfi)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M187.5,157.5 L187.5,170 L200,170 L187.5,157.5 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="107.5" x="73.75" y="180.6189">openVehicles()</text><!--MD5=[d5ee3621bc80cdf19279bea982f0a7b0]
+link MenuView to VehiclesView--><path d="M112.7736,262.5 C172.2038,262.5 269.045,262.5 334.8138,262.5 " fill="none" id="MenuView-&gt;VehiclesView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="341.08,262.5,329.83,257.5,334.83,262.5,329.83,267.5,341.08,262.5" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M140.625,215 L140.625,247.5 L308.125,247.5 L308.125,227.5 L295.625,215 L140.625,215 " fill="#F5F5F5" filter="url(#f1ahcymd08jzfi)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M295.625,215 L295.625,227.5 L308.125,227.5 L295.625,215 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="141.25" x="148.125" y="238.1189">new VehiclesView()</text><!--MD5=[9f9a42d40fc66ac560841a98cd9508c5]
+link VehiclesView to OpenVehiclesController--><path d="M469.0225,262.5 C529.2675,262.5 620.8075,262.5 693.32,262.5 " fill="none" id="VehiclesView-&gt;OpenVehiclesController" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="699.8313,262.5,688.5813,257.5,693.5813,262.5,688.5813,267.5,699.8313,262.5" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M496.875,195 L496.875,247.5 L666.875,247.5 L666.875,207.5 L654.375,195 L496.875,195 " fill="#F5F5F5" filter="url(#f1ahcymd08jzfi)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M654.375,195 L654.375,207.5 L666.875,207.5 L654.375,195 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="122.5" x="504.375" y="218.1189">readAllVehicles()</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="143.75" x="504.375" y="238.5583">readClient(clientId())</text><!--MD5=[1a8513f96609cc40d5e42683625eb098]
+link OpenVehiclesController to VehiclesDao--><path d="M834.42,286.4663 C845.685,296.81 857.9325,309.8425 866.25,323.75 C898.16,377.1038 913.9513,449.1563 920.7125,489.0525 " fill="none" id="OpenVehiclesController-&gt;VehiclesDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="921.7963,495.6437,924.9039,483.7314,920.7818,489.4766,915.0365,485.3545,921.7963,495.6437" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M893.75,330 L893.75,362.5 L1042.5,362.5 L1042.5,342.5 L1030,330 L893.75,330 " fill="#F5F5F5" filter="url(#f1ahcymd08jzfi)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M1030,330 L1030,342.5 L1042.5,342.5 L1030,330 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="122.5" x="901.25" y="353.1189">readAllVehicles()</text><!--MD5=[4cbaa0019b690df30f745363b4bfe185]
+link OpenVehiclesController to ClientsDao--><path d="M699.6713,275.47 C670.3725,284.155 641.7425,298.895 623.75,323.75 C610.7188,341.7513 615.8125,352.9938 623.75,373.75 C628.3025,385.6538 636.4238,396.685 644.9975,405.9575 " fill="none" id="OpenVehiclesController-&gt;ClientsDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="649.7862,410.9213,645.5742,399.3532,645.447,406.4231,638.3771,406.2959,649.7862,410.9213" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M630,330 L630,362.5 L790,362.5 L790,342.5 L777.5,330 L630,330 " fill="#F5F5F5" filter="url(#f1ahcymd08jzfi)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M777.5,330 L777.5,342.5 L790,342.5 L777.5,330 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="133.75" x="637.5" y="353.1189">readClient(clientId)</text><!--MD5=[6eeb786bd01602443b5a81748b6a3018]
+link OpenVehiclesController to Vehicle--><path d="M807.595,286.4313 C812.2638,365.1725 827.7425,626.1888 832.4075,704.8621 " fill="none" id="OpenVehiclesController-Vehicle" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="25" x="803.1682" y="691.4949">0..*</text><!--MD5=[9d4ac66e03812f670f6dfce48da52d5f]
+link OpenVehiclesController to Client--><path d="M699.6625,273.2663 C664.9438,281.6013 629.1613,296.69 605,323.75 C538.7288,397.97 545.8063,528.8225 551.8225,581.1737 " fill="none" id="OpenVehiclesController-Client" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="540.7595" y="567.8254">1</text><!--MD5=[596d1ab474876e7244518296a7f8487a]
+link ClientsDao to Client--><path d="M660.9788,458.84 C637.5988,490.8088 595.1013,548.9188 571.65,580.9838 " fill="none" id="ClientsDao-Client" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[94adf10cd89fc5ba5849f7be97a393c4]
+link VehiclesDao to Vehicle--><path d="M916.825,543.89 C906.1325,572.9287 886.3788,624.655 866.25,667.5 C860.4063,679.9379 853.1863,693.4233 847.0363,704.4531 " fill="none" id="VehiclesDao-Vehicle" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[40d8b619e0632680c8f1b5408673d623]
+link VehiclesView to Vehicle--><path d="M403.4363,286.4713 C400.3762,350.3563 401.0137,533.1213 498.75,628.75 C577.6313,705.9296 713.6813,723.2805 785.7388,726.8629 " fill="none" id="VehiclesView-&gt;Vehicle" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="792.0838,727.1509,781.0725,721.645,785.8402,726.8669,780.6182,731.6346,792.0838,727.1509" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[5430a9698428fc78cdd73388f6b88c76]
+link VehiclesView to Client--><path d="M413.695,286.5888 C432.2325,334.77 477.62,450.0938 522.5,543.75 C527.5025,554.19 533.4213,565.4013 538.8288,575.275 " fill="none" id="VehiclesView-&gt;Client" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="542.1163,581.2313,541.0596,568.9656,539.0971,575.7589,532.3038,573.7963,542.1163,581.2313" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[7f8ef254b28778c6de959c80e9ca517f]
+@startuml
+
+skinparam {
+    NoteBorderThickness 0
+    NoteBackgroundColor #whiteSmoke
+    RectangleBackgroundColor #whiteSmoke
+    ArchimateBackgroundColor #whiteSmoke
+}
+
+
+actor user
+
+rectangle #629EF9 MenuView
+rectangle #629EF9 VehiclesView
+
+rectangle #b5bd68 OpenVehiclesController
+
+rectangle #F2AC4E VehiclesDao
+rectangle #F2AC4E ClientsDao
+rectangle #F2AC4E Vehicle
+rectangle #F2AC4E Client
+
+user - -> MenuView
+note on link
+    openVehicles()
+end note
+
+MenuView -right-> VehiclesView
+note on link
+    new VehiclesView()
+end note
+
+VehiclesView -right-> OpenVehiclesController
+note on link
+    readAllVehicles()
+    readClient(clientId())
+end note
+
+OpenVehiclesController - -> VehiclesDao
+note on link
+readAllVehicles()
+end note
+
+OpenVehiclesController - -> ClientsDao
+note on link
+readClient(clientId)
+end note
+
+OpenVehiclesController .. "0..*" Vehicle
+OpenVehiclesController .. "1" Client
+ClientsDao .. Client
+VehiclesDao .. Vehicle
+VehiclesView - - - -> Vehicle
+VehiclesView - -> Client
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

@@ -1,0 +1,50 @@
+@startuml
+skinparam linetype polyline
+
+package webapp <<xhtml, css js>> #e1eced  {
+    package backoffice
+
+    package resources {
+        package components {
+            package agrim {
+            }
+        }
+        package css
+    }
+    package swagger
+    package templates
+    package user_access
+}
+
+package front <<java>> #e1eced {
+
+    package beans
+    package converters
+    package filters
+    package dtos
+    package gateways
+    package util
+
+}
+
+
+backoffice ...> templates
+backoffice ..> agrim
+backoffice ..> css
+templates .> css
+user_access ..> templates
+user_access ...> css
+user_access ...> agrim
+
+beans ..> dtos
+beans ..> gateways
+beans ..> util
+gateways ..> util
+gateways ..> dtos
+
+webapp .down....> beans
+webapp .down....> dtos
+webapp .down....> filters
+webapp .down....> converters
+
+@enduml

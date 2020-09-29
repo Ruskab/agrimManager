@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="595px" preserveAspectRatio="none" style="width:763px;height:595px;" version="1.1" viewBox="0 0 763 595" width="763.75px" zoomAndPan="magnify"><defs><filter height="300%" id="f7vv3ykm2ou9t" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><ellipse cx="25.625" cy="21.875" fill="#FEFECE" filter="url(#f7vv3ykm2ou9t)" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.875;"/><path d="M25.625,31.875 L25.625,65.625 M9.375,41.875 L41.875,41.875 M25.625,65.625 L9.375,84.375 M25.625,65.625 L41.875,84.375 " fill="none" filter="url(#f7vv3ykm2ou9t)" style="stroke: #A80036; stroke-width: 1.875;"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="35" x="8.125" y="109.4165">user</text><!--MD5=[cde785e7aa7fa884f5332c0fa561ef76]
+entity VehiclesView--><rect fill="#629EF9" filter="url(#f7vv3ykm2ou9t)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="127.5" x="403.125" y="38.125"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="102.5" x="415.625" y="68.7915">VehiclesView</text><!--MD5=[8b4160d0424288b01998d58295b92c19]
+entity ConfigVehicleView--><rect fill="#629EF9" filter="url(#f7vv3ykm2ou9t)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="170" x="160.625" y="238.75"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="145" x="173.125" y="269.4165">ConfigVehicleView</text><!--MD5=[88effdea55b3ef348003d6a00c195355]
+entity ConfigVehicleController--><rect fill="#B5BD68" filter="url(#f7vv3ykm2ou9t)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="211.25" x="508.75" y="238.75"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="186.25" x="521.25" y="269.4165">ConfigVehicleController</text><!--MD5=[c796543839e6086ac460deba3cd4e684]
+entity Vehicle--><rect fill="#F2AC4E" filter="url(#f7vv3ykm2ou9t)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="82.5" x="444.375" y="535"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="57.5" x="456.875" y="565.6665">Vehicle</text><!--MD5=[6e5a8ceef7a3d9ef19b893e365a5e382]
+entity VehiclesDao--><rect fill="#F2AC4E" filter="url(#f7vv3ykm2ou9t)" height="47.0117" style="stroke: #000000; stroke-width: 1.875;" width="123.75" x="552.5" y="411.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="98.75" x="565" y="441.9165">VehiclesDao</text><!--MD5=[350e3f05de815dc34a0839612b2566fd]
+link user to VehiclesView--><path d="M44.0232,61.875 C103.3948,61.875 292.0775,61.875 396.1937,61.875 " fill="none" id="user-&gt;VehiclesView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="402.9275,61.875,391.6775,56.875,396.6775,61.875,391.6775,66.875,402.9275,61.875" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M71.5625,14.375 L71.5625,46.875 L370.3125,46.875 L370.3125,26.875 L357.8125,14.375 L71.5625,14.375 " fill="#F5F5F5" filter="url(#f7vv3ykm2ou9t)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M357.8125,14.375 L357.8125,26.875 L370.3125,26.875 L357.8125,14.375 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="272.5" x="79.0625" y="37.4939">configClient(vehicleId, clientFullName)</text><!--MD5=[7156f4e815368b13b23f65eb49e828be]
+link user to ConfigVehicleView--><path d="M44.0036,79.6762 C81.9666,113.865 169.3513,192.56 215.62,234.2288 " fill="none" id="user-&gt;ConfigVehicleView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="220.51,238.6325,215.4954,227.389,215.8654,234.4504,208.804,234.8204,220.51,238.6325" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M181.875,157.5 L181.875,190 L344.375,190 L344.375,170 L331.875,157.5 L181.875,157.5 " fill="#F5F5F5" filter="url(#f7vv3ykm2ou9t)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M331.875,157.5 L331.875,170 L344.375,170 L331.875,157.5 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="136.25" x="189.375" y="180.6189">setVehicleInfo(info)</text><!--MD5=[8a8e7e811f003e2cf9a880837877c3e7]
+link VehiclesView to ConfigVehicleView--><path d="M454.5875,85.7462 C437.5637,115.3975 404.34,167.58 364.375,201.25 C348.0463,215.0075 328.0263,226.6525 309.11,235.9163 " fill="none" id="VehiclesView-&gt;ConfigVehicleView" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="303.2813,238.715,315.587,238.3525,308.9154,236.0096,311.2583,229.3379,303.2813,238.715" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M416.875,157.5 L416.875,190 L749.375,190 L749.375,170 L736.875,157.5 L416.875,157.5 " fill="#F5F5F5" filter="url(#f7vv3ykm2ou9t)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M736.875,157.5 L736.875,170 L749.375,170 L736.875,157.5 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="306.25" x="424.375" y="180.6189">new configVehicle(vehicle, clientFullName)</text><!--MD5=[428626b4e90d4a096408b7f2eb43deae]
+link ConfigVehicleView to ConfigVehicleController--><path d="M330.6863,262.5 C381.6825,262.5 447.1275,262.5 502.305,262.5 " fill="none" id="ConfigVehicleView-&gt;ConfigVehicleController" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="508.6375,262.5,497.3875,257.5,502.3875,262.5,497.3875,267.5,508.6375,262.5" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M358.4375,215 L358.4375,247.5 L475.9375,247.5 L475.9375,227.5 L463.4375,215 L358.4375,215 " fill="#F5F5F5" filter="url(#f7vv3ykm2ou9t)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M463.4375,215 L463.4375,227.5 L475.9375,227.5 L463.4375,215 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="91.25" x="365.9375" y="238.1189">save(vehicle)</text><!--MD5=[99bb9e152866dab488dc384582750592]
+link ConfigVehicleController to VehiclesDao--><path d="M614.375,286.325 C614.375,316.8075 614.375,371.1613 614.375,404.6713 " fill="none" id="ConfigVehicleController-&gt;VehiclesDao" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="614.375,411.0825,619.375,399.8325,614.375,404.8325,609.375,399.8325,614.375,411.0825" style="stroke: #A80036; stroke-width: 1.25;"/><path d="M620.625,330 L620.625,362.5 L738.125,362.5 L738.125,342.5 L725.625,330 L620.625,330 " fill="#F5F5F5" filter="url(#f7vv3ykm2ou9t)" style="stroke: #A80036; stroke-width: 0.0;"/><path d="M725.625,330 L725.625,342.5 L738.125,342.5 L725.625,330 " fill="#F5F5F5" style="stroke: #A80036; stroke-width: 0.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="91.25" x="628.125" y="353.1189">save(vehicle)</text><!--MD5=[05e4c6501b8f899b86ed298a0ae3d692]
+link ConfigVehicleView to Vehicle--><path d="M264.0588,286.3125 C307.4238,339.3887 415.79,472.0243 463.0225,529.8351 " fill="none" id="ConfigVehicleView-&gt;Vehicle" style="stroke: #A80036; stroke-width: 1.25;"/><polygon fill="#A80036" points="467.1287,534.8609,463.8819,522.9857,463.174,530.0212,456.1384,529.3133,467.1287,534.8609" style="stroke: #A80036; stroke-width: 1.25;"/><!--MD5=[508f38ec77fbc99c6e98082a598a9cfa]
+link ConfigVehicleController to Vehicle--><path d="M599.4075,286.4438 C581.2438,314.7363 550.5788,365.0175 530.625,411.25 C512.4137,453.4463 498.265,505.4008 491.005,534.6549 " fill="none" id="ConfigVehicleController-Vehicle" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="8.75" x="482.5628" y="521.2242">1</text><!--MD5=[94adf10cd89fc5ba5849f7be97a393c4]
+link VehiclesDao to Vehicle--><path d="M590.1575,459.0563 C567.14,480.7338 532.7163,513.1524 509.7338,534.7961 " fill="none" id="VehiclesDao-Vehicle" style="stroke: #A80036; stroke-width: 1.25; stroke-dasharray: 7.0,7.0;"/><!--MD5=[122b544e988cc75779c06e2e1f1b5b38]
+@startuml
+
+skinparam {
+    NoteBorderThickness 0
+    NoteBackgroundColor #whiteSmoke
+    RectangleBackgroundColor #whiteSmoke
+    ArchimateBackgroundColor #whiteSmoke
+}
+
+
+actor user
+rectangle #629EF9 VehiclesView
+rectangle #629EF9 ConfigVehicleView
+rectangle #b5bd68 ConfigVehicleController
+rectangle #F2AC4E Vehicle
+rectangle #F2AC4E VehiclesDao
+
+user -right-> VehiclesView
+note on link
+    configClient(vehicleId, clientFullName)
+end note
+
+user -right-> ConfigVehicleView
+note on link
+    setVehicleInfo(info)
+end note
+
+VehiclesView -down-> ConfigVehicleView
+note on link
+   new configVehicle(vehicle, clientFullName)
+end note
+
+ConfigVehicleView -right-> ConfigVehicleController
+note on link
+    save(vehicle)
+end note
+
+
+ConfigVehicleController - -> VehiclesDao
+note on link
+    save(vehicle)
+end note
+
+ConfigVehicleView - -> Vehicle
+ConfigVehicleController .. "1" Vehicle
+VehiclesDao .. Vehicle
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>
