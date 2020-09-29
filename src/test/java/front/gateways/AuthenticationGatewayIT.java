@@ -18,9 +18,9 @@ import java.util.Properties;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-class AuthenticationApiControllerIT {
+class AuthenticationGatewayIT {
 
-    private static final Logger LOGGER = LogManager.getLogger(AuthenticationApiControllerIT.class);
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationGatewayIT.class);
     private final MechanicApiController mechanicApiController = new MechanicApiController();
     Client client;
     Properties properties;

@@ -16,6 +16,7 @@ import api.dtos.CredentialsDto;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ import static java.util.stream.Collectors.toList;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-class DeleteDataApiControllerIT {
+class DeleteDataGatewayIT {
 
     public static final String APP_BASE_URL = "app.url";
     private static final String API_PATH = "/api/v0";
@@ -54,7 +55,8 @@ class DeleteDataApiControllerIT {
         client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD))
+                .getEntity();
         DaoFactory.setFactory(new DaoFactoryHibr());
         operationsGateway = new OperationsGateway(authToken);
     }
@@ -66,18 +68,13 @@ class DeleteDataApiControllerIT {
         vehicleBusinessController = new VehicleBusinessController();
         interventionBusinesssController = new InterventionBusinesssController();
         repairingPackBusinessController = new RepairingPackBusinessController();
-        List<Integer> clients;
-        List<Integer> vehicles;
-        List<Integer> repairingPacks;
-        clients = Stream.generate(ClientDtoMother::clientDto).limit(5).map(clientBusinessController::create).collect(toList());
-        clients.stream().limit(5).map(clientId -> createVehicle(Integer.toString(clientId))).map(vehicleBusinessController::create).collect(toList());
-        vehicles = clients.stream().limit(5).map(clientId -> createVehicle(Integer.toString(clientId))).map(vehicleBusinessController::create).collect(toList());
-        Stream.generate(InterventionDtoMother::cafe).limit(5).map(interventionBusinesssController::create).collect(toList());
-        vehicles.stream().limit(5).map(vehicleId -> InterventionDtoMother.withVehicle(Integer.toString(vehicleId))).map(interventionBusinesssController::create).collect(toList());
-        repairingPacks = Stream.generate(AgrimDomainFactory::createRepairingPackDto).limit(3)
-                .map(repairingPackBusinessController::create).collect(toList());
-        repairingPacks.stream().map(repairingPackId -> InterventionDtoMother.withVehicle(Integer.toString(vehicles.get(new Random().nextInt(vehicles.size())))))
-                .map(interventionBusinesssController::create).collect(toList());
+        List<Integer> clients = generateClients();
+        List<Integer> vehicles = generateVehicles(clients);
+        List<Integer> repairingPacks = generateRepairingPacks();
+        generateMoreVehicles(clients);
+        generateCafeInterventions();
+        generateRepairInterventions(vehicles);
+        generateInterventionsWithRepairingPack(vehicles, repairingPacks);
 
         Response response = client.target(properties.getProperty(APP_BASE_URL) + API_PATH + DeleteDataApiController.DELETE_DATA)
                 .request(MediaType.APPLICATION_JSON)
@@ -85,5 +82,55 @@ class DeleteDataApiControllerIT {
                 .delete();
 
         assertThat(response.getStatus(), is(Response.Status.NO_CONTENT.getStatusCode()));
+    }
+
+    private void generateInterventionsWithRepairingPack(List<Integer> vehicles, List<Integer> repairingPacks) {
+        repairingPacks.stream()
+                .map(repairingPackId -> InterventionDtoMother.withVehicle(Integer.toString(vehicles.get(new Random().nextInt(vehicles
+                        .size())))))
+                .forEach(interventionBusinesssController::create);
+    }
+
+    @NotNull
+    private List<Integer> generateRepairingPacks() {
+        return Stream.generate(AgrimDomainFactory::createRepairingPackDto).limit(3)
+                .map(repairingPackBusinessController::create).collect(toList());
+    }
+
+    @NotNull
+    private List<Integer> generateRepairInterventions(List<Integer> vehicles) {
+        return vehicles.stream()
+                .limit(5)
+                .map(vehicleId -> InterventionDtoMother.withVehicle(Integer.toString(vehicleId)))
+                .map(interventionBusinesssController::create)
+                .collect(toList());
+    }
+
+    private void generateCafeInterventions() {
+        Stream.generate(InterventionDtoMother::cafe).limit(5).forEach(interventionBusinesssController::create);
+    }
+
+    private void generateMoreVehicles(List<Integer> clients) {
+        clients.stream()
+                .limit(5)
+                .map(clientId -> createVehicle(Integer.toString(clientId)))
+                .forEach(vehicleBusinessController::create);
+    }
+
+    @NotNull
+    private List<Integer> generateVehicles(List<Integer> clients) {
+        return clients.stream()
+                .limit(5)
+                .map(clientId -> createVehicle(Integer.toString(clientId)))
+                .map(vehicleBusinessController::create)
+                .collect(toList());
+    }
+
+    @NotNull
+    private List<Integer> generateClients() {
+        return Stream.generate(ClientDtoMother::clientDto)
+                .limit(5)
+                .map(clientBusinessController::create)
+                .collect(toList());
     }
 }
