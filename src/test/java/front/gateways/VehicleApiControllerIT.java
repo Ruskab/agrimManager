@@ -1,15 +1,14 @@
-package api.api_controllers;
+package front.gateways;
 
 import api.PropertiesResolver;
 import api.RestClientLoader;
+import api.api_controllers.AuthenticationApiController;
+import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
 import api.dtos.VehicleDto;
 import api.dtos.builder.VehicleDtoBuilder;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.MechanicDtoMother;
-import front.gateways.ClientGateway;
-import front.gateways.OperationsGateway;
-import front.gateways.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -18,8 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Client;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
 import java.util.Properties;
 
@@ -30,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class VehicleApiControllerIT {
 
     private static final Logger LOGGER = LogManager.getLogger(VehicleApiControllerIT.class);
-
 
     private Client client;
     private Properties properties;
@@ -45,7 +41,8 @@ class VehicleApiControllerIT {
         client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD))
+                .getEntity();
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);

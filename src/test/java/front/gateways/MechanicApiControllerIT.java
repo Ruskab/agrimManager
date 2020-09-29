@@ -1,48 +1,38 @@
-package api.api_controllers;
+package front.gateways;
 
 import api.AgrimDomainFactory;
 import api.PropertiesResolver;
 import api.RestClientLoader;
+import api.api_controllers.AuthenticationApiController;
+import api.api_controllers.MechanicApiController;
 import api.dtos.ClientDto;
 import api.dtos.CredentialsDto;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
 import api.dtos.VehicleDto;
-import api.entity.InterventionType;
 import api.object_mothers.ClientDtoMother;
 import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
-import front.gateways.ClientGateway;
-import front.gateways.InterventionGateway;
-import front.gateways.MechanicGateway;
-import front.gateways.OperationsGateway;
-import front.gateways.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Client;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MechanicApiControllerIT {
 
     private static final Logger LOGGER = LogManager.getLogger(MechanicApiControllerIT.class);
-
+    private final MechanicApiController mechanicApiController = new MechanicApiController();
     Client client;
     Properties properties;
-    private final MechanicApiController mechanicApiController = new MechanicApiController();
     private String authToken;
     private Integer mechanicId;
     private ClientGateway clientGateway;
@@ -82,7 +72,7 @@ class MechanicApiControllerIT {
         MechanicDto mechanic = MechanicDtoMother.mechanicDto();
         mechanic.setId(mechanicId);
 
-        mechanicGateway.createIntervention(mechanic ,interventionDto);
+        mechanicGateway.createIntervention(mechanic, interventionDto);
 
         MechanicDto updatedMechanic = mechanicGateway.read(Integer.toString(mechanicId));
         assertThat(updatedMechanic.getInterventionIds().isEmpty(), is(false));
@@ -97,7 +87,7 @@ class MechanicApiControllerIT {
         InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
         MechanicDto mechanic = MechanicDtoMother.mechanicDto();
         mechanic.setId(mechanicId);
-        mechanicGateway.createIntervention(mechanic ,interventionDto);
+        mechanicGateway.createIntervention(mechanic, interventionDto);
 
         List<InterventionDto> interventionDtos = mechanicGateway.searchInterventions(Integer.toString(mechanicId), true);
 
@@ -114,6 +104,7 @@ class MechanicApiControllerIT {
     private void createAuthToken() {
         LOGGER.info("creamos mecanico fake authorizado");
         mechanicId = (Integer) mechanicApiController.create(MechanicDtoMother.mechanicDto()).getEntity();
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD)).getEntity();
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD))
+                .getEntity();
     }
 }
