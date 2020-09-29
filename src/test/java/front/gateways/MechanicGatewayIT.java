@@ -1,18 +1,19 @@
 package front.gateways;
 
-import front.AgrimDomainFactory;
 import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
-import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
-import front.dtos.Vehicle;
 import api.object_mothers.FrontClientMother;
-import api.object_mothers.InterventionDtoMother;
+import api.object_mothers.FrontInterventionMother;
+import api.object_mothers.FrontMechanicMother;
 import api.object_mothers.MechanicDtoMother;
+import front.AgrimDomainFactory;
 import front.dtos.Client;
+import front.dtos.Intervention;
+import front.dtos.Mechanic;
+import front.dtos.Vehicle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -54,7 +55,7 @@ class MechanicGatewayIT {
 
     @Test
     void create_and_read_mechanic() {
-        MechanicDto mechanic = MechanicDtoMother.mechanicDto();
+        Mechanic mechanic = FrontMechanicMother.mechanic();
 
         String mechanicId = mechanicGateway.create(mechanic);
 
@@ -67,13 +68,13 @@ class MechanicGatewayIT {
         String clientId = clientGateway.create(client);
         Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicle);
-        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
-        MechanicDto mechanic = MechanicDtoMother.mechanicDto();
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
+        Mechanic mechanic = FrontMechanicMother.mechanic();
         mechanic.setId(mechanicId);
-
         mechanicGateway.createIntervention(mechanic, interventionDto);
 
-        MechanicDto updatedMechanic = mechanicGateway.read(Integer.toString(mechanicId));
+        Mechanic updatedMechanic = mechanicGateway.read(Integer.toString(mechanicId));
+
         assertThat(updatedMechanic.getInterventionIds().isEmpty(), is(false));
     }
 
@@ -83,12 +84,12 @@ class MechanicGatewayIT {
         String clientId = clientGateway.create(clientDto);
         Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicle);
-        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
-        MechanicDto mechanic = MechanicDtoMother.mechanicDto();
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
+        Mechanic mechanic = FrontMechanicMother.mechanic();
         mechanic.setId(mechanicId);
         mechanicGateway.createIntervention(mechanic, interventionDto);
 
-        List<InterventionDto> interventionDtos = mechanicGateway.searchInterventions(Integer.toString(mechanicId), true);
+        List<Intervention> interventionDtos = mechanicGateway.searchInterventions(Integer.toString(mechanicId), true);
 
         assertThat(interventionDtos.isEmpty(), is(false));
 
@@ -103,7 +104,7 @@ class MechanicGatewayIT {
     private void createAuthToken() {
         LOGGER.info("creamos mecanico fake authorizado");
         mechanicId = (Integer) mechanicApiController.create(MechanicDtoMother.mechanicDto()).getEntity();
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD))
+        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(FrontMechanicMother.FAKE_NAME, FrontMechanicMother.FAKE_PASSWORD))
                 .getEntity();
     }
 }

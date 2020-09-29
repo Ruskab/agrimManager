@@ -1,6 +1,6 @@
 package front.util;
 
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import org.omnifaces.util.Faces;
 
 public class SessionUtil {
@@ -11,7 +11,7 @@ public class SessionUtil {
         return (String) Faces.getSession().getAttribute("token");
     }
 
-    public static MechanicDto getSessionMechanic(String key) {
-        return (MechanicDto) Faces.getSession().getAttribute(key);
+    public static Mechanic getSessionMechanic(String key) {
+        return (Mechanic) Faces.getSession().getAttribute(key);
     }
 }

@@ -1,12 +1,11 @@
 package front.beans;
 
-import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
+import front.dtos.Intervention;
+import front.dtos.Mechanic;
 import front.dtos.Vehicle;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
-import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -28,9 +27,9 @@ public class DashboardBean {
     private InterventionGateway interventionGateway;
     private MechanicGateway mechanicGateway;
     private VehicleGateway vehicleGateway;
-    private MechanicDto mechanic;
+    private Mechanic mechanic;
 
-    private List<InterventionDto> activeInterventions = new ArrayList<>();
+    private List<Intervention> activeInterventions = new ArrayList<>();
 
     @ManagedProperty(value="#{sessionBean}")
     private SessionBean sessionBean;
@@ -40,11 +39,11 @@ public class DashboardBean {
         interventionGateway = new InterventionGateway(getAuthToken());
         mechanicGateway = new MechanicGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
-        mechanic = sessionBean.getMechanicDto();
+        mechanic = sessionBean.getMechanic();
         activeInterventions = searchActiveInterventions(mechanic);
     }
 
-    private List<InterventionDto> searchActiveInterventions(MechanicDto mechanic) {
+    private List<Intervention> searchActiveInterventions(Mechanic mechanic) {
         return mechanicGateway.searchInterventions(Integer.toString(mechanic.getId()), true);
     }
 
@@ -52,7 +51,7 @@ public class DashboardBean {
         return vehicleGateway.read(vehicleId);
     }
 
-    public void finishActiveIntervention(InterventionDto intervention) {
+    public void finishActiveIntervention(Intervention intervention) {
         try {
             mechanicGateway.finishIntervention(mechanic, intervention);
         } catch (IllegalStateException e) {
@@ -63,11 +62,11 @@ public class DashboardBean {
         activeInterventions =  searchActiveInterventions(mechanic);
     }
 
-    public List<InterventionDto> getActiveInterventions() {
+    public List<Intervention> getActiveInterventions() {
         return activeInterventions;
     }
 
-    public void setActiveInterventions(List<InterventionDto> activeInterventions) {
+    public void setActiveInterventions(List<Intervention> activeInterventions) {
         this.activeInterventions = activeInterventions;
     }
 

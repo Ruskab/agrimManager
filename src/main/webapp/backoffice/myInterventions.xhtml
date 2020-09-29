@@ -24,18 +24,18 @@
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records">
 
-                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.interventionDto.startTime}" priority="3">
-                            <h:outputText value="#{intervention.interventionDto.startTime}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.intervention.startTime}" priority="3">
+                            <h:outputText value="#{intervention.intervention.startTime}"/>
                         </p:column>
-                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.interventionDto.endTime}" priority="3">
-                            <h:outputText value="#{intervention.interventionDto.endTime}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.intervention.endTime}" priority="3">
+                            <h:outputText value="#{intervention.intervention.endTime}"/>
                         </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" priority="1">
                             <h:outputText value="#{intervention.interventionVehicle()}"/>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.type']}" priority="1">
-                            <h:outputText value="#{intervention.interventionDto.interventionType}"/>
+                            <h:outputText value="#{intervention.intervention.interventionType}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

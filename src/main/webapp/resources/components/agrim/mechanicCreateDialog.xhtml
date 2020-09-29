@@ -21,19 +21,19 @@
             </f:facet>
             <h:outputLabel for="username"
                            value="#{msg['web.mechanics.create.username']}"/>
-            <p:inputText id="username" value="#{mechanicCreateBean.mechanicDto.name}"
+            <p:inputText id="username" value="#{mechanicCreateBean.mechanic.name}"
                          required="true"/>
             <p:message for="username"/>
 
             <h:outputLabel for="password" value="#{msg['web.mechanics.create.password']}"/>
-            <p:inputText id="password" value="#{mechanicCreateBean.mechanicDto.password}" required="true"
+            <p:inputText id="password" value="#{mechanicCreateBean.mechanic.password}" required="true"
                          label="passrowrd"/>
             <p:message for="password"/>
 
             <h:outputLabel for="rolesChecboxMenu" value="#{msg['web.mechanics.create.roles']}"/>
 
 
-            <p:selectCheckboxMenu id="rolesChecboxMenu" value="#{mechanicCreateBean.mechanicDto.roles}" label="roles">
+            <p:selectCheckboxMenu id="rolesChecboxMenu" value="#{mechanicCreateBean.mechanic.roles}" label="roles">
                 <f:selectItems value="#{mechanicCreateBean.roles}"/>
             </p:selectCheckboxMenu>
             <p:message for="rolesChecboxMenu"/>

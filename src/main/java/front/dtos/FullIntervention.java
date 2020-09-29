@@ -1,42 +1,39 @@
 package front.dtos;
 
-import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
-
 public class FullIntervention {
 
-    private InterventionDto interventionDto;
+    private Intervention intervention;
     private Vehicle vehicle;
-    private MechanicDto mechanicDto;
+    private Mechanic mechanic;
 
-    public static FullIntervention of(MechanicDto mechanicDto, InterventionDto interventionDto, Vehicle vehicleDto) {
+    public static FullIntervention of(Mechanic mechanic, Intervention intervention, Vehicle vehicleDto) {
         FullIntervention fullIntervention = new FullIntervention();
-        fullIntervention.setMechanicDto(mechanicDto);
+        fullIntervention.setMechanic(mechanic);
         fullIntervention.setVehicle(vehicleDto);
-        fullIntervention.setInterventionDto(interventionDto);
+        fullIntervention.setIntervention(intervention);
         return fullIntervention;
     }
 
-    public static FullIntervention of(MechanicDto mechanicDto, InterventionDto interventionDto) {
+    public static FullIntervention of(Mechanic mechanic, Intervention intervention) {
         FullIntervention fullIntervention = new FullIntervention();
-        fullIntervention.setMechanicDto(mechanicDto);
-        fullIntervention.setInterventionDto(interventionDto);
+        fullIntervention.setMechanic(mechanic);
+        fullIntervention.setIntervention(intervention);
         return fullIntervention;
     }
 
     public String interventionVehicle() {
-        if (interventionDto.getVehicleId() == null) {
+        if (intervention.getVehicleId() == null) {
             return "-";
         }
         return vehicle.getVehicleDataSheet();
     }
 
-    public InterventionDto getInterventionDto() {
-        return interventionDto;
+    public Intervention getIntervention() {
+        return intervention;
     }
 
-    public void setInterventionDto(InterventionDto interventionDto) {
-        this.interventionDto = interventionDto;
+    public void setIntervention(Intervention intervention) {
+        this.intervention = intervention;
     }
 
     public Vehicle getVehicle() {
@@ -47,11 +44,11 @@ public class FullIntervention {
         this.vehicle = vehicle;
     }
 
-    public MechanicDto getMechanicDto() {
-        return mechanicDto;
+    public Mechanic getMechanic() {
+        return mechanic;
     }
 
-    public void setMechanicDto(MechanicDto mechanicDto) {
-        this.mechanicDto = mechanicDto;
+    public void setMechanic(Mechanic mechanic) {
+        this.mechanic = mechanic;
     }
 }

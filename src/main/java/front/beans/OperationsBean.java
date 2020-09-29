@@ -1,7 +1,7 @@
 package front.beans;
 
-import api.dtos.InterventionDto;
-import api.dtos.MechanicDto;
+import front.dtos.Intervention;
+import front.dtos.Mechanic;
 import front.dtos.Client;
 import front.dtos.Vehicle;
 import front.gateways.ClientGateway;
@@ -44,15 +44,15 @@ public class OperationsBean {
     private VehicleGateway vehicleGateway;
     private ClientGateway clientGateway;
     private MechanicGateway mechanicGateway;
-    private MechanicDto mechanic;
+    private Mechanic mechanic;
     private DashboardModel model;
     private Random rnd = new SecureRandom();
 
-    public MechanicDto getMechanic() {
+    public Mechanic getMechanic() {
         return mechanic;
     }
 
-    public void setMechanic(MechanicDto mechanic) {
+    public void setMechanic(Mechanic mechanic) {
         this.mechanic = mechanic;
     }
 
@@ -136,8 +136,8 @@ public class OperationsBean {
 
         for (int i = 0; i < 5; i++) {
             Collections.shuffle(vehiclesIds);
-            InterventionDto interventionDto = createFakeInterventionDto(vehiclesIds.get(0).toString());
-            addFakeIntervention(interventionDto);
+            Intervention intervention = createFakeInterventionDto(vehiclesIds.get(0).toString());
+            addFakeIntervention(intervention);
         }
 
         addMessage(SUCCESS, "Added new 10 interventions to " + mechanic.getName());
@@ -154,7 +154,7 @@ public class OperationsBean {
         return Integer.parseInt(vehicleGateway.create(vehicleDto));
     }
 
-    private void addFakeIntervention(InterventionDto interventionDto) {
+    private void addFakeIntervention(Intervention interventionDto) {
         mechanicGateway.createIntervention(mechanic, interventionDto);
     }
 
@@ -194,12 +194,11 @@ public class OperationsBean {
         return salt.toString();
     }
 
-    private InterventionDto createFakeInterventionDto(String vehicleId) {
+    private Intervention createFakeInterventionDto(String vehicleId) {
         List<String> titles = Arrays.asList("Ruedas", "Volante", "Capo", "Sistema", "Maletero", "Puerta", "Pintura", "faros", "Luces", "motor");
         Collections.shuffle(titles);
         int startTime = getStartTime();
-        return new InterventionDto(titles.get(0), "REPAIR", vehicleId, null, LocalDateTime.now()
-                .minusHours(startTime), LocalDateTime.now().plusHours(1));
+        return Intervention.builder().title(titles.get(0)).interventionType("REPAIR").vehicleId(vehicleId).startTime(LocalDateTime.now().minusHours(startTime)).endTime(LocalDateTime.now().plusHours(1)).build();
     }
 
     private int getStartTime() {

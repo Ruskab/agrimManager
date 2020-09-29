@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.MechanicDto;
+import front.dtos.Mechanic;
 import api.entity.Role;
 import com.mysql.cj.util.StringUtils;
 import front.gateways.MechanicGateway;
@@ -24,21 +24,21 @@ public class MechanicCreateBean {
 
     private static final Logger LOGGER = LogManager.getLogger(MechanicCreateBean.class);
     private MechanicGateway mechanicGateway;
-    private MechanicDto mechanicDto;
+    private Mechanic mechanic;
     private List<Role> selectedRoles = new ArrayList<>();
 
     @PostConstruct
     public void init() {
         mechanicGateway = new MechanicGateway(getAuthToken());
-        mechanicDto = new MechanicDto();
+        mechanic = new Mechanic();
     }
 
     public void create() {
-        if (mechanicDto == null) {
+        if (mechanic == null) {
             LOGGER.error("Mecanico vacio");
             FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
         }
-        String mechanicId = mechanicGateway.create(mechanicDto);
+        String mechanicId = mechanicGateway.create(mechanic);
         String message = StringUtils.isStrictlyNumeric(mechanicId) ? "Successful" : "Error";
         if ("Error".equals(message)) {
             FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "create vehicle"));
@@ -47,12 +47,12 @@ public class MechanicCreateBean {
         PrimeFaces.current().executeScript("PF('vehicleCreateDialog').hide();");
     }
 
-    public MechanicDto getMechanicDto() {
-        return mechanicDto;
+    public Mechanic getMechanic() {
+        return mechanic;
     }
 
-    public void setMechanicDto(MechanicDto mechanicDto) {
-        this.mechanicDto = mechanicDto;
+    public void setMechanic(Mechanic mechanic) {
+        this.mechanic = mechanic;
     }
 
     public Role[] getRoles() {
