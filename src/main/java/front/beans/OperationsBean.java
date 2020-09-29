@@ -1,11 +1,9 @@
 package front.beans;
 
-import front.dtos.Client;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
-import api.dtos.builder.VehicleDtoBuilder;
-import api.entity.InterventionType;
+import front.dtos.Client;
+import front.dtos.Vehicle;
 import front.gateways.ClientGateway;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
@@ -84,19 +82,22 @@ public class OperationsBean {
         FacesMessage message = new FacesMessage();
         message.setSeverity(FacesMessage.SEVERITY_INFO);
         message.setSummary("Reordered: " + event.getWidgetId());
-        message.setDetail("Item index: " + event.getItemIndex() + ", Column index: " + event.getColumnIndex() + ", Sender index: " + event.getSenderColumnIndex());
+        message.setDetail("Item index: " + event.getItemIndex() + ", Column index: " + event.getColumnIndex() + ", Sender index: " + event
+                .getSenderColumnIndex());
 
         addMessage(message);
     }
 
     public void handleClose(CloseEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Closed", "Closed panel id:'" + event.getComponent().getId() + "'");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Closed", "Closed panel id:'" + event.getComponent()
+                .getId() + "'");
 
         addMessage(message);
     }
 
     public void handleToggle(ToggleEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, event.getComponent().getId() + " toggled", "Status:" + event.getVisibility().name());
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, event.getComponent()
+                .getId() + " toggled", "Status:" + event.getVisibility().name());
 
         addMessage(message);
     }
@@ -119,13 +120,16 @@ public class OperationsBean {
         List<Integer> vehiclesIds = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
-            Client client = Client.builder().fullName(getRandomName()).hours(rnd.ints(0, 40).findFirst().getAsInt()).build();
+            Client client = Client.builder()
+                    .fullName(getRandomName())
+                    .hours(rnd.ints(0, 40).findFirst().getAsInt())
+                    .build();
             clientsIds.add(addFakeClient(client));
         }
         addMessage(SUCCESS, "Added new 30 clients");
         for (int i = 0; i < 60; i++) {
             Collections.shuffle(clientsIds);
-            VehicleDto vehicleDto = createFakeVehicleDto(clientsIds.get(0).toString());
+            Vehicle vehicleDto = createFakeVehicle(clientsIds.get(0).toString());
             vehiclesIds.add(addFakeVehicle(vehicleDto));
         }
         addMessage(SUCCESS, "Added new 60 vehicles");
@@ -146,7 +150,7 @@ public class OperationsBean {
         return randomNames.get(0);
     }
 
-    private Integer addFakeVehicle(VehicleDto vehicleDto) {
+    private Integer addFakeVehicle(Vehicle vehicleDto) {
         return Integer.parseInt(vehicleGateway.create(vehicleDto));
     }
 
@@ -154,7 +158,7 @@ public class OperationsBean {
         mechanicGateway.createIntervention(mechanic, interventionDto);
     }
 
-    private VehicleDto createFakeVehicleDto(String clientId) {
+    private Vehicle createFakeVehicle(String clientId) {
         List<String> brands = Arrays.asList("Piaggio", "Suzuki", "Lexus", "Jaguar", "Iveco", "Lancia", "Volkswagen", "Bentley", "Tata", "BMW",
                 "Seat", "Nissan", "Piaggio", "Suzuki", "Lexus", "Jaguar", "Iveco", "Lancia", "Volkswagen", "Bentley", "Tata",
                 "BMW", "Seat", "Nissan", "Isuzu", "Aston Martin", "Smart", "Ferrari", "Citroen", "Skoda", "Opel", "Peugeot",
@@ -164,20 +168,20 @@ public class OperationsBean {
 
         Collections.shuffle(brands);
 
-        return new VehicleDtoBuilder()
-                .setRegistrationPlate(getSaltString())
-                .setClientId(clientId)
-                .setBrand(brands.get(0))
-                .setKMS("03-03-2017 94744")
-                .setBodyOnFrame("VF1KC0JEF" + rnd.ints(1, 5000).findFirst().getAsInt() + "32")
-                .setLastRevisionDate(LocalDate.now().minusMonths(rnd.ints(1, 5).findFirst().getAsInt()))
-                .setItvDate(LocalDate.now().minusMonths(rnd.ints(1, 5).findFirst().getAsInt()))
-                .setNextItvDate(LocalDate.now().plusYears(rnd.ints(1, 5).findFirst().getAsInt()))
-                .setAirFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "3")
-                .setOilFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "1")
-                .setFuelFilter(rnd.ints(1000, 100000000).findFirst().getAsInt() + "2")
-                .setMotorOil("5.5  5W30")
-                .createVehicleDto();
+        return Vehicle.builder()
+                .registrationPlate(getSaltString())
+                .clientId(clientId)
+                .brand(brands.get(0))
+                .kms("03-03-2017 94744")
+                .bodyOnFrame("VF1KC0JEF" + rnd.ints(1, 5000).findFirst().getAsInt() + "32")
+                .lastRevisionDate(LocalDate.now().minusMonths(rnd.ints(1, 5).findFirst().getAsInt()))
+                .itvDate(LocalDate.now().minusMonths(rnd.ints(1, 5).findFirst().getAsInt()))
+                .nextItvDate(LocalDate.now().plusYears(rnd.ints(1, 5).findFirst().getAsInt()))
+                .airFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "3")
+                .oilFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "1")
+                .fuelFilter(rnd.ints(1000, 100000000).findFirst().getAsInt() + "2")
+                .motorOil("5.5  5W30")
+                .build();
     }
 
     private String getSaltString() {
@@ -194,7 +198,8 @@ public class OperationsBean {
         List<String> titles = Arrays.asList("Ruedas", "Volante", "Capo", "Sistema", "Maletero", "Puerta", "Pintura", "faros", "Luces", "motor");
         Collections.shuffle(titles);
         int startTime = getStartTime();
-        return new InterventionDto(titles.get(0), "REPAIR", vehicleId, null, LocalDateTime.now().minusHours(startTime), LocalDateTime.now().plusHours(1));
+        return new InterventionDto(titles.get(0), "REPAIR", vehicleId, null, LocalDateTime.now()
+                .minusHours(startTime), LocalDateTime.now().plusHours(1));
     }
 
     private int getStartTime() {
@@ -215,7 +220,7 @@ public class OperationsBean {
     }
 
     private void deleteAllVehicles() {
-        List<VehicleDto> vehicleDtoList = vehicleGateway.readAll();
+        List<Vehicle> vehicleDtoList = vehicleGateway.readAll();
         vehicleDtoList.forEach(vehicleDto -> vehicleGateway.delete(vehicleDto.getId()));
     }
 

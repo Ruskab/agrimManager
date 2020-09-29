@@ -1,13 +1,13 @@
 package front.gateways;
 
-import api.AgrimDomainFactory;
+import front.AgrimDomainFactory;
 import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
 import api.dtos.InterventionDto;
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import api.object_mothers.FrontClientMother;
 import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
@@ -61,8 +61,8 @@ class InterventionGatewayIT {
     void create_and_read_intervention() {
         Client clientDto = FrontClientMother.client();
         String clientId = clientGateway.create(clientDto);
-        VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
-        String vehicleId = vehicleGateway.create(vehicleDto);
+        Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
+        String vehicleId = vehicleGateway.create(vehicle);
         InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
 
         String interventionId = interventionGateway.create(interventionDto);
@@ -76,8 +76,8 @@ class InterventionGatewayIT {
     void delete_intervention() {
         Client clientDto = FrontClientMother.client();
         String clientId = clientGateway.create(clientDto);
-        VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
-        String vehicleId = vehicleGateway.create(vehicleDto);
+        Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
+        String vehicleId = vehicleGateway.create(vehicle);
         InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
         String interventionId = interventionGateway.create(interventionDto);
 
@@ -90,8 +90,8 @@ class InterventionGatewayIT {
     void update_intervention() {
         Client clientDto = FrontClientMother.client();
         String clientId = clientGateway.create(clientDto);
-        VehicleDto vehicleDto = AgrimDomainFactory.createVehicle(clientId);
-        String vehicleId = vehicleGateway.create(vehicleDto);
+        Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
+        String vehicleId = vehicleGateway.create(vehicle);
         InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
         String interventionId = interventionGateway.create(interventionDto);
         InterventionDto createdInterventionDto = interventionGateway.read(interventionId);

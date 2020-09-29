@@ -1,6 +1,6 @@
 package front.converters;
 
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.gateways.VehicleGateway;
 
 import javax.faces.application.FacesMessage;
@@ -32,7 +32,7 @@ public class VehicleConverter implements Converter {
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
         if (value != null) {
-            return String.valueOf(((VehicleDto) value).getId());
+            return String.valueOf(((Vehicle) value).getId());
         } else {
             return null;
         }

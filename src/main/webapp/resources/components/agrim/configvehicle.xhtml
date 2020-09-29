@@ -10,12 +10,12 @@
 
 
 <composite:interface>
-    <composite:attribute name="selectedVehicle" required="true" type="api.dtos.VehicleDto"/>
+    <composite:attribute name="selectedVehicle" required="true" type="front.dtos.Vehicle"/>
     <composite:attribute name="clientName" required="true" type="java.lang.String"/>
 </composite:interface>
 
 <composite:implementation>
-    <c:set value="#{cc.attrs.selectedVehicle}" target="#{configVehicleBean}" property="selectedVehicleDto"/>
+    <c:set value="#{cc.attrs.selectedVehicle}" target="#{configVehicleBean}" property="selectedVehicle"/>
 
     <p:dialog id="vehicleDetail" widgetVar="vehicleConfigDialog" header="Vehicle" modal="true"
               showEffect="fade" hideEffect="fade" resizable="false"
@@ -44,12 +44,12 @@
 
                         <h:outputLabel for="registationplate"
                                        value="#{msg['web.vehicles.edit.basicinfo.registationplate']}"/>
-                        <p:inputText id="registationplate" value="#{configVehicleBean.selectedVehicleDto.registrationPlate}"
+                        <p:inputText id="registationplate" value="#{configVehicleBean.selectedVehicle.registrationPlate}"
                                      required="true"/>
                         <p:message for="registationplate"/>
 
                         <h:outputText for="brand" value="#{msg['web.vehicles.edit.basicinfo.brand']}"/>
-                        <p:inputText id="brand" value="#{configVehicleBean.selectedVehicleDto.brand}" required="true"
+                        <p:inputText id="brand" value="#{configVehicleBean.selectedVehicle.brand}" required="true"
                                      label="brand"/>
                         <p:message for="brand"/>
 
@@ -58,12 +58,12 @@
                         <p:message for="client"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.bodyOnFrame']}"/>
-                        <p:inputText id="bodyOnFrame" value="#{configVehicleBean.selectedVehicleDto.bodyOnFrame}"
+                        <p:inputText id="bodyOnFrame" value="#{configVehicleBean.selectedVehicle.bodyOnFrame}"
                                      label="bodyframe"/>
                         <p:message for="bodyOnFrame"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.basicinfo.KMS']}"/>
-                        <p:inputText id="KMS" value="#{configVehicleBean.selectedVehicleDto.kms}" label="kms"/>
+                        <p:inputText id="KMS" value="#{configVehicleBean.selectedVehicle.kms}" label="kms"/>
                         <p:message for="KMS"/>
                     </p:panelGrid>
                 </p:tab>
@@ -79,13 +79,13 @@
                                 value="#{msg['web.vehicles.edit.itv.header']}"></h:outputText></f:facet>
 
                         <p:outputLabel for="lastItvDateBtn" value="#{msg['web.vehicles.edit.itv.last']}"/>
-                        <p:calendar id="lastItvDateBtn" value="#{configVehicleBean.selectedVehicleDto.itvDate}"
+                        <p:calendar id="lastItvDateBtn" value="#{configVehicleBean.selectedVehicle.itvDate}"
                                     showOn="button" pattern="dd/MM/yyyy">
                             <f:converter converterId="front.converters.LocalDateConverter"/>
                         </p:calendar>
 
                         <p:outputLabel for="nextItvDateBtn" value="#{msg['web.vehicles.edit.itv.next']}"/>
-                        <p:calendar id="nextItvDateBtn" value="#{configVehicleBean.selectedVehicleDto.nextItvDate}"
+                        <p:calendar id="nextItvDateBtn" value="#{configVehicleBean.selectedVehicle.nextItvDate}"
                                     showOn="button" pattern="dd/MM/yyyy">
                             <f:converter converterId="front.converters.LocalDateConverter"/>
                         </p:calendar>
@@ -102,22 +102,22 @@
                                 value="#{msg['web.vehicles.edit.revision.header']}"></h:outputText></f:facet>
                         <p:outputLabel for="lastRevisionBtn"
                                        value="#{msg['web.vehicles.edit.revision.lastrevisiondate']}"/>
-                        <p:calendar id="lastRevisionBtn" value="#{configVehicleBean.selectedVehicleDto.lastRevisionDate}"
+                        <p:calendar id="lastRevisionBtn" value="#{configVehicleBean.selectedVehicle.lastRevisionDate}"
                                     showOn="button" pattern="dd/MM/yyyy">
                             <f:converter converterId="front.converters.LocalDateConverter"/>
                         </p:calendar>
 
                         <h:outputText value="#{msg['web.vehicles.edit.revision.airFilterReference']}"/>
-                        <p:inputText value="#{configVehicleBean.selectedVehicleDto.airFilterReference}"/>
+                        <p:inputText value="#{configVehicleBean.selectedVehicle.airFilterReference}"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.revision.oilFilterReference']}"/>
-                        <p:inputText value="#{configVehicleBean.selectedVehicleDto.oilFilterReference}"/>
+                        <p:inputText value="#{configVehicleBean.selectedVehicle.oilFilterReference}"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.revision.fuelFilter']}"/>
-                        <p:inputText value="#{configVehicleBean.selectedVehicleDto.fuelFilter}"/>
+                        <p:inputText value="#{configVehicleBean.selectedVehicle.fuelFilter}"/>
 
                         <h:outputText value="#{msg['web.vehicles.edit.revision.motorOil']}"/>
-                        <p:inputText value="#{configVehicleBean.selectedVehicleDto.motorOil}"/>
+                        <p:inputText value="#{configVehicleBean.selectedVehicle.motorOil}"/>
                     </p:panelGrid>
                 </p:tab>
 

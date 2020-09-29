@@ -1,6 +1,6 @@
 package front.gateways;
 
-import api.AgrimDomainFactory;
+import front.AgrimDomainFactory;
 import api.PropertiesResolver;
 import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
@@ -29,7 +29,7 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import static api.AgrimDomainFactory.createVehicle;
+import static front.AgrimDomainFactory.createVehicle;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -46,6 +46,7 @@ class DeleteDataGatewayIT {
     Properties properties;
     private MechanicApiController mechanicApiController = new MechanicApiController();
     private OperationsGateway operationsGateway;
+    private VehicleGateway vehicleGateway;
 
     private String authToken;
 
@@ -59,6 +60,7 @@ class DeleteDataGatewayIT {
                 .getEntity();
         DaoFactory.setFactory(new DaoFactoryHibr());
         operationsGateway = new OperationsGateway(authToken);
+        vehicleGateway = new VehicleGateway(authToken);
     }
 
 
@@ -114,7 +116,7 @@ class DeleteDataGatewayIT {
         clients.stream()
                 .limit(5)
                 .map(clientId -> createVehicle(Integer.toString(clientId)))
-                .forEach(vehicleBusinessController::create);
+                .forEach(vehicleGateway::create);
     }
 
     @NotNull
@@ -122,7 +124,8 @@ class DeleteDataGatewayIT {
         return clients.stream()
                 .limit(5)
                 .map(clientId -> createVehicle(Integer.toString(clientId)))
-                .map(vehicleBusinessController::create)
+                .map(vehicleGateway::create)
+                .map(Integer::parseInt)
                 .collect(toList());
     }
 

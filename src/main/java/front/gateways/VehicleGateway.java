@@ -1,10 +1,11 @@
 package front.gateways;
 
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import front.dtos.Client;
+import front.dtos.Vehicle;
 import front.util.PropertyLoader;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
@@ -42,7 +43,7 @@ public class VehicleGateway implements Serializable {
         this.authToken = authToken;
     }
 
-    public String create(VehicleDto vehicleDto) {
+    public String create(Vehicle vehicleDto) {
         Response response = client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
@@ -51,36 +52,36 @@ public class VehicleGateway implements Serializable {
         return response.readEntity(String.class);
     }
 
-    public List<VehicleDto> readAll() {
+    public List<Vehicle> readAll() {
         return client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<VehicleDto>>() {});
+                .get(new GenericType<List<Vehicle>>() {});
     }
 
-    public VehicleDto read(String vehicleId) {
+    public Vehicle read(String vehicleId) {
         return client.target(UriBuilder.fromPath(resource).path("/" + vehicleId))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(VehicleDto.class);
+                .get(Vehicle.class);
 
     }
 
-    public List<VehicleDto> searchBy(String query) {
+    public List<Vehicle> searchBy(String query) {
         return client.target(UriBuilder.fromPath(resource).queryParam("query", query))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<VehicleDto>>() {});
+                .get(new GenericType<List<Vehicle>>() {});
     }
 
-    public List<VehicleDto> searchBy(Client client) {
+    public List<Vehicle> searchBy(Client client) {
         return this.client.target(UriBuilder.fromPath(resource).queryParam("clientId", client.getId()))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<VehicleDto>>() {});
+                .get(new GenericType<List<Vehicle>>() {});
     }
 
-    public void update(VehicleDto vehicleDto) {
+    public void update(Vehicle vehicleDto) {
         Response response = client.target(UriBuilder.fromPath(resource).path("/" + vehicleDto.getId()))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)

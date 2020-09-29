@@ -6,15 +6,15 @@ import api.dtos.builder.VehicleDtoBuilder;
 
 import java.time.LocalDate;
 
-public class AgrimDomainFactory {
+public class AgrimBackEndDomainFactory {
 
-    public static VehicleDto createVehicle() {
+    public static VehicleDto createVehicleDto() {
         return new VehicleDtoBuilder().byDefault().setClientId(VehicleDtoBuilder.CLIENT_ID).createVehicleDto();
     }
 
-    public static VehicleDto createVehicle(String clientId) {
-        VehicleDto vehicleDto = new VehicleDto("AA1234BB", clientId);
-        return vehicleDto;
+    public static VehicleDto createVehicleDto(String clientId) {
+        return new VehicleDto("AA1234BB", clientId);
+
     }
 
     public static RepairingPackDto createRepairingPackDto() {

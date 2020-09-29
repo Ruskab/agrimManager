@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.gateways.ClientGateway;
 import front.gateways.VehicleGateway;
 import org.primefaces.event.SelectEvent;
@@ -26,8 +26,8 @@ public class LazyVehiclesBean implements Serializable {
 
     private static final String NOT_NAME = "NOT NAME";
     private static final String VEHICLE_BRAND = "brand";
-    private LazyDataModel<VehicleDto> lazyModel;
-    private VehicleDto selectedVehicleDto;
+    private LazyDataModel<Vehicle> lazyModel;
+    private Vehicle selectedVehicle;
     private String clientName;
     private Map<String, String> clientNames = new HashMap<>();
     private VehicleGateway vehicleGateway;
@@ -37,9 +37,9 @@ public class LazyVehiclesBean implements Serializable {
     public void init() {
         vehicleGateway = new VehicleGateway(getAuthToken());
         clientGateway = new ClientGateway(getAuthToken());
-        List<VehicleDto> vehicles = vehicleGateway.readAll();
+        List<Vehicle> vehicles = vehicleGateway.readAll();
         vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId()).getFullName()));
-        lazyModel = new LazyDataModel<VehicleDto>() {
+        lazyModel = new LazyDataModel<Vehicle>() {
 
             @Override
             public int getRowCount() {
@@ -47,9 +47,9 @@ public class LazyVehiclesBean implements Serializable {
             }
 
             @Override
-            public List<VehicleDto> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+            public List<Vehicle> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
-                List<VehicleDto> filtered = vehicleGateway.readAll().stream()
+                List<Vehicle> filtered = vehicleGateway.readAll().stream()
                         .skip(first)
                         .filter(vehicleDto -> doFilter(vehicleDto, filters))
                         .filter(vehicleDto -> vehicleDto.getBrand().contains((String) filters.getOrDefault(VEHICLE_BRAND, "")))
@@ -63,19 +63,19 @@ public class LazyVehiclesBean implements Serializable {
             }
 
             @Override
-            public VehicleDto getRowData(String rowKey) {
+            public Vehicle getRowData(String rowKey) {
                 return vehicleGateway.read(rowKey);
             }
 
             @Override
-            public Integer getRowKey(VehicleDto vehicleDto) {
+            public Integer getRowKey(Vehicle vehicleDto) {
                 return vehicleDto.getId();
             }
 
-            private List<VehicleDto> sortRows(String sortField, SortOrder sortOrder, List<VehicleDto> filtered) {
-                Comparator<VehicleDto> registrationPlateComparator = Comparator.comparing(VehicleDto::getRegistrationPlate);
-                Comparator<VehicleDto> brandComparator = Comparator.comparing(VehicleDto::getBrand);
-                Comparator<VehicleDto> bodyOnFrameComparator = Comparator.comparing(VehicleDto::getBodyOnFrame);
+            private List<Vehicle> sortRows(String sortField, SortOrder sortOrder, List<Vehicle> filtered) {
+                Comparator<Vehicle> registrationPlateComparator = Comparator.comparing(Vehicle::getRegistrationPlate);
+                Comparator<Vehicle> brandComparator = Comparator.comparing(Vehicle::getBrand);
+                Comparator<Vehicle> bodyOnFrameComparator = Comparator.comparing(Vehicle::getBodyOnFrame);
 
                 switch (sortField) {
                     case "registrationPlate":
@@ -89,7 +89,7 @@ public class LazyVehiclesBean implements Serializable {
                 }
             }
 
-            private boolean doFilter(VehicleDto vehicleDto, Map<String, Object> filters) {
+            private boolean doFilter(Vehicle vehicleDto, Map<String, Object> filters) {
                 if (filters == null || filters.isEmpty()) {
                     return true;
                 }
@@ -109,7 +109,7 @@ public class LazyVehiclesBean implements Serializable {
                 return clientNames.getOrDefault(clientId, NOT_NAME).toLowerCase().contains(((String) clientName).toLowerCase());
             }
 
-            private boolean globalContainsSearch(VehicleDto vehicle, Object key) {
+            private boolean globalContainsSearch(Vehicle vehicle, Object key) {
                 if (!(key instanceof String)) {
                     return true;
                 }
@@ -129,16 +129,16 @@ public class LazyVehiclesBean implements Serializable {
         };
     }
 
-    public LazyDataModel<VehicleDto> getLazyModel() {
+    public LazyDataModel<Vehicle> getLazyModel() {
         return lazyModel;
     }
 
-    public VehicleDto getSelectedVehicleDto() {
-        return selectedVehicleDto;
+    public Vehicle getSelectedVehicle() {
+        return selectedVehicle;
     }
 
-    public void setSelectedVehicleDto(VehicleDto selectedVehicleDto) {
-        this.selectedVehicleDto = selectedVehicleDto;
+    public void setSelectedVehicle(Vehicle selectedVehicle) {
+        this.selectedVehicle = selectedVehicle;
     }
 
     public String getClient(String clientId) {
@@ -147,7 +147,7 @@ public class LazyVehiclesBean implements Serializable {
 
 
     public void onRowSelect(SelectEvent event) {
-        String clientId = ((VehicleDto) event.getObject()).getClientId();
+        String clientId = ((Vehicle) event.getObject()).getClientId();
         clientName = getClientNames().get(clientId);
     }
 

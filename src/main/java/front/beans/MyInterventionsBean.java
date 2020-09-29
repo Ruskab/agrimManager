@@ -2,7 +2,7 @@ package front.beans;
 
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.dtos.FullIntervention;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
@@ -54,7 +54,7 @@ public class MyInterventionsBean implements Serializable {
 
     private FullIntervention mapToFullIntervention(InterventionDto intervention, MechanicDto mechanic) {
         if (intervention.getVehicleId() != null) {
-            VehicleDto vehicle = vehicleGateway.read(intervention.getVehicleId());
+            Vehicle vehicle = vehicleGateway.read(intervention.getVehicleId());
             return FullIntervention.of(mechanic, intervention, vehicle);
         }
         return FullIntervention.of(mechanic, intervention);
