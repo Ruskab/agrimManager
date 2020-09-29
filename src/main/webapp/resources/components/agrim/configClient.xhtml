@@ -36,7 +36,7 @@
                             <p:panelGrid layout="grid" columns="3" cellpadding="5">
                                 <h:outputLabel for="fullName"
                                                value="#{msg['web.clients.clientInfo.basicinfo.fullInfo']}"/>
-                                <p:inputText id="fullName" value="#{configClientBean.clientDto.fullName}"
+                                <p:inputText id="fullName" value="#{configClientBean.client.fullName}"
                                              required="true"/>
                                 <p:message for="fullName"/>
                             </p:panelGrid>
@@ -82,7 +82,7 @@
 
                                 <p:outputLabel for="toInvoice"
                                                value="#{msg['web.clients.clientInfo.billabletab.toinvoice']}"/>
-                                <p:spinner id="toInvoice" value="#{configClientBean.clientDto.hours}" min="0" max="999"
+                                <p:spinner id="toInvoice" value="#{configClientBean.client.hours}" min="0" max="999"
                                            suffix="h"/>
                                 <p:message for="toInvoice"/>
                             </h:panelGrid>

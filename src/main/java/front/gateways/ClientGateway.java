@@ -1,6 +1,6 @@
 package front.gateways;
 
-import api.dtos.ClientDto;
+import front.dtos.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -8,7 +8,6 @@ import front.util.PropertyLoader;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
@@ -27,7 +26,7 @@ public class ClientGateway implements Serializable {
     public static final String APP_BASE_URL = "app.url";
     public static final String CLIENTS = "api.clients.path";
     private static final String API_PATH = "app.api.base.path";
-    private final Client client;
+    private final javax.ws.rs.client.Client client;
     private final String authToken;
     private final String resource;
 
@@ -42,43 +41,43 @@ public class ClientGateway implements Serializable {
         this.authToken = authToken;
     }
 
-    public String create(ClientDto clientDto) {
-        Response response = client.target(UriBuilder.fromPath(resource))
+    public String create(Client client) {
+        Response response = this.client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.entity(client, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.CREATED);
         return response.readEntity(String.class);
     }
 
-    public List<ClientDto> readAll() {
+    public List<Client> readAll() {
         return client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<ClientDto>>() {
+                .get(new GenericType<List<Client>>() {
                 });
     }
 
-    public ClientDto read(String clientId) {
-        return client.target(UriBuilder.fromPath(resource).path("/" + clientId))
+    public Client read(String clientId) {
+        return this.client.target(UriBuilder.fromPath(resource).path("/" + clientId))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(ClientDto.class);
+                .get(front.dtos.Client.class);
     }
 
-    public List<ClientDto> searchBy(String query) {
+    public List<Client> searchBy(String query) {
         return client.target(UriBuilder.fromPath(resource).queryParam("query", query))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<ClientDto>>() {
+                .get(new GenericType<List<Client>>() {
                 });
     }
 
-    public void update(ClientDto clientDto) throws IllegalStateException {
-        Response response = client.target(UriBuilder.fromPath(resource).path("/" + clientDto.getId()))
+    public void update(Client client) throws IllegalStateException {
+        Response response = this.client.target(UriBuilder.fromPath(resource).path("/" + client.getId()))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .put(Entity.entity(clientDto, MediaType.APPLICATION_JSON_TYPE));
+                .put(Entity.entity(client, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.OK);
     }
 

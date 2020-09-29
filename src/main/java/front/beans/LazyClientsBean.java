@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.ClientDto;
+import front.dtos.Client;
 import front.gateways.ClientGateway;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
@@ -22,59 +22,59 @@ import static front.util.SessionUtil.getAuthToken;
 @ViewScoped
 public class LazyClientsBean implements Serializable {
 
-    private LazyDataModel<ClientDto> lazyModel;
+    private LazyDataModel<Client> lazyModel;
 
-    private ClientDto selectedClientDto;
+    private Client selectedClient;
 
     private ClientGateway clientGateway;
 
-    private List<ClientDto> clientDtos;
+    private List<Client> clients;
 
     @PostConstruct
     public void init() {
         clientGateway = new ClientGateway(getAuthToken());
-        clientDtos = clientGateway.readAll();
-        lazyModel = new LazyDataModel<ClientDto>() {
+        clients = clientGateway.readAll();
+        lazyModel = new LazyDataModel<Client>() {
             @Override
             public int getRowCount() {
                 return clientGateway.readAll().size();
             }
 
             @Override
-            public List<ClientDto> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-                return clientDtos.stream()
+            public List<Client> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+                return clients.stream()
                         .skip(first)
                         .filter(client -> client.getFullName().contains((String) filters.getOrDefault("fullName", "")))
                         .collect(Collectors.toList());
             }
 
             @Override
-            public ClientDto getRowData(String rowKey) {
+            public Client getRowData(String rowKey) {
                 return clientGateway.read(rowKey);
             }
 
             @Override
-            public Integer getRowKey(ClientDto clientDto) {
-                return clientDto.getId();
+            public Integer getRowKey(Client client) {
+                return client.getId();
             }
         };
 
     }
 
-    public LazyDataModel<ClientDto> getLazyModel() {
+    public LazyDataModel<Client> getLazyModel() {
         return lazyModel;
     }
 
-    public ClientDto getSelectedClientDto() {
-        return selectedClientDto;
+    public Client getSelectedClient() {
+        return selectedClient;
     }
 
-    public void setSelectedClientDto(ClientDto selectedClientDto) {
-        this.selectedClientDto = selectedClientDto;
+    public void setSelectedClient(Client selectedClient) {
+        this.selectedClient = selectedClient;
     }
 
     public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Client Selected", ((ClientDto) event.getObject()).getFullName());
+        FacesMessage msg = new FacesMessage("Client Selected", ((Client) event.getObject()).getFullName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }

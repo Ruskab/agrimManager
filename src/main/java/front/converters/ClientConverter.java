@@ -1,6 +1,6 @@
 package front.converters;
 
-import api.dtos.ClientDto;
+import front.dtos.Client;
 import front.gateways.ClientGateway;
 import org.primefaces.component.calendar.Calendar;
 
@@ -33,7 +33,7 @@ public class ClientConverter implements Converter {
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
         if (value != null) {
-            return String.valueOf(((ClientDto) value).getId());
+            return String.valueOf(((Client) value).getId());
         } else {
             return null;
         }

@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.ClientDto;
+import front.dtos.Client;
 import front.gateways.ClientGateway;
 import org.primefaces.PrimeFaces;
 
@@ -18,8 +18,8 @@ import static front.util.SessionUtil.getAuthToken;
 @ViewScoped
 public class ClientsBean implements Serializable {
 
-    private List<ClientDto> clients;
-    private ClientDto selectedClient;
+    private List<Client> clients;
+    private Client selectedClient;
 
     @PostConstruct
     public void init() {
@@ -43,19 +43,19 @@ public class ClientsBean implements Serializable {
         return options;
     }
 
-    public List<ClientDto> getClients() {
+    public List<Client> getClients() {
         return clients;
     }
 
-    public void setClients(List<ClientDto> clients) {
+    public void setClients(List<Client> clients) {
         this.clients = clients;
     }
 
-    public ClientDto getSelectedClient() {
+    public Client getSelectedClient() {
         return selectedClient;
     }
 
-    public void setSelectedClient(ClientDto selectedClient) {
+    public void setSelectedClient(Client selectedClient) {
         this.selectedClient = selectedClient;
     }
 
