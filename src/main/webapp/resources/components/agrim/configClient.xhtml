@@ -11,11 +11,11 @@
 
 
 <composite:interface>
-    <composite:attribute name="selectedClient" required="true" type="api.dtos.ClientDto"/>
+    <composite:attribute name="selectedClient" required="true" type="front.dtos.Client"/>
 </composite:interface>
 
 <composite:implementation>
-    <c:set value="#{cc.attrs.selectedClient}" target="#{configClientBean}" property="clientDto"/>
+    <c:set value="#{cc.attrs.selectedClient}" target="#{configClientBean}" property="client"/>
 
     <p:dialog id="configClient" widgetVar="configClientDialog" header="Client" modal="true"
               showEffect="fade" hideEffect="fade" resizable="false" styleClass="config-client-dialog" responsive="true">
