@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.dtos.Client;
 import front.gateways.ClientGateway;
 import com.mysql.cj.util.StringUtils;
@@ -25,7 +25,7 @@ public class CreateVehicleBean {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateVehicleBean.class);
     private boolean skip;
-    private VehicleDto selectedVehicleDto;
+    private Vehicle selectedVehicle;
     private Client selectedClient;
     private VehicleGateway vehicleGateway;
     private ClientGateway clientGateway;
@@ -34,7 +34,7 @@ public class CreateVehicleBean {
     public void init() {
         vehicleGateway = new VehicleGateway(getAuthToken());
         clientGateway = new ClientGateway(getAuthToken());
-        selectedVehicleDto = new VehicleDto();
+        selectedVehicle = new Vehicle();
     }
 
     public void create() {
@@ -44,8 +44,8 @@ public class CreateVehicleBean {
                     .addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
             return;
         }
-        selectedVehicleDto.setClientId(Integer.toString(selectedClient.getId()));
-        String vehicleId = vehicleGateway.create(selectedVehicleDto);
+        selectedVehicle.setClientId(Integer.toString(selectedClient.getId()));
+        String vehicleId = vehicleGateway.create(selectedVehicle);
         String message = StringUtils.isStrictlyNumeric(vehicleId) ? "Successful" : "Error";
 
         if ("Error".equals(message)) {
@@ -65,7 +65,7 @@ public class CreateVehicleBean {
 
     private void resertWizard() {
         PrimeFaces.current().executeScript("PF('createVehicleWizzard').loadStep('basicInfoTab', false)");
-        selectedVehicleDto = new VehicleDto();
+        selectedVehicle = new Vehicle();
         selectedClient = null;
     }
 
@@ -86,12 +86,12 @@ public class CreateVehicleBean {
         }
     }
 
-    public VehicleDto getSelectedVehicleDto() {
-        return selectedVehicleDto;
+    public Vehicle getSelectedVehicle() {
+        return selectedVehicle;
     }
 
-    public void setSelectedVehicleDto(VehicleDto selectedVehicleDto) {
-        this.selectedVehicleDto = selectedVehicleDto;
+    public void setSelectedVehicle(Vehicle selectedVehicle) {
+        this.selectedVehicle = selectedVehicle;
     }
 
     public Client getSelectedClient() {

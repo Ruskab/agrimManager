@@ -2,7 +2,7 @@ package front.beans;
 
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
@@ -48,7 +48,7 @@ public class DashboardBean {
         return mechanicGateway.searchInterventions(Integer.toString(mechanic.getId()), true);
     }
 
-    public VehicleDto searchVehicle(String vehicleId) {
+    public Vehicle searchVehicle(String vehicleId) {
         return vehicleGateway.read(vehicleId);
     }
 

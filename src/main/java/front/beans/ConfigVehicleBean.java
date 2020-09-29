@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.gateways.VehicleGateway;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +15,7 @@ import static front.util.SessionUtil.getAuthToken;
 @ViewScoped
 public class ConfigVehicleBean {
 
-    private VehicleDto selectedVehicleDto;
+    private Vehicle selectedVehicle;
     private VehicleGateway vehicleGateway;
 
     @PostConstruct
@@ -25,7 +25,7 @@ public class ConfigVehicleBean {
 
     public void save() {
         try {
-            vehicleGateway.update(selectedVehicleDto);
+            vehicleGateway.update(selectedVehicle);
         } catch (IllegalStateException e) {
             FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update vehicle"));
             return;
@@ -34,11 +34,11 @@ public class ConfigVehicleBean {
 
     }
 
-    public VehicleDto getSelectedVehicleDto() {
-        return selectedVehicleDto;
+    public Vehicle getSelectedVehicle() {
+        return selectedVehicle;
     }
 
-    public void setSelectedVehicleDto(VehicleDto selectedVehicleDto) {
-        this.selectedVehicleDto = selectedVehicleDto;
+    public void setSelectedVehicle(Vehicle selectedVehicle) {
+        this.selectedVehicle = selectedVehicle;
     }
 }

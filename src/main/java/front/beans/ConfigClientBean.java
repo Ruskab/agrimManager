@@ -1,7 +1,7 @@
 package front.beans;
 
 import front.dtos.Client;
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.gateways.ClientGateway;
 import front.gateways.VehicleGateway;
 
@@ -20,7 +20,7 @@ import static front.util.SessionUtil.getAuthToken;
 public class ConfigClientBean implements Serializable {
 
     private Client client;
-    private List<VehicleDto> vehicles;
+    private List<Vehicle> vehicles;
     private ClientGateway clientGateway;
     private VehicleGateway vehicleGateway;
 
@@ -51,11 +51,11 @@ public class ConfigClientBean implements Serializable {
         this.client = client;
     }
 
-    public List<VehicleDto> getVehicles() {
+    public List<Vehicle> getVehicles() {
         return vehicles;
     }
 
-    public void setVehicles(List<VehicleDto> vehicles) {
+    public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
 

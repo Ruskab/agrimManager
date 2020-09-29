@@ -22,7 +22,7 @@
                                  var="vehicle" value="#{lazyVehiclesBean.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
-                                 selection="#{lazyVehiclesBean.selectedVehicleDto}" lazy="true" filterDelay="200">
+                                 selection="#{lazyVehiclesBean.selectedVehicle}" lazy="true" filterDelay="200">
 
                         <p:ajax event="rowSelect" listener="#{lazyVehiclesBean.onRowSelect}"
                                 update="@(.vehicle-config-dialog)"
@@ -62,7 +62,7 @@
                     </p:dataTable>
 
                     <agrim:configvehicle id="vehiclesEditComponent"
-                                         selectedVehicle="#{lazyVehiclesBean.selectedVehicleDto}"
+                                         selectedVehicle="#{lazyVehiclesBean.selectedVehicle}"
                                          clientName="#{lazyVehiclesBean.clientName}"/>
                 </h:form>
 

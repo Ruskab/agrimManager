@@ -2,7 +2,7 @@ package front.beans;
 
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import front.dtos.FullIntervention;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
@@ -107,18 +107,18 @@ public class    LazyAllInterventionsBean implements Serializable {
 
                 return containsSearchString(intervention.getInterventionDto()
                         .getInterventionType(), filters.get("state"))
-                        && doFilterVehicleReference(intervention.getVehicleDto(), filters.get("interventionVehicle"))
+                        && doFilterVehicleReference(intervention.getVehicle(), filters.get("interventionVehicle"))
                         && globalContainsSearch(intervention, filters.get("globalFilter"));
             }
 
-            private boolean doFilterVehicleReference(VehicleDto vehicleDto, Object vehicleReference) {
+            private boolean doFilterVehicleReference(Vehicle vehicle, Object vehicleReference) {
                 if (!(vehicleReference instanceof String)) {
                     return true;
                 }
-                if (vehicleDto == null) {
+                if (vehicle == null) {
                     return true;
                 }
-                return vehicleDto.getVehicleDataSheet().toLowerCase().contains(((String) vehicleReference).toLowerCase());
+                return vehicle.getVehicleDataSheet().toLowerCase().contains(((String) vehicleReference).toLowerCase());
             }
 
             private boolean globalContainsSearch(FullIntervention fullIntervention, Object key) {
@@ -130,7 +130,7 @@ public class    LazyAllInterventionsBean implements Serializable {
                 return intervention.getTitle().toLowerCase().contains(searchExpresion)
                         || intervention.getInterventionType().toLowerCase().contains(searchExpresion)
                         || intervention.getStartTime().toString().toLowerCase().contains(searchExpresion)
-                        || fullIntervention.getVehicleDto()
+                        || fullIntervention.getVehicle()
                         .getVehicleDataSheet()
                         .toLowerCase()
                         .contains(searchExpresion);
@@ -161,14 +161,14 @@ public class    LazyAllInterventionsBean implements Serializable {
 
     private FullIntervention mapToFullIntervention(InterventionDto intervention, MechanicDto mechanic) {
         if (intervention.getVehicleId() != null) {
-            VehicleDto vehicle = vehicleGateway.read(intervention.getVehicleId());
+            Vehicle vehicle = vehicleGateway.read(intervention.getVehicleId());
             return FullIntervention.of(mechanic, intervention, vehicle);
         }
         return FullIntervention.of(mechanic, intervention);
     }
 
 
-    public String getVehicleReference(VehicleDto vehicleDto) {
+    public String getVehicleReference(Vehicle vehicleDto) {
         return String.format("%s - %s", vehicleDto.getBrand(), vehicleDto.getRegistrationPlate());
     }
 

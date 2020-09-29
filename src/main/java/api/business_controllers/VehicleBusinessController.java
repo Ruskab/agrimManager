@@ -2,7 +2,6 @@ package api.business_controllers;
 
 import api.daos.DaoFactory;
 import api.daos.DaoSupplier;
-import api.daos.VehicleDao;
 import api.dtos.VehicleDto;
 import api.entity.Client;
 import api.entity.Vehicle;
@@ -11,7 +10,6 @@ import api.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -30,11 +28,18 @@ public class VehicleBusinessController {
                     .orElseThrow(() -> NotFoundException.throwBecauseOf("Client not found"));
         }
         Vehicle vehicle = new VehicleBuilder(vehicleDto.getRegistrationPlate())
-                .setBrand(vehicleDto.getBrand()).setClient(client).setKMS(vehicleDto.getKms())
-                .setBodyOnFrame(vehicleDto.getBodyOnFrame()).setLastRevisionDate(vehicleDto.getLastRevisionDate())
-                .setItvDate(vehicleDto.getItvDate()).setNextItvDate(vehicleDto.getNextItvDate())
-                .setAirFilterReference(vehicleDto.getAirFilterReference()).setOilFilterReference(vehicleDto.getOilFilterReference())
-                .setFuelFilter(vehicleDto.getFuelFilter()).setMotorOil(vehicleDto.getMotorOil()).createVehicle();
+                .setBrand(vehicleDto.getBrand())
+                .setClient(client)
+                .setKMS(vehicleDto.getKms())
+                .setBodyOnFrame(vehicleDto.getBodyOnFrame())
+                .setLastRevisionDate(vehicleDto.getLastRevisionDate())
+                .setItvDate(vehicleDto.getItvDate())
+                .setNextItvDate(vehicleDto.getNextItvDate())
+                .setAirFilterReference(vehicleDto.getAirFilterReference())
+                .setOilFilterReference(vehicleDto.getOilFilterReference())
+                .setFuelFilter(vehicleDto.getFuelFilter())
+                .setMotorOil(vehicleDto.getMotorOil())
+                .createVehicle();
 
         DaoFactory.getFactory().getVehicleDao().create(vehicle);
         return vehicle.getId();

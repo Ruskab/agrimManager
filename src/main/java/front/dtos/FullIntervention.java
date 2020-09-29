@@ -2,18 +2,17 @@ package front.dtos;
 
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
 
 public class FullIntervention {
 
     private InterventionDto interventionDto;
-    private VehicleDto vehicleDto;
+    private Vehicle vehicle;
     private MechanicDto mechanicDto;
 
-    public static FullIntervention of(MechanicDto mechanicDto, InterventionDto interventionDto, VehicleDto vehicleDto) {
+    public static FullIntervention of(MechanicDto mechanicDto, InterventionDto interventionDto, Vehicle vehicleDto) {
         FullIntervention fullIntervention = new FullIntervention();
         fullIntervention.setMechanicDto(mechanicDto);
-        fullIntervention.setVehicleDto(vehicleDto);
+        fullIntervention.setVehicle(vehicleDto);
         fullIntervention.setInterventionDto(interventionDto);
         return fullIntervention;
     }
@@ -29,7 +28,7 @@ public class FullIntervention {
         if (interventionDto.getVehicleId() == null) {
             return "-";
         }
-        return vehicleDto.getVehicleDataSheet();
+        return vehicle.getVehicleDataSheet();
     }
 
     public InterventionDto getInterventionDto() {
@@ -40,12 +39,12 @@ public class FullIntervention {
         this.interventionDto = interventionDto;
     }
 
-    public VehicleDto getVehicleDto() {
-        return vehicleDto;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setVehicleDto(VehicleDto vehicleDto) {
-        this.vehicleDto = vehicleDto;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public MechanicDto getMechanicDto() {

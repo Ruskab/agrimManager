@@ -5,10 +5,9 @@ import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
-import api.dtos.VehicleDto;
-import api.dtos.builder.VehicleDtoBuilder;
 import api.object_mothers.FrontClientMother;
 import api.object_mothers.MechanicDtoMother;
+import front.dtos.Vehicle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -52,10 +51,10 @@ class VehicleGatewayIT {
     @Test
     void create_and_read_vehicle() {
         String clientId = clientGateway.create(FrontClientMother.client());
-        VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
-        String vehicleId = vehicleGateway.create(vehicleDto);
+        Vehicle vehicle = createVehicleDto(clientId, "AABBDDCC");
+        String vehicleId = vehicleGateway.create(vehicle);
 
-        VehicleDto createdVehicleDto = vehicleGateway.read(vehicleId);
+        Vehicle createdVehicleDto = vehicleGateway.read(vehicleId);
 
         assertThat(createdVehicleDto.getRegistrationPlate(), is("AABBDDCC"));
         assertThat(createdVehicleDto.getClientId(), is(clientId));
@@ -74,9 +73,9 @@ class VehicleGatewayIT {
     @Test
     void delete_vehicle() {
         String clientId = clientGateway.create(FrontClientMother.client());
-        VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
+        Vehicle vehicle = createVehicleDto(clientId, "AABBDDCC");
 
-        String vehicleId = vehicleGateway.create(vehicleDto);
+        String vehicleId = vehicleGateway.create(vehicle);
 
         vehicleGateway.delete(Integer.parseInt(vehicleId));
 
@@ -86,32 +85,32 @@ class VehicleGatewayIT {
     @Test
     void update_vehicle() {
         String clientId = clientGateway.create(FrontClientMother.client());
-        VehicleDto vehicleDto = createVehicleDto(clientId, "AABBDDCC");
-        String vehicleId = vehicleGateway.create(vehicleDto);
-        VehicleDto createdVehicleDto = vehicleGateway.read(vehicleId);
+        Vehicle vehicle = createVehicleDto(clientId, "AABBDDCC");
+        String vehicleId = vehicleGateway.create(vehicle);
+        Vehicle createdVehicleDto = vehicleGateway.read(vehicleId);
         createdVehicleDto.setRegistrationPlate("CCDDAABB");
 
         vehicleGateway.update(createdVehicleDto);
 
-        VehicleDto updatedVehicleDto = vehicleGateway.read(vehicleId);
+        Vehicle updatedVehicleDto = vehicleGateway.read(vehicleId);
         assertThat(updatedVehicleDto.getRegistrationPlate(), is("CCDDAABB"));
     }
 
-    private VehicleDto createVehicleDto(String clientId, String registrationPlate) {
-        return new VehicleDtoBuilder()
-                .setRegistrationPlate(registrationPlate)
-                .setClientId(clientId)
-                .setBrand("Opel")
-                .setKMS("03-03-2017 94744")
-                .setBodyOnFrame("VF1KC0JEF31065732")
-                .setLastRevisionDate(LocalDate.now().minusMonths(2))
-                .setItvDate(LocalDate.now().minusMonths(3))
-                .setNextItvDate(LocalDate.now().plusYears(1))
-                .setAirFilterReference("1813029400")
-                .setOilFilterReference("1812344000")
-                .setFuelFilter("181315400")
-                .setMotorOil("5.5  5W30")
-                .createVehicleDto();
+    private Vehicle createVehicleDto(String clientId, String registrationPlate) {
+        return Vehicle.builder()
+                .registrationPlate(registrationPlate)
+                .clientId(clientId)
+                .brand("Opel")
+                .kms("03-03-2017 94744")
+                .bodyOnFrame("VF1KC0JEF31065732")
+                .lastRevisionDate(LocalDate.now().minusMonths(2))
+                .itvDate(LocalDate.now().minusMonths(3))
+                .nextItvDate(LocalDate.now().plusYears(1))
+                .airFilterReference("1813029400")
+                .oilFilterReference("1812344000")
+                .fuelFilter("181315400")
+                .motorOil("5.5  5W30")
+                .build();
     }
 
     @AfterEach

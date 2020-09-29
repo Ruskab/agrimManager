@@ -2,7 +2,7 @@ package front.beans;
 
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
-import api.dtos.VehicleDto;
+import front.dtos.Vehicle;
 import api.entity.InterventionType;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
@@ -29,7 +29,7 @@ import static front.util.SessionUtil.getAuthToken;
 public class CreateInterventionBean {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateInterventionBean.class);
-    private VehicleDto selectedVehicle;
+    private Vehicle selectedVehicle;
     private InterventionDto selectedIntervention;
     private MechanicGateway mechanicGateway;
     private VehicleGateway vehicleGateway;
@@ -55,7 +55,7 @@ public class CreateInterventionBean {
         externalContext.redirect(externalContext.getRequestContextPath().concat("/backoffice/dashboard.xhtml"));
     }
 
-    public List<VehicleDto> searchVehicles(String query) {
+    public List<Vehicle> searchVehicles(String query) {
         return vehicleGateway.searchBy(query);
     }
 
@@ -84,11 +84,11 @@ public class CreateInterventionBean {
             return event.getNewStep();
     }
 
-    public VehicleDto getSelectedVehicle() {
+    public Vehicle getSelectedVehicle() {
         return selectedVehicle;
     }
 
-    public void setSelectedVehicle(VehicleDto selectedVehicle) {
+    public void setSelectedVehicle(Vehicle selectedVehicle) {
         this.selectedVehicle = selectedVehicle;
     }
 

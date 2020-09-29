@@ -38,7 +38,7 @@
                         </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{intervention.interventionVehicle}" priority="1">
-                            <h:outputText value="#{intervention.vehicleDto.vehicleDataSheet}"/>
+                            <h:outputText value="#{intervention.vehicle.vehicleDataSheet}"/>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.type']}"
                                   filterBy="#{intervention.interventionDto.interventionType}" filterMatchMode="equals" priority="1">

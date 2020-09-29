@@ -1,6 +1,6 @@
 package api.api_controllers.unittest;
 
-import api.AgrimDomainFactory;
+import api.AgrimBackEndDomainFactory;
 import api.api_controllers.VehicleApiController;
 import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
@@ -39,7 +39,7 @@ class VehicleApiControllerTest {
 
     @Test
     void create_vehicle() {
-        VehicleDto vehicleDto = AgrimDomainFactory.createVehicle();
+        VehicleDto vehicleDto = AgrimBackEndDomainFactory.createVehicleDto();
         doReturn(1).when(vehicleBusinessController).create(vehicleDto);
 
         Response response = vehicleApiController.create(vehicleDto);
@@ -55,7 +55,9 @@ class VehicleApiControllerTest {
 
     @Test
     void create_vehicle_without_vehicleDto_registrationPlate_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> vehicleApiController.create(new VehicleDtoBuilder().byDefault().setRegistrationPlate(null).createVehicleDto()));
+        assertThrows(FieldInvalidException.class, () -> vehicleApiController.create(new VehicleDtoBuilder().byDefault()
+                .setRegistrationPlate(null)
+                .createVehicleDto()));
     }
 
     @Test
@@ -68,7 +70,9 @@ class VehicleApiControllerTest {
 
     @Test
     void update_vehicle_without_vehicleDto_registationPlate_should_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> vehicleApiController.update("1", new VehicleDtoBuilder().byDefault().setRegistrationPlate(null).createVehicleDto()));
+        assertThrows(FieldInvalidException.class, () -> vehicleApiController.update("1", new VehicleDtoBuilder().byDefault()
+                .setRegistrationPlate(null)
+                .createVehicleDto()));
     }
 
     @Test
