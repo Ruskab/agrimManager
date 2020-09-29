@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.InterventionDto;
+import front.dtos.Intervention;
 import front.dtos.Mechanic;
 import front.dtos.Vehicle;
 import front.dtos.FullIntervention;
@@ -25,7 +25,7 @@ import static front.util.SessionUtil.getAuthToken;
 public class MyInterventionsBean implements Serializable {
 
     private List<FullIntervention> interventions;
-    private InterventionDto selectedInterventionDto;
+    private Intervention selectedIntervention;
     private Mechanic mechanic;
     private Map<String, String> vehicles = new HashMap<>();
     private String selectedVehicleReference;
@@ -52,7 +52,7 @@ public class MyInterventionsBean implements Serializable {
 
     }
 
-    private FullIntervention mapToFullIntervention(InterventionDto intervention, Mechanic mechanic) {
+    private FullIntervention mapToFullIntervention(Intervention intervention, Mechanic mechanic) {
         if (intervention.getVehicleId() != null) {
             Vehicle vehicle = vehicleGateway.read(intervention.getVehicleId());
             return FullIntervention.of(mechanic, intervention, vehicle);
@@ -68,12 +68,12 @@ public class MyInterventionsBean implements Serializable {
         this.interventions = interventions;
     }
 
-    public InterventionDto getSelectedInterventionDto() {
-        return selectedInterventionDto;
+    public Intervention getSelectedIntervention() {
+        return selectedIntervention;
     }
 
-    public void setSelectedInterventionDto(InterventionDto selectedInterventionDto) {
-        this.selectedInterventionDto = selectedInterventionDto;
+    public void setSelectedIntervention(Intervention selectedIntervention) {
+        this.selectedIntervention = selectedIntervention;
     }
 
     public Map<String, String> getVehicles() {

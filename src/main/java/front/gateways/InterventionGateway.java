@@ -1,6 +1,6 @@
 package front.gateways;
 
-import api.dtos.InterventionDto;
+import front.dtos.Intervention;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -40,27 +40,27 @@ public class InterventionGateway implements Serializable {
         this.authToken = authToken;
     }
 
-    public String create(InterventionDto interventionDto) {
+    public String create(Intervention intervention) {
         Response response = client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.entity(intervention, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.CREATED);
         return response.readEntity(String.class);
     }
 
-    public InterventionDto read(String interventionId) {
+    public Intervention read(String interventionId) {
         return client.target(UriBuilder.fromPath(resource).path("/" + interventionId))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(InterventionDto.class);
+                .get(Intervention.class);
     }
 
-    public void update(InterventionDto interventionDto) {
-        Response response = client.target(UriBuilder.fromPath(resource).path("/" + interventionDto.getId()))
+    public void update(Intervention intervention) {
+        Response response = client.target(UriBuilder.fromPath(resource).path("/" + intervention.getId()))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .put(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
+                .put(Entity.entity(intervention, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.OK);
     }
 

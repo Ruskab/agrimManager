@@ -5,13 +5,13 @@ import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
-import api.dtos.InterventionDto;
 import api.object_mothers.FrontClientMother;
+import api.object_mothers.FrontInterventionMother;
 import api.object_mothers.FrontMechanicMother;
-import api.object_mothers.InterventionDtoMother;
 import api.object_mothers.MechanicDtoMother;
 import front.AgrimDomainFactory;
 import front.dtos.Client;
+import front.dtos.Intervention;
 import front.dtos.Mechanic;
 import front.dtos.Vehicle;
 import org.apache.logging.log4j.LogManager;
@@ -68,7 +68,7 @@ class MechanicGatewayIT {
         String clientId = clientGateway.create(client);
         Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicle);
-        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
         Mechanic mechanic = FrontMechanicMother.mechanic();
         mechanic.setId(mechanicId);
         mechanicGateway.createIntervention(mechanic, interventionDto);
@@ -84,12 +84,12 @@ class MechanicGatewayIT {
         String clientId = clientGateway.create(clientDto);
         Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicle);
-        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
         Mechanic mechanic = FrontMechanicMother.mechanic();
         mechanic.setId(mechanicId);
         mechanicGateway.createIntervention(mechanic, interventionDto);
 
-        List<InterventionDto> interventionDtos = mechanicGateway.searchInterventions(Integer.toString(mechanicId), true);
+        List<Intervention> interventionDtos = mechanicGateway.searchInterventions(Integer.toString(mechanicId), true);
 
         assertThat(interventionDtos.isEmpty(), is(false));
 

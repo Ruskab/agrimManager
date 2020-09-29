@@ -21,7 +21,7 @@
                                  var="intervention" value="#{lazyAllInterventionsBean.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
-                                 selection="#{lazyAllInterventionsBean.selectedInterventionDto}" lazy="true" filterDelay="200">
+                                 selection="#{lazyAllInterventionsBean.selectedIntervention}" lazy="true" filterDelay="200">
 
                         <f:facet name="header">
                             <p:outputPanel>
@@ -30,18 +30,18 @@
                             </p:outputPanel>
                         </f:facet>
 
-                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.interventionDto.startTime}" priority="3">
-                            <h:outputText value="#{intervention.interventionDto.startTime}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.intervention.startTime}" priority="3">
+                            <h:outputText value="#{intervention.intervention.startTime}"/>
                         </p:column>
-                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.interventionDto.endTime}" priority="3">
-                            <h:outputText value="#{intervention.interventionDto.endTime}"/>
+                        <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.intervention.endTime}" priority="3">
+                            <h:outputText value="#{intervention.intervention.endTime}"/>
                         </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{intervention.interventionVehicle}" priority="1">
                             <h:outputText value="#{intervention.vehicle.vehicleDataSheet}"/>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.type']}"
-                                  filterBy="#{intervention.interventionDto.interventionType}" filterMatchMode="equals" priority="1">
+                                  filterBy="#{intervention.intervention.interventionType}" filterMatchMode="equals" priority="1">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('interventionTable').filter()" styleClass="custom-filter">
                                     <f:selectItem itemLabel="All" itemValue="" />
@@ -49,7 +49,7 @@
                                     <f:selectItem itemLabel="Caffe" itemValue="CAFFE" />
                                 </p:selectOneButton>
                             </f:facet>
-                            <h:outputText value="#{intervention.interventionDto.interventionType}"/>
+                            <h:outputText value="#{intervention.intervention.interventionType}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

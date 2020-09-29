@@ -6,10 +6,10 @@ import api.RestClientLoader;
 import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
-import api.dtos.InterventionDto;
+import front.dtos.Intervention;
 import front.dtos.Vehicle;
 import api.object_mothers.FrontClientMother;
-import api.object_mothers.InterventionDtoMother;
+import api.object_mothers.FrontInterventionMother;
 import api.object_mothers.MechanicDtoMother;
 import front.dtos.Client;
 import org.apache.logging.log4j.LogManager;
@@ -63,11 +63,11 @@ class InterventionGatewayIT {
         String clientId = clientGateway.create(clientDto);
         Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicle);
-        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
 
         String interventionId = interventionGateway.create(interventionDto);
 
-        InterventionDto createdInterventionDto = interventionGateway.read(interventionId);
+        Intervention createdInterventionDto = interventionGateway.read(interventionId);
         assertThat(createdInterventionDto.getVehicleId(), is(vehicleId));
         assertThat(createdInterventionDto.getInterventionType(), is("REPAIR"));
     }
@@ -78,7 +78,7 @@ class InterventionGatewayIT {
         String clientId = clientGateway.create(clientDto);
         Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicle);
-        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
         String interventionId = interventionGateway.create(interventionDto);
 
         interventionGateway.delete(Integer.parseInt(interventionId));
@@ -92,15 +92,15 @@ class InterventionGatewayIT {
         String clientId = clientGateway.create(clientDto);
         Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
         String vehicleId = vehicleGateway.create(vehicle);
-        InterventionDto interventionDto = InterventionDtoMother.withVehicle(vehicleId);
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
         String interventionId = interventionGateway.create(interventionDto);
-        InterventionDto createdInterventionDto = interventionGateway.read(interventionId);
-        createdInterventionDto.setTitle("new title");
-        interventionGateway.update(createdInterventionDto);
+        Intervention createdIntervention = interventionGateway.read(interventionId);
+        createdIntervention.setTitle("new title");
+        interventionGateway.update(createdIntervention);
 
-        InterventionDto updatedInterventionDto = interventionGateway.read(interventionId);
+        Intervention updatedIntervention = interventionGateway.read(interventionId);
 
-        assertThat(updatedInterventionDto.getTitle(), is("new title"));
+        assertThat(updatedIntervention.getTitle(), is("new title"));
     }
 
     @AfterEach

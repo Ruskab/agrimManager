@@ -1,6 +1,6 @@
 package front.gateways;
 
-import api.dtos.InterventionDto;
+import front.dtos.Intervention;
 import front.dtos.Mechanic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -53,18 +53,18 @@ public class MechanicGateway implements Serializable {
         return response.readEntity(String.class);
     }
 
-    public void createIntervention(Mechanic mechanic, InterventionDto interventionDto) {
+    public void createIntervention(Mechanic mechanic, Intervention intervention) {
         client.target(UriBuilder.fromPath(resource).path(mechanic.getId() + "/interventions").build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(Entity.entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.entity(intervention, MediaType.APPLICATION_JSON_TYPE));
     }
 
-    public void finishIntervention(Mechanic mechanic, InterventionDto interventionDto) {
-        Response response = client.target(UriBuilder.fromPath(resource).path(mechanic.getId() + "/interventions/" + interventionDto.getId() + "/finish").build())
+    public void finishIntervention(Mechanic mechanic, Intervention intervention) {
+        Response response = client.target(UriBuilder.fromPath(resource).path(mechanic.getId() + "/interventions/" + intervention.getId() + "/finish").build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .post(entity(interventionDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(entity(intervention, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.OK);
     }
 
@@ -91,11 +91,11 @@ public class MechanicGateway implements Serializable {
                 });
     }
 
-    public List<InterventionDto> searchInterventions(String mechanicId, Boolean active) {
+    public List<Intervention> searchInterventions(String mechanicId, Boolean active) {
         return client.target(UriBuilder.fromPath(resource).path(mechanicId + "/interventions").queryParam("active", active.toString()).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<InterventionDto>>() {
+                .get(new GenericType<List<Intervention>>() {
                 });
     }
 

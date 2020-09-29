@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.InterventionDto;
+import front.dtos.Intervention;
 import front.dtos.Mechanic;
 import front.dtos.Vehicle;
 import front.dtos.FullIntervention;
@@ -29,7 +29,7 @@ import static front.util.SessionUtil.getAuthToken;
 public class    LazyAllInterventionsBean implements Serializable {
 
     private LazyDataModel<FullIntervention> lazyModel;
-    private InterventionDto selectedInterventionDto;
+    private Intervention selectedIntervention;
     private List<Mechanic> mechanics;
     private Mechanic user;
     private List<FullIntervention> fullInterventions = new ArrayList<>();
@@ -71,20 +71,20 @@ public class    LazyAllInterventionsBean implements Serializable {
             @Override
             public FullIntervention getRowData(String rowKey) {
                 return fullInterventions.stream()
-                        .filter(i -> rowKey.equals(Integer.toString(i.getInterventionDto().getId())))
+                        .filter(i -> rowKey.equals(Integer.toString(i.getIntervention().getId())))
                         .findFirst()
                         .orElse(null);
             }
 
             @Override
             public Integer getRowKey(FullIntervention fullIntervention) {
-                return fullIntervention.getInterventionDto().getId();
+                return fullIntervention.getIntervention().getId();
             }
 
             private List<FullIntervention> sortRows(String sortField, SortOrder sortOrder, List<FullIntervention> interventions) {
-                Comparator<FullIntervention> startDateComparador = Comparator.comparing(interv -> interv.getInterventionDto()
+                Comparator<FullIntervention> startDateComparador = Comparator.comparing(interv -> interv.getIntervention()
                         .getStartTime());
-                Comparator<FullIntervention> endDateComparador = Comparator.comparing(interv -> interv.getInterventionDto()
+                Comparator<FullIntervention> endDateComparador = Comparator.comparing(interv -> interv.getIntervention()
                         .getEndTime());
                 switch (sortField) {
                     case "startTime":
@@ -105,7 +105,7 @@ public class    LazyAllInterventionsBean implements Serializable {
                     return true;
                 }
 
-                return containsSearchString(intervention.getInterventionDto()
+                return containsSearchString(intervention.getIntervention()
                         .getInterventionType(), filters.get("state"))
                         && doFilterVehicleReference(intervention.getVehicle(), filters.get("interventionVehicle"))
                         && globalContainsSearch(intervention, filters.get("globalFilter"));
@@ -122,7 +122,7 @@ public class    LazyAllInterventionsBean implements Serializable {
             }
 
             private boolean globalContainsSearch(FullIntervention fullIntervention, Object key) {
-                InterventionDto intervention = fullIntervention.getInterventionDto();
+                Intervention intervention = fullIntervention.getIntervention();
                 if (!(key instanceof String)) {
                     return true;
                 }
@@ -159,7 +159,7 @@ public class    LazyAllInterventionsBean implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    private FullIntervention mapToFullIntervention(InterventionDto intervention, Mechanic mechanic) {
+    private FullIntervention mapToFullIntervention(Intervention intervention, Mechanic mechanic) {
         if (intervention.getVehicleId() != null) {
             Vehicle vehicle = vehicleGateway.read(intervention.getVehicleId());
             return FullIntervention.of(mechanic, intervention, vehicle);
@@ -176,12 +176,12 @@ public class    LazyAllInterventionsBean implements Serializable {
         return lazyModel;
     }
 
-    public InterventionDto getSelectedInterventionDto() {
-        return selectedInterventionDto;
+    public Intervention getSelectedIntervention() {
+        return selectedIntervention;
     }
 
-    public void setSelectedInterventionDto(InterventionDto selectedInterventionDto) {
-        this.selectedInterventionDto = selectedInterventionDto;
+    public void setSelectedIntervention(Intervention selectedIntervention) {
+        this.selectedIntervention = selectedIntervention;
     }
 
     public String getSelectedVehicleReference() {
