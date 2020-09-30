@@ -23,7 +23,7 @@ public class AuthenticationApiController {
 
     public static final String AUTH = "/authentication";
 
-    private final AuthenticationBusinessController authenticationBusinessController = new AuthenticationBusinessController();
+    private AuthenticationBusinessController authenticationBusinessController = new AuthenticationBusinessController();
 
 
     @POST

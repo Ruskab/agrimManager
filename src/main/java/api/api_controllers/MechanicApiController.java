@@ -30,7 +30,7 @@ public class MechanicApiController {
 
     public static final String ID = "/{id}";
 
-    private final MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
+    private MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
     @POST
     @Secured
@@ -72,11 +72,7 @@ public class MechanicApiController {
             @PathParam("id")
                     String mechanicId) {
         this.validateId(mechanicId, "mechanic id");
-        try {
-            return Response.ok().entity(this.mechanicBusinessController.read(mechanicId)).build();
-        } catch (NotFoundException e) {
-            return Response.status(404).build();
-        }
+        return Response.ok().entity(this.mechanicBusinessController.read(mechanicId)).build();
     }
 
     @GET

@@ -29,7 +29,7 @@ public class VehicleApiController {
 
     public static final String ID_ID = "/{id}";
 
-    private final VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
+    private VehicleBusinessController vehicleBusinessController = new VehicleBusinessController();
 
     @POST
     @Secured

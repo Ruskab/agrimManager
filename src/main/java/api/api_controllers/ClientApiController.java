@@ -3,7 +3,6 @@ package api.api_controllers;
 import api.business_controllers.ClientBusinessController;
 import api.dtos.ClientDto;
 import api.exceptions.FieldInvalidException;
-import api.exceptions.NotFoundException;
 import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
@@ -32,7 +31,7 @@ public class ClientApiController {
     public static final String ID = "/{id}";
     private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
 
-    private final ClientBusinessController clientBusinessController = new ClientBusinessController();
+    private ClientBusinessController clientBusinessController = new ClientBusinessController();
 
     @POST
     @Secured
@@ -66,11 +65,7 @@ public class ClientApiController {
     @Path("{id}")
     public Response getById(@ApiParam(value = "Get by id", required = true) @PathParam("id") String id) {
         this.validateId(id, "client id");
-        try {
-            return Response.ok().entity(this.clientBusinessController.read(id)).build();
-        } catch (NotFoundException e) {
-            return Response.status(404).build();
-        }
+        return Response.ok().entity(this.clientBusinessController.read(id)).build();
     }
 
     @GET

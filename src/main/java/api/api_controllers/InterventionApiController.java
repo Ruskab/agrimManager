@@ -31,7 +31,7 @@ public class InterventionApiController {
 
     public static final String ID = "/{id}";
 
-    private final InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
+    private InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
 
     private static final Logger LOGGER = LogManager.getLogger(InterventionApiController.class);
 
@@ -68,11 +68,7 @@ public class InterventionApiController {
             @PathParam("id")
                     String interventionId) {
         this.validateId(interventionId, "Intervention id");
-        try {
-            return Response.ok().entity(this.interventionBusinessController.read(interventionId)).build();
-        } catch (NotFoundException e) {
-            return Response.status(404).build();
-        }
+        return Response.ok().entity(this.interventionBusinessController.read(interventionId)).build();
     }
 
     @PUT
