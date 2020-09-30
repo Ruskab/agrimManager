@@ -1,6 +1,6 @@
 package front.beans;
 
-import api.dtos.CredentialsDto;
+import front.dtos.Credentials;
 import front.dtos.Mechanic;
 import api.exceptions.UnauthorizedException;
 import front.gateways.AuthenticationGateway;
@@ -39,7 +39,8 @@ public class LoginBean {
 
     public void login() throws IOException {
         try {
-            String authToken = "Bearer " + authenticateGateway.authenticate(CredentialsDto.create(userName, password));
+            Credentials credentials = Credentials.builder().username(userName).password(password).build();
+            String authToken = "Bearer " + authenticateGateway.authenticate(credentials);
             initSession(authToken);
             redirect(HOME_PAGE);
         } catch (UnauthorizedException e) {
@@ -49,15 +50,18 @@ public class LoginBean {
     }
 
     private void initSession(String authToken) {
-        List<Mechanic> mechanics = new MechanicGateway(authToken).searchByCredentials(userName);
+        List<Mechanic> mechanics = new MechanicGateway(authToken).searchByName(userName);
 
         if (mechanics.stream().noneMatch(mechanic -> password.equals(mechanic.getPassword()))) {
             throw new UnauthorizedException("mechanic not found with given credentials");
         }
+
         Faces.getSession().setAttribute("username", userName);
-        Faces.getSession().setAttribute("mechanic", mechanics.get(0));
+        Mechanic user = mechanics.get(0);
+        //TODO a lo mejor la brecha es por guardar la pass aqui sin encriptar :(
+        user.setPassword(null);
         Faces.getSession().setAttribute("token", authToken);
-        sessionBean.setMechanic(mechanics.get(0));
+        sessionBean.setMechanic(user);
     }
 
     private void redirect(String path) throws IOException {

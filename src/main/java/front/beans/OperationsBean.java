@@ -1,8 +1,8 @@
 package front.beans;
 
+import front.dtos.Client;
 import front.dtos.Intervention;
 import front.dtos.Mechanic;
-import front.dtos.Client;
 import front.dtos.Vehicle;
 import front.gateways.ClientGateway;
 import front.gateways.MechanicGateway;
@@ -20,6 +20,7 @@ import org.primefaces.model.DefaultDashboardModel;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.security.SecureRandom;
@@ -32,7 +33,6 @@ import java.util.List;
 import java.util.Random;
 
 import static front.util.SessionUtil.getAuthToken;
-import static front.util.SessionUtil.getSessionMechanic;
 
 
 @ManagedBean
@@ -48,6 +48,10 @@ public class OperationsBean {
     private DashboardModel model;
     private Random rnd = new SecureRandom();
 
+    @ManagedProperty(value = "#{sessionBean}")
+    private SessionBean sessionBean;
+
+
     public Mechanic getMechanic() {
         return mechanic;
     }
@@ -62,7 +66,7 @@ public class OperationsBean {
         vehicleGateway = new VehicleGateway(getAuthToken());
         mechanicGateway = new MechanicGateway(getAuthToken());
         initDashboard();
-        mechanic = getSessionMechanic("mechanic");
+        mechanic = sessionBean.getMechanic();
 
     }
 
