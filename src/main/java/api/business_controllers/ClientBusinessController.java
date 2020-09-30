@@ -3,10 +3,9 @@ package api.business_controllers;
 import api.daos.DaoFactory;
 import api.daos.DaoSupplier;
 import api.dtos.ClientDto;
-import api.dtos.ClientVehiclesDto;
+import api.dtos.VehicleDto;
 import api.dtos.mappers.ClientMapper;
 import api.entity.Client;
-import api.entity.Vehicle;
 import api.exceptions.NotFoundException;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class ClientBusinessController {
         DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
     }
 
-    private ClientMapper clientMapper = ClientMapper.INSTANCE;
+    private final ClientMapper clientMapper = ClientMapper.INSTANCE;
 
 
     public ClientBusinessController() {
@@ -74,29 +73,21 @@ public class ClientBusinessController {
                         () -> NotFoundException.throwBecauseOf(CLIENT_ID + id));
     }
 
-    public Optional<ClientVehiclesDto> readClientVehicles(int clientId) {
-        return DaoFactory.getFactory().getClientDao()
-                .read(clientId)
-                .map(this::mapClientVehiclesDto)
-                .or(Optional::empty);
-    }
-
-    private ClientVehiclesDto mapClientVehiclesDto(Client client) {
-        return ClientVehiclesDto.create(clientMapper.toClientDto(client), getClientVehicles(client));
-    }
-
-    private List<Integer> getClientVehicles(Client client) {
-        return DaoFactory.getFactory().getVehicleDao()
-                .findByClient(client)
-                .map(Vehicle::getId)
-                .collect(toList());
-    }
-
     public List<ClientDto> searchByFullName(String fullName) {
         return DaoFactory.getFactory().getClientDao()
                 .findAll()
                 .filter(client -> client.getFullName().toLowerCase().contains(fullName.toLowerCase()))
                 .map(clientMapper::toClientDto)
                 .collect(toList());
+    }
+
+    public List<VehicleDto> searchClientVehicles(String clientId) {
+        Optional<Client> optClient = DaoFactory.getFactory().getClientDao().read(Integer.parseInt(clientId));
+        return optClient.map(this::findVehiclesByClient)
+                .orElseThrow(() -> NotFoundException.throwBecauseOf("Client not found"));
+    }
+
+    private List<VehicleDto> findVehiclesByClient(Client client) {
+        return DaoFactory.getFactory().getVehicleDao().findByClient(client).map(VehicleDto::new).collect(toList());
     }
 }

@@ -79,7 +79,7 @@ class MechanicApiControllerTest {
         String nonExistentMechanicId = "999";
         doThrow(NotFoundException.class).when(mechanicBusinessController).read(nonExistentMechanicId);
 
-        assertThrows(NotFoundException.class, () -> mechanicApiController.read(nonExistentMechanicId));
+        assertThrows(NotFoundException.class, () -> mechanicApiController.getById(nonExistentMechanicId));
     }
 
     @Test

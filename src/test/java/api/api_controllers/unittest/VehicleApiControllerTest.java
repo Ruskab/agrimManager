@@ -65,7 +65,7 @@ class VehicleApiControllerTest {
         String nonExistentVehicleId = "999";
         doThrow(NotFoundException.class).when(vehicleBusinessController).read(nonExistentVehicleId);
 
-        assertThrows(NotFoundException.class, () -> vehicleApiController.read(nonExistentVehicleId));
+        assertThrows(NotFoundException.class, () -> vehicleApiController.getById(nonExistentVehicleId));
     }
 
     @Test

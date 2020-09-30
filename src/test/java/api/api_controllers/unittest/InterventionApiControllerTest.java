@@ -74,7 +74,7 @@ class InterventionApiControllerTest {
         String nonExistentInterventionId = "999";
         doThrow(NotFoundException.class).when(interventionBusinessController).read(nonExistentInterventionId);
 
-        assertThrows(NotFoundException.class, () -> interventionApiController.read(nonExistentInterventionId));
+        assertThrows(NotFoundException.class, () -> interventionApiController.getById(nonExistentInterventionId));
     }
 
     @Test

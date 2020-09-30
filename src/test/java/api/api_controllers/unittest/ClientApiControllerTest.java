@@ -73,7 +73,7 @@ class ClientApiControllerTest {
         String nonExistentClientId = "999";
         doThrow(NotFoundException.class).when(clientServiceMock).read(nonExistentClientId);
 
-        assertThrows(NotFoundException.class, () -> clientApiController.read(nonExistentClientId));
+        assertThrows(NotFoundException.class, () -> clientApiController.getById(nonExistentClientId));
     }
 
     @Test

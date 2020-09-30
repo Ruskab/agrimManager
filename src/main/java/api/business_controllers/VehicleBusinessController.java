@@ -88,12 +88,4 @@ public class VehicleBusinessController {
                 .filter(vehicleDto -> vehicleDto.getVehicleDataSheet().toLowerCase().contains(query.toLowerCase()))
                 .collect(toList());
     }
-
-    public List<VehicleDto> searchByClient(String clientId) {
-        Optional<Client> optClient = DaoFactory.getFactory().getClientDao().read(Integer.parseInt(clientId));
-        return optClient.stream()
-                .flatMap(client -> DaoFactory.getFactory().getVehicleDao().findByClient(client))
-                .map(VehicleDto::new)
-                .collect(toList());
-    }
 }

@@ -14,6 +14,7 @@ import org.primefaces.event.FlowEvent;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -34,6 +35,10 @@ public class CreateInterventionBean {
     private VehicleGateway vehicleGateway;
     private boolean isCaffe;
 
+    @ManagedProperty(value="#{sessionBean}")
+    private SessionBean sessionBean;
+
+
     @PostConstruct
     public void init() {
         mechanicGateway = new MechanicGateway(getAuthToken());
@@ -42,7 +47,7 @@ public class CreateInterventionBean {
     }
 
     public void create() throws IOException {
-        Mechanic mechanic = (Mechanic) Faces.getSession().getAttribute("mechanic");
+        Mechanic mechanic = sessionBean.getMechanic();
         validateSelection();
         selectedIntervention.setStartTime(LocalDateTime.now());
         selectedIntervention.setVehicleId(selectedVehicle != null ? Integer.toString(selectedVehicle.getId()) : null);
@@ -98,5 +103,13 @@ public class CreateInterventionBean {
 
     public void setSelectedIntervention(Intervention selectedIntervention) {
         this.selectedIntervention = selectedIntervention;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
+    }
+
+    public SessionBean getSessionBean() {
+        return sessionBean;
     }
 }

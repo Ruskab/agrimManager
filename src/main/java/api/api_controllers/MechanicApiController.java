@@ -1,6 +1,5 @@
 package api.api_controllers;
 
-import api.business_controllers.InterventionBusinesssController;
 import api.business_controllers.MechanicBusinessController;
 import api.dtos.InterventionDto;
 import api.dtos.MechanicDto;
@@ -10,6 +9,7 @@ import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -30,20 +30,17 @@ public class MechanicApiController {
 
     public static final String ID = "/{id}";
 
-    public static final String ID_INTERVENTIONS = ID + "/interventions";
-
-    private MechanicBusinessController mechanicBusinesssController = new MechanicBusinessController();
-    private InterventionBusinesssController interventionBusinesssController = new InterventionBusinesssController();
+    private final MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
     @POST
     @Secured
     @ApiOperation(value = "Create new Mechanic")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(MechanicDto mechanicDto) {
+    public Response create(@ApiParam(value = "Mechanic", required = true) MechanicDto mechanicDto) {
         this.validate(mechanicDto, "mechanicDto");
         this.validate(mechanicDto.getName(), "mechanicDto Name");
         this.validate(mechanicDto.getPassword(), "mechanicDto Password");
-        return Response.status(201).entity(mechanicBusinesssController.create(mechanicDto)).build();
+        return Response.status(201).entity(mechanicBusinessController.create(mechanicDto)).build();
     }
 
     @POST
@@ -51,64 +48,94 @@ public class MechanicApiController {
     @ApiOperation(value = "Create new Mechanic Intervention")
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/interventions")
-    public void createIntervention(@PathParam("id") String mechanicId, InterventionDto interventionDto) {
+    public Response createIntervention(
+            @ApiParam(value = "Mechanic ID", required = true)
+            @PathParam("id")
+                    String mechanicId,
+            @ApiParam(value = "Intervention", required = true)
+                    InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
         this.validate(interventionDto.getInterventionType(), "State");
         this.validate(interventionDto.getStartTime(), "Start Time");
         this.validateId(mechanicId, "Mechanic id");
-        this.mechanicBusinesssController.createIntervention(mechanicId, interventionDto);
+        this.mechanicBusinessController.createIntervention(mechanicId, interventionDto);
+        return Response.status(201).build();
     }
-
-    @GET
-    @Secured
-    @ApiOperation(value = "Get mechanics")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<MechanicDto> read(@QueryParam("username") String username, @QueryParam("password") String password) {
-        if (username != null && password != null) {
-             return mechanicBusinesssController.searchBy(username, password);
-        }
-        return mechanicBusinesssController.readAll();
-    }
-
-    @GET
-    @Secured
-    @ApiOperation(value = "Get active interventions")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}/interventions")
-    public List<InterventionDto> readInterventions(@PathParam("id") Integer id, @QueryParam("active") Boolean active) {
-        return mechanicBusinesssController.getMechanicInterventions(id, false);
-    }
-
-    @POST
-    @ApiOperation(value = "Finish active information")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("{id}/interventions/{interventionId}/finish")
-    public Response finishIntervention(@PathParam("id") String id, @PathParam("interventionId") String interventionId) {
-        this.validateId(id, "intervention id: ");
-        this.validateId(interventionId, "intervention id: ");
-        this.mechanicBusinesssController.finishIntervention(Integer.parseInt(id), interventionId);
-        return Response.status(200).build();
-    }
-
 
     @GET
     @Secured
     @ApiOperation(value = "Get mechanic by ID")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public MechanicDto read(@PathParam("id") String id) {
-        this.validateId(id, "mechanic id");
-        return this.mechanicBusinesssController.read(id);
-        //todo handle exceptions like not found
+    public Response getById(
+            @ApiParam(value = "Mechanic ID", required = true)
+            @PathParam("id")
+                    String mechanicId) {
+        this.validateId(mechanicId, "mechanic id");
+        try {
+            return Response.ok().entity(this.mechanicBusinessController.read(mechanicId)).build();
+        } catch (NotFoundException e) {
+            return Response.status(404).build();
+        }
     }
+
+    @GET
+    @Secured
+    @ApiOperation(value = "Get mechanics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<MechanicDto> listAll(
+            @ApiParam(value = "Mechanic username")
+            @QueryParam("username")
+                    String username) {
+        if (username != null) {
+            return mechanicBusinessController.searchBy(username);
+        }
+        return mechanicBusinessController.readAll();
+    }
+
+    @GET
+    @Secured
+    @ApiOperation(value = "Get mechanic interventions")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}/interventions")
+    public List<InterventionDto> readInterventions(
+            @PathParam("id")
+            @ApiParam(value = "Mechanic ID", required = true)
+                    Integer id,
+            @ApiParam(value = "Filter by active interventions", type = "Boolean")
+            @QueryParam("active")
+                    Boolean active) {
+        return mechanicBusinessController.getMechanicInterventions(id, active);
+    }
+
+    @POST
+    @ApiOperation(value = "Finish active information")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{id}/interventions/{interventionId}/finish")
+    public Response finishIntervention(
+            @ApiParam(value = "Mechanic ID", required = true)
+            @PathParam("id")
+                    String mechanicId,
+            @ApiParam(value = "Active intervention ID", required = true)
+            @PathParam("interventionId")
+                    String interventionId) {
+        this.validateId(mechanicId, "intervention id: ");
+        this.validateId(interventionId, "intervention id: ");
+        this.mechanicBusinessController.finishIntervention(Integer.parseInt(mechanicId), interventionId);
+        return Response.ok().build();
+    }
+
 
     @DELETE
     @Secured
     @ApiOperation(value = "Delete mechanic by Id")
     @Path("{id}")
-    public Response delete(@PathParam("id") String id) {
-        this.validateId(id, "client id: ");
-        this.mechanicBusinesssController.delete(id);
+    public Response delete(
+            @ApiParam(value = "Mechanic ID", required = true)
+            @PathParam("id")
+                    String mechanicId) {
+        this.validateId(mechanicId, "client id: ");
+        this.mechanicBusinessController.delete(mechanicId);
         return Response.status(204).build();
     }
 

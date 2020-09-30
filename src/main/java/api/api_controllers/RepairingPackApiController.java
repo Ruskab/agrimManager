@@ -33,12 +33,12 @@ public class RepairingPackApiController {
     }
 
 
-    public RepairingPackDto read(String id) {
+    public RepairingPackDto getById(String id) {
         this.validateId(id, "RepairingPack id");
         return this.repairingPackBusinessController.read(id);
     }
 
-    public List<RepairingPackDto> readAll() {
+    public List<RepairingPackDto> listAll() {
         return this.repairingPackBusinessController.readAll();
     }
 

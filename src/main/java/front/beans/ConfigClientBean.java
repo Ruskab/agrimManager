@@ -3,7 +3,6 @@ package front.beans;
 import front.dtos.Client;
 import front.dtos.Vehicle;
 import front.gateways.ClientGateway;
-import front.gateways.VehicleGateway;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -22,25 +21,25 @@ public class ConfigClientBean implements Serializable {
     private Client client;
     private List<Vehicle> vehicles;
     private ClientGateway clientGateway;
-    private VehicleGateway vehicleGateway;
 
     @PostConstruct
     public void init() {
         clientGateway = new ClientGateway(getAuthToken());
-        vehicleGateway = new VehicleGateway(getAuthToken());
     }
 
     public void save() {
         try {
             clientGateway.update(client);
-            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update client"));
-        }catch (IllegalStateException e){
-            FacesContext.getCurrentInstance().addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update client"));
+            FacesContext.getCurrentInstance()
+                    .addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update client"));
+        } catch (IllegalStateException e) {
+            FacesContext.getCurrentInstance()
+                    .addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update client"));
         }
     }
 
     public void searchClientVehicles() {
-        vehicles = vehicleGateway.searchBy(client);
+        vehicles = clientGateway.searchClientVehicles(client);
     }
 
     public Client getClient() {
