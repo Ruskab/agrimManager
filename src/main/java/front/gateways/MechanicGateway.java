@@ -83,7 +83,7 @@ public class MechanicGateway implements Serializable {
                 .get(Mechanic.class);
     }
 
-    public List<Mechanic> searchByCredentials(String username) {
+    public List<Mechanic> searchByName(String username) {
         return client.target(UriBuilder.fromPath(resource).queryParam("username", username).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)

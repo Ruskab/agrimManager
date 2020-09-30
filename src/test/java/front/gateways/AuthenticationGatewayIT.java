@@ -6,6 +6,7 @@ import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
 import api.dtos.CredentialsDto;
 import api.object_mothers.MechanicDtoMother;
+import front.dtos.Credentials;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -41,7 +42,7 @@ class AuthenticationGatewayIT {
 
     @Test
     void authenticate_user() {
-        CredentialsDto credentialsDto = new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
+        Credentials credentialsDto = new Credentials(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
 
         String token = authenticationGateway.authenticate(credentialsDto);
 

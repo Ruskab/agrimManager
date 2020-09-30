@@ -1,7 +1,6 @@
 package front.gateways;
 
-import api.dtos.CredentialsDto;
-import api.exceptions.UnauthorizedException;
+import front.dtos.Credentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -9,6 +8,7 @@ import front.util.PropertyLoader;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 
+import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -38,17 +38,17 @@ public class AuthenticationGateway implements Serializable {
         resource = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(AUTHENTICATION);
     }
 
-    public String authenticate(CredentialsDto credentialsDto) throws UnauthorizedException {
+    public String authenticate(Credentials credentials) throws NotAuthorizedException {
         Response response = client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(credentialsDto, MediaType.APPLICATION_JSON_TYPE));
+                .post(Entity.entity(credentials, MediaType.APPLICATION_JSON_TYPE));
         checkResponseStatus(response, Response.Status.OK);
         return response.readEntity(String.class);
     }
 
     private void checkResponseStatus(Response response, Response.Status status) {
         if (response.getStatus() != status.getStatusCode()) {
-            throw new UnauthorizedException(String.format("API response invalid status: %s", response.getStatus()));
+            throw new NotAuthorizedException(String.format("API response invalid status: %s", response.getStatus()));
         }
     }
 
