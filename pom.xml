@@ -438,7 +438,7 @@
 				<configuration>
 					<argLine>-Duser.timezone=UTC</argLine>
 					<excludes>
-						<exclude>**/LoginEndToEnd.java</exclude>
+						<exclude>**/WorkflowEndToEnd.java</exclude>
 					</excludes>
 				</configuration>
 				<dependencies>

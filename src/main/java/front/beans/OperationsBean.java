@@ -232,6 +232,14 @@ public class OperationsBean {
         clients.forEach(client -> clientGateway.delete(client.getId()));
     }
 
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
+    }
+
 
 }
 

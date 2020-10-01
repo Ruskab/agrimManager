@@ -29,7 +29,7 @@
 
                             <p:ajax event="rowSelect" update="@(.config-client-dialog)" oncomplete="PF('configClientDialog').show()"/>
 
-                            <p:column headerText="Client" sortBy="#{client.fullName}"
+                            <p:column styleClass="d-full-name" headerText="Client" sortBy="#{client.fullName}"
                                       filterBy="#{client.fullName}" priority="1">
                                 <h:outputText value="#{client.fullName}"/>
                             </p:column>
