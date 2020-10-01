@@ -44,7 +44,7 @@ public class DashboardBean {
     }
 
     private List<Intervention> searchActiveInterventions(Mechanic mechanic) {
-        return mechanicGateway.searchInterventions(Integer.toString(mechanic.getId()), true);
+        return mechanicGateway.searchInterventionsByFilter(Integer.toString(mechanic.getId()), true);
     }
 
     public Vehicle searchVehicle(String vehicleId) {
