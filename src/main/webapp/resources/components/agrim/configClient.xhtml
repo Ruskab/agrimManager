@@ -41,7 +41,7 @@
                                 <p:message for="fullName"/>
                             </p:panelGrid>
                         </p:panel>
-                        <p:commandButton id="saveButton" value="Save" style="margin-top: 2%;"
+                        <p:commandButton id="saveButton" value="Save" style="margin-top: 2%;" styleClass="d-save-button"
                                          process="@(.edit-client-form)"
                                          action="#{configClientBean.save}"
                                          update="@(.clients-data-view), @(.edit-client-panel)"/>

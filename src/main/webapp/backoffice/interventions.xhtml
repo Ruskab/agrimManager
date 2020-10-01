@@ -15,9 +15,9 @@
 
         <ui:define name="content">
             <div class="p-col">
-                <h:form id="data-view-vehicles-form">
+                <h:form id="data-view-all-interventions-form">
 
-                    <p:dataTable id="interventionTable" styleClass="interventions-datatable" widgetVar="interventionTable"
+                    <p:dataTable id="myInterventionTable" styleClass="interventions-datatable" widgetVar="interventionTable"
                                  var="intervention" value="#{lazyAllInterventionsBean.lazyModel}" paginator="true" rows="10"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"
