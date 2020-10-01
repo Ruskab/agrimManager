@@ -89,7 +89,7 @@ class MechanicGatewayIT {
         mechanic.setId(mechanicId);
         mechanicGateway.createIntervention(mechanic, interventionDto);
 
-        List<Intervention> interventionDtos = mechanicGateway.searchInterventions(Integer.toString(mechanicId), true);
+        List<Intervention> interventionDtos = mechanicGateway.searchInterventionsByFilter(Integer.toString(mechanicId), false);
 
         assertThat(interventionDtos.isEmpty(), is(false));
 

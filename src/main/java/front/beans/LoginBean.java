@@ -2,7 +2,6 @@ package front.beans;
 
 import front.dtos.Credentials;
 import front.dtos.Mechanic;
-import api.exceptions.UnauthorizedException;
 import front.gateways.AuthenticationGateway;
 import front.gateways.MechanicGateway;
 import org.omnifaces.util.Faces;
@@ -15,6 +14,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.NotAuthorizedException;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class LoginBean {
             String authToken = "Bearer " + authenticateGateway.authenticate(credentials);
             initSession(authToken);
             redirect(HOME_PAGE);
-        } catch (UnauthorizedException e) {
+        } catch (NotAuthorizedException e) {
             showMessage(FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!");
             redirect(LOGIN_PAGE);
         }
@@ -53,7 +53,7 @@ public class LoginBean {
         List<Mechanic> mechanics = new MechanicGateway(authToken).searchByName(userName);
 
         if (mechanics.stream().noneMatch(mechanic -> password.equals(mechanic.getPassword()))) {
-            throw new UnauthorizedException("mechanic not found with given credentials");
+            throw new NotAuthorizedException("mechanic not found with given credentials");
         }
 
         Faces.getSession().setAttribute("username", userName);

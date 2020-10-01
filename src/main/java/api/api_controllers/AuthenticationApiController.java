@@ -6,6 +6,7 @@ import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -22,14 +23,14 @@ public class AuthenticationApiController {
 
     public static final String AUTH = "/authentication";
 
-    private final AuthenticationBusinessController authenticationBusinesssController = new AuthenticationBusinessController();
+    private AuthenticationBusinessController authenticationBusinessController = new AuthenticationBusinessController();
 
 
     @POST
-    @ApiOperation(value = "Auth mechanic")
+    @ApiOperation(value = "User authorization")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response authenticateUser(CredentialsDto credentials) {
+    public Response authenticateUser(@ApiParam(value = "user and password pair", required = true) CredentialsDto credentials) {
         try {
             String username = credentials.getUsername();
             String password = credentials.getPassword();
@@ -49,7 +50,7 @@ public class AuthenticationApiController {
     private void authenticate(String username, String password) throws NotFoundException {
         // Authenticate against a database, LDAP, file or whatever
         // Throw an Exception if the credentials are invalid
-        authenticationBusinesssController.authenticateCredentials(username, password);
+        authenticationBusinessController.authenticateCredentials(username, password);
     }
 
     private String issueToken(String username, String password) {

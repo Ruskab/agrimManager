@@ -28,7 +28,7 @@ public class MechanicBusinessController {
         DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
     }
 
-    private InterventionBusinesssController interventionBO = new InterventionBusinesssController();
+    private final InterventionBusinesssController interventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
         Mechanic mechanic = new Mechanic(mechanicDto);

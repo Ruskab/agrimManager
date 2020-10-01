@@ -2,9 +2,7 @@ package api.api_controllers;
 
 import api.business_controllers.ClientBusinessController;
 import api.dtos.ClientDto;
-import api.dtos.ClientVehiclesDto;
 import api.exceptions.FieldInvalidException;
-import api.exceptions.NotFoundException;
 import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
@@ -24,7 +22,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Api(value = ClientApiController.CLIENTS)
 @Path(ClientApiController.CLIENTS)
@@ -32,7 +29,6 @@ public class ClientApiController {
 
     public static final String CLIENTS = "/clients";
     public static final String ID = "/{id}";
-    public static final String ID_VEHICLES = ID + "/vehicles";
     private static final Logger LOGGER = LogManager.getLogger(ClientApiController.class);
 
     private ClientBusinessController clientBusinessController = new ClientBusinessController();
@@ -52,11 +48,14 @@ public class ClientApiController {
     @Secured
     @ApiOperation(value = "Get clients")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ClientDto> readAll(@ApiParam(value = "search by full name") @QueryParam("query") String fullName) {
+    public Response listAll(
+            @ApiParam(value = "search by username")
+            @QueryParam("query")
+                    String fullName) {
         if (fullName != null) {
-            return clientBusinessController.searchByFullName(fullName);
+            return Response.ok().entity(clientBusinessController.searchByFullName(fullName)).build();
         }
-        return clientBusinessController.readAll();
+        return Response.ok().entity(clientBusinessController.readAll()).build();
     }
 
     @GET
@@ -64,30 +63,35 @@ public class ClientApiController {
     @ApiOperation(value = "Get client by ID")
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public ClientDto read(@ApiParam(value = "Get by id", required = true ) @PathParam("id") String id) {
+    public Response getById(@ApiParam(value = "Get by id", required = true) @PathParam("id") String id) {
         this.validateId(id, "client id");
-        return this.clientBusinessController.read(id);
-        //todo handle exceptions like not found
+        return Response.ok().entity(this.clientBusinessController.read(id)).build();
     }
-
 
     @GET
     @Secured
-    @ApiOperation(value = "Get all client vehicles ")
+    @ApiOperation(value = "Get client vehicles")
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/vehicles/{id}")
-    public ClientVehiclesDto clientVehiclesList(@ApiParam(value = "Client id", required = true) @PathParam("id") String clientId) {
-        validateId(clientId, "client Id");
-        return clientBusinessController.readClientVehicles(Integer.parseInt(clientId))
-                .orElseThrow(() -> NotFoundException.throwBecauseOf("client with id: " + clientId));
+    @Path("{id}/vehicles")
+    public Response readVehicles(
+            @PathParam("id")
+            @ApiParam(value = "Client ID", required = true)
+                    String clientId) {
+        return Response.ok().entity(clientBusinessController.searchClientVehicles(clientId)).build();
     }
+
 
     @PUT
     @Secured
     @ApiOperation(value = "Update client information")
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response update(@ApiParam(value = "client Id", required = true) @PathParam("id") String id, @ApiParam(value = "updated client", required = true) ClientDto clientDto) {
+    public Response update(
+            @ApiParam(value = "client ID", required = true)
+            @PathParam("id")
+                    String id,
+            @ApiParam(value = "updated client", required = true)
+                    ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
         this.validateId(id, "client id: ");
@@ -100,7 +104,10 @@ public class ClientApiController {
     @Secured
     @ApiOperation(value = "Delete client by Id")
     @Path("{id}")
-    public Response delete(@ApiParam(value = "Client Id", required = true) @PathParam("id") String id) {
+    public Response delete(
+            @ApiParam(value = "Client Id", required = true)
+            @PathParam("id")
+                    String id) {
         this.validateId(id, "client id: ");
         this.clientBusinessController.delete(id);
         return Response.status(204).build();

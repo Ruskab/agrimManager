@@ -1,9 +1,10 @@
 package front.gateways;
 
-import front.dtos.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import front.dtos.Client;
+import front.dtos.Vehicle;
 import front.util.PropertyLoader;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
@@ -95,4 +96,12 @@ public class ClientGateway implements Serializable {
         }
     }
 
+    public List<Vehicle> searchClientVehicles(Client clientModel) {
+        return client.target(UriBuilder.fromPath(resource).path(clientModel.getId() + "/vehicles").build())
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<List<Vehicle>>() {
+                });
+
+    }
 }

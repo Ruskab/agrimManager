@@ -3,10 +3,12 @@ package api.api_controllers;
 import api.business_controllers.InterventionBusinesssController;
 import api.dtos.InterventionDto;
 import api.exceptions.FieldInvalidException;
+import api.exceptions.NotFoundException;
 import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,8 +31,6 @@ public class InterventionApiController {
 
     public static final String ID = "/{id}";
 
-    public static final String REPAIRING_PACK = "/repairing-pack";
-
     private InterventionBusinesssController interventionBusinessController = new InterventionBusinesssController();
 
     private static final Logger LOGGER = LogManager.getLogger(InterventionApiController.class);
@@ -40,7 +40,7 @@ public class InterventionApiController {
     @Secured
     @ApiOperation(value = "Create new intervention")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(InterventionDto interventionDto) {
+    public Response create(@ApiParam(value = "Intervention", required = true) InterventionDto interventionDto) {
         this.validate(interventionDto, "interventionDto");
         this.validate(interventionDto.getInterventionType(), "InterventionType");
         return Response.status(201).entity(interventionBusinessController.create(interventionDto)).build();
@@ -50,25 +50,37 @@ public class InterventionApiController {
     @Secured
     @ApiOperation(value = "Delete intervention by Id")
     @Path("{id}")
-    public void delete(@PathParam("id") String interventionId) {
+    public void delete(
+            @ApiParam(value = "Intervention", required = true)
+            @PathParam("id")
+                String interventionId) {
         this.validate(interventionId, "intervention id");
         this.validateId(interventionId, "intenvention id");
         this.interventionBusinessController.delete(interventionId);
+        Response.status(204).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public InterventionDto read(@PathParam("id") String interventionId) {
+    public Response getById(
+            @ApiParam(value = "Intervention", required = true)
+            @PathParam("id")
+                    String interventionId) {
         this.validateId(interventionId, "Intervention id");
-        return this.interventionBusinessController.read(interventionId);
+        return Response.ok().entity(this.interventionBusinessController.read(interventionId)).build();
     }
 
     @PUT
     @ApiOperation(value = "Update intervention information")
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Response update(@PathParam("id") String id, InterventionDto interventionDto) {
+    public Response update(
+            @ApiParam(value = "InterventionId", required = true)
+            @PathParam("id")
+                    String id,
+            @ApiParam(value = "Intervention", required = true)
+            InterventionDto interventionDto) {
         this.validateId(id, "intervention id: ");
         this.validate(interventionDto, "interventionDto");
         this.validate(interventionDto.getInterventionType(), "interventionDto interventionType");
@@ -82,7 +94,7 @@ public class InterventionApiController {
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public List<InterventionDto> readAll() {
+    public List<InterventionDto> listAll() {
         return this.interventionBusinessController.readAll();
     }
 

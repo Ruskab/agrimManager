@@ -1,7 +1,6 @@
 package front.beans;
 
 import front.dtos.Mechanic;
-import api.entity.Role;
 import com.mysql.cj.util.StringUtils;
 import front.gateways.MechanicGateway;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +24,7 @@ public class MechanicCreateBean {
     private static final Logger LOGGER = LogManager.getLogger(MechanicCreateBean.class);
     private MechanicGateway mechanicGateway;
     private Mechanic mechanic;
-    private List<Role> selectedRoles = new ArrayList<>();
+    private List<String> selectedRoles = new ArrayList<>();
 
     @PostConstruct
     public void init() {
@@ -55,15 +54,15 @@ public class MechanicCreateBean {
         this.mechanic = mechanic;
     }
 
-    public Role[] getRoles() {
-        return Role.values();
+    public List<String> getRoles() {
+        return List.of("ADMIN", "DEVELOPER", "MECHANIC");
     }
 
-    public List<Role> getSelectedRoles() {
+    public List<String> getSelectedRoles() {
         return selectedRoles;
     }
 
-    public void setSelectedRoles(List<Role> selectedRoles) {
+    public void setSelectedRoles(List<String> selectedRoles) {
         this.selectedRoles = selectedRoles;
     }
 }

@@ -1,14 +1,12 @@
 package api.api_controllers;
 
 import api.business_controllers.VehicleBusinessController;
-import api.daos.DaoFactory;
-import api.daos.VehicleDao;
-import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
 import api.exceptions.FieldInvalidException;
 import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -36,7 +34,7 @@ public class VehicleApiController {
     @POST
     @Secured
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(VehicleDto vehicleDto) {
+    public Response create(@ApiParam(value = "Vehicle", required = true)VehicleDto vehicleDto) {
         this.validate(vehicleDto, "vehicleDto");
         this.validate(vehicleDto.getRegistrationPlate(), "registration plate");
         this.validateId(vehicleDto.getClientId(), "Vehicle id");
@@ -46,7 +44,10 @@ public class VehicleApiController {
     @DELETE
     @Secured
     @Path("{id}")
-    public Response delete(@PathParam("id") String id) {
+    public Response delete(
+            @ApiParam(value = "Vehicle ID", required = true)
+            @PathParam("id")
+                    String id) {
         validateId(id, "Vehicle id");
         vehicleBusinessController.delete(id);
         return Response.status(204).build();
@@ -55,12 +56,12 @@ public class VehicleApiController {
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
-    public List<VehicleDto> readAll(@QueryParam("query") String query, @QueryParam("clientId") String clientId) {
+    public List<VehicleDto> listAll(
+                @ApiParam(value = "Search by vehicle datasheet")
+                @QueryParam("query")
+                        String query) {
         if (query != null) {
             return this.vehicleBusinessController.searchBy(query);
-        }
-        if (clientId != null) {
-            return vehicleBusinessController.searchByClient(clientId);
         }
         return this.vehicleBusinessController.readAll();
     }
@@ -69,7 +70,7 @@ public class VehicleApiController {
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public VehicleDto read(@PathParam("id") String id) {
+    public VehicleDto getById(@PathParam("id") String id) {
         validateId(id, "vehicle id");
         return vehicleBusinessController.read(id);
     }
