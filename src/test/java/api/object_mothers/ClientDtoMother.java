@@ -8,7 +8,7 @@ public class ClientDtoMother {
     public static final int HOURS = 10;
 
     public static ClientDto create(String fullName, int hours) {
-        return new ClientDto(fullName, hours);
+        return ClientDto.builder().fullName(fullName).hours(hours).build();
     }
 
     public static ClientDto clientDto() {

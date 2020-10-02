@@ -14,7 +14,7 @@ public class InterventionDtoMother {
     public static final String REPAIRING_PACK_ID = "999";
 
     public static InterventionDto create(String title, String interventionType, String vehicleId, String repairingPackId, LocalDateTime startTime, LocalDateTime endTime) {
-        return new InterventionDto(title, interventionType, vehicleId, repairingPackId, startTime, endTime);
+        return InterventionDto.builder().title(title).interventionType(interventionType).vehicleId(vehicleId).repairingPackId(repairingPackId).startTime(startTime).endTime(endTime).build();
     }
 
     public static InterventionDto interventionDto() {

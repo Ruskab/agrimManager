@@ -23,11 +23,11 @@ public class RepairingPackBusinessController {
     }
 
     public List<RepairingPackDto> readAll() {
-        return DaoFactory.getFactory().getRepairingPackDao().findAll().map(RepairingPackDto::new).collect(Collectors.toList());
+        return DaoFactory.getFactory().getRepairingPackDao().findAll().map(repairingPack -> new RepairingPackDto(repairingPack.getId(), repairingPack.getInvoicedDate(), repairingPack.getInvoicedHours())).collect(Collectors.toList());
     }
 
     public RepairingPackDto read(String id) {
-        return DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(id)).map(RepairingPackDto::new)
+        return DaoFactory.getFactory().getRepairingPackDao().read(Integer.parseInt(id)).map(repairingPack -> new RepairingPackDto(repairingPack.getId(), repairingPack.getInvoicedDate(), repairingPack.getInvoicedHours()))
                 .orElseThrow(() -> NotFoundException.throwBecauseOf("Repairing pack not found"));
     }
 

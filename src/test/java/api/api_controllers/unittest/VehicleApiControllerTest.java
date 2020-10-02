@@ -6,7 +6,6 @@ import api.business_controllers.VehicleBusinessController;
 import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.VehicleDto;
-import api.dtos.builder.VehicleDtoBuilder;
 import api.exceptions.FieldInvalidException;
 import api.exceptions.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,9 +54,10 @@ class VehicleApiControllerTest {
 
     @Test
     void create_vehicle_without_vehicleDto_registrationPlate_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> vehicleApiController.create(new VehicleDtoBuilder().byDefault()
-                .setRegistrationPlate(null)
-                .createVehicleDto()));
+        assertThrows(FieldInvalidException.class, () -> {
+            VehicleDto vehicleDto = VehicleDto.builder().registrationPlate(null).build();
+            vehicleApiController.create(vehicleDto);
+        });
     }
 
     @Test
@@ -70,9 +70,10 @@ class VehicleApiControllerTest {
 
     @Test
     void update_vehicle_without_vehicleDto_registationPlate_should_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> vehicleApiController.update("1", new VehicleDtoBuilder().byDefault()
-                .setRegistrationPlate(null)
-                .createVehicleDto()));
+        assertThrows(FieldInvalidException.class, () -> {
+            VehicleDto vehicleDto = VehicleDto.builder().registrationPlate(null).build();
+            vehicleApiController.update("1", vehicleDto);
+        });
     }
 
     @Test

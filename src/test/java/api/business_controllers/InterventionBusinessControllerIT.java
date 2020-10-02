@@ -5,7 +5,6 @@ import api.daos.DaoFactory;
 import api.daos.hibernate.DaoFactoryHibr;
 import api.dtos.InterventionDto;
 import api.dtos.VehicleDto;
-import api.dtos.builder.VehicleDtoBuilder;
 import api.entity.Intervention;
 import api.entity.InterventionType;
 import api.object_mothers.ClientDtoMother;
@@ -39,20 +38,20 @@ public class InterventionBusinessControllerIT {
     }
 
     private static VehicleDto createVehicleDto(String clientId, String registrationPlate) {
-        return new VehicleDtoBuilder()
-                .setRegistrationPlate(registrationPlate)
-                .setClientId(clientId)
-                .setBrand("Opel")
-                .setKMS("03-03-2017 94744")
-                .setBodyOnFrame("VF1KC0JEF31065732")
-                .setLastRevisionDate(LocalDate.now().minusMonths(2))
-                .setItvDate(LocalDate.now().minusMonths(3))
-                .setNextItvDate(LocalDate.now().plusYears(1))
-                .setAirFilterReference("1813029400")
-                .setOilFilterReference("1812344000")
-                .setFuelFilter("181315400")
-                .setMotorOil("5.5  5W30")
-                .createVehicleDto();
+        return VehicleDto.builder().
+                registrationPlate(registrationPlate)
+                .clientId(clientId)
+                .brand("Opel")
+                .kms("03-03-2017 94744")
+                .bodyOnFrame("VF1KC0JEF31065732")
+                .lastRevisionDate(LocalDate.now().minusMonths(2))
+                .itvDate(LocalDate.now().minusMonths(3))
+                .nextItvDate(LocalDate.now().plusYears(1))
+                .airFilterReference("1813029400")
+                .oilFilterReference("1812344000")
+                .fuelFilter("181315400")
+                .motorOil("5.5  5W30")
+                .build();
     }
 
     @AfterAll
@@ -69,7 +68,10 @@ public class InterventionBusinessControllerIT {
 
         int createdInterventionId = interventionBusinesssController.create(interventionDto);
 
-        Intervention createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
+        Intervention createdIntervention = DaoFactory.getFactory()
+                .getInterventionDao()
+                .read(createdInterventionId)
+                .get();
         assertThat(createdIntervention.getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
         assertThat(createdIntervention.getStartTime(), is(interventionDto.getStartTime()));
@@ -83,7 +85,10 @@ public class InterventionBusinessControllerIT {
         InterventionDto caffeInterventionDto = InterventionDtoMother.cafe();
         int createdInterventionId = interventionBusinesssController.create(caffeInterventionDto);
 
-        Intervention createdIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
+        Intervention createdIntervention = DaoFactory.getFactory()
+                .getInterventionDao()
+                .read(createdInterventionId)
+                .get();
         assertThat(createdIntervention.getRepairingPack(), is(Optional.empty()));
         assertThat(createdIntervention.getTitle(), is(InterventionDtoMother.FAKE_TITLE));
         assertThat(createdIntervention.getStartTime(), is(caffeInterventionDto.getStartTime()));
@@ -118,12 +123,19 @@ public class InterventionBusinessControllerIT {
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);
         InterventionDto interventionDto = InterventionDtoMother.withVehicle(Integer.toString(createdVehicleId));
         int createdInterventionId = interventionBusinesssController.create(interventionDto);
-        String createdInterventionTitle = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get().getTitle();
+        String createdInterventionTitle = DaoFactory.getFactory()
+                .getInterventionDao()
+                .read(createdInterventionId)
+                .get()
+                .getTitle();
         InterventionDto updatedTitleIntervention = InterventionDtoMother.cafe();
         updatedTitleIntervention.setTitle("new title");
         interventionBusinesssController.update(Integer.toString(createdInterventionId), updatedTitleIntervention);
 
-        Intervention updatedIntervention = DaoFactory.getFactory().getInterventionDao().read(createdInterventionId).get();
+        Intervention updatedIntervention = DaoFactory.getFactory()
+                .getInterventionDao()
+                .read(createdInterventionId)
+                .get();
         assertThat(createdInterventionTitle, is(InterventionDtoMother.FAKE_TITLE));
         assertThat(updatedIntervention.getTitle(), is("new title"));
     }

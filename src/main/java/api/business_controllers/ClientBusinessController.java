@@ -5,6 +5,7 @@ import api.daos.DaoSupplier;
 import api.dtos.ClientDto;
 import api.dtos.VehicleDto;
 import api.dtos.mappers.ClientMapper;
+import api.dtos.mappers.VehicleMapper;
 import api.entity.Client;
 import api.exceptions.NotFoundException;
 
@@ -88,6 +89,6 @@ public class ClientBusinessController {
     }
 
     private List<VehicleDto> findVehiclesByClient(Client client) {
-        return DaoFactory.getFactory().getVehicleDao().findByClient(client).map(VehicleDto::new).collect(toList());
+        return DaoFactory.getFactory().getVehicleDao().findByClient(client).map(VehicleMapper.INSTANCE::toVehicleDto).collect(toList());
     }
 }

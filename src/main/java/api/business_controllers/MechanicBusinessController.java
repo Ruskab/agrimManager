@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toList;
 
@@ -49,7 +48,8 @@ public class MechanicBusinessController {
         Mechanic mechanic = DaoFactory.getFactory().getMechanicDao().read(Integer.parseInt(mechanicId))
                 .orElseThrow(() -> NotFoundException.throwBecauseOf("Mechanic not found"));
 
-        Intervention intervention = new Intervention(interventionDto.getTitle(), InterventionType.valueOf(interventionDto.getInterventionType()), interventionDto
+        Intervention intervention = new Intervention(interventionDto.getTitle(), InterventionType.valueOf(interventionDto
+                .getInterventionType()), interventionDto
                 .getStartTime(), interventionDto.getEndTime());
 
         if (!InterventionBusinesssController.isCaffeIntervention(intervention)) {
