@@ -1,10 +1,6 @@
 package front.gateways;
 
-import api.PropertiesResolver;
-import api.RestClientLoader;
-import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
-import api.dtos.CredentialsDto;
 import api.object_mothers.FrontClientMother;
 import api.object_mothers.FrontInterventionMother;
 import api.object_mothers.FrontMechanicMother;
@@ -21,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -31,8 +26,7 @@ class MechanicGatewayIT {
 
     private static final Logger LOGGER = LogManager.getLogger(MechanicGatewayIT.class);
     private final MechanicApiController mechanicApiController = new MechanicApiController();
-    javax.ws.rs.client.Client client;
-    Properties properties;
+    private final AuthenticationGateway authenticationGateway = new AuthenticationGateway();
     private String authToken;
     private Integer mechanicId;
     private ClientGateway clientGateway;
@@ -43,14 +37,15 @@ class MechanicGatewayIT {
 
     @BeforeEach
     void setUp() {
-        client = new RestClientLoader().creteRestClient();
-        properties = new PropertiesResolver().loadPropertiesFile("config.properties");
-        createAuthToken();
+        mechanicId = (Integer) mechanicApiController.create(MechanicDtoMother.mechanicDto()).getEntity();
+        authToken = "Bearer " + authenticationGateway.authenticate(AgrimDomainFactory.fakeCredentials());
+
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
         interventionGateway = new InterventionGateway(authToken);
         mechanicGateway = new MechanicGateway(authToken);
         operationsGateway = new OperationsGateway(authToken);
+
     }
 
     @Test
@@ -99,12 +94,5 @@ class MechanicGatewayIT {
     void delete_data() {
         LOGGER.info("clean database after test");
         operationsGateway.deleteAll();
-    }
-
-    private void createAuthToken() {
-        LOGGER.info("creamos mecanico fake authorizado");
-        mechanicId = (Integer) mechanicApiController.create(MechanicDtoMother.mechanicDto()).getEntity();
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(FrontMechanicMother.FAKE_NAME, FrontMechanicMother.FAKE_PASSWORD))
-                .getEntity();
     }
 }

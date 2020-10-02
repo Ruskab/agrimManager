@@ -42,9 +42,9 @@ class DeleteDataGatewayIT {
     private static VehicleBusinessController vehicleBusinessController;
     private static InterventionBusinesssController interventionBusinesssController;
     private static RepairingPackBusinessController repairingPackBusinessController;
+    private final MechanicApiController mechanicApiController = new MechanicApiController();
     Client client;
     Properties properties;
-    private MechanicApiController mechanicApiController = new MechanicApiController();
     private OperationsGateway operationsGateway;
     private VehicleGateway vehicleGateway;
 
