@@ -24,25 +24,17 @@ import java.util.Properties;
 import static javax.ws.rs.client.Entity.entity;
 import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
-public class MechanicGateway implements Serializable {
+public class MechanicGateway extends RestGateway implements Serializable {
 
     public static final String APP_BASE_URL = "app.url";
     public static final String MECHANICS = "api.mechanics.path";
     private static final String API_PATH = "app.api.base.path";
-    private final Client client;
     private final String authToken;
     private final String resource;
 
     public MechanicGateway(String authToken) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        JacksonJsonProvider jsonProvider = new JacksonJaxbJsonProvider(objectMapper, DEFAULT_ANNOTATIONS);
-        client = ClientBuilder.newClient().register(jsonProvider);
-        Properties properties = new PropertyLoader().loadPropertiesFile("config.properties");
-        resource = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS);
-
         this.authToken = authToken;
+        resource = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(MECHANICS);
     }
 
     public String create(Mechanic mechanic) {
