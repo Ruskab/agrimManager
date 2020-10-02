@@ -1,6 +1,8 @@
 package front;
 
 import api.dtos.RepairingPackDto;
+import api.object_mothers.MechanicDtoMother;
+import front.dtos.Credentials;
 import front.dtos.Vehicle;
 
 import java.time.LocalDate;
@@ -9,6 +11,13 @@ public class AgrimDomainFactory {
 
     public static Vehicle createVehicle() {
         return byDefault().clientId("3").build();
+    }
+
+    public static Credentials fakeCredentials() {
+        return Credentials.builder()
+                .username(MechanicDtoMother.FAKE_NAME)
+                .password(MechanicDtoMother.FAKE_PASSWORD)
+                .build();
     }
 
     public static Vehicle createVehicle(String clientId) {

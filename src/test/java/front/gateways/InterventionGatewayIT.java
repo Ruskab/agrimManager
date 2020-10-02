@@ -1,17 +1,13 @@
 package front.gateways;
 
-import front.AgrimDomainFactory;
-import api.PropertiesResolver;
-import api.RestClientLoader;
-import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
-import api.dtos.CredentialsDto;
-import front.dtos.Intervention;
-import front.dtos.Vehicle;
 import api.object_mothers.FrontClientMother;
 import api.object_mothers.FrontInterventionMother;
 import api.object_mothers.MechanicDtoMother;
+import front.AgrimDomainFactory;
 import front.dtos.Client;
+import front.dtos.Intervention;
+import front.dtos.Vehicle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.NotFoundException;
-import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -29,9 +24,8 @@ class InterventionGatewayIT {
 
     private static final Logger LOGGER = LogManager.getLogger(InterventionGatewayIT.class);
 
-    javax.ws.rs.client.Client client;
-    Properties properties;
-    private MechanicApiController mechanicApiController = new MechanicApiController();
+    private final MechanicApiController mechanicApiController = new MechanicApiController();
+    private final AuthenticationGateway authenticationGateway = new AuthenticationGateway();
     private String authToken;
     private ClientGateway clientGateway;
     private VehicleGateway vehicleGateway;
@@ -41,20 +35,12 @@ class InterventionGatewayIT {
 
     @BeforeEach
     void setUp() {
-        client = new RestClientLoader().creteRestClient();
-        properties = new PropertiesResolver().loadPropertiesFile("config.properties");
-        createAuthToken();
+        mechanicApiController.create(MechanicDtoMother.mechanicDto());
+        authToken = "Bearer " + authenticationGateway.authenticate(AgrimDomainFactory.fakeCredentials());
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
         interventionGateway = new InterventionGateway(authToken);
         operationsGateway = new OperationsGateway(authToken);
-    }
-
-    private void createAuthToken() {
-        LOGGER.info("creamos mecanico fake authorizado");
-        mechanicApiController.create(MechanicDtoMother.mechanicDto());
-        authToken = "Bearer " + new AuthenticationApiController().authenticateUser(new CredentialsDto(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD))
-                .getEntity();
     }
 
     @Test
