@@ -1,21 +1,21 @@
 package front.beans;
 
-import front.dtos.Mechanic;
 import com.mysql.cj.util.StringUtils;
+import front.dtos.Mechanic;
 import front.gateways.MechanicGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.primefaces.PrimeFaces;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import static front.util.FrontMessages.sendFrontMessage;
 import static front.util.SessionUtil.getAuthToken;
+import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 
 @ManagedBean
 @ViewScoped
@@ -35,12 +35,12 @@ public class MechanicCreateBean {
     public void create() {
         if (mechanic == null) {
             LOGGER.error("Mecanico vacio");
-            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
+            sendFrontMessage("confirmMessages", SEVERITY_ERROR, "Client empty", "");
         }
         String mechanicId = mechanicGateway.create(mechanic);
         String message = StringUtils.isStrictlyNumeric(mechanicId) ? "Successful" : "Error";
         if ("Error".equals(message)) {
-            FacesContext.getCurrentInstance().addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "create vehicle"));
+            sendFrontMessage("confirmMessages", SEVERITY_ERROR, message, "create vehicle");
             return;
         }
         PrimeFaces.current().executeScript("PF('vehicleCreateDialog').hide();");

@@ -7,10 +7,8 @@ import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +72,5 @@ public class LazyClientsBean implements Serializable {
     }
 
     public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Client Selected", ((Client) event.getObject()).getFullName());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }

@@ -8,17 +8,18 @@ import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static front.util.FrontMessages.sendFrontMessage;
 import static front.util.SessionUtil.getAuthToken;
+import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
+import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 
 @ManagedBean
 @ViewScoped
@@ -31,7 +32,7 @@ public class DashboardBean {
 
     private List<Intervention> activeInterventions = new ArrayList<>();
 
-    @ManagedProperty(value="#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
 
     @PostConstruct
@@ -55,11 +56,11 @@ public class DashboardBean {
         try {
             mechanicGateway.finishIntervention(mechanic, intervention);
         } catch (IllegalStateException e) {
-            FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client empty", ""));
+            sendFrontMessage("msg", SEVERITY_ERROR, "Client empty", "");
         }
         long duration = Duration.between(intervention.getStartTime(), LocalDateTime.now()).toHours();
-        FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Intervention Finished Time: " + duration, ""));
-        activeInterventions =  searchActiveInterventions(mechanic);
+        sendFrontMessage("msg", SEVERITY_INFO, "Intervention Finished Time: " + duration, "");
+        activeInterventions = searchActiveInterventions(mechanic);
     }
 
     public List<Intervention> getActiveInterventions() {

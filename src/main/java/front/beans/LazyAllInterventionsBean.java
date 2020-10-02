@@ -1,9 +1,9 @@
 package front.beans;
 
+import front.dtos.FullIntervention;
 import front.dtos.Intervention;
 import front.dtos.Mechanic;
 import front.dtos.Vehicle;
-import front.dtos.FullIntervention;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
@@ -26,7 +26,7 @@ import static front.util.SessionUtil.getAuthToken;
 
 @ManagedBean(name = "lazyAllInterventionsBean")
 @ViewScoped
-public class    LazyAllInterventionsBean implements Serializable {
+public class LazyAllInterventionsBean implements Serializable {
 
     private LazyDataModel<FullIntervention> lazyModel;
     private Intervention selectedIntervention;

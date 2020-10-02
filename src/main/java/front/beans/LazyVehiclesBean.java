@@ -38,7 +38,8 @@ public class LazyVehiclesBean implements Serializable {
         vehicleGateway = new VehicleGateway(getAuthToken());
         clientGateway = new ClientGateway(getAuthToken());
         List<Vehicle> vehicles = vehicleGateway.readAll();
-        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId()).getFullName()));
+        vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId())
+                .getFullName()));
         lazyModel = new LazyDataModel<Vehicle>() {
 
             @Override
@@ -52,7 +53,8 @@ public class LazyVehiclesBean implements Serializable {
                 List<Vehicle> filtered = vehicleGateway.readAll().stream()
                         .skip(first)
                         .filter(vehicleDto -> doFilter(vehicleDto, filters))
-                        .filter(vehicleDto -> vehicleDto.getBrand().contains((String) filters.getOrDefault(VEHICLE_BRAND, "")))
+                        .filter(vehicleDto -> vehicleDto.getBrand()
+                                .contains((String) filters.getOrDefault(VEHICLE_BRAND, "")))
                         .collect(Collectors.toList());
 
                 if (sortField == null) {
@@ -79,11 +81,19 @@ public class LazyVehiclesBean implements Serializable {
 
                 switch (sortField) {
                     case "registrationPlate":
-                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? registrationPlateComparator : registrationPlateComparator.reversed()).collect(Collectors.toList());
+                        return filtered.stream()
+                                .sorted(sortOrder == SortOrder.ASCENDING ? registrationPlateComparator : registrationPlateComparator
+                                        .reversed())
+                                .collect(Collectors.toList());
                     case VEHICLE_BRAND:
-                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? brandComparator : brandComparator.reversed()).collect(Collectors.toList());
+                        return filtered.stream()
+                                .sorted(sortOrder == SortOrder.ASCENDING ? brandComparator : brandComparator.reversed())
+                                .collect(Collectors.toList());
                     case "bodyOnFrame":
-                        return filtered.stream().sorted(sortOrder == SortOrder.ASCENDING ? bodyOnFrameComparator : bodyOnFrameComparator.reversed()).collect(Collectors.toList());
+                        return filtered.stream()
+                                .sorted(sortOrder == SortOrder.ASCENDING ? bodyOnFrameComparator : bodyOnFrameComparator
+                                        .reversed())
+                                .collect(Collectors.toList());
                     default:
                         return Collections.emptyList();
                 }
@@ -106,7 +116,9 @@ public class LazyVehiclesBean implements Serializable {
                     return true;
                 }
 
-                return clientNames.getOrDefault(clientId, NOT_NAME).toLowerCase().contains(((String) clientName).toLowerCase());
+                return clientNames.getOrDefault(clientId, NOT_NAME)
+                        .toLowerCase()
+                        .contains(((String) clientName).toLowerCase());
             }
 
             private boolean globalContainsSearch(Vehicle vehicle, Object key) {
@@ -117,7 +129,9 @@ public class LazyVehiclesBean implements Serializable {
                 return vehicle.getRegistrationPlate().toLowerCase().contains(searchExpresion)
                         || vehicle.getBrand().toLowerCase().contains(searchExpresion)
                         || vehicle.getBodyOnFrame().toLowerCase().contains(searchExpresion)
-                        || clientNames.getOrDefault(vehicle.getClientId(), NOT_NAME).toLowerCase().contains(searchExpresion);
+                        || clientNames.getOrDefault(vehicle.getClientId(), NOT_NAME)
+                        .toLowerCase()
+                        .contains(searchExpresion);
             }
 
             private boolean containsSearchString(String name, Object searchExpresion) {

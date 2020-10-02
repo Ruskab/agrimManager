@@ -18,6 +18,8 @@ import javax.ws.rs.NotAuthorizedException;
 import java.io.IOException;
 import java.util.List;
 
+import static front.util.FrontMessages.sendFrontMessage;
+
 @ManagedBean(name = "loginBean")
 @RequestScoped
 public class LoginBean {
@@ -44,7 +46,7 @@ public class LoginBean {
             initSession(authToken);
             redirect(HOME_PAGE);
         } catch (NotAuthorizedException e) {
-            showMessage(FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!");
+            sendFrontMessage(null, FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!");
             redirect(LOGIN_PAGE);
         }
     }
@@ -74,10 +76,6 @@ public class LoginBean {
                 FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
         return LOGIN_PAGE;
-    }
-
-    private void showMessage(FacesMessage.Severity severity, String summary, String detail) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
     }
 
     public String getUserName() {
