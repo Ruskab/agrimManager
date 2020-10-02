@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiParam;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -37,7 +38,9 @@ public class ClientApiController {
     @Secured
     @ApiOperation(value = "Create new client")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(@ApiParam(value = "Client to create", required = true) ClientDto clientDto) {
+    public Response create(
+            @ApiParam(value = "Client to create", required = true)
+            @Valid ClientDto clientDto) {
         this.validate(clientDto, "clientDto");
         this.validate(clientDto.getFullName(), "clientDto FullName");
         LOGGER.info("ClienteDto valido");

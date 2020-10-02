@@ -13,7 +13,7 @@ public class MechanicDtoMother {
     public static final String FAKE_PASSWORD = "fakePassword";
 
     public static MechanicDto create(String name, String password, List<Integer> interventionIds) {
-        return new MechanicDto(name, password, interventionIds);
+        return MechanicDto.builder().name(name).password(password).interventionIds(interventionIds).build();
     }
 
     public static MechanicDto mechanicDto() {

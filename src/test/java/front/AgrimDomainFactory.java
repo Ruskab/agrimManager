@@ -16,7 +16,7 @@ public class AgrimDomainFactory {
     }
 
     public static RepairingPackDto createRepairingPackDto() {
-        return new RepairingPackDto(LocalDate.now(), 10);
+        return RepairingPackDto.builder().invoicedDate(LocalDate.now()).invoicedHours(10).build();
     }
 
 
