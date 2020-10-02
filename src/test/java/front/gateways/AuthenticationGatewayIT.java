@@ -24,7 +24,6 @@ class AuthenticationGatewayIT {
     void setUp() {
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         authenticationGateway = new AuthenticationGateway();
-        ;
     }
 
     @Test
