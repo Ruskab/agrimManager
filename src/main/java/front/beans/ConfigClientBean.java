@@ -12,7 +12,10 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
 
+import static front.util.FrontMessages.sendFrontMessage;
 import static front.util.SessionUtil.getAuthToken;
+import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
+import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 
 @ManagedBean
 @ViewScoped
@@ -30,11 +33,9 @@ public class ConfigClientBean implements Serializable {
     public void save() {
         try {
             clientGateway.update(client);
-            FacesContext.getCurrentInstance()
-                    .addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "update client"));
+            sendFrontMessage("editMessages", SEVERITY_INFO, "Successful", "update client");
         } catch (IllegalStateException e) {
-            FacesContext.getCurrentInstance()
-                    .addMessage("editMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "update client"));
+            sendFrontMessage("editMessages", SEVERITY_ERROR, "Error", "update client");
         }
     }
 

@@ -7,12 +7,10 @@ import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.omnifaces.util.Faces;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -22,7 +20,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static front.util.FrontMessages.sendFrontMessage;
 import static front.util.SessionUtil.getAuthToken;
+import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 
 @ManagedBean
 @ViewScoped
@@ -35,7 +35,7 @@ public class CreateInterventionBean {
     private VehicleGateway vehicleGateway;
     private boolean isCaffe;
 
-    @ManagedProperty(value="#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
 
 
@@ -66,8 +66,7 @@ public class CreateInterventionBean {
     private void validateSelection() {
         if (selectedIntervention == null) {
             LOGGER.error("Intervention empty");
-            FacesContext.getCurrentInstance()
-                    .addMessage("confirmMessages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Intervention empty", ""));
+            sendFrontMessage("confirmMessages", SEVERITY_ERROR, "Intervention empty", "");
         }
     }
 
@@ -105,11 +104,11 @@ public class CreateInterventionBean {
         this.selectedIntervention = selectedIntervention;
     }
 
-    public void setSessionBean(SessionBean sessionBean) {
-        this.sessionBean = sessionBean;
-    }
-
     public SessionBean getSessionBean() {
         return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
     }
 }
