@@ -1,0 +1,48 @@
+@startuml
+skinparam linetype polyline
+
+Class Client <<@Entity>>
+Class Intervention <<@Entity>>{
+    id <<@Id>> : long
+    description : String
+    startTime : LocalDate
+    endTime : LocalDate
+}
+
+Class Mechanic <<@Entity>> {
+    id <<@Id>> : long
+    username : String
+    password : String
+}
+
+Class RepairingPack <<@Entity>> {
+    id <<@Id>> long
+    invoicedDate : LocalDate
+    invoicedHours : int
+}
+
+Class Vehicle <<@Entity>> {
+    id <<@Id>> : long
+    registrationPlate : String
+    brand : String
+}
+
+Enum Role {
+    ADMIN
+    MECHANIC
+    DEVELOPER
+}
+
+Enum InterventionType{
+    REPAIR
+    COFFEE
+}
+
+
+Vehicle "0..*" o--> "0..1" Client : <<@ManyToOne>> \n client
+Intervention "0..*" o--> "0..1" Vehicle : <<@ManyToOne>> \n vehicle
+Mechanic "1" *--> "0..*" Intervention : <<@OneToMany CascadeType.ALL>> \n interventionList
+Intervention "0..*" o--> "0..1" RepairingPack : <<@ManyToOne>> \n repairingPack
+Intervention *--> "1" InterventionType
+Mechanic *--> "1..*" Role
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+skinparam linetype polyline
+
+
+
+node Client <<CLIENT>> #e1eced {
+    [webBrowser] as "web-browser" <<Executable>>
+}
+
+
+node Server #e1eced{
+package Presentation_Layer {
+
+}
+package Business_Layer {
+}
+package Data_Layer {
+}
+package Database_Layer {
+}
+
+}
+
+[webBrowser] -right- Server : html, css \n javascript
+
+Presentation_Layer -[hidden]down- Business_Layer
+Business_Layer -[hidden]down- Data_Layer
+Data_Layer -[hidden]down- Database_Layer
+
+
+
+@enduml

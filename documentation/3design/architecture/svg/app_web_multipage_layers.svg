@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="602.5px" preserveAspectRatio="none" style="width:608px;height:602px;" version="1.1" viewBox="0 0 608 602" width="608.75px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ojqg7zpux8hc" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[406b65fecc21e832f7a9b6ebadc6dce1]
+cluster Client--><polygon fill="#E1ECED" filter="url(#f1ojqg7zpux8hc)" points="27.5,42.5,40,30,205,30,205,180,192.5,192.5,27.5,192.5,27.5,42.5" style="stroke: #000000; stroke-width: 1.875;"/><line style="stroke: #000000; stroke-width: 1.875;" x1="192.5" x2="203.75" y1="42.5" y2="31.25"/><line style="stroke: #000000; stroke-width: 1.875;" x1="27.5" x2="192.5" y1="42.5" y2="42.5"/><line style="stroke: #000000; stroke-width: 1.875;" x1="192.5" x2="192.5" y1="42.5" y2="192.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="82.5" x="70" y="64.4165">«CLIENT»</text><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="51.25" x="85.625" y="86.4282">Client</text><!--MD5=[979da56a7f83e2393dc758167ae295d0]
+cluster Server--><polygon fill="#E1ECED" filter="url(#f1ojqg7zpux8hc)" points="290,63.75,302.5,51.25,581.25,51.25,581.25,575,568.75,587.5,290,587.5,290,63.75" style="stroke: #000000; stroke-width: 1.875;"/><line style="stroke: #000000; stroke-width: 1.875;" x1="568.75" x2="580" y1="63.75" y2="52.5"/><line style="stroke: #000000; stroke-width: 1.875;" x1="290" x2="568.75" y1="63.75" y2="63.75"/><line style="stroke: #000000; stroke-width: 1.875;" x1="568.75" x2="568.75" y1="63.75" y2="587.5"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="400.625" y="85.6665">Server</text><!--MD5=[9fc11c32cb4ae73303444e0f458a2290]
+entity webBrowser--><rect fill="#FEFECE" filter="url(#f1ojqg7zpux8hc)" height="69.0234" style="stroke: #A80036; stroke-width: 1.875;" width="131.25" x="50.625" y="103.75"/><rect fill="#FEFECE" height="6.25" style="stroke: #A80036; stroke-width: 1.875;" width="12.5" x="44.375" y="110"/><rect fill="#FEFECE" height="6.25" style="stroke: #A80036; stroke-width: 1.875;" width="12.5" x="44.375" y="160.2734"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="106.25" x="63.125" y="134.4165">«Executable»</text><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacingAndGlyphs" textLength="100" x="66.25" y="156.4282">web-browser</text><!--MD5=[e011680e53620bfe00b88361f73f8336]
+entity Presentation_Layer--><polygon fill="#FFFFFF" filter="url(#f1ojqg7zpux8hc)" points="343.75,112.5,521.25,112.5,530,142.0117,551.25,142.0117,551.25,163.2617,343.75,163.2617,343.75,112.5" style="stroke: #000000; stroke-width: 1.875;"/><line style="stroke: #000000; stroke-width: 1.875;" x1="343.75" x2="530" y1="142.0117" y2="142.0117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="170" x="348.75" y="134.4165">Presentation_Layer</text><!--MD5=[f749be5f5e26ce06168571eb24d706c4]
+entity Business_Layer--><polygon fill="#FFFFFF" filter="url(#f1ojqg7zpux8hc)" points="359.375,251.25,505.625,251.25,514.375,280.7617,535.625,280.7617,535.625,302.0117,359.375,302.0117,359.375,251.25" style="stroke: #000000; stroke-width: 1.875;"/><line style="stroke: #000000; stroke-width: 1.875;" x1="359.375" x2="514.375" y1="280.7617" y2="280.7617"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="138.75" x="364.375" y="273.1665">Business_Layer</text><!--MD5=[90758f7c98bd29712ff3158565e0192f]
+entity Data_Layer--><polygon fill="#FFFFFF" filter="url(#f1ojqg7zpux8hc)" points="380.625,378.75,484.375,378.75,493.125,408.2617,514.375,408.2617,514.375,429.5117,380.625,429.5117,380.625,378.75" style="stroke: #000000; stroke-width: 1.875;"/><line style="stroke: #000000; stroke-width: 1.875;" x1="380.625" x2="493.125" y1="408.2617" y2="408.2617"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="96.25" x="385.625" y="400.6665">Data_Layer</text><!--MD5=[ee49f2651d2cc8ec5b27edebe36bf671]
+entity Database_Layer--><polygon fill="#FFFFFF" filter="url(#f1ojqg7zpux8hc)" points="359.375,506.25,505.625,506.25,514.375,535.7617,535.625,535.7617,535.625,557.0117,359.375,557.0117,359.375,506.25" style="stroke: #000000; stroke-width: 1.875;"/><line style="stroke: #000000; stroke-width: 1.875;" x1="359.375" x2="514.375" y1="535.7617" y2="535.7617"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="138.75" x="364.375" y="528.1665">Database_Layer</text><!--MD5=[a594dcc41a928d34610c5a3e11f269ee]
+link webBrowser to Server--><path d="M182.0688,138.125 C206.7838,138.125 234.2409,138.125 256.4391,138.125 C267.5381,138.125 277.3224,138.125 284.7918,138.125 C286.6591,138.125 288.3818,138.125 289.9442,138.125 " fill="none" id="webBrowser-Server" style="stroke: #A80036; stroke-width: 1.25;"/><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="67.5" x="204.4625" y="109.9939">html, css</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacingAndGlyphs" textLength="67.5" x="209.4625" y="130.4333">javascript</text><!--MD5=[80580213940999e19f1bc835c54b4b02]
+link Presentation_Layer to Business_Layer--><!--MD5=[d692fad18b1384a5e3b2fa45d8b4ef44]
+link Business_Layer to Data_Layer--><!--MD5=[fe3810595e4d1becff6de05872188a4b]
+link Data_Layer to Database_Layer--><!--MD5=[2adb27c0896c900a11fa80a02f6bb00f]
+@startuml
+skinparam linetype polyline
+
+
+
+node Client <<CLIENT>> #e1eced {
+    [webBrowser] as "web-browser" <<Executable>>
+}
+
+
+node Server #e1eced{
+package Presentation_Layer {
+
+}
+package Business_Layer {
+}
+package Data_Layer {
+}
+package Database_Layer {
+}
+
+}
+
+[webBrowser] -right- Server : html, css \n javascript
+
+Presentation_Layer -[hidden]down- Business_Layer
+Business_Layer -[hidden]down- Data_Layer
+Data_Layer -[hidden]down- Database_Layer
+
+
+
+@enduml
+
+PlantUML version 1.2020.09(Sun May 10 12:51:06 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.8+10-b1094.1
+Operating System: Windows 10
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

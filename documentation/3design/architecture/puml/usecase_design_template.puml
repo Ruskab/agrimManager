@@ -9,16 +9,16 @@
     control XController #C4E4AB
     entity XEntity #F8D987
     entity XEntities #F8D987
-    boundary XStyle as "XStyle - CSS"
-    boundary XTemplate as "XTemplate - xhtml"
-    boundary XBean as "XBean - java"
-    control XApiController as "XApiController - java"
-    control XBusinessController as "XBusinessController - java"
-    control XGateway as "XGateway - java"
-    entity XDao as "XDao - java"
-    entity XDto as "XModel - java"
-    entity XDto2 as "XDto - java"
-    entity XModel as "XEntity - java"
+    boundary XStyle as "XStyle <<CSS>>"
+    boundary XTemplate as "XTemplate <<xhtml>>"
+    boundary XBean as "XBean <<java>>"
+    control XApiController as "XApiController <<java>>"
+    control XBusinessController as "XBusinessController <<java>>"
+    control XGateway as "XGateway <<java>>"
+    entity XDao as "XDao <<java>>"
+    entity XDto as "XModel <<java>>"
+    entity XDto2 as "XDto <<java>>"
+    entity XModel as "XEntity <<java>>"
 
 
     XView -right-> XController
