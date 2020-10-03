@@ -1,8 +1,6 @@
 package front.gateways;
 
-import api.api_controllers.AuthenticationApiController;
 import api.api_controllers.MechanicApiController;
-import api.dtos.CredentialsDto;
 import api.object_mothers.FrontClientMother;
 import api.object_mothers.MechanicDtoMother;
 import front.AgrimDomainFactory;
