@@ -13,7 +13,7 @@ public class FrontMechanicMother {
     public static final String FAKE_PASSWORD = "fakePassword";
 
     public static Mechanic create(String name, String password, List<Integer> interventionIds) {
-        return Mechanic.builder().name(name).password(password).interventionIds(interventionIds).build();
+        return Mechanic.builder().name(name).password(password).roles(Set.of("mechanic")).interventionIds(interventionIds).build();
     }
 
     public static Mechanic mechanic() {
