@@ -23,7 +23,7 @@ public class ClientsBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        clients = new ClientGateway(getAuthToken()).readAll();
+        clients = new ClientGateway(getAuthToken()).listAll();
     }
 
     public void openCreateClientDialog() {

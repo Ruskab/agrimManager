@@ -4,6 +4,7 @@ import api.api_controllers.MechanicApiController;
 import api.object_mothers.FrontClientMother;
 import api.object_mothers.MechanicDtoMother;
 import front.AgrimDomainFactory;
+import front.dtos.Client;
 import front.dtos.Vehicle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,9 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.NotFoundException;
 import java.time.LocalDate;
+import java.util.List;
 
+import static front.AgrimDomainFactory.REGISTRATION_PLATE;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -58,6 +61,40 @@ class VehicleGatewayIT {
         assertThat(createdVehicleDto.getOilFilterReference(), is("1812344000"));
         assertThat(createdVehicleDto.getFuelFilter(), is("181315400"));
         assertThat(createdVehicleDto.getMotorOil(), is("5.5  5W30"));
+    }
+
+    @Test
+    void listAll() {
+        String clientID = clientGateway.create(FrontClientMother.client());
+        vehicleGateway.create(AgrimDomainFactory.createVehicle(clientID));
+        vehicleGateway.create(AgrimDomainFactory.createVehicle(clientID));
+
+        List<Vehicle> vehicles = vehicleGateway.listAll();
+
+        assertThat(vehicles.size(), is(2));
+    }
+
+    @Test
+    void searchBy_query() {
+        String clientID = clientGateway.create(FrontClientMother.client());
+        vehicleGateway.create(AgrimDomainFactory.createVehicle(clientID));
+        Vehicle vehicle = AgrimDomainFactory.createVehicle(clientID);
+        vehicle.setRegistrationPlate("other");
+        vehicleGateway.create(vehicle);
+
+        List<Vehicle> vehicles = vehicleGateway.searchBy(REGISTRATION_PLATE);
+
+        assertThat(vehicles.size(), is(1));
+    }
+
+    @Test
+    void searchBy_clientId() {
+        String clientID = clientGateway.create(FrontClientMother.client());
+        vehicleGateway.create(AgrimDomainFactory.createVehicle(clientID));
+
+        List<Vehicle> vehicles = vehicleGateway.searchBy(Client.builder().id(Integer.parseInt(clientID)).build());
+
+        assertThat(vehicles.size(), is(1));
     }
 
     @Test

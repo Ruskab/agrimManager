@@ -9,6 +9,8 @@ import java.time.LocalDate;
 
 public class AgrimDomainFactory {
 
+    public static final String REGISTRATION_PLATE = "AA1234BB";
+
     public static Vehicle createVehicle() {
         return byDefault().clientId("3").build();
     }
@@ -21,7 +23,7 @@ public class AgrimDomainFactory {
     }
 
     public static Vehicle createVehicle(String clientId) {
-        return Vehicle.builder().registrationPlate("AA1234BB").clientId(clientId).build();
+        return Vehicle.builder().registrationPlate(REGISTRATION_PLATE).clientId(clientId).build();
     }
 
     public static RepairingPackDto createRepairingPackDto() {

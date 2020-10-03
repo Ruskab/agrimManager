@@ -223,12 +223,12 @@ public class OperationsBean {
     }
 
     private void deleteAllVehicles() {
-        List<Vehicle> vehicleDtoList = vehicleGateway.readAll();
+        List<Vehicle> vehicleDtoList = vehicleGateway.listAll();
         vehicleDtoList.forEach(vehicleDto -> vehicleGateway.delete(vehicleDto.getId()));
     }
 
     private void deleteAllClients() {
-        List<Client> clients = clientGateway.readAll();
+        List<Client> clients = clientGateway.listAll();
         clients.forEach(client -> clientGateway.delete(client.getId()));
     }
 

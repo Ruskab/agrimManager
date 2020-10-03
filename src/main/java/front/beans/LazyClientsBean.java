@@ -31,11 +31,11 @@ public class LazyClientsBean implements Serializable {
     @PostConstruct
     public void init() {
         clientGateway = new ClientGateway(getAuthToken());
-        clients = clientGateway.readAll();
+        clients = clientGateway.listAll();
         lazyModel = new LazyDataModel<Client>() {
             @Override
             public int getRowCount() {
-                return clientGateway.readAll().size();
+                return clientGateway.listAll().size();
             }
 
             @Override

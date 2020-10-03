@@ -46,7 +46,7 @@ public class LazyAllInterventionsBean implements Serializable {
         mechanicGateway = new MechanicGateway(getAuthToken());
         interventionGateway = new InterventionGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
-        mechanics = mechanicGateway.readAll();
+        mechanics = mechanicGateway.listAll();
         loadFullInterventions(mechanics);
         user = sessionBean.getMechanic();
         lazyModel = new LazyDataModel<FullIntervention>() {

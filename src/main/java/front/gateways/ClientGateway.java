@@ -34,11 +34,11 @@ public class ClientGateway extends RestGateway implements Serializable {
         return response.readEntity(String.class);
     }
 
-    public List<Client> readAll() {
+    public List<Client> listAll() {
         return client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<Client>>() {
+                .get(new GenericType<>() {
                 });
     }
 
@@ -53,8 +53,17 @@ public class ClientGateway extends RestGateway implements Serializable {
         return client.target(UriBuilder.fromPath(resource).queryParam("query", query))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<Client>>() {
+                .get(new GenericType<>() {
                 });
+    }
+
+    public List<Vehicle> searchClientVehicles(Client clientModel) {
+        return client.target(UriBuilder.fromPath(resource).path(clientModel.getId() + "/vehicles").build())
+                .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authToken)
+                .get(new GenericType<>() {
+                });
+
     }
 
     public void update(Client client) throws IllegalStateException {
@@ -77,14 +86,5 @@ public class ClientGateway extends RestGateway implements Serializable {
         if (response.getStatus() != status.getStatusCode()) {
             throw new IllegalStateException(String.format("API response invalid status: %s", response.getStatus()));
         }
-    }
-
-    public List<Vehicle> searchClientVehicles(Client clientModel) {
-        return client.target(UriBuilder.fromPath(resource).path(clientModel.getId() + "/vehicles").build())
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<Vehicle>>() {
-                });
-
     }
 }

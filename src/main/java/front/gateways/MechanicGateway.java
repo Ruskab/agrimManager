@@ -60,7 +60,7 @@ public class MechanicGateway extends RestGateway implements Serializable {
         checkResponseStatus(response, Response.Status.OK);
     }
 
-    public List<Mechanic> readAll() {
+    public List<Mechanic> listAll() {
         return client.target(UriBuilder.fromPath(resource).build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)

@@ -35,11 +35,12 @@ public class VehicleGateway extends RestGateway implements Serializable {
         return response.readEntity(String.class);
     }
 
-    public List<Vehicle> readAll() {
+    public List<Vehicle> listAll() {
         return client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<Vehicle>>() {});
+                .get(new GenericType<>() {
+                });
     }
 
     public Vehicle read(String vehicleId) {
@@ -54,14 +55,16 @@ public class VehicleGateway extends RestGateway implements Serializable {
         return client.target(UriBuilder.fromPath(resource).queryParam("query", query))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<Vehicle>>() {});
+                .get(new GenericType<>() {
+                });
     }
 
     public List<Vehicle> searchBy(Client client) {
         return this.client.target(UriBuilder.fromPath(resource).queryParam("clientId", client.getId()))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
-                .get(new GenericType<List<Vehicle>>() {});
+                .get(new GenericType<>() {
+                });
     }
 
     public void update(Vehicle vehicleDto) {

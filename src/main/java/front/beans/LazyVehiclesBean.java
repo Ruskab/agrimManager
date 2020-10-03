@@ -37,20 +37,20 @@ public class LazyVehiclesBean implements Serializable {
     public void init() {
         vehicleGateway = new VehicleGateway(getAuthToken());
         clientGateway = new ClientGateway(getAuthToken());
-        List<Vehicle> vehicles = vehicleGateway.readAll();
+        List<Vehicle> vehicles = vehicleGateway.listAll();
         vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId())
                 .getFullName()));
         lazyModel = new LazyDataModel<Vehicle>() {
 
             @Override
             public int getRowCount() {
-                return vehicleGateway.readAll().size();
+                return vehicleGateway.listAll().size();
             }
 
             @Override
             public List<Vehicle> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
-                List<Vehicle> filtered = vehicleGateway.readAll().stream()
+                List<Vehicle> filtered = vehicleGateway.listAll().stream()
                         .skip(first)
                         .filter(vehicleDto -> doFilter(vehicleDto, filters))
                         .filter(vehicleDto -> vehicleDto.getBrand()
