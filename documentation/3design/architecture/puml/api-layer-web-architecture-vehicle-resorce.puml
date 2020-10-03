@@ -3,7 +3,7 @@ skinparam linetype polyline
 allow_mixing
 
 
-package api {
+package api as "API REST (Backend)"{
 
         package exceptions {
             package handlers {

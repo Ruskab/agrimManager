@@ -3,12 +3,14 @@ skinparam linetype polyline
 
 
 
-package api {
+package api as "API REST (Backend)" {
 
 package  business_layer as "Business layer" #e1eced  {
     package api_controllers
     package business_controllers
     package business_services
+    package exceptions
+
 }
 
 package data_layer as "Data layer" #e1eced {
@@ -23,12 +25,13 @@ package dto_layer as "data transfer layer" #e1eced {
     package dtos
 }
 
-package utils_layer as "utilities layer" #e1eced {
-    package exceptions
+
+
+
 }
 
-
-
+package database_layer as "database layer" #e1eced {
+database database
 }
 
 business_layer .[hidden].> dto_layer
@@ -39,7 +42,7 @@ business_layer .[hidden]down...> data_layer
 api_controllers ..> business_controllers
 business_controllers ..> business_services
 business_controllers ..> daos
-business_controllers ..> data_services
+business_controllers ....> data_services
 data_services ..> daos
 daos ..> entities
 
@@ -48,6 +51,7 @@ business_controllers ..> dtos
 data_services ..> dtos
 daos ..> dtos
 dtos ..> entities
+daos .down.> database
 api_controllers .left.> exceptions
 business_controllers .left.> exceptions
 
