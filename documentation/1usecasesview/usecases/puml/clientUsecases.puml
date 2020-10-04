@@ -3,17 +3,17 @@
 left to right direction
 
 package ClientsManagement {
-:mechanic: --|> :all:
-:admin: --|> :all:
-:developer: --|> :all:
+:mechanic: --|> :user:
+:boss: --|> :user:
+:developer: --|> :user:
 
-:all: --> (createClient)
+:user: --> (createClient)
 (createClient) ..> (openClients) : <<include>>
-:all: --> (configClient)
+:user: --> (configClient)
 (configClient) ..> (openClients) : <<include>>
-:all: --> (deleteClient)
+:user: --> (deleteClient)
 (deleteClient) ..> (openClients) : <<include>>
-:all: --> (openClients)
+:user: --> (openClients)
 }
 
 @enduml

@@ -20,7 +20,6 @@ end note
 LoginView -right-> LoginController
 note on link
     login(username, password)
-    searchBy(username, password)
 end note
 
 LoginView -up-> OpenDashboard

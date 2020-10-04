@@ -1,7 +1,7 @@
 @startuml
 	class LoginController {
 	+searchBy(username, password)
-	+login(username, password)
+	+create(username, password)
 	}
 
 	LoginView --> LoginController

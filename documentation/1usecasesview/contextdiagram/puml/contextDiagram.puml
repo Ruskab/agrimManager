@@ -26,7 +26,6 @@ OPENED_VEHICLES --> OPENED_VEHICLES
          createVehicle
          configVehicle
          deleteVehicle
-         importVehicles
     end note
 
 OPENED_VEHICLES --> OPENED_DASHBOARD
@@ -80,7 +79,7 @@ OPENED_INTERVENTIONS --> OPENED_INTERVENTIONS
     note on link
          billIntervention
          configIntervention
-         openIntervention
+         configIntervention
     end note
 OPENED_INTERVENTIONS --> OPENED_DASHBOARD
     note on link
