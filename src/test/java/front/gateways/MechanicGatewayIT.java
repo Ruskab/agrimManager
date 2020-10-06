@@ -16,6 +16,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -47,6 +48,47 @@ class MechanicGatewayIT {
         operationsGateway = new OperationsGateway(authToken);
 
     }
+
+    @Test
+    void listAll_mechanics() {
+        Mechanic mechanic = FrontMechanicMother.mechanic();
+        mechanicGateway.create(mechanic);
+        mechanicGateway.create(mechanic);
+
+        List<Mechanic> mechanics = mechanicGateway.readAll();
+
+        assertThat(mechanics.size(), is(3));
+    }
+
+    @Test
+    void searchBy_name() {
+        mechanicGateway.create(FrontMechanicMother.withName("other"));
+
+        List<Mechanic> mechanics = mechanicGateway.searchByName("other");
+
+        assertThat(mechanics.size(), is(1));
+    }
+
+
+
+    @Test
+    void finish_intervention() {
+        Client client = FrontClientMother.client();
+        String clientId = clientGateway.create(client);
+        Vehicle vehicle = AgrimDomainFactory.createVehicle(clientId);
+        String vehicleId = vehicleGateway.create(vehicle);
+        Intervention interventionDto = FrontInterventionMother.withVehicle(vehicleId);
+        Mechanic mechanic = FrontMechanicMother.mechanic();
+        mechanic.setId(mechanicId);
+        mechanicGateway.createIntervention(mechanic, interventionDto);
+
+        mechanicGateway.finishIntervention(mechanic, interventionDto);
+
+        Mechanic updatedMechanic = mechanicGateway.read(Integer.toString(mechanicId));
+        Intervention intervention = interventionGateway.read(updatedMechanic.getInterventionIds().get(0).toString());
+        assertThat(intervention.getEndTime().toLocalDate(), is(LocalDate.now()));
+    }
+
 
     @Test
     void create_and_read_mechanic() {
