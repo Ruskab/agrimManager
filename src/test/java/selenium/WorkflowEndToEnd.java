@@ -56,6 +56,9 @@ class WorkflowEndToEnd {
 
     @Before
     void setUp() {
+        RemoteWebDriver driver = chrome.getWebDriver();
+        LOGGER.error("get webDriver : {}", driver.getCurrentUrl());
+        WebDriverRunner.setWebDriver(driver);
     }
 
     @BeforeEach
@@ -83,9 +86,6 @@ class WorkflowEndToEnd {
 
     @Test
     void navigate_all_pages() {
-        RemoteWebDriver driver = chrome.getWebDriver();
-        LOGGER.error("get webDriver : {}", driver.getCurrentUrl());
-        WebDriverRunner.setWebDriver(driver);
         domain = "http://localhost/agrimManager";
         LOGGER.error("starting test in {}", domain);
         open(domain);
