@@ -1,10 +1,33 @@
 @startuml
-object Mechanic
-object Intervention
-object Client
-object Vehicle
-object RepairingPack
+object AutomobileRepairShop
+object Mechanic {
+    name
+    rol
+}
+object Intervention {
+    description
+    starHour
+    endHour
+}
+object Client {
+    name
+    surname
 
+}
+object Vehicle {
+    registrationPlate
+    lastITV : date
+    nextITV : date
+
+}
+object RepairingPack {
+    invoiceDate
+    invoicedHours
+}
+
+
+AutomobileRepairShop *-- "*" Mechanic
+AutomobileRepairShop *-- "*" Client
 Mechanic *-- "*" Intervention
 Mechanic ..> Vehicle
 Mechanic ..> RepairingPack

@@ -1,20 +1,21 @@
-@startuml
+1@startuml
 
 !include skinParams.puml
 
 package Views {
+    boundary DashboardView
+    boundary OperationsView
     boundary CreateVehicleView
     boundary CreateClientView
     boundary ConfigClientView
     boundary ConfigVehicleView
     boundary VehiclesView
-    boundary ClientsView
     boundary CreateInterventionView
+    boundary MenuView
+    boundary ConfigInterventionView
     boundary InterventionsView
     boundary MyInterventionsView
-    boundary MenuView
-    boundary DashboardView
-    boundary OperationsView
+    boundary ClientsView
     boundary loginView
     boundary signInView
 }
@@ -42,9 +43,24 @@ package Models {
     entity Vehicle
     entity Intervention
     entity Mechanic
+    entity RepairingPack
 }
+
+Views -[hidden]-- Controllers
+Controllers -[hidden]- Models
+
+'views
+VehiclesView o-- CreateVehicleView
+VehiclesView o-- ConfigVehicleView
+ClientsView o-- ConfigClientView
+ClientsView o-- CreateClientView
+MenuView o-- CreateInterventionView
+loginView o-- signInView
+MyInterventionsView o-- ConfigInterventionView
+InterventionsView o-- ConfigInterventionView
 
 Client *-- Vehicle
 Intervention o-- Vehicle
 Mechanic *-- Intervention
+RepairingPack o-- Intervention
 @enduml

@@ -1,6 +1,6 @@
 @startuml
 	class LoginView {
-	+signin()
+	+signin(username, password, repeatPassword)
 	+login(username, password)
 	}
 

@@ -4,13 +4,13 @@ left to right direction
 package InterventionsManagement {
 :mechanic: --|> :user:
 :developer: --|> :user:
-:admin: --|> :superUser:
-:developer: --|> :superUser:
+:boss: --|> :user:
 
 :user: --> (createIntervention)
 :user: --> (finishIntervention)
-:superUser: --> (openInterventions)
-:admin: --> (billInterventions)
+:boss: --> (openInterventions)
+:developer: ---> (openInterventions)
+:boss: --> (billInterventions)
 :user: --> (openMyInterventions)
 :user: --> (pauseInterventions)
 :user: --> (resumeInterventions)
