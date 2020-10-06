@@ -30,7 +30,7 @@ public class MechanicBusinessController {
     private final InterventionBusinesssController interventionBO = new InterventionBusinesssController();
 
     public int create(MechanicDto mechanicDto) {
-        Mechanic mechanic = new Mechanic(mechanicDto);
+        Mechanic mechanic = MechanicMapper.INSTANCE.toMechanic(mechanicDto);
         List<InterventionDto> interventionDtos = new ArrayList<>();
         mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(interventionBO.read(Integer.toString(id))));
         mechanic.setInterventionList(interventionDtos.stream()
