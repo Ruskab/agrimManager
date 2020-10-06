@@ -44,4 +44,4 @@ jobs:
 
 
       - name: API tests
-        run: mvn clean test -Denvironment=githubendtoend -Dtest=front.gateways.*IT
+        run: mvn clean test -Denvironment=githubendtoend -Dtest=selenium.*EndToEnd

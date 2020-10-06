@@ -57,6 +57,7 @@ class WorkflowEntToEnd {
     @Before
     void setUp() {
         RemoteWebDriver driver = chrome.getWebDriver();
+        LOGGER.info("get webDriver : {}", driver.getCurrentUrl());
         WebDriverRunner.setWebDriver(driver);
     }
 
