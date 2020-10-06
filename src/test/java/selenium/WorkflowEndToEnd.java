@@ -31,12 +31,12 @@ import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.open;
 
-class WorkflowEntToEnd {
+class WorkflowEndToEnd {
 
     @Rule
     public BrowserWebDriverContainer chrome = new BrowserWebDriverContainer().withCapabilities(DesiredCapabilities.chrome());
     public static final String APP_BASE_URL = "app.url";
-    private static final Logger LOGGER = LogManager.getLogger(WorkflowEntToEnd.class);
+    private static final Logger LOGGER = LogManager.getLogger(WorkflowEndToEnd.class);
     private static final String API_PATH = "/api/v0";
     private OperationsGateway operationsGateway;
     private final AuthenticationGateway authenticationGateway = new AuthenticationGateway();
