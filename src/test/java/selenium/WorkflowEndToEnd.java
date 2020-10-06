@@ -57,15 +57,15 @@ class WorkflowEndToEnd {
     @Before
     void setUp() {
         RemoteWebDriver driver = chrome.getWebDriver();
-        LOGGER.info("get webDriver : {}", driver.getCurrentUrl());
+        LOGGER.error("get webDriver : {}", driver.getCurrentUrl());
         WebDriverRunner.setWebDriver(driver);
+        domain = "http://localhost/agrimManager";
     }
 
     @BeforeEach
     void createMechanic() {
         client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
-        domain = properties.getProperty(APP_BASE_URL);
 
         clientsPage = new ClientsPage(domain);
         vehiclesPage = new VehiclesPage(domain);
@@ -87,6 +87,7 @@ class WorkflowEndToEnd {
 
     @Test
     void navigate_all_pages() {
+        LOGGER.error("starting test in {}", domain);
         open(domain);
         loginPage.login(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
         dashboardPage.checkHeaderMenu();
