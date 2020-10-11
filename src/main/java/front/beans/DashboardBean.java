@@ -32,7 +32,7 @@ public class DashboardBean {
 
     private List<Intervention> activeInterventions = new ArrayList<>();
 
-    @ManagedProperty(value = "#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
     @PostConstruct

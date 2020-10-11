@@ -35,7 +35,7 @@ public class CreateInterventionBean {
     private VehicleGateway vehicleGateway;
     private boolean isCaffe;
 
-    @ManagedProperty(value = "#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
 

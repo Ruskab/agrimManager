@@ -48,7 +48,7 @@ public class OperationsBean {
     private DashboardModel model;
     private Random rnd = new SecureRandom();
 
-    @ManagedProperty(value = "#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
 

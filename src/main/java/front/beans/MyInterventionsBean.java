@@ -33,7 +33,7 @@ public class MyInterventionsBean implements Serializable {
     private VehicleGateway vehicleGateway;
     private MechanicGateway mechanicGateway;
 
-    @ManagedProperty(value="#{sessionBean}")
+    @ManagedProperty(value="#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
     @PostConstruct

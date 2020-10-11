@@ -31,7 +31,7 @@ public class LoginBean {
     private String password;
     private AuthenticationGateway authenticateGateway;
 
-    @ManagedProperty(value="#{sessionBean}")
+    @ManagedProperty(value="#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
     @PostConstruct
