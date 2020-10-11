@@ -15,7 +15,7 @@ public class LocalDateConverter implements Converter<Object> {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(extractPattern(uiComponent, facesContext));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(extractPattern(uiComponent));
         try {
             return LocalDate.parse(value, formatter);
         } catch (Exception e) {
@@ -28,11 +28,11 @@ public class LocalDateConverter implements Converter<Object> {
         if (value == null || (value instanceof String && StringUtils.isBlank((String) value))) {
             return "";
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(extractPattern(uiComponent, facesContext));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(extractPattern(uiComponent));
         return formatter.format((LocalDate) value);
     }
 
-    private String extractPattern(UIComponent component, FacesContext context) {
+    private String extractPattern(UIComponent component) {
         if (component instanceof Calendar) {
             Calendar calendarComponent = (Calendar) component;
             return calendarComponent.getPattern();
