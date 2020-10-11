@@ -62,10 +62,10 @@ public class GenericDaoHibr<T, I> implements GenericDao<T, I> {
 
     public Stream<T> findAll() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(entityClass);
+        CriteriaQuery<T> cq = cb.createQuery(entityClass);
         Root<T> rootEntry = cq.from(entityClass);
         CriteriaQuery<T> all = cq.select(rootEntry);
-        TypedQuery allQuery = entityManager.createQuery(all);
+        TypedQuery<T> allQuery = entityManager.createQuery(all);
         return allQuery.getResultStream();
     }
 
