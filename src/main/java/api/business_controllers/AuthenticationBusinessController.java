@@ -13,8 +13,9 @@ public class AuthenticationBusinessController {
     private final MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
     public void authenticateCredentials(String username, String password) throws NotFoundException {
-        mechanicBusinessController.searchBy(username, password).stream().findFirst()
-                .orElseThrow(() -> NotFoundException.throwBecauseOf("Invalid credentials"));
+        if (mechanicBusinessController.searchBy(username, password).isEmpty()) {
+            throw NotFoundException.throwBecauseOf("Invalid credentials");
+        }
     }
 
 }
