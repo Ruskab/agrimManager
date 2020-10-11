@@ -3,7 +3,6 @@ package api.api_controllers;
 import api.business_controllers.InterventionBusinesssController;
 import api.dtos.InterventionDto;
 import api.exceptions.FieldInvalidException;
-import api.exceptions.NotFoundException;
 import api.filters.Secured;
 import com.mysql.cj.util.StringUtils;
 import io.swagger.annotations.Api;

@@ -14,8 +14,8 @@ import java.util.Map;
 
 import static front.util.SessionUtil.getAuthToken;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean //NOSONAR
+@ViewScoped //NOSONAR
 public class ClientsBean implements Serializable {
 
     private List<Client> clients;

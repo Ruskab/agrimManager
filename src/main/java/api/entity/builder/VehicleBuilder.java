@@ -87,7 +87,7 @@ public class VehicleBuilder {
                 .setAirFilterReference("1813029400")
                 .setOilFilterReference("1812344000")
                 .setFuelFilter("181315400")
-                .setMotorOil("5.5  5W30");
+                .setMotorOil("5.5 5W30");
     }
 
     public Vehicle createVehicle() {

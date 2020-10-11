@@ -24,8 +24,8 @@ import static front.util.FrontMessages.sendFrontMessage;
 import static front.util.SessionUtil.getAuthToken;
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean //NOSONAR
+@ViewScoped //NOSONAR
 public class CreateInterventionBean {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateInterventionBean.class);
@@ -35,7 +35,7 @@ public class CreateInterventionBean {
     private VehicleGateway vehicleGateway;
     private boolean isCaffe;
 
-    @ManagedProperty(value = "#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
 

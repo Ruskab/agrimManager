@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 
 import static front.util.SessionUtil.getAuthToken;
 
-@ManagedBean(name = "myInterventionsBean")
-@ViewScoped
+@ManagedBean(name = "myInterventionsBean") //NOSONAR
+@ViewScoped //NOSONAR
 public class MyInterventionsBean implements Serializable {
 
     private List<FullIntervention> interventions;
@@ -33,7 +33,7 @@ public class MyInterventionsBean implements Serializable {
     private VehicleGateway vehicleGateway;
     private MechanicGateway mechanicGateway;
 
-    @ManagedProperty(value="#{sessionBean}")
+    @ManagedProperty(value="#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
     @PostConstruct

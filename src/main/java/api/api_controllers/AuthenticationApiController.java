@@ -47,7 +47,7 @@ public class AuthenticationApiController {
         }
     }
 
-    private void authenticate(String username, String password) throws NotFoundException {
+    private void authenticate(String username, String password) {
         // Authenticate against a database, LDAP, file or whatever
         // Throw an Exception if the credentials are invalid
         authenticationBusinessController.authenticateCredentials(username, password);

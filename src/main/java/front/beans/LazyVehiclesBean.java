@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 
 import static front.util.SessionUtil.getAuthToken;
 
-@ManagedBean(name = "lazyVehiclesBean")
-@ViewScoped
+@ManagedBean(name = "lazyVehiclesBean") //NOSONAR
+@ViewScoped //NOSONAR
 public class LazyVehiclesBean implements Serializable {
 
     private static final String NOT_NAME = "NOT NAME";

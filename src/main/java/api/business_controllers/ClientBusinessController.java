@@ -24,15 +24,13 @@ public class ClientBusinessController {
         DaoFactory.setFactory(DaoSupplier.HIBERNATE.createFactory());
     }
 
-    private final ClientMapper clientMapper = ClientMapper.INSTANCE;
-
 
     public ClientBusinessController() {
         //CDI
     }
 
     public int create(ClientDto clientDto) {
-        Client client = clientMapper.toClient(clientDto);
+        Client client = ClientMapper.INSTANCE.toClient(clientDto);
         DaoFactory.getFactory().getClientDao().create(client);
         return client.getId();
     }
@@ -40,7 +38,7 @@ public class ClientBusinessController {
     public List<ClientDto> readAll() {
         return DaoFactory.getFactory().getClientDao()
                 .findAll()
-                .map(clientMapper::toClientDto)
+                .map(ClientMapper.INSTANCE::toClientDto)
                 .collect(toList());
     }
 
@@ -48,12 +46,12 @@ public class ClientBusinessController {
     public ClientDto read(String id) {
         return DaoFactory.getFactory().getClientDao()
                 .read(Integer.parseInt(id))
-                .map(clientMapper::toClientDto)
+                .map(ClientMapper.INSTANCE::toClientDto)
                 .orElseThrow(() -> NotFoundException.throwBecauseOf(CLIENT_ID + id));
     }
 
     public void update(String id, ClientDto clientDto) {
-        BiConsumer<ClientDto, Client> mapFromDto = clientMapper::updateFromDto;
+        BiConsumer<ClientDto, Client> mapFromDto = ClientMapper.INSTANCE::updateFromDto;
         Consumer<Client> updateEntity = DaoFactory.getFactory().getClientDao()::update;
         DaoFactory.getFactory().getClientDao()
                 .read((Integer.parseInt(id)))
@@ -78,7 +76,7 @@ public class ClientBusinessController {
         return DaoFactory.getFactory().getClientDao()
                 .findAll()
                 .filter(client -> client.getFullName().toLowerCase().contains(fullName.toLowerCase()))
-                .map(clientMapper::toClientDto)
+                .map(ClientMapper.INSTANCE::toClientDto)
                 .collect(toList());
     }
 

@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 import static front.util.SessionUtil.getAuthToken;
 
-@ManagedBean(name = "lazyClientsBean")
-@ViewScoped
+@ManagedBean(name = "lazyClientsBean") //NOSONAR
+@ViewScoped //NOSONAR
 public class LazyClientsBean implements Serializable {
 
     private LazyDataModel<Client> lazyModel;

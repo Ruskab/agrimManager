@@ -21,8 +21,8 @@ import static front.util.SessionUtil.getAuthToken;
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean //NOSONAR
+@ViewScoped //NOSONAR
 public class DashboardBean {
 
     private InterventionGateway interventionGateway;
@@ -32,7 +32,7 @@ public class DashboardBean {
 
     private List<Intervention> activeInterventions = new ArrayList<>();
 
-    @ManagedProperty(value = "#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
     @PostConstruct

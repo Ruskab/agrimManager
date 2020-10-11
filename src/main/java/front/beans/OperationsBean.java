@@ -35,8 +35,8 @@ import java.util.Random;
 import static front.util.SessionUtil.getAuthToken;
 
 
-@ManagedBean
-@ViewScoped
+@ManagedBean //NOSONAR
+@ViewScoped //NOSONAR
 public class OperationsBean {
 
     public static final String SUCCESS = "Success";
@@ -48,7 +48,7 @@ public class OperationsBean {
     private DashboardModel model;
     private Random rnd = new SecureRandom();
 
-    @ManagedProperty(value = "#{sessionBean}")
+    @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
 
