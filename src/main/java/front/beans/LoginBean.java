@@ -20,7 +20,7 @@ import java.util.List;
 
 import static front.util.FrontMessages.sendFrontMessage;
 
-@ManagedBean(name = "loginBean")
+@ManagedBean(name = "loginBean") //NOSONAR
 @RequestScoped
 public class LoginBean {
 

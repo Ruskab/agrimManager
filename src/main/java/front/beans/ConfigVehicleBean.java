@@ -12,8 +12,8 @@ import static front.util.SessionUtil.getAuthToken;
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean //NOSONAR
+@ViewScoped //NOSONAR
 public class ConfigVehicleBean {
 
     private Vehicle selectedVehicle;

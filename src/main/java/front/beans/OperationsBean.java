@@ -35,8 +35,8 @@ import java.util.Random;
 import static front.util.SessionUtil.getAuthToken;
 
 
-@ManagedBean
-@ViewScoped
+@ManagedBean //NOSONAR
+@ViewScoped //NOSONAR
 public class OperationsBean {
 
     public static final String SUCCESS = "Success";
