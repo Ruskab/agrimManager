@@ -12,7 +12,7 @@ public class AuthenticationBusinessController {
 
     private final MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
-    public void authenticateCredentials(String username, String password) throws NotFoundException {
+    public void authenticateCredentials(String username, String password) {
         if (mechanicBusinessController.searchBy(username, password).isEmpty()) {
             throw NotFoundException.throwBecauseOf("Invalid credentials");
         }
