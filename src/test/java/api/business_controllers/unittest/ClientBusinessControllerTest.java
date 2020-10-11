@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 //Unit Tests with Fake doubles
-public class ClientBusinessControllerTest {
+class ClientBusinessControllerTest {
 
     private ClientBusinessController clientBusinessController;
 
@@ -34,7 +34,7 @@ public class ClientBusinessControllerTest {
     }
 
     @Test
-    public void testReadClient() {
+    void testReadClient() {
         clientBusinessController.create(ClientDtoMother.clientDto());
 
         ClientDto clientDto = clientBusinessController.read("1");
@@ -44,7 +44,7 @@ public class ClientBusinessControllerTest {
     }
 
     @Test
-    public void testReadAllClients() {
+    void testReadAllClients() {
         clientBusinessController.create(ClientDtoMother.clientDto());
         clientBusinessController.create(ClientDtoMother.clientDto());
 
@@ -52,7 +52,7 @@ public class ClientBusinessControllerTest {
     }
 
     @Test
-    public void testUpdateClient() {
+    void testUpdateClient() {
         clientBusinessController.create(ClientDtoMother.clientDto());
         String createdClientFullName = DaoFactory.getFactory().getClientDao().read(1).get().getFullName();
 

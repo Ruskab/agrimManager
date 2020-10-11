@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 
-public class InterventionBusinessControllerIT {
+class InterventionBusinessControllerIT {
 
     private static InterventionBusinesssController interventionBusinesssController;
     private static VehicleBusinessController vehicleBusinessController;
@@ -98,7 +98,7 @@ public class InterventionBusinessControllerIT {
     }
 
     @Test
-    public void testReadIntervention() {
+    void testReadIntervention() {
         int createdInterventionId = interventionBusinesssController.create(InterventionDtoMother.cafe());
 
         InterventionDto interventionDto = interventionBusinesssController.read(Integer.toString(createdInterventionId));
@@ -107,7 +107,7 @@ public class InterventionBusinessControllerIT {
     }
 
     @Test
-    public void testReadAllInterventions() {
+    void testReadAllInterventions() {
         interventionBusinesssController.create(InterventionDtoMother.cafe());
         interventionBusinesssController.create(InterventionDtoMother.cafe());
 
@@ -117,7 +117,7 @@ public class InterventionBusinessControllerIT {
     }
 
     @Test
-    public void testUpdateIntervention() {
+    void testUpdateIntervention() {
         int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);

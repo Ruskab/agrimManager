@@ -66,7 +66,9 @@ class InterventionApiControllerTest {
 
     @Test
     void create_intervention_without_interventionDto_interventionType_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> interventionApiController.create(InterventionDtoMother.withInterventionType(null)));
+        InterventionDto interventionDto = InterventionDtoMother.withInterventionType(null);
+
+        assertThrows(FieldInvalidException.class, () -> interventionApiController.create(interventionDto));
     }
 
     @Test
@@ -79,7 +81,9 @@ class InterventionApiControllerTest {
 
     @Test
     void update_intervention_without_interventionDto_interventionType_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> interventionApiController.update("1", InterventionDtoMother.withInterventionType(null)));
+        InterventionDto interventionDto = InterventionDtoMother.withInterventionType(null);
+
+        assertThrows(FieldInvalidException.class, () -> interventionApiController.update("1", interventionDto));
     }
 
     @Test
