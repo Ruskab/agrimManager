@@ -184,7 +184,7 @@ public class OperationsBean {
                 .airFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "3")
                 .oilFilterReference(rnd.ints(1000, 100000000).findFirst().getAsInt() + "1")
                 .fuelFilter(rnd.ints(1000, 100000000).findFirst().getAsInt() + "2")
-                .motorOil("5.5  5W30")
+                .motorOil("5.5 5W30")
                 .build();
     }
 

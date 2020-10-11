@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @FacesConverter("front.converters.LocalDateConverter")
-public class LocalDateConverter implements Converter {
+public class LocalDateConverter implements Converter<Object> {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {

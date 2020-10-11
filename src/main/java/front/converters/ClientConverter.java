@@ -14,7 +14,7 @@ import javax.faces.convert.FacesConverter;
 import static front.util.SessionUtil.getAuthToken;
 
 @FacesConverter("front.converters.ClientConverter")
-public class ClientConverter implements Converter {
+public class ClientConverter implements Converter<Object> {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
