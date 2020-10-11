@@ -39,12 +39,4 @@ public class ClientConverter implements Converter<Object> {
         }
     }
 
-    private String extractPattern(UIComponent component, FacesContext context) {
-        if (component instanceof Calendar) {
-            Calendar calendarComponent = (Calendar) component;
-            return calendarComponent.getPattern();
-        }
-        return null;
-    }
-
 }
