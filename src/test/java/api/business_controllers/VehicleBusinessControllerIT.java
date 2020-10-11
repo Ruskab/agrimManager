@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class VehicleBusinessControllerIT {
+class VehicleBusinessControllerIT {
 
     private static VehicleBusinessController vehicleBusinessController;
     private static ClientBusinessController clientBusinessController;
@@ -67,7 +67,7 @@ public class VehicleBusinessControllerIT {
     }
 
     @Test
-    public void testReadVehicle() {
+    void testReadVehicle() {
         int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         int createdVehicleId = vehicleBusinessController.create(createVehicleDto(Integer.toString(createdClientId), "222222"));
 
@@ -77,7 +77,7 @@ public class VehicleBusinessControllerIT {
     }
 
     @Test
-    public void testReadAllVehicles() {
+    void testReadAllVehicles() {
         int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         clientBusinessController.create(ClientDtoMother.clientDto());
         vehicleBusinessController.create(createVehicleDto(Integer.toString(createdClientId), "222222"));
@@ -89,7 +89,7 @@ public class VehicleBusinessControllerIT {
     }
 
     @Test
-    public void testUpdateVehicle() {
+    void testUpdateVehicle() {
         int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         VehicleDto vehicleDto = createVehicleDto(Integer.toString(createdClientId), "222222");
         int createdVehicleId = vehicleBusinessController.create(vehicleDto);

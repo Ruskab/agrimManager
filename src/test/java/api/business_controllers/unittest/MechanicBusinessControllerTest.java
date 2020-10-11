@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class MechanicBusinessControllerTest {
+class MechanicBusinessControllerTest {
 
     private MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
@@ -33,7 +33,7 @@ public class MechanicBusinessControllerTest {
     }
 
     @Test
-    public void testReadMechanic() {
+    void testReadMechanic() {
         MechanicDto mechanicDto = mechanicBusinessController.read("1");
 
         assertThat(mechanicDto.getName(), is(MechanicDtoMother.FAKE_NAME));
@@ -41,7 +41,7 @@ public class MechanicBusinessControllerTest {
     }
 
     @Test
-    public void testFindByNameMechanic() {
+    void testFindByNameMechanic() {
         List<MechanicDto> mechanicDtos = mechanicBusinessController.searchBy(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
 
         assertThat(mechanicDtos.get(0).getName(), is(MechanicDtoMother.FAKE_NAME));
@@ -49,7 +49,7 @@ public class MechanicBusinessControllerTest {
     }
 
     @Test
-    public void testReadAllMechanic() {
+    void testReadAllMechanic() {
         assertThat(mechanicBusinessController.readAll().size(), greaterThanOrEqualTo(2));
     }
 

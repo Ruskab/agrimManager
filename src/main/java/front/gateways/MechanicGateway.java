@@ -2,15 +2,6 @@ package front.gateways;
 
 import front.dtos.Intervention;
 import front.dtos.Mechanic;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import front.util.PropertyLoader;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.HttpHeaders;
@@ -19,10 +10,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Properties;
 
 import static javax.ws.rs.client.Entity.entity;
-import static org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS;
 
 public class MechanicGateway extends RestGateway implements Serializable {
 
@@ -53,7 +42,9 @@ public class MechanicGateway extends RestGateway implements Serializable {
     }
 
     public void finishIntervention(Mechanic mechanic, Intervention intervention) {
-        Response response = client.target(UriBuilder.fromPath(resource).path(mechanic.getId() + "/interventions/" + intervention.getId() + "/finish").build())
+        Response response = client.target(UriBuilder.fromPath(resource)
+                .path(mechanic.getId() + "/interventions/" + intervention.getId() + "/finish")
+                .build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .post(entity(intervention, MediaType.APPLICATION_JSON_TYPE));
@@ -84,7 +75,10 @@ public class MechanicGateway extends RestGateway implements Serializable {
     }
 
     public List<Intervention> searchInterventionsByFilter(String mechanicId, Boolean active) {
-        return client.target(UriBuilder.fromPath(resource).path(mechanicId + "/interventions").queryParam("active", active.toString()).build())
+        return client.target(UriBuilder.fromPath(resource)
+                .path(mechanicId + "/interventions")
+                .queryParam("active", active.toString())
+                .build())
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .get(new GenericType<List<Intervention>>() {

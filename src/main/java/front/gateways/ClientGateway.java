@@ -57,7 +57,7 @@ public class ClientGateway extends RestGateway implements Serializable {
                 });
     }
 
-    public void update(Client client) throws IllegalStateException {
+    public void update(Client client) {
         Response response = this.client.target(UriBuilder.fromPath(resource).path("/" + client.getId()))
                 .request(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, authToken)

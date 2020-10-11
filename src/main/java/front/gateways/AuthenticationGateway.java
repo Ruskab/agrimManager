@@ -20,7 +20,7 @@ public class AuthenticationGateway extends RestGateway implements Serializable {
         resource = properties.getProperty(APP_BASE_URL) + properties.getProperty(API_PATH) + properties.getProperty(AUTHENTICATION);
     }
 
-    public String authenticate(Credentials credentials) throws NotAuthorizedException {
+    public String authenticate(Credentials credentials) {
         Response response = client.target(UriBuilder.fromPath(resource))
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(credentials, MediaType.APPLICATION_JSON_TYPE));

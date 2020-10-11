@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class MechanicBusinessControllerIT {
+class MechanicBusinessControllerIT {
 
     private static MechanicBusinessController mechanicBusinessController;
     private static InterventionBusinesssController interventionBusinesssController;
@@ -47,7 +47,7 @@ public class MechanicBusinessControllerIT {
     }
 
     @Test
-    public void testReadMechanic() {
+    void testReadMechanic() {
         int createdMechanicId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
         MechanicDto mechanicDto = mechanicBusinessController.read(Integer.toString(createdMechanicId));
@@ -57,7 +57,7 @@ public class MechanicBusinessControllerIT {
     }
 
     @Test
-    public void testFindByNameMechanic() {
+    void testFindByNameMechanic() {
         mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
         List<MechanicDto> mechanicDtos = mechanicBusinessController.searchBy(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
@@ -67,7 +67,7 @@ public class MechanicBusinessControllerIT {
     }
 
     @Test
-    public void testReadAllMechanic() {
+    void testReadAllMechanic() {
         mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
         mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
@@ -75,7 +75,7 @@ public class MechanicBusinessControllerIT {
     }
 
     @Test
-    public void testDeleteMechanic() {
+    void testDeleteMechanic() {
         int mechanicToDeleteId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
         mechanicBusinessController.delete(Integer.toString(mechanicToDeleteId));
@@ -85,7 +85,7 @@ public class MechanicBusinessControllerIT {
     }
 
     @Test
-    public void testDeleteMechanicWithInterventionsShouldDeleteInterventions() {
+    void testDeleteMechanicWithInterventionsShouldDeleteInterventions() {
         Integer mechanicToDeleteId = mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
         mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), InterventionDtoMother.cafe());
         mechanicBusinessController.createIntervention(mechanicToDeleteId.toString(), InterventionDtoMother.cafe());

@@ -54,10 +54,9 @@ class VehicleApiControllerTest {
 
     @Test
     void create_vehicle_without_vehicleDto_registrationPlate_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> {
-            VehicleDto vehicleDto = VehicleDto.builder().registrationPlate(null).build();
-            vehicleApiController.create(vehicleDto);
-        });
+        VehicleDto vehicleDto = VehicleDto.builder().registrationPlate(null).build();
+
+        assertThrows(FieldInvalidException.class, () -> vehicleApiController.create(vehicleDto));
     }
 
     @Test
@@ -70,10 +69,9 @@ class VehicleApiControllerTest {
 
     @Test
     void update_vehicle_without_vehicleDto_registationPlate_should_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> {
-            VehicleDto vehicleDto = VehicleDto.builder().registrationPlate(null).build();
-            vehicleApiController.update("1", vehicleDto);
-        });
+        VehicleDto vehicleDto = VehicleDto.builder().registrationPlate(null).build();
+
+        assertThrows(FieldInvalidException.class, () -> vehicleApiController.update("1", vehicleDto));
     }
 
     @Test

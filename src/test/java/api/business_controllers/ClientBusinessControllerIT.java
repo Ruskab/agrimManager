@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class ClientBusinessControllerIT {
+class ClientBusinessControllerIT {
 
     private static ClientBusinessController clientBusinessController;
 
@@ -44,7 +44,7 @@ public class ClientBusinessControllerIT {
     }
 
     @Test
-    public void testReadClient() {
+    void testReadClient() {
         int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
 
         ClientDto clientDto = clientBusinessController.read(Integer.toString(createdClientId));
@@ -54,7 +54,7 @@ public class ClientBusinessControllerIT {
     }
 
     @Test
-    public void testReadAllClients() {
+    void testReadAllClients() {
         clientBusinessController.create(ClientDtoMother.clientDto());
         clientBusinessController.create(ClientDtoMother.clientDto());
 
@@ -64,7 +64,7 @@ public class ClientBusinessControllerIT {
     }
 
     @Test
-    public void testUpdateClient() {
+    void testUpdateClient() {
         int createdClientId = clientBusinessController.create(ClientDtoMother.clientDto());
         String createdClientFullName = DaoFactory.getFactory().getClientDao().read(createdClientId).get().getFullName();
 

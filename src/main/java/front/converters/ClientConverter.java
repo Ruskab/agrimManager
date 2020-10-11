@@ -14,7 +14,7 @@ import javax.faces.convert.FacesConverter;
 import static front.util.SessionUtil.getAuthToken;
 
 @FacesConverter("front.converters.ClientConverter")
-public class ClientConverter implements Converter {
+public class ClientConverter implements Converter<Object> {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
@@ -37,14 +37,6 @@ public class ClientConverter implements Converter {
         } else {
             return null;
         }
-    }
-
-    private String extractPattern(UIComponent component, FacesContext context) {
-        if (component instanceof Calendar) {
-            Calendar calendarComponent = (Calendar) component;
-            return calendarComponent.getPattern();
-        }
-        return null;
     }
 
 }

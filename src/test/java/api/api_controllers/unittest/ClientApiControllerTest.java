@@ -65,7 +65,9 @@ class ClientApiControllerTest {
 
     @Test
     void create_client_without_clientDto_fullName_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> clientApiController.create(ClientDtoMother.withFullName(null)));
+        ClientDto clientDto = ClientDtoMother.withFullName(null);
+
+        assertThrows(FieldInvalidException.class, () -> clientApiController.create(clientDto));
     }
 
     @Test
@@ -78,7 +80,9 @@ class ClientApiControllerTest {
 
     @Test
     void update_client_without_clientDto_fullName_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> clientApiController.update("1", ClientDtoMother.withFullName(null)));
+        ClientDto clientDto = ClientDtoMother.withFullName(null);
+
+        assertThrows(FieldInvalidException.class, () -> clientApiController.update("1", clientDto));
     }
 
     @Test

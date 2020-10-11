@@ -17,7 +17,7 @@ public abstract class RestGateway {
     protected Properties properties;
     protected javax.ws.rs.client.Client client;
 
-    public RestGateway() {
+    protected RestGateway() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
