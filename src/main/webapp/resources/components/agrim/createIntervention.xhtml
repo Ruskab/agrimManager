@@ -36,7 +36,7 @@
 
                     <f:facet name="footer">
                         <h:outputLabel for="btnCaffe" value="#{msg['web.interventionCreateDialog.iscaffe']}"/>
-                        <h:selectBooleanCheckbox id="btnCaffe" value="#{createInterventionBean.caffe}" >
+                        <h:selectBooleanCheckbox id="btnCaffe" styleClass="dev-btn-caffe" value="#{createInterventionBean.caffe}" >
                             <p:ajax event="change" update="selectVehicleTab"/>
                         </h:selectBooleanCheckbox>
                     </f:facet>
@@ -47,7 +47,7 @@
                 <p:panelGrid columns="2" layout="grid" columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-5">
 
                     <h:outputLabel for="inpTitle" value="#{msg['web.interventions.title']}"/>
-                    <p:inputText id="inpTitle" value="#{createInterventionBean.selectedIntervention.title}" required="false"/>
+                    <p:inputText id="inpTitle" styleClass="dev-intervention-description" value="#{createInterventionBean.selectedIntervention.title}" required="false"/>
                     <p:message for="inpTitle"/>
                 </p:panelGrid>
             </p:tab>
@@ -71,7 +71,7 @@
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton value="Create"
-                                                     process="@form"
+                                                     process="@form" styleClass="create-button"
                                                      action="#{createInterventionBean.create}"
                                                      update="createDialogMessages"/>
                                 </f:facet>

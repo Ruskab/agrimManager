@@ -20,6 +20,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import selenium.views.ClientsPage;
 import selenium.views.DashboardPage;
+import selenium.views.HeaderMenuPage;
 import selenium.views.InterventionsPage;
 import selenium.views.LoginPage;
 import selenium.views.MyInterventionsPage;
@@ -50,11 +51,12 @@ class WorkflowEntToEnd {
     private VehiclesPage vehiclesPage = new VehiclesPage("http://localhost:8080");
     private LoginPage loginPage = new LoginPage("http://localhost:8080");
     private DashboardPage dashboardPage = new DashboardPage("http://localhost:8080");
+    private HeaderMenuPage headerMenuPage = new HeaderMenuPage("http://localhost:8080");
     private MyInterventionsPage myInterventionsPage = new MyInterventionsPage("http://localhost:8080");
     private InterventionsPage interventionsPage = new InterventionsPage("http://localhost:8080");
     private OperationsPage operationsPage = new OperationsPage("http://localhost:8080");
 
-    @Before
+    @Before //NOSONAR
     void setUp() {
         RemoteWebDriver driver = chrome.getWebDriver();
         WebDriverRunner.setWebDriver(driver);
@@ -73,6 +75,7 @@ class WorkflowEntToEnd {
         myInterventionsPage = new MyInterventionsPage(domain);
         interventionsPage = new InterventionsPage(domain);
         operationsPage = new OperationsPage(domain);
+        headerMenuPage = new HeaderMenuPage(domain);
 
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         Credentials credentials = Credentials.builder()
@@ -103,7 +106,18 @@ class WorkflowEntToEnd {
         operationsPage.checkExistOperationsForm();
     }
 
-    @After
+    @Test
+    void create_and_finish_intervention() {
+        open(domain);
+        loginPage.login(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
+        dashboardPage.checkHeaderMenu();
+        headerMenuPage.createIntervention();
+        dashboardPage.checkActiveIntervention();
+        dashboardPage.finishActiveIntervention();
+        dashboardPage.checkNoActiveInterventions();
+    }
+
+    @After //NOSONAR
     void tearDown() {
         WebDriverRunner.closeWebDriver();
         LOGGER.info("Deleteting all data");

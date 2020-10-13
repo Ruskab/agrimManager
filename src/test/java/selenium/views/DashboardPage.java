@@ -23,4 +23,16 @@ public class DashboardPage {
     public void checkHeaderMenu() {
         $(".d-header-menu").shouldBe(Condition.visible);
     }
+
+    public void checkActiveIntervention() {
+        $(".active-intervention-description").shouldHave(Condition.text("test description"));
+    }
+
+    public void finishActiveIntervention() {
+        $(".finish-active-interventions-btn").click();
+    }
+
+    public void checkNoActiveInterventions() {
+        $(".no-active-interventions-panel").shouldHave(Condition.text("No hay intervenciones activas"));
+    }
 }
