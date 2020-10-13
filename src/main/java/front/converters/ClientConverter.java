@@ -2,7 +2,6 @@ package front.converters;
 
 import front.dtos.Client;
 import front.gateways.ClientGateway;
-import org.primefaces.component.calendar.Calendar;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;

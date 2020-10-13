@@ -31,12 +31,11 @@ public class LazyVehiclesBean implements Serializable {
     private String clientName;
     private Map<String, String> clientNames = new HashMap<>();
     private VehicleGateway vehicleGateway;
-    private ClientGateway clientGateway;
 
     @PostConstruct
     public void init() {
+        ClientGateway clientGateway = new ClientGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
-        clientGateway = new ClientGateway(getAuthToken());
         List<Vehicle> vehicles = vehicleGateway.readAll();
         vehicles.forEach(vehicle -> clientNames.putIfAbsent(vehicle.getClientId(), clientGateway.read(vehicle.getClientId())
                 .getFullName()));

@@ -66,12 +66,16 @@ class MechanicApiControllerTest {
 
     @Test
     void create_mechanic_without_name_should_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> mechanicApiController.create(MechanicDtoMother.withName(null)));
+        MechanicDto mechanicDto = MechanicDtoMother.withName(null);
+
+        assertThrows(FieldInvalidException.class, () -> mechanicApiController.create(mechanicDto));
     }
 
     @Test
     void create_mechanic_without_password_should_throw_FieldInvalidException() {
-        assertThrows(FieldInvalidException.class, () -> mechanicApiController.create(MechanicDtoMother.withPassword(null)));
+        MechanicDto mechanicDto = MechanicDtoMother.withPassword(null);
+
+        assertThrows(FieldInvalidException.class, () -> mechanicApiController.create(mechanicDto));
     }
 
     @Test

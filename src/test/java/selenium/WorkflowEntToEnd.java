@@ -57,7 +57,7 @@ class WorkflowEntToEnd {
     private OperationsPage operationsPage = new OperationsPage("http://localhost:8080");
 
     @Before //NOSONAR
-    void setUp() {
+    void setUp() { //NOSONAR
         RemoteWebDriver driver = chrome.getWebDriver();
         WebDriverRunner.setWebDriver(driver);
     }
@@ -118,7 +118,7 @@ class WorkflowEntToEnd {
     }
 
     @After //NOSONAR
-    void tearDown() {
+    void tearDown() { //NOSONAR
         WebDriverRunner.closeWebDriver();
         LOGGER.info("Deleteting all data");
         operationsGateway.deleteAll();

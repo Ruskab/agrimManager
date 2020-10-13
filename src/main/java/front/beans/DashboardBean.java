@@ -25,7 +25,6 @@ import static javax.faces.application.FacesMessage.SEVERITY_INFO;
 @ViewScoped //NOSONAR
 public class DashboardBean {
 
-    private InterventionGateway interventionGateway;
     private MechanicGateway mechanicGateway;
     private VehicleGateway vehicleGateway;
     private Mechanic mechanic;
@@ -37,7 +36,6 @@ public class DashboardBean {
 
     @PostConstruct
     public void init() {
-        interventionGateway = new InterventionGateway(getAuthToken());
         mechanicGateway = new MechanicGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
         mechanic = sessionBean.getMechanic();
