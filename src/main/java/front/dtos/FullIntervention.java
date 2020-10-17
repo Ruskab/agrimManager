@@ -1,5 +1,8 @@
 package front.dtos;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class FullIntervention {
 
     private Intervention intervention;
@@ -50,5 +53,24 @@ public class FullIntervention {
 
     public void setMechanic(Mechanic mechanic) {
         this.mechanic = mechanic;
+    }
+
+    public long getTimeSpentMinutes() {
+        return getTimeSpent().toMinutes();
+    }
+
+    public long getTimeSpentHours() {
+        return getTimeSpent().toHours();
+    }
+
+    private Duration getTimeSpent() {
+        if (isActive()) {
+            return Duration.between(getIntervention().getStartTime(), LocalDateTime.now());
+        }
+        return Duration.between(getIntervention().getStartTime(), getIntervention().getEndTime());
+    }
+
+    public boolean isActive() {
+        return getIntervention().getEndTime() == null;
     }
 }

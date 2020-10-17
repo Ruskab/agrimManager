@@ -1,9 +1,9 @@
 package front.beans;
 
+import front.dtos.FullIntervention;
 import front.dtos.Intervention;
 import front.dtos.Mechanic;
 import front.dtos.Vehicle;
-import front.dtos.FullIntervention;
 import front.gateways.InterventionGateway;
 import front.gateways.MechanicGateway;
 import front.gateways.VehicleGateway;
@@ -30,7 +30,7 @@ public class MyInterventionsBean implements Serializable {
     private String selectedVehicleReference;
     private VehicleGateway vehicleGateway;
 
-    @ManagedProperty(value="#{sessionBean}") //NOSONAR
+    @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
     @PostConstruct
@@ -45,6 +45,10 @@ public class MyInterventionsBean implements Serializable {
                 .map(intervention -> mapToFullIntervention(intervention, mechanic))
                 .collect(Collectors.toList());
 
+    }
+
+    public long getTotalSpentHours() {
+        return interventions.stream().mapToLong(FullIntervention::getTimeSpentHours).sum();
     }
 
     private FullIntervention mapToFullIntervention(Intervention intervention, Mechanic mechanic) {

@@ -24,6 +24,10 @@
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records">
 
+                        <f:facet name="header">
+                            #{msg['web.my-interventions.datatable.header']}
+                        </f:facet>
+
                         <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.intervention.startTime}" priority="3">
                             <h:outputText value="#{intervention.intervention.startTime}">
                                 <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
@@ -34,13 +38,24 @@
                                 <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
                             </h:outputText>
                         </p:column>
+                        <p:column headerText="#{msg['web.intervention.time-spent']}" sortBy="#{intervention.getTimeSpentHours()}" priority="3">
+                            <h:outputText id="timeSpent" value="#{intervention.getTimeSpentHours()}"/>
+                        </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" priority="1">
                             <h:outputText value="#{intervention.interventionVehicle()}"/>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.type']}" priority="1">
-                            <h:outputText value="#{intervention.intervention.interventionType}"/>
+                            <h:outputText id="intervention-type" value="#{intervention.intervention.interventionType}"/>
+                            <i class="pi pi-info-circle" id="intervention-description-info" style="font-size: 1em"/>
+                            <p:tooltip id="toolTip" for="intervention-type" value="#{intervention.intervention.title}"
+                                       showEffect="clip" position="left"/>
                         </p:column>
+                        <f:facet name="footer">
+                            <h:outputFormat value="#{msg['web.my-interventions.datatable.footer.spent-hours']}">
+                                <f:param value="#{myInterventionsBean.getTotalSpentHours()}" />
+                            </h:outputFormat>
+                        </f:facet>
                     </p:dataTable>
                 </h:form>
             </div>
