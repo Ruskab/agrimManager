@@ -25,10 +25,14 @@
                                  currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records">
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.intervention.startTime}" priority="3">
-                            <h:outputText value="#{intervention.intervention.startTime}"/>
+                            <h:outputText value="#{intervention.intervention.startTime}">
+                                <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
+                            </h:outputText>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.intervention.endTime}" priority="3">
-                            <h:outputText value="#{intervention.intervention.endTime}"/>
+                            <h:outputText value="#{intervention.intervention.endTime}">
+                                <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
+                            </h:outputText>
                         </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" priority="1">

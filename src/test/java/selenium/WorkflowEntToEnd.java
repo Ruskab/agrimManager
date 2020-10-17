@@ -107,7 +107,7 @@ class WorkflowEntToEnd {
     }
 
     @Test
-    void create_and_finish_intervention() {
+    void login_create_and_finish_intervention() {
         open(domain);
         loginPage.login(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
         dashboardPage.checkHeaderMenu();
