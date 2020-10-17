@@ -43,7 +43,6 @@ class MechanicBusinessControllerIT {
         assertThat(createdMechanic.isPresent(), is(true));
         assertThat(createdMechanic.get().getId(), is(createdMechanicId));
         assertThat(createdMechanic.get().getName(), is(MechanicDtoMother.FAKE_NAME));
-        assertThat(createdMechanic.get().getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
@@ -53,17 +52,15 @@ class MechanicBusinessControllerIT {
         MechanicDto mechanicDto = mechanicBusinessController.read(Integer.toString(createdMechanicId));
 
         assertThat(mechanicDto.getName(), is(MechanicDtoMother.FAKE_NAME));
-        assertThat(mechanicDto.getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
     void testFindByNameMechanic() {
         mechanicBusinessController.create(MechanicDtoMother.mechanicDto());
 
-        List<MechanicDto> mechanicDtos = mechanicBusinessController.searchBy(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
+        List<MechanicDto> mechanicDtos = mechanicBusinessController.searchBy(MechanicDtoMother.FAKE_NAME);
 
         assertThat(mechanicDtos.get(0).getName(), is(MechanicDtoMother.FAKE_NAME));
-        assertThat(mechanicDtos.get(0).getPassword(), is(MechanicDtoMother.FAKE_PASSWORD));
     }
 
     @Test
