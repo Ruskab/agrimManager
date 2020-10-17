@@ -29,12 +29,18 @@
                                 <p:inputText id="globalFilter" onkeyup="PF('interventionTable').filter()" style="width:150px" placeholder="#{msg['web.interventions.datatable.search.placeholder']}"/>
                             </p:outputPanel>
                         </f:facet>
-
+                        <p:column headerText="#{msg['web.mechanic']}" priority="1">
+                            <h:outputText value="#{intervention.mechanic.name}"/>
+                        </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.starttime']}" sortBy="#{intervention.intervention.startTime}" priority="3">
-                            <h:outputText value="#{intervention.intervention.startTime}"/>
+                            <h:outputText value="#{intervention.intervention.startTime}">
+                                <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
+                            </h:outputText>
                         </p:column>
                         <p:column headerText="#{msg['web.interventions.datatable.header.endtime']}" sortBy="#{intervention.intervention.endTime}" priority="3">
-                            <h:outputText value="#{intervention.intervention.endTime}"/>
+                            <h:outputText value="#{intervention.intervention.endTime}">
+                                <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
+                            </h:outputText>
                         </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" filterBy="#{intervention.interventionVehicle}" priority="1">
@@ -49,8 +55,20 @@
                                     <f:selectItem itemLabel="Caffe" itemValue="CAFFE" />
                                 </p:selectOneButton>
                             </f:facet>
-                            <h:outputText value="#{intervention.intervention.interventionType}"/>
+                            <h:outputText id="intervention-type" value="#{intervention.intervention.interventionType}"/>
+                            <i class="pi pi-info-circle" id="intervention-description-info" style="font-size: 1em"/>
+                            <p:tooltip id="toolTip" for="intervention-type" value="#{intervention.intervention.title}"
+                                       showEffect="clip" position="left"/>
                         </p:column>
+                        <f:facet name="footer">
+                            <p:repeat value="#{lazyAllInterventionsBean.mechanics}" var="mechanic" >
+                                <h:outputFormat value="#{msg['web.all-interventions.datatable.footer.spent-hours']}">
+                                    <f:param value="#{mechanic.name}" />
+                                    <f:param value="#{lazyAllInterventionsBean.getMechanicSpentHours(mechanic)}" />
+                                </h:outputFormat>
+                                <br/>
+                            </p:repeat>
+                        </f:facet>
                     </p:dataTable>
                 </h:form>
             </div>

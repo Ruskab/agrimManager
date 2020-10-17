@@ -16,6 +16,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static front.util.FrontMessages.sendFrontMessage;
 import static front.util.SessionUtil.getAuthToken;
@@ -41,11 +42,27 @@ public class DashboardBean {
         mechanicGateway = new MechanicGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
         mechanic = sessionBean.getMechanic();
-        activeInterventions = searchActiveInterventions(mechanic);
+        activeFullInterventions = searchActiveInterventions(mechanic).stream()
+                .map(intervention -> mapToFullIntervention(intervention, mechanic))
+                .collect(Collectors.toList());
+    }
+
+    private FullIntervention mapToFullIntervention(Intervention intervention, Mechanic mechanic) {
+        if (intervention.getVehicleId() != null) {
+            Vehicle vehicle = vehicleGateway.read(intervention.getVehicleId());
+            return FullIntervention.of(mechanic, intervention, vehicle);
+        }
+        return FullIntervention.of(mechanic, intervention);
     }
 
     private List<Intervention> searchActiveInterventions(Mechanic mechanic) {
         return mechanicGateway.searchInterventionsByFilter(Integer.toString(mechanic.getId()), true);
+    }
+
+    private List<FullIntervention> searchFullActiveInterventions(Mechanic mechanic) {
+        return searchActiveInterventions(mechanic).stream()
+                .map(intervention -> mapToFullIntervention(intervention, mechanic))
+                .collect(Collectors.toList());
     }
 
     public Vehicle searchVehicle(String vehicleId) {
@@ -60,15 +77,7 @@ public class DashboardBean {
         }
         long duration = Duration.between(intervention.getStartTime(), LocalDateTime.now()).toHours();
         sendFrontMessage("msg", SEVERITY_INFO, "Intervention Finished Time: " + duration, "");
-        activeInterventions = searchActiveInterventions(mechanic);
-    }
-
-    public List<Intervention> getActiveInterventions() {
-        return activeInterventions;
-    }
-
-    public void setActiveInterventions(List<Intervention> activeInterventions) {
-        this.activeInterventions = activeInterventions;
+        activeFullInterventions = searchFullActiveInterventions(mechanic);
     }
 
     public SessionBean getSessionBean() {

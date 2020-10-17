@@ -26,20 +26,16 @@
 
                         <p:growl id="msg" showDetail="true" life="4000"/>
 
-                        <p:repeat  value="#{dashboardBean.activeInterventions}" var="intervention">
+                        <p:repeat  value="#{dashboardBean.activeFullInterventions}" var="intervention">
 
-                            <ui:fragment rendered="#{intervention.vehicleId ne null}">
-                                <agrim:activeInterventionPanel intervention="#{intervention}" vehicle="#{dashboardBean.searchVehicle(intervention.vehicleId)}"/>
-                            </ui:fragment>
-
-                            <ui:fragment rendered="#{intervention.vehicleId eq null}">
+                            <ui:fragment>
                                 <agrim:activeInterventionPanel intervention="#{intervention}"/>
                             </ui:fragment>
 
                         </p:repeat>
 
 
-                        <ui:fragment rendered="#{dashboardBean.activeInterventions.isEmpty()}">
+                        <ui:fragment rendered="#{dashboardBean.activeFullInterventions.isEmpty()}">
                             <p:panel  styleClass="no-active-interventions-panel">#{msg['web.home.panel.no.interventions']}</p:panel>
                         </ui:fragment>
 

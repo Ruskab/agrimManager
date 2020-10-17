@@ -14,24 +14,23 @@
 
 
 <composite:interface>
-    <composite:attribute name="intervention" required="true" type="front.dtos.Intervention"/>
-    <composite:attribute name="vehicle" required="false" type="front.dtos.Vehicle"/>
+    <composite:attribute name="intervention" required="true" type="front.dtos.FullIntervention"/>
 </composite:interface>
 
 <composite:implementation>
 
-    <c:set var="panelHeader"  value="#{cc.attrs.vehicle eq null ? 'Other work' : cc.attrs.vehicle.vehicleDataSheet}"/>
+    <c:set var="panelHeader"  value="#{cc.attrs.intervention.vehicle eq null ? 'Other work' : cc.attrs.intervention.vehicle.vehicleDataSheet}"/>
 
 
-    <p:panel id="pnlIntervention"  styleClass="active-intervention-panel" header="#{cc.attrs.vehicle.vehicleDataSheet}">
+    <p:panel id="pnlIntervention"  styleClass="active-intervention-panel" header="#{cc.attrs.intervention.vehicle.vehicleDataSheet}">
         <h:panelGrid id="pnlGridIntervention" layout="grid" columns="2" cellpadding="1"
                      columnClasses="ui-g-12 ui-md-12 ui-lg-4,ui-g-12 ui-md-12 ui-lg-8">
             <h:outputLabel for="intrvType" value="#{msg['web.interventions.type']}"/>
-            <h:outputText id="intrvType" value="#{cc.attrs.intervention.interventionType}" styleClass="active-intervention-type"/>
+            <h:outputText id="intrvType" value="#{cc.attrs.intervention.intervention.interventionType}" styleClass="active-intervention-type"/>
             <h:outputLabel for="description" value="#{msg['web.interventions.description']}"/>
-            <h:outputText  id="description" styleClass="active-intervention-description" value="#{cc.attrs.intervention.title}"/>
+            <h:outputText  id="description" styleClass="active-intervention-description" value="#{cc.attrs.intervention.intervention.title}"/>
             <h:outputLabel for="strtDate" value="#{msg['web.interventions.startDate']}"/>
-            <h:outputText id="strtDate" value="#{cc.attrs.intervention.startTime}">
+            <h:outputText id="strtDate" value="#{cc.attrs.intervention.intervention.startTime}">
                 <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
             </h:outputText>
             <h:outputLabel for="timeSpent" value="#{msg['web.intervention.time-spent']}"/>
@@ -40,11 +39,12 @@
         </h:panelGrid>
 
         <h:panelGrid layout="pnlGritEndIntrv" columns="1" cellpadding="10" width="100%">
-            <p:commandButton id="btnEndIntrv" styleClass="finish-active-interventions-btn" action="#{dashboardBean.finishActiveIntervention(cc.attrs.intervention)}"
+            <p:commandButton id="btnEndIntrv" styleClass="finish-active-interventions-btn" action="#{dashboardBean.finishActiveIntervention(cc.attrs.intervention.intervention)}"
                              value="#{msg['web.dashboard.active-intervention-finish-button']}" update="activeInterventionsForm" ajax="true">
             </p:commandButton>
         </h:panelGrid>
     </p:panel>
+    <p:blockUI block="pnlIntervention" trigger="btnEndIntrv" />
 </composite:implementation>
 
 </html>
