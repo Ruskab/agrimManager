@@ -38,8 +38,8 @@
                                 <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="#{msg['web.intervention.time-spent']}" sortBy="#{intervention.intervention.timeSpentHours()}" priority="3">
-                            <h:outputText id="timeSpent" value="#{intervention.intervention.timeSpentHours()}"/>
+                        <p:column headerText="#{msg['web.intervention.time-spent']}" sortBy="#{intervention.getTimeSpentHours()}" priority="3">
+                            <h:outputText id="timeSpent" value="#{intervention.getTimeSpentHours()}"/>
                         </p:column>
 
                         <p:column headerText="#{msg['web.interventions.datatable.header.vehicles']}" priority="1">

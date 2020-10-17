@@ -40,7 +40,6 @@ public class InterventionDto implements Serializable {
 
     private String repairingPackId;
 
-
     public static boolean isActiveIntervention(InterventionDto interventionDto) {
         return interventionDto.getEndTime() == null;
     }

@@ -35,7 +35,7 @@
                 <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm" />
             </h:outputText>
             <h:outputLabel for="timeSpent" value="#{msg['web.intervention.time-spent']}"/>
-            <h:outputText id="timeSpent" value="#{cc.attrs.intervention.timeSpentMinutes()}"/>
+            <h:outputText id="timeSpent" value="#{cc.attrs.intervention.getTimeSpentMinutes()}"/>
 
         </h:panelGrid>
 

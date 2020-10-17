@@ -48,7 +48,7 @@ public class MyInterventionsBean implements Serializable {
     }
 
     public long getTotalSpentHours() {
-        return interventions.stream().map(FullIntervention::getIntervention).mapToLong(Intervention::timeSpentHours).sum();
+        return interventions.stream().mapToLong(FullIntervention::getTimeSpentHours).sum();
     }
 
     private FullIntervention mapToFullIntervention(Intervention intervention, Mechanic mechanic) {

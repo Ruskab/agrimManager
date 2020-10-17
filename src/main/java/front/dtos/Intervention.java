@@ -41,23 +41,4 @@ public class Intervention implements Serializable {
     public static boolean isActiveIntervention(Intervention intervention) {
         return intervention.getEndTime() == null;
     }
-
-    public long timeSpentMinutes() {
-        return timeSpent().toMinutes();
-    }
-
-    public long timeSpentHours() {
-        return timeSpent().toHours();
-    }
-
-    private Duration timeSpent() {
-        if (isActive()) {
-            return Duration.between(getStartTime(), LocalDateTime.now());
-        }
-        return Duration.between(getStartTime(), getEndTime());
-    }
-
-    public boolean isActive() {
-        return endTime == null;
-    }
 }

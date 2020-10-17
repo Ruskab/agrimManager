@@ -62,12 +62,6 @@ public class Mechanic implements Serializable {
         this.interventionList = new ArrayList<>();
     }
 
-    public Mechanic(MechanicDto mechanicDto) {
-        this.name = mechanicDto.getName();
-        this.password = mechanicDto.getPassword();
-        this.roles = mechanicDto.getRoles().stream().map(Role::getByValue).collect(Collectors.toSet());
-    }
-
     public Mechanic(String name, String password, List<Intervention> interventions) {
         this.name = name;
         this.password = password;

@@ -1,5 +1,6 @@
 package front.beans;
 
+import front.dtos.FullIntervention;
 import front.dtos.Intervention;
 import front.dtos.Mechanic;
 import front.dtos.Vehicle;
@@ -30,6 +31,7 @@ public class DashboardBean {
     private Mechanic mechanic;
 
     private List<Intervention> activeInterventions = new ArrayList<>();
+    private List<FullIntervention> activeFullInterventions = new ArrayList<>();
 
     @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
@@ -75,5 +77,13 @@ public class DashboardBean {
 
     public void setSessionBean(SessionBean sessionBean) {
         this.sessionBean = sessionBean;
+    }
+
+    public List<FullIntervention> getActiveFullInterventions() {
+        return activeFullInterventions;
+    }
+
+    public void setActiveFullInterventions(List<FullIntervention> activeFullInterventions) {
+        this.activeFullInterventions = activeFullInterventions;
     }
 }
