@@ -195,5 +195,21 @@ public class LazyAllInterventionsBean implements Serializable {
     public void setSessionBean(SessionBean sessionBean) {
         this.sessionBean = sessionBean;
     }
+
+    public List<Mechanic> getMechanics() {
+        return mechanics;
+    }
+
+    public void setMechanics(List<Mechanic> mechanics) {
+        this.mechanics = mechanics;
+    }
+
+    public long getMechanicSpentHours(Mechanic mechanic) {
+        if (fullInterventions.isEmpty()) {
+            return 0;
+        }
+        return fullInterventions.stream().filter(fullIntervention -> mechanic.equals(fullIntervention.getMechanic()))
+                .mapToLong(FullIntervention::getTimeSpentHours).sum();
+    }
 }
 

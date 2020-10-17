@@ -34,6 +34,7 @@
                 <p:commandButton id="createMec" action="#{loginBean.createMechanic}" value="create mec" update="loginForm" ajax="true"/>
             </h:panelGrid>
         </p:panel>
+        <p:blockUI block="loginPnl" trigger="loginButton" />
     </h:form>
 </composite:implementation>
 
