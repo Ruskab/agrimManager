@@ -69,8 +69,6 @@ class MechanicGatewayIT {
         assertThat(mechanics.size(), is(1));
     }
 
-
-
     @Test
     void finish_intervention() {
         Client client = FrontClientMother.client();
@@ -88,7 +86,6 @@ class MechanicGatewayIT {
         Intervention intervention = interventionGateway.read(updatedMechanic.getInterventionIds().get(0).toString());
         assertThat(intervention.getEndTime().toLocalDate(), is(LocalDate.now()));
     }
-
 
     @Test
     void create_and_read_mechanic() {

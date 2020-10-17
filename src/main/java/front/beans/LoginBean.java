@@ -21,7 +21,7 @@ import java.util.List;
 import static front.util.FrontMessages.sendFrontMessage;
 
 @ManagedBean(name = "loginBean") //NOSONAR
-@RequestScoped
+@RequestScoped //NOSONAR
 public class LoginBean {
 
     public static final String HOME_PAGE = "/backoffice/dashboard.xhtml";

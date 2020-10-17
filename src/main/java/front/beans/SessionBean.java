@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean //NOSONAR
-@SessionScoped
+@SessionScoped //NOSONAR
 public class SessionBean {
 
     private Mechanic mechanic;

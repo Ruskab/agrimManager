@@ -71,6 +71,5 @@ public class LazyClientsBean implements Serializable {
         this.selectedClient = selectedClient;
     }
 
-    public void onRowSelect(SelectEvent event) {
-    }
+
 }

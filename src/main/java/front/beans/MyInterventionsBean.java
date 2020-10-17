@@ -26,24 +26,19 @@ public class MyInterventionsBean implements Serializable {
 
     private List<FullIntervention> interventions;
     private Intervention selectedIntervention;
-    private Mechanic mechanic;
     private Map<String, String> vehicles = new HashMap<>();
     private String selectedVehicleReference;
-    private InterventionGateway interventionGateway;
     private VehicleGateway vehicleGateway;
-    private MechanicGateway mechanicGateway;
 
     @ManagedProperty(value="#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
     @PostConstruct
     public void init() {
-        mechanicGateway = new MechanicGateway(getAuthToken());
-        interventionGateway = new InterventionGateway(getAuthToken());
+        InterventionGateway interventionGateway = new InterventionGateway(getAuthToken());
+        MechanicGateway mechanicGateway = new MechanicGateway(getAuthToken());
         vehicleGateway = new VehicleGateway(getAuthToken());
-        mechanic = sessionBean.getMechanic();
-        mechanic = sessionBean.getMechanic();
-        mechanic = mechanicGateway.read(Integer.toString(mechanic.getId()));
+        Mechanic mechanic = mechanicGateway.read(Integer.toString(sessionBean.getMechanic().getId()));
         interventions = mechanic.getInterventionIds().stream()
                 .map(Object::toString)
                 .map(interventionGateway::read)
