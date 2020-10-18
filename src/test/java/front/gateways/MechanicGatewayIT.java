@@ -1,6 +1,7 @@
 package front.gateways;
 
 import api.api_controllers.MechanicApiController;
+import api.dtos.MechanicDto;
 import api.object_mothers.FrontClientMother;
 import api.object_mothers.FrontInterventionMother;
 import api.object_mothers.FrontMechanicMother;
@@ -38,9 +39,8 @@ class MechanicGatewayIT {
 
     @BeforeEach
     void setUp() {
-        mechanicId = (Integer) mechanicApiController.create(MechanicDtoMother.mechanicDto()).getEntity();
-        authToken = "Bearer " + authenticationGateway.authenticate(AgrimDomainFactory.fakeCredentials());
-
+        mechanicId = (Integer) mechanicApiController.create(MechanicDtoMother.authUser()).getEntity();
+        authToken = "Bearer " + authenticationGateway.authenticate(AgrimDomainFactory.authCredentials());
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
         interventionGateway = new InterventionGateway(authToken);
