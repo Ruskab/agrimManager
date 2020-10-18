@@ -4,11 +4,11 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <lifecycle>
-        <phase-listener>
-            front.util.DebugListener
-        </phase-listener>
-    </lifecycle>
+<!--    <lifecycle>-->
+<!--        <phase-listener>-->
+<!--            front.util.DebugListener-->
+<!--        </phase-listener>-->
+<!--    </lifecycle>-->
 
     <application>
         <locale-config>

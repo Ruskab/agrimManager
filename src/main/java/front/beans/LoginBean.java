@@ -1,9 +1,12 @@
 package front.beans;
 
+import api.business_controllers.AuthenticationBusinessController;
 import front.dtos.Credentials;
 import front.dtos.Mechanic;
 import front.gateways.AuthenticationGateway;
 import front.gateways.MechanicGateway;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
@@ -24,6 +27,8 @@ import static front.util.FrontMessages.sendFrontMessage;
 @RequestScoped //NOSONAR
 public class LoginBean {
 
+    private static final Logger LOGGER = LogManager.getLogger(LoginBean.class);
+
     public static final String HOME_PAGE = "/backoffice/dashboard.xhtml";
     public static final String LOGIN_PAGE = "/user_access/loginPage.xhtml";
     private String message;
@@ -43,31 +48,35 @@ public class LoginBean {
         try {
             Credentials credentials = Credentials.builder().username(userName).password(password).build();
             String authToken = "Bearer " + authenticateGateway.authenticate(credentials);
+            LOGGER.error("auth token recovered");
             initSession(authToken);
             redirect(HOME_PAGE);
         } catch (NotAuthorizedException e) {
+            LOGGER.error("something wrong", e);
             sendFrontMessage(null, FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!");
             redirect(LOGIN_PAGE);
         }
     }
 
     private void initSession(String authToken) {
+        LOGGER.error("try get mechanic from database");
         List<Mechanic> mechanics = new MechanicGateway(authToken).searchByName(userName);
-
         if (mechanics.stream().noneMatch(mechanic -> password.equals(mechanic.getPassword()))) {
             throw new NotAuthorizedException("mechanic not found with given credentials");
         }
 
         Faces.getSession().setAttribute("username", userName);
         Mechanic user = mechanics.get(0);
-        //TODO a lo mejor la brecha es por guardar la pass aqui sin encriptar :(
+        LOGGER.error("mechanic {} recovered", user.getName());
         user.setPassword(null);
         Faces.getSession().setAttribute("token", authToken);
         sessionBean.setMechanic(user);
+        LOGGER.error("session started");
     }
 
     private void redirect(String path) throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        LOGGER.error("redirect to path {} external context {}", path, externalContext.getRequestContextPath());
         externalContext.redirect(externalContext.getRequestContextPath().concat(path));
     }
 
