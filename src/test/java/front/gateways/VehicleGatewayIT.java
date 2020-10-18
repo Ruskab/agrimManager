@@ -30,8 +30,8 @@ class VehicleGatewayIT {
 
     @BeforeEach
     void setUp() {
-        mechanicApiController.create(MechanicDtoMother.mechanicDto());
-        authToken = "Bearer " + authenticationGateway.authenticate(AgrimDomainFactory.fakeCredentials());
+        mechanicApiController.create(MechanicDtoMother.authUser());
+        authToken = "Bearer " + authenticationGateway.authenticate(AgrimDomainFactory.authCredentials());
         clientGateway = new ClientGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);
         vehicleGateway = new VehicleGateway(authToken);

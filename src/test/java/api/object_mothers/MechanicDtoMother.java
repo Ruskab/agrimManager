@@ -10,7 +10,9 @@ import static java.util.Collections.emptyList;
 public class MechanicDtoMother {
 
     public static final String FAKE_NAME = "fakeName";
+    public static final String FAKE_AUTH_NAME = "username";
     public static final String FAKE_PASSWORD = "fakePassword";
+    public static final String FAKE_AUTH_PASSWORD = "password";
 
     public static MechanicDto create(String name, String password, List<Integer> interventionIds) {
         return MechanicDto.builder().name(name).password(password).interventionIds(interventionIds).build();
@@ -18,6 +20,12 @@ public class MechanicDtoMother {
 
     public static MechanicDto mechanicDto() {
         MechanicDto mechanicDto = create(FAKE_NAME, FAKE_PASSWORD, emptyList());
+        mechanicDto.setRoles(Set.of("mechanic"));
+        return mechanicDto;
+    }
+
+    public static MechanicDto authUser() {
+        MechanicDto mechanicDto = create("username", "password", emptyList());
         mechanicDto.setRoles(Set.of("mechanic"));
         return mechanicDto;
     }

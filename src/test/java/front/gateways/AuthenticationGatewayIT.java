@@ -22,13 +22,13 @@ class AuthenticationGatewayIT {
 
     @BeforeEach
     void setUp() {
-        mechanicApiController.create(MechanicDtoMother.mechanicDto());
+        mechanicApiController.create(MechanicDtoMother.authUser());
         authenticationGateway = new AuthenticationGateway();
     }
 
     @Test
     void authenticate_user() {
-        Credentials credentialsDto = new Credentials(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
+        Credentials credentialsDto = new Credentials(MechanicDtoMother.FAKE_AUTH_NAME, MechanicDtoMother.FAKE_AUTH_PASSWORD);
 
         authToken = authenticationGateway.authenticate(credentialsDto);
 
