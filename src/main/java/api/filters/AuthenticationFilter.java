@@ -78,6 +78,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private Predicate<MechanicDto> isValidMechanic(String credentials) {
         LocalDate date = LocalDate.parse(credentials.split(DELIMITER)[2]);
         return mechanicDto -> mechanicDto.getName().equals(credentials.split(DELIMITER)[0]) &&
-                mechanicDto.getPassword().equals(credentials.split(DELIMITER)[1]) && date.plusDays(1).isAfter(LocalDate.now());
+                mechanicDto.getPassword().equals(credentials.split(DELIMITER)[1]) && date.plusDays(1)
+                .isAfter(LocalDate.now());
     }
 }

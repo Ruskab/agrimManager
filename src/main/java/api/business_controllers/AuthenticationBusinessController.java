@@ -5,8 +5,6 @@ import api.daos.DaoSupplier;
 import api.dtos.MechanicDto;
 import api.exceptions.NotFoundException;
 import front.util.PropertyLoader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -20,8 +18,6 @@ import java.util.Optional;
 
 
 public class AuthenticationBusinessController {
-
-    private static final Logger LOGGER = LogManager.getLogger(AuthenticationBusinessController.class);
 
     private static final SecureRandom RAND = new SecureRandom();
 
@@ -38,14 +34,11 @@ public class AuthenticationBusinessController {
 
     public String authenticateCredentials(String username, String password) {
         String salt = new PropertyLoader().loadPropertiesFile("config.properties").getProperty("api.salt");
-        LOGGER.error("loaded salt: {}", salt);
         List<MechanicDto> mechanics = mechanicBusinessController.searchBy(username);
         MechanicDto mechanic = mechanics.get(0);
         if (!verifyPassword(password, mechanic.getPassword(), salt)) {
-            LOGGER.error("Invalid credentials");
             throw NotFoundException.throwBecauseOf("Invalid credentials");
         }
-        LOGGER.error("Valid credentials");
         return mechanic.getPassword();
     }
 
