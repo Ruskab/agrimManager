@@ -4,6 +4,8 @@ import front.dtos.Credentials;
 import front.dtos.Mechanic;
 import front.gateways.AuthenticationGateway;
 import front.gateways.MechanicGateway;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.omnifaces.util.Faces;
 
 import javax.annotation.PostConstruct;
@@ -31,6 +33,8 @@ public class LoginBean {
     private String password;
     private AuthenticationGateway authenticateGateway;
 
+    private static final Logger LOGGER = LogManager.getLogger(LoginBean.class);
+
     @ManagedProperty(value = "#{sessionBean}") //NOSONAR
     private SessionBean sessionBean;
 
@@ -43,9 +47,11 @@ public class LoginBean {
         try {
             Credentials credentials = Credentials.builder().username(userName).password(password).build();
             String authToken = "Bearer " + authenticateGateway.authenticate(credentials);
+            LOGGER.info("Generated authToken");
             initSession(authToken);
             redirect(HOME_PAGE);
         } catch (NotAuthorizedException e) {
+            LOGGER.error("No authorized user: {}", userName);
             sendFrontMessage(null, FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!");
             redirect(LOGIN_PAGE);
         }
@@ -61,6 +67,7 @@ public class LoginBean {
     }
 
     private void redirect(String path) throws IOException {
+        LOGGER.info("Redirect to Dashboard");
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.redirect(externalContext.getRequestContextPath().concat(path));
     }

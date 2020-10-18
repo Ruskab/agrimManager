@@ -5,6 +5,8 @@ import api.daos.DaoSupplier;
 import api.dtos.MechanicDto;
 import api.exceptions.NotFoundException;
 import front.util.PropertyLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -19,6 +21,9 @@ import java.util.Optional;
 
 public class AuthenticationBusinessController {
 
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationBusinessController.class);
+
+
     private static final SecureRandom RAND = new SecureRandom();
 
     private static final int ITERATIONS = 65536;
@@ -32,22 +37,7 @@ public class AuthenticationBusinessController {
 
     private final MechanicBusinessController mechanicBusinessController = new MechanicBusinessController();
 
-    public String authenticateCredentials(String username, String password) {
-        String salt = new PropertyLoader().loadPropertiesFile("config.properties").getProperty("api.salt");
-        List<MechanicDto> mechanics = mechanicBusinessController.searchBy(username);
-        MechanicDto mechanic = mechanics.get(0);
-        if (!verifyPassword(password, mechanic.getPassword(), salt)) {
-            throw NotFoundException.throwBecauseOf("Invalid credentials");
-        }
-        return mechanic.getPassword();
-    }
-
-    protected boolean verifyPassword (String password, String key, String salt) {
-        Optional<String> optEncrypted = hashPassword(password, salt);
-        return optEncrypted.map(s -> s.equals(key)).orElse(false);
-    }
-
-    public static Optional<String> hashPassword (String password, String salt) {
+    public static Optional<String> hashPassword(String password, String salt) {
 
         char[] chars = password.toCharArray();
         byte[] bytes = salt.getBytes();
@@ -70,7 +60,7 @@ public class AuthenticationBusinessController {
         }
     }
 
-    public static Optional<String> generateSalt (final int length) {
+    public static Optional<String> generateSalt(final int length) {
 
         if (length < 1) {
             System.err.println("error in generateSalt: length must be > 0");
@@ -83,6 +73,21 @@ public class AuthenticationBusinessController {
         return Optional.of(Base64.getEncoder().encodeToString(salt));
     }
 
+    public String authenticateCredentials(String username, String password) {
+        String salt = new PropertyLoader().loadPropertiesFile("config.properties").getProperty("api.salt");
+        List<MechanicDto> mechanics = mechanicBusinessController.searchBy(username);
+        MechanicDto mechanic = mechanics.get(0);
+        if (!verifyPassword(password, mechanic.getPassword(), salt)) {
+            LOGGER.error("Authentication service : invalid credentials");
+            throw NotFoundException.throwBecauseOf("Invalid credentials");
+        }
+        return mechanic.getPassword();
+    }
+
+    protected boolean verifyPassword(String password, String key, String salt) {
+        Optional<String> optEncrypted = hashPassword(password, salt);
+        return optEncrypted.map(s -> s.equals(key)).orElse(false);
+    }
 
 
 }
