@@ -36,9 +36,9 @@ public class AuthenticationApiController {
             String password = credentials.getPassword();
             validate(username, password);
             // Authenticate the user using the credentials provided
-            authenticate(username, password);
+            String hashPassword = authenticate(username, password);
             // Issue a token for the user
-            String token = issueToken(username, password);
+            String token = issueToken(username, hashPassword);
             // Return the token on the response
             return Response.ok(token).build();
 
@@ -47,10 +47,10 @@ public class AuthenticationApiController {
         }
     }
 
-    private void authenticate(String username, String password) {
+    private String authenticate(String username, String password) {
         // Authenticate against a database, LDAP, file or whatever
         // Throw an Exception if the credentials are invalid
-        authenticationBusinessController.authenticateCredentials(username, password);
+        return authenticationBusinessController.authenticateCredentials(username, password);
     }
 
     private String issueToken(String username, String password) {

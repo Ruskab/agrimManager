@@ -28,11 +28,6 @@
             <h:panelGrid layout="grid" columns="1" cellpadding="10" width="100%">
                 <p:commandButton id="loginButton" action="#{loginBean.login}" value="Login" update="loginForm" ajax="true"/>
             </h:panelGrid>
-
-            <h:panelGrid rendered="#{not loginBean.production}" layout="grid" columns="1" cellpadding="10" width="100%">
-                <p:commandButton id="createBoss" action="#{loginBean.createBoss}" value="create boss" update="loginForm" ajax="true"/>
-                <p:commandButton id="createMec" action="#{loginBean.createMechanic}" value="create mec" update="loginForm" ajax="true"/>
-            </h:panelGrid>
         </p:panel>
         <p:blockUI block="loginPnl" trigger="loginButton" />
     </h:form>

@@ -11,7 +11,9 @@ import api.entity.Intervention;
 import api.entity.InterventionType;
 import api.entity.Mechanic;
 import api.exceptions.NotFoundException;
+import front.util.PropertyLoader;
 
+import javax.ws.rs.BadRequestException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,9 @@ public class MechanicBusinessController {
 
     public int create(MechanicDto mechanicDto) {
         Mechanic mechanic = MechanicMapper.INSTANCE.toMechanic(mechanicDto);
+        String salt = new PropertyLoader().loadPropertiesFile("config.properties").getProperty("api.salt");
+        Optional<String> hashPassword = AuthenticationBusinessController.hashPassword(mechanicDto.getPassword(), salt);
+        mechanic.setPassword(hashPassword.orElseThrow(BadRequestException::new));
         List<InterventionDto> interventionDtos = new ArrayList<>();
         mechanicDto.getInterventionIds().forEach(id -> interventionDtos.add(interventionBO.read(Integer.toString(id))));
         mechanic.setInterventionList(interventionDtos.stream()

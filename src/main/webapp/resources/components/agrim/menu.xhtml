@@ -23,15 +23,7 @@
 
             <p:menubar styleClass="d-header-menu" id="headerMenu">
 
-                <p:submenu label="#{msg['web.header.api-services']}" icon="pi pi-globe">
-                    <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/api/v0/clients"/>
-                    <p:separator/>
-                    <p:menuitem value="#{msg['web.header.vehicles']}" url="#{request.contextPath}/api/v0/vehicles"/>
-                    <p:separator/>
-                    <p:menuitem value="#{msg['web.header.interventions']}" url="#{request.contextPath}/api/v0/interventions" styleClass="menu-interventions"/>
-                    <p:separator/>
-                    <p:menuitem value="#{msg['web.header.repairing-paks']}" url="#"/>
-                </p:submenu>
+                <p:menuitem value="#{msg['web.header.api-services']}" url="#{request.contextPath}/api/v0/swagger.json" icon="pi pi-globe"/>
 
                 <p:menuitem value="#{msg['web.header.clients']}" url="#{request.contextPath}/backoffice/clients.xhtml" icon="pi pi-users"/>
 
