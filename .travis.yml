@@ -30,5 +30,5 @@ deploy:
   app: agrim-manager
   on:
     repo: Ruskab/agrimManager
-    branch: develop
+    branch: master
   edge: true
