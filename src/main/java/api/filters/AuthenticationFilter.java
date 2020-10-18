@@ -2,6 +2,8 @@ package api.filters;
 
 import api.business_controllers.MechanicBusinessController;
 import api.dtos.MechanicDto;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Priority;
 import javax.ws.rs.NotAuthorizedException;
@@ -21,6 +23,9 @@ import java.util.function.Predicate;
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationFilter.class);
+
+
     public static final String DELIMITER = "###";
     private static final String REALM = "example";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
@@ -33,6 +38,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         // Validate the Authorization header
         if (!isTokenBasedAuthentication(authorizationHeader)) {
             abortWithUnauthorized(requestContext);
+            LOGGER.error("Auth Filter:  authToken not present in header");
             return;
         }
 
@@ -71,6 +77,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         String credentials = new String(Base64.getDecoder().decode(token.getBytes()));
         List<MechanicDto> mechanicDtos = new MechanicBusinessController().readAll();
         if (mechanicDtos.stream().noneMatch(isValidMechanic(credentials))) {
+            LOGGER.error("Auth Filter:  user not authorized");
             throw new NotAuthorizedException("", "Usuario no autorizado");
         }
     }
