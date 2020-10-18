@@ -13,12 +13,15 @@ public class AgrimDomainFactory {
         return byDefault().clientId("3").build();
     }
 
-    public static Credentials fakeCredentials() {
+
+    public static Credentials authCredentials() {
         return Credentials.builder()
-                .username(MechanicDtoMother.FAKE_NAME)
-                .password(MechanicDtoMother.FAKE_PASSWORD)
+                .username(MechanicDtoMother.FAKE_AUTH_NAME)
+                .password(MechanicDtoMother.FAKE_AUTH_PASSWORD)
                 .build();
     }
+
+
 
     public static Vehicle createVehicle(String clientId) {
         return Vehicle.builder().registrationPlate("AA1234BB").clientId(clientId).build();
