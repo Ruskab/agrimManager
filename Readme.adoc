@@ -11,8 +11,12 @@ image:https://github.com/Ruskab/agrimManager/workflows/Unit%20&%20Integration%20
 
 image:https://github.com/Ruskab/agrimManager/workflows/API%20contoller%20aceptance%20tests%20in%20deployed%20application/badge.svg["API aceptance tests", link="https://github.com/Ruskab/agrimManager/actions?query=workflow%3A%22API+contoller+aceptance+tests+in+deployed+application%22"]
 
+https://www.notion.so/Trabajo-fin-de-grado-a8d44826c2494e15bcb235fc1019938d#cd3ccf181d9c4a1b9253416cd9b74f57[Memoria del proyecto (Español)]
 
-== Used tecnologies
+https://www.notion.so/Trabajo-fin-de-grado-a8d44826c2494e15bcb235fc1019938d#cd3ccf181d9c4a1b9253416cd9b74f57[Presentación del proyecto (Español)]
+
+
+== Used technologies
 
 image::documentation/4implementation/software_ecosystem/Heramientas_Ecosistema.svg[ecosystem]
 
@@ -22,7 +26,7 @@ image::documentation/4implementation/ci_cd/continuos_integration.svg[continuous 
 
 == Design
 
-=== Class desgin
+=== Analysis to Design trazability
 image::documentation/3design/architecture/svg/design.svg[Diseño de caso de uso]
 
 === API REST structured in layers
