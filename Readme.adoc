@@ -27,10 +27,16 @@ image::documentation/4implementation/ci_cd/continuos_integration.svg[continuous 
 == Design
 
 === Analysis to Design trazability
-image::documentation/3design/architecture/svg/design.svg[Diseño de caso de uso]
+image::documentation/3design/architecture/svg/design.svg[]
+//https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/3design/architecture/puml/usecase_design_template.puml
+
 
 === API REST structured in layers
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/3design/architecture/puml/app-web-architecture-packages.puml&fmt=svg[packages REST]
 
-image::documentation/3design/architecture/svg/api_layer_web_architecture_packages.svg[paquetes API REST]
+=== Persisted entities model
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/3design/architecture/puml/persistance/persistance_jpa_orm_model.puml&fmt=svg[packages REST]
+
+
 
 Autor: Ilya Kabushko.
