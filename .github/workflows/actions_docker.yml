@@ -36,12 +36,11 @@ jobs:
               sleep 2
           done
 
-- name: Check docker running containers
+      - name: Check docker running containers
         run: docker ps
 
       - name: Unit and Bussiness controllers tests
         run: mvn test -Denvironment=githubdocker
-
 
       - name: API tests
         run: mvn clean test -Denvironment=githubendtoend -Dtest=selenium.*EntToEnd
