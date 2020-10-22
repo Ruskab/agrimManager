@@ -80,7 +80,11 @@ class WorkflowEntToEnd {
     @Test
     void navigate_all_pages() {
         LOGGER.error("start test navigate_all_pages");
-        open(domain);
+        try {
+            open(domain);
+        } catch (Exception e) {
+            LOGGER.error("exception", e);
+        }
         LOGGER.error("abierto el dominio {}", domain);
         loginPage.login(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
         dashboardPage.checkHeaderMenu();
