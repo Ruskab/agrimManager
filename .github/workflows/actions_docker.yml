@@ -26,6 +26,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - uses: actions/checkout@master
+      - uses: nanasess/setup-chromedriver@master
+
       - name: create Mysql DB and deploy Tomcat 9 with the app
         run: docker-compose -f docker-compose-github.yml up -d
 
