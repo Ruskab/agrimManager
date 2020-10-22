@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import selenium.views.ClientsPage;
@@ -52,6 +53,7 @@ class WorkflowEntToEnd {
 
     @BeforeEach
     void createMechanic() {
+        LOGGER.error("BeforeEach : start");
         client = new RestClientLoader().creteRestClient();
         properties = new PropertiesResolver().loadPropertiesFile("config.properties");
         domain = properties.getProperty(APP_BASE_URL);
@@ -63,19 +65,23 @@ class WorkflowEntToEnd {
         interventionsPage = new InterventionsPage(domain);
         operationsPage = new OperationsPage(domain);
         headerMenuPage = new HeaderMenuPage(domain);
+        LOGGER.error("Test pages init ok");
         mechanicApiController.create(MechanicDtoMother.mechanicDto());
         Credentials credentials = Credentials.builder()
                 .username(MechanicDtoMother.FAKE_NAME)
                 .password(MechanicDtoMother.FAKE_PASSWORD)
                 .build();
+        LOGGER.error("Mechanic created");
         authToken = "Bearer " + authenticationGateway.authenticate(credentials);
         operationsGateway = new OperationsGateway(authToken);
-        LOGGER.info("credo el cliente rest y usuario en DB");
+        LOGGER.error("credo el cliente rest y usuario en DB");
     }
 
     @Test
     void navigate_all_pages() {
+        LOGGER.error("start test navigate_all_pages");
         open(domain);
+        LOGGER.error("abierto el dominio {}", domain);
         loginPage.login(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
         dashboardPage.checkHeaderMenu();
         clientsPage.openPage();
@@ -92,7 +98,7 @@ class WorkflowEntToEnd {
         operationsPage.checkExistOperationsForm();
     }
 
-    @Test
+    @Test @Disabled
     void login_create_and_finish_intervention() {
         open(domain);
         loginPage.login(MechanicDtoMother.FAKE_NAME, MechanicDtoMother.FAKE_PASSWORD);
@@ -102,10 +108,10 @@ class WorkflowEntToEnd {
         dashboardPage.finishActiveIntervention();
         dashboardPage.checkNoActiveInterventions();
     }
-
-    @AfterEach
-    void tearDown() { //NOSONAR
-        LOGGER.info("Deleteting all data");
-        operationsGateway.deleteAll();
-    }
+//
+//    @AfterEach
+//    void tearDown() { //NOSONAR
+//        LOGGER.info("Deleteting all data");
+//        operationsGateway.deleteAll();
+//    }
 }
