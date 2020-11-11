@@ -38,5 +38,7 @@ image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.
 image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/3design/architecture/puml/persistance/persistance_jpa_orm_model.puml&fmt=svg[packages REST]
 
 
+image::https://profile-counter.glitch.me/Ruskab/count.svg[visitas]
+
 
 Autor: Ilya Kabushko.
