@@ -1,0 +1,26 @@
+@startuml
+
+
+'together con todas las del servidor
+' '' con las del cliente
+
+component agrimManager as "agrimManager.war" <<WAR>>
+component jsf as "JSF"
+component primefaces as "Primefaces"
+component java as "Java EE"
+artifact database as "Database" <<MySql>>
+component hibernate as "Hibernate"
+package api as "api"
+package webapp as "webapp"
+package front as "front"
+
+agrimManager .down.>jsf
+agrimManager .down.>primefaces
+agrimManager .down.> java
+agrimManager .down.> hibernate
+hibernate --> database
+
+api ..> agrimManager : <<trace>>
+webapp ..> agrimManager : <<trace>>
+front ..> agrimManager : <<trace>>
+@enduml
