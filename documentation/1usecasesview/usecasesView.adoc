@@ -8,20 +8,6 @@
 ** <<_vehicleUseCases>>
 * <<_contextDiagram>>
 * <<_usecasesspecification>>
-** <<_login>>
-** <<_signin>>
-** <<_openDashboard>>
-** <<_openClients>>
-** <<_openClient>>
-** <<_createClient>>
-** <<_updateClient>>
-** <<_openVehicles>>
-** <<_openVehicle>>
-** <<_createVehicle>>
-** <<_updateVehicle>>
-** <<_openInterventions>>
-** <<_createIntervention>>
-** <<_finishIntervention>>
 * <<_userinterfaces>>
 
 
@@ -31,121 +17,47 @@
 [#_clientUsecases]
 === clientUsecases
 
-image::usecases/svg/clientUsecases.svg[]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecases/puml/clientUsecases.puml&fmt=svg[use cases]
 <<_index>>
 
 [#_interventionUsecases]
 === interventionUsecases
 
-image::usecases/svg/interventionUsecases.svg[]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecases/puml/interventionUsecases.puml&fmt=svg[use cases]
 <<_index>>
 
 [#_mechanicUsecases]
 === mechanicUsecases
 
-image::usecases/svg/mechanicUsecases.svg[]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecases/puml/mechanicUsecases.puml&fmt=svg[use cases]
 <<_index>>
 
 [#_vehicleUseCases]
 === vehicleUseCases
 
-image::usecases/svg/vehicleUseCases.svg[]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecases/puml/vehicleUseCases.puml&fmt=svg[use cases]
 <<_index>>
 
 [#_contextDiagram]
 == contextDiagram
-image::contextdiagram/svg/contextDiagram.svg[]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/contextdiagram/puml/contextDiagram.puml&fmt=svg[use cases]
 
 [#_usecasesspecification]
 == Use cases specification
 
-[#_login]
-== usecasesspecification
-
-image::usecasesspecification/svg/login.svg[]
-<<_index>>
-
-[#_signin]
-== login
-
-image::usecasesspecification/svg/signin.svg[]
-<<_index>>
-
-[#_openDashboard]
-== signin
-
-image::usecasesspecification/svg/openDashboard.svg[]
-<<_index>>
-
-[#_openClients]
-== openDashboard
-
-image::usecasesspecification/svg/openClients.svg[]
-<<_index>>
-
-[#_openClient]
-== openClients
-
-image::usecasesspecification/svg/openClient.svg[]
-<<_index>>
-
-[#_createClient]
-== openClient
-
-image::usecasesspecification/svg/createClient.svg[]
-<<_index>>
-
-[#_updateClient]
-== createClient
-
-image::usecasesspecification/svg/updateClient.svg[]
-<<_index>>
-
-[#_openVehicles]
-== updateClient
-
-image::usecasesspecification/svg/openVehicles.svg[]
-<<_index>>
-
-[#_openVehicle]
-== openVehicles
-
-image::usecasesspecification/svg/openVehicle.svg[]
-<<_index>>
-
-[#_createVehicle]
-== openVehicle
-
-image::usecasesspecification/svg/createVehicle.svg[]
-<<_index>>
-
-[#_updateVehicle]
-== createVehicle
-
-image::usecasesspecification/svg/updateVehicle.svg[]
-<<_index>>
-
-[#_openInterventions]
-== updateVehicle
-
-image::usecasesspecification/svg/openInterventions.svg[]
-<<_index>>
-
-[#_createIntervention]
-== openInterventions
-
-image::usecasesspecification/svg/createIntervention.svg[]
-<<_index>>
-
-[#_finishIntervention]
-== createIntervention
-
-image::usecasesspecification/svg/finishIntervention.svg[]
-<<_index>>
-
-== finishIntervention
-
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/login.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/signin.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/openDashboard.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/openClients.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/configClient.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/createClient.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/openVehicles.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/configVehicle.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/createVehicle.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/openInterventions.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/createIntervention.puml&fmt=svg[use case especification]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/usecasesspecification/puml/finishIntervention.puml&fmt=svg[use case especification]
 
 [#_userinterfaces]
 == Webmap
-image::userinterfaces/svg/webmap.svg[]
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/1usecasesview/repository/userinterfaces/puml/webmap.puml&fmt=svg[webapp]
