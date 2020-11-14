@@ -15,6 +15,8 @@ https://www.notion.so/Trabajo-fin-de-grado-a8d44826c2494e15bcb235fc1019938d#cd3c
 
 https://www.notion.so/Trabajo-fin-de-grado-a8d44826c2494e15bcb235fc1019938d#cd3ccf181d9c4a1b9253416cd9b74f57[Presentación del proyecto (Español)]
 
+https://github.com/Ruskab/agrimManager/wiki/032--Architecture-documentation#cd3ccf181d9c4a1b9253416cd9b74f57[4+1 views Architecture documentation]
+
 
 == Used technologies
 
