@@ -18,24 +18,11 @@ https://www.notion.so/Trabajo-fin-de-grado-a8d44826c2494e15bcb235fc1019938d#cd3c
 
 == Used technologies
 
-image::documentation/4implementation/software_ecosystem/Heramientas_Ecosistema.svg[ecosystem]
+image::documentation/other/softwareecosystem/Heramientas_Ecosistema.svg[]
 
 == Continuos Integration & Continuos Delivery (CI/CD)
 
-image::documentation/4implementation/ci_cd/continuos_integration.svg[continuous integration]
-
-== Design
-
-=== Analysis to Design trazability
-image::documentation/3design/architecture/svg/design.svg[]
-//https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/3design/architecture/puml/usecase_design_template.puml
-
-
-=== API REST structured in layers
-image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/3design/architecture/puml/app-web-architecture-packages.puml&fmt=svg[packages REST]
-
-=== Persisted entities model
-image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/3design/architecture/puml/persistance/persistance_jpa_orm_model.puml&fmt=svg[packages REST]
+image::documentation/other/cicd/continuos_integration.svg[]
 
 
 image::https://profile-counter.glitch.me/Ruskab/count.svg[visitas]
