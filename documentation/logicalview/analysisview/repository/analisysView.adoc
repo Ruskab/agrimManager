@@ -1,65 +1,90 @@
-= Analysis View
+= Analysis view
 
 [#_index]
 == Index
-* <<_clases>>
-* <<_packages>>
-* <<_usecaseanalysis>>
-** <<_login>>
-** <<_openDashboard>>
-** <<_openClients>>
-** <<_openClient>>
-** <<_createIntervention>>
 
-[#_clases]
-== classes
+* <<_Architecture>>
+* <<_UserCaseAnalysis>>
+* <<_PackageAnalysis>>
+
+[#_Architecture]
+== Architecture Analysis
+image::clases/svg/packages.svg[]
+
+<<_index>>
+
+
+
+[#_UserCaseAnalysis]
+== Use cases analysis
+
+
+configClient
+
+image::usecaseanalysis/collaboration/svg/configClient.svg[]
+
+configVehicle
+
+image::usecaseanalysis/collaboration/svg/configVehicle.svg[]
+
+createClient
+
+image::usecaseanalysis/collaboration/svg/createClient.svg[]
+
+createIntervention
+
+image::usecaseanalysis/collaboration/svg/createIntervention.svg[]
+
+createVehicle
+
+image::usecaseanalysis/collaboration/svg/createVehicle.svg[]
+
+finishIntervention
+
+image::usecaseanalysis/collaboration/svg/finishIntervention.svg[]
+
+login
+
+image::usecaseanalysis/collaboration/svg/login.svg[]
+
+logout
+
+image::usecaseanalysis/collaboration/svg/logout.svg[]
+
+openClients
+
+image::usecaseanalysis/collaboration/svg/openClients.svg[]
+
+openDashboard
+
+image::usecaseanalysis/collaboration/svg/openDashboard.svg[]
+
+openInterventions
+
+image::usecaseanalysis/collaboration/svg/openInterventions.svg[]
+
+openMyInterventions
+
+image::usecaseanalysis/collaboration/svg/openMyInterventions.svg[]
+
+openOperations
+
+image::usecaseanalysis/collaboration/svg/openOperations.svg[]
+
+openVehicles
+
+image::usecaseanalysis/collaboration/svg/openVehicles.svg[]
+
+signin
+
+image::usecaseanalysis/collaboration/svg/signin.svg[]
+
+<<_index>>
+
+
+[#_PackageAnalysis]
+== Package analysis
 
 image::clases/svg/clases.svg[]
+
 <<_index>>
-
-[#_packages]
-== packages
-
-[#_usecaseanalysis]
-== usecase analysis
-
-[#_login]
-=== login
-image::usecaseanalysis/clases/svg/login.svg[]
-image::usecaseanalysis/collaboration/svg/login.svg[]
-<<_index>>
-
-[#_openDashboard]
-=== openDashboard
-
-image::usecaseanalysis/clases/svg/openDashboard.svg[]
-image::usecaseanalysis/collaboration/svg/openDashboard.svg[]
-<<_index>>
-
-[#_openClients]
-=== openClients
-
-image::usecaseanalysis/clases/svg/openClients.svg[]
-image::usecaseanalysis/collaboration/svg/openClients.svg[]
-<<_index>>
-
-[#_openClient]
-=== openClient
-
-image::usecaseanalysis/clases/svg/openClient.svg[]
-image::usecaseanalysis/collaboration/svg/openClient.svg[]
-<<_index>>
-
-[#_createIntervention]
-=== createIntervention
-
-image::usecaseanalysis/clases/svg/createIntervention.svg[]
-image::usecaseanalysis/collaboration/svg/createIntervention.svg[]
-<<_index>>
-
-
-
-
-
-
-

@@ -1,0 +1,37 @@
+= Design View
+
+[#_index]
+== Index
+
+* <<_Architecture>>
+* <<_UserCaseAnalysis>>
+* <<_PackageAnalysis>>
+
+[#_Architecture]
+== Architecture
+=== Presentation layer
+image::repository/svg/app_web_architecture_packages.svg[]
+
+=== Business layer
+image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ruskab/agrimManager/develop/documentation/logicalview/designview/repository/puml/api-layer-web-architecture-packages.puml&fmt=svg[packages REST]
+
+<<_index>>
+
+
+[#_UserCaseAnalysis]
+== Analysis design traceability
+
+image::repository/svg/usecase_desing_template.svg[]
+
+<<_index>>
+
+[#_PackageAnalysis]
+== Mechanisms
+
+=== Persistence
+image::repository/svg/persistance_jpa_orm_model.svg[]
+
+=== API REST resource
+image::repository/svg/api_layer_web_architecture_vehicle_resorce.svg[]
+
+<<_index>>
