@@ -9,7 +9,7 @@
 
 [#_Architecture]
 == Architecture Analysis
-image::clases/svg/packages.svg[]
+image::repository/clases/svg/packages.svg[]
 
 <<_index>>
 
@@ -21,63 +21,63 @@ image::clases/svg/packages.svg[]
 
 configClient
 
-image::usecaseanalysis/collaboration/svg/configClient.svg[]
+image::repository/usecaseanalysis/collaboration/svg/configClient.svg[]
 
 configVehicle
 
-image::usecaseanalysis/collaboration/svg/configVehicle.svg[]
+image::repository/usecaseanalysis/collaboration/svg/configVehicle.svg[]
 
 createClient
 
-image::usecaseanalysis/collaboration/svg/createClient.svg[]
+image::repository/usecaseanalysis/collaboration/svg/createClient.svg[]
 
 createIntervention
 
-image::usecaseanalysis/collaboration/svg/createIntervention.svg[]
+image::repository/usecaseanalysis/collaboration/svg/createIntervention.svg[]
 
 createVehicle
 
-image::usecaseanalysis/collaboration/svg/createVehicle.svg[]
+image::repository/usecaseanalysis/collaboration/svg/createVehicle.svg[]
 
 finishIntervention
 
-image::usecaseanalysis/collaboration/svg/finishIntervention.svg[]
+image::repository/usecaseanalysis/collaboration/svg/finishIntervention.svg[]
 
 login
 
-image::usecaseanalysis/collaboration/svg/login.svg[]
+image::repository/usecaseanalysis/collaboration/svg/login.svg[]
 
 logout
 
-image::usecaseanalysis/collaboration/svg/logout.svg[]
+image::repository/usecaseanalysis/collaboration/svg/logout.svg[]
 
 openClients
 
-image::usecaseanalysis/collaboration/svg/openClients.svg[]
+image::repository/usecaseanalysis/collaboration/svg/openClients.svg[]
 
 openDashboard
 
-image::usecaseanalysis/collaboration/svg/openDashboard.svg[]
+image::repository/usecaseanalysis/collaboration/svg/openDashboard.svg[]
 
 openInterventions
 
-image::usecaseanalysis/collaboration/svg/openInterventions.svg[]
+image::repository/usecaseanalysis/collaboration/svg/openInterventions.svg[]
 
 openMyInterventions
 
-image::usecaseanalysis/collaboration/svg/openMyInterventions.svg[]
+image::repository/usecaseanalysis/collaboration/svg/openMyInterventions.svg[]
 
 openOperations
 
-image::usecaseanalysis/collaboration/svg/openOperations.svg[]
+image::repository/usecaseanalysis/collaboration/svg/openOperations.svg[]
 
 openVehicles
 
-image::usecaseanalysis/collaboration/svg/openVehicles.svg[]
+image::repository/usecaseanalysis/collaboration/svg/openVehicles.svg[]
 
 signin
 
-image::usecaseanalysis/collaboration/svg/signin.svg[]
+image::repository/usecaseanalysis/collaboration/svg/signin.svg[]
 
 <<_index>>
 
@@ -85,6 +85,6 @@ image::usecaseanalysis/collaboration/svg/signin.svg[]
 [#_PackageAnalysis]
 == Package analysis
 
-image::clases/svg/clases.svg[]
+image::repository/clases/svg/clases.svg[]
 
 <<_index>>
