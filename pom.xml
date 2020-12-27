@@ -131,6 +131,19 @@
 			</properties>
 		</profile>
 
+		<profile>
+			<id>ocean</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>ocean</value>
+				</property>
+			</activation>
+			<properties>
+				<env>ocean</env>
+			</properties>
+		</profile>
+
 	</profiles>
 
 	<repositories>
