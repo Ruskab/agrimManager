@@ -373,11 +373,13 @@
 			<version>3.4.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/bootstrap -->
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
-			<artifactId>all-themes</artifactId>
+			<artifactId>bootstrap</artifactId>
 			<version>1.0.10</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.webjars</groupId>
