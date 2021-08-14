@@ -47,3 +47,7 @@
 
 ![continuos integration](https://user-images.githubusercontent.com/16058725/55355842-b39bc280-54c9-11e9-8973-101f3d87758b.png)
 ##### Autor: Ilya Kabushko.
+
+
+## Octo GitHub repository diagram
+![Visualization of this repo](./diagram.svg)
