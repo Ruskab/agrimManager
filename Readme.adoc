@@ -27,6 +27,11 @@ image::documentation/other/softwareecosystem/Heramientas_Ecosistema.svg[]
 image::documentation/other/cicd/continuos_integration.svg[]
 
 
+== Octo GitHub repository diagram
+
+image::diagram.svg[]
+
+
 image::https://profile-counter.glitch.me/Ruskab/count.svg[visitas]
 
 
