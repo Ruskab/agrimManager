@@ -1,4 +1,4 @@
-FROM nginx:1.16
+FROM nginx:1.20.2
 
 WORKDIR /etc/nginx
 
